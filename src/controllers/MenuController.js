@@ -1,15 +1,16 @@
-export default class MenuController {
+import AbstractController from "./AbstractController";
+
+export default class MenuController extends AbstractController{
 
   constructor(view){
-    console.log(view);
-
-    view.addEventListener('MenuEvent', function (e) {
+    super();
+    view.addEventListener('menuEvent', function (e) {
       console.log("MenuEvent din MenuController-el", e);
     });
 
     console.log("Added Menu Controller");
-    document.addEventListener('MenuEvent', function (e) {
-      console.log("MenuEvent din MenuController", e);
+    document.addEventListener('menuEvent', function (e) {
+      console.log("MenuEvent din MenuController", e.returnValue);
     });
   }
 

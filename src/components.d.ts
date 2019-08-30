@@ -72,6 +72,7 @@ declare namespace LocalJSX {
     'controller'?: any;
     'itemRenderer'?: string;
     'onMenuChanged'?: any;
+    'onMenuEvent'?: (event: CustomEvent<any>) => void;
   }
   interface AppMenuItem extends JSXBase.HTMLAttributes<HTMLAppMenuItemElement> {}
   interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {

@@ -1,39 +1,42 @@
-import {Component, h, Prop, Element} from '@stencil/core';
+import {Component, h, Prop, Element, Event, EventEmitter,Listen} from '@stencil/core';
 import MenuController from "../../controllers/MenuController";
+import CustomTheme from "../../decorators/CustomTheme";
 
 @Component({
   tag: 'app-menu',
-  styleUrl: 'app-menu.css',
+  styleUrl: '../../themes/default/components/app-menu/app-menu.css',
   shadow: true
 })
 export class AppMenu {
+  @CustomTheme({}) theme;
   @Prop() controller: any;
   @Prop() itemRenderer: string;
   @Prop() onMenuChanged ?:any;
   @Element() el: HTMLElement;
+  @Event({
+    eventName: 'menuEvent',
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+  }) menuItemClicked:EventEmitter;
 
+  @Listen('click', {capture: true})
+  handleClick(ev) {
+    console.log("menu-clicked");
+    this.menuItemClicked.emit(ev)}
 
-  triggerEvent(ev){
-    console.log(this.el);
-    ev.stopImmediatePropagation();
-    console.log(ev.target);
-    var event = new CustomEvent('MenuEvent');
-    this.el.dispatchEvent(event);
-    //dispatch using component instance view this.something...
-  }
   render() {
-    console.log("Render");
     if (!this.controller) {
       console.log("No controller");
       this.controller = new MenuController(this.el);
     }
 
     let menuItems = this.controller.getMenuItems();
-    console.log(menuItems);
+
     let renderComponent = [];
     for (let i = 0; i < menuItems.length; i++) {
       // @ts-ignore
-      renderComponent.push(<a onclick={(event)=>this.triggerEvent(event)} path={menuItems[i].path} >{menuItems[i].name}</a>)
+      renderComponent.push(<a path={menuItems[i].path} >{menuItems[i].name}</a>)
     }
     return renderComponent;
   }
