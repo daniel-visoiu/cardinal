@@ -30,7 +30,6 @@ export default function CustomTheme(opt?: CustomThemeOptions): MyDecoratorResult
         var styleElement = document.createElement("link");
         styleElement.setAttribute("rel", "stylesheet");
         styleElement.setAttribute("href", themeStylePath);
-        console.log(host.shadowRoot);
         host.shadowRoot.appendChild(styleElement);
       }
 

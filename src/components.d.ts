@@ -12,10 +12,13 @@ export namespace Components {
   interface AppContainer {}
   interface AppMenu {
     'controller': any;
-    'itemRenderer': string;
+    'itemRenderer'?: string;
     'onMenuChanged'?: any;
   }
   interface AppMenuItem {}
+  interface MenuItemRenderer {
+    'value': string;
+  }
   interface MyComponent {
     /**
     * The first name
@@ -53,6 +56,12 @@ declare global {
     new (): HTMLAppMenuItemElement;
   };
 
+  interface HTMLMenuItemRendererElement extends Components.MenuItemRenderer, HTMLStencilElement {}
+  var HTMLMenuItemRendererElement: {
+    prototype: HTMLMenuItemRendererElement;
+    new (): HTMLMenuItemRendererElement;
+  };
+
   interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
   var HTMLMyComponentElement: {
     prototype: HTMLMyComponentElement;
@@ -62,6 +71,7 @@ declare global {
     'app-container': HTMLAppContainerElement;
     'app-menu': HTMLAppMenuElement;
     'app-menu-item': HTMLAppMenuItemElement;
+    'menu-item-renderer': HTMLMenuItemRendererElement;
     'my-component': HTMLMyComponentElement;
   }
 }
@@ -75,6 +85,9 @@ declare namespace LocalJSX {
     'onMenuEvent'?: (event: CustomEvent<any>) => void;
   }
   interface AppMenuItem extends JSXBase.HTMLAttributes<HTMLAppMenuItemElement> {}
+  interface MenuItemRenderer extends JSXBase.HTMLAttributes<HTMLMenuItemRendererElement> {
+    'value'?: string;
+  }
   interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {
     /**
     * The first name
@@ -94,6 +107,7 @@ declare namespace LocalJSX {
     'app-container': AppContainer;
     'app-menu': AppMenu;
     'app-menu-item': AppMenuItem;
+    'menu-item-renderer': MenuItemRenderer;
     'my-component': MyComponent;
   }
 }
