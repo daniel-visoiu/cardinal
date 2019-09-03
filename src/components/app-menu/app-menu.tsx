@@ -1,4 +1,4 @@
-import {Component, h, Prop, Element, Event, EventEmitter} from '@stencil/core';
+import {Component, h, Prop, Element, Event, EventEmitter, Watch} from '@stencil/core';
 import CustomTheme from "../../decorators/CustomTheme";
 
 @Component({
@@ -7,34 +7,55 @@ import CustomTheme from "../../decorators/CustomTheme";
   shadow: true
 })
 export class AppMenu {
-  @CustomTheme({}) theme;
+  @CustomTheme()
   @Prop() controller: any;
   @Prop() itemRenderer?: string;
-  @Prop() onMenuChanged ?:any;
+  @Prop() onMenuChanged ?: any;
+  @Prop() menuItems ?: any;
   @Element() el: HTMLElement;
   @Event({
     eventName: 'menuEvent',
     composed: true,
     cancelable: true,
     bubbles: true,
-  }) menuItemClicked:EventEmitter;
+  }) menuItemClicked: EventEmitter;
+
+  @Event({
+    eventName: 'needMenuItems',
+    cancelable: true,
+    composed: true,
+    bubbles: true,
+  }) needMenuItemsEvt: EventEmitter;
 
 
   handleClick(ev) {
     ev.preventDefault();
-    this.menuItemClicked.emit(ev.target.value)}
 
-  render() {
-    let ItemRendererTag = "menu-item-renderer";
-    if(this.itemRenderer){
-       ItemRendererTag = this.itemRenderer;
+    let item = ev.target.value;
+
+    for (let i = 0; i < this.menuItems.length; i++) {
+      this.menuItems[i].active = item === this.menuItems[i];
     }
 
-    let menuItems = this.controller.getMenuItems();
+    this.menuItemClicked.emit(ev.target.value);
+    //forcing a rerendering
+    this.menuItems = [...this.menuItems];
+  }
+
+  componentWillLoad() {
+    this.needMenuItemsEvt.emit((data) => {
+      this.menuItems = data;
+    });
+  }
+
+
+  render() {
+    let ItemRendererTag = this.itemRenderer ? this.itemRenderer : "menu-item-renderer";
 
     let renderComponent = [];
-    for (let i = 0; i < menuItems.length; i++) {
-      renderComponent.push(<ItemRendererTag  onclick={(event)=>this.handleClick(event)} active={true} value={menuItems[i].path} >{menuItems[i].name}</ItemRendererTag>)
+    for (let i = 0; i < this.menuItems.length; i++) {
+      renderComponent.push(<ItemRendererTag onclick={(event) => this.handleClick(event)} active={this.menuItems[i].active?this.menuItems[i].active:false}
+                                            value={this.menuItems[i]}/>)
     }
     return renderComponent;
   }

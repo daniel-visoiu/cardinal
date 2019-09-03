@@ -13,11 +13,12 @@ export namespace Components {
   interface AppMenu {
     'controller': any;
     'itemRenderer'?: string;
+    'menuItems'?: any;
     'onMenuChanged'?: any;
   }
   interface AppMenuItem {}
   interface MenuItemRenderer {
-    'value': string;
+    'value': MenuItem;
   }
   interface MyComponent {
     /**
@@ -81,12 +82,14 @@ declare namespace LocalJSX {
   interface AppMenu extends JSXBase.HTMLAttributes<HTMLAppMenuElement> {
     'controller'?: any;
     'itemRenderer'?: string;
+    'menuItems'?: any;
     'onMenuChanged'?: any;
     'onMenuEvent'?: (event: CustomEvent<any>) => void;
+    'onNeedMenuItems'?: (event: CustomEvent<any>) => void;
   }
   interface AppMenuItem extends JSXBase.HTMLAttributes<HTMLAppMenuItemElement> {}
   interface MenuItemRenderer extends JSXBase.HTMLAttributes<HTMLMenuItemRendererElement> {
-    'value'?: string;
+    'value'?: MenuItem;
   }
   interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {
     /**

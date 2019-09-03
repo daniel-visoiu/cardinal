@@ -1,17 +1,23 @@
 import {Component, h, Prop} from '@stencil/core';
+import CustomTheme from "../../decorators/CustomTheme";
+
+interface MenuItem {
+  name: string
+}
 
 @Component({
   tag: 'menu-item-renderer',
-  styleUrl: '../../themes/default/components/app-item-renderer/app-item-renderer.css',
+  styleUrl: '../../themes/default/components/menu-item-renderer/menu-item-renderer.css',
   shadow: true
 })
 
 export class MenuItemRenderer {
-  @Prop() value: string;
+  @CustomTheme()
+  @Prop() value: MenuItem;
 
   render() {
     return (<a>
-      <slot/>
+      {this.value.name}
     </a>);
   }
 }

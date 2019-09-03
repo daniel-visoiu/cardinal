@@ -7,22 +7,18 @@ declare type MyDecoratorResult = (
   methodName: string
 ) => void;
 
-declare interface CustomThemeOptions {
-  // some optional decorator parameters go here
-}
 
-export default function CustomTheme(opt?: CustomThemeOptions): MyDecoratorResult {
+export default function CustomTheme(): MyDecoratorResult {
   return (proto: ComponentInterface) => {
     // this is to resolve the 'compiler optimization issue':
     // lifecycle events not being called when not explicitly declared in at least one of components from bundle
     BUILD.cmpDidLoad = true;
     BUILD.cmpDidUnload = true;
-    console.log(opt);
     const {componentDidLoad, componentDidUnload} = proto;
 
     proto.componentDidLoad = function () {
       const host = getElement(this);
-      let componentName = this.el.localName;
+      let componentName = host.tagName.toLowerCase();
       // @ts-ignore
       if (typeof globalConfig !== "undefined" && typeof globalConfig.theme === "string") {
         // @ts-ignore
