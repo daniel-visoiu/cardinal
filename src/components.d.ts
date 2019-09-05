@@ -6,7 +6,9 @@
 
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
-
+import {
+  MenuItem,
+} from './components/menu-item-renderer/menu-item-renderer';
 
 export namespace Components {
   interface AppContainer {}

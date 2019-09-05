@@ -1,7 +1,7 @@
 import {Component, h, Prop} from '@stencil/core';
 import CustomTheme from "../../decorators/CustomTheme";
 
-interface MenuItem {
+export interface MenuItem {
   name: string
 }
 

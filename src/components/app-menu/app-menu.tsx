@@ -1,4 +1,4 @@
-import {Component, h, Prop, Element, Event, EventEmitter, Watch} from '@stencil/core';
+import {Component, h, Prop, Element, Event, EventEmitter} from '@stencil/core';
 import CustomTheme from "../../decorators/CustomTheme";
 
 @Component({
