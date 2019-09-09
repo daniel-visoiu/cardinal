@@ -1,3 +1,12 @@
+@import url(../../assets/bootstrap/dist/css/bootstrap.min.css);
 a{
   color:magenta;
+}
+
+:host{
+  width: 100%;
+}
+
+.navbar {
+padding:.5rem 1rem .5rem 0rem;
 }

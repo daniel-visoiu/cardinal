@@ -14,6 +14,7 @@ export namespace Components {
   interface AppContainer {}
   interface AppMenu {
     'controller': any;
+    'hamburgerMaxWidth'?: number;
     'itemRenderer'?: string;
     'menuItems'?: any;
     'onMenuChanged'?: any;
@@ -83,6 +84,7 @@ declare namespace LocalJSX {
   interface AppContainer extends JSXBase.HTMLAttributes<HTMLAppContainerElement> {}
   interface AppMenu extends JSXBase.HTMLAttributes<HTMLAppMenuElement> {
     'controller'?: any;
+    'hamburgerMaxWidth'?: number;
     'itemRenderer'?: string;
     'menuItems'?: any;
     'onMenuChanged'?: any;

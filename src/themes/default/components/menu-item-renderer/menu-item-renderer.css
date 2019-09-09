@@ -12,3 +12,7 @@ a:hover{
 :host([active]) a{
   background: #9ca1fb;
 }
+
+:host{
+  width:100%;
+}
