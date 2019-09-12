@@ -65,15 +65,32 @@ export class AppMenu {
   }
 
 
-  render() {
+  renderItem(menuItem){
     let ItemRendererTag = this.itemRenderer ? this.itemRenderer : "menu-item-renderer";
+
+    let children = [];
+
+    if(menuItem.children){
+      for (let i = 0; i < menuItem.children.length; i++) {
+        children.push(this.renderItem(menuItem.children[i]))
+      }
+    }
+    return <ItemRendererTag onclick={(event) => this.handleClick(event)}
+                            active={menuItem.active ? menuItem.active : false}
+                            children={children}
+                            hamburger = {this.showHamburgerMenu}
+                            value={menuItem}/>
+  }
+
+  render() {
+
 
     let renderComponent = [];
     for (let i = 0; i < this.menuItems.length; i++) {
-      renderComponent.push(<ItemRendererTag onclick={(event) => this.handleClick(event)}
-                                            active={this.menuItems[i].active ? this.menuItems[i].active : false}
-                                            hamburger = {this.showHamburgerMenu}
-                                            value={this.menuItems[i]}/>)
+      let menuItem = this.menuItems[i];
+
+      renderComponent.push(this.renderItem(menuItem));
+
     }
 
     if (this.showHamburgerMenu) {

@@ -15,9 +15,23 @@ export class MenuItemRenderer {
   @CustomTheme()
   @Prop() value: MenuItem;
 
+
+  renderMenuItem(item){
+    let children = [];
+    if(item.children){
+      item.children.forEach((child)=>{
+        children.push(this.renderMenuItem(child));
+      })
+    }
+    return (
+      <a>
+        {item.name}
+        {children}
+      </a>
+    )
+  }
+
   render() {
-    return (<a>
-      {this.value.name}
-    </a>);
+    return (this.renderMenuItem(this.value));
   }
 }
