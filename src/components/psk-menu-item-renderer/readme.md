@@ -1,4 +1,4 @@
-# menu-item-renderer
+# psk-menu-item-renderer
 
 
 
@@ -9,6 +9,7 @@
 
 | Property | Attribute | Description | Type       | Default     |
 | -------- | --------- | ----------- | ---------- | ----------- |
+| `active` | `active`  |             | `boolean`  | `undefined` |
 | `value`  | --        |             | `MenuItem` | `undefined` |
 
 

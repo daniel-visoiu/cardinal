@@ -66,7 +66,7 @@ export class AppMenu {
 
 
   renderItem(menuItem){
-    let ItemRendererTag = this.itemRenderer ? this.itemRenderer : "menu-item-renderer";
+    let ItemRendererTag = this.itemRenderer ? this.itemRenderer : "psk-menu-item-renderer";
 
     let children = [];
 

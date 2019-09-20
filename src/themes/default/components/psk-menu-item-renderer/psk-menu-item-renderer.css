@@ -1,0 +1,62 @@
+@import url(../../assets/fonts/font-awesome.min.css);
+
+div{
+  display: inline-block;
+  margin:0;
+}
+div.item_container{
+  padding:9px 20px 9px 9px;
+}
+
+a.active div,
+.dropdown.active
+{
+  background:#64749A;
+}
+
+div a{
+  color:#FFF;
+  text-decoration: none;
+}
+
+:host([hamburger]) a div{
+  width:100%;
+}
+
+span.icon{
+  padding: 10px;
+  color:#FFF
+}
+
+.children{
+  position:absolute;
+  top:56px;
+  left:0;
+  display: none;
+  background: #051130;
+}
+
+.children .wrapper_container{
+  display: list-item;
+  width: 250px;
+  list-style: none;
+}
+
+.dropdown{
+  cursor: pointer;
+}
+
+.dropdown.isOpened,
+.dropdown .children{
+  background: #051130;
+}
+.dropdown.isOpened div.children{
+  display: block;
+}
+span.fa-caret-down{
+  padding-left: 10px;
+}
+
+.wrapper_container{
+  position: relative;
+}

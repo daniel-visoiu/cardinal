@@ -7,8 +7,14 @@
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
+  WgFile,
+} from './interfaces/WgFile';
+import {
+  EventEmitter,
+} from '@stencil/core';
+import {
   MenuItem,
-} from './components/menu-item-renderer/menu-item-renderer';
+} from './interfaces/MenuItem';
 
 export namespace Components {
   interface AppContainer {}
@@ -19,23 +25,35 @@ export namespace Components {
     'menuItems'?: any;
     'onMenuChanged'?: any;
   }
-  interface AppMenuItem {}
-  interface MenuItemRenderer {
+  interface PskAttachmentsList {
+    'files': WgFile[];
+  }
+  interface PskButton {
+    'buttonClass': string;
+    'disabled': boolean;
+    'eventData': any;
+    'eventEmitter': EventEmitter;
+    'label': string;
+  }
+  interface PskFilesChooser {
+    'accept'?: string;
+    'label': string;
+    'onFilesChange'?: Function;
+    'onFilesSelect'?: Function;
+  }
+  interface PskMenuItemRenderer {
+    'active': boolean;
     'value': MenuItem;
   }
-  interface MyComponent {
-    /**
-    * The first name
-    */
-    'first': string;
-    /**
-    * The last name
-    */
-    'last': string;
-    /**
-    * The middle name
-    */
-    'middle': string;
+  interface PskModal {
+    'opened': boolean;
+  }
+  interface PskPageNotFound {
+    'basePath': string;
+    'urlDestination'?: string;
+  }
+  interface PskUiLoader {
+    'shouldBeRendered': boolean;
   }
 }
 
@@ -54,29 +72,57 @@ declare global {
     new (): HTMLAppMenuElement;
   };
 
-  interface HTMLAppMenuItemElement extends Components.AppMenuItem, HTMLStencilElement {}
-  var HTMLAppMenuItemElement: {
-    prototype: HTMLAppMenuItemElement;
-    new (): HTMLAppMenuItemElement;
+  interface HTMLPskAttachmentsListElement extends Components.PskAttachmentsList, HTMLStencilElement {}
+  var HTMLPskAttachmentsListElement: {
+    prototype: HTMLPskAttachmentsListElement;
+    new (): HTMLPskAttachmentsListElement;
   };
 
-  interface HTMLMenuItemRendererElement extends Components.MenuItemRenderer, HTMLStencilElement {}
-  var HTMLMenuItemRendererElement: {
-    prototype: HTMLMenuItemRendererElement;
-    new (): HTMLMenuItemRendererElement;
+  interface HTMLPskButtonElement extends Components.PskButton, HTMLStencilElement {}
+  var HTMLPskButtonElement: {
+    prototype: HTMLPskButtonElement;
+    new (): HTMLPskButtonElement;
   };
 
-  interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
-  var HTMLMyComponentElement: {
-    prototype: HTMLMyComponentElement;
-    new (): HTMLMyComponentElement;
+  interface HTMLPskFilesChooserElement extends Components.PskFilesChooser, HTMLStencilElement {}
+  var HTMLPskFilesChooserElement: {
+    prototype: HTMLPskFilesChooserElement;
+    new (): HTMLPskFilesChooserElement;
+  };
+
+  interface HTMLPskMenuItemRendererElement extends Components.PskMenuItemRenderer, HTMLStencilElement {}
+  var HTMLPskMenuItemRendererElement: {
+    prototype: HTMLPskMenuItemRendererElement;
+    new (): HTMLPskMenuItemRendererElement;
+  };
+
+  interface HTMLPskModalElement extends Components.PskModal, HTMLStencilElement {}
+  var HTMLPskModalElement: {
+    prototype: HTMLPskModalElement;
+    new (): HTMLPskModalElement;
+  };
+
+  interface HTMLPskPageNotFoundElement extends Components.PskPageNotFound, HTMLStencilElement {}
+  var HTMLPskPageNotFoundElement: {
+    prototype: HTMLPskPageNotFoundElement;
+    new (): HTMLPskPageNotFoundElement;
+  };
+
+  interface HTMLPskUiLoaderElement extends Components.PskUiLoader, HTMLStencilElement {}
+  var HTMLPskUiLoaderElement: {
+    prototype: HTMLPskUiLoaderElement;
+    new (): HTMLPskUiLoaderElement;
   };
   interface HTMLElementTagNameMap {
     'app-container': HTMLAppContainerElement;
     'app-menu': HTMLAppMenuElement;
-    'app-menu-item': HTMLAppMenuItemElement;
-    'menu-item-renderer': HTMLMenuItemRendererElement;
-    'my-component': HTMLMyComponentElement;
+    'psk-attachments-list': HTMLPskAttachmentsListElement;
+    'psk-button': HTMLPskButtonElement;
+    'psk-files-chooser': HTMLPskFilesChooserElement;
+    'psk-menu-item-renderer': HTMLPskMenuItemRendererElement;
+    'psk-modal': HTMLPskModalElement;
+    'psk-page-not-found': HTMLPskPageNotFoundElement;
+    'psk-ui-loader': HTMLPskUiLoaderElement;
   }
 }
 
@@ -91,31 +137,48 @@ declare namespace LocalJSX {
     'onMenuEvent'?: (event: CustomEvent<any>) => void;
     'onNeedMenuItems'?: (event: CustomEvent<any>) => void;
   }
-  interface AppMenuItem extends JSXBase.HTMLAttributes<HTMLAppMenuItemElement> {}
-  interface MenuItemRenderer extends JSXBase.HTMLAttributes<HTMLMenuItemRendererElement> {
+  interface PskAttachmentsList extends JSXBase.HTMLAttributes<HTMLPskAttachmentsListElement> {
+    'files'?: WgFile[];
+  }
+  interface PskButton extends JSXBase.HTMLAttributes<HTMLPskButtonElement> {
+    'buttonClass'?: string;
+    'disabled'?: boolean;
+    'eventData'?: any;
+    'eventEmitter'?: EventEmitter;
+    'label'?: string;
+  }
+  interface PskFilesChooser extends JSXBase.HTMLAttributes<HTMLPskFilesChooserElement> {
+    'accept'?: string;
+    'label'?: string;
+    'onFilesChange'?: Function;
+    'onFilesSelect'?: Function;
+  }
+  interface PskMenuItemRenderer extends JSXBase.HTMLAttributes<HTMLPskMenuItemRendererElement> {
+    'active'?: boolean;
     'value'?: MenuItem;
   }
-  interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {
-    /**
-    * The first name
-    */
-    'first'?: string;
-    /**
-    * The last name
-    */
-    'last'?: string;
-    /**
-    * The middle name
-    */
-    'middle'?: string;
+  interface PskModal extends JSXBase.HTMLAttributes<HTMLPskModalElement> {
+    'onCloseModal'?: (event: CustomEvent<any>) => void;
+    'opened'?: boolean;
+  }
+  interface PskPageNotFound extends JSXBase.HTMLAttributes<HTMLPskPageNotFoundElement> {
+    'basePath'?: string;
+    'urlDestination'?: string;
+  }
+  interface PskUiLoader extends JSXBase.HTMLAttributes<HTMLPskUiLoaderElement> {
+    'shouldBeRendered'?: boolean;
   }
 
   interface IntrinsicElements {
     'app-container': AppContainer;
     'app-menu': AppMenu;
-    'app-menu-item': AppMenuItem;
-    'menu-item-renderer': MenuItemRenderer;
-    'my-component': MyComponent;
+    'psk-attachments-list': PskAttachmentsList;
+    'psk-button': PskButton;
+    'psk-files-chooser': PskFilesChooser;
+    'psk-menu-item-renderer': PskMenuItemRenderer;
+    'psk-modal': PskModal;
+    'psk-page-not-found': PskPageNotFound;
+    'psk-ui-loader': PskUiLoader;
   }
 }
 
