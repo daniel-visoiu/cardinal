@@ -23,6 +23,18 @@ div a{
   width:100%;
 }
 
+:host([hamburger]) div.children{
+
+  position: relative;
+  background: none;
+  top:0;
+  width:100%;
+}
+
+:host([hamburger]) div.children .item_container{
+  padding-left: 32px;
+}
+
 span.icon{
   padding: 10px;
   color:#FFF
@@ -42,6 +54,11 @@ span.icon{
   list-style: none;
 }
 
+:host([hamburger]) .wrapper_container,
+:host([hamburger]) .dropdown{
+  width: 100%;
+}
+
 .dropdown{
   cursor: pointer;
 }
@@ -49,6 +66,28 @@ span.icon{
 .dropdown.isOpened,
 .dropdown .children{
   background: #051130;
+}
+:host([hamburger]) .dropdown.isOpened,
+:host([hamburger]) .dropdown .children{
+  background: none;
+  width: 100%;
+}
+
+.dropdown.isOpened div.children .children{
+  display:none
+}
+
+.dropdown.isOpened div.children .children{
+  left: 100%;
+  top: 0;
+}
+
+.dropdown.isOpened .wrapper_container:hover > .children{
+  display:block;
+}
+
+.children span.fa.fa-caret-down{
+  transform: rotate(270deg) translateX(-5px);
 }
 .dropdown.isOpened div.children{
   display: block;

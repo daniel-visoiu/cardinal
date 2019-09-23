@@ -7,14 +7,14 @@
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
+  MenuItem,
+} from './interfaces/MenuItem';
+import {
   WgFile,
 } from './interfaces/WgFile';
 import {
   EventEmitter,
 } from '@stencil/core';
-import {
-  MenuItem,
-} from './interfaces/MenuItem';
 
 export namespace Components {
   interface AppContainer {}
@@ -22,7 +22,7 @@ export namespace Components {
     'controller': any;
     'hamburgerMaxWidth'?: number;
     'itemRenderer'?: string;
-    'menuItems'?: any;
+    'menuItems'?: MenuItem[];
     'onMenuChanged'?: any;
   }
   interface DropdownRenderer {
@@ -144,7 +144,7 @@ declare namespace LocalJSX {
     'controller'?: any;
     'hamburgerMaxWidth'?: number;
     'itemRenderer'?: string;
-    'menuItems'?: any;
+    'menuItems'?: MenuItem[];
     'onMenuChanged'?: any;
     'onMenuEvent'?: (event: CustomEvent<any>) => void;
     'onNeedMenuItems'?: (event: CustomEvent<any>) => void;

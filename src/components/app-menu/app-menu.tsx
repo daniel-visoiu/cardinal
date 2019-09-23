@@ -1,5 +1,6 @@
 import {Component, h, Prop, Element, Event, EventEmitter, Listen, State} from '@stencil/core';
 import CustomTheme from "../../decorators/CustomTheme";
+import {MenuItem} from "../../interfaces/MenuItem";
 
 @Component({
   tag: 'app-menu',
@@ -11,7 +12,7 @@ export class AppMenu {
   @Prop() controller: any;
   @Prop() itemRenderer?: string;
   @Prop() onMenuChanged ?: any;
-  @Prop() menuItems ?: any;
+  @Prop() menuItems ?: MenuItem[]=[];
   @Prop() hamburgerMaxWidth ?: number = 600;
   @State() showHamburgerMenu?: boolean = false;
   @State() showNavBar: boolean = false;

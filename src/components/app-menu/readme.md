@@ -7,13 +7,13 @@
 
 ## Properties
 
-| Property            | Attribute             | Description | Type     | Default     |
-| ------------------- | --------------------- | ----------- | -------- | ----------- |
-| `controller`        | `controller`          |             | `any`    | `undefined` |
-| `hamburgerMaxWidth` | `hamburger-max-width` |             | `number` | `600`       |
-| `itemRenderer`      | `item-renderer`       |             | `string` | `undefined` |
-| `menuItems`         | `menu-items`          |             | `any`    | `undefined` |
-| `onMenuChanged`     | `on-menu-changed`     |             | `any`    | `undefined` |
+| Property            | Attribute             | Description | Type         | Default     |
+| ------------------- | --------------------- | ----------- | ------------ | ----------- |
+| `controller`        | `controller`          |             | `any`        | `undefined` |
+| `hamburgerMaxWidth` | `hamburger-max-width` |             | `number`     | `600`       |
+| `itemRenderer`      | `item-renderer`       |             | `string`     | `undefined` |
+| `menuItems`         | --                    |             | `MenuItem[]` | `[]`        |
+| `onMenuChanged`     | `on-menu-changed`     |             | `any`        | `undefined` |
 
 
 ## Events

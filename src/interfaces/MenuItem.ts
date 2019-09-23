@@ -3,5 +3,6 @@ export interface MenuItem {
   name: string,
   icon: string,
   type: string,
+  active:boolean,
   children:MenuItem[]
 }
