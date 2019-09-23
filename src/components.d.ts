@@ -25,6 +25,11 @@ export namespace Components {
     'menuItems'?: any;
     'onMenuChanged'?: any;
   }
+  interface DropdownRenderer {
+    'active': boolean;
+    'somethingChanged': boolean;
+    'url': any;
+  }
   interface PskAttachmentsList {
     'files': WgFile[];
   }
@@ -72,6 +77,12 @@ declare global {
     new (): HTMLAppMenuElement;
   };
 
+  interface HTMLDropdownRendererElement extends Components.DropdownRenderer, HTMLStencilElement {}
+  var HTMLDropdownRendererElement: {
+    prototype: HTMLDropdownRendererElement;
+    new (): HTMLDropdownRendererElement;
+  };
+
   interface HTMLPskAttachmentsListElement extends Components.PskAttachmentsList, HTMLStencilElement {}
   var HTMLPskAttachmentsListElement: {
     prototype: HTMLPskAttachmentsListElement;
@@ -116,6 +127,7 @@ declare global {
   interface HTMLElementTagNameMap {
     'app-container': HTMLAppContainerElement;
     'app-menu': HTMLAppMenuElement;
+    'dropdown-renderer': HTMLDropdownRendererElement;
     'psk-attachments-list': HTMLPskAttachmentsListElement;
     'psk-button': HTMLPskButtonElement;
     'psk-files-chooser': HTMLPskFilesChooserElement;
@@ -136,6 +148,11 @@ declare namespace LocalJSX {
     'onMenuChanged'?: any;
     'onMenuEvent'?: (event: CustomEvent<any>) => void;
     'onNeedMenuItems'?: (event: CustomEvent<any>) => void;
+  }
+  interface DropdownRenderer extends JSXBase.HTMLAttributes<HTMLDropdownRendererElement> {
+    'active'?: boolean;
+    'somethingChanged'?: boolean;
+    'url'?: any;
   }
   interface PskAttachmentsList extends JSXBase.HTMLAttributes<HTMLPskAttachmentsListElement> {
     'files'?: WgFile[];
@@ -172,6 +189,7 @@ declare namespace LocalJSX {
   interface IntrinsicElements {
     'app-container': AppContainer;
     'app-menu': AppMenu;
+    'dropdown-renderer': DropdownRenderer;
     'psk-attachments-list': PskAttachmentsList;
     'psk-button': PskButton;
     'psk-files-chooser': PskFilesChooser;
