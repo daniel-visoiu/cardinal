@@ -1,14 +1,9 @@
-@import url(../../assets/bootstrap/css/bootstrap.min.css);
-a{
-  color:magenta;
-}
-
 :host{
   width: 100%;
 }
 
 .navbar {
-padding:.5rem 1rem .5rem 0rem;
+padding:.5rem 1rem .5rem 0;
 }
 
 .navbar-brand{

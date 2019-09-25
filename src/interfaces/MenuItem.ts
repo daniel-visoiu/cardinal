@@ -4,5 +4,8 @@ export interface MenuItem {
   icon: string,
   type: string,
   active:boolean,
-  children:MenuItem[]
+  children:MenuItem[],
+  component:string,
+  componentProps:any
+  exactMatch:boolean
 }

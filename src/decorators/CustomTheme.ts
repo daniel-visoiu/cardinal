@@ -18,6 +18,10 @@ export default function CustomTheme(): MyDecoratorResult {
 
     proto.componentDidLoad = function () {
       const host = getElement(this);
+      if(!host){
+        //current component does not have a shadow dom.
+        return;
+      }
       let componentName = host.tagName.toLowerCase();
       // @ts-ignore
       if (typeof globalConfig !== "undefined" && typeof globalConfig.theme === "string") {
@@ -26,7 +30,7 @@ export default function CustomTheme(): MyDecoratorResult {
         var styleElement = document.createElement("link");
         styleElement.setAttribute("rel", "stylesheet");
         styleElement.setAttribute("href", themeStylePath);
-        host.shadowRoot.appendChild(styleElement);
+        host.shadowRoot.prepend(styleElement);
       }
 
       return componentDidLoad && componentDidLoad.call(this);

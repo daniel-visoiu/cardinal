@@ -1,5 +1,6 @@
 import {Component, h, Prop} from '@stencil/core';
 import {MenuItem} from "../../interfaces/MenuItem";
+import CustomTheme from "../../decorators/CustomTheme";
 
 @Component({
   tag: 'psk-menu-item-renderer',
@@ -8,6 +9,7 @@ import {MenuItem} from "../../interfaces/MenuItem";
 })
 
 export class PskMenuItemRenderer {
+  @CustomTheme()
   @Prop() value: MenuItem;
   @Prop({
     reflectToAttr: true,
@@ -20,10 +22,10 @@ export class PskMenuItemRenderer {
       item.children.forEach((child) => {
         children.push(this.renderMenuItem(child));
       })
+
     }
 
     let ItemWrapperTag = item.type === "abstract" ? "dropdown-renderer" : "stencil-route-link";
-
     return (
       <ItemWrapperTag url={href} activeClass="active" exact={false} somethingChanged={this.value}>
         <div class="wrapper_container">

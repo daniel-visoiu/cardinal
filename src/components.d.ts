@@ -30,6 +30,9 @@ export namespace Components {
     'somethingChanged': boolean;
     'url': any;
   }
+  interface PskAppRouter {
+    'menuItems'?: MenuItem[];
+  }
   interface PskAttachmentsList {
     'files': WgFile[];
   }
@@ -60,6 +63,12 @@ export namespace Components {
   interface PskUiLoader {
     'shouldBeRendered': boolean;
   }
+  interface PskUserProfile {
+    'itemRenderer': any;
+  }
+  interface PskUserProfileRenderer {
+    'userInfo': any;
+  }
 }
 
 declare global {
@@ -81,6 +90,12 @@ declare global {
   var HTMLDropdownRendererElement: {
     prototype: HTMLDropdownRendererElement;
     new (): HTMLDropdownRendererElement;
+  };
+
+  interface HTMLPskAppRouterElement extends Components.PskAppRouter, HTMLStencilElement {}
+  var HTMLPskAppRouterElement: {
+    prototype: HTMLPskAppRouterElement;
+    new (): HTMLPskAppRouterElement;
   };
 
   interface HTMLPskAttachmentsListElement extends Components.PskAttachmentsList, HTMLStencilElement {}
@@ -124,10 +139,23 @@ declare global {
     prototype: HTMLPskUiLoaderElement;
     new (): HTMLPskUiLoaderElement;
   };
+
+  interface HTMLPskUserProfileElement extends Components.PskUserProfile, HTMLStencilElement {}
+  var HTMLPskUserProfileElement: {
+    prototype: HTMLPskUserProfileElement;
+    new (): HTMLPskUserProfileElement;
+  };
+
+  interface HTMLPskUserProfileRendererElement extends Components.PskUserProfileRenderer, HTMLStencilElement {}
+  var HTMLPskUserProfileRendererElement: {
+    prototype: HTMLPskUserProfileRendererElement;
+    new (): HTMLPskUserProfileRendererElement;
+  };
   interface HTMLElementTagNameMap {
     'app-container': HTMLAppContainerElement;
     'app-menu': HTMLAppMenuElement;
     'dropdown-renderer': HTMLDropdownRendererElement;
+    'psk-app-router': HTMLPskAppRouterElement;
     'psk-attachments-list': HTMLPskAttachmentsListElement;
     'psk-button': HTMLPskButtonElement;
     'psk-files-chooser': HTMLPskFilesChooserElement;
@@ -135,6 +163,8 @@ declare global {
     'psk-modal': HTMLPskModalElement;
     'psk-page-not-found': HTMLPskPageNotFoundElement;
     'psk-ui-loader': HTMLPskUiLoaderElement;
+    'psk-user-profile': HTMLPskUserProfileElement;
+    'psk-user-profile-renderer': HTMLPskUserProfileRendererElement;
   }
 }
 
@@ -153,6 +183,10 @@ declare namespace LocalJSX {
     'active'?: boolean;
     'somethingChanged'?: boolean;
     'url'?: any;
+  }
+  interface PskAppRouter extends JSXBase.HTMLAttributes<HTMLPskAppRouterElement> {
+    'menuItems'?: MenuItem[];
+    'onNeedMenuItems'?: (event: CustomEvent<any>) => void;
   }
   interface PskAttachmentsList extends JSXBase.HTMLAttributes<HTMLPskAttachmentsListElement> {
     'files'?: WgFile[];
@@ -185,11 +219,19 @@ declare namespace LocalJSX {
   interface PskUiLoader extends JSXBase.HTMLAttributes<HTMLPskUiLoaderElement> {
     'shouldBeRendered'?: boolean;
   }
+  interface PskUserProfile extends JSXBase.HTMLAttributes<HTMLPskUserProfileElement> {
+    'itemRenderer'?: any;
+    'onGetUserInfo'?: (event: CustomEvent<any>) => void;
+  }
+  interface PskUserProfileRenderer extends JSXBase.HTMLAttributes<HTMLPskUserProfileRendererElement> {
+    'userInfo'?: any;
+  }
 
   interface IntrinsicElements {
     'app-container': AppContainer;
     'app-menu': AppMenu;
     'dropdown-renderer': DropdownRenderer;
+    'psk-app-router': PskAppRouter;
     'psk-attachments-list': PskAttachmentsList;
     'psk-button': PskButton;
     'psk-files-chooser': PskFilesChooser;
@@ -197,6 +239,8 @@ declare namespace LocalJSX {
     'psk-modal': PskModal;
     'psk-page-not-found': PskPageNotFound;
     'psk-ui-loader': PskUiLoader;
+    'psk-user-profile': PskUserProfile;
+    'psk-user-profile-renderer': PskUserProfileRenderer;
   }
 }
 
