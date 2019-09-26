@@ -9,7 +9,6 @@ import {MenuItem} from "../../interfaces/MenuItem";
 })
 export class AppMenu {
   @CustomTheme()
-  @Prop() controller: any;
   @Prop() itemRenderer?: string;
   @Prop() onMenuChanged ?: any;
   @Prop() menuItems ?: MenuItem[]=[];
