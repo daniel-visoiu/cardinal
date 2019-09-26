@@ -1,4 +1,4 @@
-import {Component, h, Prop, Element, Event, EventEmitter, Listen, State} from '@stencil/core';
+import {Component, h, Prop, Event, EventEmitter, Listen, State} from '@stencil/core';
 import CustomTheme from "../../decorators/CustomTheme";
 import {MenuItem} from "../../interfaces/MenuItem";
 
@@ -16,7 +16,6 @@ export class AppMenu {
   @Prop() hamburgerMaxWidth ?: number = 600;
   @State() showHamburgerMenu?: boolean = false;
   @State() showNavBar: boolean = false;
-  @Element() el: HTMLElement;
   @Event({
     eventName: 'menuEvent',
     composed: true,
