@@ -22,18 +22,26 @@ export class PskAppRouter {
     });
   }
 
+  renderItems(items) {
+    let routes = items.map((item) => {
+      if (item.children) {
+        return this.renderItems(item.children)
+      } else {
+        return <stencil-route url={item.path} exact={item.exactMatch} component={item.component}
+                              componentProps={item.componentProps}/>
+      }
+    });
+    return routes;
+  }
 
   render() {
-    let routes = this.menuItems.map((menuItem)=>{
-      return  <stencil-route url={menuItem.path}  exact={menuItem.exactMatch} component={menuItem.component} componentProps={menuItem.componentProps}/>
-    });
-
+    let routes = this.renderItems(this.menuItems);
     return (
       <div class="app_container">
         <stencil-router>
-        <stencil-route-switch scrollTopOffset={0}>
-          {routes}
-        </stencil-route-switch>
+          <stencil-route-switch scrollTopOffset={0}>
+            {routes}
+          </stencil-route-switch>
         </stencil-router>
       </div>)
   }
