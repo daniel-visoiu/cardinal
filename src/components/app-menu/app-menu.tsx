@@ -10,7 +10,6 @@ import {MenuItem} from "../../interfaces/MenuItem";
 export class AppMenu {
   @CustomTheme()
   @Prop() itemRenderer?: string;
-  @Prop() onMenuChanged ?: any;
   @Prop() menuItems ?: MenuItem[]=[];
   @Prop() hamburgerMaxWidth ?: number = 600;
   @State() showHamburgerMenu?: boolean = false;
@@ -58,9 +57,11 @@ export class AppMenu {
   }
 
   componentWillLoad() {
-    this.needMenuItemsEvt.emit((data) => {
-      this.menuItems = data;
-    });
+    if(!this.menuItems){
+      this.needMenuItemsEvt.emit((data) => {
+        this.menuItems = data;
+      });
+    }
   }
 
 
