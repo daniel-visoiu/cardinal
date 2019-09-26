@@ -1,12 +1,12 @@
-import {Component, h, State, EventEmitter, Event, Prop,} from '@stencil/core';
+import {Component, h,  EventEmitter, Event, Prop,} from '@stencil/core';
 
 @Component({
   tag: 'psk-user-profile',
   shadow: true
 })
 export class PskUserProfile {
-  @State() userInfo: any;
-  @Prop() itemRenderer:any;
+  @Prop() userInfo: any = null;
+  @Prop() profileRenderer:any;
 
   @Event({
     eventName: 'getUserInfo',
@@ -16,19 +16,20 @@ export class PskUserProfile {
   }) getUserInfoEvent: EventEmitter;
 
   componentWillLoad() {
-    this.getUserInfoEvent.emit((err, userInfo)=>{
-      if(!err){
-        this.userInfo = userInfo;
-      }
-      else{
-        console.error("Error getting user info",err);
-      }
-    })
+    if (!this.userInfo) {
+      this.getUserInfoEvent.emit((err, userInfo) => {
+        if (!err) {
+          this.userInfo = userInfo;
+        } else {
+          console.error("Error getting user info", err);
+        }
+      })
+    }
   }
 
   render() {
 
-    let ItemRenderer = this.itemRenderer?this.itemRenderer:"psk-user-profile-renderer";
+    let ItemRenderer = this.profileRenderer?this.profileRenderer:"psk-user-profile-renderer";
 
     return (
       <ItemRenderer userInfo={this.userInfo}/>

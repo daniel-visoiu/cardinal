@@ -64,7 +64,8 @@ export namespace Components {
     'shouldBeRendered': boolean;
   }
   interface PskUserProfile {
-    'itemRenderer': any;
+    'profileRenderer': any;
+    'userInfo': any;
   }
   interface PskUserProfileRenderer {
     'userInfo': any;
@@ -220,8 +221,9 @@ declare namespace LocalJSX {
     'shouldBeRendered'?: boolean;
   }
   interface PskUserProfile extends JSXBase.HTMLAttributes<HTMLPskUserProfileElement> {
-    'itemRenderer'?: any;
     'onGetUserInfo'?: (event: CustomEvent<any>) => void;
+    'profileRenderer'?: any;
+    'userInfo'?: any;
   }
   interface PskUserProfileRenderer extends JSXBase.HTMLAttributes<HTMLPskUserProfileRendererElement> {
     'userInfo'?: any;
