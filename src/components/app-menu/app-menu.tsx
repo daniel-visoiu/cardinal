@@ -10,7 +10,7 @@ import {MenuItem} from "../../interfaces/MenuItem";
 export class AppMenu {
   @CustomTheme()
   @Prop() itemRenderer?: string;
-  @Prop() menuItems ?: MenuItem[]=[];
+  @Prop() menuItems ?: MenuItem[]=null;
   @Prop() hamburgerMaxWidth ?: number = 600;
   @State() showHamburgerMenu?: boolean = false;
   @State() showNavBar: boolean = false;

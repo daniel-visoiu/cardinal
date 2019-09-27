@@ -9,11 +9,9 @@
 
 | Property            | Attribute             | Description | Type         | Default     |
 | ------------------- | --------------------- | ----------- | ------------ | ----------- |
-| `controller`        | `controller`          |             | `any`        | `undefined` |
 | `hamburgerMaxWidth` | `hamburger-max-width` |             | `number`     | `600`       |
 | `itemRenderer`      | `item-renderer`       |             | `string`     | `undefined` |
-| `menuItems`         | --                    |             | `MenuItem[]` | `[]`        |
-| `onMenuChanged`     | `on-menu-changed`     |             | `any`        | `undefined` |
+| `menuItems`         | --                    |             | `MenuItem[]` | `null`      |
 
 
 ## Events
@@ -28,7 +26,7 @@
 
 ### Used by
 
- - [app-container](..\app-container)
+ - [app-container](../app-container)
 
 ### Graph
 ```mermaid

@@ -19,11 +19,9 @@ import {
 export namespace Components {
   interface AppContainer {}
   interface AppMenu {
-    'controller': any;
     'hamburgerMaxWidth'?: number;
     'itemRenderer'?: string;
     'menuItems'?: MenuItem[];
-    'onMenuChanged'?: any;
   }
   interface DropdownRenderer {
     'active': boolean;
@@ -172,11 +170,9 @@ declare global {
 declare namespace LocalJSX {
   interface AppContainer extends JSXBase.HTMLAttributes<HTMLAppContainerElement> {}
   interface AppMenu extends JSXBase.HTMLAttributes<HTMLAppMenuElement> {
-    'controller'?: any;
     'hamburgerMaxWidth'?: number;
     'itemRenderer'?: string;
     'menuItems'?: MenuItem[];
-    'onMenuChanged'?: any;
     'onMenuEvent'?: (event: CustomEvent<any>) => void;
     'onNeedMenuItems'?: (event: CustomEvent<any>) => void;
   }
