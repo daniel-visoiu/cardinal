@@ -1,4 +1,4 @@
-# psk-modal
+# psk-pin-popup
 
 
 
@@ -9,27 +9,27 @@
 
 | Property | Attribute | Description | Type      | Default |
 | -------- | --------- | ----------- | --------- | ------- |
-| `opened` | `opened`  |             | `boolean` | `false` |
+| `opened` | `opened`  |             | `boolean` | `true`  |
 
 
 ## Events
 
-| Event        | Description | Type               |
-| ------------ | ----------- | ------------------ |
-| `closeModal` |             | `CustomEvent<any>` |
+| Event     | Description | Type               |
+| --------- | ----------- | ------------------ |
+| `sendPin` |             | `CustomEvent<any>` |
 
 
 ## Dependencies
 
-### Used by
+### Depends on
 
- - [psk-pin-popup](../psk-pin-popup)
+- [psk-modal](../psk-modal)
 
 ### Graph
 ```mermaid
 graph TD;
   psk-pin-popup --> psk-modal
-  style psk-modal fill:#f9f,stroke:#333,stroke-width:4px
+  style psk-pin-popup fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

@@ -58,6 +58,9 @@ export namespace Components {
     'basePath': string;
     'urlDestination'?: string;
   }
+  interface PskPinPopup {
+    'opened': boolean;
+  }
   interface PskUiLoader {
     'shouldBeRendered': boolean;
   }
@@ -133,6 +136,12 @@ declare global {
     new (): HTMLPskPageNotFoundElement;
   };
 
+  interface HTMLPskPinPopupElement extends Components.PskPinPopup, HTMLStencilElement {}
+  var HTMLPskPinPopupElement: {
+    prototype: HTMLPskPinPopupElement;
+    new (): HTMLPskPinPopupElement;
+  };
+
   interface HTMLPskUiLoaderElement extends Components.PskUiLoader, HTMLStencilElement {}
   var HTMLPskUiLoaderElement: {
     prototype: HTMLPskUiLoaderElement;
@@ -161,6 +170,7 @@ declare global {
     'psk-menu-item-renderer': HTMLPskMenuItemRendererElement;
     'psk-modal': HTMLPskModalElement;
     'psk-page-not-found': HTMLPskPageNotFoundElement;
+    'psk-pin-popup': HTMLPskPinPopupElement;
     'psk-ui-loader': HTMLPskUiLoaderElement;
     'psk-user-profile': HTMLPskUserProfileElement;
     'psk-user-profile-renderer': HTMLPskUserProfileRendererElement;
@@ -213,6 +223,10 @@ declare namespace LocalJSX {
     'basePath'?: string;
     'urlDestination'?: string;
   }
+  interface PskPinPopup extends JSXBase.HTMLAttributes<HTMLPskPinPopupElement> {
+    'onSendPin'?: (event: CustomEvent<any>) => void;
+    'opened'?: boolean;
+  }
   interface PskUiLoader extends JSXBase.HTMLAttributes<HTMLPskUiLoaderElement> {
     'shouldBeRendered'?: boolean;
   }
@@ -236,6 +250,7 @@ declare namespace LocalJSX {
     'psk-menu-item-renderer': PskMenuItemRenderer;
     'psk-modal': PskModal;
     'psk-page-not-found': PskPageNotFound;
+    'psk-pin-popup': PskPinPopup;
     'psk-ui-loader': PskUiLoader;
     'psk-user-profile': PskUserProfile;
     'psk-user-profile-renderer': PskUserProfileRenderer;
