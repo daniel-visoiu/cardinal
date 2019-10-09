@@ -9,7 +9,7 @@
 
 | Property | Attribute | Description | Type      | Default |
 | -------- | --------- | ----------- | --------- | ------- |
-| `opened` | `opened`  |             | `boolean` | `true`  |
+| `opened` | `opened`  |             | `boolean` | `false` |
 
 
 ## Events
