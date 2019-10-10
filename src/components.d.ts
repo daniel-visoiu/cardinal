@@ -15,6 +15,9 @@ import {
 import {
   EventEmitter,
 } from '@stencil/core';
+import {
+  WizardStep,
+} from './interfaces/Wizard';
 
 export namespace Components {
   interface AppContainer {}
@@ -61,6 +64,12 @@ export namespace Components {
   interface PskPinPopup {
     'opened': boolean;
   }
+  interface PskUiFeedback {
+    'message': any;
+    'timeMeasure': string;
+    'timeSinceCreation': number;
+    'typeOfAlert': string;
+  }
   interface PskUiLoader {
     'shouldBeRendered': boolean;
   }
@@ -70,6 +79,9 @@ export namespace Components {
   }
   interface PskUserProfileRenderer {
     'userInfo': any;
+  }
+  interface PskWizard {
+    'wizardSteps': WizardStep[];
   }
 }
 
@@ -142,6 +154,12 @@ declare global {
     new (): HTMLPskPinPopupElement;
   };
 
+  interface HTMLPskUiFeedbackElement extends Components.PskUiFeedback, HTMLStencilElement {}
+  var HTMLPskUiFeedbackElement: {
+    prototype: HTMLPskUiFeedbackElement;
+    new (): HTMLPskUiFeedbackElement;
+  };
+
   interface HTMLPskUiLoaderElement extends Components.PskUiLoader, HTMLStencilElement {}
   var HTMLPskUiLoaderElement: {
     prototype: HTMLPskUiLoaderElement;
@@ -159,6 +177,12 @@ declare global {
     prototype: HTMLPskUserProfileRendererElement;
     new (): HTMLPskUserProfileRendererElement;
   };
+
+  interface HTMLPskWizardElement extends Components.PskWizard, HTMLStencilElement {}
+  var HTMLPskWizardElement: {
+    prototype: HTMLPskWizardElement;
+    new (): HTMLPskWizardElement;
+  };
   interface HTMLElementTagNameMap {
     'app-container': HTMLAppContainerElement;
     'app-menu': HTMLAppMenuElement;
@@ -171,9 +195,11 @@ declare global {
     'psk-modal': HTMLPskModalElement;
     'psk-page-not-found': HTMLPskPageNotFoundElement;
     'psk-pin-popup': HTMLPskPinPopupElement;
+    'psk-ui-feedback': HTMLPskUiFeedbackElement;
     'psk-ui-loader': HTMLPskUiLoaderElement;
     'psk-user-profile': HTMLPskUserProfileElement;
     'psk-user-profile-renderer': HTMLPskUserProfileRendererElement;
+    'psk-wizard': HTMLPskWizardElement;
   }
 }
 
@@ -227,6 +253,13 @@ declare namespace LocalJSX {
     'onSendPin'?: (event: CustomEvent<any>) => void;
     'opened'?: boolean;
   }
+  interface PskUiFeedback extends JSXBase.HTMLAttributes<HTMLPskUiFeedbackElement> {
+    'message'?: any;
+    'onCloseFeedback'?: (event: CustomEvent<any>) => void;
+    'timeMeasure'?: string;
+    'timeSinceCreation'?: number;
+    'typeOfAlert'?: string;
+  }
   interface PskUiLoader extends JSXBase.HTMLAttributes<HTMLPskUiLoaderElement> {
     'shouldBeRendered'?: boolean;
   }
@@ -237,6 +270,9 @@ declare namespace LocalJSX {
   }
   interface PskUserProfileRenderer extends JSXBase.HTMLAttributes<HTMLPskUserProfileRendererElement> {
     'userInfo'?: any;
+  }
+  interface PskWizard extends JSXBase.HTMLAttributes<HTMLPskWizardElement> {
+    'wizardSteps'?: WizardStep[];
   }
 
   interface IntrinsicElements {
@@ -251,9 +287,11 @@ declare namespace LocalJSX {
     'psk-modal': PskModal;
     'psk-page-not-found': PskPageNotFound;
     'psk-pin-popup': PskPinPopup;
+    'psk-ui-feedback': PskUiFeedback;
     'psk-ui-loader': PskUiLoader;
     'psk-user-profile': PskUserProfile;
     'psk-user-profile-renderer': PskUserProfileRenderer;
+    'psk-wizard': PskWizard;
   }
 }
 
