@@ -50,6 +50,12 @@ export namespace Components {
     'onFilesChange'?: Function;
     'onFilesSelect'?: Function;
   }
+  interface PskListFeedbacks {
+    'hour': number;
+    'messagesToDisplay': number;
+    'minute': number;
+    'second': number;
+  }
   interface PskMenuItemRenderer {
     'active': boolean;
     'value': MenuItem;
@@ -66,6 +72,7 @@ export namespace Components {
   }
   interface PskUiFeedback {
     'message': any;
+    'opened': boolean;
     'timeMeasure': string;
     'timeSinceCreation': number;
     'typeOfAlert': string;
@@ -130,6 +137,12 @@ declare global {
     new (): HTMLPskFilesChooserElement;
   };
 
+  interface HTMLPskListFeedbacksElement extends Components.PskListFeedbacks, HTMLStencilElement {}
+  var HTMLPskListFeedbacksElement: {
+    prototype: HTMLPskListFeedbacksElement;
+    new (): HTMLPskListFeedbacksElement;
+  };
+
   interface HTMLPskMenuItemRendererElement extends Components.PskMenuItemRenderer, HTMLStencilElement {}
   var HTMLPskMenuItemRendererElement: {
     prototype: HTMLPskMenuItemRendererElement;
@@ -191,6 +204,7 @@ declare global {
     'psk-attachments-list': HTMLPskAttachmentsListElement;
     'psk-button': HTMLPskButtonElement;
     'psk-files-chooser': HTMLPskFilesChooserElement;
+    'psk-list-feedbacks': HTMLPskListFeedbacksElement;
     'psk-menu-item-renderer': HTMLPskMenuItemRendererElement;
     'psk-modal': HTMLPskModalElement;
     'psk-page-not-found': HTMLPskPageNotFoundElement;
@@ -237,6 +251,14 @@ declare namespace LocalJSX {
     'onFilesChange'?: Function;
     'onFilesSelect'?: Function;
   }
+  interface PskListFeedbacks extends JSXBase.HTMLAttributes<HTMLPskListFeedbacksElement> {
+    'hour'?: number;
+    'messagesToDisplay'?: number;
+    'minute'?: number;
+    'onOpenFeedback'?: (event: CustomEvent<any>) => void;
+    'onShowFeedback'?: (event: CustomEvent<any>) => void;
+    'second'?: number;
+  }
   interface PskMenuItemRenderer extends JSXBase.HTMLAttributes<HTMLPskMenuItemRendererElement> {
     'active'?: boolean;
     'value'?: MenuItem;
@@ -256,6 +278,7 @@ declare namespace LocalJSX {
   interface PskUiFeedback extends JSXBase.HTMLAttributes<HTMLPskUiFeedbackElement> {
     'message'?: any;
     'onCloseFeedback'?: (event: CustomEvent<any>) => void;
+    'opened'?: boolean;
     'timeMeasure'?: string;
     'timeSinceCreation'?: number;
     'typeOfAlert'?: string;
@@ -283,6 +306,7 @@ declare namespace LocalJSX {
     'psk-attachments-list': PskAttachmentsList;
     'psk-button': PskButton;
     'psk-files-chooser': PskFilesChooser;
+    'psk-list-feedbacks': PskListFeedbacks;
     'psk-menu-item-renderer': PskMenuItemRenderer;
     'psk-modal': PskModal;
     'psk-page-not-found': PskPageNotFound;
