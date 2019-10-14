@@ -1,4 +1,9 @@
 @import url(../../themes/default/assets/fonts/opensans-font.css);
+.body {
+    height: 100%;
+    width: 100%;
+}
+
 .page-content {
     width: 100%;
     margin: 0 auto;
@@ -124,20 +129,15 @@
     display: block;
 }
 
-.form-register .steps li a .step-text .step-inner-1 {
+.form-register .steps li a .step-text .step-inner {
     font-size: 16px;
     color: #fff;
-}
-
-.form-register .steps li a .step-text .step-inner-2 {
-    font-size: 14px;
-    font-style: italic;
-    color: rgba(255, 255, 255, 0.7);
 }
 
 .form-register .content {
     float: right;
     width: 530px;
+    min-height: 400px;
 }
 
 .form-register .content h2 {
@@ -150,6 +150,7 @@
     border-radius: 5px;
     padding: 0 30px 25px;
     background-color: #fff;
+    height: 100%;
 }
 
 .form-register .content .wizard-header {
@@ -296,11 +297,6 @@ input::-ms-input-placeholder {
     margin-bottom: 40px;
     display: flex;
     justify-content: space-between;
-}
-
-.actions ul li.disabled,
-.actions ul li:first-child {
-    opacity: 0;
 }
 
 .actions ul li {

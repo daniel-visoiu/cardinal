@@ -28,11 +28,13 @@
 ### Used by
 
  - [psk-list-feedbacks](../psk-list-feedbacks)
+ - [psk-wizard](../psk-wizard)
 
 ### Graph
 ```mermaid
 graph TD;
   psk-list-feedbacks --> psk-ui-feedback
+  psk-wizard --> psk-ui-feedback
   style psk-ui-feedback fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

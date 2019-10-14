@@ -1,102 +1,164 @@
-import { Component, h, Prop, State } from '@stencil/core';
-import { WizardStep, WizardInformation } from '../../interfaces/Wizard';
+import { Component, h, Prop, State, Event, EventEmitter } from '@stencil/core';
+import { WizardStep } from '../../interfaces/Wizard';
 
 @Component({
     tag: 'psk-wizard',
-    styleUrl: './psk-wizard.css',
-    shadow: true
+    styleUrl: './psk-wizard.css'
 })
 export class PskWizard {
 
-    @Prop() wizardSteps: WizardStep[];
+    @Prop({ mutable: true, reflect: true }) wizardSteps?: WizardStep[];
 
-    @State() wizardInformation: WizardInformation[];
-    @State() currentWizardStep: WizardStep;
+    @State() activeStep: WizardStep;
 
     componentWillLoad() {
-        if (!this.currentWizardStep && this.wizardSteps.length > 1) {
-            this.currentWizardStep = this.wizardSteps[1];
+        this.needWizardConfiguration.emit((data) => {
+            this.wizardSteps = data;
+            this.activeStep = this.wizardSteps.length > 0 ? this.wizardSteps[0] : null;
+        });
+    }
+
+    @Event({
+        eventName: 'needWizardConfiguration',
+        cancelable: true,
+        composed: true,
+        bubbles: true,
+    }) needWizardConfiguration: EventEmitter;
+
+    @Event({
+        eventName: "changeStep",
+        bubbles: true,
+        cancelable: true,
+        composed: true
+    }) changeStep: EventEmitter;
+
+    @Event({
+        eventName: "finishWizard",
+        bubbles: true,
+        cancelable: true,
+        composed: true
+    }) finishWizard: EventEmitter;
+
+    handleStepChange(indexToAdvance: number) {
+        this.changeStep.emit({
+            stepIndexToDisplay: indexToAdvance,
+            wizardSteps: this.wizardSteps,
+            activeStep: this.activeStep,
+            callback: (err, data) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                this.activeStep = data.activeStep;
+                this.wizardSteps = data.wizardSteps;
+            }
+        });
+        return;
+    }
+
+    handleFinish(): void {
+        this.finishWizard.emit({
+            wizardSteps: this.wizardSteps,
+            callback: (err, data) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                console.log(data);
+            }
+        });
+        return;
+    }
+
+    handleStepPropertiesChange(newProperties: any): void {
+        this.activeStep["stepProperties"] = newProperties;
+    }
+
+    computeStepDesign(stepIndex: number, activeStepIndex: number, lastStepIndex: number): string {
+        let stepClass: string = "";
+
+        if (stepIndex === 0) {
+            stepClass += "first ";
+        } else if (stepIndex === lastStepIndex - 1) {
+            stepClass += "last ";
         }
+
+        if (stepIndex < activeStepIndex) {
+            stepClass += "done";
+        } else if (stepIndex === activeStepIndex) {
+            stepClass += "current";
+        }
+
+        return stepClass;
     }
 
     render() {
-        if (!this.currentWizardStep) {
-            return null;
-        }
+        const StepComponentRenderer = this.activeStep.stepComponent;
 
-        let stepHeader = null;
-        if (this.wizardSteps.length > 0) {
-            stepHeader = this.wizardSteps.map((step: WizardStep) => {
-                let stepClass: string = step.stepIndex === 1 ? "first " : step.stepIndex === this.wizardSteps.length ? "last " : "";
-
-                if (step.stepIndex < this.currentWizardStep.stepIndex) {
-                    stepClass += "done";
-                }
-                if (step.stepIndex === this.currentWizardStep.stepIndex) {
-                    stepClass += "current";
-                }
-
-                return (
-                    <li role="tab" class={stepClass}>
-                        <a id="form-total-t-0" href="#form-total-h-0" aria-controls="form-total-p-0">
-                            <span class="current-info audible"></span>
-                            <div class="title">
-                                <p class="step-icon"><span>{step.stepIndex}</span></p>
-                                <div class="step-text">
-                                    <span class="step-inner-1">{step.stepName}</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                );
-            });
-        }
-
-        return (
+        return [
             <div class="page-content">
                 <div class="wizard-content">
                     <div class="wizard-form">
-                        <form class="form-register">
+                        <form class="form-register" action="#" method="post"
+                            onSubmit={(ev) => {
+                                ev.preventDefault();
+                                ev.stopImmediatePropagation();
+                            }} >
                             <div id="form-total" role="application" class="wizard clearfix vertical">
 
                                 <div class="steps clearfix">
                                     <ul role="tablist">
-                                        {stepHeader}
+                                        {this.wizardSteps.map((step: WizardStep) => (
+                                            <li role="tab" class={this.computeStepDesign(step.stepIndex, this.activeStep.stepIndex, this.wizardSteps.length)}>
+                                                <a id={`step-${step.stepIndex}`}
+                                                    href={`#step-${step.stepIndex}`}
+                                                    onClick={this.handleStepChange.bind(this, step.stepIndex)}>
+                                                    <span class="current-info audible"></span>
+                                                    <div class="title">
+                                                        <p class="step-icon"><span>{step.stepIndex + 1}</span></p>
+                                                        <div class="step-text">
+                                                            <span class="step-inner">{step.stepName}</span>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        ))}
                                     </ul>
                                 </div>
 
-                                <div class="content clearfix">
-                                    <section id="form-total-p-0" role="tabpanel" aria-labelledby="form-total-h-0" class="body current" aria-hidden="false" >
-                                        <div class="inner">
-                                            <div class="wizard-header">
-                                                <h3 class="heading">Account Setup</h3>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-holder form-holder-2">
-                                                    <label htmlFor="your_email">Email Address</label>
-                                                    <input type="email" name="your_email" id="your_email" class="form-control" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="Your Email" required />
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-holder form-holder-2">
-                                                    <label htmlFor="password">Password</label>
-                                                    <input type="password" name="password" id="password" class="form-control" placeholder="Password" required />
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-holder form-holder-2">
-                                                    <label htmlFor="confirm_password">Confirm Password</label>
-                                                    <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Password" required />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
+                                <StepComponentRenderer
+                                    onPropertiesChange={this.handleStepPropertiesChange.bind(this)}
+                                    stepProperties={this.activeStep.stepProperties} />
+
+                                <div class="actions clearfix">
+                                    <ul role="menu" aria-label="Pagination">
+                                        {this.activeStep.stepIndex > 0
+                                            ? <li>
+                                                <a href="#" role="menuitem"
+                                                    onClick={this.handleStepChange.bind(this, this.activeStep.stepIndex - 1)}>Previous</a>
+                                            </li>
+                                            : null}
+
+                                        {this.activeStep.stepIndex < this.wizardSteps.length - 1
+                                            ? <li>
+                                                <a href="#" role="menuitem"
+                                                    onClick={this.handleStepChange.bind(this, this.activeStep.stepIndex + 1)}>Next</a>
+                                            </li>
+                                            : null}
+
+                                        {this.activeStep.stepIndex === this.wizardSteps.length - 1
+                                            ? <li>
+                                                <a href="#" role="menuitem"
+                                                    onClick={this.handleFinish.bind(this)}>Finish</a>
+                                            </li>
+                                            : null}
+                                    </ul>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-        )
+        ]
     }
 }

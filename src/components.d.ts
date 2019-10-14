@@ -88,7 +88,7 @@ export namespace Components {
     'userInfo': any;
   }
   interface PskWizard {
-    'wizardSteps': WizardStep[];
+    'wizardSteps'?: WizardStep[];
   }
 }
 
@@ -295,6 +295,9 @@ declare namespace LocalJSX {
     'userInfo'?: any;
   }
   interface PskWizard extends JSXBase.HTMLAttributes<HTMLPskWizardElement> {
+    'onChangeStep'?: (event: CustomEvent<any>) => void;
+    'onFinishWizard'?: (event: CustomEvent<any>) => void;
+    'onNeedWizardConfiguration'?: (event: CustomEvent<any>) => void;
     'wizardSteps'?: WizardStep[];
   }
 
