@@ -7,9 +7,10 @@
 
 ## Properties
 
-| Property      | Attribute | Description | Type           | Default     |
-| ------------- | --------- | ----------- | -------------- | ----------- |
-| `wizardSteps` | --        |             | `WizardStep[]` | `undefined` |
+| Property          | Attribute          | Description | Type           | Default     |
+| ----------------- | ------------------ | ----------- | -------------- | ----------- |
+| `componentRender` | `component-render` |             | `string`       | `undefined` |
+| `wizardSteps`     | --                 |             | `WizardStep[]` | `undefined` |
 
 
 ## Events
@@ -25,12 +26,12 @@
 
 ### Depends on
 
-- [psk-ui-feedback](../psk-ui-feedback)
+- [psk-stepper](../psk-stepper)
 
 ### Graph
 ```mermaid
 graph TD;
-  psk-wizard --> psk-ui-feedback
+  psk-wizard --> psk-stepper
   style psk-wizard fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

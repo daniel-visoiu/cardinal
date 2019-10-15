@@ -7,6 +7,7 @@ import { WizardStep } from '../../interfaces/Wizard';
 })
 export class PskWizard {
 
+    @Prop() componentRender: string;
     @Prop({ mutable: true, reflect: true }) wizardSteps?: WizardStep[];
 
     @State() activeStep: WizardStep;
@@ -104,26 +105,13 @@ export class PskWizard {
                                 ev.preventDefault();
                                 ev.stopImmediatePropagation();
                             }} >
-                            <div id="form-total" role="application" class="wizard clearfix vertical">
+                            <div id="form-total" class="wizard clearfix">
 
-                                <div class="steps clearfix">
-                                    <ul role="tablist">
-                                        {this.wizardSteps.map((step: WizardStep) => (
-                                            <li role="tab" class={this.computeStepDesign(step.stepIndex, this.activeStep.stepIndex, this.wizardSteps.length)}>
-                                                <button id={`step-${step.stepIndex}`}
-                                                    onClick={this.handleStepChange.bind(this, step.stepIndex)}>
-                                                    <span class="current-info audible"></span>
-                                                    <div class="title">
-                                                        <p class="step-icon"><span>{step.stepIndex + 1}</span></p>
-                                                        <div class="step-text">
-                                                            <span class="step-inner">{step.stepName}</span>
-                                                        </div>
-                                                    </div>
-                                                </button>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
+                                <psk-stepper
+                                    componentRender={this.componentRender}
+                                    wizardSteps={this.wizardSteps}
+                                    activeStep={this.activeStep}
+                                    handleStepChange={this.handleStepChange.bind(this)} />
 
                                 <StepComponentRenderer
                                     onPropertiesChange={this.handleStepPropertiesChange.bind(this)}
