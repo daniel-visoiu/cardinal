@@ -110,8 +110,7 @@ export class PskWizard {
                                     <ul role="tablist">
                                         {this.wizardSteps.map((step: WizardStep) => (
                                             <li role="tab" class={this.computeStepDesign(step.stepIndex, this.activeStep.stepIndex, this.wizardSteps.length)}>
-                                                <a id={`step-${step.stepIndex}`}
-                                                    href={`#step-${step.stepIndex}`}
+                                                <button id={`step-${step.stepIndex}`}
                                                     onClick={this.handleStepChange.bind(this, step.stepIndex)}>
                                                     <span class="current-info audible"></span>
                                                     <div class="title">
@@ -120,7 +119,7 @@ export class PskWizard {
                                                             <span class="step-inner">{step.stepName}</span>
                                                         </div>
                                                     </div>
-                                                </a>
+                                                </button>
                                             </li>
                                         ))}
                                     </ul>
@@ -134,22 +133,22 @@ export class PskWizard {
                                     <ul role="menu" aria-label="Pagination">
                                         {this.activeStep.stepIndex > 0
                                             ? <li>
-                                                <a href="#" role="menuitem"
-                                                    onClick={this.handleStepChange.bind(this, this.activeStep.stepIndex - 1)}>Previous</a>
+                                                <button role="menuitem"
+                                                    onClick={this.handleStepChange.bind(this, this.activeStep.stepIndex - 1)}>Previous</button>
                                             </li>
                                             : null}
 
                                         {this.activeStep.stepIndex < this.wizardSteps.length - 1
                                             ? <li>
-                                                <a href="#" role="menuitem"
-                                                    onClick={this.handleStepChange.bind(this, this.activeStep.stepIndex + 1)}>Next</a>
+                                                <button role="menuitem"
+                                                    onClick={this.handleStepChange.bind(this, this.activeStep.stepIndex + 1)}>Next</button>
                                             </li>
                                             : null}
 
                                         {this.activeStep.stepIndex === this.wizardSteps.length - 1
                                             ? <li>
-                                                <a href="#" role="menuitem"
-                                                    onClick={this.handleFinish.bind(this)}>Finish</a>
+                                                <button role="menuitem"
+                                                    onClick={this.handleFinish.bind(this)}>Finish</button>
                                             </li>
                                             : null}
                                     </ul>
