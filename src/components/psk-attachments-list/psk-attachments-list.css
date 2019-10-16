@@ -1,2 +1,8 @@
 @import url("../../themes/default/assets/fonts/font-awesome.min.css");
 @import url("../../themes/default/assets/bootstrap/css/bootstrap.min.css");
+.fa-remove {
+    font-size: 22px;
+    padding-left: 10px;
+    font-weight: lighter;
+    color: rgba(255, 0, 0, 0.5);
+}

@@ -36,6 +36,7 @@ export namespace Components {
   }
   interface PskAttachmentsList {
     'files': WgFile[];
+    'removeFileFromList'?: Function;
   }
   interface PskButton {
     'buttonClass': string;
@@ -67,9 +68,11 @@ export namespace Components {
     'pageUrl': string;
   }
   interface PskPageNotFound {
-    'basePath': string;
+    'basePath'?: string;
+    'pageRenderer'?: string;
     'urlDestination'?: string;
   }
+  interface PskPageNotFoundRenderer {}
   interface PskPinPopup {
     'opened': boolean;
   }
@@ -182,6 +185,12 @@ declare global {
     new (): HTMLPskPageNotFoundElement;
   };
 
+  interface HTMLPskPageNotFoundRendererElement extends Components.PskPageNotFoundRenderer, HTMLStencilElement {}
+  var HTMLPskPageNotFoundRendererElement: {
+    prototype: HTMLPskPageNotFoundRendererElement;
+    new (): HTMLPskPageNotFoundRendererElement;
+  };
+
   interface HTMLPskPinPopupElement extends Components.PskPinPopup, HTMLStencilElement {}
   var HTMLPskPinPopupElement: {
     prototype: HTMLPskPinPopupElement;
@@ -242,6 +251,7 @@ declare global {
     'psk-modal': HTMLPskModalElement;
     'psk-page-loader': HTMLPskPageLoaderElement;
     'psk-page-not-found': HTMLPskPageNotFoundElement;
+    'psk-page-not-found-renderer': HTMLPskPageNotFoundRendererElement;
     'psk-pin-popup': HTMLPskPinPopupElement;
     'psk-stepper': HTMLPskStepperElement;
     'psk-stepper-renderer': HTMLPskStepperRendererElement;
@@ -273,6 +283,7 @@ declare namespace LocalJSX {
   }
   interface PskAttachmentsList {
     'files'?: WgFile[];
+    'removeFileFromList'?: Function;
   }
   interface PskButton {
     'buttonClass'?: string;
@@ -308,8 +319,10 @@ declare namespace LocalJSX {
   }
   interface PskPageNotFound {
     'basePath'?: string;
+    'pageRenderer'?: string;
     'urlDestination'?: string;
   }
+  interface PskPageNotFoundRenderer {}
   interface PskPinPopup {
     'onSendPin'?: (event: CustomEvent<any>) => void;
     'opened'?: boolean;
@@ -365,6 +378,7 @@ declare namespace LocalJSX {
     'psk-modal': PskModal;
     'psk-page-loader': PskPageLoader;
     'psk-page-not-found': PskPageNotFound;
+    'psk-page-not-found-renderer': PskPageNotFoundRenderer;
     'psk-pin-popup': PskPinPopup;
     'psk-stepper': PskStepper;
     'psk-stepper-renderer': PskStepperRenderer;
@@ -394,6 +408,7 @@ declare module "@stencil/core" {
       'psk-modal': LocalJSX.PskModal & JSXBase.HTMLAttributes<HTMLPskModalElement>;
       'psk-page-loader': LocalJSX.PskPageLoader & JSXBase.HTMLAttributes<HTMLPskPageLoaderElement>;
       'psk-page-not-found': LocalJSX.PskPageNotFound & JSXBase.HTMLAttributes<HTMLPskPageNotFoundElement>;
+      'psk-page-not-found-renderer': LocalJSX.PskPageNotFoundRenderer & JSXBase.HTMLAttributes<HTMLPskPageNotFoundRendererElement>;
       'psk-pin-popup': LocalJSX.PskPinPopup & JSXBase.HTMLAttributes<HTMLPskPinPopupElement>;
       'psk-stepper': LocalJSX.PskStepper & JSXBase.HTMLAttributes<HTMLPskStepperElement>;
       'psk-stepper-renderer': LocalJSX.PskStepperRenderer & JSXBase.HTMLAttributes<HTMLPskStepperRendererElement>;

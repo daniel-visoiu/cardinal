@@ -7,8 +7,9 @@ import { Component, h, Prop } from '@stencil/core';
 })
 export class PskPageNotFound {
 
-	@Prop() basePath: string;
+	@Prop() basePath?: string;
 	@Prop() urlDestination?: string = null;
+	@Prop() pageRenderer?: string = "psk-page-not-found-renderer";
 
 	render() {
 
@@ -20,6 +21,8 @@ export class PskPageNotFound {
 
 			if (shouldBeRedirected) {
 				return <stencil-router-redirect url={this.basePath} />;
+			} else {
+				return <this.pageRenderer />
 			}
 		}
 	}

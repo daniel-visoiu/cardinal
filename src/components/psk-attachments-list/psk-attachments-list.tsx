@@ -10,6 +10,7 @@ const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
 
 export class PskAttachmentsList {
 	@Prop() files: WgFile[] = [];
+	@Prop() removeFileFromList?: Function = null;
 
 	static bytesToSize(bytes) {
 		if (bytes == 0) return '0 Byte';
@@ -22,7 +23,7 @@ export class PskAttachmentsList {
 			return <h5>No attachments available!</h5>;
 		}
 
-		let filesView = this.files.map((file) => {
+		let filesView = this.files.map((file, index) => {
 
 			let fileType = null;
 			switch (file.name.substr(file.name.lastIndexOf(".") + 1)) {
@@ -45,7 +46,15 @@ export class PskAttachmentsList {
 
 			return <button type="button" class="btn btn-primary mr-2 mt-2">
 				<span class={`icon mr-1 fa ${fileType}`} />{file.name}
-				<span class="badge badge-light ml-1">{PskAttachmentsList.bytesToSize(file.size)}</span></button>
+				<span class="badge badge-light ml-1">{PskAttachmentsList.bytesToSize(file.size)}</span>
+				{this.removeFileFromList !== null && <span
+					class="fa fa-remove fa-2x pull-right"
+					onClick={(evt) => {
+						evt.preventDefault();
+						evt.stopImmediatePropagation();
+						this.removeFileFromList(index);
+					}} />}
+			</button>
 		});
 
 		return (filesView)

@@ -7,9 +7,10 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type       | Default |
-| -------- | --------- | ----------- | ---------- | ------- |
-| `files`  | --        |             | `WgFile[]` | `[]`    |
+| Property             | Attribute | Description | Type       | Default |
+| -------------------- | --------- | ----------- | ---------- | ------- |
+| `files`              | --        |             | `WgFile[]` | `[]`    |
+| `removeFileFromList` | --        |             | `Function` | `null`  |
 
 
 ----------------------------------------------
