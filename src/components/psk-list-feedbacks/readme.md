@@ -27,7 +27,7 @@
 
 ### Depends on
 
-- [psk-ui-feedback](../psk-ui-feedback)
+- [psk-ui-feedback](..\psk-ui-feedback)
 
 ### Graph
 ```mermaid

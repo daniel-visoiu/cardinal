@@ -84,6 +84,9 @@ export class AppMenu {
 
   render() {
 
+    if(!this.menuItems){
+      return;
+    }
 
     let renderComponent = [];
     for (let i = 0; i < this.menuItems.length; i++) {

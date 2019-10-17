@@ -27,7 +27,7 @@
 
 ### Used by
 
- - [psk-list-feedbacks](../psk-list-feedbacks)
+ - [psk-list-feedbacks](..\psk-list-feedbacks)
 
 ### Graph
 ```mermaid

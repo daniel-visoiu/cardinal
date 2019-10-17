@@ -35,7 +35,13 @@ export class PskAppRouter {
   }
 
   render() {
+
     let routes = this.renderItems(this.menuItems);
+
+    if(routes.length === 0){
+      return <psk-ui-loader shouldBeRendered={true} />
+    }
+
     return (
       <div class="app_container">
         <stencil-router>

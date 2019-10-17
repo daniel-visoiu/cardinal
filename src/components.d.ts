@@ -264,41 +264,41 @@ declare global {
 }
 
 declare namespace LocalJSX {
-  interface AppContainer {}
-  interface AppMenu {
+  interface AppContainer extends JSXBase.HTMLAttributes<HTMLAppContainerElement> {}
+  interface AppMenu extends JSXBase.HTMLAttributes<HTMLAppMenuElement> {
     'hamburgerMaxWidth'?: number;
     'itemRenderer'?: string;
     'menuItems'?: MenuItem[];
     'onMenuEvent'?: (event: CustomEvent<any>) => void;
     'onNeedMenuItems'?: (event: CustomEvent<any>) => void;
   }
-  interface DropdownRenderer {
+  interface DropdownRenderer extends JSXBase.HTMLAttributes<HTMLDropdownRendererElement> {
     'active'?: boolean;
     'somethingChanged'?: boolean;
     'url'?: any;
   }
-  interface PskAppRouter {
+  interface PskAppRouter extends JSXBase.HTMLAttributes<HTMLPskAppRouterElement> {
     'menuItems'?: MenuItem[];
     'onNeedMenuItems'?: (event: CustomEvent<any>) => void;
   }
-  interface PskAttachmentsList {
+  interface PskAttachmentsList extends JSXBase.HTMLAttributes<HTMLPskAttachmentsListElement> {
     'files'?: WgFile[];
     'removeFileFromList'?: Function;
   }
-  interface PskButton {
+  interface PskButton extends JSXBase.HTMLAttributes<HTMLPskButtonElement> {
     'buttonClass'?: string;
     'disabled'?: boolean;
     'eventData'?: any;
     'eventEmitter'?: EventEmitter;
     'label'?: string;
   }
-  interface PskFilesChooser {
+  interface PskFilesChooser extends JSXBase.HTMLAttributes<HTMLPskFilesChooserElement> {
     'accept'?: string;
     'label'?: string;
     'onFilesChange'?: Function;
     'onFilesSelect'?: Function;
   }
-  interface PskListFeedbacks {
+  interface PskListFeedbacks extends JSXBase.HTMLAttributes<HTMLPskListFeedbacksElement> {
     'hour'?: number;
     'messagesToDisplay'?: number;
     'minute'?: number;
@@ -306,39 +306,39 @@ declare namespace LocalJSX {
     'onShowFeedback'?: (event: CustomEvent<any>) => void;
     'second'?: number;
   }
-  interface PskMenuItemRenderer {
+  interface PskMenuItemRenderer extends JSXBase.HTMLAttributes<HTMLPskMenuItemRendererElement> {
     'active'?: boolean;
     'value'?: MenuItem;
   }
-  interface PskModal {
+  interface PskModal extends JSXBase.HTMLAttributes<HTMLPskModalElement> {
     'onCloseModal'?: (event: CustomEvent<any>) => void;
     'opened'?: boolean;
   }
-  interface PskPageLoader {
+  interface PskPageLoader extends JSXBase.HTMLAttributes<HTMLPskPageLoaderElement> {
     'pageUrl'?: string;
   }
-  interface PskPageNotFound {
+  interface PskPageNotFound extends JSXBase.HTMLAttributes<HTMLPskPageNotFoundElement> {
     'basePath'?: string;
     'pageRenderer'?: string;
     'urlDestination'?: string;
   }
-  interface PskPageNotFoundRenderer {}
-  interface PskPinPopup {
+  interface PskPageNotFoundRenderer extends JSXBase.HTMLAttributes<HTMLPskPageNotFoundRendererElement> {}
+  interface PskPinPopup extends JSXBase.HTMLAttributes<HTMLPskPinPopupElement> {
     'onSendPin'?: (event: CustomEvent<any>) => void;
     'opened'?: boolean;
   }
-  interface PskStepper {
+  interface PskStepper extends JSXBase.HTMLAttributes<HTMLPskStepperElement> {
     'activeStep'?: WizardStep;
     'componentRender'?: string;
     'handleStepChange'?: Function;
     'wizardSteps'?: WizardStep[];
   }
-  interface PskStepperRenderer {
+  interface PskStepperRenderer extends JSXBase.HTMLAttributes<HTMLPskStepperRendererElement> {
     'activeStep'?: WizardStep;
     'handleStepChange'?: Function;
     'wizardSteps'?: WizardStep[];
   }
-  interface PskUiFeedback {
+  interface PskUiFeedback extends JSXBase.HTMLAttributes<HTMLPskUiFeedbackElement> {
     'message'?: any;
     'onCloseFeedback'?: (event: CustomEvent<any>) => void;
     'opened'?: boolean;
@@ -346,18 +346,18 @@ declare namespace LocalJSX {
     'timeSinceCreation'?: number;
     'typeOfAlert'?: string;
   }
-  interface PskUiLoader {
+  interface PskUiLoader extends JSXBase.HTMLAttributes<HTMLPskUiLoaderElement> {
     'shouldBeRendered'?: boolean;
   }
-  interface PskUserProfile {
+  interface PskUserProfile extends JSXBase.HTMLAttributes<HTMLPskUserProfileElement> {
     'onGetUserInfo'?: (event: CustomEvent<any>) => void;
     'profileRenderer'?: any;
     'userInfo'?: any;
   }
-  interface PskUserProfileRenderer {
+  interface PskUserProfileRenderer extends JSXBase.HTMLAttributes<HTMLPskUserProfileRendererElement> {
     'userInfo'?: any;
   }
-  interface PskWizard {
+  interface PskWizard extends JSXBase.HTMLAttributes<HTMLPskWizardElement> {
     'componentRender'?: string;
     'onChangeStep'?: (event: CustomEvent<any>) => void;
     'onFinishWizard'?: (event: CustomEvent<any>) => void;
@@ -395,29 +395,7 @@ export { LocalJSX as JSX };
 
 declare module "@stencil/core" {
   export namespace JSX {
-    interface IntrinsicElements {
-      'app-container': LocalJSX.AppContainer & JSXBase.HTMLAttributes<HTMLAppContainerElement>;
-      'app-menu': LocalJSX.AppMenu & JSXBase.HTMLAttributes<HTMLAppMenuElement>;
-      'dropdown-renderer': LocalJSX.DropdownRenderer & JSXBase.HTMLAttributes<HTMLDropdownRendererElement>;
-      'psk-app-router': LocalJSX.PskAppRouter & JSXBase.HTMLAttributes<HTMLPskAppRouterElement>;
-      'psk-attachments-list': LocalJSX.PskAttachmentsList & JSXBase.HTMLAttributes<HTMLPskAttachmentsListElement>;
-      'psk-button': LocalJSX.PskButton & JSXBase.HTMLAttributes<HTMLPskButtonElement>;
-      'psk-files-chooser': LocalJSX.PskFilesChooser & JSXBase.HTMLAttributes<HTMLPskFilesChooserElement>;
-      'psk-list-feedbacks': LocalJSX.PskListFeedbacks & JSXBase.HTMLAttributes<HTMLPskListFeedbacksElement>;
-      'psk-menu-item-renderer': LocalJSX.PskMenuItemRenderer & JSXBase.HTMLAttributes<HTMLPskMenuItemRendererElement>;
-      'psk-modal': LocalJSX.PskModal & JSXBase.HTMLAttributes<HTMLPskModalElement>;
-      'psk-page-loader': LocalJSX.PskPageLoader & JSXBase.HTMLAttributes<HTMLPskPageLoaderElement>;
-      'psk-page-not-found': LocalJSX.PskPageNotFound & JSXBase.HTMLAttributes<HTMLPskPageNotFoundElement>;
-      'psk-page-not-found-renderer': LocalJSX.PskPageNotFoundRenderer & JSXBase.HTMLAttributes<HTMLPskPageNotFoundRendererElement>;
-      'psk-pin-popup': LocalJSX.PskPinPopup & JSXBase.HTMLAttributes<HTMLPskPinPopupElement>;
-      'psk-stepper': LocalJSX.PskStepper & JSXBase.HTMLAttributes<HTMLPskStepperElement>;
-      'psk-stepper-renderer': LocalJSX.PskStepperRenderer & JSXBase.HTMLAttributes<HTMLPskStepperRendererElement>;
-      'psk-ui-feedback': LocalJSX.PskUiFeedback & JSXBase.HTMLAttributes<HTMLPskUiFeedbackElement>;
-      'psk-ui-loader': LocalJSX.PskUiLoader & JSXBase.HTMLAttributes<HTMLPskUiLoaderElement>;
-      'psk-user-profile': LocalJSX.PskUserProfile & JSXBase.HTMLAttributes<HTMLPskUserProfileElement>;
-      'psk-user-profile-renderer': LocalJSX.PskUserProfileRenderer & JSXBase.HTMLAttributes<HTMLPskUserProfileRendererElement>;
-      'psk-wizard': LocalJSX.PskWizard & JSXBase.HTMLAttributes<HTMLPskWizardElement>;
-    }
+    interface IntrinsicElements extends LocalJSX.IntrinsicElements {}
   }
 }
 

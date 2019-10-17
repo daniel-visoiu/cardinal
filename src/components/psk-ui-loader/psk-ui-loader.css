@@ -171,5 +171,5 @@
 .loader-container {
     background: rgba(173, 174, 255, 0.6);
     height: 100%;
-    display: grid;
+    display: flex;
 }

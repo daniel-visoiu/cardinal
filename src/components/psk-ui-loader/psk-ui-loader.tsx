@@ -7,7 +7,7 @@ import {Component, h, Prop, Watch} from '@stencil/core';
 })
 export class PskUiLoader {
 
-  @Prop() shouldBeRendered:boolean
+  @Prop() shouldBeRendered:boolean=false;
 
   @Watch("shouldBeRendered")
   render() {
