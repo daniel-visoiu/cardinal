@@ -15,10 +15,12 @@ export class AppMenuDropdown {
   @State() dropDownHasChildActive = false;
   @Prop() somethingChanged = false;
 
-  @Listen("click", {capture: false, target: "window"})
+  @Listen("click", {capture: true, target: "window"})
   handleClick(e: Event) {
     const target = e.target as HTMLElement;
+    console.log(getElement(this).contains(target), target);
     if (!getElement(this).contains(target)) {
+      console.log(this.isOpened);
       this.isOpened = false;
     }
   }

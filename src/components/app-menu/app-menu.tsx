@@ -42,7 +42,6 @@ export class AppMenu {
     ev.preventDefault();
 
     let item = ev.target.value;
-
     for (let i = 0; i < this.menuItems.length; i++) {
       this.menuItems[i].active = item === this.menuItems[i];
     }

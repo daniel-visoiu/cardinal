@@ -16,7 +16,7 @@ export class PskAppRouter {
   }) needMenuItemsEvt: EventEmitter;
 
 
-  componentWillLoad() {
+  componentDidLoad() {
     this.needMenuItemsEvt.emit((data) => {
       this.menuItems = data;
     });

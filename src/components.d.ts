@@ -45,11 +45,18 @@ export namespace Components {
     'eventEmitter': EventEmitter;
     'label': string;
   }
+  interface PskCard {
+    'title': string;
+  }
+  interface PskExample {}
   interface PskFilesChooser {
     'accept'?: string;
     'label': string;
     'onFilesChange'?: Function;
     'onFilesSelect'?: Function;
+  }
+  interface PskImg {
+    'src': string;
   }
   interface PskListFeedbacks {
     'hour': number;
@@ -63,6 +70,9 @@ export namespace Components {
   }
   interface PskModal {
     'opened': boolean;
+  }
+  interface PskPage {
+    'title': string;
   }
   interface PskPageLoader {
     'pageUrl': string;
@@ -87,6 +97,7 @@ export namespace Components {
     'handleStepChange': Function;
     'wizardSteps': WizardStep[];
   }
+  interface PskTag {}
   interface PskUiFeedback {
     'message': any;
     'opened': boolean;
@@ -149,10 +160,28 @@ declare global {
     new (): HTMLPskButtonElement;
   };
 
+  interface HTMLPskCardElement extends Components.PskCard, HTMLStencilElement {}
+  var HTMLPskCardElement: {
+    prototype: HTMLPskCardElement;
+    new (): HTMLPskCardElement;
+  };
+
+  interface HTMLPskExampleElement extends Components.PskExample, HTMLStencilElement {}
+  var HTMLPskExampleElement: {
+    prototype: HTMLPskExampleElement;
+    new (): HTMLPskExampleElement;
+  };
+
   interface HTMLPskFilesChooserElement extends Components.PskFilesChooser, HTMLStencilElement {}
   var HTMLPskFilesChooserElement: {
     prototype: HTMLPskFilesChooserElement;
     new (): HTMLPskFilesChooserElement;
+  };
+
+  interface HTMLPskImgElement extends Components.PskImg, HTMLStencilElement {}
+  var HTMLPskImgElement: {
+    prototype: HTMLPskImgElement;
+    new (): HTMLPskImgElement;
   };
 
   interface HTMLPskListFeedbacksElement extends Components.PskListFeedbacks, HTMLStencilElement {}
@@ -171,6 +200,12 @@ declare global {
   var HTMLPskModalElement: {
     prototype: HTMLPskModalElement;
     new (): HTMLPskModalElement;
+  };
+
+  interface HTMLPskPageElement extends Components.PskPage, HTMLStencilElement {}
+  var HTMLPskPageElement: {
+    prototype: HTMLPskPageElement;
+    new (): HTMLPskPageElement;
   };
 
   interface HTMLPskPageLoaderElement extends Components.PskPageLoader, HTMLStencilElement {}
@@ -209,6 +244,12 @@ declare global {
     new (): HTMLPskStepperRendererElement;
   };
 
+  interface HTMLPskTagElement extends Components.PskTag, HTMLStencilElement {}
+  var HTMLPskTagElement: {
+    prototype: HTMLPskTagElement;
+    new (): HTMLPskTagElement;
+  };
+
   interface HTMLPskUiFeedbackElement extends Components.PskUiFeedback, HTMLStencilElement {}
   var HTMLPskUiFeedbackElement: {
     prototype: HTMLPskUiFeedbackElement;
@@ -245,16 +286,21 @@ declare global {
     'psk-app-router': HTMLPskAppRouterElement;
     'psk-attachments-list': HTMLPskAttachmentsListElement;
     'psk-button': HTMLPskButtonElement;
+    'psk-card': HTMLPskCardElement;
+    'psk-example': HTMLPskExampleElement;
     'psk-files-chooser': HTMLPskFilesChooserElement;
+    'psk-img': HTMLPskImgElement;
     'psk-list-feedbacks': HTMLPskListFeedbacksElement;
     'psk-menu-item-renderer': HTMLPskMenuItemRendererElement;
     'psk-modal': HTMLPskModalElement;
+    'psk-page': HTMLPskPageElement;
     'psk-page-loader': HTMLPskPageLoaderElement;
     'psk-page-not-found': HTMLPskPageNotFoundElement;
     'psk-page-not-found-renderer': HTMLPskPageNotFoundRendererElement;
     'psk-pin-popup': HTMLPskPinPopupElement;
     'psk-stepper': HTMLPskStepperElement;
     'psk-stepper-renderer': HTMLPskStepperRendererElement;
+    'psk-tag': HTMLPskTagElement;
     'psk-ui-feedback': HTMLPskUiFeedbackElement;
     'psk-ui-loader': HTMLPskUiLoaderElement;
     'psk-user-profile': HTMLPskUserProfileElement;
@@ -292,11 +338,18 @@ declare namespace LocalJSX {
     'eventEmitter'?: EventEmitter;
     'label'?: string;
   }
+  interface PskCard extends JSXBase.HTMLAttributes<HTMLPskCardElement> {
+    'title'?: string;
+  }
+  interface PskExample extends JSXBase.HTMLAttributes<HTMLPskExampleElement> {}
   interface PskFilesChooser extends JSXBase.HTMLAttributes<HTMLPskFilesChooserElement> {
     'accept'?: string;
     'label'?: string;
     'onFilesChange'?: Function;
     'onFilesSelect'?: Function;
+  }
+  interface PskImg extends JSXBase.HTMLAttributes<HTMLPskImgElement> {
+    'src'?: string;
   }
   interface PskListFeedbacks extends JSXBase.HTMLAttributes<HTMLPskListFeedbacksElement> {
     'hour'?: number;
@@ -313,6 +366,9 @@ declare namespace LocalJSX {
   interface PskModal extends JSXBase.HTMLAttributes<HTMLPskModalElement> {
     'onCloseModal'?: (event: CustomEvent<any>) => void;
     'opened'?: boolean;
+  }
+  interface PskPage extends JSXBase.HTMLAttributes<HTMLPskPageElement> {
+    'title'?: string;
   }
   interface PskPageLoader extends JSXBase.HTMLAttributes<HTMLPskPageLoaderElement> {
     'pageUrl'?: string;
@@ -338,6 +394,7 @@ declare namespace LocalJSX {
     'handleStepChange'?: Function;
     'wizardSteps'?: WizardStep[];
   }
+  interface PskTag extends JSXBase.HTMLAttributes<HTMLPskTagElement> {}
   interface PskUiFeedback extends JSXBase.HTMLAttributes<HTMLPskUiFeedbackElement> {
     'message'?: any;
     'onCloseFeedback'?: (event: CustomEvent<any>) => void;
@@ -372,16 +429,21 @@ declare namespace LocalJSX {
     'psk-app-router': PskAppRouter;
     'psk-attachments-list': PskAttachmentsList;
     'psk-button': PskButton;
+    'psk-card': PskCard;
+    'psk-example': PskExample;
     'psk-files-chooser': PskFilesChooser;
+    'psk-img': PskImg;
     'psk-list-feedbacks': PskListFeedbacks;
     'psk-menu-item-renderer': PskMenuItemRenderer;
     'psk-modal': PskModal;
+    'psk-page': PskPage;
     'psk-page-loader': PskPageLoader;
     'psk-page-not-found': PskPageNotFound;
     'psk-page-not-found-renderer': PskPageNotFoundRenderer;
     'psk-pin-popup': PskPinPopup;
     'psk-stepper': PskStepper;
     'psk-stepper-renderer': PskStepperRenderer;
+    'psk-tag': PskTag;
     'psk-ui-feedback': PskUiFeedback;
     'psk-ui-loader': PskUiLoader;
     'psk-user-profile': PskUserProfile;
