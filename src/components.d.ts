@@ -49,6 +49,9 @@ export namespace Components {
   interface PskCard {
     'title': string;
   }
+  interface PskChapter {
+    'title': string;
+  }
   interface PskExample {}
   interface PskFilesChooser {
     'accept'?: string;
@@ -165,6 +168,12 @@ declare global {
   var HTMLPskCardElement: {
     prototype: HTMLPskCardElement;
     new (): HTMLPskCardElement;
+  };
+
+  interface HTMLPskChapterElement extends Components.PskChapter, HTMLStencilElement {}
+  var HTMLPskChapterElement: {
+    prototype: HTMLPskChapterElement;
+    new (): HTMLPskChapterElement;
   };
 
   interface HTMLPskExampleElement extends Components.PskExample, HTMLStencilElement {}
@@ -288,6 +297,7 @@ declare global {
     'psk-attachments-list': HTMLPskAttachmentsListElement;
     'psk-button': HTMLPskButtonElement;
     'psk-card': HTMLPskCardElement;
+    'psk-chapter': HTMLPskChapterElement;
     'psk-example': HTMLPskExampleElement;
     'psk-files-chooser': HTMLPskFilesChooserElement;
     'psk-img': HTMLPskImgElement;
@@ -341,6 +351,10 @@ declare namespace LocalJSX {
     'label'?: string;
   }
   interface PskCard extends JSXBase.HTMLAttributes<HTMLPskCardElement> {
+    'title'?: string;
+  }
+  interface PskChapter extends JSXBase.HTMLAttributes<HTMLPskChapterElement> {
+    'onPsk-send-chapter'?: (event: CustomEvent<any>) => void;
     'title'?: string;
   }
   interface PskExample extends JSXBase.HTMLAttributes<HTMLPskExampleElement> {}
@@ -432,6 +446,7 @@ declare namespace LocalJSX {
     'psk-attachments-list': PskAttachmentsList;
     'psk-button': PskButton;
     'psk-card': PskCard;
+    'psk-chapter': PskChapter;
     'psk-example': PskExample;
     'psk-files-chooser': PskFilesChooser;
     'psk-img': PskImg;
