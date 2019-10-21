@@ -1,33 +1,20 @@
-export interface TableOfContentClass {
-    (opts?: ClassOptions);
-}
 export interface ClassOptions {
     className: string;
-    description: string;
+    description: string | Array<string>;
     componentTag: string;
 }
 
-export interface TableOfContentMethod {
-    (opts?: MethodOptions): MethodDecorator;
-}
 export interface MethodOptions {
-    methodName?: string;
-    description?: string;
+    // The name of the method. This is automatically filled in using the decorator
+    methodName?: string | symbol;
+    description: string | Array<string>;
+    specialNote?: string | Array<string>;
 }
 
-export interface TableOfContentProperty {
-    (opts?: PropertyOptions): PropertyDecorator;
-}
 export interface PropertyOptions {
-    propertyName?: string;
-    description?: string;
-    instance?: any;
-}
-
-export interface TableOfContentParameter {
-    (opts?: ParameterOptions): ParameterDecorator;
-}
-export interface ParameterOptions {
-    parameterName: string;
-    description: string;
+    // The name of the property. This is automatically filled in using the decorator
+    propertyName?: string | symbol;
+    description: string | Array<string>;
+    specialNote?: string | Array<string>;
+    mandatory: boolean;
 }
