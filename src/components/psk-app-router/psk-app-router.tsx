@@ -27,7 +27,7 @@ export class PskAppRouter {
       if (item.children) {
         return this.renderItems(item.children)
       } else {
-        return <stencil-route url={item.path} exact={item.exactMatch} component={item.component}
+        return <stencil-route url={item.path} exact={item.exact} component={item.component}
                               componentProps={item.componentProps}/>
       }
     });
