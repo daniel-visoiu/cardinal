@@ -7,9 +7,10 @@
 
 ## Properties
 
-| Property    | Attribute | Description | Type         | Default |
-| ----------- | --------- | ----------- | ------------ | ------- |
-| `menuItems` | --        |             | `MenuItem[]` | `[]`    |
+| Property         | Attribute          | Description | Type         | Default |
+| ---------------- | ------------------ | ----------- | ------------ | ------- |
+| `failRedirectTo` | `fail-redirect-to` |             | `string`     | `""`    |
+| `menuItems`      | --                 |             | `MenuItem[]` | `[]`    |
 
 
 ## Events

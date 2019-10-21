@@ -32,6 +32,7 @@ export namespace Components {
     'url': any;
   }
   interface PskAppRouter {
+    'failRedirectTo': string;
     'menuItems'?: MenuItem[];
   }
   interface PskAttachmentsList {
@@ -324,6 +325,7 @@ declare namespace LocalJSX {
     'url'?: any;
   }
   interface PskAppRouter extends JSXBase.HTMLAttributes<HTMLPskAppRouterElement> {
+    'failRedirectTo'?: string;
     'menuItems'?: MenuItem[];
     'onNeedMenuItems'?: (event: CustomEvent<any>) => void;
   }
