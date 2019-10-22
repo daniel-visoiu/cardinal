@@ -33,6 +33,7 @@ export namespace Components {
   }
   interface PskAppRouter {
     'failRedirectTo': string;
+    'historyType': string;
     'menuItems'?: MenuItem[];
   }
   interface PskAttachmentsList {
@@ -61,6 +62,7 @@ export namespace Components {
   }
   interface PskImg {
     'src': string;
+    'title': string;
   }
   interface PskListFeedbacks {
     'hour': number;
@@ -102,6 +104,7 @@ export namespace Components {
     'wizardSteps': WizardStep[];
   }
   interface PskTag {}
+  interface PskToc {}
   interface PskUiFeedback {
     'message': any;
     'opened': boolean;
@@ -260,6 +263,12 @@ declare global {
     new (): HTMLPskTagElement;
   };
 
+  interface HTMLPskTocElement extends Components.PskToc, HTMLStencilElement {}
+  var HTMLPskTocElement: {
+    prototype: HTMLPskTocElement;
+    new (): HTMLPskTocElement;
+  };
+
   interface HTMLPskUiFeedbackElement extends Components.PskUiFeedback, HTMLStencilElement {}
   var HTMLPskUiFeedbackElement: {
     prototype: HTMLPskUiFeedbackElement;
@@ -312,6 +321,7 @@ declare global {
     'psk-stepper': HTMLPskStepperElement;
     'psk-stepper-renderer': HTMLPskStepperRendererElement;
     'psk-tag': HTMLPskTagElement;
+    'psk-toc': HTMLPskTocElement;
     'psk-ui-feedback': HTMLPskUiFeedbackElement;
     'psk-ui-loader': HTMLPskUiLoaderElement;
     'psk-user-profile': HTMLPskUserProfileElement;
@@ -336,6 +346,7 @@ declare namespace LocalJSX {
   }
   interface PskAppRouter extends JSXBase.HTMLAttributes<HTMLPskAppRouterElement> {
     'failRedirectTo'?: string;
+    'historyType'?: string;
     'menuItems'?: MenuItem[];
     'onNeedMenuItems'?: (event: CustomEvent<any>) => void;
   }
@@ -366,6 +377,7 @@ declare namespace LocalJSX {
   }
   interface PskImg extends JSXBase.HTMLAttributes<HTMLPskImgElement> {
     'src'?: string;
+    'title'?: string;
   }
   interface PskListFeedbacks extends JSXBase.HTMLAttributes<HTMLPskListFeedbacksElement> {
     'hour'?: number;
@@ -411,6 +423,7 @@ declare namespace LocalJSX {
     'wizardSteps'?: WizardStep[];
   }
   interface PskTag extends JSXBase.HTMLAttributes<HTMLPskTagElement> {}
+  interface PskToc extends JSXBase.HTMLAttributes<HTMLPskTocElement> {}
   interface PskUiFeedback extends JSXBase.HTMLAttributes<HTMLPskUiFeedbackElement> {
     'message'?: any;
     'onCloseFeedback'?: (event: CustomEvent<any>) => void;
@@ -461,6 +474,7 @@ declare namespace LocalJSX {
     'psk-stepper': PskStepper;
     'psk-stepper-renderer': PskStepperRenderer;
     'psk-tag': PskTag;
+    'psk-toc': PskToc;
     'psk-ui-feedback': PskUiFeedback;
     'psk-ui-loader': PskUiLoader;
     'psk-user-profile': PskUserProfile;

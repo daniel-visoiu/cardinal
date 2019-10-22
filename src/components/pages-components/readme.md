@@ -9,13 +9,14 @@
 
 ### Depends on
 
-- [psk-card]()
+- [psk-chapter]()
 
 ### Graph
 ```mermaid
 graph TD;
-  psk-tag --> psk-card
-  style psk-tag fill:#f9f,stroke:#333,stroke-width:4px
+  psk-toc --> psk-chapter
+  psk-chapter --> psk-card
+  style psk-toc fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

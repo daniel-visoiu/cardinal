@@ -8,6 +8,7 @@ import {MenuItem} from "../../interfaces/MenuItem";
 export class PskAppRouter {
   @Prop() menuItems ?: MenuItem[] = [];
   @Prop() failRedirectTo:string = "";
+  @Prop() historyType:string = "browser";
 
   @Event({
     eventName: 'needMenuItems',
@@ -45,7 +46,7 @@ export class PskAppRouter {
 
     return (
       <div class="app_container">
-        <stencil-router>
+        <stencil-router historyType={this.historyType} >
           <stencil-route-switch scrollTopOffset={0}>
             {routes}
             <stencil-route component="psk-page-not-found" componentProps={{urlDestination:this.menuItems[0].path, }} />

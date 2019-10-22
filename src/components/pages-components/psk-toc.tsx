@@ -21,10 +21,10 @@ export class PskToc {
         console.log(this.chapters);
         console.log("[INSIDE PSK-TOC COMPONENT]");
 
-        return (
-            <psk-chapter title="Table of Contents">
+        return null;
+            /*<psk-chapter title="Table of Contents">
 
-            </psk-chapter>
-        );
+            </psk-chapter>*/
+
     }
 }

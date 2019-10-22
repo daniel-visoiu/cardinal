@@ -107,7 +107,7 @@ export class PskChapter {
 		let componentEventsDefinitions = [];
 		if (this.decoratorEvents) {
 			componentEventsDefinitions = this.decoratorEvents.map((event: d.EventOptions) => {
-				const cardTitle = `${event.eventName}: CustomEvent`
+				const cardTitle = `${event.eventName}: CustomEvent`;
 				return (
 					<psk-card title={cardTitle}>
 						<p>{event.description}</p>
@@ -117,11 +117,12 @@ export class PskChapter {
 			});
 		}
 
-		return [
-			<div id={this.chapterInfo.guid}>{this.title}</div>,
-			<slot />,
-			componentEventsDefinitions,
-			componentPropertiesDefinitions
-		];
+		return (
+      <psk-card title={this.title}>
+        <slot/>
+        {componentEventsDefinitions}
+        {componentPropertiesDefinitions}
+      </psk-card>
+		);
 	}
 }

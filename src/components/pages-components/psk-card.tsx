@@ -11,12 +11,12 @@ export class PskCard {
 
 	render() {
 
-		return (
-			<div class="card">
-				{this.title ?
-					<div class="card-header">
-						{this.title}
-					</div> : null}
+    return (
+      <div class="card psk-card">
+        {this.title ?
+          <div class="card-header">
+            {this.title}
+          </div> : null}
 
 				<div class="card-body">
 					<slot />
