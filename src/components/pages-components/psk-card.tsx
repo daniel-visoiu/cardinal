@@ -1,29 +1,29 @@
-import {Component, h, Prop} from "@stencil/core";
+import { Component, h, Prop } from "@stencil/core";
 
 @Component({
-  tag: "psk-card",
-  styleUrl: "./page.css"
+	tag: "psk-card",
+	styleUrl: "./page.css"
 })
 
 export class PskCard {
 
-  @Prop() title: string = "";
+	@Prop() title: string = "";
 
-  render() {
+	render() {
 
-    return (
-      <div class="card">
-        {this.title ?
-          <div class="card-header">
-            {this.title}
-          </div> : null}
+		return (
+			<div class="card">
+				{this.title ?
+					<div class="card-header">
+						{this.title}
+					</div> : null}
 
-        <div class="card-body">
-          <slot/>
-        </div>
-      </div>
-    )
-  }
+				<div class="card-body">
+					<slot />
+				</div>
+			</div>
+		)
+	}
 
 
 }

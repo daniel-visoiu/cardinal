@@ -1,28 +1,22 @@
-import {Component, h, Listen, Prop, State} from "@stencil/core";
+import { Component, h, Prop } from "@stencil/core";
 
 @Component({
-  tag: "psk-page",
-  styleUrl: "./page.css",
-  shadow:true
+	tag: "psk-page",
+	styleUrl: "./page.css",
+	shadow: true
 })
 
 export class PskPage {
 
-  @Prop() title: string;
-  @State() chaptersToc :any;
-  @Listen("psk-send-chapter")
-  receivedChapter(event: any) {
-    this.chaptersToc = event.detail;
-    console.log(this.chaptersToc);
-  }
+	@Prop() title: string;
 
-  render() {
+	render() {
 
-    return (
-      <div>
-        <h1>{this.title}</h1>
-        <slot/>
-      </div>
-    )
-  }
+		return (
+			<div>
+				<h1>{this.title}</h1>
+				<slot />
+			</div>
+		)
+	}
 }

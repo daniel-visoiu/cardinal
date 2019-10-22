@@ -1,8 +1,8 @@
 import * as d from './declarations/declarations';
-import { DEFINED_PROPERTIES, DATA_DEFINED_PROPS } from './declarations/constants';
 import { getElement } from '@stencil/core';
+import { DATA_DEFINED_EVENTS, DEFINED_EVENTS } from './declarations/constants';
 
-export function TableOfContentProperty(opts: d.PropertyOptions) {
+export function TableOfContentEvent(opts: d.EventOptions) {
     return function (proto, propertyKey: string | symbol): void {
 
         const { componentWillLoad, render } = proto;
@@ -11,29 +11,29 @@ export function TableOfContentProperty(opts: d.PropertyOptions) {
             let self = this;
             let thisElement = getElement(self);
 
-            if (thisElement.hasAttribute(DATA_DEFINED_PROPS)) {
+            if (thisElement.hasAttribute(DATA_DEFINED_EVENTS)) {
                 if (!self.componentDefinitions) {
                     self.componentDefinitions = {
-                        "definedProperties": [{
+                        "definedEvents": [{
                             ...opts,
-                            propertyName: String(propertyKey)
+                            eventName: String(propertyKey)
                         }]
                     };
                     return componentWillLoad && componentWillLoad.call(self);
                 }
 
                 let componentDefinitions = self.componentDefinitions;
-                const newProperty: d.PropertyOptions = {
+                const newEvent: d.EventOptions = {
                     ...opts,
-                    propertyName: String(propertyKey)
+                    eventName: String(propertyKey)
                 };
 
-                if (componentDefinitions && componentDefinitions.hasOwnProperty(DEFINED_PROPERTIES)) {
-                    let tempProps: Array<d.PropertyOptions> = [...componentDefinitions[DEFINED_PROPERTIES]];
-                    tempProps.push(newProperty);
-                    componentDefinitions[DEFINED_PROPERTIES] = [...tempProps];
+                if (componentDefinitions && componentDefinitions.hasOwnProperty(DEFINED_EVENTS)) {
+                    let tempProps: Array<d.EventOptions> = [...componentDefinitions[DEFINED_EVENTS]];
+                    tempProps.push(newEvent);
+                    componentDefinitions[DEFINED_EVENTS] = [...tempProps];
                 } else {
-                    componentDefinitions[DEFINED_PROPERTIES] = [newProperty];
+                    componentDefinitions[DEFINED_EVENTS] = [newEvent];
                 }
                 self.componentDefinitions = { ...componentDefinitions };
             }
@@ -43,15 +43,15 @@ export function TableOfContentProperty(opts: d.PropertyOptions) {
         proto.render = function () {
             let self = this;
             if (!self.componentDefinitions
-                || !(self.componentDefinitions && self.componentDefinitions[DEFINED_PROPERTIES])) {
+                || !(self.componentDefinitions && self.componentDefinitions[DEFINED_EVENTS])) {
                 return render && render.call(self);
             }
 
-            document.dispatchEvent(new CustomEvent('psk-send-props', {
+            document.dispatchEvent(new CustomEvent('psk-send-events', {
                 composed: true,
                 bubbles: true,
                 cancelable: true,
-                detail: self.componentDefinitions[DEFINED_PROPERTIES]
+                detail: self.componentDefinitions[DEFINED_EVENTS]
             }));
         }
     }
