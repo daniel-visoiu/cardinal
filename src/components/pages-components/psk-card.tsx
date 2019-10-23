@@ -2,7 +2,7 @@ import { Component, h, Prop } from "@stencil/core";
 
 @Component({
 	tag: "psk-card",
-  styleUrl: "./page.css"
+	styleUrl: "./page.css"
 })
 
 export class PskCard {
@@ -11,12 +11,12 @@ export class PskCard {
 
 	render() {
 
-    return (
-      <div class="card psk-card">
-        {this.title ?
-          <div class="card-header">
-            {this.title}
-          </div> : null}
+		return (
+			<div class="card psk-card">
+				{this.title ?
+					<div class="card-header">
+						<h5>{this.title}</h5>
+					</div> : null}
 
 				<div class="card-body">
 					<slot />

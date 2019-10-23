@@ -1,9 +1,10 @@
 import { Component, h, Prop, Event, EventEmitter, Listen, getElement, State } from "@stencil/core";
 import * as d from "../../decorators/declarations/declarations";
+import { Chapter } from "../../interfaces/Chapter";
 
 @Component({
 	tag: "psk-chapter",
-  styleUrl: "./page.css"
+	styleUrl: "./page.css"
 })
 export class PskChapter {
 
@@ -25,11 +26,7 @@ export class PskChapter {
 
 	@Prop() title: string;
 
-	@State() chapterInfo: {
-		data: string,
-		guid: string,
-		children: Array<any>
-	};
+	@State() chapterInfo: Chapter;
 	@State() guid: string;
 	@State() reportedToc: boolean = false;
 
@@ -96,7 +93,7 @@ export class PskChapter {
 				const cardTitle = `${prop.propertyName}${prop.isMandatory ? "" : "?"}: ${prop.propertyType} ${prop.isMandatory ? "(mandatory)" : "(optional)"}`;
 				return (
 					<psk-card title={cardTitle}>
-						{prop.description}
+						<p>{prop.description}</p>
 						{prop.specialNote ? (<p><b>Note: {prop.specialNote}</b></p>) : null}
 						{prop.defaultValue ? (<p><i>Default value: {prop.defaultValue}</i></p>) : null}
 					</psk-card>
@@ -118,11 +115,11 @@ export class PskChapter {
 		}
 
 		return (
-      <psk-card title={this.title}>
-        <slot/>
-        {componentEventsDefinitions}
-        {componentPropertiesDefinitions}
-      </psk-card>
+			<psk-card title={this.title}>
+				<slot />
+				{componentEventsDefinitions}
+				{componentPropertiesDefinitions}
+			</psk-card>
 		);
 	}
 }
