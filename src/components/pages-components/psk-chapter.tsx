@@ -3,7 +3,7 @@ import * as d from "../../decorators/declarations/declarations";
 
 @Component({
 	tag: "psk-chapter",
-	styleUrl: './page.css'
+  styleUrl: "./page.css"
 })
 export class PskChapter {
 

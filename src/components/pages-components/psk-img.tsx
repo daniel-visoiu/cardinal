@@ -4,7 +4,7 @@ const basePath = "https://raw.githubusercontent.com/PrivateSky/pwc-apps/master/s
 
 @Component({
   tag: "psk-img",
-  shadow: false
+  styleUrl: "./page.css"
 })
 
 export class PskImg {
