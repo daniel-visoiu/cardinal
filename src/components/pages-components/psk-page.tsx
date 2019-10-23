@@ -8,16 +8,15 @@ import { Component, h, Prop } from "@stencil/core";
 
 export class PskPage {
 
-	@Prop() title:string="";
+	@Prop() title: string = "";
 
 	render() {
-
 		return (
 			<div>
-        <nav><h3>{this.title}</h3></nav>
-        <div class="page-content">
-				  <slot />
-        </div>
+				<nav><h3>{this.title}</h3></nav>
+				<div class="page-content">
+					<slot />
+				</div>
 			</div>
 		)
 	}
