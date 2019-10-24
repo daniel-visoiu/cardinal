@@ -1,21 +1,18 @@
 import { Component, h, Prop } from "@stencil/core";
 
 @Component({
-  tag: "psk-example",
-  styleUrl: "./page.css"
+	tag: "psk-example"
 })
 
 export class PskExample {
 
-  @Prop() exampleTitle?: string = "Live example";
+	@Prop() title: string = "Live example";
 
-  render() {
-
-    return (
-      <psk-card title={this.exampleTitle}>
-        <slot />
-      </psk-card>
-    );
-  }
-
+	render() {
+		return (
+			<psk-chapter title={this.title}>
+				<slot />
+			</psk-chapter>
+		);
+	}
 }

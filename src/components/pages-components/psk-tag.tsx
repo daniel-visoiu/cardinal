@@ -1,32 +1,28 @@
-import {Component, Element, h, State} from "@stencil/core";
+import { Component, Element, h, State } from "@stencil/core";
 
 @Component({
-  tag: "psk-tag",
-  styleUrl: "./page.css"
+	tag: "psk-tag"
 })
 
 export class PskTag {
 
-  @State() componentCode:string="";
-  @Element() host: HTMLDivElement;
+	@State() componentCode: string = "";
+	@Element() host: HTMLDivElement;
 
-  componentWillLoad(){
+	componentWillLoad() {
+		this.componentCode = this.host.innerHTML;
+		this.host.innerHTML = '';
+	}
 
-    this.componentCode = this.host.innerHTML;
-    this.host.innerHTML = '';
-  }
-
-  render() {
-    return (
-      <psk-card title={"HTML Tag"}>
-          <pre class="text-center code-tag">
-              <code class="language-html code-tag" data-lang="html">
-                <span class="nt">{this.componentCode}</span>
-              </code>
-            </pre>
-      </psk-card>
-    )
-  }
-
-
+	render() {
+		return (
+			<psk-chapter title={"HTML Tag"}>
+				<pre class="text-center code-tag">
+					<code class="language-html code-tag" data-lang="html">
+						<span class="nt">{this.componentCode}</span>
+					</code>
+				</pre>
+			</psk-chapter>
+		)
+	}
 }

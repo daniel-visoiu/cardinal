@@ -5,9 +5,9 @@ import { DATA_DEFINED_EVENTS, DEFINED_EVENTS } from './declarations/constants';
 export function TableOfContentEvent(opts: d.EventOptions) {
     return function (proto, propertyKey: string | symbol): void {
 
-        const { componentWillLoad, render } = proto;
+        const { connectedCallback, render } = proto;
 
-        proto.componentWillLoad = function () {
+        proto.connectedCallback = function () {
             let self = this;
             let thisElement = getElement(self);
 
@@ -19,7 +19,7 @@ export function TableOfContentEvent(opts: d.EventOptions) {
                             eventName: String(propertyKey)
                         }]
                     };
-                    return componentWillLoad && componentWillLoad.call(self);
+                    return connectedCallback && connectedCallback.call(self);
                 }
 
                 let componentDefinitions = self.componentDefinitions;
@@ -37,7 +37,7 @@ export function TableOfContentEvent(opts: d.EventOptions) {
                 }
                 self.componentDefinitions = { ...componentDefinitions };
             }
-            return componentWillLoad && componentWillLoad.call(self);
+            return connectedCallback && connectedCallback.call(self);
         };
 
         proto.render = function () {

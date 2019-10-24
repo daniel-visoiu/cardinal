@@ -1,6 +1,6 @@
 export interface Chapter {
     index?: number;
-    data: string;
+    title: string;
     guid: string;
     children: Array<Chapter>;
 }

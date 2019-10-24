@@ -1,20 +1,20 @@
-import { Component, h } from "@stencil/core";
+import { Component, h, Prop } from "@stencil/core";
 
 @Component({
-	tag: "psk-description",
-	styleUrl: "./page.css"
+	tag: "psk-description"
 })
 
 export class PskDescription {
 
-	render() {
+	@Prop() title: string = "Description";
 
+	render() {
 		return (
-			<div class="psk-description">
-				<slot />
-			</div>
+			<psk-chapter title={this.title}>
+				<div class="psk-description">
+					<slot />
+				</div>
+			</psk-chapter>
 		)
 	}
-
-
 }

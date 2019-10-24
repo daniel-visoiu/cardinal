@@ -4,7 +4,7 @@ import { Chapter } from "../../interfaces/Chapter";
 
 @Component({
 	tag: "psk-chapter",
-	styleUrl: "./page.css"
+	styleUrl: './page.css'
 })
 export class PskChapter {
 
@@ -49,7 +49,7 @@ export class PskChapter {
 		};
 
 		this.chapterInfo = {
-			data: this.title,
+			title: this.title,
 			guid: _uuidv4(),
 			children: []
 		}
@@ -90,9 +90,10 @@ export class PskChapter {
 		let componentPropertiesDefinitions = [];
 		if (this.decoratorProperties) {
 			componentPropertiesDefinitions = this.decoratorProperties.map((prop: d.PropertyOptions) => {
-				const cardTitle = `${prop.propertyName}${prop.isMandatory ? "" : "?"}: ${prop.propertyType} ${prop.isMandatory ? "(mandatory)" : "(optional)"}`;
+				const cardSubtitle = `${prop.propertyName}${prop.isMandatory ? "" : "?"}: ${prop.propertyType} ${prop.isMandatory ? "(mandatory)" : "(optional)"}`;
 				return (
-					<psk-card title={cardTitle}>
+					<psk-card title={prop.propertyName}>
+						<p class="subtitle"><i>{cardSubtitle}</i></p>
 						<p>{prop.description}</p>
 						{prop.specialNote ? (<p><b>Note: {prop.specialNote}</b></p>) : null}
 						{prop.defaultValue ? (<p><i>Default value: {prop.defaultValue}</i></p>) : null}
@@ -104,9 +105,10 @@ export class PskChapter {
 		let componentEventsDefinitions = [];
 		if (this.decoratorEvents) {
 			componentEventsDefinitions = this.decoratorEvents.map((event: d.EventOptions) => {
-				const cardTitle = `${event.eventName}: CustomEvent`;
+				const cardSubtitle = `${event.eventName}: CustomEvent`;
 				return (
-					<psk-card title={cardTitle}>
+					<psk-card title={event.eventName}>
+						<p class="subtitle"><i>{cardSubtitle}</i></p>
 						<p>{event.description}</p>
 						{event.specialNote ? (<p><b>Note: {event.specialNote}</b></p>) : null}
 					</psk-card>
@@ -115,10 +117,10 @@ export class PskChapter {
 		}
 
 		return (
-			<psk-card title={this.title}>
-				<slot />
+			<psk-card title={this.title} elementId={this.title.replace(/ /g, "_").toLowerCase()}>
 				{componentEventsDefinitions}
 				{componentPropertiesDefinitions}
+				<slot />
 			</psk-card>
 		);
 	}
