@@ -1,8 +1,10 @@
 import { Component, State, Event, EventEmitter, Listen, h, Prop } from "@stencil/core";
 import { Message } from '../../interfaces/FeedbackMessage'
-
+import { StyleCustomisation } from '../../interfaces/StyleCustomisation'
+import Config from "./Config.js";
 @Component({
     tag: 'psk-list-feedbacks',
+    styleUrl: './psk-list-feedbacks.css',
     shadow: true
 })
 export class PskListFeebacks {
@@ -12,10 +14,13 @@ export class PskListFeebacks {
     @State() timeMeasure: string;
     @State() timer = 0;
     @State() opened: boolean = false;
+    @State() typeOfAlert: Array<string> = [];
+    @Prop() styleCustomisation: StyleCustomisation
+    @Prop() timeAlive: number = 5;
     @Prop() messagesToDisplay: number = 3;
-    @Prop() second: number = 1000;
-    @Prop() minute: number = 60 * this.second;
-    @Prop() hour: number = 60 * this.minute;
+    @Prop() toastRenderer: string;
+    @Prop() alertRenderer: string;
+
 
     @Event({
         eventName: 'openFeedback',
@@ -23,12 +28,6 @@ export class PskListFeebacks {
         cancelable: true,
         bubbles: true,
     }) openFeedbackHandler: EventEmitter
-    @Event({
-        eventName: 'showFeedback',
-        composed: true,
-        cancelable: true,
-        bubbles: true,
-    }) showFeedbackHandler: EventEmitter
     @Listen('closeFeedback')
     closeFeedbackHandler(closeData) {
         if (this.alertOpened) {
@@ -36,6 +35,7 @@ export class PskListFeebacks {
         }
         const deleteIndex = this._messagesContent.indexOf(closeData.detail)
         if (deleteIndex > -1) {
+            this.typeOfAlert.splice(deleteIndex, 1)
             this._messagesContent.splice(deleteIndex, 1)
             this._messagesContent = this._messagesContent.slice()
             if (this._messagesQueue.length > 0) {
@@ -45,15 +45,19 @@ export class PskListFeebacks {
     }
 
     componentWillLoad() {
-        this.openFeedbackHandler.emit((message) => {
+        this.openFeedbackHandler.emit((message, name, typeOfAlert) => {
+            if (typeOfAlert) {
+                this.typeOfAlert.push(typeOfAlert)
+            } else {
+                this.typeOfAlert.push('toast')
+            }
             this.alertOpened = true;
-            console.log(message)
             if (message instanceof Array) {
-                message.forEach(mes => {
-                    this.addToMessageArray.bind(this)(mes)
+                message.forEach((mes, name) => {
+                    this.addToMessageArray.bind(this)(mes, name)
                 });
             } else {
-                this.addToMessageArray.bind(this)(message)
+                this.addToMessageArray.bind(this)(message, name)
             }
         })
     }
@@ -62,35 +66,40 @@ export class PskListFeebacks {
         if (this._messagesContent.length > 0) {
             const time = new Date().getTime();
             const time2 = message.timer;
-            if (Math.floor((time - time2) / this.second) < 60) {
-                this.timeMeasure = 'seconds'
-                this.timer = Math.floor((time - time2) / this.second)
-                setTimeout(() => {
-                    this.timerToShow.bind(this)(message)
-                }, 500)
-            } else if (Math.floor((time - time2) / this.minute) < 60) {
-                this.timer = Math.floor((time - time2) / this.minute)
-                this.timeMeasure = 'minutes'
-                setTimeout(() => {
-                    this.timerToShow.bind(this)(message)
-                }, 40000)
-            } else {
-                this.timer = Math.floor((time - time2) / this.hour)
-                this.timeMeasure = 'hours'
-                setTimeout(() => {
-                    this.timerToShow.bind(this)(message)
-                }, 3000000)
+            let equation = Math.floor((time - time2) / Config.MINUTE)
+            const minute =setTimeout(() => {
+                this.timerToShow.bind(this)(message)
+            }, Config.MINUTE_TICK)
+            const hour =setTimeout(() => {
+                this.timerToShow.bind(this)(message)
+            }, Config.HOUR_TICK)
+            switch (true) {
+                case (equation <= 0):
+                    this.timeMeasure = Config.RIGHT_NOW
+                    minute
+                    break;
+                case (equation < 60):
+                    this.timer = Math.floor((time - time2) / Config.MINUTE)
+                    this.timeMeasure = Config.MINUTES
+                    minute
+                    break;
+                case (equation >= 60):
+                    this.timer = Math.floor((time - time2) / Config.HOUR)
+                    this.timeMeasure = Config.HOURS
+                    hour
+                    break;
             }
         } else {
             return;
         }
     }
 
-    addToMessageArray(content) {
+    addToMessageArray(content, name) {
         const date = new Date();
         const messageToAdd: Message = {
             content: content,
-            timer: date.getTime()
+            timer: date.getTime(),
+            name: name
         }
         if (this._messagesContent.length + 1 <= this.messagesToDisplay) {
             this._messagesContent = [...this._messagesContent, messageToAdd]
@@ -98,30 +107,34 @@ export class PskListFeebacks {
             this._messagesQueue = [...this._messagesQueue, messageToAdd]
         }
     }
-    showOneAlert() {
-        this.opened = true;
-        this.showFeedbackHandler.emit('Example!')
-    }
-    showThreeAlerts() {
-        this.opened = true;
-        this.showFeedbackHandler.emit(['SPIDERMAN!', 'BEST!', 'AVENGER!'])
-    }
     render() {
         let alertMessages = [];
-        this._messagesContent.forEach((message) => {
-            this.timerToShow.bind(this)(message)
-            console.log(message)
-            alertMessages.push(
-                <psk-ui-feedback opened={this.opened} message={message} type-of-alert='toast' timeSinceCreation={this.timer} timeMeasure={this.timeMeasure} />
-            )
-        });
+        let _feedbackTag
+        this._messagesContent.forEach((message, key) => {
+            if (this.typeOfAlert[key] === 'toast') {
+                _feedbackTag = this.toastRenderer ? this.toastRenderer : 'psk-ui-toast'
+                this.timerToShow.bind(this)(message)
+                alertMessages.push(<_feedbackTag
+                    message={message}
+                    timeSinceCreation={this.timer}
+                    timeMeasure={this.timeMeasure}
+                    styleCustomisation={this.styleCustomisation} />)
+            }
+            else {
+                _feedbackTag = this.alertRenderer ? this.alertRenderer : 'psk-ui-alert'
+                alertMessages.push(
+                    <_feedbackTag
+                        message={this._messagesContent[this._messagesContent.length - 1]}
+                        typeOfAlert={this.typeOfAlert[key]}
+                        timeAlive={this.timeAlive}
+                        styleCustomisation={this.styleCustomisation} />
+                )
+            }
+        })
         return (
             <div>
-                <button onClick={this.showOneAlert.bind(this)}>Show One Alert!</button>
-                <button onClick={this.showThreeAlerts.bind(this)}>Show Three Alerts!</button>
                 {alertMessages ? alertMessages : null}
             </div>
-
         )
 
     }

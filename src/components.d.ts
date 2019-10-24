@@ -16,6 +16,9 @@ import {
   EventEmitter,
 } from '@stencil/core';
 import {
+  StyleCustomisation,
+} from './interfaces/StyleCustomisation';
+import {
   WizardStep,
 } from './interfaces/Wizard';
 
@@ -54,7 +57,9 @@ export namespace Components {
     'title': string;
   }
   interface PskDescription {}
-  interface PskExample {}
+  interface PskExample {
+    'exampleTitle'?: string;
+  }
   interface PskFilesChooser {
     'accept'?: string;
     'label': string;
@@ -66,10 +71,11 @@ export namespace Components {
     'title': string;
   }
   interface PskListFeedbacks {
-    'hour': number;
+    'alertRenderer': string;
     'messagesToDisplay': number;
-    'minute': number;
-    'second': number;
+    'styleCustomisation': StyleCustomisation;
+    'timeAlive': number;
+    'toastRenderer': string;
   }
   interface PskMenuItemRenderer {
     'active': boolean;
@@ -106,15 +112,20 @@ export namespace Components {
   }
   interface PskTag {}
   interface PskToc {}
-  interface PskUiFeedback {
+  interface PskUiAlert {
     'message': any;
-    'opened': boolean;
-    'timeMeasure': string;
-    'timeSinceCreation': number;
+    'styleCustomisation': StyleCustomisation;
+    'timeAlive': any;
     'typeOfAlert': string;
   }
   interface PskUiLoader {
     'shouldBeRendered': boolean;
+  }
+  interface PskUiToast {
+    'message': any;
+    'styleCustomisation': StyleCustomisation;
+    'timeMeasure': string;
+    'timeSinceCreation': number;
   }
   interface PskUserProfile {
     'profileRenderer': any;
@@ -276,16 +287,22 @@ declare global {
     new (): HTMLPskTocElement;
   };
 
-  interface HTMLPskUiFeedbackElement extends Components.PskUiFeedback, HTMLStencilElement {}
-  var HTMLPskUiFeedbackElement: {
-    prototype: HTMLPskUiFeedbackElement;
-    new (): HTMLPskUiFeedbackElement;
+  interface HTMLPskUiAlertElement extends Components.PskUiAlert, HTMLStencilElement {}
+  var HTMLPskUiAlertElement: {
+    prototype: HTMLPskUiAlertElement;
+    new (): HTMLPskUiAlertElement;
   };
 
   interface HTMLPskUiLoaderElement extends Components.PskUiLoader, HTMLStencilElement {}
   var HTMLPskUiLoaderElement: {
     prototype: HTMLPskUiLoaderElement;
     new (): HTMLPskUiLoaderElement;
+  };
+
+  interface HTMLPskUiToastElement extends Components.PskUiToast, HTMLStencilElement {}
+  var HTMLPskUiToastElement: {
+    prototype: HTMLPskUiToastElement;
+    new (): HTMLPskUiToastElement;
   };
 
   interface HTMLPskUserProfileElement extends Components.PskUserProfile, HTMLStencilElement {}
@@ -330,8 +347,9 @@ declare global {
     'psk-stepper-renderer': HTMLPskStepperRendererElement;
     'psk-tag': HTMLPskTagElement;
     'psk-toc': HTMLPskTocElement;
-    'psk-ui-feedback': HTMLPskUiFeedbackElement;
+    'psk-ui-alert': HTMLPskUiAlertElement;
     'psk-ui-loader': HTMLPskUiLoaderElement;
+    'psk-ui-toast': HTMLPskUiToastElement;
     'psk-user-profile': HTMLPskUserProfileElement;
     'psk-user-profile-renderer': HTMLPskUserProfileRendererElement;
     'psk-wizard': HTMLPskWizardElement;
@@ -377,7 +395,9 @@ declare namespace LocalJSX {
     'title'?: string;
   }
   interface PskDescription extends JSXBase.HTMLAttributes<HTMLPskDescriptionElement> {}
-  interface PskExample extends JSXBase.HTMLAttributes<HTMLPskExampleElement> {}
+  interface PskExample extends JSXBase.HTMLAttributes<HTMLPskExampleElement> {
+    'exampleTitle'?: string;
+  }
   interface PskFilesChooser extends JSXBase.HTMLAttributes<HTMLPskFilesChooserElement> {
     'accept'?: string;
     'label'?: string;
@@ -389,12 +409,12 @@ declare namespace LocalJSX {
     'title'?: string;
   }
   interface PskListFeedbacks extends JSXBase.HTMLAttributes<HTMLPskListFeedbacksElement> {
-    'hour'?: number;
+    'alertRenderer'?: string;
     'messagesToDisplay'?: number;
-    'minute'?: number;
     'onOpenFeedback'?: (event: CustomEvent<any>) => void;
-    'onShowFeedback'?: (event: CustomEvent<any>) => void;
-    'second'?: number;
+    'styleCustomisation'?: StyleCustomisation;
+    'timeAlive'?: number;
+    'toastRenderer'?: string;
   }
   interface PskMenuItemRenderer extends JSXBase.HTMLAttributes<HTMLPskMenuItemRendererElement> {
     'active'?: boolean;
@@ -433,16 +453,22 @@ declare namespace LocalJSX {
   }
   interface PskTag extends JSXBase.HTMLAttributes<HTMLPskTagElement> {}
   interface PskToc extends JSXBase.HTMLAttributes<HTMLPskTocElement> {}
-  interface PskUiFeedback extends JSXBase.HTMLAttributes<HTMLPskUiFeedbackElement> {
+  interface PskUiAlert extends JSXBase.HTMLAttributes<HTMLPskUiAlertElement> {
     'message'?: any;
     'onCloseFeedback'?: (event: CustomEvent<any>) => void;
-    'opened'?: boolean;
-    'timeMeasure'?: string;
-    'timeSinceCreation'?: number;
+    'styleCustomisation'?: StyleCustomisation;
+    'timeAlive'?: any;
     'typeOfAlert'?: string;
   }
   interface PskUiLoader extends JSXBase.HTMLAttributes<HTMLPskUiLoaderElement> {
     'shouldBeRendered'?: boolean;
+  }
+  interface PskUiToast extends JSXBase.HTMLAttributes<HTMLPskUiToastElement> {
+    'message'?: any;
+    'onCloseFeedback'?: (event: CustomEvent<any>) => void;
+    'styleCustomisation'?: StyleCustomisation;
+    'timeMeasure'?: string;
+    'timeSinceCreation'?: number;
   }
   interface PskUserProfile extends JSXBase.HTMLAttributes<HTMLPskUserProfileElement> {
     'onGetUserInfo'?: (event: CustomEvent<any>) => void;
@@ -485,8 +511,9 @@ declare namespace LocalJSX {
     'psk-stepper-renderer': PskStepperRenderer;
     'psk-tag': PskTag;
     'psk-toc': PskToc;
-    'psk-ui-feedback': PskUiFeedback;
+    'psk-ui-alert': PskUiAlert;
     'psk-ui-loader': PskUiLoader;
+    'psk-ui-toast': PskUiToast;
     'psk-user-profile': PskUserProfile;
     'psk-user-profile-renderer': PskUserProfileRenderer;
     'psk-wizard': PskWizard;
