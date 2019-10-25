@@ -1,6 +1,6 @@
-import { Component, h, Prop, getElement } from "@stencil/core";
+import { Component, h, Prop, Element } from "@stencil/core";
 import { closestParentElement, scrollToElement } from "../../utils/utils";
-// import { TOOLTIP_TEXT, TOOLTIP_COPIED_TEXT } from "../../decorators/declarations/constants";
+import { TOOLTIP_TEXT, TOOLTIP_COPIED_TEXT } from "../../utils/constants";
 
 @Component({
     tag: "psk-copy-clipboard",
@@ -10,6 +10,7 @@ import { closestParentElement, scrollToElement } from "../../utils/utils";
 export class PskCard {
 
     @Prop() id: string = "";
+    @Element() private element: HTMLElement;
 
     _copyToClipboardHandler(elementId: string): void {
         try {
@@ -20,14 +21,21 @@ export class PskCard {
 
             navigator.clipboard.writeText(`${basePath}?chapter=${elementId}`);
 
-            scrollToElement(elementId, closestParentElement(getElement(this), 'psk-page'));
+            const tooltipTextArea: HTMLElement = this.element.querySelector('.tooltip');
+            tooltipTextArea.innerHTML = TOOLTIP_COPIED_TEXT;
+            tooltipTextArea.setAttribute("class", "tooltip copied");
+
+            scrollToElement(elementId, closestParentElement(this.element, 'psk-page'));
+
         } catch (err) {
             console.error(err);
         }
     }
 
     _resetTooltip(): void {
-        // this.element.querySelector('#tooltip').innerHTML = TOOLTIP_TEXT
+        const tooltipTextArea: HTMLElement = this.element.querySelector('.tooltip');
+        tooltipTextArea.innerHTML = TOOLTIP_TEXT;
+        tooltipTextArea.setAttribute("class", "tooltip");
     }
 
     _isCopySupported(): boolean {
@@ -47,20 +55,23 @@ export class PskCard {
         }
 
         return (
-            <span>
+            <div id="tooltip"
+                onClick={(evt: MouseEvent) => {
+                    evt.stopImmediatePropagation();
+                    this._copyToClipboardHandler(elementId);
+                }}
+                onMouseOut={() => {
+                    this._resetTooltip();
+                }}>
                 <a class="mark"
                     href={`#${elementId}`}
                     onClick={(evt: MouseEvent) => {
                         evt.preventDefault();
-                        evt.stopImmediatePropagation();
-                        this._copyToClipboardHandler(elementId);
-                    }}
-                    onMouseOut={() => {
-                        this._resetTooltip();
                     }} >
                     <slot />
                 </a>
-            </span>
+                <span class="tooltip">{TOOLTIP_TEXT}</span>
+            </div>
         )
     }
 }

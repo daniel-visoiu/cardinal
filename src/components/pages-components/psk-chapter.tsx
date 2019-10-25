@@ -24,7 +24,7 @@ export class PskChapter {
 		}
 	}
 
-	@Prop() title: string;
+	@Prop() title: string = "";
 
 	@State() chapterInfo: Chapter;
 	@State() guid: string;

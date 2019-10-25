@@ -157,8 +157,8 @@ pre code.code-tag {
     color: rgb(0, 0, 255, .65);
 }
 
-span>.mark,
-span>.mark:visited {
+div>.mark,
+div>.mark:visited {
     color: #707070;
     background-color: transparent;
     position: absolute;
@@ -168,9 +168,9 @@ span>.mark:visited {
     font-size: 150%;
 }
 
-span>.mark:hover,
-span>.mark:focus,
-span>.mark:active {
+div>.mark:hover,
+div>.mark:focus,
+div>.mark:active {
     color: #43853d;
     background: none;
 }
@@ -178,4 +178,40 @@ span>.mark:active {
 psk-chapter psk-chapter .mark {
     visibility: hidden;
     opacity: 0;
+}
+
+#tooltip {
+    display: inline !important;
+    color: #fff;
+    cursor: pointer;
+}
+
+#tooltip:hover .tooltip {
+    opacity: 1;
+    background-color: #224abe;
+}
+
+.tooltip {
+    margin-top: 10px;
+    margin-right: 35px;
+    padding: 6px 12px;
+    color: rgba(255, 255, 255, .7);
+    font-size: 11px;
+    border-radius: 4px;
+}
+
+.tooltip.copied {
+    color: rgba(255, 255, 255, 1);
+}
+
+.tooltip:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-left: 0px;
+    border-width: 5px;
+    margin-top: -5px;
+    border-style: solid;
+    border-color: transparent transparent transparent #224abe;
 }
