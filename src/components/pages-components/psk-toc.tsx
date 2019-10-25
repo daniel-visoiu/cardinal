@@ -11,7 +11,20 @@ export class PskToc {
     @Prop() pageElement: HTMLElement;
     @Prop() chapterList: Array<Chapter> = [];
 
-    renderChapters(chapters: Array<Chapter>, childrenStartingIndex?: string) {
+    _scrollToChapter(chapterTitle: string): void {
+        const selector = '#' + chapterTitle.replace(/ /g, "_").toLowerCase();
+        const chapterElm = this.pageElement.querySelector(selector);
+
+        if (!chapterElm) {
+            return;
+        }
+
+        chapterElm.scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
+
+    _renderChapters(chapters: Array<Chapter>, childrenStartingIndex?: string) {
         return chapters.map((chapter: Chapter, index: number) => {
             let indexToDisplay = childrenStartingIndex === undefined
                 ? `${index + 1}.`
@@ -26,7 +39,7 @@ export class PskToc {
                     <span>{`${indexToDisplay} ${chapter.title}`}</span>
                     {
                         chapter.children.length === 0 ? null
-                            : <ul>{this.renderChapters(chapter.children, indexToDisplay)}</ul>
+                            : <ul>{this._renderChapters(chapter.children, indexToDisplay)}</ul>
                     }
                 </li>
             );
@@ -34,29 +47,10 @@ export class PskToc {
     }
 
     render() {
-        if (!this.title) {
-            return null;
-        }
-
         return (
             <psk-card title={this.title}>
-                <ul>
-                    {this.renderChapters(this.chapterList)}
-                </ul>
+                <ul>{this._renderChapters(this.chapterList)}</ul>
             </psk-card>
         );
-    }
-
-    _scrollToChapter(chapterTitle: string): void {
-        const selector = '#' + chapterTitle.replace(/ /g, "_").toLowerCase();
-        const chapterElm = this.pageElement.querySelector(selector);
-        
-        if (!chapterElm) {
-            return;
-        }
-
-        chapterElm.scrollIntoView({
-            behavior: 'smooth'
-        });
     }
 }

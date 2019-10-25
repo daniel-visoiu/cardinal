@@ -47,11 +47,16 @@ export function TableOfContentProperty(opts: d.PropertyOptions) {
                 return render && render.call(self);
             }
 
+            let definedProps = self.componentDefinitions[DEFINED_PROPERTIES];
+            if (definedProps) {
+                definedProps = definedProps.reverse();
+            }
+
             document.dispatchEvent(new CustomEvent('psk-send-props', {
                 composed: true,
                 bubbles: true,
                 cancelable: true,
-                detail: self.componentDefinitions[DEFINED_PROPERTIES]
+                detail: definedProps
             }));
         }
     }

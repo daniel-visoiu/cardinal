@@ -96,19 +96,18 @@ pre code.code-tag {
 
 .table-of-content ul li {
     color: rgb(0, 0, 255, .75);
-    font-size: 120%;
+    font-size: 110%;
     list-style: none;
-    font-weight: bold;
     cursor: pointer;
     text-decoration: none !important;
 }
 
 .table-of-content ul li ul li {
-    font-size: 110%;
+    font-size: 100%;
     font-style: italic;
+    font-weight: 300;
 }
 
 .table-of-content ul li ul li ul li {
-    font-size: 100%;
-    font-weight: 300;
+    list-style: square;
 }

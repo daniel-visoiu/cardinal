@@ -92,12 +92,12 @@ export class PskChapter {
 			componentPropertiesDefinitions = this.decoratorProperties.map((prop: d.PropertyOptions) => {
 				const cardSubtitle = `${prop.propertyName}${prop.isMandatory ? "" : "?"}: ${prop.propertyType} ${prop.isMandatory ? "(mandatory)" : "(optional)"}`;
 				return (
-					<psk-card title={prop.propertyName}>
+					<psk-hoc title={prop.propertyName}>
 						<p class="subtitle"><i>{cardSubtitle}</i></p>
 						<p>{prop.description}</p>
 						{prop.specialNote ? (<p><b>Note: {prop.specialNote}</b></p>) : null}
 						{prop.defaultValue ? (<p><i>Default value: {prop.defaultValue}</i></p>) : null}
-					</psk-card>
+					</psk-hoc>
 				);
 			});
 		}
@@ -107,11 +107,11 @@ export class PskChapter {
 			componentEventsDefinitions = this.decoratorEvents.map((event: d.EventOptions) => {
 				const cardSubtitle = `${event.eventName}: CustomEvent`;
 				return (
-					<psk-card title={event.eventName}>
+					<psk-hoc title={event.eventName}>
 						<p class="subtitle"><i>{cardSubtitle}</i></p>
 						<p>{event.description}</p>
 						{event.specialNote ? (<p><b>Note: {event.specialNote}</b></p>) : null}
-					</psk-card>
+					</psk-hoc>
 				);
 			});
 		}

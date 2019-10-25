@@ -47,11 +47,16 @@ export function TableOfContentEvent(opts: d.EventOptions) {
                 return render && render.call(self);
             }
 
+            let definedEvts = self.componentDefinitions[DEFINED_EVENTS];
+            if (definedEvts) {
+                definedEvts = definedEvts.reverse();
+            }
+
             document.dispatchEvent(new CustomEvent('psk-send-events', {
                 composed: true,
                 bubbles: true,
                 cancelable: true,
-                detail: self.componentDefinitions[DEFINED_EVENTS]
+                detail: definedEvts
             }));
         }
     }
