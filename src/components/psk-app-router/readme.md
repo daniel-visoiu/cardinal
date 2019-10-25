@@ -25,7 +25,7 @@
 
 ### Depends on
 
-- [psk-ui-loader](../psk-ui-loader)
+- [psk-ui-loader](..\psk-ui-loader)
 
 ### Graph
 ```mermaid

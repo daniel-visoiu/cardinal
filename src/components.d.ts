@@ -21,6 +21,9 @@ import {
 import {
   WizardStep,
 } from './interfaces/Wizard';
+import {
+  Chapter,
+} from './interfaces/Chapter';
 
 export namespace Components {
   interface AppContainer {}
@@ -51,20 +54,26 @@ export namespace Components {
     'label': string;
   }
   interface PskCard {
+    'id': string;
     'title': string;
   }
   interface PskChapter {
     'title': string;
   }
-  interface PskDescription {}
+  interface PskDescription {
+    'title': string;
+  }
   interface PskExample {
-    'exampleTitle'?: string;
+    'title': string;
   }
   interface PskFilesChooser {
     'accept'?: string;
     'label': string;
     'onFilesChange'?: Function;
     'onFilesSelect'?: Function;
+  }
+  interface PskHoc {
+    'title': string;
   }
   interface PskImg {
     'src': string;
@@ -85,6 +94,7 @@ export namespace Components {
     'opened': boolean;
   }
   interface PskPage {
+    'tableOfContentTitle': string;
     'title': string;
   }
   interface PskPageLoader {
@@ -111,7 +121,11 @@ export namespace Components {
     'wizardSteps': WizardStep[];
   }
   interface PskTag {}
-  interface PskToc {}
+  interface PskToc {
+    'chapterList': Array<Chapter>;
+    'pageElement': HTMLElement;
+    'title': string;
+  }
   interface PskUiAlert {
     'message': any;
     'styleCustomisation': StyleCustomisation;
@@ -207,6 +221,12 @@ declare global {
   var HTMLPskFilesChooserElement: {
     prototype: HTMLPskFilesChooserElement;
     new (): HTMLPskFilesChooserElement;
+  };
+
+  interface HTMLPskHocElement extends Components.PskHoc, HTMLStencilElement {}
+  var HTMLPskHocElement: {
+    prototype: HTMLPskHocElement;
+    new (): HTMLPskHocElement;
   };
 
   interface HTMLPskImgElement extends Components.PskImg, HTMLStencilElement {}
@@ -334,6 +354,7 @@ declare global {
     'psk-description': HTMLPskDescriptionElement;
     'psk-example': HTMLPskExampleElement;
     'psk-files-chooser': HTMLPskFilesChooserElement;
+    'psk-hoc': HTMLPskHocElement;
     'psk-img': HTMLPskImgElement;
     'psk-list-feedbacks': HTMLPskListFeedbacksElement;
     'psk-menu-item-renderer': HTMLPskMenuItemRendererElement;
@@ -388,21 +409,27 @@ declare namespace LocalJSX {
     'label'?: string;
   }
   interface PskCard extends JSXBase.HTMLAttributes<HTMLPskCardElement> {
+    'id'?: string;
     'title'?: string;
   }
   interface PskChapter extends JSXBase.HTMLAttributes<HTMLPskChapterElement> {
     'onPsk-send-chapter'?: (event: CustomEvent<any>) => void;
     'title'?: string;
   }
-  interface PskDescription extends JSXBase.HTMLAttributes<HTMLPskDescriptionElement> {}
+  interface PskDescription extends JSXBase.HTMLAttributes<HTMLPskDescriptionElement> {
+    'title'?: string;
+  }
   interface PskExample extends JSXBase.HTMLAttributes<HTMLPskExampleElement> {
-    'exampleTitle'?: string;
+    'title'?: string;
   }
   interface PskFilesChooser extends JSXBase.HTMLAttributes<HTMLPskFilesChooserElement> {
     'accept'?: string;
     'label'?: string;
     'onFilesChange'?: Function;
     'onFilesSelect'?: Function;
+  }
+  interface PskHoc extends JSXBase.HTMLAttributes<HTMLPskHocElement> {
+    'title'?: string;
   }
   interface PskImg extends JSXBase.HTMLAttributes<HTMLPskImgElement> {
     'src'?: string;
@@ -425,6 +452,7 @@ declare namespace LocalJSX {
     'opened'?: boolean;
   }
   interface PskPage extends JSXBase.HTMLAttributes<HTMLPskPageElement> {
+    'tableOfContentTitle'?: string;
     'title'?: string;
   }
   interface PskPageLoader extends JSXBase.HTMLAttributes<HTMLPskPageLoaderElement> {
@@ -452,7 +480,11 @@ declare namespace LocalJSX {
     'wizardSteps'?: WizardStep[];
   }
   interface PskTag extends JSXBase.HTMLAttributes<HTMLPskTagElement> {}
-  interface PskToc extends JSXBase.HTMLAttributes<HTMLPskTocElement> {}
+  interface PskToc extends JSXBase.HTMLAttributes<HTMLPskTocElement> {
+    'chapterList'?: Array<Chapter>;
+    'pageElement'?: HTMLElement;
+    'title'?: string;
+  }
   interface PskUiAlert extends JSXBase.HTMLAttributes<HTMLPskUiAlertElement> {
     'message'?: any;
     'onCloseFeedback'?: (event: CustomEvent<any>) => void;
@@ -498,6 +530,7 @@ declare namespace LocalJSX {
     'psk-description': PskDescription;
     'psk-example': PskExample;
     'psk-files-chooser': PskFilesChooser;
+    'psk-hoc': PskHoc;
     'psk-img': PskImg;
     'psk-list-feedbacks': PskListFeedbacks;
     'psk-menu-item-renderer': PskMenuItemRenderer;
