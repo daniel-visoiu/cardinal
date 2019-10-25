@@ -174,3 +174,8 @@ span>.mark:active {
     color: #43853d;
     background: none;
 }
+
+psk-chapter psk-chapter .mark {
+    visibility: hidden;
+    opacity: 0;
+}
