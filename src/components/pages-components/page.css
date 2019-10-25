@@ -4,6 +4,54 @@
     scroll-behavior: smooth;
 }
 
+h1 span,
+h2 span,
+h3 span,
+h4 span,
+h5 span,
+h6 span {
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+}
+
+h1 span:hover,
+h2 span:hover,
+h3 span:hover,
+h4 span:hover,
+h5 span:hover,
+h6 span:hover {
+    opacity: 1;
+}
+
+h1 span a,
+h2 span a,
+h3 span a,
+h4 span a,
+h5 span a,
+h6 span a {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a,
+a:link,
+a:active {
+    color: #43af39;
+    text-decoration: none;
+    border-radius: 2px;
+    padding: 1px 3px;
+}
+
+a:hover,
+a:focus {
+    color: #fff;
+    background-color: #43af39;
+    outline: none;
+}
+
 .image_container {
     text-align: center;
     margin-bottom: 20px;
@@ -106,8 +154,28 @@ pre code.code-tag {
     font-size: 100%;
     font-style: italic;
     font-weight: 300;
+    color: rgb(0, 0, 255, .7);
 }
 
 .table-of-content ul li ul li ul li {
-    list-style: square;
+    font-size: 90%;
+    color: rgb(0, 0, 255, .65);
+}
+
+span>.mark,
+span>.mark:visited {
+    color: #707070;
+    background-color: transparent;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: .5rem;
+    font-size: 150%;
+}
+
+span>.mark:hover,
+span>.mark:focus,
+span>.mark:active {
+    color: #43853d;
+    background: none;
 }

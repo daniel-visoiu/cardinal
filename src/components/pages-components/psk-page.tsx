@@ -9,6 +9,13 @@ import { Chapter } from "../../interfaces/Chapter";
 
 export class PskPage {
 
+	@State() chapters: Array<Chapter> = [];
+
+	@Prop() title: string = "";
+	@Prop() tableOfContentTitle: string;
+
+	@Element() private element: HTMLElement;
+
 	@Listen("psk-send-chapter")
 	receiveChapters(evt: CustomEvent) {
 		evt.stopImmediatePropagation();
@@ -36,13 +43,6 @@ export class PskPage {
 		};
 		this.chapters = [...tempChapter];
 	}
-
-	@State() chapters: Array<Chapter> = [];
-
-	@Prop() title: string = "";
-	@Prop() tableOfContentTitle: string;
-
-	@Element() private element: HTMLElement;
 
 	render() {
 		return (

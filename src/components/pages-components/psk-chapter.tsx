@@ -117,7 +117,7 @@ export class PskChapter {
 		}
 
 		return (
-			<psk-card title={this.title} elementId={this.title.replace(/ /g, "_").toLowerCase()}>
+			<psk-card title={this.title} id={this.title.replace(/ /g, "_").toLowerCase()}>
 				{componentEventsDefinitions}
 				{componentPropertiesDefinitions}
 				<slot />
