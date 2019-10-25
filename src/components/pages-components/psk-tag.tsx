@@ -1,4 +1,4 @@
-import { Component, Element, h, State } from "@stencil/core";
+import { Component, Element, h, State, Prop } from "@stencil/core";
 
 @Component({
 	tag: "psk-tag"
@@ -6,6 +6,7 @@ import { Component, Element, h, State } from "@stencil/core";
 
 export class PskTag {
 
+	@Prop() title: string = "";
 	@State() componentCode: string = "";
 	@Element() host: HTMLDivElement;
 
@@ -16,7 +17,7 @@ export class PskTag {
 
 	render() {
 		return (
-			<psk-chapter title={"HTML Tag"}>
+			<psk-chapter title={this.title}>
 				<pre class="text-center code-tag">
 					<code class="language-html code-tag" data-lang="html">
 						<span class="nt">{this.componentCode}</span>

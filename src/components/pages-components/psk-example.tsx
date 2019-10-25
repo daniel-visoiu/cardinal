@@ -6,7 +6,7 @@ import { Component, h, Prop } from "@stencil/core";
 
 export class PskExample {
 
-	@Prop() title: string = "Live example";
+	@Prop() title: string = "";
 
 	render() {
 		return (
