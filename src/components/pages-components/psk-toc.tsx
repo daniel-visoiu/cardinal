@@ -1,5 +1,6 @@
-import { Component, h, Prop } from '@stencil/core';
+import { Component, h, Prop, Listen, State, getElement } from '@stencil/core';
 import { Chapter } from '../../interfaces/Chapter';
+import { scrollToElement, closestParentElement } from '../../utils/utils';
 
 @Component({
     tag: 'psk-toc',
@@ -8,23 +9,16 @@ import { Chapter } from '../../interfaces/Chapter';
 export class PskToc {
 
     @Prop() title: string;
-    @Prop() pageElement: HTMLElement;
-    @Prop() chapterList: Array<Chapter> = [];
+    @State() chapterList: Array<Chapter> = [];
 
-    _scrollToChapter(chapterTitle: string): void {
-        const selector = '#' + chapterTitle.replace(/ /g, "_").toLowerCase();
-        const chapterElm = this.pageElement.querySelector(selector);
-
-        if (!chapterElm) {
-            return;
+    @Listen('psk-send-toc', { target: "document" })
+    tocReceived(evt: CustomEvent) {
+        if (evt.detail) {
+            this.chapterList = [...evt.detail];
         }
-
-        chapterElm.scrollIntoView({
-            behavior: 'smooth'
-        });
     }
 
-    _renderChapters(chapters: Array<Chapter>, childrenStartingIndex?: string) {
+    _renderChapters(pageElement: HTMLElement, chapters: Array<Chapter>, childrenStartingIndex?: string) {
         return chapters.map((chapter: Chapter, index: number) => {
             let indexToDisplay = childrenStartingIndex === undefined
                 ? `${index + 1}.`
@@ -34,12 +28,12 @@ export class PskToc {
                 <li onClick={(evt: MouseEvent) => {
                     evt.stopImmediatePropagation();
                     evt.preventDefault();
-                    this._scrollToChapter(chapter.title);
+                    scrollToElement(chapter.title, pageElement);
                 }}>
                     <span>{`${indexToDisplay} ${chapter.title}`}</span>
                     {
                         chapter.children.length === 0 ? null
-                            : <ul>{this._renderChapters(chapter.children, indexToDisplay)}</ul>
+                            : <ul>{this._renderChapters(pageElement, chapter.children, indexToDisplay)}</ul>
                     }
                 </li>
             );
@@ -47,10 +41,14 @@ export class PskToc {
     }
 
     render() {
+        const pskPageElement = closestParentElement(getElement(this), 'psk-page');
+
         return (
-            <psk-card title={this.title}>
-                <ul>{this._renderChapters(this.chapterList)}</ul>
-            </psk-card>
+            <div class="table-of-content">
+                <psk-card title={this.title}>
+                    <ul>{this._renderChapters(pskPageElement, this.chapterList)}</ul>
+                </psk-card>
+            </div>
         );
     }
 }

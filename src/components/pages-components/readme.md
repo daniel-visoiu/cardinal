@@ -7,18 +7,12 @@
 
 ## Properties
 
-| Property      | Attribute | Description | Type          | Default     |
-| ------------- | --------- | ----------- | ------------- | ----------- |
-| `chapterList` | --        |             | `Chapter[]`   | `[]`        |
-| `pageElement` | --        |             | `HTMLElement` | `undefined` |
-| `title`       | `title`   |             | `string`      | `undefined` |
+| Property | Attribute | Description | Type     | Default     |
+| -------- | --------- | ----------- | -------- | ----------- |
+| `title`  | `title`   |             | `string` | `undefined` |
 
 
 ## Dependencies
-
-### Used by
-
- - [psk-page]()
 
 ### Depends on
 
@@ -28,7 +22,7 @@
 ```mermaid
 graph TD;
   psk-toc --> psk-card
-  psk-page --> psk-toc
+  psk-card --> psk-copy-clipboard
   style psk-toc fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

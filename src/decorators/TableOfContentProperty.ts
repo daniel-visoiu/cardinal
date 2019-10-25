@@ -1,6 +1,7 @@
 import * as d from './declarations/declarations';
-import { DEFINED_PROPERTIES, DATA_DEFINED_PROPS } from './declarations/constants';
+import { DEFINED_PROPERTIES, DATA_DEFINED_PROPS } from '../utils/constants';
 import { getElement } from '@stencil/core';
+import { createCustomEvent } from '../utils/utils';
 
 export function TableOfContentProperty(opts: d.PropertyOptions) {
     return function (proto, propertyKey: string | symbol): void {
@@ -52,12 +53,12 @@ export function TableOfContentProperty(opts: d.PropertyOptions) {
                 definedProps = definedProps.reverse();
             }
 
-            document.dispatchEvent(new CustomEvent('psk-send-props', {
+            createCustomEvent('psk-send-props', {
                 composed: true,
                 bubbles: true,
                 cancelable: true,
                 detail: definedProps
-            }));
+            }, true);
         }
     }
 }

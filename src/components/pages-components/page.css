@@ -1,7 +1,18 @@
 @import url("../../themes/default/assets/fonts/font-awesome.min.css");
 @import url("../../themes/default/assets/bootstrap/css/bootstrap.min.css");
+* {
+    outline: none !important;
+}
+
 :host {
     scroll-behavior: smooth;
+}
+
+a,
+*:hover,
+a:active {
+    outline: none !important;
+    text-decoration: none !important;
 }
 
 h1 span,
@@ -34,22 +45,6 @@ h6 span a {
     color: #000;
     text-decoration: none;
     font-weight: bold;
-}
-
-a,
-a:link,
-a:active {
-    color: #43af39;
-    text-decoration: none;
-    border-radius: 2px;
-    padding: 1px 3px;
-}
-
-a:hover,
-a:focus {
-    color: #fff;
-    background-color: #43af39;
-    outline: none;
 }
 
 .image_container {

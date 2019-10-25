@@ -1,23 +1,23 @@
-import { Component, h, Prop, Listen, State, Element } from "@stencil/core";
 import { Chapter } from "../../interfaces/Chapter";
+import { scrollToElement, createCustomEvent } from "../../utils/utils";
+import { Component, h, Prop, Listen, State, Element } from "@stencil/core";
 
 @Component({
 	tag: "psk-page",
 	styleUrl: "./page.css",
 	shadow: true
 })
-
 export class PskPage {
 
 	@State() chapters: Array<Chapter> = [];
 
 	@Prop() title: string = "";
-	@Prop() tableOfContentTitle: string;
+	@Prop() tocTitle: string;
 
 	@Element() private element: HTMLElement;
 
 	@Listen("psk-send-chapter")
-	receiveChapters(evt: CustomEvent) {
+	receiveChapters(evt: CustomEvent): void {
 		evt.stopImmediatePropagation();
 		if (!evt.detail) {
 			return;
@@ -34,26 +34,45 @@ export class PskPage {
 			tempChapter.push({
 				...newChapter,
 			});
-			this.chapters = [...tempChapter];
+			this.chapters = JSON.parse(JSON.stringify(tempChapter));
 			return;
 		}
 
 		tempChapter[chapterIndex] = {
 			...newChapter,
 		};
-		this.chapters = [...tempChapter];
+		this.chapters = JSON.parse(JSON.stringify(tempChapter));
+	}
+
+	_checkForChapterScrolling(): void {
+		if (window.location.href.indexOf("?chapter=") === -1) {
+			return;
+		}
+
+		const chapterName = window.location.href.split("?chapter=")[1];
+
+		setTimeout(() => {
+			scrollToElement(chapterName, this.element);
+		}, 50);
+	}
+
+	_sendTableOfContentChapters(): void {
+
+		createCustomEvent('psk-send-toc', {
+			bubbles: true,
+			composed: true,
+			cancelable: true,
+			detail: this.chapters
+		}, true);
 	}
 
 	render() {
+		this._checkForChapterScrolling();
+		this._sendTableOfContentChapters();
+
 		return (
 			<div>
 				<nav><h3>{this.title}</h3></nav>
-				<div class="table-of-content">
-					<psk-toc
-						pageElement={this.element}
-						chapterList={this.chapters}
-						title={this.tableOfContentTitle} />
-				</div>
 				<div class="page-content">
 					<slot />
 				</div>

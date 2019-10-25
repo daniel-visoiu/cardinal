@@ -1,6 +1,7 @@
 import * as d from './declarations/declarations';
 import { getElement } from '@stencil/core';
-import { DATA_DEFINED_EVENTS, DEFINED_EVENTS } from './declarations/constants';
+import { DATA_DEFINED_EVENTS, DEFINED_EVENTS } from '../utils/constants';
+import { createCustomEvent } from '../utils/utils';
 
 export function TableOfContentEvent(opts: d.EventOptions) {
     return function (proto, propertyKey: string | symbol): void {
@@ -52,12 +53,12 @@ export function TableOfContentEvent(opts: d.EventOptions) {
                 definedEvts = definedEvts.reverse();
             }
 
-            document.dispatchEvent(new CustomEvent('psk-send-events', {
+            createCustomEvent('psk-send-events', {
                 composed: true,
                 bubbles: true,
                 cancelable: true,
                 detail: definedEvts
-            }));
+            }, true);
         }
     }
 }
