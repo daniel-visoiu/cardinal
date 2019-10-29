@@ -1,5 +1,6 @@
 import { Component, h, Prop } from '@stencil/core';
 import { WgFile } from "../../interfaces/WgFile";
+import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 
 @Component({
 	tag: 'psk-files-chooser',
@@ -8,9 +9,39 @@ import { WgFile } from "../../interfaces/WgFile";
 })
 
 export class PskFilesChooser {
+
+	@TableOfContentProperty({
+		description:`This is the lable of the button`,
+		isMandatory: false,
+		propertyType: `string`,
+		defaultValue: `Select files`
+	})
 	@Prop() label: string = "Select files";
+
+	@TableOfContentProperty({
+		description: `This property tells the component which types of files can be uploaded from the user's device.`,
+		isMandatory: false,
+		propertyType: `string`,
+		specialNote: `If this property is missing, then all types of files can be uploaded.`
+	})
 	@Prop() accept?: string;
+
+	@TableOfContentProperty({
+		description: `This property tells the component what to do with the changed uploaded files.
+			If this property is missing, then nothing will happen with the changed uploaded files.`,
+		isMandatory: false,
+		propertyType: `Function`,
+		specialNote: `A hint message will be displayed for the user, to know that a controller for the component is not set.`
+	})
 	@Prop() onFilesChange?: Function;
+
+	@TableOfContentProperty({
+		description: `This property tells the component what to do with the selected uploaded files.
+			If this property is missing, then nothing will happen with the selected uploaded files.`,
+		isMandatory: false,
+		propertyType: `Function`,
+		specialNote: `A hint message will be displayed for the user, to know that a controller for the component is not set.`
+	})
 	@Prop() onFilesSelect?: Function;
 
 	addedFile(event) {

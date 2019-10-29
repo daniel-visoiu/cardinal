@@ -1,4 +1,5 @@
 import {Component, h, Prop, State} from "@stencil/core";
+import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 
 @Component({
   tag: 'psk-page-loader',
@@ -6,7 +7,13 @@ import {Component, h, Prop, State} from "@stencil/core";
 })
 export class PskPageLoader {
 
+  @TableOfContentProperty({
+    description: `This property is the url for the page that needs to be loaded`,
+    isMandatory: true,
+    propertyType: 'string'
+  })
   @Prop() pageUrl: string;
+
   @State() pageContent: string;
   @State() errorLoadingPage: boolean = false;
 

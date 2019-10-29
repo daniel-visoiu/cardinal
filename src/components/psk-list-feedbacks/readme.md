@@ -12,7 +12,7 @@
 | `alertRenderer`      | `alert-renderer`      |             | `string`             | `undefined` |
 | `messagesToDisplay`  | `messages-to-display` |             | `number`             | `3`         |
 | `styleCustomisation` | --                    |             | `StyleCustomisation` | `undefined` |
-| `timeAlive`          | `time-alive`          |             | `number`             | `5`         |
+| `timeAlive`          | `time-alive`          |             | `number`             | `5000`      |
 | `toastRenderer`      | `toast-renderer`      |             | `string`             | `undefined` |
 
 

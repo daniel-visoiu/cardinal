@@ -1,4 +1,5 @@
 import {Component, h, Prop,} from '@stencil/core';
+import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 
 @Component({
   tag: 'psk-user-profile-renderer',
@@ -6,6 +7,11 @@ import {Component, h, Prop,} from '@stencil/core';
   shadow: true
 })
 export class PskUserProfile {
+  @TableOfContentProperty({
+    description: `This property is the user information that needs to be rendered for the user.`,
+    isMandatory: false,
+    propertyType: `any`
+  })
   @Prop() userInfo:any;
 
   render() {

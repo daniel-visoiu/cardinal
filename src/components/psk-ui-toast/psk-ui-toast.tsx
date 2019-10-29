@@ -1,5 +1,7 @@
 import { Component, h, Prop, Event, EventEmitter, State } from '@stencil/core'
 import {StyleCustomisation} from '../../interfaces/StyleCustomisation'
+import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
+import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
 
 @Component({
     tag: "psk-ui-toast",
@@ -8,11 +10,42 @@ import {StyleCustomisation} from '../../interfaces/StyleCustomisation'
 })
 
 export class ToastComponent {
-    @Prop({ reflectToAttr: true, mutable: true }) message: any
-    @Prop({ reflectToAttr: true, mutable: true }) timeSinceCreation: number
-    @Prop({ reflectToAttr: true, mutable: true }) timeMeasure: string = 'Right now';
-    @Prop({ reflectToAttr: true, mutable: true }) styleCustomisation: StyleCustomisation
-    @State() alert: any = null;
+
+    @TableOfContentProperty({
+        description: `This property is the message that will be rendered on the toast`,
+        isMandatory : false,
+        propertyType : 'any'
+    })
+    @Prop() message: any
+
+    @TableOfContentProperty({
+        description:`The time in milliseconds when the toast was created`,
+        isMandatory: true,
+        propertyType: `number`
+    })
+    @Prop() timeSinceCreation: number
+
+    @TableOfContentProperty({
+        description:`The time measure that will be renderer togheter with timeSinceCreation in order to get the live timer working properly`,
+        isMandatory: true,
+        propertyType: 'string',
+        defaultValue: 'Right now'
+    })
+    @Prop() timeMeasure: string = 'Right now';
+
+    @TableOfContentProperty({
+        description: `The style customisation for the toast so it looks according to your application`,
+        isMandatory: false,
+        propertyType: `StyleCustomisation`,
+    })
+    @Prop() styleCustomisation: StyleCustomisation
+
+    @State() toast: any = null;
+
+    @TableOfContentEvent({
+        eventName: `closeFeedback`,
+        description: `When the X button is pressed this event is emitted in order to get rid of that specific feedback`
+    })
     @Event({
         eventName: 'closeFeedback',
         composed: true,
@@ -22,7 +55,7 @@ export class ToastComponent {
 
     render() {
         return (
-            this.alert = (
+            this.toast = (
                 <div class="toast fade out show" style={this.styleCustomisation.toast ? (this.styleCustomisation.toast.feedback ? (this.styleCustomisation.toast.feedback.style ? this.styleCustomisation.toast.feedback.style : {}) : {}) : {}}>
                     <div class="toast-header" style={this.styleCustomisation.toast ?( this.styleCustomisation.toast.header ? (this.styleCustomisation.toast.header.style ? this.styleCustomisation.toast.header.style : {} ) : {}):{}}>
                         <strong class="mr-auto">{this.message.name}</strong>

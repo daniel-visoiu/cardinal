@@ -1,6 +1,7 @@
 import {Component, h, Prop} from '@stencil/core';
 import {MenuItem} from "../../interfaces/MenuItem";
 import CustomTheme from "../../decorators/CustomTheme";
+import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 
 @Component({
   tag: 'psk-menu-item-renderer',
@@ -10,7 +11,18 @@ import CustomTheme from "../../decorators/CustomTheme";
 
 export class PskMenuItemRenderer {
   @CustomTheme()
+  @TableOfContentProperty({
+    description: `This property is the MenuItem that will be renderer as part of the menu`,
+    isMandatory: false,
+    propertyType: `MenuItem`
+  })
   @Prop() value: MenuItem;
+
+  @TableOfContentProperty({
+    description:`This property is used in the css file for renderes in order to verify the state of the component`,
+    isMandatory: false,
+    propertyType: `boolean`
+  })
   @Prop({
     reflectToAttr: true,
   }) active: boolean;

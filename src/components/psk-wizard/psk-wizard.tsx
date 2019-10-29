@@ -1,5 +1,7 @@
 import { Component, h, Prop, State, Event, EventEmitter } from '@stencil/core';
 import { WizardStep } from '../../interfaces/Wizard';
+import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
+import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
 
 @Component({
     tag: 'psk-wizard',
@@ -7,7 +9,19 @@ import { WizardStep } from '../../interfaces/Wizard';
 })
 export class PskWizard {
 
+    @TableOfContentProperty({
+        description:`This property is the string that defines the psk-stepper render`,
+        isMandatory: false,
+        propertyType: `string`,
+    })
     @Prop() componentRender: string;
+
+    @TableOfContentProperty({
+        description:`This parameter holds the wizard configuration, the names of the steps, the components that will be displayed and if there is the case, other properties, like informations for the steps.`,
+        isMandatory: false,
+        propertyType: `array of WizardStep types (WizardStep[])`,
+        specialNote: `These informations are filled in and handled by the controller of the component, not by the component itself.`
+    })
     @Prop({ mutable: true, reflect: true }) wizardSteps?: WizardStep[];
 
     @State() activeStep: WizardStep;
@@ -19,6 +33,12 @@ export class PskWizard {
         });
     }
 
+    @TableOfContentEvent({
+        eventName: `needWizardConfiguration`,
+        description: `This event is triggered when the component is loaded and if no configuration is given for the wizard.
+            In this case, the controller is responsible to send the configuration to the wizard.
+            This event comes with a single parameter, a callback function the sends the configuration to the component.`
+    })
     @Event({
         eventName: 'needWizardConfiguration',
         cancelable: true,
@@ -26,6 +46,15 @@ export class PskWizard {
         bubbles: true,
     }) needWizardConfiguration: EventEmitter;
 
+    @TableOfContentEvent({
+        eventName: `changeStep`,
+        description: `This event is triggered when the buttons Next, Previous and the step names from the left side of the component are clicked.
+            This event comes with the following parameters:
+                stepIndexToDisplay - the number of the step to be displayed
+                wizardSteps - the list of the steps from the wizard
+                activeStep - the step that will be displayed
+                callback - a callback function that is called from the controller when the validation is done`
+    })
     @Event({
         eventName: "changeStep",
         bubbles: true,
@@ -33,6 +62,13 @@ export class PskWizard {
         composed: true
     }) changeStep: EventEmitter;
 
+    @TableOfContentEvent({
+        eventName: `finishWizard`,
+        description: `This event is triggered when the buttons Finish is clicked.
+            This event comes with the following parameters:
+                wizardSteps - the list of the steps from the wizard. Maybe the information inside the wizard will be stored somewhere.
+                callback - a callback function that is called from the controller when the validation is done`
+    })
     @Event({
         eventName: "finishWizard",
         bubbles: true,

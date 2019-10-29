@@ -2,6 +2,7 @@ import { Component, h, Prop, Event, EventEmitter, State } from '@stencil/core'
 import Config from "../psk-list-feedbacks/Config.js";
 
 import {StyleCustomisation} from '../../interfaces/StyleCustomisation';
+import { TableOfContentProperty } from '../../decorators/TableOfContentProperty.js';
 @Component({
     tag: "psk-ui-alert",
     styleUrls: ['../../themes/default/assets/bootstrap/css/bootstrap.min.css', './psk-ui-alert.css'],
@@ -9,10 +10,36 @@ import {StyleCustomisation} from '../../interfaces/StyleCustomisation';
 })
 
 export class AlertComponent {
-    @Prop({ reflectToAttr: true, mutable: true }) typeOfAlert: string = Config.ALERT_SUCCESS
-    @Prop({ reflectToAttr: true, mutable: true }) message: any
-    @Prop({ reflectToAttr: true, mutable: true }) timeAlive: any;
-    @Prop({ reflectToAttr: true, mutable: true }) styleCustomisation: StyleCustomisation
+
+    @TableOfContentProperty({
+        description: `This property is a string that indicates the type of alert that you want so send back to the user`,
+        isMandatory: false,
+        propertyType: `string`,
+        defaultValue:`alert-success`
+    })
+    @Prop() typeOfAlert: string = Config.ALERT_SUCCESS
+
+    @TableOfContentProperty({
+        description: `This property is the message that will be rendered on the alert`,
+        isMandatory : false,
+        propertyType : 'any'
+    })
+    @Prop() message: any
+
+    @TableOfContentProperty({
+        description: `This property is the time in milliseconds t`,
+        isMandatory : false,
+        propertyType : 'any'
+    })
+    @Prop() timeAlive: any = 3000;
+
+    @TableOfContentProperty({
+        description: `The style customisation for the alert so it looks according to your application`,
+        isMandatory: false,
+        propertyType: `StyleCustomisation`,
+    })
+    @Prop() styleCustomisation: StyleCustomisation
+
     @State() alert: any = null;
     @State() isVisible: boolean = true;
     @Event({

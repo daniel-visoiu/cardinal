@@ -1,4 +1,5 @@
 import {Component, h, Prop, Watch} from '@stencil/core';
+import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 
 @Component({
   tag: 'psk-ui-loader',
@@ -7,6 +8,12 @@ import {Component, h, Prop, Watch} from '@stencil/core';
 })
 export class PskUiLoader {
 
+  @TableOfContentProperty({
+    description: `This is the property that gives the state of the loader, if it is displayed or not. The posible values are true or false.`,
+    isMandatory: false,
+    propertyType: 'boolean',
+    defaultValue: 'false'
+  })
   @Prop() shouldBeRendered:boolean=false;
 
   @Watch("shouldBeRendered")

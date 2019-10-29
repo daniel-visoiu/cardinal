@@ -1,4 +1,6 @@
 import { Component, h, Event, EventEmitter, State, Prop, Listen } from '@stencil/core';
+import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
+import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
 
 @Component({
 	tag: 'psk-pin-popup',
@@ -6,6 +8,13 @@ import { Component, h, Event, EventEmitter, State, Prop, Listen } from '@stencil
 	shadow: true
 })
 export class PskPinPopup {
+
+	@TableOfContentProperty({
+		description: `This is the property that gives the state of the popup if it is opened or closed.The possible values are ture or false`,
+		isMandatory: false,
+		propertyType: 'boolean',
+		defaultValue: 'false'
+	})
 	@Prop({ reflectToAttr: true, mutable: true }) opened: boolean = false;
 
 	@State() pin: string = '';
@@ -16,7 +25,12 @@ export class PskPinPopup {
 		evt.stopImmediatePropagation();
 		this.opened = false;
 	}
-
+	@TableOfContentEvent({
+		eventName: `sendPin`,
+		description: `This event is triggered when the button "Send PIN" is clicked. This event comes with two parameters:
+			pin - the PIN written by the user
+			callback - a callback function that is called after the pin is checked. this callback has one parameter (err) and should be sent only if the PIN is invalid.`
+	})
 	@Event({
 		eventName: "sendPin",
 		bubbles: true,

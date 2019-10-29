@@ -1,15 +1,35 @@
 import {Component, Event, EventEmitter, Prop, h} from "@stencil/core";
 import {MenuItem} from "../../interfaces/MenuItem";
+import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
+import { TableOfContentEvent } from "../../decorators/TableOfContentEvent";
 
 @Component({
   tag: "psk-app-router",
   shadow: true
 })
 export class PskAppRouter {
+
+  @TableOfContentProperty({
+    description: `This parameter holds the datasource for the creation of the application routes. If this property is not provided, the component will emit an event (needMenuItems) in order to fetch this information.`,
+    specialNote: `The same configuration file is used in generating the App Menu component`,
+    isMandatory: false,
+    propertyType: `Array of MenuItem types(MenuItem[])`
+    
+  })
   @Prop() menuItems ?: MenuItem[] = [];
-  @Prop() failRedirectTo:string = "";
+
+  @TableOfContentProperty({
+    description:`This is the history type that will be passed along to the stencil-router`,
+    isMandatory: true,
+    propertyType:`string`,
+    defaultValue: `browser`
+  })
   @Prop() historyType:string = "browser";
 
+  @TableOfContentEvent({
+    eventName: `needMenuItems`,
+    description:`This event gets the data as parameter and it is emitted immediately after the component is loaded in order to create the application routes `
+  })
   @Event({
     eventName: 'needMenuItems',
     cancelable: true,

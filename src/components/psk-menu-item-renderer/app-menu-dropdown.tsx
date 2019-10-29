@@ -1,4 +1,5 @@
 import {Component, getElement, h, Listen,  Prop, State} from '@stencil/core';
+import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 
 @Component({
   tag: 'dropdown-renderer',
@@ -7,12 +8,32 @@ import {Component, getElement, h, Listen,  Prop, State} from '@stencil/core';
 
 export class AppMenuDropdown {
 
+
+  @TableOfContentProperty({
+    description:`This property is used in the css file for renderes in order to verify the state of the component`,
+    isMandatory: false,
+    propertyType: `boolean`
+  })
   @Prop({
     reflectToAttr: true,
   }) active: boolean;
+
   @State() isOpened = false;
+
+  @TableOfContentProperty({
+    description: `This property sets the url for the component in menu in order to be routed.`,
+    isMandatory: true,
+    propertyType: 'any'
+  })
   @Prop() url;
+
   @State() dropDownHasChildActive = false;
+
+  @TableOfContentProperty({
+    description: `This property tells the component if something changed with the MenuItem`,
+    isMandatory: false,
+    propertyType: 'boolean'
+  })
   @Prop() somethingChanged = false;
 
   @Listen("click", {capture: true, target: "window"})

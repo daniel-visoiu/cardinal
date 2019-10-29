@@ -1,5 +1,6 @@
 import { Component, h, Prop } from '@stencil/core';
 import { WizardStep } from '../../interfaces/Wizard';
+import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 
 @Component({
     tag: 'psk-stepper-renderer',
@@ -8,8 +9,30 @@ import { WizardStep } from '../../interfaces/Wizard';
 })
 export class PskStepperRenderer {
 
+    @TableOfContentProperty({
+        description:`This property holds an array of:
+            wizard configuration
+            the names of the steps
+            the components that will be displayed
+            other properties, like informations for the steps.(optional).`,
+        isMandatory: false,
+        propertyType: `array fo WizardStep items(WizardStep[])`,
+        defaultValue: `psk-stepper-renderer`
+    })
     @Prop() wizardSteps: WizardStep[];
+
+    @TableOfContentProperty({
+        description: `The WizardStep created by psk-wizard and passed on by psk-stepper.`,
+        isMandatory: true,
+        propertyType: `WizardStep`
+    })
     @Prop() activeStep: WizardStep;
+
+    @TableOfContentProperty({
+        description: `This property is a function that modifies the way the step change is interpreted.`,
+        isMandatory: true,
+        propertyType: `Function`
+    })
     @Prop() handleStepChange: Function;
 
     computeStepDesign(stepIndex: number, activeStepIndex: number, lastStepIndex: number): string {

@@ -2,6 +2,8 @@ import { Component, State, Event, EventEmitter, Listen, h, Prop } from "@stencil
 import { Message } from '../../interfaces/FeedbackMessage'
 import { StyleCustomisation } from '../../interfaces/StyleCustomisation'
 import Config from "./Config.js";
+import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
+import { TableOfContentEvent } from "../../decorators/TableOfContentEvent";
 @Component({
     tag: 'psk-list-feedbacks',
     styleUrl: './psk-list-feedbacks.css',
@@ -15,19 +17,81 @@ export class PskListFeebacks {
     @State() timer = 0;
     @State() opened: boolean = false;
     @State() typeOfAlert: Array<string> = [];
-    @Prop() styleCustomisation: StyleCustomisation
-    @Prop() timeAlive: number = 5;
-    @Prop() messagesToDisplay: number = 3;
-    @Prop() toastRenderer: string;
-    @Prop() alertRenderer: string;
 
+    @TableOfContentProperty({
+        description: `This property is a object based on StyleCustomisation interface which has the following structure:toast: &#123;<br/>&nbsp;
+        header: &#123;<br/>&nbsp;&nbsp;
+            style: &#123;[key: string]: string;&#125;,<br/>&nbsp;&nbsp;
+            title: string<br/>
+            &nbsp;&nbsp;&#125;,<br/>&nbsp;
+        body:&#123;<br/>&nbsp;&nbsp;
+            style: &#123;[key: string]: string;&#125;,<br/>&nbsp;&nbsp;
+            content: string<br/>
+            &nbsp;&nbsp;&#125;,<br/>&nbsp;
+        feedback: &#123;<br/>&nbsp;&nbsp;
+            style: &#123;[key: string]: string;&#125;<br/>&nbsp;
+        &#125;<br/>
+        &#125;<br/>
+    alert:&#123;<br/>&nbsp;
+        style:&#123;[key: string]: string; &#125;,<br/>&nbsp;
+        content:string<br/>
+        &#125;<br/>`,
+        specialNote: `Even if you do not use all the parameters there will not be a problem with the default renderers.`,
+        isMandatory: false,
+        propertyType: `StyleCustomisation type`,
+    })
+    @Prop() styleCustomisation?: StyleCustomisation
 
+    @TableOfContentProperty({
+        description: `This property is the auto closing timer in milliseconds for the alert.`,
+        specialNote: `This property will only be taken into consideration when used with the psk-ui-alert child component`,
+        isMandatory: false,
+        propertyType: 'number',
+        defaultValue: 5000
+    })
+    @Prop() timeAlive?: number = 5000;
+
+    @TableOfContentProperty({
+        description: `This property represents the number of toasts to be renderer on the user interface.`,
+        specialNote: `This property will only be taken into consideration when used with the psk-ui-toast child component.`,
+        isMandatory: false,
+        propertyType: 'number',
+        defaultValue: 3
+    })
+    @Prop() messagesToDisplay?: number = 3;
+
+    @TableOfContentProperty({
+        description: `This property allows the component to display a custom toast in case the default one is not preferred.`,
+        specialNote: `If this property is missing , psk-ui-toast will be assumed.`,
+        isMandatory: false,
+        propertyType: 'string',
+        defaultValue: 'psk-ui-toast'
+    })
+    @Prop() toastRenderer?: string;
+
+    @TableOfContentProperty({
+        description: `This property allows the component to display a custom alert in case the default one is not preferred.`,
+        specialNote: `If this property is missing , psk-ui-alert will be assumed.`,
+        isMandatory: false,
+        propertyType: 'string',
+        defaultValue: 'psk-ui-alert'
+    })
+    @Prop() alertRenderer?: string;
+
+    @TableOfContentEvent({
+        eventName: 'openFeedback',
+        description: `This even is triggered when the user does an action that require feedback.This event comes with three parameters :
+            message(string) : the message for the action that was executed
+            name(string) : the name is necessary in case of a toast feedback
+            typeOfAlert(string) : either toast or a bootstrap alert.`
+    })
     @Event({
         eventName: 'openFeedback',
         composed: true,
         cancelable: true,
         bubbles: true,
     }) openFeedbackHandler: EventEmitter
+
     @Listen('closeFeedback')
     closeFeedbackHandler(closeData) {
         if (this.alertOpened) {
@@ -67,10 +131,10 @@ export class PskListFeebacks {
             const time = new Date().getTime();
             const time2 = message.timer;
             let equation = Math.floor((time - time2) / Config.MINUTE)
-            const minute =setTimeout(() => {
+            const minute = setTimeout(() => {
                 this.timerToShow.bind(this)(message)
             }, Config.MINUTE_TICK)
-            const hour =setTimeout(() => {
+            const hour = setTimeout(() => {
                 this.timerToShow.bind(this)(message)
             }, Config.HOUR_TICK)
             switch (true) {

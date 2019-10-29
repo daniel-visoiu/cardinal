@@ -11,7 +11,7 @@
 | -------------------- | --------------- | ----------- | -------------------- | ---------------------- |
 | `message`            | `message`       |             | `any`                | `undefined`            |
 | `styleCustomisation` | --              |             | `StyleCustomisation` | `undefined`            |
-| `timeAlive`          | `time-alive`    |             | `any`                | `undefined`            |
+| `timeAlive`          | `time-alive`    |             | `any`                | `3000`                 |
 | `typeOfAlert`        | `type-of-alert` |             | `string`             | `Config.ALERT_SUCCESS` |
 
 
