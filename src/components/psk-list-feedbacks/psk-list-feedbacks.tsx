@@ -65,8 +65,8 @@ export class PskListFeebacks {
     @TableOfContentEvent({
         eventName: 'openFeedback',
         description: `This even is triggered when the user does an action that require feedback.This event comes with three parameters :
-            message(string) : the message for the action that was executed
-            name(string) : the name is necessary in case of a toast feedback
+            message(string) : the message for the action that was executed,
+            name(string) : the name is necessary in case of a toast feedback and
             typeOfAlert(string) : either toast or a bootstrap alert.`
     })
     @Event({
