@@ -20,7 +20,7 @@ export class PskLink {
         description: [
             "This event is sent to the application controller in order to check and validate the page property.",
             "If the sequence of pages inside the page property is valid, then the event is sending back to the component the valid path to the required page.",
-            "If not, the link will be displayed in red italic font, marking that the link is not properly defined."
+            "If not, an error will be displayed in red italic font, marking that the link is not properly defined."
         ]
     })
     @Event({
@@ -30,6 +30,8 @@ export class PskLink {
         cancelable: true
     }) validateUrl: EventEmitter;
 
+    @State() error: boolean = false;
+    @State() errorMessage: string;
     @State() destinationUrl: string = "#";
 
     render() {
@@ -43,14 +45,25 @@ export class PskLink {
                 if (!err) {
                     this.destinationUrl = `${window.location.origin}/#${data}`;
                 } else {
-                    console.error(err);
+                    this.errorMessage = err;
+                    this.error = true;
                 }
             }
         });
 
         return (
-            <a href={this.destinationUrl}>
-                <slot />
+            <a href={this.destinationUrl}
+                class={this.error ? "danger" : ""}
+                onClick={(evt: MouseEvent) => {
+                    if (this.error) {
+                        evt.preventDefault();
+                    }
+                }}>
+                {
+                    this.error
+                        ? <p>{this.errorMessage}</p>
+                        : <slot />
+                }
             </a>
         )
     }

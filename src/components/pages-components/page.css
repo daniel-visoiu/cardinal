@@ -47,6 +47,11 @@ h6 span a {
     font-weight: bold;
 }
 
+a.danger {
+    font-style: italic;
+    color: rgba(255, 0, 0, .75);
+}
+
 .image_container {
     text-align: center;
     margin-bottom: 20px;
