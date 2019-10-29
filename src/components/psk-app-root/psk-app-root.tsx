@@ -3,8 +3,8 @@ import {RouterHistory} from "@stencil/router";
 const appMaxWidth = 650;
 
 @Component({
-  tag: 'app-root',
-  styleUrl: 'app-root.css',
+  tag: 'psk-app-root',
+  styleUrl: 'psk-app-root.css',
   shadow: true,
 })
 export class AppRoot {
