@@ -12,7 +12,7 @@ export class PskCard {
 
 	render() {
 
-		const elementId = this.id.trim().replace(/( |:|\/)/g,"-").toLowerCase();
+		const elementId = this.id.trim().replace(/(\s+|:+|\/+)/g, "-").toLowerCase();
 		let cardHeader = null;
 		if (this.title) {
 			cardHeader = (
