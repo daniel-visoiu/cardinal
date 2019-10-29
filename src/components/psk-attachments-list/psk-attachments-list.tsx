@@ -12,15 +12,13 @@ const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
 export class PskAttachmentsList {
 
 	@TableOfContentProperty({
-		description:`This parameter holds the files that can be downloaded. They can be downloaded one by one by clicking on the desired file, or all at the same time.
-		<i>Note: <code>WgFile</code> is a custom type. Inside it, the following information can be stored:</i>
-			<ul>
-				<li>name of the file</li>
-				<li>size of the file</li>
-				<li>type of the file (by extension)</li>
-				<li><b><code>?</code></b> content of the file</li>
-			</ul>`,
-		isMandatory:true,
+		description: `This parameter holds the files that can be downloaded. They can be downloaded one by one by clicking on the desired file, or all at the same time.`,
+		specialNote: `WgFile is a custom type. Inside it, the following information can be stored:
+			name of the file,
+			size of the file,
+			type of the file (by extension),
+			? content of the file`,
+		isMandatory: true,
 		propertyType: 'array of WgFile items (WgFile[])'
 	})
 	@Prop() files: WgFile[] = [];

@@ -20,7 +20,7 @@ export class PskAppRouter {
 
   @TableOfContentProperty({
     description:`This is the history type that will be passed along to the stencil-router`,
-    isMandatory: true,
+    isMandatory: false,
     propertyType:`string`,
     defaultValue: `browser`
   })
