@@ -14,7 +14,7 @@ export class PskAppRouter {
     specialNote: `The same configuration file is used in generating the App Menu component`,
     isMandatory: false,
     propertyType: `Array of MenuItem types(MenuItem[])`
-    
+
   })
   @Prop() menuItems ?: MenuItem[] = [];
 
@@ -25,6 +25,7 @@ export class PskAppRouter {
     defaultValue: `browser`
   })
   @Prop() historyType:string = "browser";
+  @Prop() failRedirectTo:string = "";
 
   @TableOfContentEvent({
     eventName: `needMenuItems`,
@@ -66,7 +67,7 @@ export class PskAppRouter {
 
     return (
       <div class="app_container">
-        <stencil-router historyType={this.historyType} >
+        <stencil-router historyType={this.historyType === "hash" ? "hash" : "browser"}>
           <stencil-route-switch scrollTopOffset={0}>
             {routes}
             <stencil-route component="psk-page-not-found" componentProps={{urlDestination:this.menuItems[0].path, }} />

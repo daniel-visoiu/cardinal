@@ -21,6 +21,9 @@
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate"
   },
+  "dependencies": {
+    "@stencil/router": "^1.0.1"
+  },
   "devDependencies": {
     "@stencil/core": "^1.7.1"
   },

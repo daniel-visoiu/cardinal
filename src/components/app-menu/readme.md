@@ -27,11 +27,13 @@
 ### Used by
 
  - [app-container](../app-container)
+ - [app-root](../app-root)
 
 ### Graph
 ```mermaid
 graph TD;
   app-container --> app-menu
+  app-root --> app-menu
   style app-menu fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
