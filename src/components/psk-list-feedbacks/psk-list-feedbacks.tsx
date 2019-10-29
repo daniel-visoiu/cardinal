@@ -19,62 +19,46 @@ export class PskListFeebacks {
     @State() typeOfAlert: Array<string> = [];
 
     @TableOfContentProperty({
-        description: `This property is a object based on StyleCustomisation interface which has the following structure:toast: &#123;<br/>&nbsp;
-        header: &#123;<br/>&nbsp;&nbsp;
-            style: &#123;[key: string]: string;&#125;,<br/>&nbsp;&nbsp;
-            title: string<br/>
-            &nbsp;&nbsp;&#125;,<br/>&nbsp;
-        body:&#123;<br/>&nbsp;&nbsp;
-            style: &#123;[key: string]: string;&#125;,<br/>&nbsp;&nbsp;
-            content: string<br/>
-            &nbsp;&nbsp;&#125;,<br/>&nbsp;
-        feedback: &#123;<br/>&nbsp;&nbsp;
-            style: &#123;[key: string]: string;&#125;<br/>&nbsp;
-        &#125;<br/>
-        &#125;<br/>
-    alert:&#123;<br/>&nbsp;
-        style:&#123;[key: string]: string; &#125;,<br/>&nbsp;
-        content:string<br/>
-        &#125;<br/>`,
-        specialNote: `Even if you do not use all the parameters there will not be a problem with the default renderers.`,
+        description: `This property is a object based on StyleCustomisation interface `,
         isMandatory: false,
         propertyType: `StyleCustomisation type`,
+        specialNote: `Even if you do not use all the parameters there will not be a problem with the default renderers.`,
     })
     @Prop() styleCustomisation?: StyleCustomisation
 
     @TableOfContentProperty({
         description: `This property is the auto closing timer in milliseconds for the alert.`,
-        specialNote: `This property will only be taken into consideration when used with the psk-ui-alert child component`,
         isMandatory: false,
         propertyType: 'number',
-        defaultValue: 5000
+        defaultValue: 5000,
+        specialNote: `This property will only be taken into consideration when used with the psk-ui-alert child component`,
     })
     @Prop() timeAlive?: number = 5000;
 
     @TableOfContentProperty({
         description: `This property represents the number of toasts to be renderer on the user interface.`,
-        specialNote: `This property will only be taken into consideration when used with the psk-ui-toast child component.`,
         isMandatory: false,
         propertyType: 'number',
-        defaultValue: 3
+        defaultValue: 3,
+        specialNote: `This property will only be taken into consideration when used with the psk-ui-toast child component.`,
     })
     @Prop() messagesToDisplay?: number = 3;
 
     @TableOfContentProperty({
         description: `This property allows the component to display a custom toast in case the default one is not preferred.`,
-        specialNote: `If this property is missing , psk-ui-toast will be assumed.`,
         isMandatory: false,
         propertyType: 'string',
-        defaultValue: 'psk-ui-toast'
+        defaultValue: 'psk-ui-toast',
+        specialNote: `If this property is missing , psk-ui-toast will be assumed.`,
     })
     @Prop() toastRenderer?: string;
 
     @TableOfContentProperty({
         description: `This property allows the component to display a custom alert in case the default one is not preferred.`,
-        specialNote: `If this property is missing , psk-ui-alert will be assumed.`,
         isMandatory: false,
         propertyType: 'string',
-        defaultValue: 'psk-ui-alert'
+        defaultValue: 'psk-ui-alert',
+        specialNote: `If this property is missing , psk-ui-alert will be assumed.`,
     })
     @Prop() alertRenderer?: string;
 
