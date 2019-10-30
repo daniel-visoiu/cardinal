@@ -18,9 +18,9 @@ export class PskLink {
 
     @TableOfContentEvent({
         description: [
-            "This event is sent to the application controller in order to check and validate the page property.",
-            "If the sequence of pages inside the page property is valid, then the event is sending back to the component the valid path to the required page.",
-            "If not, an error will be displayed in red italic font, marking that the link is not properly defined."
+            `This event is sent to the application controller in order to check and validate the page property.`,
+            `If the sequence of pages inside the page property is valid, then the event is sending back to the component the valid path to the required page.`,
+            `If not, a special behavior will be applied to the link. On mouse over, it will turn grey and will display a hint message: "Temporary unavailable".`
         ]
     })
     @Event({
@@ -31,21 +31,22 @@ export class PskLink {
     }) validateUrl: EventEmitter;
 
     @State() error: boolean = false;
-    @State() errorMessage: string;
-    @State() destinationUrl: string;
+    @State() destinationUrl: string = "#";
 
     render() {
         return (
-            <a href={this.destinationUrl}
-                class={this.error ? "danger" : ""}
+            <button type="button"
+                title={this.error ? "Temporary unavailable" : ""}
+                class={`btn btn-link ${this.error ? 'invalid-url' : ''}`}
                 onClick={(evt: MouseEvent) => {
                     if (this.error) {
                         evt.preventDefault();
+                    } else {
+                        window.location.href = this.destinationUrl;
                     }
                 }}>
                 <slot />
-                {this.error && <p>{this.errorMessage}</p>}
-            </a>
+            </button>
         )
     }
 
@@ -60,7 +61,6 @@ export class PskLink {
                 if (!err) {
                     this.destinationUrl = `${window.location.origin}/#${data}`;
                 } else {
-                    this.errorMessage = err;
                     this.error = true;
                 }
             }

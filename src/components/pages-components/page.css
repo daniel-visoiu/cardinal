@@ -47,9 +47,21 @@ h6 span a {
     font-weight: bold;
 }
 
-a.danger {
-    font-style: italic;
-    color: rgba(255, 0, 0, .75);
+.btn-link,
+.btn-link:focus,
+.btn-link:active,
+.btn-link:hover {
+    padding: 0;
+    text-decoration: none;
+}
+
+.btn-link.invalid-url:hover,
+.btn-link.invalid-url:focus,
+.btn-link.invalid-url:active {
+    color: #999;
+    cursor: initial;
+    text-decoration: none;
+    transition: color .5s ease-in;
 }
 
 .image_container {
