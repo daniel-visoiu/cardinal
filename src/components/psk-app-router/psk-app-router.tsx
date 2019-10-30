@@ -2,6 +2,7 @@ import {Component, Event, EventEmitter, Prop, h} from "@stencil/core";
 import {MenuItem} from "../../interfaces/MenuItem";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import { TableOfContentEvent } from "../../decorators/TableOfContentEvent";
+import {HistoryType} from "@stencil/router/dist/types/global/interfaces";
 
 @Component({
   tag: "psk-app-router",
@@ -24,7 +25,7 @@ export class PskAppRouter {
     propertyType:`string`,
     defaultValue: `browser`
   })
-  @Prop() historyType:string = "browser";
+  @Prop() historyType:HistoryType;
   @Prop() failRedirectTo:string = "";
 
   @TableOfContentEvent({
@@ -68,10 +69,9 @@ export class PskAppRouter {
     if(routes.length === 0){
       return <psk-ui-loader shouldBeRendered={true} />
     }
-
     return (
       <div class="app_container">
-        <stencil-router historyType={this.historyType === "hash" ? "hash" : "browser"}>
+        <stencil-router historyType={this.historyType}>
           <stencil-route-switch scrollTopOffset={0}>
             {routes}
             <stencil-route component="psk-page-not-found" componentProps={{urlDestination:this.menuItems[0].path, }} />
