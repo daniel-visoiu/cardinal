@@ -32,9 +32,24 @@ export class PskLink {
 
     @State() error: boolean = false;
     @State() errorMessage: string;
-    @State() destinationUrl: string = "#";
+    @State() destinationUrl: string;
 
     render() {
+        return (
+            <a href={this.destinationUrl}
+                class={this.error ? "danger" : ""}
+                onClick={(evt: MouseEvent) => {
+                    if (this.error) {
+                        evt.preventDefault();
+                    }
+                }}>
+                <slot />
+                {this.error && <p>{this.errorMessage}</p>}
+            </a>
+        )
+    }
+
+    componentDidLoad() {
         if (!this.page) {
             return;
         }
@@ -50,21 +65,5 @@ export class PskLink {
                 }
             }
         });
-
-        return (
-            <a href={this.destinationUrl}
-                class={this.error ? "danger" : ""}
-                onClick={(evt: MouseEvent) => {
-                    if (this.error) {
-                        evt.preventDefault();
-                    }
-                }}>
-                {
-                    this.error
-                        ? <p>{this.errorMessage}</p>
-                        : <slot />
-                }
-            </a>
-        )
     }
 }

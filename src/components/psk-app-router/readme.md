@@ -25,7 +25,7 @@
 
 ### Used by
 
- - [app-root](../app-root)
+ - [psk-app-root](../psk-app-root)
 
 ### Depends on
 
@@ -41,7 +41,7 @@ graph TD;
   psk-app-router --> psk-ui-loader
   psk-app-router --> stencil-router
   psk-app-router --> stencil-route-switch
-  app-root --> psk-app-router
+  psk-app-root --> psk-app-router
   style psk-app-router fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

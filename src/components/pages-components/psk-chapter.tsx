@@ -1,5 +1,4 @@
 import { Component, h, Prop, Event, EventEmitter, Listen, getElement, State } from "@stencil/core";
-import * as d from "../../decorators/declarations/declarations";
 import { Chapter } from "../../interfaces/Chapter";
 
 @Component({
@@ -8,30 +7,11 @@ import { Chapter } from "../../interfaces/Chapter";
 })
 export class PskChapter {
 
-	@Listen('psk-send-props', { target: "document" })
-	receivedPropertiesDescription(evt: CustomEvent) {
-		evt.stopImmediatePropagation();
-		if (evt.detail && evt.detail.length > 0) {
-			this.decoratorProperties = [...evt.detail];
-		}
-	}
-
-	@Listen('psk-send-events', { target: "document" })
-	receivedEventsDescription(evt: CustomEvent) {
-		evt.stopImmediatePropagation();
-		if (evt.detail && evt.detail.length > 0) {
-			this.decoratorEvents = [...evt.detail];
-		}
-	}
-
 	@Prop() title: string = "";
 
 	@State() chapterInfo: Chapter;
 	@State() guid: string;
 	@State() reportedToc: boolean = false;
-
-	@State() decoratorProperties: Array<d.PropertyOptions>;
-	@State() decoratorEvents: Array<d.EventOptions>;
 
 	@Event({
 		eventName: "psk-send-chapter",
@@ -87,39 +67,8 @@ export class PskChapter {
 	}
 
 	render() {
-		let componentPropertiesDefinitions = [];
-		if (this.decoratorProperties) {
-			componentPropertiesDefinitions = this.decoratorProperties.map((prop: d.PropertyOptions) => {
-				const cardSubtitle = `${prop.propertyName}${prop.isMandatory ? "" : "?"}: ${prop.propertyType} ${prop.isMandatory ? "(mandatory)" : "(optional)"}`;
-				return (
-					<psk-hoc title={prop.propertyName}>
-						<p class="subtitle"><i>{cardSubtitle}</i></p>
-						<p>{prop.description}</p>
-						{prop.specialNote ? (<p><b>Note: {prop.specialNote}</b></p>) : null}
-						{prop.defaultValue ? (<p><i>Default value: {prop.defaultValue}</i></p>) : null}
-					</psk-hoc>
-				);
-			});
-		}
-
-		let componentEventsDefinitions = [];
-		if (this.decoratorEvents) {
-			componentEventsDefinitions = this.decoratorEvents.map((event: d.EventOptions) => {
-				const cardSubtitle = `${event.eventName}: CustomEvent`;
-				return (
-					<psk-hoc title={event.eventName}>
-						<p class="subtitle"><i>{cardSubtitle}</i></p>
-						<p>{event.description}</p>
-						{event.specialNote ? (<p><b>Note: {event.specialNote}</b></p>) : null}
-					</psk-hoc>
-				);
-			});
-		}
-
 		return (
-			<psk-card title={this.title} id={this.title.replace(/( |:|\/)/g,"-").toLowerCase()}>
-				{componentEventsDefinitions}
-				{componentPropertiesDefinitions}
+			<psk-card title={this.title} id={this.title.replace(/( |:|\/)/g, "-").toLowerCase()}>
 				<slot />
 			</psk-card>
 		);

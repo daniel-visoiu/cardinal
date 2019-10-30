@@ -16,6 +16,18 @@ export class PskTag {
 	}
 
 	render() {
+		if (this.title.replace(/\s/g, '') === '') {
+			return (
+				<psk-card>
+					<pre class="text-center code-tag">
+						<code class="language-html code-tag" data-lang="html">
+							<span class="nt">{this.componentCode}</span>
+						</code>
+					</pre>
+				</psk-card>
+			);
+		}
+
 		return (
 			<psk-chapter title={this.title}>
 				<pre class="text-center code-tag">
