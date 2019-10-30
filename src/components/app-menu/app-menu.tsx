@@ -57,7 +57,11 @@ export class AppMenu {
 
   componentWillLoad() {
     if(!this.menuItems){
-      this.needMenuItemsEvt.emit((data) => {
+      this.needMenuItemsEvt.emit((err, data) => {
+        if(err){
+          console.log(err);
+          return;
+        }
         this.menuItems = data;
       });
     }

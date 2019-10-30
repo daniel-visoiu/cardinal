@@ -40,7 +40,11 @@ export class PskAppRouter {
 
 
   componentDidLoad() {
-    this.needMenuItemsEvt.emit((data) => {
+    this.needMenuItemsEvt.emit((err, data) => {
+      if(err){
+        console.log(err);
+        return;
+      }
       this.menuItems = data;
     });
   }
