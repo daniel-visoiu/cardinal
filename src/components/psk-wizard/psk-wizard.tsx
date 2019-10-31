@@ -50,10 +50,10 @@ export class PskWizard {
         eventName: `changeStep`,
         description: `This event is triggered when the buttons Next, Previous and the step names from the left side of the component are clicked.
             This event comes with the following parameters:
-                stepIndexToDisplay - the number of the step to be displayed
-                wizardSteps - the list of the steps from the wizard
-                activeStep - the step that will be displayed
-                callback - a callback function that is called from the controller when the validation is done`
+                stepIndexToDisplay - the number of the step to be displayed,
+                wizardSteps - the list of the steps from the wizard,
+                activeStep - the step that will be displayed,
+                callback - a callback function that is called from the controller when the validation is done.`
     })
     @Event({
         eventName: "changeStep",
@@ -66,8 +66,8 @@ export class PskWizard {
         eventName: `finishWizard`,
         description: `This event is triggered when the buttons Finish is clicked.
             This event comes with the following parameters:
-                wizardSteps - the list of the steps from the wizard. Maybe the information inside the wizard will be stored somewhere.
-                callback - a callback function that is called from the controller when the validation is done`
+                wizardSteps - the list of the steps from the wizard. Maybe the information inside the wizard will be stored somewhere,
+                callback - a callback function that is called from the controller when the validation is done.`
     })
     @Event({
         eventName: "finishWizard",
