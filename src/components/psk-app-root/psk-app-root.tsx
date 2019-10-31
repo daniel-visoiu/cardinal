@@ -1,5 +1,6 @@
 import {Component, h, Prop, EventEmitter, Event, Listen, State, Element} from '@stencil/core';
 import {HistoryType} from "@stencil/router/dist/types/global/interfaces";
+import ControllerFactory from "../../services/ControllerFactory";
 
 const appMaxWidth = 650;
 
@@ -27,13 +28,20 @@ export class PskAppRoot {
   constructor() {
     if (this.controller) {
       let controllerName = this.controller;
-      console.log(controllerName);
-      // @ts-ignore
-      new window[controllerName](this.host);
+      ControllerFactory.getController(controllerName).then((controller) => {
+        new controller(this.host)
+      })
     } else {
-      console.log("No controller here")
+      console.log("No controller added to app-root");
     }
   }
+
+  @Event({
+    eventName: "ControllerFactoryIsReady",
+    composed: true,
+    cancelable: true
+  }) cFReadyEvent: EventEmitter;
+
 
   @Listen("resize", {capture: true, target: 'window'})
   checkLayout() {
@@ -41,6 +49,7 @@ export class PskAppRoot {
   }
 
   componentWillLoad() {
+    this.cFReadyEvent.emit(ControllerFactory);
     this.checkLayout();
     let innerHTML = this.host.innerHTML;
     innerHTML = innerHTML.replace(/\s/g, "");

@@ -15,9 +15,10 @@
 
 ## Events
 
-| Event          | Description | Type               |
-| -------------- | ----------- | ------------------ |
-| `routeChanged` |             | `CustomEvent<any>` |
+| Event                      | Description | Type               |
+| -------------------------- | ----------- | ------------------ |
+| `ControllerFactoryIsReady` |             | `CustomEvent<any>` |
+| `routeChanged`             |             | `CustomEvent<any>` |
 
 
 ## Dependencies
