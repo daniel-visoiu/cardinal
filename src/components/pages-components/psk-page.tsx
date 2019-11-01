@@ -13,6 +13,7 @@ export class PskPage {
 
 	@Prop() title: string = "";
 	@Prop() tocTitle: string;
+  @State() componentFullyLoaded: boolean = false;
 
 	@Element() private element: HTMLElement;
 
@@ -66,12 +67,17 @@ export class PskPage {
 		}, true);
 	}
 
+	componentDidLoad(){
+	  this.componentFullyLoaded = true;
+  }
+
 	render() {
 		this._checkForChapterScrolling();
 		this._sendTableOfContentChapters();
 
+		let visibilityStyle={"visibility":this.componentFullyLoaded?"visible":"hidden"};
 		return (
-			<div>
+			<div style={visibilityStyle}>
 				<nav><h3>{this.title}</h3></nav>
 				<div class="page-content">
 					<slot />
