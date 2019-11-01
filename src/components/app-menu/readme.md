@@ -27,13 +27,13 @@
 ### Used by
 
  - [app-container](../app-container)
- - [psk-app-root](../psk-app-root)
+ - [psk-default-renderer](../renderers/app-root-renders)
 
 ### Graph
 ```mermaid
 graph TD;
   app-container --> app-menu
-  psk-app-root --> app-menu
+  psk-default-renderer --> app-menu
   style app-menu fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
