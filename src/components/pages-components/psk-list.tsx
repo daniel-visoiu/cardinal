@@ -1,5 +1,5 @@
 import { Component, h, Prop, Element, State } from "@stencil/core";
-import { PSK_LIST_PARSE_CONFIG } from "../../utils/constants";
+import { PSK_LIST_PARSE_CONFIG, LIST_TYPE_NUMERIC } from "../../utils/constants";
 
 @Component({
     tag: "psk-list",
@@ -9,23 +9,19 @@ import { PSK_LIST_PARSE_CONFIG } from "../../utils/constants";
 export class PskList {
 
     @Prop() listType: string;
-    @State() listContent: any = null;
+    @State() listContent = null;
     @Element() private element: HTMLElement;
 
     render() {
-        // if (!this.listType) {
-        //     return;
-        // }
+        if (this.listType === LIST_TYPE_NUMERIC) {
+            return <ol>
+                {this.listContent}
+            </ol>;
+        }
 
-        // if (this.listContent) {
-        //     if (this.listType === LIST_TYPE_NUMERIC) {
-        //         return <ol>{this.listContent}</ol>;
-        //     }
-        //     if (this.listType === LIST_TYPE_NOT_NUMERIC) {
-        //         return <ul>{this.listContent}</ul>;
-        //     }
-        // }
-        return <ul>{this.listContent}</ul>
+        return <ul>
+            {this.listContent}
+        </ul>;
     }
 
     componentWillLoad() {
@@ -46,46 +42,56 @@ export class PskList {
             sameChildDepthLevel: number = 0,
             currentChildListItem: string = '';
 
-        // const _getHtmlElementForString = (line: string) => {
-        //     const doc = new DOMParser().parseFromString(line, 'text/html');
-        //     return doc.body.children;
-        // };
-
         htmlLines.forEach((line: string) => {
-            console.log(line, withChild, currentChildTagName, currentChildListItem, sameChildDepthLevel);
-            let match = PSK_LIST_PARSE_CONFIG.startTag.exec(line);
-            if (match !== null) {
-                withChild = true;
-                currentChildListItem += line;
-                if (currentChildTagName === match[0]) {
-                    sameChildDepthLevel++;
-                } else if (!currentChildTagName) {
-                    currentChildTagName = match[0];
+            let inlineTagMatch = PSK_LIST_PARSE_CONFIG.inlineTag.exec(line);
+            if (inlineTagMatch !== null) {
+                if (withChild) {
+                    currentChildListItem += line;
+                } else {
+                    finalHtmlLines.push(this._htmlToElement('li', line));
                 }
             } else {
-                match = PSK_LIST_PARSE_CONFIG.endTag.exec(line);
-                if (match !== null) {
+                let startTagMatch = PSK_LIST_PARSE_CONFIG.startTag.exec(line);
+                if (startTagMatch !== null) {
+                    withChild = true;
                     currentChildListItem += line;
-                    if (currentChildTagName === match[0].replace(/\//g, '')) {
-                        if (sameChildDepthLevel === 0) {
-                            finalHtmlLines.push(<li>{currentChildListItem}</li>);
-                            currentChildTagName = null;
-                            currentChildListItem = '';
-                        } else {
-                            sameChildDepthLevel--;
+                    if (currentChildTagName === startTagMatch[0]) {
+                        sameChildDepthLevel++;
+                    } else if (!currentChildTagName) {
+                        currentChildTagName = startTagMatch[0];
+                    }
+                } else {
+                    let endTagMatch = PSK_LIST_PARSE_CONFIG.endTag.exec(line);
+                    if (endTagMatch !== null) {
+                        currentChildListItem += line;
+                        if (currentChildTagName === endTagMatch[0].replace(/\//g, '')) {
+                            if (sameChildDepthLevel === 0) {
+                                finalHtmlLines.push(this._htmlToElement('li', currentChildListItem));
+                                currentChildTagName = null;
+                                currentChildListItem = '';
+                                withChild = false;
+                            } else {
+                                sameChildDepthLevel--;
+                            }
                         }
                     }
-                }
-                else {
-                    if (withChild) {
-                        currentChildListItem += line;
-                    } else {
-                        finalHtmlLines.push(<li>{line}</li>);
+                    else {
+                        if (withChild) {
+                            currentChildListItem += line;
+                        } else {
+                            finalHtmlLines.push(this._htmlToElement('li', line));
+                        }
                     }
                 }
             }
         });
+
         this.element.innerHTML = '';
-        this.listContent = finalHtmlLines;
+        this.listContent = [...finalHtmlLines];
+    }
+
+    _htmlToElement(tag: string, html: string): HTMLElement {
+        const HTMLTag = tag;
+        return <HTMLTag innerHTML={html}></HTMLTag>;
     }
 }

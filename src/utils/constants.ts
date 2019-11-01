@@ -13,7 +13,8 @@ export const LIST_TYPE_NUMERIC: string = "numeric";
 export const LIST_TYPE_NOT_NUMERIC: string = "bullet";
 
 export const PSK_LIST_PARSE_CONFIG = {
-    startTag: /<([a-z]|-|!|<|>| )+>/gmi,
-    endTag: /<\/([a-z]|-)+>/gmi,
-    inlineTag: /.*<([a-z]|-|!|<|>| )+>.*<\/([a-z]|-)+>.*/gmi
+    startTag: /<([a-z]+|-*)>/,
+    endTag: /<\/([a-z]+|-*)>/,
+    inlineTag: /.*<([a-z]+|-*)>.*<\/([a-z]+|-*)>.*/
 };
+
