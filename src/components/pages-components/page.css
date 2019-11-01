@@ -8,34 +8,56 @@
     scroll-behavior: smooth;
 }
 
-a, *:hover, a:active {
+a,
+*:hover,
+a:active {
     outline: none !important;
     text-decoration: none !important;
 }
 
-h1 span, h2 span, h3 span, h4 span, h5 span, h6 span {
+h1 span,
+h2 span,
+h3 span,
+h4 span,
+h5 span,
+h6 span {
     position: absolute;
     display: block;
     top: 0;
     right: 0;
 }
 
-h1 span:hover, h2 span:hover, h3 span:hover, h4 span:hover, h5 span:hover, h6 span:hover {
+h1 span:hover,
+h2 span:hover,
+h3 span:hover,
+h4 span:hover,
+h5 span:hover,
+h6 span:hover {
     opacity: 1;
 }
 
-h1 span a, h2 span a, h3 span a, h4 span a, h5 span a, h6 span a {
+h1 span a,
+h2 span a,
+h3 span a,
+h4 span a,
+h5 span a,
+h6 span a {
     color: #000;
     text-decoration: none;
     font-weight: bold;
 }
 
-.btn-link, .btn-link:focus, .btn-link:active, .btn-link:hover {
+.btn-link,
+.btn-link:focus,
+.btn-link:active,
+.btn-link:hover {
     padding: 0;
     text-decoration: none;
 }
 
-.btn-link.invalid-url:hover, .btn-link.invalid-url:focus, .btn-link.invalid-url:active {
+.btn-link.invalid-url:hover,
+.btn-link.invalid-url:focus,
+.btn-link.invalid-url:active {
     color: #999;
     cursor: initial;
     text-decoration: none;
@@ -64,6 +86,7 @@ h1 span a, h2 span a, h3 span a, h4 span a, h5 span a, h6 span a {
     border: none;
 }
 
+
 /** first level*/
 
 .psk-card .card-header {
@@ -78,11 +101,13 @@ h1 span a, h2 span a, h3 span a, h4 span a, h5 span a, h6 span a {
     margin-top: -10px;
 }
 
+
 /** second level*/
 
 .psk-card .psk-card .card-header {
     font-size: 120%;
 }
+
 
 /** more than two levels*/
 
@@ -149,7 +174,8 @@ pre code.code-tag {
     color: rgb(0, 0, 255, .65);
 }
 
-div>.mark, div>.mark:visited {
+div>.mark,
+div>.mark:visited {
     color: #707070;
     background-color: transparent;
     position: absolute;
@@ -159,7 +185,9 @@ div>.mark, div>.mark:visited {
     font-size: 150%;
 }
 
-div>.mark:hover, div>.mark:focus, div>.mark:active {
+div>.mark:hover,
+div>.mark:focus,
+div>.mark:active {
     color: #43853d;
     background: none;
 }
@@ -203,19 +231,4 @@ psk-chapter psk-chapter .mark {
     margin-top: -5px;
     border-style: solid;
     border-color: transparent transparent transparent #224abe;
-}
-
-psk-list ul li, psk-list ol li {
-    color: red;
-    background-color: rgba(0, 0, 0, .25);
-}
-
-psk-list ul ul li, psk-list ol ol li {
-    color: green;
-    background-color: rgba(0, 0, 0, .65);
-}
-
-psk-list ul ul ul li, psk-list ol ol ol li {
-    color: blue;
-    background-color: rgba(0, 0, 0, 1);
 }
