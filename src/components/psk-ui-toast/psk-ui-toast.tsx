@@ -5,7 +5,7 @@ import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
 
 @Component({
     tag: "psk-ui-toast",
-    styleUrls: ['../../themes/default/assets/bootstrap/css/bootstrap.min.css', './psk-ui-toast.css'],
+    styleUrls: ['../../../themes/default/assets/bootstrap/css/bootstrap.min.css', './psk-ui-toast.css'],
     shadow: true
 })
 
@@ -16,7 +16,7 @@ export class ToastComponent {
         isMandatory : false,
         propertyType : 'any'
     })
-    @Prop() message: any
+    @Prop() message: any;
 
     @TableOfContentProperty({
         description:`The time in milliseconds when the toast was created`,

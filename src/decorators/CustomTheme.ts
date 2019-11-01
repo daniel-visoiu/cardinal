@@ -26,7 +26,7 @@ export default function CustomTheme(): MyDecoratorResult {
       // @ts-ignore
       if (typeof globalConfig !== "undefined" && typeof globalConfig.theme === "string") {
         // @ts-ignore
-        let themeStylePath = "/assets/themes/"+globalConfig.theme+"/components/" + componentName + "/" + componentName + ".css";
+        let themeStylePath = "/themes/"+globalConfig.theme+"/components/" + componentName + "/" + componentName + ".css";
         var styleElement = document.createElement("link");
         styleElement.setAttribute("rel", "stylesheet");
         styleElement.setAttribute("href", themeStylePath);

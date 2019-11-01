@@ -5,7 +5,7 @@ import {StyleCustomisation} from '../../interfaces/StyleCustomisation';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty.js';
 @Component({
     tag: "psk-ui-alert",
-    styleUrls: ['../../themes/default/assets/bootstrap/css/bootstrap.min.css', './psk-ui-alert.css'],
+    styleUrls: ['../../../themes/default/assets/bootstrap/css/bootstrap.min.css', './psk-ui-alert.css'],
     shadow: true
 })
 
@@ -72,4 +72,4 @@ export class AlertComponent {
             this.alert
         )
     }
-} 
+}

@@ -6,7 +6,7 @@ import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
 
 @Component({
   tag: 'app-menu',
-  styleUrl: '../../themes/default/components/app-menu/app-menu.css',
+  styleUrl: '../../../themes/default/components/app-menu/app-menu.css',
   shadow: true
 })
 export class AppMenu {

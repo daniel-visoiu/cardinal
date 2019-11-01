@@ -1,13 +1,15 @@
 import {Component, h, Prop} from '@stencil/core';
 import {MenuItem} from "../../../../interfaces/MenuItem";
+import CustomTheme from "../../../../decorators/CustomTheme";
 
 @Component({
   tag: 'sidebar-renderer',
-  styleUrl: '../../../../themes/default/components/renderers/menu-renderers/sidebar-renderer/sidebar-renderer.css',
+  styleUrl: '../../../../../themes/default/components/sidebar-renderer/sidebar-renderer.css',
   shadow: true
 })
 
 export class SidebarRenderer {
+  @CustomTheme()
   @Prop() value: MenuItem;
   @Prop({
     reflectToAttr:true,

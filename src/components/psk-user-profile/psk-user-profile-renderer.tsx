@@ -3,7 +3,7 @@ import { TableOfContentProperty } from '../../decorators/TableOfContentProperty'
 
 @Component({
   tag: 'psk-user-profile-renderer',
-  styleUrl: '../../themes/default/components/psk-user-profile/psk-user-profile-renderer.css',
+  styleUrl: '../../../themes/default/components/psk-user-profile/psk-user-profile-renderer.css',
   shadow: true
 })
 export class PskUserProfile {

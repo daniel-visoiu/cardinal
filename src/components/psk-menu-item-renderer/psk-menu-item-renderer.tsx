@@ -5,7 +5,7 @@ import { TableOfContentProperty } from '../../decorators/TableOfContentProperty'
 
 @Component({
   tag: 'psk-menu-item-renderer',
-  styleUrl: '../../themes/default/components/psk-menu-item-renderer/psk-menu-item-renderer.css',
+  styleUrl: '../../../themes/default/components/psk-menu-item-renderer/psk-menu-item-renderer.css',
   shadow: true
 })
 
