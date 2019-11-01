@@ -1,5 +1,6 @@
 import { Component, h, Prop, Element, State } from "@stencil/core";
 import { PSK_LIST_PARSE_CONFIG, LIST_TYPE_NUMERIC } from "../../utils/constants";
+import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 
 @Component({
     tag: "psk-list",
@@ -8,6 +9,12 @@ import { PSK_LIST_PARSE_CONFIG, LIST_TYPE_NUMERIC } from "../../utils/constants"
 
 export class PskList {
 
+    @TableOfContentProperty({
+        description: [`This property gives the type of the list. It has two type of values, "numeric" or "bullet"`,
+            `If this property is missing, "bullet is assumed"`],
+        isMandatory: false,
+        propertyType: 'string'
+    })
     @Prop() listType: string;
     @State() listContent = null;
     @Element() private element: HTMLElement;
