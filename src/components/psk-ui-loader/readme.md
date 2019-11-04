@@ -16,7 +16,7 @@
 
 ### Used by
 
- - [psk-app-router](../psk-app-router)
+ - [psk-app-router](..\psk-app-router)
 
 ### Graph
 ```mermaid

@@ -32,6 +32,9 @@ export default function CustomTheme(): MyDecoratorResult {
         styleElement.setAttribute("href", themeStylePath);
         host.shadowRoot.prepend(styleElement);
       }
+      else{
+        console.error("Theme or globalConfig is not defind!");
+      }
 
       return componentDidLoad && componentDidLoad.call(this);
     };

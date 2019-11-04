@@ -26,8 +26,8 @@
 
 ### Used by
 
- - [app-container](../app-container)
- - [psk-default-renderer](../renderers/app-root-renders)
+ - [app-container](..\app-container)
+ - [psk-default-renderer](..\renderers\app-root-renders)
 
 ### Graph
 ```mermaid
