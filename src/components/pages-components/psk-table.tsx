@@ -4,7 +4,6 @@ import { Component, h, Element, State, Prop } from "@stencil/core";
     tag: "psk-table",
     styleUrl: "./page.css"
 })
-
 export class PskTable {
 
     @Prop() head: boolean;

@@ -1,12 +1,15 @@
 import { Component, Element, h, State, Prop } from "@stencil/core";
+import Prism from 'prismjs';
 
 @Component({
-	tag: "psk-tag"
+	tag: "psk-tag",
+    styleUrl: './highlight.css'
 })
 
 export class PskTag {
 
 	@Prop() title: string = "";
+
 	@State() componentCode: string = "";
 	@Element() host: HTMLDivElement;
 
@@ -15,27 +18,24 @@ export class PskTag {
 		this.host.innerHTML = '';
 	}
 
+	componentDidLoad() {
+		Prism.highlightAllUnder(this.host);
+	}
+
 	render() {
+
+		const sourceCode = (
+			<pre class="text-center code-tag">
+				<code class="code-tag language-html" data-lang="html">
+					{this.componentCode}
+				</code>
+			</pre>
+		);
+
 		if (this.title.replace(/\s/g, '') === '') {
-			return (
-				<psk-card>
-					<pre class="text-center code-tag">
-						<code class="language-html code-tag" data-lang="html">
-							<span class="nt">{this.componentCode}</span>
-						</code>
-					</pre>
-				</psk-card>
-			);
+			return <psk-card>{sourceCode}</psk-card>;
 		}
 
-		return (
-			<psk-chapter title={this.title}>
-				<pre class="text-center code-tag">
-					<code class="language-html code-tag" data-lang="html">
-						<span class="nt">{this.componentCode}</span>
-					</code>
-				</pre>
-			</psk-chapter>
-		)
+		return <psk-chapter>{sourceCode}</psk-chapter>;
 	}
 }
