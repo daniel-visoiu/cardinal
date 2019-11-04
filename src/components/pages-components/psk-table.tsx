@@ -24,25 +24,24 @@ export class PskTable {
             .split(/\n/g)
             .map(el => el.trim().replace('<!---->', ''))
             .filter(el => el.length > 0)
-            .map((line: string, index: number) => {
-                console.log(line);
+            .map((line: string) => {
                 let tableRow: string = line
                     .split('|')
                     .map(el => {
-                        if (index === 0) {
+                        if (this.head) {
                             return `<th>${el.trim()}</th>`;
                         } else {
                             return `<td>${el.trim()}</td>`;
                         }
                     }).join('');
-                return this._htmlToElement('tr', tableRow);
+                return `<tr>${tableRow}</tr>`;
             });
         let finalTableRows: Array<HTMLElement> = [];
         if (this.head) {
             finalTableRows.push(this._htmlToElement('thead', tableRows.splice(0, 1)));
             if (this.footer) {
                 finalTableRows.push(this._htmlToElement('tbody', tableRows.splice(0, tableRows.length - 2)));
-                finalTableRows.push(this._htmlToElement('tfoot', tableRows[tableRows.length - 1]));
+                finalTableRows.push(this._htmlToElement('tfoot', [tableRows[tableRows.length - 1]]));
             } else {
                 finalTableRows.push(this._htmlToElement('tbody', tableRows.splice(0)));
             }
@@ -53,8 +52,8 @@ export class PskTable {
         this.element.innerHTML = '';
     }
 
-    _htmlToElement(tag: string, html: string | HTMLElement | Array<HTMLElement>): HTMLElement {
+    _htmlToElement(tag: string, html: Array<string>): HTMLElement {
         const HTMLTag = tag;
-        return <HTMLTag innerHTML={html.toString()}></HTMLTag>;
+        return <HTMLTag innerHTML={html.join('')}></HTMLTag>;
     }
 }
