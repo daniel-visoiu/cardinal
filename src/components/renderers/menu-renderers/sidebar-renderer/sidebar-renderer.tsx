@@ -28,7 +28,7 @@ export class SidebarRenderer {
     let ItemWrapperTag = item.type === "abstract" ? "expandable-renderer" : "stencil-route-link";
 
     return (
-      <ItemWrapperTag url={href} activeClass="active" exact={false} somethingChanged={this.value}>
+      <ItemWrapperTag firstMenuChild = {item.children?item.children[0]:""} url={href} activeClass="active" exact={false} somethingChanged={this.value}>
         <div class="wrapper_container">
           <div class="item_container">
             <span class={`icon fa ${item.icon}`}></span>

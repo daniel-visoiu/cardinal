@@ -1,4 +1,5 @@
 import {Component, getElement, h, Listen,  Prop, State} from '@stencil/core';
+import {injectHistory, RouterHistory} from "@stencil/router";
 
 @Component({
   tag: 'expandable-renderer',
@@ -14,6 +15,8 @@ export class ExpandableRenderer {
   @Prop() url;
   @State() dropDownHasChildActive = false;
   @Prop() somethingChanged = false;
+  @Prop() firstMenuChild :any;
+  @Prop() history: RouterHistory;
 
   @Listen("click", {capture: false, target: "window"})
   handleClick(e: Event) {
@@ -40,8 +43,10 @@ export class ExpandableRenderer {
         break;
       }
     }
-
     if(!isChild){
+      if(!this.isOpened){
+        this.history.push(this.firstMenuChild.path);
+      }
       evt.stopImmediatePropagation();
     }
     this.isOpened = !this.isOpened;
@@ -56,3 +61,4 @@ export class ExpandableRenderer {
     )
   }
 }
+injectHistory(ExpandableRenderer);
