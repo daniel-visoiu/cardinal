@@ -17,7 +17,7 @@ export class PskListFeebacks {
     @State() timer = 0;
     @State() opened: boolean = false;
     @State() typeOfAlert: Array<string> = [];
-
+   
     @TableOfContentProperty({
         description: `This property is a object based on StyleCustomisation interface `,
         isMandatory: false,

@@ -11,7 +11,6 @@ import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
 })
 export class AppMenu {
   @CustomTheme()
-
   @TableOfContentProperty({
     description: `Another web component that can render each menu item.
      This component is responsible for rendering children (nested menu items).`,
@@ -53,6 +52,7 @@ export class AppMenu {
 
   @TableOfContentEvent({
     eventName: `needMenuItems`,
+    controllerInteraction: true,
     description: `If no data is provided for the menuItems property this event will be emited that will render a default menuItem created by us.`
   })
   @Event({
