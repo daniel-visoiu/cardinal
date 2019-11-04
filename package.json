@@ -22,7 +22,8 @@
     "generate": "stencil generate"
   },
   "dependencies": {
-    "@stencil/router": "^1.0.1"
+    "@stencil/router": "^1.0.1",
+    "prismjs": "^1.17.1"
   },
   "devDependencies": {
     "@stencil/core": "^1.7.5"
