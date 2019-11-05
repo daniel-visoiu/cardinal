@@ -143,17 +143,6 @@ nav h3 {
     background: #e9e9e9;
 }
 
-pre.code-tag {
-    background: #e9e9e9;
-    padding: 20px;
-    font-weight: bold;
-    color: #454545;
-}
-
-pre code.code-tag {
-    white-space: nowrap;
-}
-
 .table-of-content ul li {
     color: rgb(0, 0, 255, .75);
     font-size: 110%;

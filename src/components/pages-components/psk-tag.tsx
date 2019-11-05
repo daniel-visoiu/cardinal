@@ -3,7 +3,7 @@ import Prism from 'prismjs';
 
 @Component({
 	tag: "psk-tag",
-    styleUrl: './highlight.css'
+	styleUrl: './highlight.css'
 })
 
 export class PskTag {
@@ -25,15 +25,15 @@ export class PskTag {
 	render() {
 
 		const sourceCode = (
-			<pre class="text-center code-tag">
-				<code class="code-tag language-html" data-lang="html">
+			<pre class="text-center">
+				<code class="language-html" data-lang="html">
 					{this.componentCode}
 				</code>
 			</pre>
 		);
 
 		if (this.title.replace(/\s/g, '') === '') {
-			return <psk-card>{sourceCode}</psk-card>;
+			return <div>{sourceCode}</div>;
 		}
 
 		return <psk-chapter>{sourceCode}</psk-chapter>;

@@ -15,7 +15,7 @@ export class PskCode {
     @Element() host: HTMLDivElement;
 
     componentWillLoad() {
-        this.componentCode = this.host.innerHTML;
+        this.componentCode = this.host.innerText;
         this.host.innerHTML = '';
     }
 
@@ -34,9 +34,9 @@ export class PskCode {
         );
 
         if (this.title.replace(/\s/g, '') === '') {
-            return <psk-card>{sourceCode}</psk-card>;
+            return <div>{sourceCode}</div>;
         }
 
-        return <psk-chapter>{sourceCode}</psk-chapter>;
+        return <psk-chapter title={this.title}>{sourceCode}</psk-chapter>;
     }
 }
