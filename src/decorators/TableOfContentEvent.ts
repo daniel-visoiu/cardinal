@@ -1,103 +1,75 @@
 import * as d from './declarations/declarations';
 import { getElement } from '@stencil/core';
-import { DATA_DEFINED_EVENTS, DEFINED_EVENTS, DATA_DEFINED_CONTROLLERS, DEFINED_CONTROLLERS } from '../utils/constants';
+import { DATA_DEFINED_EVENTS, DEFINED_EVENTS, DEFINED_CONTROLLERS, DATA_DEFINED_CONTROLLERS } from '../utils/constants';
 import { createCustomEvent } from '../utils/utils';
 
 export function TableOfContentEvent(opts: d.EventOptions) {
     return function (proto, propertyKey: string | symbol): void {
 
         const { connectedCallback, render } = proto;
+        let actionSend = 'psk-send-events';
+        let typeDefined = DEFINED_EVENTS;
+        let dataDefineAction = DATA_DEFINED_EVENTS;
+        let definedAction = 'definedEvents';
 
         proto.connectedCallback = function () {
             let self = this;
             let thisElement = getElement(self);
-            if (opts.controllerInteraction != true) {
-                if (thisElement.hasAttribute(DATA_DEFINED_EVENTS)) {
-                    if (!self.componentDefinitions) {
-                        self.componentDefinitions = {
-                            "definedEvents": [{
-                                ...opts,
-                                eventName: String(propertyKey)
-                            }]
-                        };
-                        return connectedCallback && connectedCallback.call(self);
-                    }
 
-                    let componentDefinitions = self.componentDefinitions;
-                    const newEvent: d.EventOptions = {
-                        ...opts,
-                        eventName: String(propertyKey)
-                    };
-
-                    if (componentDefinitions && componentDefinitions.hasOwnProperty(DEFINED_EVENTS)) {
-                        let tempProps: Array<d.EventOptions> = [...componentDefinitions[DEFINED_EVENTS]];
-                        tempProps.push(newEvent);
-                        componentDefinitions[DEFINED_EVENTS] = [...tempProps];
-                    } else {
-                        componentDefinitions[DEFINED_EVENTS] = [newEvent];
-                    }
-                    self.componentDefinitions = { ...componentDefinitions };
-                }
-                return connectedCallback && connectedCallback.call(self);
-            } else {
-                if (thisElement.hasAttribute(DATA_DEFINED_CONTROLLERS)) {
-                    if (!self.componentDefinitions) {
-                        self.componentDefinitions = {
-                            "definedControllers": [{
-                                ...opts,
-                                eventName: String(propertyKey)
-                            }]
-                        };
-                        return connectedCallback && connectedCallback.call(self);
-                    }
-                    let componentDefinitions = self.componentDefinitions;
-                    const newEvent: d.EventOptions = {
-                        ...opts,
-                        eventName: String(propertyKey)
-                    };
-
-                    if (componentDefinitions && componentDefinitions.hasOwnProperty(DEFINED_CONTROLLERS)) {
-                        let tempProps: Array<d.EventOptions> = [...componentDefinitions[DEFINED_CONTROLLERS]];
-                        tempProps.push(newEvent);
-                        componentDefinitions[DEFINED_CONTROLLERS] = [...tempProps];
-                    } else {
-                        componentDefinitions[DEFINED_CONTROLLERS] = [newEvent];
-                    }
-                    self.componentDefinitions = { ...componentDefinitions }; 
-                    console.log(self.componentDefinitions)
-                }
-                return connectedCallback && connectedCallback.call(self);
+            if (opts.controllerInteraction) {
+                dataDefineAction = DATA_DEFINED_CONTROLLERS;
+                definedAction = 'definedControllers'
+                typeDefined = DEFINED_CONTROLLERS
+                actionSend = 'psk-send-controllers'
             }
+
+            if (thisElement.hasAttribute(dataDefineAction)) {
+                if (!self.componentDefinitions) {
+                    self.componentDefinitions = {}
+                    self.componentDefinitions[definedAction] = [{
+                        ...opts,
+                        eventName: String(propertyKey)
+                    }]
+                    return connectedCallback && connectedCallback.call(self);
+                }
+
+                let componentDefinitions = self.componentDefinitions;
+                const newEvent: d.EventOptions = {
+                    ...opts,
+                    eventName: String(propertyKey)
+                };
+
+                if (componentDefinitions && componentDefinitions.hasOwnProperty(typeDefined)) {
+                    let tempProps: Array<d.EventOptions> = [...componentDefinitions[typeDefined]];
+                    tempProps.push(newEvent);
+                    componentDefinitions[typeDefined] = [...tempProps];
+                } else {
+                    componentDefinitions[typeDefined] = [newEvent];
+                }
+
+                self.componentDefinitions = { ...componentDefinitions };
+            }
+
+            return connectedCallback && connectedCallback.call(self);
         };
 
         proto.render = function () {
             let self = this;
             if (!self.componentDefinitions
-                || !(self.componentDefinitions && self.componentDefinitions[DEFINED_EVENTS])) {
+                || !(self.componentDefinitions && self.componentDefinitions[typeDefined])) {
                 return render && render.call(self);
             }
 
-            let definedEvts = self.componentDefinitions[DEFINED_EVENTS];
+            let definedEvts = self.componentDefinitions[typeDefined];
             if (definedEvts) {
                 definedEvts = definedEvts.reverse();
             }
-            let definedCntrl = self.componentDefinitions[DEFINED_CONTROLLERS];
-            if (definedEvts) {
-                definedEvts = definedEvts.reverse();
-            }
-
-            createCustomEvent('psk-send-events', {
+            createCustomEvent(actionSend, {
                 composed: true,
                 bubbles: true,
                 cancelable: true,
                 detail: definedEvts
             }, true);
-            createCustomEvent('psk-send-controllers', {
-                composed: true,
-                bubbles: true,
-                cancelable: true,
-                detail: definedCntrl
-            }, true)
         }
     }
 }

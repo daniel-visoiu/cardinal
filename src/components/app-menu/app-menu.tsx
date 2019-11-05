@@ -52,7 +52,9 @@ export class AppMenu {
 
   @TableOfContentEvent({
     eventName: `needMenuItems`,
-    controllerInteraction: true,
+    controllerInteraction: {
+      required: true
+    },
     description: `If no data is provided for the menuItems property this event will be emited that will render a default menuItem created by us.`
   })
   @Event({
@@ -61,7 +63,6 @@ export class AppMenu {
     composed: true,
     bubbles: true,
   }) needMenuItemsEvt: EventEmitter;
-
 
   @Listen("resize", { capture: true, target: 'window' })
   checkIfHamburgerIsNeeded() {
