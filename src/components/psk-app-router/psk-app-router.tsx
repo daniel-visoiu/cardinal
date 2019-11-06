@@ -1,8 +1,8 @@
-import {Component, Event, EventEmitter, Prop, h} from "@stencil/core";
-import {MenuItem} from "../../interfaces/MenuItem";
+import { Component, Event, EventEmitter, Prop, h } from "@stencil/core";
+import { MenuItem } from "../../interfaces/MenuItem";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import { TableOfContentEvent } from "../../decorators/TableOfContentEvent";
-import {HistoryType} from "@stencil/router/dist/types/global/interfaces";
+import { HistoryType } from "@stencil/router/dist/types/global/interfaces";
 
 @Component({
   tag: "psk-app-router",
@@ -16,20 +16,23 @@ export class PskAppRouter {
     isMandatory: false,
     propertyType: `Array of MenuItem types(MenuItem[])`
   })
-  @Prop() menuItems ?: MenuItem[] = [];
+  @Prop() menuItems?: MenuItem[] = [];
 
   @TableOfContentProperty({
-    description:`This is the history type that will be passed along to the stencil-router`,
+    description: `This is the history type that will be passed along to the stencil-router`,
     isMandatory: false,
-    propertyType:`string`,
+    propertyType: `string`,
     defaultValue: `browser`
   })
-  @Prop() historyType:HistoryType;
-  @Prop() failRedirectTo:string = "";
+  @Prop() historyType: HistoryType;
+  @Prop() failRedirectTo: string = "";
 
   @TableOfContentEvent({
     eventName: `needMenuItems`,
-    description:`This event gets the data as parameter and it is emitted immediately after the component is loaded in order to create the application routes `
+    controllerInteraction: {
+      required: true
+    },
+    description: `This event gets the data as parameter and it is emitted immediately after the component is loaded in order to create the application routes `
   })
   @Event({
     eventName: 'needMenuItems',
@@ -41,7 +44,7 @@ export class PskAppRouter {
 
   componentDidLoad() {
     this.needMenuItemsEvt.emit((err, data) => {
-      if(err){
+      if (err) {
         console.log(err);
         return;
       }
@@ -55,7 +58,7 @@ export class PskAppRouter {
         return this.renderItems(item.children)
       } else {
         return <stencil-route url={item.path} exact={item.exact} component={item.component}
-                              componentProps={item.componentProps}/>
+          componentProps={item.componentProps} />
       }
     });
     return routes;
@@ -65,7 +68,7 @@ export class PskAppRouter {
 
     let routes = this.renderItems(this.menuItems);
 
-    if(routes.length === 0){
+    if (routes.length === 0) {
       return <psk-ui-loader shouldBeRendered={true} />
     }
     return (
@@ -74,7 +77,7 @@ export class PskAppRouter {
 
           <stencil-route-switch scrollTopOffset={0}>
             {routes}
-            <stencil-route component="psk-page-not-found" componentProps={{urlDestination:this.menuItems[0].path}} />
+            <stencil-route component="psk-page-not-found" componentProps={{ urlDestination: this.menuItems[0].path }} />
           </stencil-route-switch>
 
         </stencil-router>

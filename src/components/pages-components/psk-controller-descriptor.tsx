@@ -21,7 +21,6 @@ export class PskControllerDescriptor {
     }
 
     render() {
-        console.log(this.decoratorControllers)
         let componentControllersDefinitions = this.decoratorControllers.map((controller: EventOptions) => {
             const cardSubtitle = `${controller.eventName}: CustomEvent`;
             const required = `Required : ${controller.controllerInteraction.required}`

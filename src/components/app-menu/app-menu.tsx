@@ -41,6 +41,9 @@ export class AppMenu {
 
   @TableOfContentEvent({
     eventName: `menuEvent`,
+    controllerInteraction: {
+      required: true
+    },
     description: `This event will be emited when you click on a menu item and it will create another CustomEvent that will change your route to the page you want to access.`
   })
   @Event({

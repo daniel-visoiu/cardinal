@@ -10,14 +10,14 @@ import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
 export class PskWizard {
 
     @TableOfContentProperty({
-        description:`This property is the string that defines the psk-stepper render`,
+        description: `This property is the string that defines the psk-stepper render`,
         isMandatory: false,
         propertyType: `string`,
     })
     @Prop() componentRender: string;
 
     @TableOfContentProperty({
-        description:`This parameter holds the wizard configuration, the names of the steps, the components that will be displayed and if there is the case, other properties, like informations for the steps.`,
+        description: `This parameter holds the wizard configuration, the names of the steps, the components that will be displayed and if there is the case, other properties, like informations for the steps.`,
         isMandatory: false,
         propertyType: `array of WizardStep types (WizardStep[])`,
         specialNote: `These informations are filled in and handled by the controller of the component, not by the component itself.`
@@ -35,6 +35,9 @@ export class PskWizard {
 
     @TableOfContentEvent({
         eventName: `needWizardConfiguration`,
+        controllerInteraction: {
+            required: true
+        },
         description: `This event is triggered when the component is loaded and if no configuration is given for the wizard.
             In this case, the controller is responsible to send the configuration to the wizard.
             This event comes with a single parameter, a callback function the sends the configuration to the component.`
@@ -48,6 +51,9 @@ export class PskWizard {
 
     @TableOfContentEvent({
         eventName: `changeStep`,
+        controllerInteraction: {
+            required: true
+        },
         description: `This event is triggered when the buttons Next, Previous and the step names from the left side of the component are clicked.
             This event comes with the following parameters:
                 stepIndexToDisplay - the number of the step to be displayed,

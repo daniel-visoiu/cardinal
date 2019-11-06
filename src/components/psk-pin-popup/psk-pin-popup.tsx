@@ -27,6 +27,9 @@ export class PskPinPopup {
 	}
 	@TableOfContentEvent({
 		eventName: `sendPin`,
+		controllerInteraction: {
+			required: true
+		},
 		description: `This event is triggered when the button "Send PIN" is clicked. This event comes with two parameters:
 			pin - the PIN written by the user
 			callback - a callback function that is called after the pin is checked. this callback has one parameter (err) and should be sent only if the PIN is invalid.`

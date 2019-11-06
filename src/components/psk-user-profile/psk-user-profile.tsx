@@ -1,4 +1,4 @@
-import {Component, h,  EventEmitter, Event, Prop,} from '@stencil/core';
+import { Component, h, EventEmitter, Event, Prop, } from '@stencil/core';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
 
@@ -17,14 +17,17 @@ export class PskUserProfile {
   @Prop() userInfo: any = null;
 
   @TableOfContentProperty({
-    description:`This property allows the component to display a custom User Profile in case the default one is not preferred. `,
-    isMandatory:false,
+    description: `This property allows the component to display a custom User Profile in case the default one is not preferred. `,
+    isMandatory: false,
     propertyType: 'any',
   })
-  @Prop() profileRenderer:any;
+  @Prop() profileRenderer: any;
 
   @TableOfContentEvent({
     eventName: `getUserInfo`,
+    controllerInteraction: {
+      required: true
+    },
     description: `This event is emitted only if the userInfo property is null in order to get the desired data.`
   })
   @Event({
@@ -48,10 +51,10 @@ export class PskUserProfile {
 
   render() {
 
-    let ItemRenderer = this.profileRenderer?this.profileRenderer:"psk-user-profile-renderer";
+    let ItemRenderer = this.profileRenderer ? this.profileRenderer : "psk-user-profile-renderer";
 
     return (
-      <ItemRenderer userInfo={this.userInfo}/>
+      <ItemRenderer userInfo={this.userInfo} />
     );
   }
 }

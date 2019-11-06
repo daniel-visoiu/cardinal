@@ -64,6 +64,9 @@ export class PskListFeebacks {
 
     @TableOfContentEvent({
         eventName: 'openFeedback',
+        controllerInteraction: {
+            required: true
+        },
         description: `This even is triggered when the user does an action that require feedback.This event comes with three parameters :
             message(string) : the message for the action that was executed,
             name(string) : the name is necessary in case of a toast feedback and
