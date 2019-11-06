@@ -49,7 +49,7 @@ export class PskCard {
 
     render() {
 
-        const elementId = this.id.trim().replace(/( |:|\/)/g, "-").toLowerCase();
+        const elementId = this.id.trim().replace(/( |:|\/|\.)/g, "-").toLowerCase();
         if (elementId.length === 0 || !this._isCopySupported()) {
             return;
         }

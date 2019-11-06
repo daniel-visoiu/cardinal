@@ -33,7 +33,7 @@ export class PskPropertyDescriptor {
         });
 
         return (
-            <psk-chapter title={this.title} id={this.title.replace(/( |:|\/)/g, "-").toLowerCase()}>
+            <psk-chapter title={this.title} id={this.title.replace(/( |:|\/|\.)/g, "-").toLowerCase()}>
                 {componentPropertiesDefinitions}
             </psk-chapter>
         );

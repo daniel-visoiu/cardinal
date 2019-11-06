@@ -1,12 +1,12 @@
 import { Component, Prop, State, Listen, h } from "@stencil/core";
-import {  EventOptions } from "../../decorators/declarations/declarations";
+import { EventOptions } from "../../decorators/declarations/declarations";
 
 @Component({
     tag: 'psk-controller-descriptor'
 })
 
 export class PskControllerDescriptor {
-    
+
     @Prop() title: string = "";
 
     @State() decoratorControllers: Array<EventOptions> = []
@@ -34,7 +34,7 @@ export class PskControllerDescriptor {
             );
         });
         return (
-            <psk-chapter title={this.title} id={this.title.replace(/( |:|\/)/g, "-").toLowerCase()}>
+            <psk-chapter title={this.title} id={this.title.replace(/( |:|\/|\.)/g, "-").toLowerCase()}>
                 {componentControllersDefinitions}
             </psk-chapter>
         );

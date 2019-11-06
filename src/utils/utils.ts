@@ -7,7 +7,7 @@ export function format(first: string, middle: string, last: string): string {
 }
 
 export function scrollToElement(elementId: string, htmlView: HTMLElement): void {
-	const selector = elementId.replace(/( |:|\/)/g,"-").toLowerCase();
+	const selector = elementId.replace(/( |:|\/|\.)/g,"-").toLowerCase();
 	const chapterElm = htmlView.querySelector(`#${selector}`);
 
 	if (!chapterElm) {

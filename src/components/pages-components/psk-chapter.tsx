@@ -7,10 +7,10 @@ import { Chapter } from "../../interfaces/Chapter";
 })
 export class PskChapter {
 
-	@Prop() title: string = "";
+	@Prop({ reflect: true }) title: string = "";
+	@Prop({ reflect: true, mutable: true }) guid: string;
 
 	@State() chapterInfo: Chapter;
-	@State() guid: string;
 	@State() reportedToc: boolean = false;
 
 	@Event({
@@ -28,9 +28,11 @@ export class PskChapter {
 			});
 		};
 
+		this.guid = _uuidv4();
+
 		this.chapterInfo = {
 			title: this.title,
-			guid: _uuidv4(),
+			guid: this.guid,
 			children: []
 		}
 	}
@@ -68,7 +70,9 @@ export class PskChapter {
 
 	render() {
 		return (
-			<psk-card title={this.title} id={this.title.replace(/( |:|\/)/g, "-").toLowerCase()}>
+			<psk-card
+				title={this.title}
+				id={this.title.replace(/( |:|\/|\.)/g, "-").toLowerCase()}>
 				<slot />
 			</psk-card>
 		);
