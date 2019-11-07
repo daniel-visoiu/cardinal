@@ -4,9 +4,9 @@ import { StyleCustomisation } from '../../interfaces/StyleCustomisation'
 import Config from "./Config.js";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import { TableOfContentEvent } from "../../decorators/TableOfContentEvent";
+import CustomTheme from "../../decorators/CustomTheme";
 @Component({
     tag: 'psk-list-feedbacks',
-    styleUrl: './psk-list-feedbacks.css',
     shadow: true
 })
 export class PskListFeebacks {
@@ -18,6 +18,7 @@ export class PskListFeebacks {
     @State() opened: boolean = false;
     @State() typeOfAlert: Array<string> = [];
    
+    @CustomTheme()
     @TableOfContentProperty({
         description: `This property is a object based on StyleCustomisation interface `,
         isMandatory: false,

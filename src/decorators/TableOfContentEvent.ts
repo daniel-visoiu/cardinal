@@ -55,7 +55,6 @@ export function TableOfContentEvent(opts: d.EventOptions) {
 
         proto.render = function () {
             let self = this;
-            console.log(self)
             if (!self.componentDefinitions
                 || !(self.componentDefinitions && self.componentDefinitions[typeDefined])) {
                 return render && render.call(self);

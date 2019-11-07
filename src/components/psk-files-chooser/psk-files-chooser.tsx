@@ -1,15 +1,15 @@
 import { Component, h, Prop } from '@stencil/core';
 import { WgFile } from "../../interfaces/WgFile";
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
+import CustomTheme from '../../decorators/CustomTheme';
 
 @Component({
 	tag: 'psk-files-chooser',
-	styleUrl: './psk-files-chooser.css',
 	shadow: true
 })
 
 export class PskFilesChooser {
-
+	@CustomTheme()
 	@TableOfContentProperty({
 		description:`This is the lable of the button`,
 		isMandatory: false,

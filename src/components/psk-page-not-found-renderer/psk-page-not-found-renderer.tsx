@@ -1,12 +1,12 @@
 import { Component, h } from '@stencil/core';
+import CustomTheme from '../../decorators/CustomTheme';
 
 @Component({
     tag: 'psk-page-not-found-renderer',
-    styleUrl: './psk-page-not-found-renderer.css',
     shadow: true
 })
 export class PskPageNotFoundRenderer {
-
+    @CustomTheme()
     render() {
         return (
             <div class="container">

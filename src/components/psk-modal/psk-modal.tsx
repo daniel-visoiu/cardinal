@@ -1,14 +1,14 @@
 import { Component, h, Prop, Event, EventEmitter } from '@stencil/core';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
+import CustomTheme from '../../decorators/CustomTheme';
 
 @Component({
 	tag: 'psk-modal',
-	styleUrl: './psk-modal.css',
 	shadow: true
 })
 export class PskModal {
-
+	@CustomTheme()
 	@TableOfContentProperty({
 		description: `This is the property that gives the state of the modal if it is opened or closed. The posible values are true or false.`,
 		isMandatory: false,

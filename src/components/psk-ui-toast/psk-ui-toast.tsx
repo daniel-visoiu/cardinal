@@ -2,15 +2,15 @@ import { Component, h, Prop, Event, EventEmitter, State } from '@stencil/core'
 import {StyleCustomisation} from '../../interfaces/StyleCustomisation'
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
+import CustomTheme from '../../decorators/CustomTheme';
 
 @Component({
     tag: "psk-ui-toast",
-    styleUrls: ['../../../themes/default/assets/bootstrap/css/bootstrap.min.css', './psk-ui-toast.css'],
     shadow: true
 })
 
 export class ToastComponent {
-
+    @CustomTheme()
     @TableOfContentProperty({
         description: `This property is the message that will be rendered on the toast`,
         isMandatory : false,

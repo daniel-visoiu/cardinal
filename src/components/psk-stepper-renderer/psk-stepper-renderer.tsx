@@ -1,16 +1,16 @@
 import { Component, h, Prop } from '@stencil/core';
 import { WizardStep } from '../../interfaces/Wizard';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
+import CustomTheme from '../../decorators/CustomTheme';
 
 @Component({
     tag: 'psk-stepper-renderer',
-    styleUrl: "./psk-stepper-renderer.css",
     shadow: true
 })
 export class PskStepperRenderer {
-
+    @CustomTheme()
     @TableOfContentProperty({
-        description:`This property holds an array of:
+        description: `This property holds an array of:
             wizard configuration
             the names of the steps
             the components that will be displayed

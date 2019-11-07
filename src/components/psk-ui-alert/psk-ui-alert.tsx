@@ -3,14 +3,14 @@ import Config from "../psk-list-feedbacks/Config.js";
 
 import {StyleCustomisation} from '../../interfaces/StyleCustomisation';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty.js';
+import CustomTheme from '../../decorators/CustomTheme.js';
 @Component({
     tag: "psk-ui-alert",
-    styleUrls: ['../../../themes/default/assets/bootstrap/css/bootstrap.min.css', './psk-ui-alert.css'],
     shadow: true
 })
 
 export class AlertComponent {
-
+    @CustomTheme()
     @TableOfContentProperty({
         description: `This property is a string that indicates the type of alert that you want so send back to the user`,
         isMandatory: false,

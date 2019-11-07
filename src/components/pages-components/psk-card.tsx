@@ -1,12 +1,12 @@
 import { Component, h, Prop } from "@stencil/core";
+import CustomTheme from "../../decorators/CustomTheme";
 
 @Component({
 	tag: "psk-card",
-	styleUrl: './page.css'
 })
 
 export class PskCard {
-
+	@CustomTheme()
 	@Prop() title: string = "";
 	@Prop() id: string = "";
 

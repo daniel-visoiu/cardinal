@@ -1,11 +1,12 @@
 import { Component, h, Prop, EventEmitter } from '@stencil/core';
+import CustomTheme from '../../decorators/CustomTheme';
 
 @Component({
 	tag: 'psk-button',
-	styleUrl: './psk-button.css',
 	shadow: true
 })
 export class PskButton {
+	@CustomTheme()
 	@Prop() label: string;
 	@Prop() buttonClass: string = "btn btn-primary";
 	@Prop() eventData: any;

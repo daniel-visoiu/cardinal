@@ -1,13 +1,13 @@
 import { Component, h, Prop } from '@stencil/core';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
+import CustomTheme from '../../decorators/CustomTheme';
 
 @Component({
 	tag: 'psk-page-not-found',
-	styleUrl: './psk-page-not-found.css',
 	shadow: true
 })
 export class PskPageNotFound {
-
+	@CustomTheme()
 	@TableOfContentProperty({
 		description: `This property is the base path of the website. 
 		If this parameter is sent to the component, then when the user navigates to an unknown page, he will be redirected to the base path. 

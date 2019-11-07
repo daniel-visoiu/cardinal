@@ -2,13 +2,13 @@ import { Component, h, Prop, State, Event, EventEmitter } from '@stencil/core';
 import { WizardStep } from '../../interfaces/Wizard';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
+import CustomTheme from '../../decorators/CustomTheme';
 
 @Component({
     tag: 'psk-wizard',
-    styleUrl: './psk-wizard.css'
 })
 export class PskWizard {
-
+    @CustomTheme()
     @TableOfContentProperty({
         description: `This property is the string that defines the psk-stepper render`,
         isMandatory: false,

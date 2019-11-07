@@ -1,14 +1,14 @@
 import { Component, h, Event, EventEmitter, State, Prop, Listen } from '@stencil/core';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
+import CustomTheme from '../../decorators/CustomTheme';
 
 @Component({
 	tag: 'psk-pin-popup',
-	styleUrl: './psk-pin-popup.css',
 	shadow: true
 })
 export class PskPinPopup {
-
+	@CustomTheme()
 	@TableOfContentProperty({
 		description: `This is the property that gives the state of the popup if it is opened or closed.The possible values are ture or false`,
 		isMandatory: false,
