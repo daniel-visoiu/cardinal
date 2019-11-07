@@ -1,6 +1,6 @@
-import {getElement} from "@stencil/core";
-import {ComponentInterface} from "@stencil/core/dist/declarations";
-import {BUILD} from "@stencil/core/build-conditionals";
+import { getElement } from "@stencil/core";
+import { ComponentInterface } from "@stencil/core/dist/declarations";
+import { BUILD } from "@stencil/core/build-conditionals";
 
 declare type MyDecoratorResult = (
   target: ComponentInterface,
@@ -14,11 +14,11 @@ export default function CustomTheme(): MyDecoratorResult {
     // lifecycle events not being called when not explicitly declared in at least one of components from bundle
     BUILD.cmpDidLoad = true;
     BUILD.cmpDidUnload = true;
-    const {componentDidLoad, componentDidUnload} = proto;
+    const { connectedCallback, componentDidUnload } = proto;
 
-    proto.componentDidLoad = function () {
+    proto.connectedCallback = function () {
       const host = getElement(this);
-      if(!host){
+      if (!host) {
         //current component does not have a shadow dom.
         return;
       }
@@ -26,17 +26,17 @@ export default function CustomTheme(): MyDecoratorResult {
       // @ts-ignore
       if (typeof globalConfig !== "undefined" && typeof globalConfig.theme === "string") {
         // @ts-ignore
-        let themeStylePath = "/themes/"+globalConfig.theme+"/components/" + componentName + "/" + componentName + ".css";
+        let themeStylePath = "/themes/" + globalConfig.theme + "/components/" + componentName + "/" + componentName + ".css";
         var styleElement = document.createElement("link");
         styleElement.setAttribute("rel", "stylesheet");
         styleElement.setAttribute("href", themeStylePath);
         host.shadowRoot.prepend(styleElement);
       }
-      else{
+      else {
         console.error("Theme or globalConfig is not defind!");
       }
 
-      return componentDidLoad && componentDidLoad.call(this);
+      return connectedCallback && connectedCallback.call(this);
     };
 
     proto.componentDidUnload = function () {

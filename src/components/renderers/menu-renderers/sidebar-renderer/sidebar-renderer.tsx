@@ -4,7 +4,6 @@ import CustomTheme from "../../../../decorators/CustomTheme";
 
 @Component({
   tag: 'sidebar-renderer',
-  styleUrl: '../../../../../themes/default/components/sidebar-renderer/sidebar-renderer.css',
   shadow: true
 })
 
