@@ -9,7 +9,7 @@
 
 ### Depends on
 
-- [app-menu](../app-menu)
+- [app-menu](..\app-menu)
 
 ### Graph
 ```mermaid

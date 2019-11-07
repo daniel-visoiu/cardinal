@@ -36,6 +36,6 @@ export class PskTag {
 			return <div>{sourceCode}</div>;
 		}
 
-		return <psk-chapter>{sourceCode}</psk-chapter>;
+		return <psk-chapter title={this.title}>{sourceCode}</psk-chapter>;
 	}
 }

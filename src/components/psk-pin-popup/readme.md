@@ -23,7 +23,7 @@
 
 ### Depends on
 
-- [psk-modal](../psk-modal)
+- [psk-modal](..\psk-modal)
 
 ### Graph
 ```mermaid
