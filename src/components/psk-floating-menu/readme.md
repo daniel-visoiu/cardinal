@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property    | Attribute | Description | Type                 | Default     |
-| ----------- | --------- | ----------- | -------------------- | ----------- |
-| `menuItems` | --        |             | `FloatingMenuItem[]` | `undefined` |
-| `opened`    | `opened`  |             | `boolean`            | `false`     |
+| Property    | Attribute | Description | Type         | Default     |
+| ----------- | --------- | ----------- | ------------ | ----------- |
+| `menuItems` | --        |             | `MenuItem[]` | `undefined` |
+| `opened`    | `opened`  |             | `boolean`    | `false`     |
 
 
 ----------------------------------------------

@@ -1,5 +1,5 @@
 import { Component, h, Prop } from '@stencil/core';
-import { FloatingMenuItem } from '../../interfaces/FloatingMenuItem'
+import { MenuItem } from '../../interfaces/MenuItem'
 import CustomTheme from '../../decorators/CustomTheme';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 
@@ -10,7 +10,7 @@ import { TableOfContentProperty } from '../../decorators/TableOfContentProperty'
 })
 export class FloatingMenu {
     @CustomTheme()
-    @Prop() menuItems: FloatingMenuItem[];
+    @Prop() menuItems: MenuItem[];
     @TableOfContentProperty({
         description: `This property shows the state of the backdrop on the floating menu`,
         isMandatory: false,
@@ -30,11 +30,12 @@ export class FloatingMenu {
                 <ul class="items">
                     {
                         this.menuItems.map(menuItem => {
-                            return <li>
-                                <wg-anchor
+                            // return <li>
+                                {/* <wg-anchor
                                     label={menuItem.label}
-                                    href={menuItem.href} />
-                            </li>;
+                                    href={menuItem.href} /> */}
+                            <li onClick={() => {this.opened= !this.opened}} class="nav-item">{menuItem}</li>
+                            {/* </li>; */}
                         })
                     }
                 </ul>
