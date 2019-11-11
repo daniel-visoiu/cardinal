@@ -16,9 +16,9 @@
 
 ### Depends on
 
-- [psk-user-profile](..\..\psk-user-profile)
-- [app-menu](..\..\app-menu)
-- [psk-app-router](..\..\psk-app-router)
+- [psk-user-profile](../../psk-user-profile)
+- [app-menu](../../app-menu)
+- [psk-app-router](../../psk-app-router)
 
 ### Graph
 ```mermaid
