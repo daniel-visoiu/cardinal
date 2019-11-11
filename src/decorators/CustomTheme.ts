@@ -1,42 +1,55 @@
-import { getElement } from "@stencil/core";
-import { ComponentInterface } from "@stencil/core/dist/declarations";
-import { BUILD } from "@stencil/core/build-conditionals";
+import {getElement} from "@stencil/core";
+import {ComponentInterface} from "@stencil/core/dist/declarations";
 
-declare type MyDecoratorResult = (
-	target: ComponentInterface,
-	methodName: string
+declare type CustomThemeInterface = (
+  target: ComponentInterface,
+  methodName: string
 ) => void;
 
 
-export default function CustomTheme(): MyDecoratorResult {
-	return (proto: ComponentInterface) => {
-		BUILD.cmpDidLoad = true;
-		BUILD.cmpDidUnload = true;
-		const { connectedCallback } = proto;
+export default function CustomTheme(): CustomThemeInterface {
+  return (proto: ComponentInterface) => {
 
-		proto.connectedCallback = function () {
-			const host = getElement(this);
-			if (!host) {
-				//current component does not have a shadow dom.
-				return;
-			}
-			let componentName = host.tagName.toLowerCase();
-			// @ts-ignore
-			if (typeof globalConfig !== "undefined" && typeof globalConfig.theme === "string") {
-				// @ts-ignore
-				let themeStylePath = "/themes/" + globalConfig.theme + "/components/" + componentName + "/" + componentName + ".css";
-				var styleElement = document.createElement("link");
-				styleElement.setAttribute("rel", "stylesheet");
-				styleElement.setAttribute("href", themeStylePath);
-				if (host.shadowRoot) {
-					host.shadowRoot.prepend(styleElement);
-				}
-			}
-			else {
-				console.error("Theme or globalConfig is not defind!");
-			}
+    const {componentWillLoad} = proto;
 
-			return connectedCallback && connectedCallback.call(this);
-		};
-	};
+    proto.componentWillLoad = function () {
+      const host = getElement(this);
+      if (!host || !host.shadowRoot) {
+        //current component does not have a shadow dom.
+        return componentWillLoad && componentWillLoad.call(this);
+      }
+      else {
+        // @ts-ignore
+        if (typeof globalConfig !== "undefined" && typeof globalConfig.theme === "string") {
+
+          let componentName = host.tagName.toLowerCase();
+          return new Promise((resolve) => {
+
+            // @ts-ignore
+            let themeStylePath = "/themes/" + globalConfig.theme + "/components/" + componentName + "/" + componentName + ".css";
+            var styleElement = document.createElement("link");
+            styleElement.setAttribute("rel", "stylesheet");
+            styleElement.setAttribute("href", themeStylePath);
+
+            // @ts-ignore
+            host.shadowRoot.prepend(styleElement);
+
+            styleElement.onload = () => {
+              resolve(componentWillLoad && componentWillLoad.call(this));
+            };
+
+            styleElement.onerror = () => {
+              console.log(`File ${themeStylePath} was not found`);
+              //we let the component to render anyway
+              resolve(componentWillLoad && componentWillLoad.call(this));
+            };
+
+          })
+        }
+        else {
+          console.error("Theme or globalConfig is not defind!");
+        }
+      }
+    };
+  };
 }
