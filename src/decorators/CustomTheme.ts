@@ -21,7 +21,6 @@ export default function CustomTheme(): CustomThemeInterface {
       else {
         // @ts-ignore
         if (typeof globalConfig !== "undefined" && typeof globalConfig.theme === "string") {
-
           let componentName = host.tagName.toLowerCase();
           return new Promise((resolve) => {
 
@@ -33,17 +32,28 @@ export default function CustomTheme(): CustomThemeInterface {
 
             // @ts-ignore
             host.shadowRoot.prepend(styleElement);
+            let styleWasLoaded = false;
 
-            styleElement.onload = () => {
-              resolve(componentWillLoad && componentWillLoad.call(this));
+            let checkIfShouldResolve =  ()=> {
+              if (!styleWasLoaded) {
+                styleWasLoaded = true;
+                resolve(componentWillLoad && componentWillLoad.call(this));
+              }
             };
 
+            styleElement.onload = checkIfShouldResolve;
             styleElement.onerror = () => {
               console.log(`File ${themeStylePath} was not found`);
               //we let the component to render anyway
-              resolve(componentWillLoad && componentWillLoad.call(this));
+              checkIfShouldResolve();
             };
 
+            //don't block the UI
+            setTimeout(() => {
+              if (styleWasLoaded === false) {
+                resolve(componentWillLoad && componentWillLoad.call(this));
+              }
+            }, 200)
           })
         }
         else {
