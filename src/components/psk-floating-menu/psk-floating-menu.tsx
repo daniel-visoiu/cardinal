@@ -12,14 +12,15 @@ export class FloatingMenu {
     @CustomTheme()
     @Prop() menuItems: FloatingMenuItem[];
     @TableOfContentProperty({
-        description:`This property shows the state of the backdrop on the floating menu`,
-        isMandatory:false,
-        propertyType:`boolean`,
+        description: `This property shows the state of the backdrop on the floating menu`,
+        isMandatory: false,
+        propertyType: `boolean`,
         defaultValue: `false`
     })
     @Prop({ reflectToAttr: true, mutable: true }) opened: boolean = false;
-
     render() {
+        console.log(this.menuItems);
+        console.log(this.opened)
         return [
             <div id="backdrop" onClick={(event) => {
                 event.preventDefault();
