@@ -51,9 +51,10 @@ export default function CustomTheme(): CustomThemeInterface {
             //don't block the UI
             setTimeout(() => {
               if (styleWasLoaded === false) {
+                styleWasLoaded = true;
                 resolve(componentWillLoad && componentWillLoad.call(this));
               }
-            }, 200)
+            }, 500)
           })
         }
         else {
