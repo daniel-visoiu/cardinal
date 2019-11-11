@@ -10,13 +10,21 @@ import { TableOfContentProperty } from '../../decorators/TableOfContentProperty'
 })
 export class FloatingMenu {
     @CustomTheme()
-    @Prop() menuItems: MenuItem[];
+
     @TableOfContentProperty({
-        description: `This property shows the state of the backdrop on the floating menu`,
+        description:`This property represents the elements that should be rendered in a Floating Menu.`,
+        isMandatory: true,
+        propertyType: `Array of MenuItem(MenuItem[])`
+    })
+    @Prop() menuItems: MenuItem[];
+
+    @TableOfContentProperty({
+        description: `This property shows the state of the backdrop on the Floating Menu and the Floating Menu itself.`,
         isMandatory: false,
         propertyType: `boolean`,
         defaultValue: `false`
     })
+
     @Prop({ reflectToAttr: true, mutable: true }) opened: boolean = false;
     render() {
         console.log(this.menuItems);
