@@ -1,6 +1,6 @@
 import {Component, h, Prop, EventEmitter, Event, State, Element} from '@stencil/core';
-import {HistoryType} from "@stencil/router/dist/types/global/interfaces";
 import ControllerFactory from "../../services/ControllerFactory";
+import {ExtendedHistoryType} from "../../interfaces/ExtendedHistoryType";
 
 @Component({
   tag: 'psk-app-root',
@@ -9,7 +9,7 @@ import ControllerFactory from "../../services/ControllerFactory";
 export class PskAppRoot {
   @Prop() controller: any;
   @State() mobileLayout: boolean = false;
-  @Prop() historyType: HistoryType;
+  @Prop() historyType: ExtendedHistoryType;
   @State() componentCode: string = "";
   @Element() host: HTMLDivElement;
   @State() hasSlot: boolean = false;

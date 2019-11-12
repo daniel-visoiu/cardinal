@@ -2,7 +2,7 @@ import { Component, Event, EventEmitter, Prop, h } from "@stencil/core";
 import { MenuItem } from "../../interfaces/MenuItem";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import { TableOfContentEvent } from "../../decorators/TableOfContentEvent";
-import { HistoryType } from "@stencil/router/dist/types/global/interfaces";
+import {ExtendedHistoryType} from "../../interfaces/ExtendedHistoryType";
 
 @Component({
   tag: "psk-app-router",
@@ -24,7 +24,7 @@ export class PskAppRouter {
     propertyType: `string`,
     defaultValue: `browser`
   })
-  @Prop() historyType: HistoryType;
+  @Prop() historyType: ExtendedHistoryType;
   @Prop() failRedirectTo: string = "";
 
   @TableOfContentEvent({
@@ -57,7 +57,7 @@ export class PskAppRouter {
       if (item.children) {
         return this.renderItems(item.children)
       } else {
-        return <stencil-route url={item.path} exact={item.exact} component={item.component}
+        return <stencil-route url={item.path} component={item.component}
           componentProps={item.componentProps} />
       }
     });
@@ -73,7 +73,7 @@ export class PskAppRouter {
     }
     return (
       <div class="app_container">
-        <stencil-router historyType={this.historyType}>
+        <stencil-router historyType={this.historyType === "query" ? "browser" : this.historyType}>
 
           <stencil-route-switch scrollTopOffset={0}>
             {routes}

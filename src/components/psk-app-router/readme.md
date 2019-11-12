@@ -7,11 +7,11 @@
 
 ## Properties
 
-| Property         | Attribute          | Description | Type                  | Default     |
-| ---------------- | ------------------ | ----------- | --------------------- | ----------- |
-| `failRedirectTo` | `fail-redirect-to` |             | `string`              | `""`        |
-| `historyType`    | `history-type`     |             | `"browser" \| "hash"` | `undefined` |
-| `menuItems`      | --                 |             | `MenuItem[]`          | `[]`        |
+| Property         | Attribute          | Description | Type                             | Default     |
+| ---------------- | ------------------ | ----------- | -------------------------------- | ----------- |
+| `failRedirectTo` | `fail-redirect-to` |             | `string`                         | `""`        |
+| `historyType`    | `history-type`     |             | `"browser" \| "hash" \| "query"` | `undefined` |
+| `menuItems`      | --                 |             | `MenuItem[]`                     | `[]`        |
 
 
 ## Events
