@@ -1,6 +1,7 @@
 import { Component, h, Prop, State, getElement, Listen } from '@stencil/core';
 import { closestParentElement, scrollToElement } from '../../utils/utils';
 import { Chapter } from '../../interfaces/Chapter';
+import { RouterHistory, injectHistory } from '@stencil/router';
 
 @Component({
     tag: 'psk-toc',
@@ -9,6 +10,7 @@ import { Chapter } from '../../interfaces/Chapter';
 export class PskToc {
 
     @Prop() title: string;
+    @Prop() history: RouterHistory;
     @State() pskPageElement: HTMLElement;
     @State() chapterList: Array<Chapter> = [];
 
@@ -75,7 +77,7 @@ export class PskToc {
                 <li onClick={(evt: MouseEvent) => {
                     evt.stopImmediatePropagation();
                     evt.preventDefault();
-                    scrollToElement(chapter.title, pageElement);
+                    scrollToElement(chapter.title, pageElement, this.history);
                 }}>
                     <span>{`${indexToDisplay} ${chapter.title}`}</span>
                     {
@@ -97,3 +99,5 @@ export class PskToc {
         );
     }
 }
+
+injectHistory(PskToc);

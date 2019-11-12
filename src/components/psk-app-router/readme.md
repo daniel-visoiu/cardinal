@@ -7,11 +7,10 @@
 
 ## Properties
 
-| Property         | Attribute          | Description | Type                  | Default     |
-| ---------------- | ------------------ | ----------- | --------------------- | ----------- |
-| `failRedirectTo` | `fail-redirect-to` |             | `string`              | `""`        |
-| `historyType`    | `history-type`     |             | `"browser" \| "hash"` | `undefined` |
-| `menuItems`      | --                 |             | `MenuItem[]`          | `[]`        |
+| Property    | Attribute | Description | Type            | Default     |
+| ----------- | --------- | ----------- | --------------- | ----------- |
+| `history`   | --        |             | `RouterHistory` | `undefined` |
+| `menuItems` | --        |             | `MenuItem[]`    | `[]`        |
 
 
 ## Events
@@ -25,12 +24,12 @@
 
 ### Used by
 
- - [psk-default-renderer](../renderers/app-root-renders)
+ - [psk-default-renderer](..\renderers\app-root-renders)
 
 ### Depends on
 
 - stencil-route
-- [psk-ui-loader](../psk-ui-loader)
+- [psk-ui-loader](..\psk-ui-loader)
 - stencil-router
 - stencil-route-switch
 

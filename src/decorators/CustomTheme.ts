@@ -1,5 +1,5 @@
-import {getElement} from "@stencil/core";
-import {ComponentInterface} from "@stencil/core/dist/declarations";
+import { getElement } from "@stencil/core";
+import { ComponentInterface } from "@stencil/core/dist/declarations";
 
 declare type CustomThemeInterface = (
   target: ComponentInterface,
@@ -10,7 +10,7 @@ declare type CustomThemeInterface = (
 export default function CustomTheme(): CustomThemeInterface {
   return (proto: ComponentInterface) => {
 
-    const {componentWillLoad} = proto;
+    const { componentWillLoad } = proto;
 
     proto.componentWillLoad = function () {
       const host = getElement(this);
@@ -34,7 +34,7 @@ export default function CustomTheme(): CustomThemeInterface {
             host.shadowRoot.prepend(styleElement);
             let styleWasLoaded = false;
 
-            let checkIfShouldResolve =  ()=> {
+            let checkIfShouldResolve = () => {
               if (!styleWasLoaded) {
                 styleWasLoaded = true;
                 resolve(componentWillLoad && componentWillLoad.call(this));

@@ -7,18 +7,18 @@
 
 ## Properties
 
-| Property      | Attribute      | Description | Type                  | Default     |
-| ------------- | -------------- | ----------- | --------------------- | ----------- |
-| `historyType` | `history-type` |             | `"browser" \| "hash"` | `undefined` |
+| Property  | Attribute | Description | Type            | Default     |
+| --------- | --------- | ----------- | --------------- | ----------- |
+| `history` | --        |             | `RouterHistory` | `undefined` |
 
 
 ## Dependencies
 
 ### Depends on
 
-- [psk-user-profile](../../psk-user-profile)
-- [app-menu](../../app-menu)
-- [psk-app-router](../../psk-app-router)
+- [psk-user-profile](..\..\psk-user-profile)
+- [app-menu](..\..\app-menu)
+- [psk-app-router](..\..\psk-app-router)
 
 ### Graph
 ```mermaid

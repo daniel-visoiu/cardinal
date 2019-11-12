@@ -1,6 +1,7 @@
 import { Chapter } from "../../interfaces/Chapter";
 import { scrollToElement, createCustomEvent } from "../../utils/utils";
 import { Component, h, Prop, Listen, State, Element } from "@stencil/core";
+import { RouterHistory, injectHistory } from "@stencil/router";
 
 @Component({
 	tag: "psk-page",
@@ -13,6 +14,7 @@ export class PskPage {
 
 	@Prop() title: string = "";
 	@Prop() tocTitle: string;
+	@Prop() history: RouterHistory;
 	@State() componentFullyLoaded: boolean = false;
 
 	@Element() private element: HTMLElement;
@@ -46,14 +48,14 @@ export class PskPage {
 	}
 
 	_checkForChapterScrolling(): void {
-		if (window.location.href.indexOf("?chapter=") === -1) {
+		const chapterName = window.location.hash.trim();
+
+		if (chapterName.length === 0) {
 			return;
 		}
 
-		const chapterName = window.location.href.split("?chapter=")[1];
-
 		setTimeout(() => {
-			scrollToElement(chapterName, this.element);
+			scrollToElement(chapterName, this.element, this.history);
 		}, 50);
 	}
 
@@ -86,3 +88,5 @@ export class PskPage {
 		)
 	}
 }
+
+injectHistory(PskPage);

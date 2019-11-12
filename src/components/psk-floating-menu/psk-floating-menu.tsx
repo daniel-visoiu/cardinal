@@ -12,7 +12,7 @@ export class FloatingMenu {
     @CustomTheme()
 
     @TableOfContentProperty({
-        description:`This property represents the elements that should be rendered in a Floating Menu.`,
+        description: `This property represents the elements that should be rendered in a Floating Menu.`,
         isMandatory: true,
         propertyType: `Array of MenuItem(MenuItem[])`
     })
@@ -27,8 +27,6 @@ export class FloatingMenu {
 
     @Prop({ reflectToAttr: true, mutable: true }) opened: boolean = false;
     render() {
-        console.log(this.menuItems);
-        console.log(this.opened)
         return [
             <div id="backdrop" onClick={(event) => {
                 event.preventDefault();
@@ -38,12 +36,7 @@ export class FloatingMenu {
                 <ul class="items">
                     {
                         this.menuItems.map(menuItem => {
-                            // return <li>
-                                {/* <wg-anchor
-                                    label={menuItem.label}
-                                    href={menuItem.href} /> */}
-                            <li onClick={() => {this.opened= !this.opened}} class="nav-item">{menuItem}</li>
-                            {/* </li>; */}
+                            <li onClick={() => { this.opened = !this.opened }} class="nav-item">{menuItem}</li>
                         })
                     }
                 </ul>

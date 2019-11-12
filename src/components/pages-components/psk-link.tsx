@@ -1,6 +1,7 @@
 import { Component, h, Prop, Event, EventEmitter, State } from "@stencil/core";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import { TableOfContentEvent } from "../../decorators/TableOfContentEvent";
+import { RouterHistory, injectHistory } from "@stencil/router";
 
 @Component({
     tag: "psk-link",
@@ -15,6 +16,8 @@ export class PskLink {
         propertyType: "string"
     })
     @Prop() page: string;
+
+    @Prop() history: RouterHistory;
 
     @TableOfContentEvent({
         description: [
@@ -31,7 +34,7 @@ export class PskLink {
     }) validateUrl: EventEmitter;
 
     @State() error: boolean = false;
-    @State() destinationUrl: string = "#";
+    @State() destinationUrl: string;
 
     render() {
         return (
@@ -39,10 +42,10 @@ export class PskLink {
                 title={this.error ? "Temporary unavailable" : ""}
                 class={`btn btn-link ${this.error ? 'invalid-url' : ''}`}
                 onClick={(evt: MouseEvent) => {
-                    if (this.error) {
+                    if (this.error || !this.destinationUrl) {
                         evt.preventDefault();
                     } else {
-                        window.location.href = this.destinationUrl;
+                        this.history.push(this.destinationUrl);
                     }
                 }}>
                 <slot />
@@ -59,7 +62,7 @@ export class PskLink {
             sourceUrl: this.page,
             callback: (err, data) => {
                 if (!err) {
-                    this.destinationUrl = `${window.location.origin}/#${data}`;
+                    this.destinationUrl = data;
                 } else {
                     this.error = true;
                 }
@@ -67,3 +70,5 @@ export class PskLink {
         });
     }
 }
+
+injectHistory(PskLink);

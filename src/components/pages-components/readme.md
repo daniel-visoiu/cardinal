@@ -7,9 +7,10 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type     | Default     |
-| -------- | --------- | ----------- | -------- | ----------- |
-| `title`  | `title`   |             | `string` | `undefined` |
+| Property  | Attribute | Description | Type            | Default     |
+| --------- | --------- | ----------- | --------------- | ----------- |
+| `history` | --        |             | `RouterHistory` | `undefined` |
+| `title`   | `title`   |             | `string`        | `undefined` |
 
 
 ## Dependencies
