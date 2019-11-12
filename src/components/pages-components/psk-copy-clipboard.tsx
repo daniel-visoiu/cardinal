@@ -1,7 +1,6 @@
 import { Component, h, Prop, Element } from "@stencil/core";
 import { closestParentElement, scrollToElement } from "../../utils/utils";
 import { TOOLTIP_TEXT, TOOLTIP_COPIED_TEXT } from "../../utils/constants";
-import { RouterHistory, injectHistory } from "@stencil/router";
 
 @Component({
     tag: "psk-copy-clipboard",
@@ -11,18 +10,22 @@ import { RouterHistory, injectHistory } from "@stencil/router";
 export class PskCard {
 
     @Prop() id: string = "";
-    @Prop() history: RouterHistory;
     @Element() private element: HTMLElement;
 
     _copyToClipboardHandler(elementId: string): void {
         try {
-            navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}#${elementId}`);
+            let basePath = window.location.href;
+            if (window.location.href.indexOf("?chapter=") !== -1) {
+                basePath = window.location.href.split("?chapter=")[0];
+            }
+
+            navigator.clipboard.writeText(`${basePath}?chapter=${elementId}`);
 
             const tooltipTextArea: HTMLElement = this.element.querySelector('.tooltip');
             tooltipTextArea.innerHTML = TOOLTIP_COPIED_TEXT;
             tooltipTextArea.setAttribute("class", "tooltip copied");
 
-            scrollToElement(elementId, closestParentElement(this.element, 'psk-page'), this.history);
+            scrollToElement(elementId, closestParentElement(this.element, 'psk-page'));
 
         } catch (err) {
             console.error(err);
@@ -72,5 +75,3 @@ export class PskCard {
         )
     }
 }
-
-injectHistory(PskCard);

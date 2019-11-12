@@ -1,5 +1,3 @@
-import { RouterHistory } from "@stencil/router";
-
 export function format(first: string, middle: string, last: string): string {
 	return (
 		(first || '') +
@@ -8,12 +6,9 @@ export function format(first: string, middle: string, last: string): string {
 	);
 }
 
-export function scrollToElement(elementId: string, htmlView: HTMLElement, history: RouterHistory): void {
-	if (!history) {
-		return;
-	}
-	const selector = `#${elementId.replace(/#/g, '').replace(/( |:|\/|\.)/g, "-").toLowerCase()}`;
-	const chapterElm = htmlView.querySelector(selector);
+export function scrollToElement(elementId: string, htmlView: HTMLElement): void {
+	const selector = elementId.replace(/( |:|\/|\.)/g,"-").toLowerCase();
+	const chapterElm = htmlView.querySelector(`#${selector}`);
 
 	if (!chapterElm) {
 		return;
@@ -23,7 +18,11 @@ export function scrollToElement(elementId: string, htmlView: HTMLElement, histor
 		behavior: 'smooth'
 	});
 
-	window.location.hash = selector;
+	let basePath = window.location.href;
+	if (window.location.href.indexOf("?chapter=") !== -1) {
+		basePath = window.location.href.split("?chapter=")[0];
+	}
+	window.location.href = `${basePath}?chapter=${selector}`;
 }
 
 export function createCustomEvent(eventName: string, options: any, trigger: boolean = false) {

@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property     | Attribute    | Description | Type            | Default     |
-| ------------ | ------------ | ----------- | --------------- | ----------- |
-| `controller` | `controller` |             | `any`           | `undefined` |
-| `history`    | --           |             | `RouterHistory` | `undefined` |
+| Property      | Attribute      | Description | Type                  | Default     |
+| ------------- | -------------- | ----------- | --------------------- | ----------- |
+| `controller`  | `controller`   |             | `any`                 | `undefined` |
+| `historyType` | `history-type` |             | `"browser" \| "hash"` | `undefined` |
 
 
 ## Events

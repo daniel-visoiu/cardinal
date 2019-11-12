@@ -26,7 +26,7 @@
 
 ### Depends on
 
-- [psk-stepper](..\psk-stepper)
+- [psk-stepper](../psk-stepper)
 
 ### Graph
 ```mermaid

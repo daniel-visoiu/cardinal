@@ -1,60 +1,58 @@
-import { Component, h, Prop, EventEmitter, Event, State, Element } from '@stencil/core';
-import { RouterHistory } from "@stencil/router/dist/types/global/interfaces";
+import {Component, h, Prop, EventEmitter, Event, State, Element} from '@stencil/core';
+import {HistoryType} from "@stencil/router/dist/types/global/interfaces";
 import ControllerFactory from "../../services/ControllerFactory";
-import { injectHistory } from '@stencil/router';
 
 @Component({
-	tag: 'psk-app-root',
-	shadow: true
+  tag: 'psk-app-root',
+  shadow: true
 })
 export class PskAppRoot {
-	@Prop() controller: any;
-	@Prop() history: RouterHistory;
+  @Prop() controller: any;
+  @State() mobileLayout: boolean = false;
+  @Prop() historyType: HistoryType;
+  @State() componentCode: string = "";
+  @Element() host: HTMLDivElement;
+  @State() hasSlot: boolean = false;
 
-	@State() mobileLayout: boolean = false;
-	@State() componentCode: string = "";
-	@State() hasSlot: boolean = false;
+  @Event({
+    eventName: 'routeChanged',
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+  }) routeChangedEvent: EventEmitter;
 
-	@Element() host: HTMLDivElement;
+  constructor() {
+    if (this.controller) {
+      let controllerName = this.controller;
+      ControllerFactory.getController(controllerName).then((controller) => {
+        new controller(this.host)
+      })
+    } else {
+      console.log("No controller added to app-root");
+    }
+  }
 
-	@Event({
-		eventName: 'routeChanged',
-		composed: true,
-		cancelable: true,
-		bubbles: true,
-	}) routeChangedEvent: EventEmitter;
+  @Event({
+    eventName: "controllerFactoryIsReady",
+    composed: true,
+    cancelable: true
+  }) cfReadyEvent: EventEmitter;
 
-	@Event({
-		eventName: "controllerFactoryIsReady",
-		composed: true,
-		cancelable: true
-	}) cfReadyEvent: EventEmitter;
 
-	constructor() {
-		if (this.controller) {
-			let controllerName = this.controller;
-			ControllerFactory.getController(controllerName).then((controller) => {
-				new controller(this.host);
-			});
-		} else {
-			console.log("No controller added to app-root");
-		}
-	}
+  componentWillLoad() {
+    this.cfReadyEvent.emit(ControllerFactory);
+    let innerHTML = this.host.innerHTML;
+    innerHTML = innerHTML.replace(/\s/g, "");
+    if (innerHTML.length) {
+      this.hasSlot = true;
+    }
+  }
 
-	componentWillLoad() {
-		this.cfReadyEvent.emit(ControllerFactory);
-		let innerHTML = this.host.innerHTML;
-		innerHTML = innerHTML.replace(/\s/g, "");
-		if (innerHTML.length) {
-			this.hasSlot = true;
-		}
-	}
-
-	render() {
-		let DefaultRendererTag = "psk-default-renderer";
-		return (
-			this.hasSlot ? <slot /> : <DefaultRendererTag />
-		);
-	}
+  render() {
+    let DefaultRendererTag = "psk-default-renderer";
+    let defaultRenderer = <DefaultRendererTag historyType={this.historyType}></DefaultRendererTag>;
+    return (
+      this.hasSlot ? <slot/> : defaultRenderer
+    );
+  }
 }
-injectHistory(PskAppRoot);
