@@ -40,9 +40,7 @@ export class PskContainer {
     return [
       this.htmlFilePath && <psk-page-loader pageUrl={this.htmlFilePath} />,
       this.innerHtml ? this._htmlToElement("div", this.innerHtml) : <slot />,
-      this.controllerScript && (
-        <script type="module" innerHTML={this.controllerScript} />
-      )
+      this.controllerScript && this.controller.executeScript(this.controller, this.controllerScript)
     ];
   }
 
