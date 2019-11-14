@@ -14,8 +14,7 @@ export default function CustomTheme(): CustomThemeInterface {
 
     proto.componentWillLoad = function () {
       const host = getElement(this);
-      if (!host || !host.shadowRoot) {
-        //current component does not have a shadow dom.
+      if (!host) {
         return componentWillLoad && componentWillLoad.call(this);
       }
       else {
@@ -23,17 +22,17 @@ export default function CustomTheme(): CustomThemeInterface {
         if (typeof globalConfig !== "undefined" && typeof globalConfig.theme === "string") {
           let componentName = host.tagName.toLowerCase();
           return new Promise((resolve) => {
-
             // @ts-ignore
             let themeStylePath = "/themes/" + globalConfig.theme + "/components/" + componentName + "/" + componentName + ".css";
             var styleElement = document.createElement("link");
             styleElement.setAttribute("rel", "stylesheet");
             styleElement.setAttribute("href", themeStylePath);
 
+            let parent = host.shadowRoot ? host.shadowRoot : host;
             // @ts-ignore
-            host.shadowRoot.prepend(styleElement);
-            let styleWasLoaded = false;
+            parent.prepend(styleElement);
 
+            let styleWasLoaded = false;
             let checkIfShouldResolve =  ()=> {
               if (!styleWasLoaded) {
                 styleWasLoaded = true;
@@ -54,7 +53,7 @@ export default function CustomTheme(): CustomThemeInterface {
                 styleWasLoaded = true;
                 resolve(componentWillLoad && componentWillLoad.call(this));
               }
-            }, 500)
+            }, 100)
           })
         }
         else {
