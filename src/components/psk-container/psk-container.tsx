@@ -16,11 +16,13 @@ export class PskContainer {
   @Element() host: HTMLElement;
 
   constructor() {
-    if (this.controllerName) {
-      ControllerFactory.getController(this.controllerName).then(instance => {
-        this.controller = new instance(this.host);
-      });
-    }
+    const controllerNameForInstance = this.controllerName 
+      ? this.controllerName 
+      : 'AbstractController';
+
+    ControllerFactory.getController(controllerNameForInstance).then((CTRL) => {
+      this.controller = new CTRL(this.host);
+    });
 
     const scriptInnerHtml: HTMLElement = this.host.querySelector(
       "psk-controller"
