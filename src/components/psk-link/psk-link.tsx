@@ -60,7 +60,7 @@ export class PskLink {
             sourceUrl: this.page,
             callback: (err, data) => {
                 if (!err) {
-                    this.destinationUrl = `${window.location.origin}/#${data}`;
+                    this.destinationUrl = `${window.location.origin}${data}`;
                 } else {
                     this.error = true;
                 }
