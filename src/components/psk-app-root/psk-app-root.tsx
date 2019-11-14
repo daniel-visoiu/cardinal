@@ -1,6 +1,7 @@
 import {Component, h, Prop, EventEmitter, Event, State, Element} from '@stencil/core';
 import ControllerFactory from "../../services/ControllerFactory";
 import {ExtendedHistoryType} from "../../interfaces/ExtendedHistoryType";
+import {HTMLStencilElement} from "@stencil/core/internal";
 
 @Component({
   tag: 'psk-app-root',
@@ -9,9 +10,9 @@ import {ExtendedHistoryType} from "../../interfaces/ExtendedHistoryType";
 export class PskAppRoot {
   @Prop() controller: any;
   @State() mobileLayout: boolean = false;
-  @Prop() historyType: ExtendedHistoryType;
+  @State() historyType: ExtendedHistoryType;
   @State() componentCode: string = "";
-  @Element() host: HTMLDivElement;
+  @Element() host: HTMLStencilElement;
   @State() hasSlot: boolean = false;
 
   @Event({
@@ -50,9 +51,8 @@ export class PskAppRoot {
 
   render() {
     let DefaultRendererTag = "psk-default-renderer";
-    let defaultRenderer = <DefaultRendererTag historyType={this.historyType}></DefaultRendererTag>;
     return (
-      this.hasSlot ? <slot/> : defaultRenderer
+      this.hasSlot ? <slot/> : <DefaultRendererTag></DefaultRendererTag>
     );
   }
 }

@@ -8,7 +8,7 @@ import CustomTheme from "../../decorators/CustomTheme";
     tag: "psk-copy-clipboard",
 })
 
-export class PskCard {
+export class PskCopyClipboard {
 
     @CustomTheme()
 

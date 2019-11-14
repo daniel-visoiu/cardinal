@@ -1,4 +1,4 @@
-import {Component, h, Prop, State} from "@stencil/core";
+import {Component, h, Prop, State, Watch} from "@stencil/core";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 
 @Component({
@@ -14,12 +14,21 @@ export class PskPageLoader {
   })
   @Prop() pageUrl: string;
 
+  @Watch('pageUrl')
+  watchHandler(newValue: boolean) {
+    this.getPageContent(newValue);
+  }
+
   @State() pageContent: string;
   @State() errorLoadingPage: boolean = false;
 
   componentWillLoad() {
+    this.getPageContent(this.pageUrl);
+  }
+
+  getPageContent(pageUrl){
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', this.pageUrl);
+    xhr.open('GET', pageUrl);
 
     xhr.onload = () => {
       if (xhr.status != 200) {

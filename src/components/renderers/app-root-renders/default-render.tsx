@@ -1,5 +1,4 @@
-import {Component, h, Listen, Prop, State} from "@stencil/core";
-import {HistoryType} from "@stencil/router/dist/types/global/interfaces";
+import {Component, h, Listen, State} from "@stencil/core";
 import CustomTheme from "../../../decorators/CustomTheme";
 
 const appMaxWidth = 650;
@@ -13,7 +12,6 @@ const appMaxWidth = 650;
 export class AppRootDefaultRender {
   @CustomTheme()
   @State() mobileLayout: boolean = false;
-  @Prop() historyType: HistoryType;
 
   @Listen("resize", {capture: true, target: 'window'})
   checkLayout() {
@@ -34,7 +32,7 @@ export class AppRootDefaultRender {
         </aside>
 
         <section>
-          <psk-app-router failRedirectTo="/home" historyType={this.historyType}></psk-app-router>
+          <psk-app-router failRedirectTo="/home"></psk-app-router>
           {this.mobileLayout === true ? <div class="nav-footer bottom-stick">version 0.1</div> : null}
         </section>
       </div>

@@ -7,10 +7,9 @@
 
 ## Properties
 
-| Property      | Attribute      | Description | Type                             | Default     |
-| ------------- | -------------- | ----------- | -------------------------------- | ----------- |
-| `controller`  | `controller`   |             | `any`                            | `undefined` |
-| `historyType` | `history-type` |             | `"browser" \| "hash" \| "query"` | `undefined` |
+| Property     | Attribute    | Description | Type  | Default     |
+| ------------ | ------------ | ----------- | ----- | ----------- |
+| `controller` | `controller` |             | `any` | `undefined` |
 
 
 ## Events

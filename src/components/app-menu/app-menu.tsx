@@ -3,6 +3,7 @@ import CustomTheme from "../../decorators/CustomTheme";
 import { MenuItem } from "../../interfaces/MenuItem";
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
+import {ExtendedHistoryType} from "../../interfaces/ExtendedHistoryType";
 
 @Component({
   tag: 'app-menu',
@@ -34,6 +35,7 @@ export class AppMenu {
     defaultValue: `600`
   })
   @Prop() hamburgerMaxWidth?: number = 600;
+  @Prop() historyType: ExtendedHistoryType;
 
   @State() showHamburgerMenu?: boolean = false;
   @State() showNavBar: boolean = false;
@@ -66,6 +68,20 @@ export class AppMenu {
     bubbles: true,
   }) needMenuItemsEvt: EventEmitter;
 
+  @TableOfContentEvent({
+    eventName: `getHistoryType`,
+    controllerInteraction: {
+      required: true
+    },
+    description: `This event gets the history type `
+  })
+  @Event({
+    eventName: 'getHistoryType',
+    cancelable: true,
+    composed: true,
+    bubbles: true,
+  }) getHistoryType: EventEmitter;
+
   @Listen("resize", { capture: true, target: 'window' })
   checkIfHamburgerIsNeeded() {
     this.showHamburgerMenu = document.documentElement.clientWidth < this.hamburgerMaxWidth;
@@ -73,6 +89,13 @@ export class AppMenu {
 
   componentDidLoad() {
     this.checkIfHamburgerIsNeeded();
+    this.getHistoryType.emit((err, data) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      this.historyType = data;
+    })
   }
 
   handleClick(ev) {
@@ -116,6 +139,7 @@ export class AppMenu {
       }
     }
     return <ItemRendererTag onclick={(event) => this.handleClick(event)}
+      historyType={this.historyType}
       active={menuItem.active ? menuItem.active : false}
       children={children}
       hamburger={this.showHamburgerMenu}

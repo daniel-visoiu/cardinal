@@ -7,19 +7,21 @@
 
 ## Properties
 
-| Property            | Attribute             | Description | Type         | Default     |
-| ------------------- | --------------------- | ----------- | ------------ | ----------- |
-| `hamburgerMaxWidth` | `hamburger-max-width` |             | `number`     | `600`       |
-| `itemRenderer`      | `item-renderer`       |             | `string`     | `undefined` |
-| `menuItems`         | --                    |             | `MenuItem[]` | `null`      |
+| Property            | Attribute             | Description | Type                             | Default     |
+| ------------------- | --------------------- | ----------- | -------------------------------- | ----------- |
+| `hamburgerMaxWidth` | `hamburger-max-width` |             | `number`                         | `600`       |
+| `historyType`       | `history-type`        |             | `"browser" \| "hash" \| "query"` | `undefined` |
+| `itemRenderer`      | `item-renderer`       |             | `string`                         | `undefined` |
+| `menuItems`         | --                    |             | `MenuItem[]`                     | `null`      |
 
 
 ## Events
 
-| Event           | Description | Type               |
-| --------------- | ----------- | ------------------ |
-| `menuEvent`     |             | `CustomEvent<any>` |
-| `needMenuItems` |             | `CustomEvent<any>` |
+| Event            | Description | Type               |
+| ---------------- | ----------- | ------------------ |
+| `getHistoryType` |             | `CustomEvent<any>` |
+| `menuEvent`      |             | `CustomEvent<any>` |
+| `needMenuItems`  |             | `CustomEvent<any>` |
 
 
 ## Dependencies

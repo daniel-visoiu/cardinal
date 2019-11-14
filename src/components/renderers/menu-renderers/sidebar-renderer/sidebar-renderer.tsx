@@ -1,6 +1,7 @@
 import {Component, h, Prop} from '@stencil/core';
 import {MenuItem} from "../../../../interfaces/MenuItem";
 import CustomTheme from "../../../../decorators/CustomTheme";
+import {ExtendedHistoryType} from "../../../../interfaces/ExtendedHistoryType";
 
 @Component({
   tag: 'sidebar-renderer',
@@ -10,6 +11,7 @@ import CustomTheme from "../../../../decorators/CustomTheme";
 export class SidebarRenderer {
   @CustomTheme()
   @Prop() value: MenuItem;
+  @Prop() historyType: ExtendedHistoryType;
   @Prop({
     reflectToAttr:true,
   }) active: boolean;
@@ -24,7 +26,8 @@ export class SidebarRenderer {
       })
     }
 
-    let ItemWrapperTag = item.type === "abstract" ? "expandable-renderer" : "stencil-route-link";
+    let ItemRenderer = this.historyType === "query" ? "query-page-link" : "stencil-route-link";
+    let ItemWrapperTag = item.type === "abstract" ? "expandable-renderer" : ItemRenderer;
 
     return (
       <ItemWrapperTag firstMenuChild = {item.children?item.children[0]:""} url={href} activeClass="active" exact={false} somethingChanged={this.value}>

@@ -16,9 +16,10 @@
 
 ## Events
 
-| Event           | Description | Type               |
-| --------------- | ----------- | ------------------ |
-| `needMenuItems` |             | `CustomEvent<any>` |
+| Event            | Description | Type               |
+| ---------------- | ----------- | ------------------ |
+| `getHistoryType` |             | `CustomEvent<any>` |
+| `needMenuItems`  |             | `CustomEvent<any>` |
 
 
 ## Dependencies
