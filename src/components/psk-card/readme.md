@@ -1,4 +1,4 @@
-# psk-page
+# psk-card
 
 
 
@@ -9,25 +9,30 @@
 
 | Property | Attribute | Description | Type     | Default |
 | -------- | --------- | ----------- | -------- | ------- |
+| `id`     | `id`      |             | `string` | `""`    |
 | `title`  | `title`   |             | `string` | `""`    |
 
 
 ## Dependencies
 
+### Used by
+
+ - [psk-chapter](../psk-chapter)
+ - [psk-description](../psk-description)
+ - [psk-toc](../psk-toc)
+
 ### Depends on
 
-- [psk-hoc]()
-- [psk-chapter](../psk-chapter)
+- [psk-copy-clipboard](../psk-copy-clipboard)
 
 ### Graph
 ```mermaid
 graph TD;
-  psk-property-descriptor --> psk-hoc
-  psk-property-descriptor --> psk-chapter
-  psk-hoc --> psk-chapter
-  psk-chapter --> psk-card
   psk-card --> psk-copy-clipboard
-  style psk-property-descriptor fill:#f9f,stroke:#333,stroke-width:4px
+  psk-chapter --> psk-card
+  psk-description --> psk-card
+  psk-toc --> psk-card
+  style psk-card fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

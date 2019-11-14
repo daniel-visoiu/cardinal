@@ -1,13 +1,26 @@
 import { Component, h, Prop } from "@stencil/core";
 import CustomTheme from "../../decorators/CustomTheme";
+import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 
 @Component({
-	tag: "psk-card",
+	tag: "psk-card"
 })
 
 export class PskCard {
 	@CustomTheme()
+
+	@TableOfContentProperty({
+		description: `This property is the title of our own version of the html card.`,
+		isMandatory: false,
+		propertyType: `string`
+	})
 	@Prop() title: string = "";
+
+	@TableOfContentProperty({
+		description: `This property is the id which will be used in order to create the unique element id and for the psk-copy-clipboard component.`,
+		isMandatory: false,
+		propertyType: `string`
+	})
 	@Prop() id: string = "";
 
 	render() {

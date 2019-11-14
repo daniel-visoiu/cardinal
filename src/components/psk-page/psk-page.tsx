@@ -1,18 +1,32 @@
 import { Chapter } from "../../interfaces/Chapter";
 import { scrollToElement, createCustomEvent } from "../../utils/utils";
 import { Component, h, Prop, Listen, State, Element } from "@stencil/core";
+import CustomTheme from "../../decorators/CustomTheme";
+import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 
 @Component({
 	tag: "psk-page",
-	styleUrl: "./page.css",
 	shadow: true
 })
 export class PskPage {
-
+	@CustomTheme()
 	@State() chapters: Array<Chapter> = [];
 
+	@TableOfContentProperty({
+		description:`This property will be used as the title for the page.`,
+		isMandatory:false,
+		propertyType:`string`
+	})
 	@Prop() title: string = "";
+
+	@TableOfContentProperty({
+		description:`This property is the name of the table of content.`,
+		isMandatory:false,
+		propertyType:`string`
+	})
 	@Prop() tocTitle: string;
+
+
 	@State() componentFullyLoaded: boolean = false;
 
 	@Element() private element: HTMLElement;

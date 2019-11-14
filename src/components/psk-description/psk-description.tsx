@@ -1,4 +1,5 @@
 import { Component, h, Prop } from "@stencil/core";
+import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 
 @Component({
 	tag: "psk-description"
@@ -6,6 +7,11 @@ import { Component, h, Prop } from "@stencil/core";
 
 export class PskDescription {
 
+	@TableOfContentProperty({
+		description:`The title of the component's description that will be used in order to create a psk-chapter.`,
+		isMandatory: false,
+		propertyType:`string`
+	})
 	@Prop() title: string = "";
 
 	render() {

@@ -1,13 +1,20 @@
 import { Component, h, Prop, State, getElement, Listen } from '@stencil/core';
 import { closestParentElement, scrollToElement } from '../../utils/utils';
 import { Chapter } from '../../interfaces/Chapter';
+import CustomTheme from '../../decorators/CustomTheme';
+import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 
 @Component({
     tag: 'psk-toc',
-    styleUrl: './page.css'
 })
 export class PskToc {
+    @CustomTheme()
 
+    @TableOfContentProperty({
+        description:`This property is the title of the psk-card that will be created`,
+        isMandatory:false,
+        propertyType:`string`
+    })
     @Prop() title: string;
     @State() pskPageElement: HTMLElement;
     @State() chapterList: Array<Chapter> = [];

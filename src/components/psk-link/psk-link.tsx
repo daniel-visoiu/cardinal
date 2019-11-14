@@ -1,13 +1,14 @@
 import { Component, h, Prop, Event, EventEmitter, State } from "@stencil/core";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import { TableOfContentEvent } from "../../decorators/TableOfContentEvent";
+import CustomTheme from "../../decorators/CustomTheme";
 
 @Component({
-    tag: "psk-link",
-    styleUrl: "./page.css"
+    tag: "psk-link"
 })
 
 export class PskLink {
+    @CustomTheme()
 
     @TableOfContentProperty({
         description: "This property gives the component the destination URL after clicking the displayed link. This property is first validated by valdateUrl event.",

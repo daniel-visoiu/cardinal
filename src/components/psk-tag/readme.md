@@ -1,4 +1,4 @@
-# psk-page
+# psk-tag
 
 
 
@@ -16,18 +16,15 @@
 
 ### Depends on
 
-- [psk-hoc]()
 - [psk-chapter](../psk-chapter)
 
 ### Graph
 ```mermaid
 graph TD;
-  psk-property-descriptor --> psk-hoc
-  psk-property-descriptor --> psk-chapter
-  psk-hoc --> psk-chapter
+  psk-tag --> psk-chapter
   psk-chapter --> psk-card
   psk-card --> psk-copy-clipboard
-  style psk-property-descriptor fill:#f9f,stroke:#333,stroke-width:4px
+  style psk-tag fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

@@ -1,13 +1,25 @@
 import { Component, h, Prop, Event, EventEmitter, Listen, getElement, State } from "@stencil/core";
 import { Chapter } from "../../interfaces/Chapter";
+import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
+import CustomTheme from "../../decorators/CustomTheme";
 
 @Component({
-	tag: "psk-chapter",
-	styleUrl: './page.css'
+	tag: "psk-chapter"
 })
 export class PskChapter {
+	@CustomTheme() 
 
+	@TableOfContentProperty({
+		description: `This property is the title, that will be used in order to create a psk-card `,
+		isMandatory: false,
+		propertyType: `string`
+	})
 	@Prop({ reflect: true }) title: string = "";
+	@TableOfContentProperty({
+		description: `This property is the guid that will be created as a unique 32 characters code passed as a id for the chapter`,
+		isMandatory: false,
+		propertyType: `string`
+	})
 	@Prop({ reflect: true, mutable: true }) guid: string;
 
 	@State() chapterInfo: Chapter;

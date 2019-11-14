@@ -1,4 +1,4 @@
-# psk-page
+# psk-copy-clipboard
 
 
 
@@ -9,25 +9,20 @@
 
 | Property | Attribute | Description | Type     | Default |
 | -------- | --------- | ----------- | -------- | ------- |
-| `title`  | `title`   |             | `string` | `""`    |
+| `id`     | `id`      |             | `string` | `""`    |
 
 
 ## Dependencies
 
-### Depends on
+### Used by
 
-- [psk-hoc]()
-- [psk-chapter](../psk-chapter)
+ - [psk-card](../psk-card)
 
 ### Graph
 ```mermaid
 graph TD;
-  psk-property-descriptor --> psk-hoc
-  psk-property-descriptor --> psk-chapter
-  psk-hoc --> psk-chapter
-  psk-chapter --> psk-card
   psk-card --> psk-copy-clipboard
-  style psk-property-descriptor fill:#f9f,stroke:#333,stroke-width:4px
+  style psk-copy-clipboard fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

@@ -19,7 +19,7 @@
 
 ### Used by
 
- - [psk-wizard](..\psk-wizard)
+ - [psk-wizard](../psk-wizard)
 
 ### Graph
 ```mermaid

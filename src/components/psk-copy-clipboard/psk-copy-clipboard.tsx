@@ -1,15 +1,25 @@
 import { Component, h, Prop, Element } from "@stencil/core";
 import { closestParentElement, scrollToElement } from "../../utils/utils";
 import { TOOLTIP_TEXT, TOOLTIP_COPIED_TEXT } from "../../utils/constants";
+import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
+import CustomTheme from "../../decorators/CustomTheme";
 
 @Component({
     tag: "psk-copy-clipboard",
-    styleUrl: './page.css'
 })
 
 export class PskCard {
 
+    @CustomTheme()
+
+    @TableOfContentProperty({
+        description: `This property is the id of the textzone that will be copied to the clipboard.`,
+        isMandatory: false,
+        propertyType: `string`
+    })
     @Prop() id: string = "";
+
+
     @Element() private element: HTMLElement;
 
     _copyToClipboardHandler(elementId: string): void {

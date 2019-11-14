@@ -1,12 +1,25 @@
 import { Component, h, Element, State, Prop } from "@stencil/core";
+import CustomTheme from "../../decorators/CustomTheme";
+import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 
 @Component({
-    tag: "psk-table",
-    styleUrl: "./page.css"
+    tag: "psk-table"
 })
 export class PskTable {
+    @CustomTheme()
 
+    @TableOfContentProperty({
+        description: `If this property is set as true then the table will have a footer in which the first info of the table will be written. `,
+        isMandatory: false,
+        propertyType: `boolean`
+    })
     @Prop() head: boolean;
+
+    @TableOfContentProperty({
+        description: `If this property is set as true then the table will have a footer in which the last info of the table will be written.`,
+        isMandatory: false,
+        propertyType: `boolean`
+    })
     @Prop() footer: boolean;
 
     @Element() private element: HTMLElement;

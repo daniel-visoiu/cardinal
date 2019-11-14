@@ -1,14 +1,27 @@
 import { Component, Element, h, State, Prop } from "@stencil/core";
 import Prism from 'prismjs';
+import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
+import CustomTheme from "../../decorators/CustomTheme";
 
 @Component({
-    tag: "psk-code",
-    styleUrl: './highlight.css'
+    tag: "psk-code"
 })
 
 export class PskCode {
-
+    @CustomTheme() 
+    
+    @TableOfContentProperty({
+        description: `This property is the title of the psk-chapter that will be created.`,
+        isMandatory: false,
+        propertyType: `string`
+    })
     @Prop() title: string = "";
+
+    @TableOfContentProperty({
+        description: `This property is the language, in which the code is written(so the css can identify it).`,
+        isMandatory: false,
+        propertyType: `string`
+    })
     @Prop() language: string = '';
 
     @State() componentCode: string = "";
