@@ -18,12 +18,20 @@ export class PskTag {
 	@Prop() title: string = "";
 
 	@State() componentCode: string = "";
-	@Element() host: HTMLDivElement;
+	@Element() host: HTMLElement;
 
-	componentWillLoad() {
-		this.componentCode = this.host.innerHTML;
-		this.host.innerHTML = '';
-	}
+  componentWillLoad() {
+    this.componentCode = this.host.innerHTML;
+    let linkElement = this.host.querySelector("link");
+
+    if (linkElement) {
+      this.host.innerHTML = linkElement.outerHTML;
+      this.componentCode = this.componentCode.replace(linkElement.outerHTML, "");
+      linkElement && linkElement.remove();
+    } else {
+      this.host.innerHTML = "";
+    }
+  }
 
 	componentDidLoad() {
 		Prism.highlightAllUnder(this.host);

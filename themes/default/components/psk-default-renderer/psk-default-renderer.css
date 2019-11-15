@@ -14,7 +14,13 @@ div.global_container.is-mobile{
 .is-mobile aside{
   width: 100%;
   height: auto;
+  display: block;
   overflow: inherit;
+  padding-top: 5px;
+}
+
+.is-mobile aside psk-user-profile{
+  position: absolute;
 }
 
 aside {
@@ -32,6 +38,7 @@ aside {
   overflow: auto;
   scrollbar-color: #4e73df #E5E5E5;
   scrollbar-width: thin;
+  position: relative;
 }
 
 .nav-footer{

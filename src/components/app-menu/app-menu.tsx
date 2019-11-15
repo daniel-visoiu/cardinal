@@ -158,10 +158,6 @@ export class AppMenu {
       renderComponent.push(this.renderItem(menuItem));
     }
 
-    let activeItem = this.menuItems.find((item) => {
-      return item.active;
-    });
-
     if (this.showHamburgerMenu) {
 
       renderComponent = renderComponent.map((item) => {
@@ -170,7 +166,7 @@ export class AppMenu {
 
       let navBarClass = "collapse navbar-collapse " + `${this.showNavBar == true ? 'show' : ''}`;
       return (<nav class="navbar navbar-dark ">
-        <a class="navbar-brand" href="#">{activeItem ? activeItem.name : "Home"}</a>
+        <a class="navbar-brand" href="#"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" onClick={this.toggleNavBar.bind(this)}
           aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class={navBarClass}>
