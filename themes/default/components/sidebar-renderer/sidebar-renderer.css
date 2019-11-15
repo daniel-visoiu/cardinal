@@ -79,13 +79,11 @@ a.active span.icon{
   cursor: pointer;
 }
 :host([active]) .children,
-.dropdown.active .wrapper_container > .children,
 .dropdown.isOpened .wrapper_container > .children{
 display: block;
 }
 
-.dropdown.isOpened .fa-caret-right.expand-menu,
-.dropdown.active .fa-caret-right.expand-menu{
+.dropdown.isOpened .fa-caret-right.expand-menu{
   transform: rotate(90deg);
 }
 
@@ -95,7 +93,6 @@ display: block;
 }
 
 :host([hamburger]) div.children{
-
   position: relative;
   background: none;
   top:0;

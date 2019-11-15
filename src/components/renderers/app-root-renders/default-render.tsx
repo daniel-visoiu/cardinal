@@ -5,7 +5,6 @@ const appMaxWidth = 650;
 
 @Component({
   tag: 'psk-default-renderer',
-  styleUrl: '../../../../themes/default/components/psk-default-renderer/psk-default-renderer.css',
   shadow: true
 })
 

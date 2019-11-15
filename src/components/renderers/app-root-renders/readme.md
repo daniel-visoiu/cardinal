@@ -9,15 +9,15 @@
 
 ### Depends on
 
-- [psk-user-profile](../../psk-user-profile)
 - [app-menu](../../app-menu)
+- [psk-user-profile](../../psk-user-profile)
 - [psk-app-router](../../psk-app-router)
 
 ### Graph
 ```mermaid
 graph TD;
-  psk-default-renderer --> psk-user-profile
   psk-default-renderer --> app-menu
+  psk-default-renderer --> psk-user-profile
   psk-default-renderer --> psk-app-router
   psk-app-router --> stencil-route
   psk-app-router --> psk-ui-loader
