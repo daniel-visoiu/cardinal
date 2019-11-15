@@ -2,12 +2,13 @@ import { Component, h, Prop, Event, EventEmitter, Listen, getElement, State } fr
 import { Chapter } from "../../interfaces/Chapter";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import CustomTheme from "../../decorators/CustomTheme";
+import { TableOfContentEvent } from "../../decorators/TableOfContentEvent";
 
 @Component({
 	tag: "psk-chapter"
 })
 export class PskChapter {
-	@CustomTheme() 
+	@CustomTheme()
 
 	@TableOfContentProperty({
 		description: `This property is the title, that will be used in order to create a psk-card `,
@@ -25,6 +26,12 @@ export class PskChapter {
 	@State() chapterInfo: Chapter;
 	@State() reportedToc: boolean = false;
 
+	@TableOfContentEvent({
+		eventName: `psk-send-chapter`,
+		description: `This event is emitted the moment a chapter with a title is created.
+					 It will create a tree of children which will pe rendered for the UI.`,
+
+	})
 	@Event({
 		eventName: "psk-send-chapter",
 		bubbles: true,

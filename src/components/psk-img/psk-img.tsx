@@ -34,6 +34,7 @@ export class PskImg {
     } else {
       this.basePath = defaultBasePath;
     }
+    console.log(this.basePath)
   }
 
   render() {

@@ -18,6 +18,9 @@ export class PskLink {
     @Prop() page: string;
 
     @TableOfContentEvent({
+        controllerInteraction: {
+            required: true
+        },
         description: [
             `This event is sent to the application controller in order to check and validate the page property.`,
             `If the sequence of pages inside the page property is valid, then the event is sending back to the component the valid path to the required page.`,
