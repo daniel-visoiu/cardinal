@@ -1,87 +1,119 @@
-import { Component, h, Prop, Element } from "@stencil/core";
-import { closestParentElement, scrollToElement } from "../../utils/utils";
-import { TOOLTIP_TEXT, TOOLTIP_COPIED_TEXT } from "../../utils/constants";
-import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
+import {Component, h, Prop, Element, Event, EventEmitter, State} from "@stencil/core";
+import {closestParentElement, scrollToElement} from "../../utils/utils";
+import {TOOLTIP_TEXT, TOOLTIP_COPIED_TEXT} from "../../utils/constants";
+import {TableOfContentProperty} from "../../decorators/TableOfContentProperty";
 import CustomTheme from "../../decorators/CustomTheme";
+import {TableOfContentEvent} from "../../decorators/TableOfContentEvent";
 
 @Component({
-    tag: "psk-copy-clipboard",
+  tag: "psk-copy-clipboard",
 })
 
 export class PskCopyClipboard {
 
-    @CustomTheme()
+  @CustomTheme()
 
-    @TableOfContentProperty({
-        description: `This property is the id of the textzone that will be copied to the clipboard.`,
-        isMandatory: false,
-        propertyType: `string`
+  @TableOfContentEvent({
+    eventName: `getHistoryType`,
+    controllerInteraction: {
+      required: true
+    },
+    description: `This event gets the history type `
+  })
+  @Event({
+    eventName: 'getHistoryType',
+    cancelable: true,
+    composed: true,
+    bubbles: true,
+  }) getHistoryType: EventEmitter;
+
+  @TableOfContentProperty({
+    description: `This property is the id of the textzone that will be copied to the clipboard.`,
+    isMandatory: false,
+    propertyType: `string`
+  })
+  @Prop() id: string = "";
+
+  @State() chapterToken = "";
+
+  componentWillLoad() {
+    this.getHistoryType.emit((err, historyType) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      switch (historyType) {
+        case "browser":
+        case "hash":
+          this.chapterToken = "?chapter=";
+          break;
+        case "query":
+          this.chapterToken = "&chapter=";
+          break;
+      }
     })
-    @Prop() id: string = "";
+  }
 
+  @Element() private element: HTMLElement;
 
-    @Element() private element: HTMLElement;
+  _copyToClipboardHandler(elementId: string): void {
+    try {
+      let basePath = window.location.href;
+      if (window.location.href.indexOf(this.chapterToken) !== -1) {
+        basePath = window.location.href.split(this.chapterToken)[0];
+      }
+      navigator.clipboard.writeText(`${basePath}${this.chapterToken}${elementId}`);
+      const tooltipTextArea: HTMLElement = this.element.querySelector('.tooltip');
+      tooltipTextArea.innerHTML = TOOLTIP_COPIED_TEXT;
+      tooltipTextArea.setAttribute("class", "tooltip copied");
 
-    _copyToClipboardHandler(elementId: string): void {
-        try {
-            let basePath = window.location.href;
-            if (window.location.href.indexOf("?chapter=") !== -1) {
-                basePath = window.location.href.split("?chapter=")[0];
-            }
+      scrollToElement(elementId, closestParentElement(this.element, 'psk-page'));
 
-            navigator.clipboard.writeText(`${basePath}?chapter=${elementId}`);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
-            const tooltipTextArea: HTMLElement = this.element.querySelector('.tooltip');
-            tooltipTextArea.innerHTML = TOOLTIP_COPIED_TEXT;
-            tooltipTextArea.setAttribute("class", "tooltip copied");
+  _resetTooltip(): void {
+    const tooltipTextArea: HTMLElement = this.element.querySelector('.tooltip');
+    tooltipTextArea.innerHTML = TOOLTIP_TEXT;
+    tooltipTextArea.setAttribute("class", "tooltip");
+  }
 
-            scrollToElement(elementId, closestParentElement(this.element, 'psk-page'));
+  _isCopySupported(): boolean {
+    let support: boolean = !!document.queryCommandSupported;
 
-        } catch (err) {
-            console.error(err);
-        }
+    ['copy', 'cut'].forEach((action) => {
+      support = support && !!document.queryCommandSupported(action);
+    });
+    return support;
+  }
+
+  render() {
+
+    const elementId = this.id.trim().replace(/( |:|\/|\.)/g, "-").toLowerCase();
+    if (elementId.length === 0 || !this._isCopySupported()) {
+      return;
     }
 
-    _resetTooltip(): void {
-        const tooltipTextArea: HTMLElement = this.element.querySelector('.tooltip');
-        tooltipTextArea.innerHTML = TOOLTIP_TEXT;
-        tooltipTextArea.setAttribute("class", "tooltip");
-    }
-
-    _isCopySupported(): boolean {
-        let support: boolean = !!document.queryCommandSupported;
-
-        ['copy', 'cut'].forEach((action) => {
-            support = support && !!document.queryCommandSupported(action);
-        });
-        return support;
-    }
-
-    render() {
-
-        const elementId = this.id.trim().replace(/( |:|\/|\.)/g, "-").toLowerCase();
-        if (elementId.length === 0 || !this._isCopySupported()) {
-            return;
-        }
-
-        return (
-            <div id="tooltip"
-                onClick={(evt: MouseEvent) => {
-                    evt.stopImmediatePropagation();
-                    this._copyToClipboardHandler(elementId);
-                }}
-                onMouseOut={() => {
-                    this._resetTooltip();
-                }}>
-                <a class="mark"
-                    href={`#${elementId}`}
-                    onClick={(evt: MouseEvent) => {
-                        evt.preventDefault();
-                    }} >
-                    <slot />
-                </a>
-                <span class="tooltip">{TOOLTIP_TEXT}</span>
-            </div>
-        )
-    }
+    return (
+      <div id="tooltip"
+           onClick={(evt: MouseEvent) => {
+             evt.stopImmediatePropagation();
+             this._copyToClipboardHandler(elementId);
+           }}
+           onMouseOut={() => {
+             this._resetTooltip();
+           }}>
+        <a class="mark"
+           href={`#${elementId}`}
+           onClick={(evt: MouseEvent) => {
+             evt.preventDefault();
+           }}>
+          <slot/>
+        </a>
+        <span class="tooltip">{TOOLTIP_TEXT}</span>
+      </div>
+    )
+  }
 }

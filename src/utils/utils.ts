@@ -19,10 +19,19 @@ export function scrollToElement(elementId: string, htmlView: HTMLElement): void 
 	});
 
 	let basePath = window.location.href;
-	if (window.location.href.indexOf("?chapter=") !== -1) {
-		basePath = window.location.href.split("?chapter=")[0];
-	}
-	window.location.href = `${basePath}?chapter=${selector}`;
+  let queryOperator = "?";
+  if (basePath.indexOf("chapter=") !== -1) {
+    basePath = window.location.href.split("chapter=")[0];
+    if (basePath.length > 0) {
+      queryOperator = basePath[basePath.length - 1];
+      basePath = basePath.substring(0, basePath.length - 1);
+    }
+  }
+  else{
+    queryOperator = basePath.indexOf("?")>0?"&":"?";
+  }
+	let chapterKey = `${queryOperator}chapter=`;
+	window.history.pushState({},"",`${basePath}${chapterKey}${selector}`);
 }
 
 export function createCustomEvent(eventName: string, options: any, trigger: boolean = false) {

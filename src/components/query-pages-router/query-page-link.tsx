@@ -61,7 +61,11 @@ export class QueryPageLink implements ComponentInterface {
   @Watch('location')
   computeMatch() {
     if (this.location) {
-      this.match = this.location.search === this.url;
+      let currentRouteUrl = this.location.search;
+      if (currentRouteUrl.indexOf("&") !== -1) {
+        currentRouteUrl = currentRouteUrl.substring(0, currentRouteUrl.indexOf("&"))
+      }
+      this.match = currentRouteUrl === this.url;
     }
   }
 

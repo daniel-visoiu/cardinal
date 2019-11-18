@@ -60,11 +60,11 @@ export class PskPage {
 	}
 
 	_checkForChapterScrolling(): void {
-		if (window.location.href.indexOf("?chapter=") === -1) {
+		if (window.location.href.indexOf("chapter=") === -1) {
 			return;
 		}
 
-		const chapterName = window.location.href.split("?chapter=")[1];
+		const chapterName = window.location.href.split("chapter=")[1];
 
 		setTimeout(() => {
 			scrollToElement(chapterName, this.element);

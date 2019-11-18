@@ -12,6 +12,13 @@
 | `id`     | `id`      |             | `string` | `""`    |
 
 
+## Events
+
+| Event            | Description | Type               |
+| ---------------- | ----------- | ------------------ |
+| `getHistoryType` |             | `CustomEvent<any>` |
+
+
 ## Dependencies
 
 ### Used by

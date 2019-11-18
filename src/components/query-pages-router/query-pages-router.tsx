@@ -42,8 +42,12 @@ export class QueryPagesRouter {
   }
 
   render() {
+    let currentRouteSearchUrl = this.currentRoute.search;
+    if (currentRouteSearchUrl.indexOf("&") !== -1) {
+      currentRouteSearchUrl = currentRouteSearchUrl.substring(0, currentRouteSearchUrl.indexOf("&"))
+    }
 
-    let currentRoute = this.routes[this.currentRoute.search];
+    let currentRoute = this.routes[currentRouteSearchUrl];
 
     let componentName = "psk-page-not-found";
     let componentProps = {urlDestination: this.pages[0].path};
@@ -52,7 +56,7 @@ export class QueryPagesRouter {
       componentName = currentRoute.component;
       componentProps = currentRoute.componentProps;
     }
-   
+
     return (
       <stencil-route component={componentName}
                      componentProps={componentProps}/>)
