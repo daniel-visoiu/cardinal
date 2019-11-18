@@ -11,8 +11,8 @@ export class PskTag {
 	@CustomTheme()
 
 	@TableOfContentProperty({
-		description:`This property is the title of the psk-chapter that will to be created.`,
-		isMandatory:false,
+		description: `This property is the title of the psk-chapter that will to be created.`,
+		isMandatory: false,
 		propertyType: `string`
 	})
 	@Prop() title: string = "";
@@ -20,19 +20,20 @@ export class PskTag {
 	@State() componentCode: string = "";
 	@Element() host: HTMLElement;
 
-  componentWillLoad() {
-    this.componentCode = this.host.innerHTML;
-    let linkElement = this.host.querySelector("link");
-	console.log(linkElement,this.host.innerHTML)
+	componentWillLoad() {
+		this.componentCode = this.host.innerHTML;
+		let linkElement = this.host.querySelector("link");
+		console.log(linkElement, this.host.innerHTML)
 
-    if (linkElement) {
-	  this.host.innerHTML = linkElement.outerHTML;
-	  this.componentCode = this.componentCode.replace(linkElement.outerHTML, "");
-      linkElement && linkElement.remove();
-    } else {
-      this.host.innerHTML = "";
-    }
-  }
+		if (linkElement) {
+			this.host.innerHTML = linkElement.outerHTML;
+			this.componentCode = this.componentCode.replace(linkElement.outerHTML, "");
+			console.log(this.host.innerHTML,this.componentCode)
+			linkElement && linkElement.remove();
+		} else {
+			this.host.innerHTML = "";
+		}
+	}
 
 	componentDidLoad() {
 		Prism.highlightAllUnder(this.host);
