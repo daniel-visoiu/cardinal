@@ -16,7 +16,15 @@
 
 ### Depends on
 
+<<<<<<< Updated upstream
 - [psk-card](../psk-card)
+=======
+<<<<<<< Updated upstream
+- [psk-card](../psk-card)
+=======
+- [psk-card](..\psk-card)
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
 ### Graph
 ```mermaid

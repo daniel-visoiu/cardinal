@@ -16,7 +16,15 @@
 
 ### Depends on
 
+<<<<<<< Updated upstream
 - [psk-chapter](../psk-chapter)
+=======
+<<<<<<< Updated upstream
+- [psk-chapter](../psk-chapter)
+=======
+- [psk-chapter](..\psk-chapter)
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
 ### Graph
 ```mermaid

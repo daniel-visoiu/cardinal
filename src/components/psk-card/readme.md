@@ -17,6 +17,10 @@
 
 ### Used by
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
  - [psk-chapter](../psk-chapter)
  - [psk-description](../psk-description)
  - [psk-toc](../psk-toc)
@@ -24,6 +28,18 @@
 ### Depends on
 
 - [psk-copy-clipboard](../psk-copy-clipboard)
+<<<<<<< Updated upstream
+=======
+=======
+ - [psk-chapter](..\psk-chapter)
+ - [psk-description](..\psk-description)
+ - [psk-toc](..\psk-toc)
+
+### Depends on
+
+- [psk-copy-clipboard](..\psk-copy-clipboard)
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
 ### Graph
 ```mermaid

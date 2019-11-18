@@ -67,6 +67,9 @@ section{
 app-menu,
 psk-app-router{
 flex-grow: 1;
+display: flex;
+flex-direction: column;
+justify-content: center;
 }
 
 psk-user-profile{

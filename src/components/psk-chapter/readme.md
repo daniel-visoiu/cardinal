@@ -24,6 +24,10 @@
 
 ### Used by
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
  - [psk-code](../psk-code)
  - [psk-controller-descriptor](../pages-components)
  - [psk-description](../psk-description)
@@ -36,6 +40,23 @@
 ### Depends on
 
 - [psk-card](../psk-card)
+<<<<<<< Updated upstream
+=======
+=======
+ - [psk-code](..\psk-code)
+ - [psk-controller-descriptor](..\pages-components)
+ - [psk-description](..\psk-description)
+ - [psk-event-descriptor](..\pages-components)
+ - [psk-example](..\psk-example)
+ - [psk-hoc](..\pages-components)
+ - [psk-property-descriptor](..\pages-components)
+ - [psk-tag](..\psk-tag)
+
+### Depends on
+
+- [psk-card](..\psk-card)
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
 ### Graph
 ```mermaid

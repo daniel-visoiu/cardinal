@@ -17,7 +17,15 @@
 
 ### Depends on
 
+<<<<<<< Updated upstream
 - [psk-ui-loader](../psk-ui-loader)
+=======
+<<<<<<< Updated upstream
+- [psk-ui-loader](../psk-ui-loader)
+=======
+- [psk-ui-loader](..\psk-ui-loader)
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
 ### Graph
 ```mermaid
