@@ -24,7 +24,7 @@ export class PskTag {
 		this.componentCode = this.host.innerHTML;
 		let linkElement = this.host.querySelector("link");
 		// let indexOfBr = this.componentCode.indexOf('<br>');
-		this.componentCode = this.componentCode.replace('<br>', '\n');
+		this.componentCode = this.componentCode.replace('<br>', '<br/>');
 
 		if (linkElement) {
 			this.host.innerHTML = linkElement.outerHTML;
