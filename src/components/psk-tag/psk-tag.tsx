@@ -23,12 +23,12 @@ export class PskTag {
 	componentWillLoad() {
 		this.componentCode = this.host.innerHTML;
 		let linkElement = this.host.querySelector("link");
-		console.log(linkElement, this.host.innerHTML)
+		// let indexOfBr = this.componentCode.indexOf('<br>');
+		this.componentCode = this.componentCode.replace('<br>', '\n');
 
 		if (linkElement) {
 			this.host.innerHTML = linkElement.outerHTML;
 			this.componentCode = this.componentCode.replace(linkElement.outerHTML, "");
-			console.log(this.host.innerHTML,this.componentCode)
 			linkElement && linkElement.remove();
 		} else {
 			this.host.innerHTML = "";
