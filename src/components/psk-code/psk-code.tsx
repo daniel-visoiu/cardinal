@@ -52,11 +52,14 @@ export class PskCode {
     }
 
     render() {
+      let componentCode = document.createElement('textarea');
+      componentCode.innerHTML = this.componentCode;
+      let decodedCode = componentCode.value;
 
         const sourceCode = (
             <pre>
                 <code class={`language-${this.language}`}>
-                    {this.componentCode}
+                    {decodedCode}
                 </code>
             </pre>
         );
