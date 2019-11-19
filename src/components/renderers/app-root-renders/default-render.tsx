@@ -23,7 +23,7 @@ export class AppRootDefaultRender {
 
   render() {
 
-    let appMenuCmpt = <app-menu item-renderer="sidebar-renderer" hamburgerMaxWidth={appMaxWidth}></app-menu>;
+    let appMenuCmpt = <app-menu item-renderer="sidebar-renderer" hamburgerMaxWidth={appMaxWidth} id="side-app-menu"></app-menu>;
     let versionCmpt = <div class="nav-footer">version 0.1</div>;
 
     let asideComponents = [];

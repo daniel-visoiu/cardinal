@@ -16,15 +16,7 @@
 
 ### Used by
 
-<<<<<<< Updated upstream
- - [psk-container](../psk-container)
-=======
-<<<<<<< Updated upstream
- - [psk-container](../psk-container)
-=======
  - [psk-container](..\psk-container)
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 
 ### Graph
 ```mermaid

@@ -9,18 +9,9 @@
 
 ### Depends on
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-- [app-menu](../../app-menu)
-- [psk-user-profile](../../psk-user-profile)
-- [psk-app-router](../../psk-app-router)
-=======
 - [app-menu](..\..\app-menu)
 - [psk-user-profile](..\..\psk-user-profile)
 - [psk-app-router](..\..\psk-app-router)
->>>>>>> Stashed changes
 
 ### Graph
 ```mermaid

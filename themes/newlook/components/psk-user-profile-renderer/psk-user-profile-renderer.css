@@ -1,0 +1,7 @@
+@import url(../../assets/bootstrap/css/bootstrap.min.css);
+
+img,
+.card-title,
+.card-text{
+  display:none;
+}

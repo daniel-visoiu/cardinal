@@ -28,14 +28,7 @@
 
 ### Used by
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
- - [psk-default-renderer](../renderers/app-root-renders)
-=======
  - [psk-default-renderer](..\renderers\app-root-renders)
->>>>>>> Stashed changes
 
 ### Graph
 ```mermaid

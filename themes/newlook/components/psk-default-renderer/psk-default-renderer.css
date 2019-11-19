@@ -1,0 +1,109 @@
+div.global_container{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  height: 100%;
+  background-color: #f8f9fc;
+}
+
+div.global_container.is-mobile{
+  width: 100%;
+  flex-direction: column;
+}
+
+.is-mobile aside{
+  width: 100%;
+  height: auto;
+  overflow: inherit;
+}
+
+aside {
+  height:100%;
+  background-image: linear-gradient(180deg,#5E7FE1 30%,#354F9B 100%);
+  color: white;
+  order:1;
+  flex: 1;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: auto;
+  scrollbar-color:#fff #354f98;
+  scrollbar-width: thin;
+}
+
+#side-app-menu{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+.nav-footer{
+  text-align: center;
+  width: 100%;
+  padding: 10px;
+  color: #fff;
+  box-sizing: border-box;
+  background: #ffffff1a;
+  font-size: 85%;
+}
+.nav-footer.bottom-stick{
+ color:#FFF;
+  background: #ffffff1a;
+}
+
+section{
+  display: flex;
+  flex-direction: column;
+  height:100%;
+  overflow:hidden auto;
+  scrollbar-color: #354F9B #E5E5E5;
+  scrollbar-width: thin;
+}
+
+app-menu,
+psk-app-router{
+flex-grow: 1;
+}
+
+psk-user-profile{
+  display:none;
+}
+
+h1 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #fff;
+  padding: 0 12px;
+}
+
+section{
+order:2;
+flex: 8;
+}
+
+aside::-webkit-scrollbar,
+section::-webkit-scrollbar{
+  background-color:#fff;
+  width:7px;
+}
+
+/* background of the scrollbar except button or resizer */
+aside::-webkit-scrollbar-track,
+section::-webkit-scrollbar-track{
+  background-color:#354F9B;
+}
+
+/* scrollbar itself */
+aside::-webkit-scrollbar-thumb,
+section::-webkit-scrollbar-thumb
+{
+  background-color:#fff;
+  border-radius:10px;
+  border:1px solid #354f9b ;
+}
+
+/* set button(top and bottom of the scrollbar) */
+aside::-webkit-scrollbar-button {display:none}
+
