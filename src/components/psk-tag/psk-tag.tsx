@@ -23,8 +23,6 @@ export class PskTag {
 	componentWillLoad() {
 		this.componentCode = this.host.innerHTML;
 		let linkElement = this.host.querySelector("link");
-		// let indexOfBr = this.componentCode.indexOf('<br>');
-		this.componentCode = this.componentCode.replace('<br>', '<br/>');
 
 		if (linkElement) {
 			this.host.innerHTML = linkElement.outerHTML;
@@ -43,7 +41,7 @@ export class PskTag {
 
 		const sourceCode = (
 			<pre class="text-center">
-				<code class="language-html" data-lang="html">
+				<code class="language-xml">
 					{this.componentCode}
 				</code>
 			</pre>
