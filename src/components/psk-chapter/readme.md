@@ -31,7 +31,6 @@
  - [psk-example](../psk-example)
  - [psk-hoc](../pages-components)
  - [psk-property-descriptor](../pages-components)
- - [psk-tag](../psk-tag)
 
 ### Depends on
 
@@ -49,7 +48,6 @@ graph TD;
   psk-example --> psk-chapter
   psk-hoc --> psk-chapter
   psk-property-descriptor --> psk-chapter
-  psk-tag --> psk-chapter
   style psk-chapter fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

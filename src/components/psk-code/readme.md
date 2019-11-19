@@ -9,7 +9,7 @@
 
 | Property   | Attribute  | Description | Type     | Default |
 | ---------- | ---------- | ----------- | -------- | ------- |
-| `language` | `language` |             | `string` | `''`    |
+| `language` | `language` |             | `string` | `'xml'` |
 | `title`    | `title`    |             | `string` | `""`    |
 
 
