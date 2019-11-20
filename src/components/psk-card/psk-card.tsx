@@ -9,15 +9,18 @@ import { TableOfContentProperty } from "../../decorators/TableOfContentProperty"
 export class PskCard {
 	@CustomTheme()
 
+
 	@TableOfContentProperty({
-		description: `This property is the title of our own version of the html card.`,
+		description: `This property is the title that will be rendered in title specific format.`,
 		isMandatory: false,
 		propertyType: `string`
 	})
 	@Prop() title: string = "";
 
 	@TableOfContentProperty({
-		description: `This property is the id which will be used in order to create the unique element id and for the psk-copy-clipboard component.`,
+		description: `This property is the id which will be attached to the component so finding the component in the DOM should be simplified.
+					The id is also simplifying the navigation to that section of the page where the component is rendered.
+					Special characters(Example : ':','/') will be replaced with dash('-').`,
 		isMandatory: false,
 		propertyType: `string`
 	})

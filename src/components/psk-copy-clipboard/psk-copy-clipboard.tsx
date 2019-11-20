@@ -1,9 +1,9 @@
-import {Component, h, Prop, Element, Event, EventEmitter, State} from "@stencil/core";
-import {closestParentElement, scrollToElement} from "../../utils/utils";
-import {TOOLTIP_TEXT, TOOLTIP_COPIED_TEXT} from "../../utils/constants";
-import {TableOfContentProperty} from "../../decorators/TableOfContentProperty";
+import { Component, h, Prop, Element, Event, EventEmitter, State } from "@stencil/core";
+import { closestParentElement, scrollToElement } from "../../utils/utils";
+import { TOOLTIP_TEXT, TOOLTIP_COPIED_TEXT } from "../../utils/constants";
+import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import CustomTheme from "../../decorators/CustomTheme";
-import {TableOfContentEvent} from "../../decorators/TableOfContentEvent";
+import { TableOfContentEvent } from "../../decorators/TableOfContentEvent";
 
 @Component({
   tag: "psk-copy-clipboard",
@@ -18,7 +18,8 @@ export class PskCopyClipboard {
     controllerInteraction: {
       required: true
     },
-    description: `This event gets the history type `
+    description: `This event gets the history type in order to see what identificator to use for the selected chapter Token.
+                  The three types of token that can be returned are : browser, hash or query.`
   })
   @Event({
     eventName: 'getHistoryType',
@@ -28,7 +29,9 @@ export class PskCopyClipboard {
   }) getHistoryType: EventEmitter;
 
   @TableOfContentProperty({
-    description: `This property is the id of the textzone that will be copied to the clipboard.`,
+    description: `This property is the id of the textzone that will be copied to the clipboard.
+                  It is necessary (but not mandatory) so the URL can be copied in a simplified fashion.
+                  Special characters(Example : ':','/') will be replaced with dash('-').`,
     isMandatory: false,
     propertyType: `string`
   })
@@ -98,19 +101,19 @@ export class PskCopyClipboard {
 
     return (
       <div id="tooltip"
-           onClick={(evt: MouseEvent) => {
-             evt.stopImmediatePropagation();
-             this._copyToClipboardHandler(elementId);
-           }}
-           onMouseOut={() => {
-             this._resetTooltip();
-           }}>
+        onClick={(evt: MouseEvent) => {
+          evt.stopImmediatePropagation();
+          this._copyToClipboardHandler(elementId);
+        }}
+        onMouseOut={() => {
+          this._resetTooltip();
+        }}>
         <a class="mark"
-           href={`#${elementId}`}
-           onClick={(evt: MouseEvent) => {
-             evt.preventDefault();
-           }}>
-          <slot/>
+          href={`#${elementId}`}
+          onClick={(evt: MouseEvent) => {
+            evt.preventDefault();
+          }}>
+          <slot />
         </a>
         <span class="tooltip">{TOOLTIP_TEXT}</span>
       </div>
