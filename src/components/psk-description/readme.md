@@ -16,8 +16,8 @@
 
 ### Depends on
 
-- [psk-card](../psk-card)
-- [psk-chapter](../psk-chapter)
+- [psk-card](..\psk-card)
+- [psk-chapter](..\psk-chapter)
 
 ### Graph
 ```mermaid

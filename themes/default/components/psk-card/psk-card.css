@@ -84,6 +84,11 @@ h6 span a {
     border: none;
 }
 
+.card-header {
+    display: flex;
+    flex: 1;
+}
+
 
 /** first level*/
 

@@ -34,6 +34,7 @@ export class PskCard {
 						{this.title}
 						{elementId.length > 0 ? <psk-copy-clipboard id={elementId}>#</psk-copy-clipboard> : null}
 					</h5>
+					<slot name="toolbar" />
 				</div>
 			);
 		}

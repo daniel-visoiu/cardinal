@@ -16,34 +16,27 @@ export class PskContainer {
   @Element() host: HTMLElement;
 
   constructor() {
-    const controllerNameForInstance = this.controllerName 
-      ? this.controllerName 
-      : 'AbstractController';
+    const controllerNameForInstance = this.controllerName ? this.controllerName : 'Controller';
 
     ControllerFactory.getController(controllerNameForInstance).then((CTRL) => {
       this.controller = new CTRL(this.host);
     });
-
-    const scriptInnerHtml: HTMLElement = this.host.querySelector(
-      "psk-controller"
-    );
-    if (scriptInnerHtml !== null) {
-      this.controllerScript = scriptInnerHtml.innerHTML;
-      scriptInnerHtml.innerHTML = "";
-    }
-
-    const pskHtml: HTMLElement = this.host.querySelector("psk-html");
-    if (pskHtml) {
-      this.innerHtml = pskHtml.innerHTML;
-    }
   }
 
   render() {
     return [
+      <slot />,
       this.htmlFilePath && <psk-page-loader pageUrl={this.htmlFilePath} />,
-      this.innerHtml ? this._htmlToElement("div", this.innerHtml) : <slot />,
       this.controllerScript && this.controller.executeScript(this.controller, this.controllerScript)
     ];
+  }
+
+  componentDidLoad() {
+    const scriptInnerHtml: HTMLElement = this.host.querySelector("psk-controller");
+    if (scriptInnerHtml !== null) {
+      this.controllerScript = scriptInnerHtml.innerHTML;
+      scriptInnerHtml.innerHTML = "";
+    }
   }
 
   _htmlToElement(tag: string, html: string): HTMLElement {

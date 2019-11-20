@@ -17,7 +17,7 @@
 
 ### Depends on
 
-- [psk-page-loader](../psk-page-loader)
+- [psk-page-loader](..\psk-page-loader)
 
 ### Graph
 ```mermaid

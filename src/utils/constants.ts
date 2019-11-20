@@ -20,3 +20,23 @@ export const PSK_LIST_PARSE_CONFIG = {
     inlineTag: /.*<([a-z]+|-*)>.*<\/([a-z]+|-*)>.*/
 };
 
+export const ACTIONS_ICONS = {
+    view: {
+        value: 'eye',
+        color: 'rgba(108, 192, 145, 1)'
+    },
+    edit: {
+        value: 'edit',
+        color: '#007bff'
+    },
+    cancel: {
+        value: 'close',
+        color: '#dc3545'
+    },
+    bid: {
+        value: 'gavel'
+    },
+    calendar: {
+        value: 'calendar-check-o'
+    }
+}

@@ -28,24 +28,23 @@ export class PskCode {
     @Element() host: HTMLDivElement;
 
     componentWillLoad() {
+        switch (this.language) {
+            case "javascript":
+            case "css":
+                this.componentCode = this.host.innerText;
+                break;
+            default:
+                this.componentCode = this.host.innerHTML;
+        }
 
-      switch (this.language) {
-        case "javascript":
-        case "css":
-          this.componentCode = this.host.innerText;
-          break;
-        default:
-          this.componentCode = this.host.innerHTML;
-      }
-
-      let linkElement = this.host.querySelector("link");
-      if (linkElement) {
-        this.host.innerHTML = linkElement.outerHTML;
-        this.componentCode = this.componentCode.replace(linkElement.outerHTML, "");
-      }
-      else{
-        this.host.innerHTML = "";
-      }
+        let linkElement = this.host.querySelector("link");
+        if (linkElement) {
+            this.host.innerHTML = linkElement.outerHTML;
+            this.componentCode = this.componentCode.replace(linkElement.outerHTML, "");
+        }
+        else {
+            this.host.innerHTML = "";
+        }
     }
 
     componentDidLoad() {
@@ -53,9 +52,9 @@ export class PskCode {
     }
 
     render() {
-      let componentCode = document.createElement('textarea');
-      componentCode.innerHTML = this.componentCode;
-      let decodedCode = componentCode.value;
+        let componentCode = document.createElement('textarea');
+        componentCode.innerHTML = this.componentCode;
+        let decodedCode = componentCode.value;
 
         const sourceCode = (
             <pre>
