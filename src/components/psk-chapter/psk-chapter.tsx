@@ -16,11 +16,7 @@ export class PskChapter {
 		propertyType: `string`
 	})
 	@Prop({ reflect: true }) title: string = "";
-	@TableOfContentProperty({
-		description: `This property is the guid that will be created as a unique 32 characters code passed as a id for the chapter`,
-		isMandatory: false,
-		propertyType: `string`
-	})
+
 	@Prop({ reflect: true, mutable: true }) guid: string;
 
 	@State() chapterInfo: Chapter;
