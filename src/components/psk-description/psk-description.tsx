@@ -8,9 +8,10 @@ import { TableOfContentProperty } from "../../decorators/TableOfContentProperty"
 export class PskDescription {
 
 	@TableOfContentProperty({
-		description:`The title of the component's description that will be used in order to create a psk-chapter.`,
+		description: `This property is the title of the new psk-card/psk-chapter that will be created.`,
 		isMandatory: false,
-		propertyType:`string`
+		propertyType: `string`,
+		specialNote: `All the empty spaces in the title will be deleted.`
 	})
 	@Prop() title: string = "";
 

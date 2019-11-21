@@ -24,9 +24,8 @@ export class PskChapter {
 
 	@TableOfContentEvent({
 		eventName: `psk-send-chapter`,
-		description: `This event is emitted the moment a psk-chapter with a title is created.
-					 It will create a tree of children which will pe rendered for the UI.`,
-
+		description: [`This event is emitted the moment a psk-chapter with a title is created.`,
+			`This event contains the title of the chapter as well as all the titles of it's subchapters.`],
 	})
 	@Event({
 		eventName: "psk-send-chapter",

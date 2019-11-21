@@ -16,7 +16,7 @@
 
 ### Depends on
 
-- [psk-card](../psk-card)
+- [psk-card](..\psk-card)
 
 ### Graph
 ```mermaid

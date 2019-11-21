@@ -12,7 +12,7 @@ export class PskImg {
 	@CustomTheme()
 
 	@TableOfContentProperty({
-		description: `This property is the source of the image(<name>.<extension>).`,
+		description: `This property is the path to the image source (Example:"PrivateSky/EDFS.png").`,
 		isMandatory: false,
 		propertyType: `string`
 	})
@@ -21,7 +21,8 @@ export class PskImg {
 	@TableOfContentProperty({
 		description: `This property is the title of the image(the alt attribute) and the description of the image.`,
 		isMandatory: false,
-		propertyType: `string`
+		propertyType: `string`,
+		specialNote: `If no title is given,there will not be assumed one and there will be no image description/alt.`
 	})
 	@Prop() title: string;
 
