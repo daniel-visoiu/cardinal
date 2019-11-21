@@ -52,7 +52,7 @@ export class PskTable {
         if (this.head) {
             finalTableRows.push(this._stringArrayToHTMLElement('thead', tableRows.splice(0, 1)));
             if (this.footer) {
-                finalTableRows.push(this._stringArrayToHTMLElement('tbody', tableRows.splice(0, tableRows.length - 2)));
+                finalTableRows.push(this._stringArrayToHTMLElement('tbody', tableRows.splice(0, tableRows.length - 1)));
                 finalTableRows.push(this._stringArrayToHTMLElement('tfoot', [tableRows[tableRows.length - 1]]));
             } else {
                 finalTableRows.push(this._stringArrayToHTMLElement('tbody', tableRows.splice(0)));
