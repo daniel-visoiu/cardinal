@@ -11,9 +11,9 @@ export class PskToc {
     @CustomTheme()
 
     @TableOfContentProperty({
-        description:`This property is the title of the psk-card that will be created`,
-        isMandatory:false,
-        propertyType:`string`
+        description: `This property is the title of the psk-card that will be created`,
+        isMandatory: false,
+        propertyType: `string`
     })
     @Prop() title: string;
     @State() pskPageElement: HTMLElement;

@@ -50,21 +50,21 @@ export class PskTable {
             });
         let finalTableRows: Array<HTMLElement> = [];
         if (this.head) {
-            finalTableRows.push(this._htmlToElement('thead', tableRows.splice(0, 1)));
+            finalTableRows.push(this._stringArrayToHTMLElement('thead', tableRows.splice(0, 1)));
             if (this.footer) {
-                finalTableRows.push(this._htmlToElement('tbody', tableRows.splice(0, tableRows.length - 2)));
-                finalTableRows.push(this._htmlToElement('tfoot', [tableRows[tableRows.length - 1]]));
+                finalTableRows.push(this._stringArrayToHTMLElement('tbody', tableRows.splice(0, tableRows.length - 2)));
+                finalTableRows.push(this._stringArrayToHTMLElement('tfoot', [tableRows[tableRows.length - 1]]));
             } else {
-                finalTableRows.push(this._htmlToElement('tbody', tableRows.splice(0)));
+                finalTableRows.push(this._stringArrayToHTMLElement('tbody', tableRows.splice(0)));
             }
         } else {
-            finalTableRows = [this._htmlToElement('tbody', tableRows)];
+            finalTableRows = [this._stringArrayToHTMLElement('tbody', tableRows)];
         }
         this.tableContent = finalTableRows;
         this.element.innerHTML = '';
     }
 
-    _htmlToElement(tag: string, html: Array<string>): HTMLElement {
+    _stringArrayToHTMLElement(tag: string, html: Array<string>): HTMLElement {
         const HTMLTag = tag;
         return <HTMLTag innerHTML={html.join('')}></HTMLTag>;
     }

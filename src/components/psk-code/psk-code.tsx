@@ -6,7 +6,6 @@ import CustomTheme from "../../decorators/CustomTheme";
 @Component({
     tag: "psk-code"
 })
-
 export class PskCode {
     @CustomTheme()
 

@@ -62,7 +62,6 @@ export class PskChapter {
 	receivedChapter(event: any) {
 		if (event.path && event.path[0] && getElement(this) !== event.path[0]) {
 			event.stopImmediatePropagation();
-
 			if (this.chapterInfo.children.length > 0) {
 				let isExistingChild = false;
 				this.chapterInfo.children.forEach((child) => {
@@ -77,7 +76,6 @@ export class PskChapter {
 			} else {
 				this.chapterInfo.children.push(event.detail);
 			}
-
 			this.sendChapter.emit(this.chapterInfo);
 			this.reportedToc = true;
 		}

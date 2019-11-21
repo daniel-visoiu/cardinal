@@ -5,10 +5,8 @@ import { TableOfContentProperty } from "../../decorators/TableOfContentProperty"
 @Component({
 	tag: "psk-card"
 })
-
 export class PskCard {
 	@CustomTheme()
-
 
 	@TableOfContentProperty({
 		description: `This property is the title that will be rendered in title specific format.`,

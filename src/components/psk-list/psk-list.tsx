@@ -6,9 +6,9 @@ import CustomTheme from "../../decorators/CustomTheme";
 @Component({
     tag: "psk-list"
 })
-
 export class PskList {
     @CustomTheme()
+
     @TableOfContentProperty({
         description: [`This property gives the type of the list. It has two type of values, "numeric" or "bullet"`,
             `If this property is missing, "bullet is assumed"`],
@@ -16,6 +16,7 @@ export class PskList {
         propertyType: 'string'
     })
     @Prop() listType: string;
+
     @State() listContent = null;
     @Element() private element: HTMLElement;
 
@@ -32,7 +33,6 @@ export class PskList {
     }
 
     componentWillLoad() {
-
         const htmlLines: Array<string> = this.element.innerHTML
             .split(/\n/g)
             .map(el => el.trim())
@@ -55,7 +55,7 @@ export class PskList {
                 if (withChild) {
                     currentChildListItem += line;
                 } else {
-                    finalHtmlLines.push(this._htmlToElement('li', line));
+                    finalHtmlLines.push(this._stringToHTMLElement('li', line));
                 }
             } else {
                 let startTagMatch = PSK_LIST_PARSE_CONFIG.startTag.exec(line);
@@ -73,7 +73,7 @@ export class PskList {
                         currentChildListItem += line;
                         if (currentChildTagName === endTagMatch[0].replace(/\//g, '')) {
                             if (sameChildDepthLevel === 0) {
-                                finalHtmlLines.push(this._htmlToElement('li', currentChildListItem));
+                                finalHtmlLines.push(this._stringToHTMLElement('li', currentChildListItem));
                                 currentChildTagName = null;
                                 currentChildListItem = '';
                                 withChild = false;
@@ -86,7 +86,7 @@ export class PskList {
                         if (withChild) {
                             currentChildListItem += line;
                         } else {
-                            finalHtmlLines.push(this._htmlToElement('li', line));
+                            finalHtmlLines.push(this._stringToHTMLElement('li', line));
                         }
                     }
                 }
@@ -97,7 +97,7 @@ export class PskList {
         this.listContent = [...finalHtmlLines];
     }
 
-    _htmlToElement(tag: string, html: string): HTMLElement {
+    _stringToHTMLElement(tag: string, html: string): HTMLElement {
         const HTMLTag = tag;
         return <HTMLTag innerHTML={html}></HTMLTag>;
     }
