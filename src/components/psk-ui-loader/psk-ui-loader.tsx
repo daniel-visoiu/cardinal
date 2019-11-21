@@ -19,7 +19,6 @@ export class PskUiLoader {
   @Watch("shouldBeRendered")
   render() {
 
-
     if (this.shouldBeRendered) {
       return (
         <div class="loader-container">

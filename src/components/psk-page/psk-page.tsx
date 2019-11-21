@@ -93,8 +93,9 @@ export class PskPage {
 			<div>
 				<nav><h3>{this.title}</h3></nav>
 				<div class="page-content">
-					{this.componentFullyLoaded ? <slot />
-						: <psk-ui-loader shouldBeRendered={true} />}
+					{
+						<slot />
+					}
 				</div>
 			</div>
 		)
