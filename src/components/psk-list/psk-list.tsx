@@ -1,5 +1,5 @@
 import { Component, h, Prop, Element, State } from "@stencil/core";
-import { PSK_LIST_PARSE_CONFIG, LIST_TYPE_NUMERIC } from "../../utils/constants";
+import { PSK_LIST_PARSE_CONFIG, LIST_TYPE_ORDERED } from "../../utils/constants";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import CustomTheme from "../../decorators/CustomTheme";
 
@@ -10,8 +10,8 @@ export class PskList {
     @CustomTheme()
 
     @TableOfContentProperty({
-        description: [`This property gives the type of the list. It has two type of values, "numeric" or "bullet"`,
-            `If this property is missing, "bullet is assumed"`],
+        description: [`This property gives the type of the list. It has two type of values, "ordered" or "unordered"`,
+            `If this property is missing, "unordered is assumed"`],
         isMandatory: false,
         propertyType: 'string'
     })
@@ -21,7 +21,7 @@ export class PskList {
     @Element() private element: HTMLElement;
 
     render() {
-        if (this.listType === LIST_TYPE_NUMERIC) {
+        if (this.listType === LIST_TYPE_ORDERED) {
             return <ol>
                 {this.listContent}
             </ol>;
