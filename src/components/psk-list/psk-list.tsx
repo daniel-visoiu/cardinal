@@ -33,7 +33,13 @@ export class PskList {
     }
 
     componentWillLoad() {
-        const htmlLines: Array<string> = this.element.innerHTML
+        let htmlLinesRaw = "";
+        console.log(this);
+        if (this["getInnerContent"]) {
+            htmlLinesRaw = this['getInnerContent']("innerHTML");
+        }
+        console.log(htmlLinesRaw);
+        const htmlLines: Array<string> = htmlLinesRaw
             .split(/\n/g)
             .map(el => el.trim())
             .filter(el => el.length > 0 && el !== '<!---->');
