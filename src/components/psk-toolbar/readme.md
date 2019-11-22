@@ -18,7 +18,7 @@
 
 ### Depends on
 
-- [psk-icon](..\psk-icon)
+- [psk-icon](../psk-icon)
 
 ### Graph
 ```mermaid

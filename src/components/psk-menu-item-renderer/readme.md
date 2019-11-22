@@ -7,10 +7,18 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type       | Default     |
-| -------- | --------- | ----------- | ---------- | ----------- |
-| `active` | `active`  |             | `boolean`  | `undefined` |
-| `value`  | --        |             | `MenuItem` | `undefined` |
+| Property      | Attribute      | Description | Type                             | Default     |
+| ------------- | -------------- | ----------- | -------------------------------- | ----------- |
+| `active`      | `active`       |             | `boolean`                        | `undefined` |
+| `historyType` | `history-type` |             | `"browser" \| "hash" \| "query"` | `undefined` |
+| `value`       | --             |             | `MenuItem`                       | `undefined` |
+
+
+## Events
+
+| Event         | Description | Type               |
+| ------------- | ----------- | ------------------ |
+| `menuClicked` |             | `CustomEvent<any>` |
 
 
 ----------------------------------------------

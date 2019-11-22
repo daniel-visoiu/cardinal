@@ -44,9 +44,20 @@ export class AppMenuDropdown {
     }
   }
 
+  @Listen("menuClicked", {capture: true, target: "window"})
+  handleMenuClick(e: CustomEvent) {
+    const target = e.detail as HTMLElement;
+    if (getElement(this).contains(target)) {
+      this.isOpened = false;
+    }else{
+      this.dropDownHasChildActive = false;
+    }
+  }
+
   @Listen("routeChanged", {capture: false, target: "window"})
   routeChanged() {
-    this.dropDownHasChildActive = window.location.href.includes(this.url);
+    let url = this.url+"/";
+    this.dropDownHasChildActive = window.location.href.includes(url);
   }
 
   toggleDropdown(evt) {

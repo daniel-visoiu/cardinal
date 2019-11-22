@@ -1,7 +1,8 @@
-import {Component, h, Prop} from '@stencil/core';
+import {Component, Event, EventEmitter, h, Prop} from '@stencil/core';
 import {MenuItem} from "../../interfaces/MenuItem";
 import CustomTheme from "../../decorators/CustomTheme";
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
+import {ExtendedHistoryType} from "../../interfaces/ExtendedHistoryType";
 
 @Component({
   tag: 'psk-menu-item-renderer',
@@ -25,6 +26,17 @@ export class PskMenuItemRenderer {
   @Prop({
     reflectToAttr: true,
   }) active: boolean;
+  @Prop() historyType: ExtendedHistoryType;
+
+  @Event({
+    eventName: 'menuClicked',
+    composed: true,
+    cancelable: true,
+  }) menuClicked: EventEmitter;
+
+  notifyItemClicked = function (evt) {
+    this.menuClicked.emit(evt.target);
+  };
 
   renderMenuItem(item) {
     let href = item.path;
@@ -35,10 +47,10 @@ export class PskMenuItemRenderer {
       })
 
     }
-
-    let ItemWrapperTag = item.type === "abstract" ? "dropdown-renderer" : "stencil-route-link";
+    let ItemRenderer = this.historyType === "query" ? "query-page-link" : "stencil-route-link";
+    let ItemWrapperTag = item.type === "abstract" ? "dropdown-renderer" : ItemRenderer;
     return (
-      <ItemWrapperTag url={href} activeClass="active" exact={false} somethingChanged={this.value}>
+      <ItemWrapperTag url={href} activeClass="active" exact={false} somethingChanged={this.value} onClick={(evt)=>this.notifyItemClicked(evt)}>
         <div class="wrapper_container">
           <div class="item_container">
             <span class={`icon fa ${item.icon}`}></span>
