@@ -12,6 +12,14 @@
     pointer-events: none;
 }
 
+:host{
+  display: none;
+}
+
+:host([opened]){
+  display: block;
+}
+
 :host([opened]) #backdrop,
 :host([opened]) #modal {
     opacity: 1;

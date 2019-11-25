@@ -40,9 +40,12 @@ span.icon{
 }
 
 .children{
-  position:absolute;
-  top:56px;
-  left:0;
+  position: absolute;
+  top: 56px;
+  left: 0;
+  max-height: 400px;
+  overflow-x:auto ;
+  z-index: 2;
   display: none;
   background: #051130;
 }
