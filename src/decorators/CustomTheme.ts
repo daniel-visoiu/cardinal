@@ -27,7 +27,7 @@ export default function CustomTheme(): CustomThemeInterface {
       }
     }
 
-    
+
     proto.componentWillLoad = function () {
       const host = getElement(this);
 
@@ -64,7 +64,7 @@ export default function CustomTheme(): CustomThemeInterface {
               checkIfShouldResolve();
             };
 
-  
+
 
             //don't block the UI
             setTimeout(() => {
@@ -76,7 +76,7 @@ export default function CustomTheme(): CustomThemeInterface {
           })
         }
         else {
-          console.error("Theme or globalConfig is not defind!");
+          console.error("Theme or globalConfig is not defined!");
         }
       }
     };
