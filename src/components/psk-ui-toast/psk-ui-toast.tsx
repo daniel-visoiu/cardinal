@@ -9,7 +9,7 @@ import CustomTheme from '../../decorators/CustomTheme';
     shadow: true
 })
 
-export class ToastComponent {
+export class PskUiToast {
     @CustomTheme()
     @TableOfContentProperty({
         description: `This property is the message that will be rendered on the toast`,
@@ -23,10 +23,10 @@ export class ToastComponent {
         isMandatory: true,
         propertyType: `number`
     })
-    @Prop() timeSinceCreation: number
+    @Prop() timeSinceCreation: number;
 
     @TableOfContentProperty({
-        description:`The time measure that will be renderer togheter with timeSinceCreation in order to get the live timer working properly`,
+        description:`The time measure that will be renderer together with timeSinceCreation in order to get the live timer working properly`,
         isMandatory: true,
         propertyType: 'string',
         defaultValue: 'Right now'

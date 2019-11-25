@@ -9,7 +9,7 @@ import CustomTheme from '../../decorators/CustomTheme';
 export class PskUiLoader {
   @CustomTheme()
   @TableOfContentProperty({
-    description: `This is the property that gives the state of the loader, if it is displayed or not. The posible values are true or false.`,
+    description: `This is the property that gives the state of the loader, if it is displayed or not. The possible values are true or false.`,
     isMandatory: false,
     propertyType: 'boolean',
     defaultValue: 'false'

@@ -17,10 +17,10 @@ export class PskWizard {
     @Prop() componentRender: string;
 
     @TableOfContentProperty({
-        description: `This parameter holds the wizard configuration, the names of the steps, the components that will be displayed and if there is the case, other properties, like informations for the steps.`,
+        description: `This parameter holds the wizard configuration, the names of the steps, the components that will be displayed and if there is the case, other properties, like information for the steps.`,
         isMandatory: false,
         propertyType: `array of WizardStep types (WizardStep[])`,
-        specialNote: `These informations are filled in and handled by the controller of the component, not by the component itself.`
+        specialNote: `These information are filled in and handled by the controller of the component, not by the component itself.`
     })
     @Prop({ mutable: true, reflect: true }) wizardSteps?: WizardStep[];
 
@@ -40,7 +40,7 @@ export class PskWizard {
         },
         description: `This event is triggered when the component is loaded and if no configuration is given for the wizard.
             In this case, the controller is responsible to send the configuration to the wizard.
-            This event comes with a single parameter, a callback function the sends the configuration to the component.`
+            This event comes with a single parameter, a callback function that sends the configuration to the component.`
     })
     @Event({
         eventName: 'needWizardConfiguration',

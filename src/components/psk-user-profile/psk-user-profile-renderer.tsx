@@ -6,7 +6,7 @@ import CustomTheme from '../../decorators/CustomTheme';
   tag: 'psk-user-profile-renderer',
   shadow: true
 })
-export class PskUserProfile {
+export class PskUserProfileRenderer {
   @CustomTheme()
   @TableOfContentProperty({
     description: `This property is the user information that needs to be rendered for the user.`,

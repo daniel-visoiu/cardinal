@@ -20,9 +20,9 @@ export class PskStepper {
             wizard configuration
             the names of the steps
             the components that will be displayed
-            other properties, like informations for the steps.(optional).`,
+            other properties, like information for the steps.(optional).`,
         isMandatory: false,
-        propertyType: `array fo WizardStep items(WizardStep[])`,
+        propertyType: `array for WizardStep items(WizardStep[])`,
         defaultValue: `psk-stepper-renderer`
     })
     @Prop() wizardSteps: WizardStep[];
@@ -43,7 +43,7 @@ export class PskStepper {
 
     render() {
         const StepperComponentRenderer: string = this.componentRender;
-        
+
         return <StepperComponentRenderer
             wizardSteps={this.wizardSteps}
             activeStep={this.activeStep}

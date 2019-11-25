@@ -10,7 +10,7 @@ import CustomTheme from '../../decorators/CustomTheme';
 export class PskPinPopup {
 	@CustomTheme()
 	@TableOfContentProperty({
-		description: `This is the property that gives the state of the popup if it is opened or closed.The possible values are ture or false`,
+		description: `This is the property that gives the state of the popup if it is opened or closed.The possible values are true or false`,
 		isMandatory: false,
 		propertyType: 'boolean',
 		defaultValue: 'false'
