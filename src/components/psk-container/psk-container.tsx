@@ -1,12 +1,20 @@
 import { Component, h, Prop, Element, State } from "@stencil/core";
 import ControllerFactory from "../../services/ControllerFactory";
+import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 
 @Component({
 	tag: "psk-container",
 	shadow: true
 })
 export class PskContainer {
-	@Prop() controllerName?: any | null;
+	@TableOfContentProperty({
+		isMandatory: false,
+		description: `This property is a string that will let the developer to choose his own controller.
+					If no value is sent then the null default value will be taken and the component will use the basic Controller`,
+		propertyType: `string`,
+		defaultValue: `null`
+	})
+	@Prop() controllerName?: string | null;
 	@Prop() htmlFilePath?: string | null;
 
 	@State() controller: any | null;

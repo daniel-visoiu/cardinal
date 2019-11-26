@@ -8,9 +8,10 @@ import { TableOfContentProperty } from '../../decorators/TableOfContentProperty'
 })
 export class PskIcon {
     @TableOfContentProperty({
-        isMandatory: false,
+        isMandatory: true,
         propertyType: 'string',
-        description: 'This is the icon defined in font-awesome Cascading Style Sheet'
+        description: [`This property is mandatory and it is the icon defined in font-awesome Cascading Style Sheet .`,
+            `We choose to use these icons because they are popular and quite expressive and very easy to use.(Example: user,`]
     })
     @Prop() icon: string | null;
 
