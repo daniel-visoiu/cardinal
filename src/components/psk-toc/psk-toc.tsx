@@ -52,17 +52,10 @@ export class PskToc {
 
     _sortChapters(chapters: Array<Chapter>): Array<Chapter> {
         const chaptersInsidePage = this.pskPageElement.querySelectorAll('psk-chapter');
-        //@ts-ignore
-        const guidOrderedList: Array<string> = chaptersInsidePage.filter((elem) => {
-            return !(elem.hasAttribute('data-define-props') ||
-                elem.hasAttribute('data-define-events') ||
-                elem.hasAttribute('data-define-controller'))
-                && elem.hasAttribute('guid')
-        }).map((elem) => elem.getAttribute('guid'));
-
+        const guidOrderedList: Array<string> = [];
         chaptersInsidePage.forEach((chapter: HTMLElement) => {
-            if (!(chapter.hasAttribute('data-define-props') || chapter.hasAttribute('data-define-controller') || chapter.hasAttribute('data-define-events')) && (chapter.hasAttribute('guid'))) {
-                guidOrderedList.push(chapter.getAttribute('guid'));
+            if (!(chapter.hasAttribute('data-define-props') || chapter.hasAttribute('data-define-controller') || chapter.hasAttribute('data-define-events')) && (chapter.hasAttribute('guid')) ) {
+                    guidOrderedList.push(chapter.getAttribute('guid'));
             }
         });
 
