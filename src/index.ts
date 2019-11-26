@@ -1,2 +1,2 @@
-export * from './components.d';
+export * from './components.d.ts';
 import '@stencil/router';
