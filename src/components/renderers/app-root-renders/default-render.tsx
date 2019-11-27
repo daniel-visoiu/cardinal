@@ -1,7 +1,7 @@
 import {Component, h, Listen, State} from "@stencil/core";
 import CustomTheme from "../../../decorators/CustomTheme";
 
-const appMaxWidth = 650;
+const appMaxWidth = 960;
 
 @Component({
   tag: 'psk-default-renderer',

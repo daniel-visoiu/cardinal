@@ -34,7 +34,7 @@ export class AppMenu {
     propertyType: `number`,
     defaultValue: `600`
   })
-  @Prop() hamburgerMaxWidth?: number = 600;
+  @Prop() hamburgerMaxWidth?: number = 960;
   @Prop() historyType: ExtendedHistoryType;
 
   @State() showHamburgerMenu?: boolean = false;

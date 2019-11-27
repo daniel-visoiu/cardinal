@@ -9,7 +9,7 @@
 
 | Property            | Attribute             | Description | Type                             | Default     |
 | ------------------- | --------------------- | ----------- | -------------------------------- | ----------- |
-| `hamburgerMaxWidth` | `hamburger-max-width` |             | `number`                         | `600`       |
+| `hamburgerMaxWidth` | `hamburger-max-width` |             | `number`                         | `960`       |
 | `historyType`       | `history-type`        |             | `"browser" \| "hash" \| "query"` | `undefined` |
 | `itemRenderer`      | `item-renderer`       |             | `string`                         | `undefined` |
 | `menuItems`         | --                    |             | `MenuItem[]`                     | `null`      |
