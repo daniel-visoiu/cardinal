@@ -54,8 +54,8 @@ export class PskToc {
         const chaptersInsidePage = this.pskPageElement.querySelectorAll('psk-chapter');
         const guidOrderedList: Array<string> = [];
         chaptersInsidePage.forEach((chapter: HTMLElement) => {
-            if (chapter.hasAttribute('guid')) {
-                guidOrderedList.push(chapter.getAttribute('guid'));
+            if (!(chapter.hasAttribute('data-define-props') || chapter.hasAttribute('data-define-controller') || chapter.hasAttribute('data-define-events')) && (chapter.hasAttribute('guid')) ) {
+                    guidOrderedList.push(chapter.getAttribute('guid'));
             }
         });
 

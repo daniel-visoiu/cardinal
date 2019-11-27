@@ -9,7 +9,7 @@
 
 | Property         | Attribute         | Description | Type     | Default     |
 | ---------------- | ----------------- | ----------- | -------- | ----------- |
-| `controllerName` | `controller-name` |             | `any`    | `undefined` |
+| `controllerName` | `controller-name` |             | `string` | `undefined` |
 | `htmlFilePath`   | `html-file-path`  |             | `string` | `undefined` |
 
 

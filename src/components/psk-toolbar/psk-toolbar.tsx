@@ -2,6 +2,7 @@ import { Component, Prop, h, Element } from '@stencil/core';
 import CustomTheme from '../../decorators/CustomTheme';
 import { ACTIONS_ICONS } from '../../utils/constants';
 import { createCustomEvent } from '../../utils/utils';
+import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 
 @Component({
     tag: "psk-toolbar",
@@ -11,7 +12,19 @@ export class PskToolbar {
     @CustomTheme()
 
     @Prop() actions: string | null;
+    @TableOfContentProperty({
+        description: `This property is the wanna that tells us if the toolbar action has an icon attached to it so it can be rendered.`,
+        propertyType: `boolean`,
+        isMandatory: false,
+        defaultValue: `false`
+    })
     @Prop() icons: boolean = false;
+    @TableOfContentProperty({
+        description: `This property is the data that will be passed to the newly created event in the detail property.`,
+        propertyType: `string`,
+        isMandatory: false,
+        defaultValue: `null`
+    })
     @Prop() eventData: string | null;
 
     @Element() private host: HTMLElement;

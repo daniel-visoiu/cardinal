@@ -8,8 +8,10 @@ import { TableOfContentProperty } from '../../decorators/TableOfContentProperty'
 export class PskGrid {
     @TableOfContentProperty({
         isMandatory: false,
-        propertyType: 'icon',
-        description: 'This is the icon defined in font-awesome Cascading Style Sheet'
+        propertyType: 'number',
+        description: 'This is the number of columns for the bootstrap columns class.',
+        defaultValue: 'null',
+        specialNote: `That number can only be a natural one between 1 and 12`
     })
     @Prop() columns: number | null;
 
