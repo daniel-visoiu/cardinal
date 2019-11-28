@@ -45,7 +45,7 @@ span.icon{
   left: 0;
   max-height: 400px;
   overflow-x:auto ;
-  z-index: 2;
+  z-index: 200;
   display: none;
   background: #051130;
 }
