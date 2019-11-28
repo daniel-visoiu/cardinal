@@ -9,12 +9,20 @@ import { TableOfContentProperty } from "../../decorators/TableOfContentProperty"
 export class PskContainer {
 	@TableOfContentProperty({
 		isMandatory: false,
-		description: `This property is a string that will let the developer to choose his own controller.
-					If no value is sent then the null default value will be taken and the component will use the basic Controller`,
+		description: [`This property is a string that will permit the developer to choose his own controller.`,
+			`If no value is sent then the null default value will be taken and the component will use the basic Controller.`],
 		propertyType: `string`,
 		defaultValue: `null`
 	})
 	@Prop() controllerName?: string | null;
+
+	@TableOfContentProperty({
+		description: [`This property is the page url (html) that will be passed to the psk-page-loader component`,
+			`This component will sent a get request to that url in order to get the content of that url.`],
+		isMandatory: false,
+		propertyType: `string`,
+		defaultValue: `null`
+	})
 	@Prop() htmlFilePath?: string | null;
 
 	@State() controller: any | null;

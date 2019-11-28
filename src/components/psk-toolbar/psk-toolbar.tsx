@@ -11,16 +11,27 @@ import { TableOfContentProperty } from '../../decorators/TableOfContentProperty'
 export class PskToolbar {
     @CustomTheme()
 
-    @Prop() actions: string | null;
     @TableOfContentProperty({
-        description: `This property is the wanna that tells us if the toolbar action has an icon attached to it so it can be rendered.`,
+        description: [`This property is a string where every action is delimitated by \',\'.`,
+            `If an HTML child has a slot attribute with the same value as the entry in the string then a new slot will be created with that value as the name.`],
+        isMandatory: true,
+        defaultValue: `null`,
+        propertyType: `string`
+    })
+    @Prop() actions: string | null;
+
+    @TableOfContentProperty({
+        description: [`This property is the icon attached to the toolbar action so it can be rendered .`,
+            `If this property is not given then the value false will be assumed and instead of a psk-icon, a button will be rendered.`],
         propertyType: `boolean`,
         isMandatory: false,
         defaultValue: `false`
     })
     @Prop() icons: boolean = false;
+
     @TableOfContentProperty({
-        description: `This property is the data that will be passed to the newly created event in the detail property.`,
+        description: [`This property is the data that will be passed to the newly created event in the detail property.`,
+            `It will only be passed along when an icon/button inside the toolbar is clicked.`],
         propertyType: `string`,
         isMandatory: false,
         defaultValue: `null`

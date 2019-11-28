@@ -8,7 +8,8 @@ import { TableOfContentProperty } from "../../decorators/TableOfContentProperty"
 export class PskPageLoader {
 
   @TableOfContentProperty({
-    description: `This property is the url for the page that needs to be loaded`,
+    description: [`This property is the url for the page that needs to be loaded.`,
+      `When this component loads a get http request will be issued and the cotent of that url will be rendered if it can be accessed.`],
     isMandatory: true,
     propertyType: 'string'
   })
