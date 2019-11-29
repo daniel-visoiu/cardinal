@@ -10,8 +10,8 @@ export class PskImg {
 	@CustomTheme()
 
 	@TableOfContentProperty({
-		description: `This property is the path to the image source (Example:"PrivateSky/EDFS.png").`,
-		isMandatory: false,
+		description: `This property is the path to the image source (Example:"page/PrivateSky/EDFS.png").`,
+		isMandatory: true,
 		propertyType: `string`
 	})
 	@Prop() src: string;
