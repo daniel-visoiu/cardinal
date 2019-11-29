@@ -24,22 +24,6 @@ h6 span a {
   font-weight: bold;
 }
 
-span {
-  position: absolute;
-  display: block;
-  top: 0;
-  right: 0;
-}
-
-span:hover {
-  opacity: 1;
-}
-
-span {
-  color: #000;
-  text-decoration: none;
-  font-weight: bold;
-}
 
 :host {
   display: block;
