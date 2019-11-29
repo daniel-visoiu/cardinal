@@ -68,13 +68,19 @@
   background: rgba(64,83,115,0.5);
   flex-direction: column;
 }
+@media(max-width:960px){
+  .content{
+    padding: 20px 5px;
+    font-size: 70%;
+  }
+}
 .content .title{
-  font-size: 250%;
+  font-size: 200%;
   color: #FFF;
   text-align: center;
 }
 .content .caption{
-  font-size: 150%;
+  font-size: 120%;
   color: #FFF;
   text-align: center;
 }
@@ -82,3 +88,4 @@
   margin-top:20px;
   text-align: center;
 }
+
