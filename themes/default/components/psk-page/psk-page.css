@@ -34,3 +34,9 @@ nav h3 {
   padding: 20px;
   color: #3d3e44;
 }
+
+@media(max-width:960px){
+  .page-content {
+    padding: 0;
+  }
+}
