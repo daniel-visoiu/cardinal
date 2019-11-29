@@ -24,6 +24,7 @@
 graph TD;
   psk-code --> psk-chapter
   psk-chapter --> psk-card
+  psk-card --> psk-grid
   psk-card --> psk-copy-clipboard
   style psk-code fill:#f9f,stroke:#333,stroke-width:4px
 ```

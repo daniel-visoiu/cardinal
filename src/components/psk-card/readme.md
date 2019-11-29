@@ -23,11 +23,13 @@
 
 ### Depends on
 
+- [psk-grid](..\psk-grid)
 - [psk-copy-clipboard](..\psk-copy-clipboard)
 
 ### Graph
 ```mermaid
 graph TD;
+  psk-card --> psk-grid
   psk-card --> psk-copy-clipboard
   psk-chapter --> psk-card
   psk-description --> psk-card

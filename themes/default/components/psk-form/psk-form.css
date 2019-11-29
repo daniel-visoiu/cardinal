@@ -1,0 +1,6 @@
+@import url("/themes/default/assets/fonts/font-awesome.min.css");
+@import url("/themes/default/assets/bootstrap/css/bootstrap.min.css");
+#actions {
+    display: flex;
+    justify-content: space-between;
+}
