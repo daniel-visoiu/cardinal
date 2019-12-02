@@ -7,11 +7,12 @@
 
 ## Properties
 
-| Property   | Attribute  | Description | Type      | Default |
-| ---------- | ---------- | ----------- | --------- | ------- |
-| `checked`  | `checked`  |             | `boolean` | `false` |
-| `label`    | `label`    |             | `string`  | `null`  |
-| `required` | `required` |             | `boolean` | `false` |
+| Property        | Attribute        | Description | Type      | Default |
+| --------------- | ---------------- | ----------- | --------- | ------- |
+| `checkboxLabel` | `checkbox-label` |             | `string`  | `null`  |
+| `checked`       | `checked`        |             | `boolean` | `false` |
+| `label`         | `label`          |             | `string`  | `null`  |
+| `required`      | `required`       |             | `boolean` | `false` |
 
 
 ----------------------------------------------

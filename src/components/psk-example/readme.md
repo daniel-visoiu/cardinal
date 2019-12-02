@@ -23,7 +23,6 @@
 graph TD;
   psk-example --> psk-chapter
   psk-chapter --> psk-card
-  psk-card --> psk-grid
   psk-card --> psk-copy-clipboard
   style psk-example fill:#f9f,stroke:#333,stroke-width:4px
 ```

@@ -1,39 +1,102 @@
 export type Option = SelectOption | RadioOption;
 export type RowType = 'normal' | 'wide';
+export type SelectType = 'single' | 'multiple';
 export type FormActionType = 'submit' | 'reset';
 export type FormComponentType = 'psk-input' | 'psk-radio' | 'psk-checkbox' | 'psk-select';
 
+/**
+ * SelectOption interface is used to define the options for a dropdown list select.
+ * It can be multiple or single selection.
+ * This is defined separated of RadioOption because of the possibility of enhancements
+ */
 export interface SelectOption {
-    optionName: string;
+    label: string;
+    /**
+     * The name will be used to get the value of the input on submission
+     * If name is not given, the label will be used by normalizing it to lowercase and no white spaces
+     */
+    name?: string;
+    /**
+     * This property will be updated during form submition
+     */
     selected?: boolean;
-    // Will be more in here...
 };
 
+/**
+ * RadioOption interface is used to define the options for a set of radio buttons.
+ * This is defined separated of SelectOption because of the possibility of enhancements
+ */
 export interface RadioOption {
-    optionName: string;
-    selected?: boolean
-    // Will be more in here...
+    label: string;
+    /**
+     * The name will be used to get the value of the input on submission.
+     * If name is not given, the label will be used by normalizing it to lowercase and no white spaces
+     */
+    name?: string;
+    /**
+     * This property will be updated during form submition
+     */
+    selected?: boolean;
 };
 
+/**
+ * FormAction interface is used to define the list of action buttons form the form
+ * E.g.: Submit, Reset, Cancel, Go Back...
+ * 
+ * If eventName property will be set, inside the DefaultController of the application or in the controller
+ * of the form, that event needs to be listened, otherwise, the triggered event is useless.
+ * 
+ * type property has two possible values, standard for HTML: submit and reset.
+ * If no type is provided, submit is assumed.
+ */
 export interface FormAction {
-    acitonName: string;
+    name: string;
     eventName?: string;
-    actionType?: FormActionType;
+    type?: FormActionType;
 };
 
+/**
+ * The FormRow interface defines a list of components that can be grouped as a row using the rowType property
+ * The rowType property has two possible values, wide and normal.
+ * If wide is provided, than each component will be displayed in a single row.
+ * If normal is provided, each row will be formed using 3 components
+ * If this property is not provided, wide will be assumed.
+ */
 export interface FormRow {
     row: Array<FormComponent>;
     rowType?: RowType;
 };
 
 export interface FormComponent {
+    /**
+     * For the momment, the possible values are:
+     * psk-input, psk-radio, psk-checkbox and psk-select
+     */
     componentName: FormComponentType;
-
     label?: string;
+    /**
+     * This is the type of the input like in standsrd HTML: text, email, password...
+     * The full list of possible types is available on https://www.w3schools.com/html/html_form_input_types.asp
+     * The property is optional.
+     */
     type?: string;
+    /**
+     * This is the value that will be displayed when the form is loaded. 
+     * The property is optional.
+     */
     defaultValue?: string;
 
+    /**
+     * This is the property that is setting the input to be required or not.
+     * The property is optional.
+     * If not value is provided, false is assumed.
+     */
     required?: boolean;
+    /**
+     * This is the property that is setting the input to be read only or not.
+     * The property is optional.
+     * If not value is provided, false is assumed.
+     */
     readOnly?: boolean;
     /**
      * Used only for checkboxes
@@ -63,6 +126,12 @@ export interface FormComponent {
      * This property will be filled inside controller if the component does not pass the validation step 
      */
     invalidValue?: boolean;
+
+    /**
+     * Select type is used to determinate the selection if it is single or multiple
+     * Possible values are: single and multiple. If no value is provided, single is assumed
+     */
+    selectionType?: SelectType;
 };
 
 /**

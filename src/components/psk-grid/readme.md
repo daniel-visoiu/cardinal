@@ -7,23 +7,10 @@
 
 ## Properties
 
-| Property  | Attribute | Description | Type     | Default |
-| --------- | --------- | ----------- | -------- | ------- |
-| `columns` | `columns` |             | `string` | `"1"`   |
+| Property  | Attribute | Description | Type     | Default     |
+| --------- | --------- | ----------- | -------- | ----------- |
+| `columns` | `columns` |             | `number` | `undefined` |
 
-
-## Dependencies
-
-### Used by
-
- - [psk-card](..\psk-card)
-
-### Graph
-```mermaid
-graph TD;
-  psk-card --> psk-grid
-  style psk-grid fill:#f9f,stroke:#333,stroke-width:4px
-```
 
 ----------------------------------------------
 

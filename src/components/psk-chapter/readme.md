@@ -40,7 +40,6 @@
 ```mermaid
 graph TD;
   psk-chapter --> psk-card
-  psk-card --> psk-grid
   psk-card --> psk-copy-clipboard
   psk-code --> psk-chapter
   psk-controller-descriptor --> psk-chapter

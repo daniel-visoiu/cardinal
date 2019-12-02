@@ -22,7 +22,6 @@
 ```mermaid
 graph TD;
   psk-toc --> psk-card
-  psk-card --> psk-grid
   psk-card --> psk-copy-clipboard
   style psk-toc fill:#f9f,stroke:#333,stroke-width:4px
 ```

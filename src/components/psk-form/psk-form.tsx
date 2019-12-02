@@ -74,7 +74,7 @@ export class PskForm {
     _handleClickActionButton(evt: MouseEvent, eventName: string = 'defaultSubmit') {
         evt.preventDefault();
         evt.stopImmediatePropagation();
-        console.log(eventName, 'after click');
+
         createCustomEvent(eventName, {
             bubbles: true,
             composed: true,
@@ -97,12 +97,19 @@ export class PskForm {
             <div class="row">
                 <div id="actions" class="col-md-4 align-self-end">
                     {formAction.map((action: FormAction) => {
+                        const props = {
+                            type: (!action.type
+                                || (action.type !== 'submit'
+                                    && action.type !== 'reset'))
+                                ? 'submit' : action.type,
+                            value: action.name
+                        };
+
                         return <input
-                            type={action.actionType ? action.actionType : 'submit'}
-                            value={action.acitonName}
+                            {...props}
                             class="btn btn-primary"
                             onClick={(evt: MouseEvent) => {
-                                if (action.actionType === 'reset') {
+                                if (action.type === 'reset') {
                                     return;
                                 }
                                 this._handleClickActionButton(evt, action.eventName);
