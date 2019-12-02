@@ -11,7 +11,7 @@ export class PskGrid {
         propertyType: 'number',
         description: 'This is the number of columns for the bootstrap columns class.',
         defaultValue: 'null',
-        specialNote: `That number can only be a natural one between 1 and 12`
+        specialNote: `That number can only be an integer between 1 and 12`
     })
     @Prop() columns: number | null;
 
