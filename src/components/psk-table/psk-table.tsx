@@ -9,14 +9,14 @@ export class PskTable {
     @CustomTheme()
 
     @TableOfContentProperty({
-        description: `If this property is set as true then the table will have a footer in which the first info of the table will be written. `,
+        description: `If this property is set to true then the first row of the given content will be shown as a table header.`,
         isMandatory: false,
         propertyType: `boolean`
     })
-    @Prop() head: boolean;
+    @Prop() header: boolean;
 
     @TableOfContentProperty({
-        description: `If this property is set as true then the table will have a footer in which the last info of the table will be written.`,
+        description: `If this property is set to true then the last row of the given content will be shown as a table footer.`,
         isMandatory: false,
         propertyType: `boolean`
     })
@@ -40,7 +40,7 @@ export class PskTable {
                 let tableRow: string = line
                     .split('|')
                     .map(el => {
-                        if (this.head) {
+                        if (this.header) {
                             return `<th>${el.trim()}</th>`;
                         } else {
                             return `<td>${el.trim()}</td>`;
@@ -49,7 +49,7 @@ export class PskTable {
                 return `<tr>${tableRow}</tr>`;
             });
         let finalTableRows: Array<HTMLElement> = [];
-        if (this.head) {
+        if (this.header) {
             finalTableRows.push(this._stringArrayToHTMLElement('thead', tableRows.splice(0, 1)));
             if (this.footer) {
                 finalTableRows.push(this._stringArrayToHTMLElement('tbody', tableRows.splice(0, tableRows.length - 1)));
