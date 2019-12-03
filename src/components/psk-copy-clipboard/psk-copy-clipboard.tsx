@@ -66,9 +66,9 @@ export class PskCopyClipboard {
         basePath = window.location.href.split(this.chapterToken)[0];
       }
       navigator.clipboard.writeText(`${basePath}${this.chapterToken}${elementId}`);
-      const tooltipTextArea: HTMLElement = this.element.querySelector('.tooltip');
+      const tooltipTextArea: HTMLElement = this.element.querySelector('.copy-tooltip');
       tooltipTextArea.innerHTML = TOOLTIP_COPIED_TEXT;
-      tooltipTextArea.setAttribute("class", "tooltip copied");
+      tooltipTextArea.setAttribute("class", "copy-tooltip copied");
 
       scrollToElement(elementId, closestParentElement(this.element, 'psk-page'));
 
@@ -78,9 +78,9 @@ export class PskCopyClipboard {
   }
 
   _resetTooltip(): void {
-    const tooltipTextArea: HTMLElement = this.element.querySelector('.tooltip');
+    const tooltipTextArea: HTMLElement = this.element.querySelector('.copy-tooltip');
     tooltipTextArea.innerHTML = TOOLTIP_TEXT;
-    tooltipTextArea.setAttribute("class", "tooltip");
+    tooltipTextArea.setAttribute("class", "copy-tooltip");
   }
 
   _isCopySupported(): boolean {
@@ -100,7 +100,7 @@ export class PskCopyClipboard {
     }
 
     return (
-      <div id="tooltip"
+      <div class="tooltip_container"
         onClick={(evt: MouseEvent) => {
           evt.stopImmediatePropagation();
           this._copyToClipboardHandler(elementId);
@@ -115,7 +115,7 @@ export class PskCopyClipboard {
           }}>
           <slot />
         </a>
-        <span class="tooltip">{TOOLTIP_TEXT}</span>
+        <span class="copy-tooltip">{TOOLTIP_TEXT}</span>
       </div>
     )
   }
