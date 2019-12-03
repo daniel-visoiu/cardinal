@@ -13,7 +13,7 @@ export class PskTable {
         isMandatory: false,
         propertyType: `boolean`
     })
-    @Prop() header: boolean;
+    @Prop() head: boolean;
 
     @TableOfContentProperty({
         description: `If this property is set to true then the last row of the given content will be shown as a table footer.`,
@@ -40,7 +40,7 @@ export class PskTable {
                 let tableRow: string = line
                     .split('|')
                     .map(el => {
-                        if (this.header) {
+                        if (this.head) {
                             return `<th>${el.trim()}</th>`;
                         } else {
                             return `<td>${el.trim()}</td>`;
@@ -49,7 +49,7 @@ export class PskTable {
                 return `<tr>${tableRow}</tr>`;
             });
         let finalTableRows: Array<HTMLElement> = [];
-        if (this.header) {
+        if (this.head) {
             finalTableRows.push(this._stringArrayToHTMLElement('thead', tableRows.splice(0, 1)));
             if (this.footer) {
                 finalTableRows.push(this._stringArrayToHTMLElement('tbody', tableRows.splice(0, tableRows.length - 1)));
