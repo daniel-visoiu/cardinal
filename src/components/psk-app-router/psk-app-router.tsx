@@ -1,8 +1,8 @@
-import {Component, Event, EventEmitter, Prop, h} from "@stencil/core";
-import {MenuItem} from "../../interfaces/MenuItem";
-import {TableOfContentProperty} from "../../decorators/TableOfContentProperty";
-import {TableOfContentEvent} from "../../decorators/TableOfContentEvent";
-import {ExtendedHistoryType} from "../../interfaces/ExtendedHistoryType";
+import { Component, Event, EventEmitter, Prop, h, State } from "@stencil/core";
+import { MenuItem } from "../../interfaces/MenuItem";
+import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
+import { TableOfContentEvent } from "../../decorators/TableOfContentEvent";
+import { ExtendedHistoryType } from "../../interfaces/ExtendedHistoryType";
 
 @Component({
   tag: "psk-app-router",
@@ -56,6 +56,7 @@ export class PskAppRouter {
     bubbles: true,
   }) getHistoryType: EventEmitter;
 
+  @State() notFoundRoute: string = ""
 
   componentDidLoad() {
     this.needRoutesEvt.emit((err, data) => {
@@ -77,33 +78,40 @@ export class PskAppRouter {
 
   renderItems(items) {
     let routes = items.map((item) => {
+      console.log(item)
+      if (item.name == "404") {
+        this.notFoundRoute = item.path;
+      }
+
       if (item.children) {
         return this.renderItems(item.children)
       } else {
         return <stencil-route url={item.path} component={item.component}
-                              componentProps={item.componentProps}/>
+          componentProps={item.componentProps} />
       }
     });
     return routes;
   }
 
   render() {
-
+    if (this.notFoundRoute == "") {
+      this.notFoundRoute = this.menuItems[0].path
+    }
     let routes = this.renderItems(this.menuItems);
 
     if (routes.length === 0) {
-      return <psk-ui-loader shouldBeRendered={true}/>
+      return <psk-ui-loader shouldBeRendered={true} />
     }
     return (
       <div class="app_container">
-        <stencil-router historyType={this.historyType==="query"?"browser":this.historyType}>
+        <stencil-router historyType={this.historyType === "query" ? "browser" : this.historyType}>
 
           <stencil-route-switch scrollTopOffset={0}>
             {this.historyType === "query" ?
-              <stencil-route component="query-pages-router" componentProps={{pages: this.menuItems}}/> :
+              <stencil-route component="query-pages-router" componentProps={{ pages: this.menuItems }} /> :
               [routes,
                 <stencil-route component="psk-page-not-found"
-                               componentProps={{urlDestination: this.menuItems[0].path}}/>]}
+                  componentProps={{ urlDestination: this.notFoundRoute }} />]}
           </stencil-route-switch>
 
         </stencil-router>

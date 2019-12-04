@@ -1,7 +1,7 @@
-import {Component, h, Element, Prop, Watch, State} from '@stencil/core';
-import {LocationSegments, RouterHistory, injectHistory} from "@stencil/router";
-import {MenuItem} from "../../interfaces/MenuItem";
-import {HTMLStencilElement} from "@stencil/core/internal";
+import { Component, h, Element, Prop, Watch, State } from '@stencil/core';
+import { LocationSegments, RouterHistory, injectHistory } from "@stencil/router";
+import { MenuItem } from "../../interfaces/MenuItem";
+import { HTMLStencilElement } from "@stencil/core/internal";
 
 @Component({
   tag: 'query-pages-router',
@@ -15,6 +15,7 @@ export class QueryPagesRouter {
   @State() currentRoute;
   @Element() el: HTMLStencilElement;
   @Prop() location: LocationSegments;
+  @Prop() redirectTo: string = "";
 
   componentWillLoad() {
 
@@ -25,8 +26,8 @@ export class QueryPagesRouter {
         if (item.children) {
           renderItems(item.children)
         } else {
-          let {path, component, componentProps} = item;
-          routes[path] = ({component, componentProps});
+          let { path, component, componentProps } = item;
+          routes[path] = ({ component, componentProps });
         }
       });
 
@@ -34,11 +35,22 @@ export class QueryPagesRouter {
     };
 
     this.routes = renderItems(this.pages);
+
   }
 
   @Watch('location')
   locationChanged(newValue: LocationSegments) {
     this.currentRoute = newValue;
+    if (this.currentRoute.pathname === '/' && this.currentRoute.search === "") {
+      this.redirectTo = this.pages[0].path;
+    } else {
+      let notFoundRoute = this.pages.map((item, index) => item.name == "404" ? index : null).filter(item => item !== null)[0];
+      if (notFoundRoute) {
+        this.redirectTo = this.pages[notFoundRoute].path;
+      } else {
+        this.redirectTo = this.pages[0].path;
+      }
+    }
   }
 
   render() {
@@ -50,7 +62,7 @@ export class QueryPagesRouter {
     let currentRoute = this.routes[currentRouteSearchUrl];
 
     let componentName = "psk-page-not-found";
-    let componentProps = {urlDestination: this.pages[0].path};
+    let componentProps = { urlDestination: this.redirectTo };
 
     if (currentRoute) {
       componentName = currentRoute.component;
@@ -59,7 +71,7 @@ export class QueryPagesRouter {
 
     return (
       <stencil-route component={componentName}
-                     componentProps={componentProps}/>)
+        componentProps={componentProps} />)
 
 
   }
