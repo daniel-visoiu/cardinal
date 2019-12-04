@@ -35,11 +35,11 @@ export class PskAppRouter {
     description: `This event gets the data as parameter and it is emitted immediately after the component is loaded in order to create the application routes `
   })
   @Event({
-    eventName: 'needMenuItems',
+    eventName: 'needRoutes',
     cancelable: true,
     composed: true,
     bubbles: true,
-  }) needMenuItemsEvt: EventEmitter;
+  }) needRoutesEvt: EventEmitter;
 
 
   @TableOfContentEvent({
@@ -58,7 +58,7 @@ export class PskAppRouter {
 
 
   componentDidLoad() {
-    this.needMenuItemsEvt.emit((err, data) => {
+    this.needRoutesEvt.emit((err, data) => {
       if (err) {
         console.log(err);
         return;
