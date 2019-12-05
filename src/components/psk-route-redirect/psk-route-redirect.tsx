@@ -11,7 +11,12 @@ export class PskRouteRedirect {
   @Prop() history: RouterHistory;
 
   componentWillLoad() {
-    this.history.push(this.url, {});
+    if(this.url){
+      this.history.push(this.url, {});
+    }
+    else{
+      console.error("Url was not provided")
+    }
   }
 }
 
