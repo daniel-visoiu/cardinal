@@ -7,11 +7,12 @@
 
 ## Properties
 
-| Property   | Attribute | Description | Type               | Default     |
-| ---------- | --------- | ----------- | ------------------ | ----------- |
-| `history`  | --        |             | `RouterHistory`    | `undefined` |
-| `location` | --        |             | `LocationSegments` | `undefined` |
-| `pages`    | --        |             | `MenuItem[]`       | `undefined` |
+| Property     | Attribute     | Description | Type               | Default     |
+| ------------ | ------------- | ----------- | ------------------ | ----------- |
+| `history`    | --            |             | `RouterHistory`    | `undefined` |
+| `location`   | --            |             | `LocationSegments` | `undefined` |
+| `pages`      | --            |             | `MenuItem[]`       | `undefined` |
+| `redirectTo` | `redirect-to` |             | `string`           | `""`        |
 
 
 ## Dependencies

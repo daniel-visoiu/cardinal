@@ -1,42 +1,28 @@
-export type Option = SelectOption | RadioOption;
 export type RowType = 'normal' | 'wide';
 export type SelectType = 'single' | 'multiple';
 export type FormActionType = 'submit' | 'reset';
-export type FormComponentType = 'psk-input' | 'psk-radio' | 'psk-checkbox' | 'psk-select';
+export type FormComponentType = 'psk-input' | 'psk-radio' | 'psk-checkbox' | 'psk-select' | 'psk-label';
 
 /**
  * SelectOption interface is used to define the options for a dropdown list select.
  * It can be multiple or single selection.
- * This is defined separated of RadioOption because of the possibility of enhancements
  */
-export interface SelectOption {
+export interface Option {
     label: string;
     /**
      * The name will be used to get the value of the input on submission
      * If name is not given, the label will be used by normalizing it to lowercase and no white spaces
      */
-    name?: string;
+    value?: string;
     /**
      * This property will be updated during form submition
      */
     selected?: boolean;
-};
-
-/**
- * RadioOption interface is used to define the options for a set of radio buttons.
- * This is defined separated of SelectOption because of the possibility of enhancements
- */
-export interface RadioOption {
-    label: string;
     /**
-     * The name will be used to get the value of the input on submission.
-     * If name is not given, the label will be used by normalizing it to lowercase and no white spaces
+     * By using this property, you can disable the option from being selected. 
+     * This can be used for conditionals
      */
-    name?: string;
-    /**
-     * This property will be updated during form submition
-     */
-    selected?: boolean;
+    disabled?: boolean;
 };
 
 /**
@@ -70,7 +56,7 @@ export interface FormRow {
 export interface FormComponent {
     /**
      * For the momment, the possible values are:
-     * psk-input, psk-radio, psk-checkbox and psk-select
+     * psk-input, psk-radio, psk-checkbox, psk-select, psk-label
      */
     componentName: FormComponentType;
     label?: string;

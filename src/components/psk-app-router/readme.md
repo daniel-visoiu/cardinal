@@ -19,7 +19,7 @@
 | Event            | Description | Type               |
 | ---------------- | ----------- | ------------------ |
 | `getHistoryType` |             | `CustomEvent<any>` |
-| `needMenuItems`  |             | `CustomEvent<any>` |
+| `needRoutes`     |             | `CustomEvent<any>` |
 
 
 ## Dependencies

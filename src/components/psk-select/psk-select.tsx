@@ -1,49 +1,58 @@
 import { h, Component, Prop } from '@stencil/core';
-import { SelectOption, SelectType } from '../../interfaces/FormModel';
+import { Option, SelectType } from '../../interfaces/FormModel';
 
 @Component({
     tag: 'psk-select'
 })
-export class PskRadio {
+export class PskSelect {
 
     @Prop() label: string | null = null;
     @Prop() defaultValue?: string | null = null;
-    @Prop({ reflect: true, mutable: true }) options: Array<SelectOption> = null;
+    @Prop() options: Array<Option> = null;
     @Prop() selectionType?: SelectType = 'single';
+    @Prop() placeholder?: string | null = null;
 
     @Prop() required?: boolean = false;
     @Prop() disabled?: boolean = false;
     @Prop() invalidValue?: boolean | null = null;
 
     componentWillLoad() {
-        console.log(this.selectionType);
         if (this.selectionType !== 'single' && this.selectionType !== 'multiple') {
             this.selectionType = 'single';
         }
     }
 
     render() {
+        const name: string = this.label.replace(/\s/g, '').toLowerCase();
+
         return (
             <div class="form-group">
-                <label
-                    htmlFor={this.label.replace(/\s/g, '').toLowerCase()}>
-                    {this.label}
-                </label>
+                <psk-label for={name} label={this.label} />
 
-                {
-                    this.selectionType === 'single'
-                        ? this._selectWithSingleOption.call(this)
-                        : this._selectMultipleOptions.call(this)
-                }
+                <select name={name} id={name} class="form-control"
+                    disabled={this.disabled} required={this.required}
+                    multiple={this.selectionType === 'multiple'}>
+
+                    {this.placeholder && <option
+                        disabled={true}
+                        label={this.placeholder}
+                        value={''} />}
+
+                    {this.options.map((option: Option) => {
+                        const value = option.value ? option.value
+                            : option.label.replace(/\s/g, '').toLowerCase();
+
+                        return (
+                            <option
+                                selected={option.selected}
+                                value={value}
+                                label={option.label}
+                                disabled={option.disabled}
+                            />
+                        );
+                    })}
+                </select>
             </div>
         );
-    }
-
-    _selectWithSingleOption() {
-        return <p>{this.selectionType}</p>;
-    }
-
-    _selectMultipleOptions() {
-        return <p>{this.selectionType}</p>;
     }
 }

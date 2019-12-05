@@ -3,8 +3,7 @@ import ControllerFactory from "../../services/ControllerFactory";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 
 @Component({
-	tag: "psk-container",
-	shadow: true
+	tag: "psk-container"
 })
 export class PskContainer {
 	@TableOfContentProperty({

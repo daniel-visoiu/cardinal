@@ -1,5 +1,6 @@
-import { Component, h, Prop, EventEmitter } from '@stencil/core';
+import { Component, h, Prop } from '@stencil/core';
 import CustomTheme from '../../decorators/CustomTheme';
+import { createCustomEvent } from '../../utils/utils';
 
 @Component({
 	tag: 'psk-button',
@@ -7,22 +8,27 @@ import CustomTheme from '../../decorators/CustomTheme';
 })
 export class PskButton {
 	@CustomTheme()
-	@Prop() label: string;
-	@Prop() buttonClass: string = "btn btn-primary";
-	@Prop() eventData: any;
-	@Prop() eventEmitter: EventEmitter;
+
+	@Prop() label: string | null = null;
+	@Prop() buttonClass: string | null = "btn btn-primary";
+	@Prop() eventName: string | null = null;
 	@Prop() disabled: boolean = false;
 
 	render() {
 		return (
-			<button onClick={() => {
-				this.eventEmitter.emit(this.eventData)
+			<button onClick={(evt: MouseEvent) => {
+				evt.preventDefault();
+				evt.stopImmediatePropagation();
+				if (this.eventName) {
+					createCustomEvent(this.eventName, {
+						bubbles: true, composed: true, cancelable: true
+					}, true);
+				}
 			}} class={this.buttonClass}
 				disabled={this.disabled}>
-				<slot name="button_content" />
-				{this.label ? this.label : null}
+				{this.label && this.label}
+				<slot />
 			</button>
 		);
 	}
 }
-

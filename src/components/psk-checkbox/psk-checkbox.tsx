@@ -1,4 +1,4 @@
-import { h, Component, Prop } from '@stencil/core';
+import { h, Component, Prop, Element } from '@stencil/core';
 
 @Component({
     tag: 'psk-checkbox'
@@ -25,7 +25,6 @@ export class PskCheckbox {
                         type="checkbox"
                         id={this.checkboxLabel && this.checkboxLabel.replace(/\s/g, '').toLowerCase()}
                         checked={this.checked}
-                        required={this.required}
                         name={this.checkboxLabel && this.checkboxLabel.replace(/\s/g, '').toLowerCase()}
                         class={`form-check-input`} />
 
@@ -37,5 +36,15 @@ export class PskCheckbox {
                 </div>
             </div>
         );
+    }
+
+    @Element() private __host: HTMLElement;
+
+    componentDidRender() {
+        const input: HTMLInputElement = this.__host.querySelector('input');
+
+        if (this.required) {
+            input.setAttribute('required', 'required');
+        }
     }
 }

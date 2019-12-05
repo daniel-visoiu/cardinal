@@ -9,8 +9,6 @@
 
 | Property       | Attribute       | Description | Type                      | Default |
 | -------------- | --------------- | ----------- | ------------------------- | ------- |
-| `defaultValue` | `default-value` |             | `string`                  | `null`  |
-| `disabled`     | `disabled`      |             | `boolean`                 | `false` |
 | `invalidValue` | `invalid-value` |             | `boolean`                 | `null`  |
 | `label`        | `label`         |             | `string`                  | `null`  |
 | `options`      | `options`       |             | `RadioOption[] \| string` | `null`  |

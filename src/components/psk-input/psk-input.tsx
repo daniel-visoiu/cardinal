@@ -8,6 +8,7 @@ export class PskInput {
     @Prop() label?: string | null = null;
     @Prop() type?: string = 'text';
     @Prop() value?: string | null = null;
+    @Prop() name?: string | null = null;
     @Prop() defaultValue?: string | null = null;
     @Prop() placeHolder?: string | null = null;
 
@@ -24,14 +25,9 @@ export class PskInput {
 
         return (
             <div class={`form-group`}>
-                {this.label && <label
-                    htmlFor={this.label.replace(/\s/g, '').toLowerCase()}>
-                    {this.label}
-                </label>}
+                <psk-label for={name} label={this.label} />
 
                 <input
-                    readOnly={this.readOnly}
-                    required={this.required}
                     type={this.type}
                     value={inputValue}
                     name={this.label && this.label.replace(/\s/g, '').toLowerCase()}
