@@ -3,7 +3,8 @@ import CustomTheme from "../../decorators/CustomTheme";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 
 @Component({
-    tag: "psk-table"
+  tag: "psk-table",
+  shadow:true
 })
 export class PskTable {
     @CustomTheme()
@@ -36,11 +37,11 @@ export class PskTable {
             .split(/\n/g)
             .map(el => el.trim().replace('<!---->', ''))
             .filter(el => el.length > 0)
-            .map((line: string) => {
+            .map((line: string,index:number) => {
                 let tableRow: string = line
                     .split('|')
                     .map(el => {
-                        if (this.head) {
+                        if (this.head && index === 0) {
                             return `<th>${el.trim()}</th>`;
                         } else {
                             return `<td>${el.trim()}</td>`;
