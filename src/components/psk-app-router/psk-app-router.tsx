@@ -78,7 +78,6 @@ export class PskAppRouter {
 
   renderItems(items) {
     let routes = items.map((item) => {
-      console.log(item)
       if (item.name == "404") {
         this.notFoundRoute = item.path;
       }
@@ -94,14 +93,15 @@ export class PskAppRouter {
   }
 
   render() {
-    if (this.notFoundRoute == "") {
-      this.notFoundRoute = this.menuItems[0].path
-    }
     let routes = this.renderItems(this.menuItems);
 
     if (routes.length === 0) {
       return <psk-ui-loader shouldBeRendered={true} />
     }
+    if (this.notFoundRoute == "") {
+      this.notFoundRoute = this.menuItems[0].path;
+    }
+
     return (
       <div class="app_container">
         <stencil-router historyType={this.historyType === "query" ? "browser" : this.historyType}>
@@ -109,7 +109,9 @@ export class PskAppRouter {
           <stencil-route-switch scrollTopOffset={0}>
             {this.historyType === "query" ?
               <stencil-route component="query-pages-router" componentProps={{ pages: this.menuItems }} /> :
-              [routes,
+              [<stencil-route url="/" exact={true} component="psk-route-redirect"
+                              componentProps={{url:this.menuItems[0].path}}/>,
+                routes,
                 <stencil-route component="psk-page-not-found"
                   componentProps={{ urlDestination: this.notFoundRoute }} />]}
           </stencil-route-switch>
