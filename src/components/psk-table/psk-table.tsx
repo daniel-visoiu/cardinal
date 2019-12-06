@@ -52,12 +52,11 @@ export class PskTable {
                 let tableRow: string = line
                     .split('|')
                     .map(el => {
-                        widthIndex++
-                        console.log(widthIndex);
+                        widthIndex++;
                         if (this.header && index === 0) {
-                            return `<th style=width:${widthValues[widthIndex]}%;>${el.trim()}</th>`;
+                            return `<th style=width:${widthValues[widthIndex] ? `${widthValues[widthIndex]}%;` : 'auto'}>${el.trim()}</th>`;
                         } else {
-                            return `<td style=width:${widthValues[widthIndex]}%;>${el.trim()}</td>`;
+                            return `<td style=width:${widthValues[widthIndex] ? `${widthValues[widthIndex]}%;` : 'auto'}>${el.trim()}</td>`;
                         }
                     }).join('');
 
@@ -83,6 +82,7 @@ export class PskTable {
 
     _stringArrayToHTMLElement(tag: string, html: Array<string>): HTMLElement {
         const HTMLTag = tag;
-        return <HTMLTag innerHTML={html.join('')}></HTMLTag>;
+        return <HTMLTag innerHTML={html.join('')
+        } ></HTMLTag >;
     }
 }
