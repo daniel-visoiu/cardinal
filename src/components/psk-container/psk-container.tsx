@@ -48,10 +48,11 @@ export class PskContainer {
 	}
 
 	render() {
+		console.log(this)
 		return [
 			<slot />,
 			this.htmlFilePath && <psk-page-loader pageUrl={this.htmlFilePath} />,
-			this.controllerScript && this.controller.executeScript(this.controller, this.controllerScript)
+			(this.controller && this.controllerScript) && this.controller.executeScript(this.controller, this.controllerScript)
 		];
 	}
 
