@@ -1,4 +1,4 @@
-import { Component, h, Prop } from '@stencil/core';
+import { Component, h, Prop, Element } from '@stencil/core';
 import CustomTheme from '../../decorators/CustomTheme.js';
 
 @Component({
@@ -12,10 +12,12 @@ export class PskForm {
     @Prop() controllerName: string | null;
     @Prop() formActions: string | null = 'submit';
 
+    @Element() private _host: HTMLElement;
+
     render() {
 
         return (
-            <psk-container controllerName={this.controllerName}>
+            <psk-container controllerName={this.controllerName} parentHost={this._host}>
                 <div class="container">
                     <form>
                         <slot />

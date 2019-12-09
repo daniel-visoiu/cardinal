@@ -11,6 +11,7 @@ export class PskTemplateIterator {
 
     componentWillLoad() {
         console.log(this._host);
+        console.log("To be continued after binding implementation...");
     }
 
     render() {

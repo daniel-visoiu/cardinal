@@ -28,13 +28,22 @@ export class PskContainer {
 	@State() innerHtml: string | null;
 	@State() controllerScript: string | null;
 
-	@Element() host: HTMLElement;
+	// Internal ussage property. In the public documentation, this property should be mentioned as a feature in case the user wants to create a component and to provide the HTML context to the container.
+	// This property is provided by other components where psk-container is loaded. (e.g. psk-form)
+	// If this property is filled in, the searching of a controller script written inside psk-controller tag will commence here.
+	@Prop() parentHost: HTMLElement = null;
+
+	@Element() private _host: HTMLElement;
 
 	constructor() {
 		const controllerNameForInstance = this.controllerName ? this.controllerName : 'Controller';
 
 		ControllerFactory.getController(controllerNameForInstance).then((CTRL) => {
-			this.controller = new CTRL(this.host);
+			if (this.parentHost) {
+				this.controller = new CTRL(this.parentHost);
+				return;
+			}
+			this.controller = new CTRL(this._host);
 		});
 	}
 
@@ -47,7 +56,14 @@ export class PskContainer {
 	}
 
 	componentWillLoad() {
-		const scriptInnerHtml: HTMLElement = this.host.querySelector("psk-controller");
+		let scriptInnerHtml: HTMLElement = null;
+
+		if (this.parentHost) {
+			scriptInnerHtml = this.parentHost.querySelector("psk-controller");
+		} else {
+			scriptInnerHtml = this._host.querySelector("psk-controller");
+		}
+
 		if (scriptInnerHtml !== null) {
 			this.controllerScript = scriptInnerHtml.innerHTML;
 			scriptInnerHtml.innerHTML = "";

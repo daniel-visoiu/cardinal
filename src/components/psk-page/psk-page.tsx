@@ -13,16 +13,16 @@ export class PskPage {
 	@State() chapters: Array<Chapter> = [];
 
 	@TableOfContentProperty({
-		description:`This property will be used as the title for the page.`,
-		isMandatory:false,
-		propertyType:`string`
+		description: `This property will be used as the title for the page.`,
+		isMandatory: false,
+		propertyType: `string`
 	})
 	@Prop() title: string = "";
 
 	@TableOfContentProperty({
-		description:`This property is the name of the table of content.`,
-		isMandatory:false,
-		propertyType:`string`
+		description: `This property is the name of the table of content.`,
+		isMandatory: false,
+		propertyType: `string`
 	})
 	@Prop() tocTitle: string;
 
@@ -92,7 +92,7 @@ export class PskPage {
 		return (
 			<div>
 				<nav><h3>{this.title}</h3></nav>
-				<div class="page-content">
+				<div class="page-content container">
 					{this.componentFullyLoaded ? <slot />
 						: <psk-ui-loader shouldBeRendered={true} />}
 				</div>

@@ -8,13 +8,14 @@ export class PskSelect {
 
     @Prop() label: string | null = null;
     @Prop() defaultValue?: string | null = null;
-    @Prop() options: Array<Option> = null;
     @Prop() selectionType?: SelectType = 'single';
     @Prop() placeholder?: string | null = null;
 
     @Prop() required?: boolean = false;
     @Prop() disabled?: boolean = false;
     @Prop() invalidValue?: boolean | null = null;
+
+    @Prop() options: Array<Option> = null;
 
     componentWillLoad() {
         if (this.selectionType !== 'single' && this.selectionType !== 'multiple') {
@@ -42,9 +43,12 @@ export class PskSelect {
                         const value = option.value ? option.value
                             : option.label.replace(/\s/g, '').toLowerCase();
 
+                        const selected: boolean = option.selected ? option.selected
+                            : this.defaultValue === option.value;
+
                         return (
                             <option
-                                selected={option.selected}
+                                selected={selected}
                                 value={value}
                                 label={option.label}
                                 disabled={option.disabled}

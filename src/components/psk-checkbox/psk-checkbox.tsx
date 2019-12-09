@@ -1,4 +1,4 @@
-import { h, Component, Prop, Element } from '@stencil/core';
+import { h, Component, Prop } from '@stencil/core';
 
 @Component({
     tag: 'psk-checkbox'
@@ -6,45 +6,33 @@ import { h, Component, Prop, Element } from '@stencil/core';
 export class PskCheckbox {
 
     @Prop() label?: string | null = null;
+    @Prop() name?: string | null = null;
     @Prop() checkboxLabel?: string | null = null;
 
     @Prop() required?: boolean = false;
     @Prop() checked?: boolean = false;
 
     render() {
+        const checkboxName = this.name ? this.name
+            : this.checkboxLabel ? this.checkboxLabel.replace(/\s/g, '').toLowerCase() : '';
+
         return (
             <div class="form-group">
-                {this.label && <label
-                    class="form-check-label"
-                    htmlFor={this.label.replace(/\s/g, '').toLowerCase()}>
-                    {this.label}
-                </label>}
+                {/* Here, we display the label of the grouped checkbox component. Details in the documentation */}
+                <psk-label for={this.label.replace(/\s/g, '').toLowerCase()} label={this.label} />
 
                 <div class="form-check">
                     <input
                         type="checkbox"
-                        id={this.checkboxLabel && this.checkboxLabel.replace(/\s/g, '').toLowerCase()}
-                        checked={this.checked}
-                        name={this.checkboxLabel && this.checkboxLabel.replace(/\s/g, '').toLowerCase()}
-                        class={`form-check-input`} />
-
-                    {this.checkboxLabel && <label
-                        class="form-check-label"
-                        htmlFor={this.checkboxLabel.replace(/\s/g, '').toLowerCase()}>
-                        {this.checkboxLabel}
-                    </label>}
+                        class="form-check-input"
+                        id={checkboxName}
+                        name={checkboxName}
+                        required={this.required}
+                        checked={this.checked} />
+                    {/* This is the label for the checkbox */}
+                    <psk-label for={checkboxName} label={this.checkboxLabel} />
                 </div>
             </div>
         );
-    }
-
-    @Element() private __host: HTMLElement;
-
-    componentDidRender() {
-        const input: HTMLInputElement = this.__host.querySelector('input');
-
-        if (this.required) {
-            input.setAttribute('required', 'required');
-        }
     }
 }

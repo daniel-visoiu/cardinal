@@ -17,11 +17,17 @@
 
 ### Used by
 
+ - [psk-checkbox](..\psk-checkbox)
+ - [psk-radio](..\psk-radio)
+ - [psk-radio-group](..\psk-radio-group)
  - [psk-select](..\psk-select)
 
 ### Graph
 ```mermaid
 graph TD;
+  psk-checkbox --> psk-label
+  psk-radio --> psk-label
+  psk-radio-group --> psk-label
   psk-select --> psk-label
   style psk-label fill:#f9f,stroke:#333,stroke-width:4px
 ```

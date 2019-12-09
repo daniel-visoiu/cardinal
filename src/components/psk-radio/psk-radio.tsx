@@ -1,59 +1,64 @@
-// import { h, Component, Prop } from '@stencil/core';
-// import { RadioOption } from '../../interfaces/FormModel';
+import { h, Component, Prop, Event } from '@stencil/core';
+import { EventEmitter } from '@stencil/router/dist/types/stencil.core';
+import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
 
-// @Component({
-//     tag: 'psk-radio'
-// })
-// export class PskRadio {
+@Component({
+    tag: 'psk-radio'
+})
+export class PskRadio {
 
-//     @Prop() label: string | null = null;
-//     @Prop({ reflect: true, mutable: true }) options: Array<RadioOption> | string = null;
+    @Prop() label?: string | null = null;
+    @Prop() value?: string | null = null;
+    @Prop() name?: string | null = null;
 
-//     @Prop() required?: boolean = false;
-//     @Prop({ reflect: true, mutable: true }) invalidValue?: boolean | null = null;
+    @Prop() readOnly?: boolean = false;
+    @Prop() invalidValue?: boolean | null = null;
 
-//     render() {
-//         if (typeof this.options === 'string') {
-//             this.options = this.options
-//                 .split('|')
-//                 .map((opt: string) => {
-//                     return {
-//                         label: opt.trim(),
-//                         name: opt.replace(/(\s|\.)/g, '')
-//                     };
-//                 });
-//         }
+    @Prop({ mutable: true, reflect: true }) checked?: boolean = false;
 
-//         return (
-//             <div class="form-group">
-//                 <label
-//                     htmlFor={this.label.replace(/\s/g, '').toLowerCase()}>
-//                     {this.label}
-//                 </label>
+    @TableOfContentEvent({
+        description: ["This event is being triggered when a radio button is checked.",
+            "The event bubbles to the parent component, psk-radio-group, where the component will handle the selection of the radio."],
+        specialNote: "This event is not composed, it will not bubble outside the form!"
+    })
+    @Event({
+        eventName: 'onChangeRadio',
+        bubbles: true,
+        composed: false,
+        cancelable: true
+    }) onChangeRadio: EventEmitter;
 
-//                 <div class="form-group">
-//                     {this.options.map((option: RadioOption) => {
+    render() {
+        const inputName = this.name ? this.name
+            : (this.label && this.label.replace(/\s/g, '').toLowerCase());
 
-//                         const optionName = option.name ? option.name
-//                             : option.label.replace(/\s/g, '').toLowerCase();
+        return (
+            <div class="form-check form-check-inline">
+                <psk-label for={inputName} label={this.label} />
 
-//                         return (
-//                             <div class="form-check form-check-inline">
-//                                 <input class="form-check-input"
-//                                     type="radio"
-//                                     name={optionName}
-//                                     id={optionName}
-//                                     value={optionName} />
-//                                 <label
-//                                     class="form-check-label"
-//                                     htmlFor={optionName}>
-//                                     {option.label}
-//                                 </label>
-//                             </div>
-//                         );
-//                     })}
-//                 </div>
-//             </div>
-//         );
-//     }
-// }
+                <input
+                    type="radio"
+                    class="form-check-input"
+                    value={this.value}
+                    name={inputName}
+                    readOnly={this.readOnly}
+                    checked={this.checked}
+                    onChange={this._handleRadioChange.bind(this)} />
+            </div>
+        );
+    }
+
+    _handleRadioChange(evt: MouseEvent): void {
+        evt.preventDefault();
+        evt.stopImmediatePropagation();
+        if (!this.checked) {
+            this.checked = true;
+            this.onChangeRadio.emit({
+                value: this.value
+                // maybe in the future we will improove this
+                // by adding the name as well for double comparison
+                // in case two values are the same, but with different names
+            });
+        }
+    }
+}

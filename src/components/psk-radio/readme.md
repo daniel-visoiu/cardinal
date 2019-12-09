@@ -7,13 +7,35 @@
 
 ## Properties
 
-| Property       | Attribute       | Description | Type                      | Default |
-| -------------- | --------------- | ----------- | ------------------------- | ------- |
-| `invalidValue` | `invalid-value` |             | `boolean`                 | `null`  |
-| `label`        | `label`         |             | `string`                  | `null`  |
-| `options`      | `options`       |             | `RadioOption[] \| string` | `null`  |
-| `required`     | `required`      |             | `boolean`                 | `false` |
+| Property       | Attribute       | Description | Type      | Default |
+| -------------- | --------------- | ----------- | --------- | ------- |
+| `checked`      | `checked`       |             | `boolean` | `false` |
+| `invalidValue` | `invalid-value` |             | `boolean` | `null`  |
+| `label`        | `label`         |             | `string`  | `null`  |
+| `name`         | `name`          |             | `string`  | `null`  |
+| `readOnly`     | `read-only`     |             | `boolean` | `false` |
+| `value`        | `value`         |             | `string`  | `null`  |
 
+
+## Events
+
+| Event           | Description | Type               |
+| --------------- | ----------- | ------------------ |
+| `onChangeRadio` |             | `CustomEvent<any>` |
+
+
+## Dependencies
+
+### Depends on
+
+- [psk-label](..\psk-label)
+
+### Graph
+```mermaid
+graph TD;
+  psk-radio --> psk-label
+  style psk-radio fill:#f9f,stroke:#333,stroke-width:4px
+```
 
 ----------------------------------------------
 

@@ -7,10 +7,11 @@
 
 ## Properties
 
-| Property         | Attribute         | Description | Type     | Default     |
-| ---------------- | ----------------- | ----------- | -------- | ----------- |
-| `controllerName` | `controller-name` |             | `string` | `undefined` |
-| `htmlFilePath`   | `html-file-path`  |             | `string` | `undefined` |
+| Property         | Attribute         | Description | Type          | Default     |
+| ---------------- | ----------------- | ----------- | ------------- | ----------- |
+| `controllerName` | `controller-name` |             | `string`      | `undefined` |
+| `htmlFilePath`   | `html-file-path`  |             | `string`      | `undefined` |
+| `parentHost`     | --                |             | `HTMLElement` | `null`      |
 
 
 ## Dependencies

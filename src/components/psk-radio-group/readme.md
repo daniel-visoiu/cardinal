@@ -1,4 +1,4 @@
-# psk-checkbox
+# psk-radio-group
 
 
 
@@ -9,11 +9,10 @@
 
 | Property        | Attribute        | Description | Type      | Default |
 | --------------- | ---------------- | ----------- | --------- | ------- |
-| `checkboxLabel` | `checkbox-label` |             | `string`  | `null`  |
-| `checked`       | `checked`        |             | `boolean` | `false` |
+| `invalid`       | `invalid`        |             | `boolean` | `true`  |
 | `label`         | `label`          |             | `string`  | `null`  |
 | `name`          | `name`           |             | `string`  | `null`  |
-| `required`      | `required`       |             | `boolean` | `false` |
+| `selectedValue` | `selected-value` |             | `string`  | `null`  |
 
 
 ## Dependencies
@@ -25,8 +24,8 @@
 ### Graph
 ```mermaid
 graph TD;
-  psk-checkbox --> psk-label
-  style psk-checkbox fill:#f9f,stroke:#333,stroke-width:4px
+  psk-radio-group --> psk-label
+  style psk-radio-group fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------
