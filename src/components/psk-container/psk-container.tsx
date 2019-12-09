@@ -48,7 +48,6 @@ export class PskContainer {
 	}
 
 	render() {
-		console.log(this)
 		return [
 			<slot />,
 			this.htmlFilePath && <psk-page-loader pageUrl={this.htmlFilePath} />,
