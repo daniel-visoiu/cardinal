@@ -41,13 +41,16 @@ export default function CustomTheme(): CustomThemeInterface {
           return new Promise((resolve) => {
             // @ts-ignore
             let themeStylePath = "/themes/" + globalConfig.theme + "/components/" + componentName + "/" + componentName + ".css";
-            var styleElement = document.createElement("link");
+            let styleElement = document.createElement("link");
             styleElement.setAttribute("rel", "stylesheet");
             styleElement.setAttribute("href", themeStylePath);
 
             let parent = host.shadowRoot ? host.shadowRoot : host;
             // @ts-ignore
-            parent.prepend(styleElement);
+
+            setTimeout(()=>{
+              parent.prepend(styleElement);
+            },0);
 
             let styleWasLoaded = false;
             let checkIfShouldResolve = () => {

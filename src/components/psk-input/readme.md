@@ -9,6 +9,7 @@
 
 | Property       | Attribute       | Description | Type      | Default  |
 | -------------- | --------------- | ----------- | --------- | -------- |
+| `bind`         | `bind`          |             | `string`  | `null`   |
 | `defaultValue` | `default-value` |             | `string`  | `null`   |
 | `invalidValue` | `invalid-value` |             | `boolean` | `null`   |
 | `label`        | `label`         |             | `string`  | `null`   |
@@ -20,18 +21,12 @@
 | `value`        | `value`         |             | `string`  | `null`   |
 
 
-## Dependencies
+## Events
 
-### Depends on
+| Event           | Description | Type               |
+| --------------- | ----------- | ------------------ |
+| `getModelEvent` |             | `CustomEvent<any>` |
 
-- [psk-label](..\psk-label)
-
-### Graph
-```mermaid
-graph TD;
-  psk-input --> psk-label
-  style psk-input fill:#f9f,stroke:#333,stroke-width:4px
-```
 
 ----------------------------------------------
 

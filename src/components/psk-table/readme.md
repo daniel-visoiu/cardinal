@@ -7,10 +7,11 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type      | Default     |
-| -------- | --------- | ----------- | --------- | ----------- |
-| `footer` | `footer`  |             | `boolean` | `undefined` |
-| `head`   | `head`    |             | `boolean` | `undefined` |
+| Property     | Attribute     | Description | Type      | Default     |
+| ------------ | ------------- | ----------- | --------- | ----------- |
+| `cellsWidth` | `cells-width` |             | `string`  | `undefined` |
+| `footer`     | `footer`      |             | `boolean` | `undefined` |
+| `header`     | `header`      |             | `boolean` | `undefined` |
 
 
 ----------------------------------------------

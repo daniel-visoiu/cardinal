@@ -3,7 +3,6 @@ import {injectHistory, RouterHistory} from "@stencil/router";
 
 @Component({
   tag: "psk-route-redirect",
-
 })
 export class PskRouteRedirect {
 
