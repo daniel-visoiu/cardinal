@@ -46,7 +46,7 @@ export class PskContainer {
 		];
 	}
 
-	componentDidLoad() {
+	componentWillLoad() {
 		const scriptInnerHtml: HTMLElement = this.host.querySelector("psk-controller");
 		if (scriptInnerHtml !== null) {
 			this.controllerScript = scriptInnerHtml.innerHTML;

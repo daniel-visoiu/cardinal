@@ -41,8 +41,6 @@ export class PskTable {
             widthValues = this.cellsWidth.split(',');
         }
         widthValues = widthValues.map(value => parseInt(value));
-        console.log(widthValues);
-        console.log(this.element.innerHTML)
         let tableRows = this.element.innerHTML
             .split(/\n/g)
             .map(el => el.trim().replace('<!---->', ''))
@@ -65,7 +63,6 @@ export class PskTable {
         let finalTableRows: Array<HTMLElement> = [];
         if (this.header) {
             finalTableRows.push(this._stringArrayToHTMLElement('thead', tableRows.splice(0, 1)));
-            console.log(finalTableRows)
             if (this.footer) {
                 finalTableRows.push(this._stringArrayToHTMLElement('tbody', tableRows.splice(0, tableRows.length - 1)));
                 finalTableRows.push(this._stringArrayToHTMLElement('tfoot', [tableRows[tableRows.length - 1]]));
@@ -76,7 +73,6 @@ export class PskTable {
             finalTableRows = [this._stringArrayToHTMLElement('tbody', tableRows)];
         }
         this.tableContent = finalTableRows;
-        console.log(this.tableContent)
         this.element.innerHTML = '';
     }
 
