@@ -56,12 +56,20 @@ export class PskContainer {
 	}
 
 	componentWillLoad() {
+		if (this.parentHost) {
+			this.__getInnerController.call(this, this.parentHost);
+		} else {
+			this.__getInnerController.call(this, this._host);
+		}
+	}
+
+	__getInnerController(fromElement: HTMLElement): void {
 		let scriptInnerHtml: HTMLElement = null;
 
-		if (this.parentHost) {
-			scriptInnerHtml = this.parentHost.querySelector("psk-controller");
+		if (fromElement.querySelector("psk-controller script") !== null) {
+			scriptInnerHtml = fromElement.querySelector("psk-controller script");
 		} else {
-			scriptInnerHtml = this._host.querySelector("psk-controller");
+			scriptInnerHtml = fromElement.querySelector("psk-controller");
 		}
 
 		if (scriptInnerHtml !== null) {
