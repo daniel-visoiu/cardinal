@@ -17,9 +17,9 @@ export class PskButton {
 	render() {
 		return (
 			<button onClick={(evt: MouseEvent) => {
-				evt.preventDefault();
-				evt.stopImmediatePropagation();
 				if (this.eventName) {
+          evt.preventDefault();
+          evt.stopImmediatePropagation();
 					createCustomEvent(this.eventName, {
 						bubbles: true, composed: true, cancelable: true
 					}, true);
