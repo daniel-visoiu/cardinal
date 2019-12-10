@@ -9,7 +9,7 @@
 
 | Property     | Attribute     | Description | Type      | Default     |
 | ------------ | ------------- | ----------- | --------- | ----------- |
-| `cellsWidth` | `cells-width` |             | `string`  | `undefined` |
+| `cellsWidth` | `cells-width` |             | `string`  | `''`        |
 | `footer`     | `footer`      |             | `boolean` | `undefined` |
 | `header`     | `header`      |             | `boolean` | `undefined` |
 

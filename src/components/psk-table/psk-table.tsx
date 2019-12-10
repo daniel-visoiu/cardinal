@@ -23,7 +23,7 @@ export class PskTable {
     })
     @Prop() footer: boolean;
 
-    @Prop() cellsWidth: string
+    @Prop() cellsWidth: string = '';
 
 
     @Element() private element: HTMLElement;
@@ -36,8 +36,8 @@ export class PskTable {
     }
 
     componentWillLoad() {
-        let widthValues;
-        if (this.cellsWidth) {
+        let widthValues = [];
+        if (this.cellsWidth.length > 0) {
             widthValues = this.cellsWidth.split(',');
         }
         widthValues = widthValues.map(value => parseInt(value));
@@ -52,9 +52,9 @@ export class PskTable {
                     .map(el => {
                         widthIndex++;
                         if (this.header && index === 0) {
-                            return `<th style=width:${widthValues[widthIndex] ? `${widthValues[widthIndex]}%;` : 'auto'}>${el.trim()}</th>`;
+                            return `<th style=width:${widthValues.length > widthIndex ? `${widthValues[widthIndex]}%;` : 'auto'}>${el.trim()}</th>`;
                         } else {
-                            return `<td style=width:${widthValues[widthIndex] ? `${widthValues[widthIndex]}%;` : 'auto'}>${el.trim()}</td>`;
+                            return `<td style=width:${widthValues.length >= widthIndex ? `${widthValues[widthIndex]}%;` : 'auto'}>${el.trim()}</td>`;
                         }
                     }).join('');
 
