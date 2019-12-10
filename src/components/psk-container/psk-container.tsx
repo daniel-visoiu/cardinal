@@ -64,13 +64,7 @@ export class PskContainer {
 	}
 
 	__getInnerController(fromElement: HTMLElement): void {
-		let scriptInnerHtml: HTMLElement = null;
-
-		if (fromElement.querySelector("psk-controller script") !== null) {
-			scriptInnerHtml = fromElement.querySelector("psk-controller script");
-		} else {
-			scriptInnerHtml = fromElement.querySelector("psk-controller");
-		}
+		let scriptInnerHtml: HTMLElement = fromElement.querySelector("script");
 
 		if (scriptInnerHtml !== null) {
 			this.controllerScript = scriptInnerHtml.innerHTML;
