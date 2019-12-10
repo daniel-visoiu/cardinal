@@ -16,7 +16,7 @@ export class PskAppRouter {
     isMandatory: false,
     propertyType: `Array of MenuItem types(MenuItem[])`
   })
-  @Prop() menuItems?: MenuItem[] = [];
+  @Prop() routesItems?: MenuItem[] = [];
 
   @TableOfContentProperty({
     description: `This is the history type that will be passed along to the stencil-router`,
@@ -28,7 +28,7 @@ export class PskAppRouter {
   @Prop() failRedirectTo: string = "";
 
   @TableOfContentEvent({
-    eventName: `needMenuItems`,
+    eventName: `needRoutes`,
     controllerInteraction: {
       required: true
     },
@@ -56,7 +56,7 @@ export class PskAppRouter {
     bubbles: true,
   }) getHistoryType: EventEmitter;
 
-  @State() notFoundRoute: string = ""
+  @State() notFoundRoute: string = "";
 
   componentDidLoad() {
     this.needRoutesEvt.emit((err, data) => {
@@ -64,7 +64,7 @@ export class PskAppRouter {
         console.log(err);
         return;
       }
-      this.menuItems = data;
+      this.routesItems = data;
     });
 
     this.getHistoryType.emit((err, data) => {
@@ -93,13 +93,13 @@ export class PskAppRouter {
   }
 
   render() {
-    let routes = this.renderItems(this.menuItems);
+    let routes = this.renderItems(this.routesItems);
 
     if (routes.length === 0) {
       return <psk-ui-loader shouldBeRendered={true} />
     }
     if (this.notFoundRoute == "") {
-      this.notFoundRoute = this.menuItems[0].path;
+      this.notFoundRoute = this.routesItems[0].path;
     }
 
     return (
@@ -108,9 +108,9 @@ export class PskAppRouter {
 
           <stencil-route-switch scrollTopOffset={0}>
             {this.historyType === "query" ?
-              <stencil-route component="query-pages-router" componentProps={{ pages: this.menuItems }} /> :
+              <stencil-route component="query-pages-router" componentProps={{ pages: this.routesItems }} /> :
               [<stencil-route url="/" exact={true} component="psk-route-redirect"
-                              componentProps={{url:this.menuItems[0].path}}/>,
+                              componentProps={{url:this.routesItems[0].path}}/>,
                 routes,
                 <stencil-route component="psk-page-not-found"
                   componentProps={{ urlDestination: this.notFoundRoute }} />]}

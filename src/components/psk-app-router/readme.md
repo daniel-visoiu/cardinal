@@ -11,7 +11,7 @@
 | ---------------- | ------------------ | ----------- | -------------------------------- | ----------- |
 | `failRedirectTo` | `fail-redirect-to` |             | `string`                         | `""`        |
 | `historyType`    | `history-type`     |             | `"browser" \| "hash" \| "query"` | `undefined` |
-| `menuItems`      | --                 |             | `MenuItem[]`                     | `[]`        |
+| `routesItems`    | --                 |             | `MenuItem[]`                     | `[]`        |
 
 
 ## Events
