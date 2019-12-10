@@ -30,7 +30,7 @@ export class PskContainer {
 
 	// Internal ussage property. In the public documentation, this property should be mentioned as a feature in case the user wants to create a component and to provide the HTML context to the container.
 	// This property is provided by other components where psk-container is loaded. (e.g. psk-form)
-	// If this property is filled in, the searching of a controller script written inside psk-controller tag will commence here.
+	// If this property is filled in, the searching of a controller script will commence here.
 	@Prop() parentHost: HTMLElement = null;
 
 	@Element() private _host: HTMLElement;
