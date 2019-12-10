@@ -56,6 +56,7 @@ export class PskInput {
 		event.stopImmediatePropagation();
 		let value = event.target.value;
 		this.model.setChainValue(this.bind, value);
+		this.model.setChainValue("model.user.label",value)
 	};
 
 
