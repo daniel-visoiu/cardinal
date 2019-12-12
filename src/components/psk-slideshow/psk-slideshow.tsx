@@ -1,5 +1,6 @@
-import {Component, h, Listen, Prop, State, Element} from "@stencil/core";
+import { Component, h, Listen, Prop, State, Element } from "@stencil/core";
 import CustomTheme from "../../decorators/CustomTheme";
+import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 
 @Component({
   tag: 'psk-slideshow',
@@ -7,26 +8,55 @@ import CustomTheme from "../../decorators/CustomTheme";
 })
 export class PskPageLoader {
   @CustomTheme()
+
+  @TableOfContentProperty({
+    description: [`This property is the images sources separed by ','.`,
+      `Using this property a new array will be created by spliting this string by ','.`],
+    isMandatory: true,
+    propertyType: `string`
+  })
   @Prop() images: string;
-  @Prop() top: string;
+
+  @TableOfContentProperty({
+    description: [`This property is the title of the slideshow that will be rendered.`,
+      `If this property is given than a new div container will be created with the title as the class and the HTML child.`],
+    isMandatory: false,
+    propertyType: `string`,
+    defaultValue: `null`
+  })
   @Prop() title: string;
+
+  @TableOfContentProperty({
+    description: [`This property is the caption of the slideshow that will be rendered.`,
+      `If this property is given than a new div container will be created with the caption as the class and the HTML child.`],
+    isMandatory: false,
+    propertyType: `string`,
+    defaultValue: `null`
+  })
   @Prop() caption: string;
+
   @State() imagesSrcs: Array<string>;
   @State() slideshowHeight;
   @State() marginTop;
-  @Prop() fadeSeconds:number = 1;
-  @Prop() visibleSeconds:number = 10;
+  @Prop() fadeSeconds: number = 1;
+  @Prop() visibleSeconds: number = 10;
 
   @Element() element;
 
   componentWillLoad() {
-    this.marginTop = this.element.getBoundingClientRect().y;
-    this.checkLayout();
-    this.imagesSrcs = this.images.split(",");
-    this.getAnimationCSS();
+
+    if(this.images){
+      this.marginTop = this.element.getBoundingClientRect().y;
+      this.checkLayout();
+      this.imagesSrcs = this.images.split(",");
+      this.getAnimationCSS();
+    }
+    else{
+      console.log("No images provided");
+    }
   }
 
-  @Listen("resize", {capture: true, target: 'window'})
+  @Listen("resize", { capture: true, target: 'window' })
   checkLayout() {
     this.slideshowHeight = document.documentElement.clientHeight - this.marginTop;
   }
@@ -34,7 +64,7 @@ export class PskPageLoader {
   renderSlide(imageSrc, id) {
     let slide =
       <li id={"slide-" + id} class={"animation-" + id}
-          style={{backgroundImage: "url(" + imageSrc + ")"}}>
+        style={{ backgroundImage: "url(" + imageSrc + ")" }}>
       </li>;
     return slide;
   }
@@ -79,7 +109,7 @@ export class PskPageLoader {
 
     let actions = this.element.children.length > 0 ?
       <div class="actions">
-        <slot/>
+        <slot />
       </div> : null;
 
     let content = null;
@@ -96,7 +126,7 @@ export class PskPageLoader {
         {content}
         <div id="psk-content-slider">
           <div id="psk-slider">
-            <div id="psk-slider-mask" style={{height: this.slideshowHeight + "px"}}>
+            <div id="psk-slider-mask" style={{ height: this.slideshowHeight + "px" }}>
               <ul>
                 {slides}
               </ul>
