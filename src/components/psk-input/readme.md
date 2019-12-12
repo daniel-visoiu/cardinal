@@ -12,11 +12,9 @@
 | `invalidValue` | `invalid-value` |             | `boolean` | `null`   |
 | `label`        | `label`         |             | `string`  | `null`   |
 | `name`         | `name`          |             | `string`  | `null`   |
-| `parentChain`  | `parent-chain`  |             | `string`  | `null`   |
 | `placeholder`  | `placeholder`   |             | `string`  | `null`   |
 | `readOnly`     | `read-only`     |             | `boolean` | `false`  |
 | `required`     | `required`      |             | `boolean` | `false`  |
-| `rootModel`    | `root-model`    |             | `any`     | `null`   |
 | `type`         | `type`          |             | `string`  | `'text'` |
 | `value`        | `value`         |             | `string`  | `null`   |
 

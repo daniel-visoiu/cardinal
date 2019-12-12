@@ -11,13 +11,10 @@ declare type BindInterface = (
 export function BindModel(): BindInterface {
     return function (proto: ComponentInterface): void {
 
-        let { componentWillLoad } = proto;
+        let { componentDidLoad } = proto;
 
-        proto.componentWillLoad = function () {
+        proto.componentDidLoad = function () {
             let self = this;
-
-            self['changeModel'] = changeModel;
-            self['assignProperties'] = assignProperties;
             let thisElement: HTMLElement = getElement(self);
 
             setTimeout(function () {
@@ -31,7 +28,10 @@ export function BindModel(): BindInterface {
                 }, true, thisElement);
             }, 0);
 
-            return componentWillLoad && componentWillLoad.call(self);
+            self['changeModel'] = changeModel;
+            self['assignProperties'] = assignProperties;
+
+            return componentDidLoad && componentDidLoad.call(self);
         };
     };
 }

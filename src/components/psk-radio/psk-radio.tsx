@@ -32,6 +32,8 @@ export class PskRadio {
         const inputName = this.name ? this.name
             : (this.label && this.label.replace(/\s/g, '').toLowerCase());
 
+        const inputValue = this.value ? this.value : inputName;
+
         return (
             <div class="form-check form-check-inline">
                 <psk-label for={inputName} label={this.label} />
@@ -39,7 +41,7 @@ export class PskRadio {
                 <input
                     type="radio"
                     class="form-check-input"
-                    value={this.value}
+                    value={inputValue}
                     name={inputName}
                     readOnly={this.readOnly}
                     checked={this.checked}

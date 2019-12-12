@@ -9,14 +9,13 @@
 
 | Property        | Attribute        | Description | Type                     | Default    |
 | --------------- | ---------------- | ----------- | ------------------------ | ---------- |
-| `defaultValue`  | `default-value`  |             | `string`                 | `null`     |
 | `disabled`      | `disabled`       |             | `boolean`                | `false`    |
 | `invalidValue`  | `invalid-value`  |             | `boolean`                | `null`     |
 | `label`         | `label`          |             | `string`                 | `null`     |
-| `options`       | --               |             | `Option[]`               | `null`     |
 | `placeholder`   | `placeholder`    |             | `string`                 | `null`     |
 | `required`      | `required`       |             | `boolean`                | `false`    |
 | `selectionType` | `selection-type` |             | `"multiple" \| "single"` | `'single'` |
+| `value`         | `value`          |             | `string`                 | `null`     |
 
 
 ## Dependencies

@@ -77,7 +77,7 @@ export function getModelEventCbk(err: Error, model: any): void {
                 ? `${componentAttrName}.${attrName}`
                 : attrName;
 
-            attr.value = model.getChainValue(fullChain);
+            __self[attrName] = model.getChainValue(fullChain);
 			/**
 			 * Apply onChange to the modifiable attributes (e.g. value, selected)
 			 */

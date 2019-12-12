@@ -13,7 +13,6 @@
 | `fadeSeconds`    | `fade-seconds`    |             | `number` | `1`         |
 | `images`         | `images`          |             | `string` | `undefined` |
 | `title`          | `title`           |             | `string` | `undefined` |
-| `top`            | `top`             |             | `string` | `undefined` |
 | `visibleSeconds` | `visible-seconds` |             | `number` | `10`        |
 
 

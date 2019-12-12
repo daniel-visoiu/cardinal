@@ -18,7 +18,7 @@ export class PskInput {
 	@Prop() readOnly?: boolean = false;
 	@Prop() invalidValue?: boolean | null = null;
 
-	keyUpHandler = (event) => {
+	__keyUpHandler = (event) => {
 		event.stopImmediatePropagation();
 		let value = event.target.value;
 		if (this['changeModel']) {
@@ -33,7 +33,7 @@ export class PskInput {
 			: this.invalidValue ? 'is-invalid' : 'is-valid';
 
 		const inputName = this.name ? this.name
-			: (this.label && this.label.replace(/\s/g, '').toLowerCase());
+			: (this.label && this.label.replace(/( |:|\/|\.|-)/g, "").toLowerCase());
 
 		return (
 			<div class={`form-group`}>
@@ -47,7 +47,7 @@ export class PskInput {
 					placeholder={this.placeholder}
 					required={this.required}
 					readOnly={this.readOnly}
-					onKeyUp={this.keyUpHandler.bind(this)} />
+					onKeyUp={this.__keyUpHandler.bind(this)} />
 			</div>
 		);
 	}

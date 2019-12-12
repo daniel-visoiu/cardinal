@@ -1,13 +1,16 @@
-import { h, Component, Prop } from '@stencil/core';
+import { h, Component, Prop, State } from '@stencil/core';
 import { Option, SelectType } from '../../interfaces/FormModel';
+import { BindModel } from '../../decorators/BindModel';
 
 @Component({
     tag: 'psk-select'
 })
 export class PskSelect {
 
+    @BindModel()
+
     @Prop() label: string | null = null;
-    @Prop() defaultValue?: string | null = null;
+    @Prop() value?: string | null = null;
     @Prop() selectionType?: SelectType = 'single';
     @Prop() placeholder?: string | null = null;
 
@@ -15,7 +18,7 @@ export class PskSelect {
     @Prop() disabled?: boolean = false;
     @Prop() invalidValue?: boolean | null = null;
 
-    @Prop() options: Array<Option> = null;
+    @State() options: Array<Option> = null;
 
     componentWillLoad() {
         if (this.selectionType !== 'single' && this.selectionType !== 'multiple') {
@@ -23,8 +26,20 @@ export class PskSelect {
         }
     }
 
+    __onChangeHandler(evt): void {
+        evt.preventDefault();
+        evt.stopImmediatePropagation();
+
+        let value = evt.target.value;
+        if (this['changeModel']) {
+            this['changeModel'].call(this, 'value', value);
+        } else {
+            console.warn('[psk-select] Function named -=changeModel=- is not defined!');
+        }
+    }
+
     render() {
-        const name: string = this.label.replace(/\s/g, '').toLowerCase();
+        const name: string = this.label.replace(/( |:|\/|\.|-)/g, "").toLowerCase();
 
         return (
             <div class="form-group">
@@ -32,19 +47,21 @@ export class PskSelect {
 
                 <select name={name} id={name} class="form-control"
                     disabled={this.disabled} required={this.required}
-                    multiple={this.selectionType === 'multiple'}>
+                    multiple={this.selectionType === 'multiple'}
+                    onChange={this.__onChangeHandler.bind(this)} >
 
                     {this.placeholder && <option
                         disabled={true}
                         label={this.placeholder}
-                        value={''} />}
+                        value={''}
+                        selected={this.value === null} />}
 
-                    {this.options.map((option: Option) => {
+                    {this.options && this.options.map((option: Option) => {
                         const value = option.value ? option.value
-                            : option.label.replace(/\s/g, '').toLowerCase();
+                            : option.label.replace(/( |:|\/|\.|-)/g, "").toLowerCase();
 
                         const selected: boolean = option.selected ? option.selected
-                            : this.defaultValue === option.value;
+                            : this.value === option.value;
 
                         return (
                             <option
