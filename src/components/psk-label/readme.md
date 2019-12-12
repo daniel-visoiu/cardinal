@@ -18,6 +18,7 @@
 ### Used by
 
  - [psk-checkbox](..\psk-checkbox)
+ - [psk-input](..\psk-input)
  - [psk-radio](..\psk-radio)
  - [psk-radio-group](..\psk-radio-group)
  - [psk-select](..\psk-select)
@@ -26,6 +27,7 @@
 ```mermaid
 graph TD;
   psk-checkbox --> psk-label
+  psk-input --> psk-label
   psk-radio --> psk-label
   psk-radio-group --> psk-label
   psk-select --> psk-label

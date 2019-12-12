@@ -8,7 +8,6 @@ import CustomTheme from '../../decorators/CustomTheme.js';
 export class PskForm {
     @CustomTheme()
 
-    @Prop({ mutable: true, reflect: true }) model: string | null = null;
     @Prop() controllerName: string | null;
     @Prop() formActions: string | null = 'submit';
 

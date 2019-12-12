@@ -11,7 +11,6 @@
 | ---------------- | ----------------- | ----------- | -------- | ----------- |
 | `controllerName` | `controller-name` |             | `string` | `undefined` |
 | `formActions`    | `form-actions`    |             | `string` | `'submit'`  |
-| `model`          | `model`           |             | `string` | `null`      |
 
 
 ## Dependencies

@@ -34,11 +34,17 @@ export function scrollToElement(elementId: string, htmlView: HTMLElement): void 
 	window.history.pushState({}, "", `${basePath}${chapterKey}${selector}`);
 }
 
-export function createCustomEvent(eventName: string, options: any, trigger: boolean = false) {
+export function createCustomEvent(eventName: string, options: any,
+	trigger: boolean = false, triggerElement: HTMLElement = null) {
+
 	const customEvent = new CustomEvent(eventName, options);
 
 	if (trigger) {
-		document.dispatchEvent(customEvent);
+		if (triggerElement) {
+			triggerElement.dispatchEvent(customEvent);
+		} else {
+			document.dispatchEvent(customEvent);
+		}
 	}
 }
 
