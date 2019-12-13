@@ -1,16 +1,23 @@
-import { h, Component, Prop, Listen, Element } from '@stencil/core';
+import { h, Component, Prop, Listen, Element, State } from '@stencil/core';
+import { BindModel } from '../../decorators/BindModel';
+import { RadioOption } from '../../interfaces/FormModel';
 
 @Component({
     tag: 'psk-radio-group'
 })
 export class PskRadioGroup {
 
+    @BindModel()
+
     @Prop() label: string | null = null;
     @Prop() name?: string | null = null;
 
+    @Prop() required?: boolean = false;
     @Prop() invalid?: boolean = true;
 
-    @Prop({ reflect: true, mutable: true }) selectedValue?: string | null = null;
+    @Prop({ reflect: true, mutable: true }) value?: string | null = null;
+
+    @State() options: Array<RadioOption> = null;
 
     @Element() private _host: HTMLElement;
 
@@ -22,16 +29,24 @@ export class PskRadioGroup {
         if (!evt.detail || !evt.detail.value) {
             return;
         }
-
         const radioButtons = this._host.querySelectorAll("psk-radio");
-        for (let index = 0; index < radioButtons.length; ++index) {
-            let radio = radioButtons[index];
-            if (radio.getAttribute('value') === evt.detail.value) {
-                this.selectedValue = evt.detail.value;
-                radio.setAttribute('checked', 'true');
+        radioButtons.forEach((radio: Element) => {
+            const inputRadio: HTMLInputElement = radio.getElementsByTagName('input')[0];
+            if (inputRadio.value === evt.detail.value) {
+                this.value = evt.detail.value;
+                this.__updateModel.call(this);
+                inputRadio.checked = true;
             } else {
-                radio.setAttribute('checked', 'false');
+                inputRadio.checked = false;
             }
+        });
+    }
+
+    __updateModel(): void {
+        if (this['changeModel']) {
+            this['changeModel'].call(this, 'value', this.value);
+        } else {
+            console.warn('[psk-radio-group] Function named -=changeModel=- is not defined!');
         }
     }
 
@@ -42,6 +57,13 @@ export class PskRadioGroup {
 
                 <div id="psk-radio-group"
                     class={`form-group`}>
+                    {this.options && this.options.map((option: RadioOption) => {
+                        const inputName = option.name ? option.name
+                            : (option.label && option.label.replace(/\s/g, '').toLowerCase());
+
+                        return <psk-radio {...option}
+                            name={inputName} />
+                    })}
                     <slot />
                 </div>
             </div>

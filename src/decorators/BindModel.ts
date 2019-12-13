@@ -1,7 +1,7 @@
 import { getElement } from '@stencil/core';
 import { ComponentInterface } from "@stencil/core/dist/declarations";
 import { createCustomEvent, } from '../utils/utils';
-import { assignProperties, getModelEventCbk, changeModel } from '../utils/bindModelUtils';
+import { __assignProperties, __getModelEventCbk, changeModel } from '../utils/bindModelUtils';
 
 declare type BindInterface = (
     target: ComponentInterface,
@@ -11,27 +11,27 @@ declare type BindInterface = (
 export function BindModel(): BindInterface {
     return function (proto: ComponentInterface): void {
 
-        let { componentDidLoad } = proto;
+        let { componentWillLoad } = proto;
 
-        proto.componentDidLoad = function () {
+        proto.componentWillLoad = function () {
             let self = this;
             let thisElement: HTMLElement = getElement(self);
 
-            setTimeout(function () {
+            document.addEventListener('modelReady', function () {
                 createCustomEvent('getModelEvent', {
                     bubbles: true,
                     composed: false,
                     cancellable: true,
                     detail: {
-                        callback: getModelEventCbk.bind(self)
+                        callback: __getModelEventCbk.bind(self)
                     }
                 }, true, thisElement);
-            }, 0);
-
+            });
+            
             self['changeModel'] = changeModel;
-            self['assignProperties'] = assignProperties;
+            self['__assignProperties'] = __assignProperties;
 
-            return componentDidLoad && componentDidLoad.call(self);
+            return componentWillLoad && componentWillLoad.call(self);
         };
     };
 }

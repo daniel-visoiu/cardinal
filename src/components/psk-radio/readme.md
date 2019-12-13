@@ -26,6 +26,10 @@
 
 ## Dependencies
 
+### Used by
+
+ - [psk-radio-group](..\psk-radio-group)
+
 ### Depends on
 
 - [psk-label](..\psk-label)
@@ -34,6 +38,7 @@
 ```mermaid
 graph TD;
   psk-radio --> psk-label
+  psk-radio-group --> psk-radio
   style psk-radio fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

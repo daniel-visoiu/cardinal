@@ -39,7 +39,7 @@ export class PskSelect {
     }
 
     render() {
-        const name: string = this.label.replace(/( |:|\/|\.|-)/g, "").toLowerCase();
+        const name: string = this.label && this.label.replace(/( |:|\/|\.|-)/g, "").toLowerCase();
 
         return (
             <div class="form-group">
@@ -58,10 +58,9 @@ export class PskSelect {
 
                     {this.options && this.options.map((option: Option) => {
                         const value = option.value ? option.value
-                            : option.label.replace(/( |:|\/|\.|-)/g, "").toLowerCase();
+                            : option.label && option.label.replace(/( |:|\/|\.|-)/g, "").toLowerCase();
 
-                        const selected: boolean = option.selected ? option.selected
-                            : this.value === option.value;
+                        const selected: boolean = option.selected === true;
 
                         return (
                             <option

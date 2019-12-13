@@ -45,22 +45,16 @@ export class PskRadio {
                     name={inputName}
                     readOnly={this.readOnly}
                     checked={this.checked}
-                    onChange={this._handleRadioChange.bind(this)} />
+                    onChange={this.__handleRadioChange.bind(this)} />
             </div>
         );
     }
 
-    _handleRadioChange(evt: MouseEvent): void {
+    __handleRadioChange(evt): void {
         evt.preventDefault();
         evt.stopImmediatePropagation();
-        if (!this.checked) {
-            this.checked = true;
-            this.onChangeRadio.emit({
-                value: this.value
-                // maybe in the future we will improove this
-                // by adding the name as well for double comparison
-                // in case two values are the same, but with different names
-            });
-        }
+        this.onChangeRadio.emit({
+            value: evt.target.value
+        });
     }
 }

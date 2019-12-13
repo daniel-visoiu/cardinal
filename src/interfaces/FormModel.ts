@@ -3,20 +3,25 @@ export type SelectType = 'single' | 'multiple';
 export type FormActionType = 'submit' | 'reset';
 export type FormComponentType = 'psk-input' | 'psk-radio' | 'psk-checkbox' | 'psk-select' | 'psk-label';
 
+export interface RadioOption {
+    label: string;
+    value?: string;
+    name?: string;
+    checked?: boolean;
+    /**
+     * By using this property, you can disable the option from being checked. 
+     * This can be used for conditionals
+     */
+    readOnly?: boolean;
+}
+
 /**
- * SelectOption interface is used to define the options for a dropdown list select.
+ * Option interface is used to define the options for a dropdown list select.
  * It can be multiple or single selection.
  */
 export interface Option {
     label: string;
-    /**
-     * The name will be used to get the value of the input on submission
-     * If name is not given, the label will be used by normalizing it to lowercase and no white spaces
-     */
     value?: string;
-    /**
-     * This property will be updated during form submition
-     */
     selected?: boolean;
     /**
      * By using this property, you can disable the option from being selected. 
