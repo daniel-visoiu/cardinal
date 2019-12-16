@@ -14,6 +14,7 @@ export class PskAppRoot {
   @State() componentCode: string = "";
   @Element() host: HTMLStencilElement;
   @State() hasSlot: boolean = false;
+  @State() htmlLoader:HTMLElement;
 
   @Event({
     eventName: 'routeChanged',
@@ -22,7 +23,25 @@ export class PskAppRoot {
     bubbles: true,
   }) routeChangedEvent: EventEmitter;
 
+  __createLoader() {
+
+    const NR_CIRCLES = 12;
+    let circles = "";
+
+    for (let i = 1; i <= NR_CIRCLES; i++) {
+      circles += `<div class="sk-circle${i} sk-circle"></div>`
+    }
+
+    let node = document.createElement("div");
+    node.className="app-loader";
+    node.innerHTML = `<div class='sk-fading-circle'>${circles}</div>`;
+    return node;
+  }
+
   constructor() {
+    this.htmlLoader = this.__createLoader();
+    document.getElementsByTagName("body")[0].appendChild(this.htmlLoader);
+
     if (this.controller) {
       let controllerName = this.controller;
       ControllerFactory.getController(controllerName).then((controller) => {
@@ -47,6 +66,10 @@ export class PskAppRoot {
     if (innerHTML.length) {
       this.hasSlot = true;
     }
+  }
+
+  componentDidLoad(){
+    document.getElementsByTagName("body")[0].removeChild(this.htmlLoader);
   }
 
   render() {
