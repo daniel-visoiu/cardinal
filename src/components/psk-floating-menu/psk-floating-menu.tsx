@@ -1,4 +1,4 @@
-import { Component, h, Prop } from '@stencil/core';
+import { Component, h, Prop, Event, EventEmitter } from '@stencil/core';
 import { MenuItem } from '../../interfaces/MenuItem'
 import CustomTheme from '../../decorators/CustomTheme';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
@@ -26,6 +26,26 @@ export class FloatingMenu {
     })
 
     @Prop({ reflectToAttr: true, mutable: true }) opened: boolean = false;
+
+    @Event({
+        eventName: 'needMenuItems',
+        cancelable: true,
+        composed: true,
+        bubbles: true,
+    }) needMenuItems: EventEmitter;
+
+    componentWillLoad() {
+        if (!this.menuItems) {
+            this.needMenuItems.emit((err, data) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                this.menuItems = data;
+            });
+        }
+    }
+
     render() {
         return [
             <div id="backdrop" onClick={(event) => {
@@ -33,12 +53,15 @@ export class FloatingMenu {
                 this.opened = !this.opened;
             }}></div>,
             <div class="container">
-                <ul class="items">
-                    {
-                        this.menuItems.map(menuItem => {
-                            <li onClick={() => { this.opened = !this.opened }} class="nav-item">{menuItem}</li>
-                        })
-                    }
+                <ul class="items">{
+                    this.menuItems.map(menuItem => {
+                        return (<li onClick={() => { this.opened = !this.opened }} class="nav-item">
+                            <a href={menuItem.path}>
+                                {menuItem.name}
+                            </a>
+                        </li>)
+                    })
+                }
                 </ul>
                 <div class="toggleFloatingMenu">
                     <a href="#" class="plus"

@@ -13,6 +13,13 @@
 | `opened`    | `opened`  |             | `boolean`    | `false`     |
 
 
+## Events
+
+| Event           | Description | Type               |
+| --------------- | ----------- | ------------------ |
+| `needMenuItems` |             | `CustomEvent<any>` |
+
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*
