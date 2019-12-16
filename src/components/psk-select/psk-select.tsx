@@ -26,18 +26,6 @@ export class PskSelect {
         }
     }
 
-    __onChangeHandler(evt): void {
-        evt.preventDefault();
-        evt.stopImmediatePropagation();
-
-        let value = evt.target.value;
-        if (this['changeModel']) {
-            this['changeModel'].call(this, 'value', value);
-        } else {
-            console.warn('[psk-select] Function named -=changeModel=- is not defined!');
-        }
-    }
-
     render() {
         const name: string = this.label && this.label.replace(/( |:|\/|\.|-)/g, "").toLowerCase();
 
@@ -74,5 +62,17 @@ export class PskSelect {
                 </select>
             </div>
         );
+    }
+
+    __onChangeHandler(evt): void {
+        evt.preventDefault();
+        evt.stopImmediatePropagation();
+
+        let value = evt.target.value;
+        if (this['changeModel']) {
+            this['changeModel'].call(this, 'value', value);
+        } else {
+            console.warn('[psk-select] Function named -=changeModel=- is not defined!');
+        }
     }
 }

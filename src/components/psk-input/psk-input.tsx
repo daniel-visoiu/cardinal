@@ -18,16 +18,6 @@ export class PskInput {
 	@Prop() readOnly?: boolean = false;
 	@Prop() invalidValue?: boolean | null = null;
 
-	__keyUpHandler = (event) => {
-		event.stopImmediatePropagation();
-		let value = event.target.value;
-		if (this['changeModel']) {
-			this['changeModel'].call(this, 'value', value);
-		} else {
-			console.warn('[psk-input] Function named -=changeModel=- is not defined!');
-		}
-	};
-
 	render() {
 		const invalidClass = this.invalidValue === null ? ''
 			: this.invalidValue ? 'is-invalid' : 'is-valid';
@@ -51,4 +41,14 @@ export class PskInput {
 			</div>
 		);
 	}
+
+	__keyUpHandler = (event) => {
+		event.stopImmediatePropagation();
+		let value = event.target.value;
+		if (this['changeModel']) {
+			this['changeModel'].call(this, 'value', value);
+		} else {
+			console.warn('[psk-input] Function named -=changeModel=- is not defined!');
+		}
+	};
 }

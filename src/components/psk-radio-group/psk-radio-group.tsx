@@ -42,14 +42,6 @@ export class PskRadioGroup {
         });
     }
 
-    __updateModel(): void {
-        if (this['changeModel']) {
-            this['changeModel'].call(this, 'value', this.value);
-        } else {
-            console.warn('[psk-radio-group] Function named -=changeModel=- is not defined!');
-        }
-    }
-
     render() {
         return (
             <div class="form-group">
@@ -68,5 +60,13 @@ export class PskRadioGroup {
                 </div>
             </div>
         );
+    }
+
+    __updateModel(): void {
+        if (this['changeModel']) {
+            this['changeModel'].call(this, 'value', this.value);
+        } else {
+            console.warn('[psk-radio-group] Function named -=changeModel=- is not defined!');
+        }
     }
 }

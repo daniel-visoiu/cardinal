@@ -12,16 +12,20 @@ export class PskButton {
 	@Prop() label: string | null = null;
 	@Prop() buttonClass: string | null = "btn btn-primary";
 	@Prop() eventName: string | null = null;
+	@Prop() eventData: any | null = null;
 	@Prop() disabled: boolean = false;
 
 	render() {
 		return (
 			<button onClick={(evt: MouseEvent) => {
 				if (this.eventName) {
-          evt.preventDefault();
-          evt.stopImmediatePropagation();
+					evt.preventDefault();
+					evt.stopImmediatePropagation();
 					createCustomEvent(this.eventName, {
-						bubbles: true, composed: true, cancelable: true
+						bubbles: true,
+						composed: true,
+						cancelable: true,
+						detail: this.eventData
 					}, true);
 				}
 			}} class={this.buttonClass}

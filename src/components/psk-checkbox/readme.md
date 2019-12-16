@@ -7,13 +7,16 @@
 
 ## Properties
 
-| Property        | Attribute        | Description | Type      | Default |
-| --------------- | ---------------- | ----------- | --------- | ------- |
-| `checkboxLabel` | `checkbox-label` |             | `string`  | `null`  |
-| `checked`       | `checked`        |             | `boolean` | `false` |
-| `label`         | `label`          |             | `string`  | `null`  |
-| `name`          | `name`           |             | `string`  | `null`  |
-| `required`      | `required`       |             | `boolean` | `false` |
+| Property         | Attribute         | Description | Type      | Default       |
+| ---------------- | ----------------- | ----------- | --------- | ------------- |
+| `checkboxLabel`  | `checkbox-label`  |             | `string`  | `null`        |
+| `checked`        | `checked`         |             | `boolean` | `false`       |
+| `checkedValue`   | `checked-value`   |             | `string`  | `null`        |
+| `label`          | `label`           |             | `string`  | `null`        |
+| `name`           | `name`            |             | `string`  | `null`        |
+| `required`       | `required`        |             | `boolean` | `false`       |
+| `uncheckedValue` | `unchecked-value` |             | `string`  | `null`        |
+| `value`          | `value`           |             | `string`  | `'unchecked'` |
 
 
 ## Dependencies

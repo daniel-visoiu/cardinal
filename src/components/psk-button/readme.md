@@ -11,6 +11,7 @@
 | ------------- | -------------- | ----------- | --------- | ------------------- |
 | `buttonClass` | `button-class` |             | `string`  | `"btn btn-primary"` |
 | `disabled`    | `disabled`     |             | `boolean` | `false`             |
+| `eventData`   | `event-data`   |             | `any`     | `null`              |
 | `eventName`   | `event-name`   |             | `string`  | `null`              |
 | `label`       | `label`        |             | `string`  | `null`              |
 
