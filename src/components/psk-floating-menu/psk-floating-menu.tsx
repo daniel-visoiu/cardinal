@@ -1,4 +1,4 @@
-import { Component, h, Prop, Event, EventEmitter } from '@stencil/core';
+import { Component, h, Prop, Event, EventEmitter, State } from '@stencil/core';
 import { MenuItem } from '../../interfaces/MenuItem'
 import CustomTheme from '../../decorators/CustomTheme';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
@@ -11,12 +11,7 @@ import { TableOfContentProperty } from '../../decorators/TableOfContentProperty'
 export class FloatingMenu {
     @CustomTheme()
 
-    @TableOfContentProperty({
-        description: `This property represents the elements that should be rendered in a Floating Menu.`,
-        isMandatory: true,
-        propertyType: `Array of MenuItem(MenuItem[])`
-    })
-    @Prop() menuItems: MenuItem[];
+    @State() menuItems: MenuItem[] = [];
 
     @TableOfContentProperty({
         description: `This property shows the state of the backdrop on the Floating Menu and the Floating Menu itself.`,
@@ -28,22 +23,20 @@ export class FloatingMenu {
     @Prop({ reflectToAttr: true, mutable: true }) opened: boolean = false;
 
     @Event({
-        eventName: 'needMenuItems',
-        cancelable: true,
-        composed: true,
+        eventName: "needFloatingMenu",
         bubbles: true,
-    }) needMenuItems: EventEmitter;
+        composed: true,
+        cancelable: true
+    }) needFloatingMenu: EventEmitter;
 
     componentWillLoad() {
-        if (!this.menuItems) {
-            this.needMenuItems.emit((err, data) => {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                this.menuItems = data;
-            });
-        }
+        this.needFloatingMenu.emit((err, data) => {
+            if (!err && data) {
+                this.menuItems = JSON.parse(JSON.stringify(data));
+            } else {
+                console.error(err);
+            }
+        });
     }
 
     render() {
