@@ -47,7 +47,7 @@ export class PskLink {
       sourceUrl: this.page,
       callback: (err, data) => {
         if (!err) {
-          this.destinationUrl = `${window.location.origin}${data}`;
+          this.destinationUrl = data;
           this.error = false;
         } else {
           this.error = true;
@@ -57,7 +57,6 @@ export class PskLink {
   }
 
   render() {
-
     let errorContent = null;
     if (this.error) {
       errorContent = <div class="tooltip-error">
@@ -66,20 +65,19 @@ export class PskLink {
     }
     return (
       <div class="psk-link">
-        <a class={`btn btn-link ${this.error ? 'invalid-url' : ''}`}
-           onClick={(evt: MouseEvent) => {
-             if (this.error) {
-               evt.preventDefault();
-             } else {
-               window.location.href = this.destinationUrl;
-             }
-           }}>
-          <slot/>
-        </a>
-        {errorContent}
+        {this.error ?
+          <div><a class={`btn btn-link ${this.error ? 'invalid-url' : ''}`}
+                  onClick={(evt: MouseEvent) => {
+                    evt.preventDefault();
+                  }}>
+            <slot/>
+          </a>,
+            {errorContent}</div> :
+          <stencil-route-link url={this.destinationUrl} anchorClass="btn btn-link">
+            <slot/>
+          </stencil-route-link>}
       </div>
     )
   }
-
 
 }
