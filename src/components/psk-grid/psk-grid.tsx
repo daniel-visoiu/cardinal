@@ -1,11 +1,13 @@
 import { Component, Prop, h, Element } from '@stencil/core';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
+import CustomTheme from '../../decorators/CustomTheme';
 
 @Component({
-    tag: "psk-grid",
-    styleUrl: './psk-grid.css'
+    tag: "psk-grid"
 })
 export class PskGrid {
+    @CustomTheme()
+
     @TableOfContentProperty({
         isMandatory: true,
         propertyType: 'number',
