@@ -7,7 +7,7 @@ import { TableOfContentProperty } from '../../decorators/TableOfContentProperty'
 })
 export class PskGrid {
     @TableOfContentProperty({
-        isMandatory: false,
+        isMandatory: true,
         propertyType: 'number',
         description: 'This is the number of columns for the bootstrap columns class.',
         defaultValue: 'null',
