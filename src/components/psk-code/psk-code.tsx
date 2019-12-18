@@ -2,6 +2,7 @@ import { Component, Element, h, State, Prop } from "@stencil/core";
 import Prism from 'prismjs';
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import CustomTheme from "../../decorators/CustomTheme";
+const HTML_COMMENT_TAG = "<!---->";
 
 @Component({
     tag: "psk-code"
@@ -54,6 +55,7 @@ export class PskCode {
         let componentCode = document.createElement('textarea');
         componentCode.innerHTML = this.componentCode;
         let decodedCode = componentCode.value;
+        decodedCode = decodedCode.replace(HTML_COMMENT_TAG,"");
 
         const sourceCode = (
             <pre>
