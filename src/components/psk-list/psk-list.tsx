@@ -13,7 +13,8 @@ export class PskList {
         description: [`This property gives the type of the list. It has two type of values, "ordered" or "unordered"`,
             `If this property is missing, "unordered is assumed"`],
         isMandatory: false,
-        propertyType: 'string'
+        propertyType: 'string',
+        defaultValue: `unordered`
     })
     @Prop() listType: string;
 
