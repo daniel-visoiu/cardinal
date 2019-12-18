@@ -1,6 +1,6 @@
-import { Component, h, Prop } from '@stencil/core';
+import { Component, h, Prop} from '@stencil/core';
 import CustomTheme from '../../decorators/CustomTheme';
-import { createCustomEvent } from '../../utils/utils';
+import PskButtonEvent from "../../events/PskButtonEvent";
 
 @Component({
 	tag: 'psk-button',
@@ -21,12 +21,14 @@ export class PskButton {
 				if (this.eventName) {
 					evt.preventDefault();
 					evt.stopImmediatePropagation();
-					createCustomEvent(this.eventName, {
-						bubbles: true,
-						composed: true,
-						cancelable: true,
-						detail: this.eventData
-					}, true);
+
+          let pskButtonEvent = new PskButtonEvent(this.eventName, this.eventData, {
+            bubbles: true,
+            composed: true,
+            cancelable: true
+          });
+          //button is in shadow root
+          document.dispatchEvent(pskButtonEvent);
 				}
 			}} class={this.buttonClass}
 				disabled={this.disabled}>

@@ -33,7 +33,14 @@ export function scrollToElement(elementId: string, htmlView: HTMLElement): void 
 	let chapterKey = `${queryOperator}chapter=`;
 	window.history.pushState({}, "", `${basePath}${chapterKey}${selector}`);
 }
-
+//TODO refactor this
+/**
+ * @deprecated You should create your own Event. See /events/PskButtonEvent.ts example
+ * @param eventName
+ * @param options
+ * @param trigger
+ * @param triggerElement
+ */
 export function createCustomEvent(eventName: string, options: any,
 	trigger: boolean = false, triggerElement: HTMLElement = null) {
 

@@ -7,17 +7,16 @@
 
 ## Properties
 
-| Property    | Attribute | Description | Type         | Default     |
-| ----------- | --------- | ----------- | ------------ | ----------- |
-| `menuItems` | --        |             | `MenuItem[]` | `undefined` |
-| `opened`    | `opened`  |             | `boolean`    | `false`     |
+| Property | Attribute | Description | Type      | Default |
+| -------- | --------- | ----------- | --------- | ------- |
+| `opened` | `opened`  |             | `boolean` | `false` |
 
 
 ## Events
 
-| Event           | Description | Type               |
-| --------------- | ----------- | ------------------ |
-| `needMenuItems` |             | `CustomEvent<any>` |
+| Event              | Description | Type               |
+| ------------------ | ----------- | ------------------ |
+| `needFloatingMenu` |             | `CustomEvent<any>` |
 
 
 ----------------------------------------------
