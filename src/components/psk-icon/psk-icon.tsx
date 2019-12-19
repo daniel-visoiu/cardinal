@@ -1,14 +1,12 @@
 import { Component, Prop, h } from '@stencil/core';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
-import CustomTheme from '../../decorators/CustomTheme';
 
 @Component({
     tag: "psk-icon",
-    shadow: true
+    shadow: true,
+    styleUrl: './psk-icon.css'
 })
 export class PskIcon {
-    @CustomTheme()
-
     @TableOfContentProperty({
         isMandatory: true,
         propertyType: 'string',
