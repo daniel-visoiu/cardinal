@@ -1,4 +1,4 @@
-@import url("../../assets/bootstrap/css/bootstrap.min.css");
+@import url(../../../commons/bootstrap/css/bootstrap.min.css);
 * {
     outline: none !important;
 }

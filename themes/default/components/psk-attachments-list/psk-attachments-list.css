@@ -1,5 +1,5 @@
-@import url("../../assets/fonts/font-awesome.min.css");
-@import url("../../assets/bootstrap/css/bootstrap.min.css");
+@import url(../../../commons/fonts/font-awesome.min.css);
+@import url(../../../commons/bootstrap/css/bootstrap.min.css);
 .fa-remove {
     font-size: 22px;
     padding-left: 10px;
