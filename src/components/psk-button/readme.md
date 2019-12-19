@@ -7,13 +7,14 @@
 
 ## Properties
 
-| Property      | Attribute      | Description | Type      | Default             |
-| ------------- | -------------- | ----------- | --------- | ------------------- |
-| `buttonClass` | `button-class` |             | `string`  | `"btn btn-primary"` |
-| `disabled`    | `disabled`     |             | `boolean` | `false`             |
-| `eventData`   | `event-data`   |             | `any`     | `null`              |
-| `eventName`   | `event-name`   |             | `string`  | `null`              |
-| `label`       | `label`        |             | `string`  | `null`              |
+| Property          | Attribute          | Description | Type      | Default             |
+| ----------------- | ------------------ | ----------- | --------- | ------------------- |
+| `buttonClass`     | `button-class`     |             | `string`  | `"btn btn-primary"` |
+| `disabled`        | `disabled`         |             | `boolean` | `false`             |
+| `eventData`       | `event-data`       |             | `any`     | `null`              |
+| `eventDispatcher` | `event-dispatcher` |             | `string`  | `undefined`         |
+| `eventName`       | `event-name`       |             | `string`  | `null`              |
+| `label`           | `label`            |             | `string`  | `null`              |
 
 
 ## Dependencies
