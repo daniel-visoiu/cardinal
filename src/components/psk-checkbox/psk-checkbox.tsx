@@ -29,18 +29,20 @@ export class PskCheckbox {
                 {/* Here, we display the label of the grouped checkbox component. Details in the documentation */}
                 <psk-label label={this.label} />
 
-                <div class="form-check">
-                    <input
-                        type="checkbox"
-                        class="form-check-input"
-                        id={checkboxName}
-                        name={checkboxName}
-                        required={this.required}
-                        checked={this.checked}
-                        onChange={this.__handleCheckbox.bind(this)}
-                        value={this.value} />
-                    {/* This is the label for the checkbox */}
-                    <psk-label for={checkboxName} label={this.checkboxLabel} />
+                <div class="form-group">
+                    <div class="form-check form-check-inline">
+                        <input
+                            type="checkbox"
+                            class="form-check-input"
+                            id={checkboxName}
+                            name={checkboxName}
+                            required={this.required}
+                            checked={this.checked}
+                            onChange={this.__handleCheckbox.bind(this)}
+                            value={this.value} />
+                        {/* This is the label for the checkbox */}
+                        <psk-label for={checkboxName} label={this.checkboxLabel} />
+                    </div>
                 </div>
             </div>
         );

@@ -10,7 +10,9 @@ export class PskLabel {
 
     render() {
         return (
-            <label htmlFor={this.for}>{this.label}</label>
+            <label class="col-form-label" htmlFor={this.for}>
+                {this.label ? this.label : < slot />}
+            </label>
         );
     }
 }

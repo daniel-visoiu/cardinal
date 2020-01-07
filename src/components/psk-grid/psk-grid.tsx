@@ -27,7 +27,8 @@ export class PskGrid {
         let className = `col-12 col-md-${Math.floor(12 / this.columns)}`;
         let index = 0;
         while (index < this.host.children.length) {
-            this.host.children.item(index++).className = className;
+            const child: Element = this.host.children.item(index++);
+            child.tagName.toLowerCase() !== 'link' && (child.className = className);
         }
 
         return <div class="row">

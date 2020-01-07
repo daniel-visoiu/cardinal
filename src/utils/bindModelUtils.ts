@@ -56,10 +56,31 @@ export function __getModelEventCbk(err: Error, model: any): void {
     let thisElement: HTMLElement = getElement(__self);
 
     /**
-     * If we find view-model property defined, then we skip the checking of the attributes (name, label)
+     * If we find data-view-model property defined, then we assign the parentChain and the rootModel to the compnent
+     * This means we found a psk-for-each component.
      */
-    let viewModel = thisElement.getAttribute('view-model');
-    let attrNameLabel, parentChain = viewModel;
+    let viewModel, attrNameLabel, parentChain;
+    if (thisElement.getAttribute('data-view-model') !== null
+        && thisElement.tagName.toLowerCase() === 'psk-for-each') {
+        viewModel = thisElement.getAttribute('data-view-model');
+        parentChain = viewModel;
+        /**
+         * Set the rootModel and parentChain
+         */
+        __self.__assignProperties.call(__self, {
+            rootModel: model,
+            parentChain: parentChain
+        });
+
+        __self['render'].call(__self);
+        return;
+    }
+
+    /**
+    * If we find view-model property defined, then we skip the checking of the attributes (name, label)
+    */
+    viewModel = thisElement.getAttribute('view-model');
+    parentChain = viewModel;
     if (viewModel === null) {
         attrNameLabel = thisElement.getAttribute('name');
         if (attrNameLabel === null && thisElement.getAttribute('label') !== null) {
@@ -69,7 +90,7 @@ export function __getModelEventCbk(err: Error, model: any): void {
     }
 
     if (!viewModel && !attrNameLabel) {
-        console.error('[Bind Model] At least one of the attributes should be defined in order to apply the binding: view-model, name, label');
+        console.error('[Bind Model] At least one of the attributes should be defined in order to apply the binding: data-view-model(only for psk-for-each), view-model, name, label');
         return;
     }
 

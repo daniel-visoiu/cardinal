@@ -11,7 +11,7 @@ declare type BindInterface = (
 export function BindModel(): BindInterface {
     return function (proto: ComponentInterface): void {
 
-        let { componentWillLoad } = proto;
+        let { componentWillLoad, render } = proto;
 
         proto.componentWillLoad = function () {
             let self = this;
@@ -27,7 +27,8 @@ export function BindModel(): BindInterface {
                     }
                 }, true, thisElement);
             });
-            
+
+            self['render'] = render;
             self['changeModel'] = changeModel;
             self['__assignProperties'] = __assignProperties;
 

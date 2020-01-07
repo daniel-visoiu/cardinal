@@ -36,8 +36,6 @@ export class PskRadio {
 
         return (
             <div class="form-check form-check-inline">
-                <psk-label for={inputName} label={this.label} />
-
                 <input
                     type="radio"
                     class="form-check-input"
@@ -46,6 +44,7 @@ export class PskRadio {
                     readOnly={this.readOnly}
                     checked={this.checked}
                     onChange={this.__handleRadioChange.bind(this)} />
+                <psk-label for={inputName} label={this.label} />
             </div>
         );
     }
