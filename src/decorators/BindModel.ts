@@ -17,10 +17,12 @@ export function BindModel(): BindInterface {
             let self = this;
             let thisElement: HTMLElement = getElement(self);
 
+            console.log(`[Bind Model] ${thisElement.tagName} instantiated!`);
+
             document.addEventListener('modelReady', function () {
                 createCustomEvent('getModelEvent', {
                     bubbles: true,
-                    composed: false,
+                    composed: true,
                     cancellable: true,
                     detail: {
                         callback: __getModelEventCbk.bind(self)

@@ -21,7 +21,7 @@
 
 ### Used by
 
- - [psk-form](..\psk-form)
+ - [psk-form](../psk-form)
 
 ### Graph
 ```mermaid

@@ -49,6 +49,7 @@ export namespace Components {
     'somethingChanged': boolean;
     'url': any;
   }
+  interface ForEachTemplateItem {}
   interface MobileProfileRenderer {
     'userInfo': any;
   }
@@ -124,10 +125,12 @@ export namespace Components {
   interface PskFloatingMenu {
     'opened': boolean;
   }
+  interface PskForEach {}
   interface PskForm {
     'controllerName': string | null;
     'formActions': string | null;
   }
+  interface PskFormRow {}
   interface PskGrid {
     'columns': number | null;
   }
@@ -253,9 +256,6 @@ export namespace Components {
     'footer': boolean;
     'header': boolean;
   }
-  interface PskTemplateIterator {
-    'model': string | null;
-  }
   interface PskToc {
     'title': string;
   }
@@ -344,6 +344,12 @@ declare global {
   var HTMLExpandableRendererElement: {
     prototype: HTMLExpandableRendererElement;
     new (): HTMLExpandableRendererElement;
+  };
+
+  interface HTMLForEachTemplateItemElement extends Components.ForEachTemplateItem, HTMLStencilElement {}
+  var HTMLForEachTemplateItemElement: {
+    prototype: HTMLForEachTemplateItemElement;
+    new (): HTMLForEachTemplateItemElement;
   };
 
   interface HTMLMobileProfileRendererElement extends Components.MobileProfileRenderer, HTMLStencilElement {}
@@ -454,10 +460,22 @@ declare global {
     new (): HTMLPskFloatingMenuElement;
   };
 
+  interface HTMLPskForEachElement extends Components.PskForEach, HTMLStencilElement {}
+  var HTMLPskForEachElement: {
+    prototype: HTMLPskForEachElement;
+    new (): HTMLPskForEachElement;
+  };
+
   interface HTMLPskFormElement extends Components.PskForm, HTMLStencilElement {}
   var HTMLPskFormElement: {
     prototype: HTMLPskFormElement;
     new (): HTMLPskFormElement;
+  };
+
+  interface HTMLPskFormRowElement extends Components.PskFormRow, HTMLStencilElement {}
+  var HTMLPskFormRowElement: {
+    prototype: HTMLPskFormRowElement;
+    new (): HTMLPskFormRowElement;
   };
 
   interface HTMLPskGridElement extends Components.PskGrid, HTMLStencilElement {}
@@ -616,12 +634,6 @@ declare global {
     new (): HTMLPskTableElement;
   };
 
-  interface HTMLPskTemplateIteratorElement extends Components.PskTemplateIterator, HTMLStencilElement {}
-  var HTMLPskTemplateIteratorElement: {
-    prototype: HTMLPskTemplateIteratorElement;
-    new (): HTMLPskTemplateIteratorElement;
-  };
-
   interface HTMLPskTocElement extends Components.PskToc, HTMLStencilElement {}
   var HTMLPskTocElement: {
     prototype: HTMLPskTocElement;
@@ -691,6 +703,7 @@ declare global {
     'app-menu': HTMLAppMenuElement;
     'dropdown-renderer': HTMLDropdownRendererElement;
     'expandable-renderer': HTMLExpandableRendererElement;
+    'for-each-template-item': HTMLForEachTemplateItemElement;
     'mobile-profile-renderer': HTMLMobileProfileRendererElement;
     'psk-app-root': HTMLPskAppRootElement;
     'psk-app-router': HTMLPskAppRouterElement;
@@ -709,7 +722,9 @@ declare global {
     'psk-example': HTMLPskExampleElement;
     'psk-files-chooser': HTMLPskFilesChooserElement;
     'psk-floating-menu': HTMLPskFloatingMenuElement;
+    'psk-for-each': HTMLPskForEachElement;
     'psk-form': HTMLPskFormElement;
+    'psk-form-row': HTMLPskFormRowElement;
     'psk-grid': HTMLPskGridElement;
     'psk-hoc': HTMLPskHocElement;
     'psk-icon': HTMLPskIconElement;
@@ -736,7 +751,6 @@ declare global {
     'psk-stepper': HTMLPskStepperElement;
     'psk-stepper-renderer': HTMLPskStepperRendererElement;
     'psk-table': HTMLPskTableElement;
-    'psk-template-iterator': HTMLPskTemplateIteratorElement;
     'psk-toc': HTMLPskTocElement;
     'psk-toolbar': HTMLPskToolbarElement;
     'psk-ui-alert': HTMLPskUiAlertElement;
@@ -773,6 +787,7 @@ declare namespace LocalJSX {
     'somethingChanged'?: boolean;
     'url'?: any;
   }
+  interface ForEachTemplateItem {}
   interface MobileProfileRenderer {
     'userInfo'?: any;
   }
@@ -855,10 +870,12 @@ declare namespace LocalJSX {
     'onNeedFloatingMenu'?: (event: CustomEvent<any>) => void;
     'opened'?: boolean;
   }
+  interface PskForEach {}
   interface PskForm {
     'controllerName'?: string | null;
     'formActions'?: string | null;
   }
+  interface PskFormRow {}
   interface PskGrid {
     'columns'?: number | null;
   }
@@ -990,9 +1007,6 @@ declare namespace LocalJSX {
     'footer'?: boolean;
     'header'?: boolean;
   }
-  interface PskTemplateIterator {
-    'model'?: string | null;
-  }
   interface PskToc {
     'title'?: string;
   }
@@ -1071,6 +1085,7 @@ declare namespace LocalJSX {
     'app-menu': AppMenu;
     'dropdown-renderer': DropdownRenderer;
     'expandable-renderer': ExpandableRenderer;
+    'for-each-template-item': ForEachTemplateItem;
     'mobile-profile-renderer': MobileProfileRenderer;
     'psk-app-root': PskAppRoot;
     'psk-app-router': PskAppRouter;
@@ -1089,7 +1104,9 @@ declare namespace LocalJSX {
     'psk-example': PskExample;
     'psk-files-chooser': PskFilesChooser;
     'psk-floating-menu': PskFloatingMenu;
+    'psk-for-each': PskForEach;
     'psk-form': PskForm;
+    'psk-form-row': PskFormRow;
     'psk-grid': PskGrid;
     'psk-hoc': PskHoc;
     'psk-icon': PskIcon;
@@ -1116,7 +1133,6 @@ declare namespace LocalJSX {
     'psk-stepper': PskStepper;
     'psk-stepper-renderer': PskStepperRenderer;
     'psk-table': PskTable;
-    'psk-template-iterator': PskTemplateIterator;
     'psk-toc': PskToc;
     'psk-toolbar': PskToolbar;
     'psk-ui-alert': PskUiAlert;
@@ -1140,6 +1156,7 @@ declare module "@stencil/core" {
       'app-menu': LocalJSX.AppMenu & JSXBase.HTMLAttributes<HTMLAppMenuElement>;
       'dropdown-renderer': LocalJSX.DropdownRenderer & JSXBase.HTMLAttributes<HTMLDropdownRendererElement>;
       'expandable-renderer': LocalJSX.ExpandableRenderer & JSXBase.HTMLAttributes<HTMLExpandableRendererElement>;
+      'for-each-template-item': LocalJSX.ForEachTemplateItem & JSXBase.HTMLAttributes<HTMLForEachTemplateItemElement>;
       'mobile-profile-renderer': LocalJSX.MobileProfileRenderer & JSXBase.HTMLAttributes<HTMLMobileProfileRendererElement>;
       'psk-app-root': LocalJSX.PskAppRoot & JSXBase.HTMLAttributes<HTMLPskAppRootElement>;
       'psk-app-router': LocalJSX.PskAppRouter & JSXBase.HTMLAttributes<HTMLPskAppRouterElement>;
@@ -1158,7 +1175,9 @@ declare module "@stencil/core" {
       'psk-example': LocalJSX.PskExample & JSXBase.HTMLAttributes<HTMLPskExampleElement>;
       'psk-files-chooser': LocalJSX.PskFilesChooser & JSXBase.HTMLAttributes<HTMLPskFilesChooserElement>;
       'psk-floating-menu': LocalJSX.PskFloatingMenu & JSXBase.HTMLAttributes<HTMLPskFloatingMenuElement>;
+      'psk-for-each': LocalJSX.PskForEach & JSXBase.HTMLAttributes<HTMLPskForEachElement>;
       'psk-form': LocalJSX.PskForm & JSXBase.HTMLAttributes<HTMLPskFormElement>;
+      'psk-form-row': LocalJSX.PskFormRow & JSXBase.HTMLAttributes<HTMLPskFormRowElement>;
       'psk-grid': LocalJSX.PskGrid & JSXBase.HTMLAttributes<HTMLPskGridElement>;
       'psk-hoc': LocalJSX.PskHoc & JSXBase.HTMLAttributes<HTMLPskHocElement>;
       'psk-icon': LocalJSX.PskIcon & JSXBase.HTMLAttributes<HTMLPskIconElement>;
@@ -1185,7 +1204,6 @@ declare module "@stencil/core" {
       'psk-stepper': LocalJSX.PskStepper & JSXBase.HTMLAttributes<HTMLPskStepperElement>;
       'psk-stepper-renderer': LocalJSX.PskStepperRenderer & JSXBase.HTMLAttributes<HTMLPskStepperRendererElement>;
       'psk-table': LocalJSX.PskTable & JSXBase.HTMLAttributes<HTMLPskTableElement>;
-      'psk-template-iterator': LocalJSX.PskTemplateIterator & JSXBase.HTMLAttributes<HTMLPskTemplateIteratorElement>;
       'psk-toc': LocalJSX.PskToc & JSXBase.HTMLAttributes<HTMLPskTocElement>;
       'psk-toolbar': LocalJSX.PskToolbar & JSXBase.HTMLAttributes<HTMLPskToolbarElement>;
       'psk-ui-alert': LocalJSX.PskUiAlert & JSXBase.HTMLAttributes<HTMLPskUiAlertElement>;

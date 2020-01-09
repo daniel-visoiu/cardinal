@@ -68,3 +68,7 @@ export function closestParentElement(el: HTMLElement, selector: string, stopSele
 	}
 	return retval;
 }
+
+export function normalizeInnerHTML(source: string = ''): string {
+	return source.replace(/<!----->/g, '').replace(/<!---->/g, '');
+}

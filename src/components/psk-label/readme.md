@@ -17,11 +17,11 @@
 
 ### Used by
 
- - [psk-checkbox](..\psk-checkbox)
- - [psk-input](..\psk-input)
- - [psk-radio](..\psk-radio)
- - [psk-radio-group](..\psk-radio-group)
- - [psk-select](..\psk-select)
+ - [psk-checkbox](../psk-checkbox)
+ - [psk-input](../psk-input)
+ - [psk-radio](../psk-radio)
+ - [psk-radio-group](../psk-radio-group)
+ - [psk-select](../psk-select)
 
 ### Graph
 ```mermaid

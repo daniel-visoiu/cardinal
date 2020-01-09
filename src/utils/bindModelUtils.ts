@@ -48,12 +48,17 @@ export function changeModel(leafChain: string, newValue: any): boolean {
  * @returns void
  */
 export function __getModelEventCbk(err: Error, model: any): void {
+
+    console.log(`[__getModelEventCbk] the event has beed called!`, this);
+
     if (err || !model) {
         return;
     }
 
     let __self = this;
     let thisElement: HTMLElement = getElement(__self);
+
+    console.log(`[__getModelEventCbk] ${thisElement.tagName}`);
 
     /**
      * If we find data-view-model property defined, then we assign the parentChain and the rootModel to the compnent
@@ -72,6 +77,11 @@ export function __getModelEventCbk(err: Error, model: any): void {
             parentChain: parentChain
         });
 
+        /**
+         * Special behaviour only for psk-for-each component.
+         * Render must be called in order to trigger the update,
+         * because none of the assigned attributes is watched by the Stencil Listener (State)
+         */
         __self['render'].call(__self);
         return;
     }
@@ -88,6 +98,8 @@ export function __getModelEventCbk(err: Error, model: any): void {
         }
         parentChain = attrNameLabel;
     }
+
+    console.log(`[viewModel and attrNameLabel] ${viewModel} --&&-- ${attrNameLabel}`);
 
     if (!viewModel && !attrNameLabel) {
         console.error('[Bind Model] At least one of the attributes should be defined in order to apply the binding: data-view-model(only for psk-for-each), view-model, name, label');

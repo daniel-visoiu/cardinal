@@ -23,7 +23,7 @@
 
 ### Used by
 
- - [psk-pin-popup](..\psk-pin-popup)
+ - [psk-pin-popup](../psk-pin-popup)
 
 ### Graph
 ```mermaid

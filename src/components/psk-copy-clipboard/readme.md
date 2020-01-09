@@ -23,7 +23,7 @@
 
 ### Used by
 
- - [psk-card](..\psk-card)
+ - [psk-card](../psk-card)
 
 ### Graph
 ```mermaid
