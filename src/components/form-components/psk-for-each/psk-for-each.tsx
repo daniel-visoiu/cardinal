@@ -1,5 +1,5 @@
 import { Component, Element } from '@stencil/core';
-import { BindModel } from '../../decorators/BindModel';
+import { BindModel } from '../../../decorators/BindModel';
 
 @Component({
     tag: 'psk-for-each'

@@ -18,7 +18,7 @@
 
 ### Used by
 
- - [psk-form](../psk-form)
+ - [psk-form](../form-components/psk-form)
 
 ### Depends on
 

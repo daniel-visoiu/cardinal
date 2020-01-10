@@ -17,8 +17,8 @@
 
 ### Depends on
 
-- [psk-container](../psk-container)
-- [psk-button](../psk-button)
+- [psk-container](../../psk-container)
+- [psk-button](../../psk-button)
 
 ### Graph
 ```mermaid

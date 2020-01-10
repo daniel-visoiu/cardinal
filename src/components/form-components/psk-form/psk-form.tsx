@@ -1,5 +1,5 @@
 import { Component, h, Prop, Element } from '@stencil/core';
-import CustomTheme from '../../decorators/CustomTheme.js';
+import CustomTheme from '../../../decorators/CustomTheme.js';
 
 @Component({
     tag: 'psk-form',

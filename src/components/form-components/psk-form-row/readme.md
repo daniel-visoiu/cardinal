@@ -9,7 +9,7 @@
 
 ### Depends on
 
-- [psk-grid](../psk-grid)
+- [psk-grid](../../psk-grid)
 
 ### Graph
 ```mermaid

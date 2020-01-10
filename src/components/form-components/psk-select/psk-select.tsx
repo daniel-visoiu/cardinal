@@ -1,6 +1,6 @@
 import { h, Component, Prop, State } from '@stencil/core';
-import { Option, SelectType } from '../../interfaces/FormModel';
-import { BindModel } from '../../decorators/BindModel';
+import { Option, SelectType } from '../../../interfaces/FormModel';
+import { BindModel } from '../../../decorators/BindModel';
 
 @Component({
     tag: 'psk-select'

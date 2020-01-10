@@ -1,6 +1,6 @@
 import { h, Component, Prop, Listen, Element, State } from '@stencil/core';
-import { BindModel } from '../../decorators/BindModel';
-import { RadioOption } from '../../interfaces/FormModel';
+import { BindModel } from '../../../decorators/BindModel';
+import { RadioOption } from '../../../interfaces/FormModel';
 
 @Component({
     tag: 'psk-radio-group'

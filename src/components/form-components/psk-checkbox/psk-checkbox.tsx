@@ -1,5 +1,5 @@
 import { h, Component, Prop } from '@stencil/core';
-import { BindModel } from '../../decorators/BindModel';
+import { BindModel } from '../../../decorators/BindModel';
 
 @Component({
     tag: 'psk-checkbox'
