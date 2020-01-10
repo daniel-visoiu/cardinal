@@ -60,9 +60,9 @@ export function closestParentElement(el: HTMLElement, selector: string, stopSele
 	while (el) {
 		if (el.matches(selector)) {
 			retval = el;
-			break
+			break;
 		} else if (stopSelector && el.matches(stopSelector)) {
-			break
+			break;
 		}
 		el = el.parentElement;
 	}

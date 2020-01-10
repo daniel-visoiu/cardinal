@@ -1,9 +1,12 @@
 import { h, Component, Prop } from '@stencil/core';
+import { BindModel } from '../../decorators/BindModel';
 
 @Component({
     tag: 'psk-label'
 })
 export class PskLabel {
+
+    @BindModel()
 
     @Prop() label: string | null = null;
     @Prop() for: string | null = null;

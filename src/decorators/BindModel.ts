@@ -1,40 +1,54 @@
-import { getElement } from '@stencil/core';
+import { getElement } from "@stencil/core";
 import { ComponentInterface } from "@stencil/core/dist/declarations";
-import { createCustomEvent, } from '../utils/utils';
-import { __assignProperties, __getModelEventCbk, changeModel } from '../utils/bindModelUtils';
+import { createCustomEvent } from "../utils/utils";
+import {
+  __assignProperties,
+  __getModelEventCbk,
+  changeModel
+} from "../utils/bindModelUtils";
 
 declare type BindInterface = (
-    target: ComponentInterface,
-    methodName: string
+  target: ComponentInterface,
+  methodName: string
 ) => void;
 
 export function BindModel(): BindInterface {
-    return function (proto: ComponentInterface): void {
+  return function(proto: ComponentInterface): void {
+    let { componentWillLoad, render } = proto;
 
-        let { componentWillLoad, render } = proto;
+    proto.componentWillLoad = function() {
+      let self = this;
+      let thisElement: HTMLElement = getElement(self);
 
-        proto.componentWillLoad = function () {
-            let self = this;
-            let thisElement: HTMLElement = getElement(self);
+      self["render"] = render;
+      self["changeModel"] = changeModel;
+      self["__assignProperties"] = __assignProperties;
 
-            console.log(`[Bind Model] ${thisElement.tagName} instantiated!`);
+      function getModel() {
+        createCustomEvent(
+          "getModelEvent",
+          {
+            bubbles: true,
+            composed: true,
+            cancellable: true,
+            detail: {
+              callback: __getModelEventCbk.bind(self)
+            }
+          },
+          true,
+          thisElement
+        );
+      }
 
-            document.addEventListener('modelReady', function () {
-                createCustomEvent('getModelEvent', {
-                    bubbles: true,
-                    composed: true,
-                    cancellable: true,
-                    detail: {
-                        callback: __getModelEventCbk.bind(self)
-                    }
-                }, true, thisElement);
-            });
+      if (thisElement.getAttribute("get-model") === "get-model") {
+        getModel();
+      } else {
+        document.addEventListener("modelReady", function() {
+          getModel();
+        });
+      }
 
-            self['render'] = render;
-            self['changeModel'] = changeModel;
-            self['__assignProperties'] = __assignProperties;
-
-            return componentWillLoad && componentWillLoad.call(self);
-        };
+      return componentWillLoad && componentWillLoad.call(self);
     };
+  };
 }

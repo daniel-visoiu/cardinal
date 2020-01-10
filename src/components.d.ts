@@ -49,7 +49,6 @@ export namespace Components {
     'somethingChanged': boolean;
     'url': any;
   }
-  interface ForEachTemplateItem {}
   interface MobileProfileRenderer {
     'userInfo': any;
   }
@@ -344,12 +343,6 @@ declare global {
   var HTMLExpandableRendererElement: {
     prototype: HTMLExpandableRendererElement;
     new (): HTMLExpandableRendererElement;
-  };
-
-  interface HTMLForEachTemplateItemElement extends Components.ForEachTemplateItem, HTMLStencilElement {}
-  var HTMLForEachTemplateItemElement: {
-    prototype: HTMLForEachTemplateItemElement;
-    new (): HTMLForEachTemplateItemElement;
   };
 
   interface HTMLMobileProfileRendererElement extends Components.MobileProfileRenderer, HTMLStencilElement {}
@@ -703,7 +696,6 @@ declare global {
     'app-menu': HTMLAppMenuElement;
     'dropdown-renderer': HTMLDropdownRendererElement;
     'expandable-renderer': HTMLExpandableRendererElement;
-    'for-each-template-item': HTMLForEachTemplateItemElement;
     'mobile-profile-renderer': HTMLMobileProfileRendererElement;
     'psk-app-root': HTMLPskAppRootElement;
     'psk-app-router': HTMLPskAppRouterElement;
@@ -787,7 +779,6 @@ declare namespace LocalJSX {
     'somethingChanged'?: boolean;
     'url'?: any;
   }
-  interface ForEachTemplateItem {}
   interface MobileProfileRenderer {
     'userInfo'?: any;
   }
@@ -1085,7 +1076,6 @@ declare namespace LocalJSX {
     'app-menu': AppMenu;
     'dropdown-renderer': DropdownRenderer;
     'expandable-renderer': ExpandableRenderer;
-    'for-each-template-item': ForEachTemplateItem;
     'mobile-profile-renderer': MobileProfileRenderer;
     'psk-app-root': PskAppRoot;
     'psk-app-router': PskAppRouter;
@@ -1156,7 +1146,6 @@ declare module "@stencil/core" {
       'app-menu': LocalJSX.AppMenu & JSXBase.HTMLAttributes<HTMLAppMenuElement>;
       'dropdown-renderer': LocalJSX.DropdownRenderer & JSXBase.HTMLAttributes<HTMLDropdownRendererElement>;
       'expandable-renderer': LocalJSX.ExpandableRenderer & JSXBase.HTMLAttributes<HTMLExpandableRendererElement>;
-      'for-each-template-item': LocalJSX.ForEachTemplateItem & JSXBase.HTMLAttributes<HTMLForEachTemplateItemElement>;
       'mobile-profile-renderer': LocalJSX.MobileProfileRenderer & JSXBase.HTMLAttributes<HTMLMobileProfileRendererElement>;
       'psk-app-root': LocalJSX.PskAppRoot & JSXBase.HTMLAttributes<HTMLPskAppRootElement>;
       'psk-app-router': LocalJSX.PskAppRouter & JSXBase.HTMLAttributes<HTMLPskAppRouterElement>;

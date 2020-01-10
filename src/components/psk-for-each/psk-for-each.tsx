@@ -58,52 +58,11 @@ export class PskForEach {
         viewModelComponents.forEach((component: HTMLElement) => {
             const fullChain: string = `${chain}${component.getAttribute('view-model')}`;
             component.setAttribute('view-model', fullChain);
+            component.setAttribute('get-model', 'get-model');
         });
 
         Array.from(clonedNode.childNodes).forEach((child: Node) => {
             this.__host.shadowRoot.appendChild(child);
         });
     }
-
-    // componentDidRender() {
-    //     if (!this['parentChain'] || !this['rootModel']
-    //         || this.__host.querySelectorAll("[view-model]").length === 0) {
-    //         return;
-    //     }
-
-    //     let parentChain: string = this['parentChain'];
-    //     let rootModel = this['rootModel'];
-    //     let templateModel = rootModel.getChainValue(parentChain);
-    //     if (templateModel.length === 0) {
-    //         return;
-    //     }
-
-    //     let formSections = Array.from(Array(templateModel.length).keys()).map((index: number) => {
-    //         const fullParentChain: string = `${parentChain}.${index}.`;
-    //         const templateHTMLCopy = this.templateHTML
-    //             .map((element: HTMLStencilElement) => element.cloneNode(true) as Element);
-
-    //         templateHTMLCopy.forEach(child => {
-    //             let viewModelComponents = clonedNode.querySelectorAll("[view-model]");
-
-    //             viewModelComponents.forEach((component: HTMLElement) => {
-    //                 const fullChain: string = `${fullParentChain}${component.getAttribute('view-model')}`;
-    //                 component.setAttribute('view-model', fullChain);
-    //             });
-    //         });
-
-    //         return templateHTMLCopy;
-    //     });
-
-    //     this.displayedSesctions = formSections.map(section => {
-    //         return (
-    //             <for-each-template-item>
-    //                 {section.map((sectionItem) => {
-    //                     const SectionTag: string = sectionItem.tagName;
-    //                     return <SectionTag innerHTML={sectionItem.innerHTML} />;
-    //                 })}
-    //             </for-each-template-item>
-    //         )
-    //     });
-    // }
 }
