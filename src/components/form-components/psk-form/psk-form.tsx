@@ -21,7 +21,7 @@ export class PskForm {
                     <form>
                         <slot />
 
-                        <div id="#actions">
+                        <div id="actions">
                             {this._createFormActions(this.formActions)}
                         </div>
                     </form>

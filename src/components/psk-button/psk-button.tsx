@@ -1,4 +1,4 @@
-import {Component, h, Prop, Element} from '@stencil/core';
+import { Component, h, Prop, Element } from '@stencil/core';
 import CustomTheme from '../../decorators/CustomTheme';
 import PskButtonEvent from "../../events/PskButtonEvent";
 
@@ -41,9 +41,9 @@ export class PskButton {
           eventDispatcherElement.dispatchEvent(pskButtonEvent);
         }
       }} class={this.buttonClass}
-              disabled={this.disabled}>
+        disabled={this.disabled}>
         {this.label && this.label}
-        <slot/>
+        <slot />
       </button>
     );
   }

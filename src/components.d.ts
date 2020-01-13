@@ -105,9 +105,27 @@ export namespace Components {
   interface PskCopyClipboard {
     'id': string;
   }
+  interface PskDateInput {
+    'invalidValue'?: boolean | null;
+    'label'?: string | null;
+    'name'?: string | null;
+    'placeholder'?: string | null;
+    'readOnly'?: boolean;
+    'required'?: boolean;
+    'value'?: string | null;
+  }
   interface PskDefaultRenderer {}
   interface PskDescription {
     'title': string;
+  }
+  interface PskEmailInput {
+    'invalidValue'?: boolean | null;
+    'label'?: string | null;
+    'name'?: string | null;
+    'placeholder'?: string | null;
+    'readOnly'?: boolean;
+    'required'?: boolean;
+    'value'?: string | null;
   }
   interface PskEventDescriptor {
     'title': string;
@@ -152,6 +170,7 @@ export namespace Components {
     'placeholder'?: string | null;
     'readOnly'?: boolean;
     'required'?: boolean;
+    'specificProps'?: any;
     'type'?: string;
     'value'?: string | null;
   }
@@ -180,6 +199,15 @@ export namespace Components {
   interface PskModal {
     'opened': boolean;
   }
+  interface PskNumberInput {
+    'invalidValue'?: boolean | null;
+    'label'?: string | null;
+    'name'?: string | null;
+    'placeholder'?: string | null;
+    'readOnly'?: boolean;
+    'required'?: boolean;
+    'value'?: string | null;
+  }
   interface PskPage {
     'title': string;
     'tocTitle': string;
@@ -193,6 +221,15 @@ export namespace Components {
     'urlDestination'?: string;
   }
   interface PskPageNotFoundRenderer {}
+  interface PskPasswordInput {
+    'invalidValue'?: boolean | null;
+    'label'?: string | null;
+    'name'?: string | null;
+    'placeholder'?: string | null;
+    'readOnly'?: boolean;
+    'required'?: boolean;
+    'value'?: string | null;
+  }
   interface PskPinPopup {
     'opened': boolean;
   }
@@ -254,6 +291,15 @@ export namespace Components {
     'cellsWidth': string;
     'footer': boolean;
     'header': boolean;
+  }
+  interface PskTextInput {
+    'invalidValue'?: boolean | null;
+    'label'?: string | null;
+    'name'?: string | null;
+    'placeholder'?: string | null;
+    'readOnly'?: boolean;
+    'required'?: boolean;
+    'value'?: string | null;
   }
   interface PskToc {
     'title': string;
@@ -417,6 +463,12 @@ declare global {
     new (): HTMLPskCopyClipboardElement;
   };
 
+  interface HTMLPskDateInputElement extends Components.PskDateInput, HTMLStencilElement {}
+  var HTMLPskDateInputElement: {
+    prototype: HTMLPskDateInputElement;
+    new (): HTMLPskDateInputElement;
+  };
+
   interface HTMLPskDefaultRendererElement extends Components.PskDefaultRenderer, HTMLStencilElement {}
   var HTMLPskDefaultRendererElement: {
     prototype: HTMLPskDefaultRendererElement;
@@ -427,6 +479,12 @@ declare global {
   var HTMLPskDescriptionElement: {
     prototype: HTMLPskDescriptionElement;
     new (): HTMLPskDescriptionElement;
+  };
+
+  interface HTMLPskEmailInputElement extends Components.PskEmailInput, HTMLStencilElement {}
+  var HTMLPskEmailInputElement: {
+    prototype: HTMLPskEmailInputElement;
+    new (): HTMLPskEmailInputElement;
   };
 
   interface HTMLPskEventDescriptorElement extends Components.PskEventDescriptor, HTMLStencilElement {}
@@ -537,6 +595,12 @@ declare global {
     new (): HTMLPskModalElement;
   };
 
+  interface HTMLPskNumberInputElement extends Components.PskNumberInput, HTMLStencilElement {}
+  var HTMLPskNumberInputElement: {
+    prototype: HTMLPskNumberInputElement;
+    new (): HTMLPskNumberInputElement;
+  };
+
   interface HTMLPskPageElement extends Components.PskPage, HTMLStencilElement {}
   var HTMLPskPageElement: {
     prototype: HTMLPskPageElement;
@@ -559,6 +623,12 @@ declare global {
   var HTMLPskPageNotFoundRendererElement: {
     prototype: HTMLPskPageNotFoundRendererElement;
     new (): HTMLPskPageNotFoundRendererElement;
+  };
+
+  interface HTMLPskPasswordInputElement extends Components.PskPasswordInput, HTMLStencilElement {}
+  var HTMLPskPasswordInputElement: {
+    prototype: HTMLPskPasswordInputElement;
+    new (): HTMLPskPasswordInputElement;
   };
 
   interface HTMLPskPinPopupElement extends Components.PskPinPopup, HTMLStencilElement {}
@@ -625,6 +695,12 @@ declare global {
   var HTMLPskTableElement: {
     prototype: HTMLPskTableElement;
     new (): HTMLPskTableElement;
+  };
+
+  interface HTMLPskTextInputElement extends Components.PskTextInput, HTMLStencilElement {}
+  var HTMLPskTextInputElement: {
+    prototype: HTMLPskTextInputElement;
+    new (): HTMLPskTextInputElement;
   };
 
   interface HTMLPskTocElement extends Components.PskToc, HTMLStencilElement {}
@@ -708,8 +784,10 @@ declare global {
     'psk-container': HTMLPskContainerElement;
     'psk-controller-descriptor': HTMLPskControllerDescriptorElement;
     'psk-copy-clipboard': HTMLPskCopyClipboardElement;
+    'psk-date-input': HTMLPskDateInputElement;
     'psk-default-renderer': HTMLPskDefaultRendererElement;
     'psk-description': HTMLPskDescriptionElement;
+    'psk-email-input': HTMLPskEmailInputElement;
     'psk-event-descriptor': HTMLPskEventDescriptorElement;
     'psk-example': HTMLPskExampleElement;
     'psk-files-chooser': HTMLPskFilesChooserElement;
@@ -728,10 +806,12 @@ declare global {
     'psk-list-feedbacks': HTMLPskListFeedbacksElement;
     'psk-menu-item-renderer': HTMLPskMenuItemRendererElement;
     'psk-modal': HTMLPskModalElement;
+    'psk-number-input': HTMLPskNumberInputElement;
     'psk-page': HTMLPskPageElement;
     'psk-page-loader': HTMLPskPageLoaderElement;
     'psk-page-not-found': HTMLPskPageNotFoundElement;
     'psk-page-not-found-renderer': HTMLPskPageNotFoundRendererElement;
+    'psk-password-input': HTMLPskPasswordInputElement;
     'psk-pin-popup': HTMLPskPinPopupElement;
     'psk-property-descriptor': HTMLPskPropertyDescriptorElement;
     'psk-radio': HTMLPskRadioElement;
@@ -743,6 +823,7 @@ declare global {
     'psk-stepper': HTMLPskStepperElement;
     'psk-stepper-renderer': HTMLPskStepperRendererElement;
     'psk-table': HTMLPskTableElement;
+    'psk-text-input': HTMLPskTextInputElement;
     'psk-toc': HTMLPskTocElement;
     'psk-toolbar': HTMLPskToolbarElement;
     'psk-ui-alert': HTMLPskUiAlertElement;
@@ -841,9 +922,27 @@ declare namespace LocalJSX {
     'id'?: string;
     'onGetHistoryType'?: (event: CustomEvent<any>) => void;
   }
+  interface PskDateInput {
+    'invalidValue'?: boolean | null;
+    'label'?: string | null;
+    'name'?: string | null;
+    'placeholder'?: string | null;
+    'readOnly'?: boolean;
+    'required'?: boolean;
+    'value'?: string | null;
+  }
   interface PskDefaultRenderer {}
   interface PskDescription {
     'title'?: string;
+  }
+  interface PskEmailInput {
+    'invalidValue'?: boolean | null;
+    'label'?: string | null;
+    'name'?: string | null;
+    'placeholder'?: string | null;
+    'readOnly'?: boolean;
+    'required'?: boolean;
+    'value'?: string | null;
   }
   interface PskEventDescriptor {
     'title'?: string;
@@ -889,6 +988,7 @@ declare namespace LocalJSX {
     'placeholder'?: string | null;
     'readOnly'?: boolean;
     'required'?: boolean;
+    'specificProps'?: any;
     'type'?: string;
     'value'?: string | null;
   }
@@ -921,6 +1021,15 @@ declare namespace LocalJSX {
     'onCloseModal'?: (event: CustomEvent<any>) => void;
     'opened'?: boolean;
   }
+  interface PskNumberInput {
+    'invalidValue'?: boolean | null;
+    'label'?: string | null;
+    'name'?: string | null;
+    'placeholder'?: string | null;
+    'readOnly'?: boolean;
+    'required'?: boolean;
+    'value'?: string | null;
+  }
   interface PskPage {
     'title'?: string;
     'tocTitle'?: string;
@@ -934,6 +1043,15 @@ declare namespace LocalJSX {
     'urlDestination'?: string;
   }
   interface PskPageNotFoundRenderer {}
+  interface PskPasswordInput {
+    'invalidValue'?: boolean | null;
+    'label'?: string | null;
+    'name'?: string | null;
+    'placeholder'?: string | null;
+    'readOnly'?: boolean;
+    'required'?: boolean;
+    'value'?: string | null;
+  }
   interface PskPinPopup {
     'onSendPin'?: (event: CustomEvent<any>) => void;
     'opened'?: boolean;
@@ -997,6 +1115,15 @@ declare namespace LocalJSX {
     'cellsWidth'?: string;
     'footer'?: boolean;
     'header'?: boolean;
+  }
+  interface PskTextInput {
+    'invalidValue'?: boolean | null;
+    'label'?: string | null;
+    'name'?: string | null;
+    'placeholder'?: string | null;
+    'readOnly'?: boolean;
+    'required'?: boolean;
+    'value'?: string | null;
   }
   interface PskToc {
     'title'?: string;
@@ -1088,8 +1215,10 @@ declare namespace LocalJSX {
     'psk-container': PskContainer;
     'psk-controller-descriptor': PskControllerDescriptor;
     'psk-copy-clipboard': PskCopyClipboard;
+    'psk-date-input': PskDateInput;
     'psk-default-renderer': PskDefaultRenderer;
     'psk-description': PskDescription;
+    'psk-email-input': PskEmailInput;
     'psk-event-descriptor': PskEventDescriptor;
     'psk-example': PskExample;
     'psk-files-chooser': PskFilesChooser;
@@ -1108,10 +1237,12 @@ declare namespace LocalJSX {
     'psk-list-feedbacks': PskListFeedbacks;
     'psk-menu-item-renderer': PskMenuItemRenderer;
     'psk-modal': PskModal;
+    'psk-number-input': PskNumberInput;
     'psk-page': PskPage;
     'psk-page-loader': PskPageLoader;
     'psk-page-not-found': PskPageNotFound;
     'psk-page-not-found-renderer': PskPageNotFoundRenderer;
+    'psk-password-input': PskPasswordInput;
     'psk-pin-popup': PskPinPopup;
     'psk-property-descriptor': PskPropertyDescriptor;
     'psk-radio': PskRadio;
@@ -1123,6 +1254,7 @@ declare namespace LocalJSX {
     'psk-stepper': PskStepper;
     'psk-stepper-renderer': PskStepperRenderer;
     'psk-table': PskTable;
+    'psk-text-input': PskTextInput;
     'psk-toc': PskToc;
     'psk-toolbar': PskToolbar;
     'psk-ui-alert': PskUiAlert;
@@ -1158,8 +1290,10 @@ declare module "@stencil/core" {
       'psk-container': LocalJSX.PskContainer & JSXBase.HTMLAttributes<HTMLPskContainerElement>;
       'psk-controller-descriptor': LocalJSX.PskControllerDescriptor & JSXBase.HTMLAttributes<HTMLPskControllerDescriptorElement>;
       'psk-copy-clipboard': LocalJSX.PskCopyClipboard & JSXBase.HTMLAttributes<HTMLPskCopyClipboardElement>;
+      'psk-date-input': LocalJSX.PskDateInput & JSXBase.HTMLAttributes<HTMLPskDateInputElement>;
       'psk-default-renderer': LocalJSX.PskDefaultRenderer & JSXBase.HTMLAttributes<HTMLPskDefaultRendererElement>;
       'psk-description': LocalJSX.PskDescription & JSXBase.HTMLAttributes<HTMLPskDescriptionElement>;
+      'psk-email-input': LocalJSX.PskEmailInput & JSXBase.HTMLAttributes<HTMLPskEmailInputElement>;
       'psk-event-descriptor': LocalJSX.PskEventDescriptor & JSXBase.HTMLAttributes<HTMLPskEventDescriptorElement>;
       'psk-example': LocalJSX.PskExample & JSXBase.HTMLAttributes<HTMLPskExampleElement>;
       'psk-files-chooser': LocalJSX.PskFilesChooser & JSXBase.HTMLAttributes<HTMLPskFilesChooserElement>;
@@ -1178,10 +1312,12 @@ declare module "@stencil/core" {
       'psk-list-feedbacks': LocalJSX.PskListFeedbacks & JSXBase.HTMLAttributes<HTMLPskListFeedbacksElement>;
       'psk-menu-item-renderer': LocalJSX.PskMenuItemRenderer & JSXBase.HTMLAttributes<HTMLPskMenuItemRendererElement>;
       'psk-modal': LocalJSX.PskModal & JSXBase.HTMLAttributes<HTMLPskModalElement>;
+      'psk-number-input': LocalJSX.PskNumberInput & JSXBase.HTMLAttributes<HTMLPskNumberInputElement>;
       'psk-page': LocalJSX.PskPage & JSXBase.HTMLAttributes<HTMLPskPageElement>;
       'psk-page-loader': LocalJSX.PskPageLoader & JSXBase.HTMLAttributes<HTMLPskPageLoaderElement>;
       'psk-page-not-found': LocalJSX.PskPageNotFound & JSXBase.HTMLAttributes<HTMLPskPageNotFoundElement>;
       'psk-page-not-found-renderer': LocalJSX.PskPageNotFoundRenderer & JSXBase.HTMLAttributes<HTMLPskPageNotFoundRendererElement>;
+      'psk-password-input': LocalJSX.PskPasswordInput & JSXBase.HTMLAttributes<HTMLPskPasswordInputElement>;
       'psk-pin-popup': LocalJSX.PskPinPopup & JSXBase.HTMLAttributes<HTMLPskPinPopupElement>;
       'psk-property-descriptor': LocalJSX.PskPropertyDescriptor & JSXBase.HTMLAttributes<HTMLPskPropertyDescriptorElement>;
       'psk-radio': LocalJSX.PskRadio & JSXBase.HTMLAttributes<HTMLPskRadioElement>;
@@ -1193,6 +1329,7 @@ declare module "@stencil/core" {
       'psk-stepper': LocalJSX.PskStepper & JSXBase.HTMLAttributes<HTMLPskStepperElement>;
       'psk-stepper-renderer': LocalJSX.PskStepperRenderer & JSXBase.HTMLAttributes<HTMLPskStepperRendererElement>;
       'psk-table': LocalJSX.PskTable & JSXBase.HTMLAttributes<HTMLPskTableElement>;
+      'psk-text-input': LocalJSX.PskTextInput & JSXBase.HTMLAttributes<HTMLPskTextInputElement>;
       'psk-toc': LocalJSX.PskToc & JSXBase.HTMLAttributes<HTMLPskTocElement>;
       'psk-toolbar': LocalJSX.PskToolbar & JSXBase.HTMLAttributes<HTMLPskToolbarElement>;
       'psk-ui-alert': LocalJSX.PskUiAlert & JSXBase.HTMLAttributes<HTMLPskUiAlertElement>;

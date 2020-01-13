@@ -18,6 +18,8 @@ export class PskInput {
 	@Prop() readOnly?: boolean = false;
 	@Prop() invalidValue?: boolean | null = null;
 
+	@Prop() specificProps?: any = {};
+
 	render() {
 		const invalidClass = this.invalidValue === null ? ''
 			: this.invalidValue ? 'is-invalid' : 'is-valid';
@@ -37,7 +39,8 @@ export class PskInput {
 					placeholder={this.placeholder}
 					required={this.required}
 					readOnly={this.readOnly}
-					onKeyUp={this.__keyUpHandler.bind(this)} />
+					onKeyUp={this.__keyUpHandler.bind(this)}
+					{...this.specificProps} />
 			</div>
 		);
 	}
