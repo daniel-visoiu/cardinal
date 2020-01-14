@@ -25,7 +25,11 @@ export class PskPropertyDescriptor {
             return (
                 <psk-hoc title={prop.propertyName}>
                     <p class="subtitle"><i>{cardSubtitle}</i></p>
-                    <p>{prop.description}</p>
+                    {
+                        Array.isArray(prop.description)
+                            ? prop.description.map(line => <p innerHTML={line}></p>)
+                            : <p>{prop.description}</p>
+                    }
                     {prop.specialNote ? (<p><b>Note: {prop.specialNote}</b></p>) : null}
                     {prop.defaultValue ? (<p><i>Default value: {prop.defaultValue}</i></p>) : null}
                 </psk-hoc>

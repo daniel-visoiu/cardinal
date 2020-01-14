@@ -144,8 +144,10 @@ export namespace Components {
   }
   interface PskForEach {}
   interface PskForm {
-    'controllerName': string | null;
-    'formActions': string | null;
+    'action'?: string | null;
+    'controllerName'?: string;
+    'formActions'?: string | null;
+    'method': string | null;
   }
   interface PskFormRow {}
   interface PskGrid {
@@ -962,8 +964,10 @@ declare namespace LocalJSX {
   }
   interface PskForEach {}
   interface PskForm {
-    'controllerName'?: string | null;
+    'action'?: string | null;
+    'controllerName'?: string;
     'formActions'?: string | null;
+    'method'?: string | null;
   }
   interface PskFormRow {}
   interface PskGrid {
