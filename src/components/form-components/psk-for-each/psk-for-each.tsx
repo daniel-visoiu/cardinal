@@ -1,5 +1,6 @@
-import { Component, Element } from '@stencil/core';
+import { Component, Element, Prop } from '@stencil/core';
 import { BindModel } from '../../../decorators/BindModel';
+import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
 
 @Component({
     tag: 'psk-for-each'
@@ -11,8 +12,6 @@ export class PskForEach {
 
     render() {
         this.__renderFormTemplateContent.call(this);
-
-        console.log("[psk-for-each] finished Rendering!");
     }
 
     __renderFormTemplateContent(): any {
@@ -65,4 +64,13 @@ export class PskForEach {
             this.__host.shadowRoot.appendChild(child);
         });
     }
+
+    @TableOfContentProperty({
+        description: [`This property is the name of the model which will be used to generate the form. The model should be a JavaScript array.`,
+            `All the information about how to write a model, hot to use the two-way binding and how to use the model with this component cand be found in the documentation found at: <psk-link page="forms/using-forms">Using forms</psk-link>`],
+        isMandatory: false,
+        propertyType: 'string',
+        specialNote: [`If this property is not provided, nothing written inside the component's template will be displayed.`]
+    })
+    @Prop() dataViewModel?: string | null = null;
 }

@@ -142,7 +142,9 @@ export namespace Components {
   interface PskFloatingMenu {
     'opened': boolean;
   }
-  interface PskForEach {}
+  interface PskForEach {
+    'dataViewModel'?: string | null;
+  }
   interface PskForm {
     'action'?: string | null;
     'controllerName'?: string;
@@ -172,6 +174,9 @@ export namespace Components {
     'placeholder'?: string | null;
     'readOnly'?: boolean;
     'required'?: boolean;
+    /**
+    * Property used only by other components psk-text-input, psk-email-input...
+    */
     'specificProps'?: any;
     'type'?: string;
     'value'?: string | null;
@@ -962,7 +967,9 @@ declare namespace LocalJSX {
     'onNeedFloatingMenu'?: (event: CustomEvent<any>) => void;
     'opened'?: boolean;
   }
-  interface PskForEach {}
+  interface PskForEach {
+    'dataViewModel'?: string | null;
+  }
   interface PskForm {
     'action'?: string | null;
     'controllerName'?: string;
@@ -992,6 +999,9 @@ declare namespace LocalJSX {
     'placeholder'?: string | null;
     'readOnly'?: boolean;
     'required'?: boolean;
+    /**
+    * Property used only by other components psk-text-input, psk-email-input...
+    */
     'specificProps'?: any;
     'type'?: string;
     'value'?: string | null;

@@ -7,17 +7,17 @@
 
 ## Properties
 
-| Property        | Attribute        | Description | Type      | Default  |
-| --------------- | ---------------- | ----------- | --------- | -------- |
-| `invalidValue`  | `invalid-value`  |             | `boolean` | `null`   |
-| `label`         | `label`          |             | `string`  | `null`   |
-| `name`          | `name`           |             | `string`  | `null`   |
-| `placeholder`   | `placeholder`    |             | `string`  | `null`   |
-| `readOnly`      | `read-only`      |             | `boolean` | `false`  |
-| `required`      | `required`       |             | `boolean` | `false`  |
-| `specificProps` | `specific-props` |             | `any`     | `{}`     |
-| `type`          | `type`           |             | `string`  | `'text'` |
-| `value`         | `value`          |             | `string`  | `null`   |
+| Property        | Attribute        | Description                                                               | Type      | Default  |
+| --------------- | ---------------- | ------------------------------------------------------------------------- | --------- | -------- |
+| `invalidValue`  | `invalid-value`  |                                                                           | `boolean` | `null`   |
+| `label`         | `label`          |                                                                           | `string`  | `null`   |
+| `name`          | `name`           |                                                                           | `string`  | `null`   |
+| `placeholder`   | `placeholder`    |                                                                           | `string`  | `null`   |
+| `readOnly`      | `read-only`      |                                                                           | `boolean` | `false`  |
+| `required`      | `required`       |                                                                           | `boolean` | `false`  |
+| `specificProps` | `specific-props` | Property used only by other components psk-text-input, psk-email-input... | `any`     | `{}`     |
+| `type`          | `type`           |                                                                           | `string`  | `'text'` |
+| `value`         | `value`          |                                                                           | `string`  | `null`   |
 
 
 ## Dependencies

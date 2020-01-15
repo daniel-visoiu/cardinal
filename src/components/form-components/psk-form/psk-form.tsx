@@ -17,9 +17,9 @@ export class PskForm {
                     <form>
                         <slot />
 
-                        <psk-form-row id="actions">
+                        <psk-container id="actions">
                             {this._createFormActions(this.formActions)}
-                        </psk-form-row>
+                        </psk-container>
                     </form>
                 </div>
             </psk-container>
@@ -52,7 +52,8 @@ export class PskForm {
     @TableOfContentProperty({
         description: [`By defining this attribute, the user is able to control the behaviour of the form, so by definition, this attribute holds the possible actions inside the form, the defined actions should be sepparated by comma(",").`,
             `Also, as a recommendation, the values should be provided using lowercases, and if there are more words inside an action, to be written using dash symbol(-)`,
-            `Example of form actions: submit, reset-form, validate-form, cancel`],
+            `Example of form actions: submit, reset-form, validate-form, cancel`,
+        `Using all these actions, the component will generate a <psk-link page="web-components/psk-button">psk-button</psk-link>.`],
         isMandatory: false,
         propertyType: 'string values sepparated by comma (,)',
         defaultValue: "submit",

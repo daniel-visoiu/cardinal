@@ -1,5 +1,6 @@
 import { h, Component, Prop } from '@stencil/core';
 import { BindModel } from '../../../decorators/BindModel';
+import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
 
 @Component({
     tag: 'psk-number-input'
@@ -7,15 +8,6 @@ import { BindModel } from '../../../decorators/BindModel';
 export class PskNumberInput {
 
     @BindModel()
-
-    @Prop() label?: string | null = null;
-    @Prop() name?: string | null = null;
-    @Prop() value?: string | null = null;
-    @Prop() placeholder?: string | null = null;
-
-    @Prop() required?: boolean = false;
-    @Prop() readOnly?: boolean = false;
-    @Prop() invalidValue?: boolean | null = null;
 
     render() {
         return <psk-input
@@ -39,7 +31,60 @@ export class PskNumberInput {
         if (this['changeModel']) {
             this['changeModel'].call(this, 'value', value);
         } else {
-            console.warn('[psk-input] Function named -=changeModel=- is not defined!');
+            console.warn('[psk-number-input] Function named -=changeModel=- is not defined!');
         }
     };
+
+    @TableOfContentProperty({
+        description: [`By filling out this property, the component will display above it, a label using <psk-link page="forms/psk-label">psk-label</psk-link> component.`],
+        isMandatory: false,
+        propertyType: 'string',
+        specialNote: `If this property is not provided, the component will be displayed wothout any label`
+    })
+    @Prop() label?: string | null = null;
+
+    @TableOfContentProperty({
+        description: [`Specifies the value of an psk-number-input component.`,
+            `This value is updated also in the model using the two-way binding. Information about two-way binding using models and templates can be found at: <psk-link page="forms/using-forms">Using forms</psk-link>.`],
+        isMandatory: false,
+        propertyType: 'string'
+    })
+    @Prop() value?: string | null = null;
+
+    @TableOfContentProperty({
+        description: [`Specifies the name of a psk-number-input component. It is used along with the psk-label component.`],
+        isMandatory: false,
+        propertyType: 'string'
+    })
+    @Prop() name?: string | null = null;
+
+    @TableOfContentProperty({
+        description: [`Specifies a short hint that describes the expected value of an psk-number-input component`],
+        isMandatory: false,
+        propertyType: 'string'
+    })
+    @Prop() placeholder?: string | null = null;
+
+    @TableOfContentProperty({
+        description: [`Specifies that an input field must be filled out before submitting the form.`,
+            `Accepted values: "true" and "false"`],
+        isMandatory: false,
+        propertyType: 'boolean'
+    })
+    @Prop() required?: boolean = false;
+
+    @TableOfContentProperty({
+        description: [`	Specifies that an input field is read-only.`,
+            `Accepted values: "true" and "false"`],
+        isMandatory: false,
+        propertyType: 'boolean'
+    })
+    @Prop() readOnly?: boolean = false;
+
+    @TableOfContentProperty({
+        description: [`This property indicates if the value entered by the user is a valid one according to some validation present in the controller.`],
+        isMandatory: false,
+        propertyType: 'boolean'
+    })
+    @Prop() invalidValue?: boolean | null = null;
 }
