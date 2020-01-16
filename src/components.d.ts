@@ -253,7 +253,7 @@ export namespace Components {
   }
   interface PskRadioGroup {
     'invalid'?: boolean;
-    'label': string | null;
+    'label'?: string | null;
     'name'?: string | null;
     'required'?: boolean;
     'value'?: string | null;
@@ -265,7 +265,7 @@ export namespace Components {
   interface PskSelect {
     'disabled'?: boolean;
     'invalidValue'?: boolean | null;
-    'label': string | null;
+    'label'?: string | null;
     'placeholder'?: string | null;
     'required'?: boolean;
     'selectionType'?: SelectType;

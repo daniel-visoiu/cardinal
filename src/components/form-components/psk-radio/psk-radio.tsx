@@ -1,32 +1,12 @@
 import { h, Component, Prop, Event } from '@stencil/core';
 import { EventEmitter } from '@stencil/router/dist/types/stencil.core';
 import { TableOfContentEvent } from '../../../decorators/TableOfContentEvent';
+import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
 
 @Component({
     tag: 'psk-radio'
 })
 export class PskRadio {
-
-    @Prop() label?: string | null = null;
-    @Prop() value?: string | null = null;
-    @Prop() name?: string | null = null;
-
-    @Prop() readOnly?: boolean = false;
-    @Prop() invalidValue?: boolean | null = null;
-
-    @Prop({ mutable: true, reflect: true }) checked?: boolean = false;
-
-    @TableOfContentEvent({
-        description: ["This event is being triggered when a radio button is checked.",
-            "The event bubbles to the parent component, psk-radio-group, where the component will handle the selection of the radio."],
-        specialNote: "This event is not composed, it will not bubble outside the form!"
-    })
-    @Event({
-        eventName: 'onChangeRadio',
-        bubbles: true,
-        composed: false,
-        cancelable: true
-    }) onChangeRadio: EventEmitter;
 
     render() {
         const inputName = this.name ? this.name
@@ -56,4 +36,62 @@ export class PskRadio {
             value: evt.target.value
         });
     }
+
+    @TableOfContentProperty({
+        description: [`By filling out this property, the component will display near it, a label using <psk-link page="forms/psk-label">psk-label</psk-link> component.`],
+        isMandatory: false,
+        propertyType: 'string',
+        specialNote: `If this property is not provided, the component will be displayed without any label`
+    })
+    @Prop() label?: string | null = null;
+
+    @TableOfContentProperty({
+        description: [`Specifies the value of a psk-radio component.`,
+            `This value is updated also in the model using the two-way binding. Information about two-way binding using models and templates can be found at: <psk-link page="forms/using-forms">Using forms</psk-link>.`],
+        isMandatory: false,
+        propertyType: 'string'
+    })
+    @Prop() value?: string | null = null;
+
+    @TableOfContentProperty({
+        description: [`Specifies the name of a psk-radio component. It is used along with the psk-label component.`],
+        isMandatory: false,
+        propertyType: 'string'
+    })
+    @Prop() name?: string | null = null;
+
+    @TableOfContentProperty({
+        description: [`	Specifies that a psk-radio is read-only and it cannot be changed.`,
+            `Accepted values: "true" and "false"`],
+        isMandatory: false,
+        propertyType: 'boolean',
+        defaultValue: "false"
+    })
+    @Prop() readOnly?: boolean = false;
+
+    @TableOfContentProperty({
+        description: [`This property indicates if the value entered by the user is a valid one according to some validation present in the controller.`],
+        isMandatory: false,
+        propertyType: 'boolean'
+    })
+    @Prop() invalidValue?: boolean | null = null;
+
+    @TableOfContentProperty({
+        description: [`This property indicates the status of the component, if it checked or not. Also, by using this property, you can set the default value of the radio, in case you need it to be checked.`],
+        isMandatory: false,
+        propertyType: 'boolean'
+    })
+    @Prop({ mutable: true, reflect: true }) checked?: boolean = false;
+
+    @TableOfContentEvent({
+        description: ["This event is being triggered when a radio button is checked.",
+            "The event bubbles to the parent component, psk-radio-group, where the component will handle the selection of the radio."],
+        specialNote: "This event is not composed, it will not bubble outside the form!"
+    })
+    @Event({
+        eventName: 'onChangeRadio',
+        bubbles: true,
+        composed: false,
+        cancelable: true
+    }) onChangeRadio: EventEmitter;
 }

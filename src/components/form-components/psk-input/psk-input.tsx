@@ -58,7 +58,7 @@ export class PskInput {
 		description: [`By filling out this property, the component will display above it, a label using <psk-link page="forms/psk-label">psk-label</psk-link> component.`],
 		isMandatory: false,
 		propertyType: 'string',
-		specialNote: `If this property is not provided, the component will be displayed wothout any label`
+		specialNote: `If this property is not provided, the component will be displayed without any label`
 	})
 	@Prop() label?: string | null = null;
 

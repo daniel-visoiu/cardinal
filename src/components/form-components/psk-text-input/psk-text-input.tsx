@@ -39,7 +39,7 @@ export class PskTextInput {
         description: [`By filling out this property, the component will display above it, a label using <psk-link page="forms/psk-label">psk-label</psk-link> component.`],
         isMandatory: false,
         propertyType: 'string',
-        specialNote: `If this property is not provided, the component will be displayed wothout any label`
+        specialNote: `If this property is not provided, the component will be displayed without any label`
     })
     @Prop() label?: string | null = null;
 
@@ -69,7 +69,8 @@ export class PskTextInput {
         description: [`Specifies that an input field must be filled out before submitting the form.`,
             `Accepted values: "true" and "false"`],
         isMandatory: false,
-        propertyType: 'boolean'
+        propertyType: 'boolean',
+        defaultValue: "false"
     })
     @Prop() required?: boolean = false;
 
@@ -77,7 +78,8 @@ export class PskTextInput {
         description: [`	Specifies that an input field is read-only.`,
             `Accepted values: "true" and "false"`],
         isMandatory: false,
-        propertyType: 'boolean'
+        propertyType: 'boolean',
+        defaultValue: "false"
     })
     @Prop() readOnly?: boolean = false;
 
