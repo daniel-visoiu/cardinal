@@ -1,6 +1,6 @@
-import {Component, h, Prop, Event, EventEmitter, State} from "@stencil/core";
-import {TableOfContentProperty} from "../../decorators/TableOfContentProperty";
-import {TableOfContentEvent} from "../../decorators/TableOfContentEvent";
+import { Component, h, Prop, Event, EventEmitter, State } from "@stencil/core";
+import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
+import { TableOfContentEvent } from "../../decorators/TableOfContentEvent";
 import CustomTheme from "../../decorators/CustomTheme";
 
 @Component({
@@ -67,14 +67,14 @@ export class PskLink {
       <div class="psk-link">
         {this.error ?
           <div><a class={`btn btn-link ${this.error ? 'invalid-url' : ''}`}
-                  onClick={(evt: MouseEvent) => {
-                    evt.preventDefault();
-                  }}>
-            <slot/>
-          </a>,
+            onClick={(evt: MouseEvent) => {
+              evt.preventDefault();
+            }}>
+            <slot />
+          </a>
             {errorContent}</div> :
           <stencil-route-link url={this.destinationUrl} anchorClass="btn btn-link">
-            <slot/>
+            <slot />
           </stencil-route-link>}
       </div>
     )
