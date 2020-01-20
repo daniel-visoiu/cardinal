@@ -37,17 +37,14 @@ export class PskSelect {
                         disabled={true}
                         label={this.placeholder}
                         value={''}
-                        selected={this.value === null} />}
+                        selected={true} />}
 
                     {this.options && this.options.map((option: Option) => {
                         const value = option.value ? option.value
                             : option.label && option.label.replace(/( |:|\/|\.|-)/g, "").toLowerCase();
 
-                        const selected: boolean = option.selected === true;
-
                         return (
                             <option
-                                selected={selected}
                                 value={value}
                                 label={option.label}
                                 disabled={option.disabled}
