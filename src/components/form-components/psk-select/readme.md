@@ -14,6 +14,7 @@
 | `label`         | `label`          |             | `string`                 | `null`     |
 | `placeholder`   | `placeholder`    |             | `string`                 | `null`     |
 | `required`      | `required`       |             | `boolean`                | `false`    |
+| `selectOptions` | `select-options` |             | `string`                 | `null`     |
 | `selectionType` | `selection-type` |             | `"multiple" \| "single"` | `'single'` |
 | `value`         | `value`          |             | `string`                 | `null`     |
 

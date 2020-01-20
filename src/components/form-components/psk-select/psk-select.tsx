@@ -2,6 +2,7 @@ import { h, Component, Prop, State } from '@stencil/core';
 import { Option, SelectType } from '../../../interfaces/FormModel';
 import { BindModel } from '../../../decorators/BindModel';
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
+import { normalizeRegexToString } from '../../../utils/utils';
 
 @Component({
     tag: 'psk-select'
@@ -19,6 +20,8 @@ export class PskSelect {
     }
 
     render() {
+        this.selectOptions && this.__createOptions.call(this);
+
         const name: string = this.label && this.label.replace(/( |:|\/|\.|-)/g, "").toLowerCase();
 
         return (
@@ -67,6 +70,37 @@ export class PskSelect {
             console.warn('[psk-select] Function named -=changeModel=- is not defined!');
         }
     }
+
+    __createOptions(): void {
+        let optionsArray: Array<string> = this.selectOptions.split('|');
+
+        this.options = optionsArray.map((option: string) => {
+            let labelValue = option.trim().split(',');
+
+            let value, label = labelValue[0].trim();
+            if (labelValue.length === 1) {
+                value = normalizeRegexToString(label, /( |:|\/|\.)/g, '-', (str: string) => str.toLowerCase());
+            } else {
+                value = labelValue[1].trim();
+            }
+
+            return {
+                label: label,
+                value: value
+            }
+        });
+    }
+
+    @TableOfContentProperty({
+        description: [`This property is providing the list of the options available for selection.`,
+            `Each option is sepparated by the special character "|" (pipe) (e.g. option 1 | option 2 | option 3).`,
+            `For each option, as a recommendation, you should add a value sepparated by comma.`,
+            `Example of options with values: "Romania, ROM | Italy, ITA | Germany, DE"`,
+            `If no value is provided for an option, the component will create one. It will take the option and will normalize it to lower case and the special characters will be changed to dash ("-").`],
+        isMandatory: false,
+        propertyType: 'string'
+    })
+    @Prop() selectOptions?: string | null = null;
 
     @TableOfContentProperty({
         description: [`By filling out this property, the component will display above it, a label using <psk-link page="forms/psk-label">psk-label</psk-link> component.`],

@@ -268,6 +268,7 @@ export namespace Components {
     'label'?: string | null;
     'placeholder'?: string | null;
     'required'?: boolean;
+    'selectOptions'?: string | null;
     'selectionType'?: SelectType;
     'value'?: string | null;
   }
@@ -1099,6 +1100,7 @@ declare namespace LocalJSX {
     'label'?: string | null;
     'placeholder'?: string | null;
     'required'?: boolean;
+    'selectOptions'?: string | null;
     'selectionType'?: SelectType;
     'value'?: string | null;
   }

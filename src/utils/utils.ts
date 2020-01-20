@@ -92,3 +92,23 @@ export function normalizeCamelCaseToDashed(source: string): string {
     })
     .join("");
 }
+
+/**
+ *
+ * @param source
+ * @param regex
+ * @param replaceString
+ * @param applyCallback - A callback function that will be applyed to the string result
+ */
+export function normalizeRegexToString(
+  source: string,
+  regex: RegExp,
+  replaceString: string,
+  applyCallback: Function = null
+): string {
+  let result = source.replace(regex, replaceString);
+  if (applyCallback) {
+    return applyCallback(result);
+  }
+  return result;
+}
