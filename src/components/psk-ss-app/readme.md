@@ -10,6 +10,7 @@
 | Property    | Attribute    | Description | Type     | Default     |
 | ----------- | ------------ | ----------- | -------- | ----------- |
 | `appName`   | `app-name`   |             | `string` | `undefined` |
+| `csbSeed`   | `csb-seed`   |             | `string` | `undefined` |
 | `iframeSrc` | `iframe-src` |             | `string` | `undefined` |
 | `swPath`    | `sw-path`    |             | `string` | `undefined` |
 

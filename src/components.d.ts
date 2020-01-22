@@ -281,6 +281,7 @@ export namespace Components {
   }
   interface PskSsApp {
     'appName': string;
+    'csbSeed': string;
     'iframeSrc': string;
     'swPath': string;
   }
@@ -1113,6 +1114,7 @@ declare namespace LocalJSX {
   }
   interface PskSsApp {
     'appName'?: string;
+    'csbSeed'?: string;
     'iframeSrc'?: string;
     'swPath'?: string;
   }
