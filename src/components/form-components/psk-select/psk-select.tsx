@@ -3,11 +3,14 @@ import { Option, SelectType } from '../../../interfaces/FormModel';
 import { BindModel } from '../../../decorators/BindModel';
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
 import { normalizeRegexToString } from '../../../utils/utils';
+import CustomTheme from '../../../decorators/CustomTheme';
 
 @Component({
     tag: 'psk-select'
 })
 export class PskSelect {
+
+    @CustomTheme()
 
     @BindModel()
 

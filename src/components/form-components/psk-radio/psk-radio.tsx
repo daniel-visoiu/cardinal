@@ -2,11 +2,14 @@ import { h, Component, Prop, Event } from '@stencil/core';
 import { EventEmitter } from '@stencil/router/dist/types/stencil.core';
 import { TableOfContentEvent } from '../../../decorators/TableOfContentEvent';
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
+import CustomTheme from '../../../decorators/CustomTheme';
 
 @Component({
     tag: 'psk-radio'
 })
 export class PskRadio {
+
+    @CustomTheme()
 
     render() {
         const inputName = this.name ? this.name

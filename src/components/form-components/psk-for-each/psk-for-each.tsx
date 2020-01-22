@@ -1,11 +1,14 @@
 import { Component, Element, Prop } from '@stencil/core';
 import { BindModel } from '../../../decorators/BindModel';
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
+import CustomTheme from '../../../decorators/CustomTheme';
 
 @Component({
     tag: 'psk-for-each'
 })
 export class PskForEach {
+
+    @CustomTheme()
 
     @BindModel()
     @Element() private __host: HTMLElement;

@@ -1,11 +1,14 @@
 import { h, Component, Prop } from '@stencil/core';
 import { BindModel } from '../../../decorators/BindModel';
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
+import CustomTheme from '../../../decorators/CustomTheme';
 
 @Component({
     tag: 'psk-email-input'
 })
 export class PskEmailInput {
+
+    @CustomTheme()
 
     @BindModel()
 

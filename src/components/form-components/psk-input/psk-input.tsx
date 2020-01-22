@@ -1,11 +1,14 @@
 import { h, Component, Prop } from '@stencil/core';
 import { BindModel } from '../../../decorators/BindModel';
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
+import CustomTheme from '../../../decorators/CustomTheme';
 
 @Component({
 	tag: 'psk-input'
 })
 export class PskInput {
+
+    @CustomTheme()
 
 	@BindModel()
 

@@ -2,11 +2,14 @@ import { h, Component, Prop, Listen, Element, State } from '@stencil/core';
 import { BindModel } from '../../../decorators/BindModel';
 import { RadioOption } from '../../../interfaces/FormModel';
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
+import CustomTheme from '../../../decorators/CustomTheme';
 
 @Component({
     tag: 'psk-radio-group'
 })
 export class PskRadioGroup {
+
+    @CustomTheme()
 
     @BindModel()
 
