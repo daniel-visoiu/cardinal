@@ -35,11 +35,9 @@ export class PskList {
 
     componentWillLoad() {
         let htmlLinesRaw = "";
-        console.log(this);
         if (this["getInnerContent"]) {
             htmlLinesRaw = this['getInnerContent']("innerHTML");
         }
-        console.log(htmlLinesRaw);
         const htmlLines: Array<string> = htmlLinesRaw
             .split(/\n/g)
             .map(el => el.trim())
