@@ -15,15 +15,17 @@ export class PskSelfSovereignApp {
   @Element() element;
 
 
-  async componentWillLoad() {
+  componentWillLoad() {
     this.digestSeedHex = this.digestMessage(this.csbSeed);
   }
 
   componentDidLoad() {
     let newIframe = this.element.querySelector("iframe");
 
+    //TODO: this code should be moved to a separate controller
     // @ts-ignore
-    window.IframeCommunicationInstance.initializeSwarmEngine(this.digestSeedHex, newIframe);
+    const BootLoader = require("boot-host").getBootScriptLoader();
+    BootLoader.createPowerCord(this.digestSeedHex, this.csbSeed, newIframe);
     //TODO remove this test
     setTimeout(() => {
       this.sendMessageToIframe(this.digestSeedHex, "Hi there " + this.digestSeedHex);
@@ -31,17 +33,26 @@ export class PskSelfSovereignApp {
   }
 
   sendMessageToIframe(identity, message) {
+
+    let sayEcho =  (message)=>{
       // @ts-ignore
       $$.interactions.startSwarmAs(identity, "echo", "say", message)
         .onReturn(function (err, result) {
           if (!err) {
             console.log("Iframe received: ", result);
             //ping-pong
-            //sayEcho(result+"!");
+            setTimeout(()=>{
+              //sayEcho(result+"!");
+            },10000)
           } else {
             console.log(err);
           }
         });
+    };
+
+    sayEcho(message);
+
+
     }
 
    digestMessage(message) {
@@ -53,10 +64,6 @@ export class PskSelfSovereignApp {
 
 
   render() {
-
-    if (!this.digestSeedHex) {
-      return null;
-    }
 
     let iframeSrc = "/SSApps/app/" + this.digestSeedHex + "/index.html?" + this.digestSeedHex;
     return (
