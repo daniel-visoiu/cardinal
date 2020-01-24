@@ -24,29 +24,43 @@ export function BindModel(): BindInterface {
       self["changeModel"] = changeModel;
       self["__assignProperties"] = __assignProperties;
 
-      function getModel() {
-        createCustomEvent(
-          "getModelEvent",
-          {
-            bubbles: true,
-            composed: true,
-            cancellable: true,
-            detail: {
-              callback: __getModelEventCbk.bind(self)
-            }
-          },
-          true,
-          thisElement
-        );
-      }
+      // function getModel() {
+      //   createCustomEvent(
+      //     "getModelEvent",
+      //     {
+      //       bubbles: true,
+      //       composed: true,
+      //       cancellable: true,
+      //       detail: {
+      //         callback: __getModelEventCbk.bind(self)
+      //       }
+      //     },
+      //     true,
+      //     thisElement
+      //   );
+      // }
 
-      if (thisElement.getAttribute("get-model") === "get-model") {
-        getModel();
-      } else {
-        document.addEventListener("modelReady", function() {
-          getModel();
-        });
-      }
+      // if (thisElement.getAttribute("get-model") === "get-model") {
+      //   getModel();
+      // } else {
+      //   document.addEventListener("modelReady", function() {
+      //     getModel();
+      //   });
+      // }
+
+      createCustomEvent(
+        "getModelEvent",
+        {
+          bubbles: true,
+          composed: true,
+          cancellable: true,
+          detail: {
+            callback: __getModelEventCbk.bind(self)
+          }
+        },
+        true,
+        thisElement
+      );
 
       return componentWillLoad && componentWillLoad.call(self);
     };

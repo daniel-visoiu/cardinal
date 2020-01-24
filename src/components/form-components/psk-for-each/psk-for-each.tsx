@@ -60,7 +60,7 @@ export class PskForEach {
         viewModelComponents.forEach((component: HTMLElement) => {
             const fullChain: string = `${chain}${component.getAttribute('view-model')}`;
             component.setAttribute('view-model', fullChain);
-            component.setAttribute('get-model', 'get-model');
+            // component.setAttribute('get-model', 'get-model');
         });
 
         Array.from(clonedNode.childNodes).forEach((child: Node) => {
