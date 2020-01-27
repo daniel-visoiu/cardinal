@@ -48,7 +48,7 @@ export class PskFilesChooser {
 
 		let filesArray = Array.from(event.target.files);
 		if (typeof this.onFilesChange === "function") {
-			this.onFilesChange(filesArray);
+			this.onFilesChange.call(this, filesArray);
 		}
 
 		if (typeof this.onFilesSelect === "function") {
@@ -60,7 +60,7 @@ export class PskFilesChooser {
 					type: attachment.name.substr(attachment.name.lastIndexOf(".") + 1)
 				};
 			});
-			this.onFilesSelect(files);
+			this.onFilesSelect.call(this, files);
 		}
 	}
 
