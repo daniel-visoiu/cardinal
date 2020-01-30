@@ -17,13 +17,13 @@
 
 ### Used by
 
- - [psk-chapter](../psk-chapter)
- - [psk-description](../psk-description)
- - [psk-toc](../psk-toc)
+ - [psk-chapter](..\psk-chapter)
+ - [psk-description](..\psk-description)
+ - [psk-toc](..\psk-toc)
 
 ### Depends on
 
-- [psk-copy-clipboard](../psk-copy-clipboard)
+- [psk-copy-clipboard](..\psk-copy-clipboard)
 
 ### Graph
 ```mermaid

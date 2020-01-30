@@ -12,6 +12,75 @@ export function __assignProperties(params: any): void {
 }
 
 /**
+ * @description This function checks the component for attributes whose name start with a selector
+ * and then it assigns the value from the model according to the chain (if exists)
+ * @param {string | null} parentChain
+ * @param {any} model
+ * @param {string} selector
+ * @returns {void}
+ */
+export function __checkViewModelAttributes(
+  parentChain: string | null,
+  model: any,
+  selector: string
+): void {
+  let __self = this;
+  const thisElement = getElement(__self);
+
+  const attributes: Array<Attr> = Array.from(
+    thisElement.attributes
+  ).filter((attr: Attr) => attr.name.startsWith(selector));
+
+  attributes.forEach((attr: Attr) => {
+    const property = attr.name.split(selector)[1];
+    const chain = parentChain ? `${parentChain}.${attr.value}` : attr.value;
+
+    __self[property] = model.getChainValue(chain);
+  });
+
+  /**
+   * Render must be called in order to trigger the update,
+   * because none of the assigned attributes is watched by the Stencil Listener (State)
+   */
+  __self["render"].call(__self);
+  return;
+}
+
+/**
+ * @description This function checks the component for attibutes whose values starts with a selector
+ * and then it assigns the value from the model according to the chain (if exists)
+ * @param {string | null} parentChain
+ * @param {any} model
+ * @returns {void}
+ */
+export function __checkViewModelValues(
+  parentChain: string | null,
+  model: any,
+  selector: string
+): void {
+  let __self = this;
+  const thisElement = getElement(__self);
+
+  const attributes: Array<Attr> = Array.from(
+    thisElement.attributes
+  ).filter((attr: Attr) => attr.value.startsWith(selector));
+
+  attributes.forEach((attr: Attr) => {
+    const property = attr.value.split(selector)[1];
+    const chain = parentChain ? `${parentChain}.${property}` : property;
+
+    __self[attr.name] = model.getChainValue(chain);
+  });
+
+  /**
+   * Render must be called in order to trigger the update,
+   * because none of the assigned attributes is watched by the Stencil Listener (State)
+   */
+  __self["render"].call(__self);
+  return;
+}
+
+/**
  * @description This function is intending to update the model on a given chain.
  * The target object may contain the parentChain attribute. If it is present,
  * then the fullChain that is being updated is built from parentChain and leafChain.
@@ -47,7 +116,7 @@ export function changeModel(leafChain: string, newValue: any): boolean {
  * @param model The proxified model
  * @returns void
  */
-export function __getModelEventCbk(err: Error, model: any): void {
+export function __getModelEventCbk(err: Error, model: any): void | boolean {
   if (err || !model) {
     return;
   }
@@ -75,7 +144,6 @@ export function __getModelEventCbk(err: Error, model: any): void {
     });
 
     /**
-     * Special behaviour only for psk-for-each component.
      * Render must be called in order to trigger the update,
      * because none of the assigned attributes is watched by the Stencil Listener (State)
      */
@@ -89,8 +157,16 @@ export function __getModelEventCbk(err: Error, model: any): void {
   viewModel = thisElement.getAttribute("view-model");
   parentChain = viewModel;
   if (viewModel === null) {
-    attrNameLabel = thisElement.getAttribute("name");
-    if (attrNameLabel === null && thisElement.getAttribute("label") !== null) {
+    attrNameLabel =
+      thisElement.getAttribute("name") !== null &&
+      !thisElement.getAttribute("name").startsWith("@")
+        ? thisElement.getAttribute("name")
+        : null;
+    if (
+      attrNameLabel === null &&
+      thisElement.getAttribute("label") !== null &&
+      !thisElement.getAttribute("label").startsWith("@")
+    ) {
       attrNameLabel = thisElement
         .getAttribute("label")
         .replace(/( |:|\/|\.|-)/g, "")
@@ -100,15 +176,26 @@ export function __getModelEventCbk(err: Error, model: any): void {
   }
 
   if (!viewModel && !attrNameLabel) {
+    /**
+     * Check if we have view-model-* attributes and assign the properties
+     */
+    __checkViewModelAttributes.call(__self, parentChain, model, "view-model-");
+
+    /**
+     * Check if we have attributes that start with @
+     * Similar behaviour as above
+     */
+    __checkViewModelValues.call(__self, parentChain, model, "@");
+
     return;
   }
 
   /**
    * @description Given a property name and a full chain, the method fetches the values for the property
    * and applies an event to the given full chain in order to trigger the two-way binding.
-   * @param propertyName The name of the property to be updated from the model
-   * @param fullChain The chain in side the model where to search and get the value for propertyName
-   * @returns void
+   * @param {string} propertyName The name of the property to be updated from the model
+   * @param {string} fullChain The chain in side the model where to search and get the value for propertyName
+   * @returns {void} void
    */
   function __setModelViewProperty(
     propertyName: string,
@@ -166,21 +253,4 @@ export function __getModelEventCbk(err: Error, model: any): void {
     __registerValueListener();
     return;
   }
-
-  /**
-   * Parse the component's attributes and look for those who start with @ symbol.
-   * This code is beeing executed if view-model is not defined.
-   */
-  for (let index: number = 0; index < thisElement.attributes.length; ++index) {
-    const attr: Attr = thisElement.attributes[index];
-    if (attr.value.startsWith("@")) {
-      const attrName: string = attr.value.split("@")[1];
-
-      const fullChain: string = parentChain
-        ? `${parentChain}.${attrName}`
-        : attrName;
-      __setModelViewProperty(attrName, fullChain);
-    }
-  }
-  __registerValueListener();
 }

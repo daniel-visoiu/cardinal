@@ -1,11 +1,15 @@
 import { Component, h, Prop } from "@stencil/core";
 import CustomTheme from "../../decorators/CustomTheme";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
+import { BindModel } from "../../decorators/BindModel";
 
 @Component({
 	tag: "psk-card"
 })
 export class PskCard {
+
+	@BindModel()
+
 	@CustomTheme()
 
 	@TableOfContentProperty({
