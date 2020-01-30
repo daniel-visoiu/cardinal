@@ -38,11 +38,6 @@ export function __checkViewModelAttributes(
     __self[property] = model.getChainValue(chain);
   });
 
-  /**
-   * Render must be called in order to trigger the update,
-   * because none of the assigned attributes is watched by the Stencil Listener (State)
-   */
-  __self["render"].call(__self);
   return;
 }
 
@@ -72,11 +67,6 @@ export function __checkViewModelValues(
     __self[attr.name] = model.getChainValue(chain);
   });
 
-  /**
-   * Render must be called in order to trigger the update,
-   * because none of the assigned attributes is watched by the Stencil Listener (State)
-   */
-  __self["render"].call(__self);
   return;
 }
 
@@ -177,15 +167,21 @@ export function __getModelEventCbk(err: Error, model: any): void | boolean {
 
   if (!viewModel && !attrNameLabel) {
     /**
+     * Check if we have attributes that start with @
+     * Similar behaviour as above
+     */
+    __checkViewModelValues.call(__self, parentChain, model, "@");
+
+    /**
      * Check if we have view-model-* attributes and assign the properties
      */
     __checkViewModelAttributes.call(__self, parentChain, model, "view-model-");
 
     /**
-     * Check if we have attributes that start with @
-     * Similar behaviour as above
+     * Render must be called in order to trigger the update,
+     * because none of the assigned attributes is watched by the Stencil Listener (State)
      */
-    __checkViewModelValues.call(__self, parentChain, model, "@");
+    __self["render"].call(__self);
 
     return;
   }

@@ -24,8 +24,7 @@ export class PskForEach {
             return null;
         }
 
-        if (!this['parentChain'] || !this['rootModel']
-            || templateContent.content.querySelectorAll("[view-model]").length === 0) {
+        if (!this['parentChain'] || !this['rootModel']) {
             return null;
         }
 
@@ -37,7 +36,9 @@ export class PskForEach {
             return null;
         }
 
-        this.__host.attachShadow({ mode: 'open' });
+        if (!this.__host.shadowRoot) {
+            this.__host.attachShadow({ mode: 'open' });
+        }
         for (let index = 0; index < templateModel.length; ++index) {
             const fullParentChain: string = `${parentChain}.${index}.`;
             this.__appendTemplateItem.call(this, fullParentChain, templateContent.content.cloneNode(true));
@@ -54,13 +55,44 @@ export class PskForEach {
         return template ? template : null;
     }
 
+    __processNode(node: Element, chain: string): void {
+        let nodeAttributes = Array.from(node.attributes)
+            .filter((attr: Attr) => attr.name.startsWith("view-model-"));
+
+        nodeAttributes.forEach((attr: Attr) => {
+            const property = attr.name.split("view-model-")[1];
+            const fullChain = chain ? `${chain}${attr.value}` : attr.value;
+
+            node.setAttribute(property, this['rootModel'].getChainValue(fullChain));
+        });
+
+        nodeAttributes = Array.from(node.attributes)
+            .filter((attr: Attr) => attr.value.startsWith("@"));
+
+        nodeAttributes.forEach((attr: Attr) => {
+            const property = attr.value.split("@")[1];
+            const fullChain = chain ? `${chain}${property}` : property;
+
+            node.setAttribute(attr.name, this['rootModel'].getChainValue(fullChain));
+        });
+
+        Array.from(node.children).forEach((node: Element) => {
+            this.__processNode.call(this, node, chain);
+        });
+    }
+
     __appendTemplateItem(chain: string, clonedNode: DocumentFragment): void {
         let viewModelComponents = clonedNode.querySelectorAll("[view-model]");
+
+        let childNodes = Array.from(clonedNode.children);
+        childNodes.forEach((node: Element) => {
+            this.__processNode.call(this, node, chain);
+        });
 
         viewModelComponents.forEach((component: HTMLElement) => {
             const fullChain: string = `${chain}${component.getAttribute('view-model')}`;
             component.setAttribute('view-model', fullChain);
-            // component.setAttribute('get-model', 'get-model');
+            component.setAttribute('get-model', 'get-model');
         });
 
         Array.from(clonedNode.childNodes).forEach((child: Node) => {
