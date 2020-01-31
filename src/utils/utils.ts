@@ -112,3 +112,32 @@ export function normalizeRegexToString(
   }
   return result;
 }
+
+export function canAttachShadow(tagName: string): boolean {
+  if (tagName.startsWith("psk-")) {
+    return true;
+  }
+
+  const found = [
+    "article",
+    "aside",
+    "blockquote",
+    "body",
+    "div",
+    "footer",
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "header",
+    "main",
+    "nav",
+    "p",
+    "section",
+    "span"
+  ].find((htmlTag: string) => htmlTag === tagName);
+
+  return found === tagName;
+}

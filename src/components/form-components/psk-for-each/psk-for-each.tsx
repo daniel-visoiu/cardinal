@@ -2,6 +2,7 @@ import { Component, Element, Prop } from '@stencil/core';
 import { BindModel } from '../../../decorators/BindModel';
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
 import CustomTheme from '../../../decorators/CustomTheme';
+import { canAttachShadow } from '../../../utils/utils';
 
 @Component({
     tag: 'psk-for-each'
@@ -28,6 +29,11 @@ export class PskForEach {
             return null;
         }
 
+        if (templateContent.getAttribute('done') === 'done') {
+            templateContent.removeAttribute('done');
+            return null;
+        }
+
         let parentChain: string = this['parentChain'];
         let rootModel = this['rootModel'];
         let templateModel = rootModel.getChainValue(parentChain);
@@ -36,18 +42,32 @@ export class PskForEach {
             return null;
         }
 
-        if (!this.__host.shadowRoot) {
-            this.__host.attachShadow({ mode: 'open' });
-        }
-        for (let index = 0; index < templateModel.length; ++index) {
-            const fullParentChain: string = `${parentChain}.${index}.`;
-            this.__appendTemplateItem.call(this, fullParentChain, templateContent.content.cloneNode(true));
+        let parentComponent = this.__host.parentElement;
+
+        if (parentComponent.shadowRoot) {
+            if (parentComponent.shadowRoot.querySelector('slot') !== null) {
+                parentComponent = parentComponent.shadowRoot.querySelector('slot').parentElement;
+            }
+        } else {
+            if (parentComponent.querySelector('slot') !== null) {
+                parentComponent = parentComponent.querySelector('slot').parentElement;
+            }
         }
 
         /**
-         * Remove the template after rendering
+         * Attach ShadowRoot to the parent component so the content is not cloned in a wrong manner
+         * This is a Stencil.Js issue
          */
-        templateContent.remove();
+        if (!parentComponent.shadowRoot && canAttachShadow(parentComponent.tagName)) {
+            parentComponent.attachShadow({ mode: 'open' });
+        }
+
+        for (let index = 0; index < templateModel.length; ++index) {
+            const fullParentChain: string = `${parentChain}.${index}.`;
+            this.__appendTemplateItem.call(this, fullParentChain, templateContent.content.cloneNode(true), parentComponent);
+        }
+
+        templateContent.setAttribute("done", "done");
     }
 
     __getTemplateContent(): HTMLTemplateElement | null {
@@ -81,7 +101,7 @@ export class PskForEach {
         });
     }
 
-    __appendTemplateItem(chain: string, clonedNode: DocumentFragment): void {
+    __appendTemplateItem(chain: string, clonedNode: DocumentFragment, parentComponent: HTMLElement): void {
         let viewModelComponents = clonedNode.querySelectorAll("[view-model]");
 
         let childNodes = Array.from(clonedNode.children);
@@ -95,8 +115,12 @@ export class PskForEach {
             component.setAttribute('get-model', 'get-model');
         });
 
-        Array.from(clonedNode.childNodes).forEach((child: Node) => {
-            this.__host.shadowRoot.appendChild(child);
+        Array.from(clonedNode.childNodes).reverse().forEach((child: Node) => {
+            if (parentComponent.shadowRoot) {
+                parentComponent.shadowRoot.insertBefore(child, parentComponent.shadowRoot.firstChild);
+            } else {
+                parentComponent.insertBefore(child, parentComponent.firstChild);
+            }
         });
     }
 

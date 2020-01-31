@@ -40,27 +40,15 @@ export function BindModel(): BindInterface {
         );
       }
 
-      if (thisElement.getAttribute("get-model") === "get-model") {
-        getModel();
-      } else {
-        document.addEventListener("modelReady", function() {
-          getModel();
-        });
-      }
+      getModel();
 
-      // createCustomEvent(
-      //   "getModelEvent",
-      //   {
-      //     bubbles: true,
-      //     composed: true,
-      //     cancellable: true,
-      //     detail: {
-      //       callback: __getModelEventCbk.bind(self)
-      //     }
-      //   },
-      //   true,
-      //   thisElement
-      // );
+      // if (thisElement.getAttribute("get-model") === "get-model") {
+      //   getModel();
+      // } else {
+      //   document.addEventListener("modelReady", function() {
+      //     getModel();
+      //   });
+      // }
 
       return componentWillLoad && componentWillLoad.call(self);
     };

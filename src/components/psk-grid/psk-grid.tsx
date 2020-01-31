@@ -28,7 +28,10 @@ export class PskGrid {
         let index = 0;
         while (index < this.host.children.length) {
             const child: Element = this.host.children.item(index++);
-            child.tagName.toLowerCase() !== 'link' && (child.className = className);
+            if (child.tagName.toLowerCase() !== 'link'
+                && child.tagName.toLowerCase() !== 'psk-for-each') {
+                child.className = className;
+            }
         }
 
         return <div class="row">
