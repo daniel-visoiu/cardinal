@@ -1,7 +1,7 @@
 import { Component, h, Prop } from '@stencil/core';
-import { WgFile } from "../../interfaces/WgFile";
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import CustomTheme from '../../decorators/CustomTheme';
+import {BindModel} from "../../decorators/BindModel";
 const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
 
 @Component({
@@ -11,6 +11,7 @@ const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
 
 export class PskAttachmentsList {
 	@CustomTheme()
+  @BindModel()
 	@TableOfContentProperty({
 		description: `This parameter holds the files that can be downloaded. They can be downloaded one by one by clicking on the desired file, or all at the same time.`,
 		specialNote: `WgFile is a custom type. Inside it, the following information can be stored:
@@ -21,7 +22,7 @@ export class PskAttachmentsList {
 		isMandatory: true,
 		propertyType: 'array of WgFile items (WgFile[])'
 	})
-	@Prop() files: WgFile[] = [];
+	@Prop() files: any[] = [];
 
 	@TableOfContentProperty({
 		description: `If this property is given to the component, then a red X will be displayed on the right of each file card giving the possibility to remove the file (this functionality should be implemented by the programmer providing him the possibility to have custom behavior before the deletion of the file).`,
@@ -54,6 +55,7 @@ export class PskAttachmentsList {
 					fileType = "fa-file-excel-o";
 					break;
 				case "doc":
+        case "docx":
 					fileType = "fa-file-word-o";
 					break;
 				case "jpg":

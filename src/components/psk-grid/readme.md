@@ -16,7 +16,7 @@
 
 ### Used by
 
- - [psk-form-row](..\form-components\psk-form-row)
+ - [psk-form-row](../form-components/psk-form-row)
 
 ### Graph
 ```mermaid

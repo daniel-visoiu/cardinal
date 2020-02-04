@@ -9,7 +9,7 @@
 
 | Property             | Attribute | Description | Type       | Default |
 | -------------------- | --------- | ----------- | ---------- | ------- |
-| `files`              | --        |             | `WgFile[]` | `[]`    |
+| `files`              | --        |             | `any[]`    | `[]`    |
 | `removeFileFromList` | --        |             | `Function` | `null`  |
 
 

@@ -34,7 +34,7 @@ export class PskGrid {
             continue;
           }
 
-          if(!child.className.startsWith("col-")){
+          if(!child.className.includes("col-")){
             child.className = className;
           }
         }

@@ -18,9 +18,6 @@ import {
   RouterHistory,
 } from '@stencil/router';
 import {
-  WgFile,
-} from './interfaces/WgFile';
-import {
   StyleCustomisation,
 } from './interfaces/StyleCustomisation';
 import {
@@ -61,7 +58,7 @@ export namespace Components {
     'routesItems'?: MenuItem[];
   }
   interface PskAttachmentsList {
-    'files': WgFile[];
+    'files': any[];
     'removeFileFromList'?: Function;
   }
   interface PskButton {
@@ -901,7 +898,7 @@ declare namespace LocalJSX {
     'routesItems'?: MenuItem[];
   }
   interface PskAttachmentsList {
-    'files'?: WgFile[];
+    'files'?: any[];
     'removeFileFromList'?: Function;
   }
   interface PskButton {

@@ -65,6 +65,9 @@ export function __checkViewModelValues(
     const chain = parentChain ? `${parentChain}.${property}` : property;
 
     __self[attr.name] = model.getChainValue(chain);
+    model.onChange(chain,function(){
+      __self[attr.name] = model.getChainValue(chain);
+    })
   });
 
   return;
