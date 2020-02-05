@@ -115,11 +115,11 @@ export class PskForEach {
             component.setAttribute('get-model', 'get-model');
         });
 
-        Array.from(clonedNode.childNodes).reverse().forEach((child: Node) => {
+        Array.from(clonedNode.childNodes).forEach((child: Node) => {
             if (parentComponent.shadowRoot) {
-                parentComponent.shadowRoot.insertBefore(child, parentComponent.shadowRoot.firstChild);
+                parentComponent.shadowRoot.append(child);
             } else {
-                parentComponent.insertBefore(child, parentComponent.firstChild);
+                parentComponent.append(child);
             }
         });
     }
