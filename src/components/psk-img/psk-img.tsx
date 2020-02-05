@@ -1,6 +1,7 @@
 import { Component, h, Prop } from "@stencil/core";
 import CustomTheme from "../../decorators/CustomTheme";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
+import {BindModel} from "../../decorators/BindModel";
 
 @Component({
 	tag: "psk-img"
@@ -8,7 +9,7 @@ import { TableOfContentProperty } from "../../decorators/TableOfContentProperty"
 
 export class PskImg {
 	@CustomTheme()
-
+  @BindModel()
 	@TableOfContentProperty({
 		description: `This property is the path to the image source (Example:"page/PrivateSky/EDFS.png").`,
 		isMandatory: true,
