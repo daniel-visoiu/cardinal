@@ -1,4 +1,4 @@
-import { Component, Element, Prop } from '@stencil/core';
+import {Component, Element, Prop, State} from '@stencil/core';
 import { BindModel } from '../../../decorators/BindModel';
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
 import CustomTheme from '../../../decorators/CustomTheme';
@@ -10,9 +10,12 @@ import { canAttachShadow } from '../../../utils/utils';
 export class PskForEach {
 
     @CustomTheme()
-
     @BindModel()
+    @State() templateModel = null;
     @Element() private __host: HTMLElement;
+
+    private currentTemplateViews = [];
+    private emptyListPlaceholder :any = null;
 
     render() {
         this.__renderFormTemplateContent.call(this);
@@ -29,18 +32,23 @@ export class PskForEach {
             return null;
         }
 
-        if (templateContent.getAttribute('done') === 'done') {
-            templateContent.removeAttribute('done');
-            return null;
+      let children = templateContent.content.children;
+      for (let i = 0; i < children.length; i++) {
+        if (children[i].hasAttribute("slot")) {
+          if (children[i].getAttribute("slot") === "no-data") {
+            this.emptyListPlaceholder = children[i].cloneNode(true);
+            templateContent.content.removeChild(children[i]);
+            break;
+          }
         }
+      }
 
         let parentChain: string = this['parentChain'];
         let rootModel = this['rootModel'];
-        let templateModel = rootModel.getChainValue(parentChain);
-        if (templateModel.length === 0) {
-            console.error(`[psk-for-each] Template model defined as -=${parentChain}=- is not present in the rootModel`);
-            return null;
-        }
+         this.templateModel = rootModel.getChainValue(parentChain);
+        rootModel.onChange(parentChain, ()=>{
+           this.templateModel = rootModel.getChainValue(parentChain);
+        });
 
         let parentComponent = this.__host.parentElement;
 
@@ -53,6 +61,13 @@ export class PskForEach {
                 parentComponent = parentComponent.querySelector('slot').parentElement;
             }
         }
+        //before re-rendering, make sure that old template are removed from view;
+        while (this.currentTemplateViews.length > 0) {
+          let node = this.currentTemplateViews.pop();
+          if (parentComponent.contains(node)) {
+            parentComponent.removeChild(node);
+          }
+        }
 
         /**
          * Attach ShadowRoot to the parent component so the content is not cloned in a wrong manner
@@ -62,12 +77,18 @@ export class PskForEach {
             parentComponent.attachShadow({ mode: 'open' });
         }
 
-        for (let index = 0; index < templateModel.length; ++index) {
-            const fullParentChain: string = `${parentChain}.${index}.`;
-            this.__appendTemplateItem.call(this, fullParentChain, templateContent.content.cloneNode(true), parentComponent);
+      if (this.templateModel.length > 0) {
+        for (let index = 0; index < this.templateModel.length; ++index) {
+          const fullParentChain: string = `${parentChain}.${index}.`;
+          this.__appendTemplateItem.call(this, fullParentChain, templateContent.content.cloneNode(true), parentComponent);
         }
-
-        templateContent.setAttribute("done", "done");
+      } else {
+        if (this.emptyListPlaceholder) {
+          this.__appendNodeInParent(this.emptyListPlaceholder, parentComponent);
+        } else {
+          console.log("No data to iterate");
+        }
+      }
     }
 
     __getTemplateContent(): HTMLTemplateElement | null {
@@ -116,15 +137,20 @@ export class PskForEach {
         });
 
         Array.from(clonedNode.childNodes).forEach((child: Node) => {
-            if (parentComponent.shadowRoot) {
-                parentComponent.shadowRoot.append(child);
-            } else {
-                parentComponent.append(child);
-            }
+          this.__appendNodeInParent(child, parentComponent);
         });
     }
 
-    @TableOfContentProperty({
+     __appendNodeInParent(child: Node, parentComponent: HTMLElement) {
+      this.currentTemplateViews.push(child);
+      if (parentComponent.shadowRoot) {
+        parentComponent.shadowRoot.append(child);
+      } else {
+        parentComponent.append(child);
+      }
+    }
+
+  @TableOfContentProperty({
         description: [`This property is the name of the model which will be used to generate the form. The model should be a JavaScript array.`,
             `All the information about how to write a model, hot to use the two-way binding and how to use the model with this component cand be found in the documentation found at: <psk-link page="forms/using-forms">Using forms</psk-link>`],
         isMandatory: false,
