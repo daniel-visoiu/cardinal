@@ -7,16 +7,17 @@
 
 ## Properties
 
-| Property  | Attribute | Description | Type     | Default     |
-| --------- | --------- | ----------- | -------- | ----------- |
-| `columns` | `columns` |             | `number` | `undefined` |
+| Property  | Attribute | Description | Type     | Default |
+| --------- | --------- | ----------- | -------- | ------- |
+| `columns` | `columns` |             | `number` | `null`  |
+| `layout`  | `layout`  |             | `string` | `null`  |
 
 
 ## Dependencies
 
 ### Used by
 
- - [psk-form-row](../form-components/psk-form-row)
+ - [psk-form-row](..\form-components\psk-form-row)
 
 ### Graph
 ```mermaid

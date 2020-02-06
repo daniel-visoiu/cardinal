@@ -20,8 +20,8 @@
 
 ### Depends on
 
-- [psk-label](../psk-label)
-- [psk-radio](../psk-radio)
+- [psk-label](..\psk-label)
+- [psk-radio](..\psk-radio)
 
 ### Graph
 ```mermaid
