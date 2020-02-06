@@ -1,6 +1,7 @@
 import { Component, Prop, h } from '@stencil/core';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import CustomTheme from '../../decorators/CustomTheme';
+import {BindModel} from "../../decorators/BindModel";
 
 @Component({
     tag: "psk-icon",
@@ -8,6 +9,7 @@ import CustomTheme from '../../decorators/CustomTheme';
 })
 export class PskIcon {
     @CustomTheme()
+    @BindModel()
 
     @TableOfContentProperty({
         isMandatory: true,
