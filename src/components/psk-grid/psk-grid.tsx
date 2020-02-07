@@ -17,12 +17,23 @@ export class PskGrid {
 	@TableOfContentProperty({
 		isMandatory: true,
 		propertyType: 'number',
-		description: 'This is the number of columns for the bootstrap columns class.',
+		description: 'This is the number of columns for the bootstrap columns class. ',
 		defaultValue: 'null',
-		specialNote: `That number can only be an integer between 1 and 12`
+		specialNote: `That number can only be an integer between 1 and 12.`
 	})
 	@Prop() columns: number | null = null;
 
+	@TableOfContentProperty({
+		isMandatory: true,
+		propertyType: 'string',
+		description: ['This attribute will set the layout for the components inside the grid, according to the number of columns.',
+			`Example: <psk-grid columns="3" layout="xs=[12,12,12] s=[6,6,12] m=[3,3,6] l=[3,4,5]">`,
+			`There are 4 possible breakpoints, according to Bootstrap documentation: xs, s, m and l. For each breakpoint you want to use, the number of the values must be the same with the number of the columns, otherwise, the breakpoint will be ignored.`,
+			`Each breakpoint will be written in the following manner: breakpoint=[value1, value2,... valueN], where N is the number of columns and the value accepts numbers between 0 and 12 included, or the string "auto".`,
+			`If a value is 0, then the element for that column will be hidden. If a value is auto, it will have no bootstrap class and will inherit the design.`,
+			`If any other value is set, the breakpoint will be ignored even if it has the same number of columns.`],
+		defaultValue: 'null'
+	})
 	@Prop() layout: string | null = null;
 
 	@Element() _host: HTMLElement;
@@ -31,23 +42,20 @@ export class PskGrid {
 
 	render() {
 		let htmlChildren: Array<Element> = Array.from(this._host.children);
+		let htmlRender: HTMLElement = (
+			<div class="row">
+				<slot />
+			</div>
+		);
 
 		if (!this.columns || !this.layout) {
-			return (
-				<div class="row">
-					<slot />
-				</div>
-			);
+			return htmlRender;
 		}
 
 		let mappedBoostrapRules: Array<BreakPoint> = this._createLayoutRules.call(this);
 
 		if (mappedBoostrapRules.length === 0) {
-			return (
-				<div class="row">
-					<slot />
-				</div>
-			);
+			return htmlRender;
 		}
 
 		let index = 0;
@@ -83,11 +91,7 @@ export class PskGrid {
 			index = (index + 1) % this.columns;
 		});
 
-		return (
-			<div class="row">
-				<slot />
-			</div>
-		);
+		return htmlRender;
 	}
 
 	_getClass(bkpt: string, value: string) {
