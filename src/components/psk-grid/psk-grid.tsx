@@ -38,28 +38,22 @@ export class PskGrid {
 
 	@Element() _host: HTMLElement;
 
-	@State() htmlChildren: HTMLElement | Array<HTMLElement> = [];
-
 	render() {
-		let htmlChildren: Array<Element> = Array.from(this._host.children);
-		let htmlRender: HTMLElement = (
-			<div class="row">
-				<slot />
-			</div>
-		);
+		let htmlSlotChildren: Array<Element> = Array.from(this._host.children);
+		let htmlChildren: Array<Element> = [];
 
 		if (!this.columns || !this.layout) {
-			return htmlRender;
+			return <slot />;
 		}
 
 		let mappedBoostrapRules: Array<BreakPoint> = this._createLayoutRules.call(this);
 
 		if (mappedBoostrapRules.length === 0) {
-			return htmlRender;
+			return <slot />;
 		}
 
 		let index = 0;
-		htmlChildren.forEach((child: Element) => {
+		htmlSlotChildren.forEach((child: Element) => {
 			if (GRID_IGNORED_COMPONENTS.indexOf(child.tagName.toLowerCase()) >= 0) {
 				return;
 			}
@@ -87,11 +81,28 @@ export class PskGrid {
 				}
 			});
 
-			child.className = `${child.className} ${classList}`;
+			child.className = `${child.className.trim()} ${classList.trim()}`.trim();
 			index = (index + 1) % this.columns;
+
+			htmlChildren.push(child.parentNode.removeChild(child));
 		});
 
-		return htmlRender;
+		let done: boolean = false;
+		while (!done) {
+			let rowElements: Array<Element> = htmlChildren.splice(0, Math.min(this.columns, htmlChildren.length));
+
+			let row: HTMLDivElement = document.createElement('div');
+			row.className = "row";
+			rowElements.forEach(function (child: Element) {
+				row.appendChild(child);
+			});
+
+			this._host.appendChild(row);
+
+			done = htmlChildren.length === 0;
+		}
+
+		return <slot />;
 	}
 
 	_getClass(bkpt: string, value: string) {

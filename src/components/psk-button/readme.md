@@ -11,10 +11,10 @@
 | ----------------- | ------------------ | ----------- | --------- | ------------------- |
 | `buttonClass`     | `button-class`     |             | `string`  | `"btn btn-primary"` |
 | `disabled`        | `disabled`         |             | `boolean` | `false`             |
-| `eventData`       | `event-data`       |             | `any`     | `null`              |
+| `eventData`       | `event-data`       |             | `any`     | `undefined`         |
 | `eventDispatcher` | `event-dispatcher` |             | `string`  | `undefined`         |
-| `eventName`       | `event-name`       |             | `string`  | `null`              |
-| `label`           | `label`            |             | `string`  | `null`              |
+| `eventName`       | `event-name`       |             | `string`  | `undefined`         |
+| `label`           | `label`            |             | `string`  | `undefined`         |
 
 
 ## Dependencies

@@ -64,7 +64,7 @@ export namespace Components {
     'buttonClass': string | null;
     'disabled': boolean;
     'eventData': any | null;
-    'eventDispatcher': string;
+    'eventDispatcher': string | null;
     'eventName': string | null;
     'label': string | null;
   }
@@ -905,7 +905,7 @@ declare namespace LocalJSX {
     'buttonClass'?: string | null;
     'disabled'?: boolean;
     'eventData'?: any | null;
-    'eventDispatcher'?: string;
+    'eventDispatcher'?: string | null;
     'eventName'?: string | null;
     'label'?: string | null;
   }
