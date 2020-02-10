@@ -1,4 +1,4 @@
-import { Component, Prop, h, Element, State } from '@stencil/core';
+import { Component, Prop, h, Element } from '@stencil/core';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import CustomTheme from '../../decorators/CustomTheme';
 import { GRID_IGNORED_COMPONENTS, GRID_BREAKPOINTS } from '../../utils/constants';
