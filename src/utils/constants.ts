@@ -43,4 +43,12 @@ export const ACTIONS_ICONS = {
 
 export const GRID_IGNORED_COMPONENTS = ["link", "psk-for-each"];
 
-export const GRID_BREAKPOINTS = ["xs", "s", "m", "l"];
+export const GRID_BREAKPOINTS = ["xs", "s", "m", "l", "xl"];
+
+export const GRID_HIDDEN_BREAKPOINTS = {
+  xs: ".d-none .d-sm-block",
+  sm: ".d-sm-none .d-md-block",
+  md: ".d-md-none .d-lg-block",
+  lg: ".d-lg-none .d-xl-block",
+  xl: ".d-xl-none"
+};

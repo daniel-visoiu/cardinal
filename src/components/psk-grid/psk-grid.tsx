@@ -1,7 +1,7 @@
 import { Component, Prop, h, Element } from '@stencil/core';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import CustomTheme from '../../decorators/CustomTheme';
-import { GRID_IGNORED_COMPONENTS, GRID_BREAKPOINTS } from '../../utils/constants';
+import { GRID_IGNORED_COMPONENTS, GRID_BREAKPOINTS, GRID_HIDDEN_BREAKPOINTS } from '../../utils/constants';
 
 interface BreakPoint {
 	breakpoint: string,
@@ -77,6 +77,10 @@ export class PskGrid {
 						classList += this._getClass('lg', rule.values[index]);
 						break;
 					}
+					case 'xl': {
+						classList += this._getClass('xl', rule.values[index]);
+						break;
+					}
 					default: break;
 				}
 			});
@@ -109,9 +113,8 @@ export class PskGrid {
 		let classes: string = '';
 
 		switch (value) {
-			case "auto": break;
 			case "0": {
-				classes += `hidden-${bkpt} `;
+				classes += `${GRID_HIDDEN_BREAKPOINTS[bkpt]} `;
 				break;
 			}
 			default: {
