@@ -49,9 +49,15 @@ export class PskForEach {
   }
 
   componentDidLoad() {
-    this['rootModel'].onChange(this['parentChain'], () => {
-      this.modelChanged = !this.modelChanged;
-    });
+    if(this['rootModel']){
+      this['rootModel'].onChange(this['parentChain'], () => {
+        this.modelChanged = !this.modelChanged;
+      });
+    }
+    else{
+      console.error("Model was not set or it wasn't found");
+    }
+
   }
 
   render() {
