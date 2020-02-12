@@ -12,7 +12,7 @@ export class PskForEach {
   @State() modelChanged: boolean = false;
 
   private ignoredNodeNames = ["link", "slot", "#text", "#comment", "text", "comment"];
-  @State() templateNode: Node;
+  private templateNodes = [];
   private emptyNode: Element;
 
   componentWillLoad() {
@@ -24,7 +24,7 @@ export class PskForEach {
     });
 
     //get the template for item rendering
-    let templateChildren = children.find((node: Element) => {
+    let templateChildren = children.filter((node: Element) => {
       return !node.hasAttribute("slot");
     });
     //get the template for "no data available"
@@ -39,10 +39,11 @@ export class PskForEach {
 
     //empty the host
     this.__host.innerHTML = "";
-
-
     if (templateChildren) {
-      this.templateNode = templateChildren.cloneNode(true);
+      templateChildren.forEach(child=>{
+        this.templateNodes.push(child.cloneNode(true));
+      })
+
     } else {
       console.error("No template found!")
     }
@@ -55,7 +56,9 @@ export class PskForEach {
       });
     }
     else{
-      console.error("Model was not set or it wasn't found");
+      //TODO: an error should be logged to console.
+      //In this moment the TableOfContentsEvents decorator is not properly stopping this component
+      //console.error("Model was not set or it wasn't found");
     }
 
   }
@@ -66,7 +69,7 @@ export class PskForEach {
       return null;
     }
     //check if template is ready
-    if (!this.templateNode) {
+    if (!this.templateNodes) {
       return null;
     }
 
@@ -75,9 +78,15 @@ export class PskForEach {
 
     for (let i = 0; i < model.length; i++) {
       let pChain = this['parentChain'] ? `${this['parentChain']}.${i}.` : `${i}.`;
-      let clonedTemplate = this.templateNode.cloneNode(true) as Element;
-      let node = this.prepareItem(pChain, clonedTemplate);
-      childList.push(<div innerHTML={node.outerHTML}></div>);
+
+      let preparedNodes = [];
+      this.templateNodes.forEach(node=>{
+        let clonedTemplate = node.cloneNode(true) as Element;
+        let preparedNode = this.prepareItem(pChain, clonedTemplate);
+        preparedNodes.push(<div innerHTML={preparedNode.outerHTML}></div>)
+      });
+
+      childList.push(preparedNodes);
     }
 
     if (childList.length === 0 && this.emptyNode) {
@@ -121,7 +130,6 @@ export class PskForEach {
     viewModelComponents.forEach((component: HTMLElement) => {
       const fullChain: string = `${chain}${component.getAttribute('view-model')}`;
       component.setAttribute('view-model', fullChain);
-      component.setAttribute('get-model', 'get-model');
     });
 
     return clonedTemplate;
