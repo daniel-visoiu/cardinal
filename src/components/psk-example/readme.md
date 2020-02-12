@@ -16,7 +16,7 @@
 
 ### Depends on
 
-- [psk-chapter](..\psk-chapter)
+- [psk-chapter](../psk-chapter)
 
 ### Graph
 ```mermaid

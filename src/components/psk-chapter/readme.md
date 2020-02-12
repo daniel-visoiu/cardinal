@@ -24,17 +24,17 @@
 
 ### Used by
 
- - [psk-code](..\psk-code)
- - [psk-controller-descriptor](..\pages-components)
- - [psk-description](..\psk-description)
- - [psk-event-descriptor](..\pages-components)
- - [psk-example](..\psk-example)
- - [psk-hoc](..\pages-components)
- - [psk-property-descriptor](..\pages-components)
+ - [psk-code](../psk-code)
+ - [psk-controller-descriptor](../pages-components)
+ - [psk-description](../psk-description)
+ - [psk-event-descriptor](../pages-components)
+ - [psk-example](../psk-example)
+ - [psk-hoc](../pages-components)
+ - [psk-property-descriptor](../pages-components)
 
 ### Depends on
 
-- [psk-card](..\psk-card)
+- [psk-card](../psk-card)
 
 ### Graph
 ```mermaid

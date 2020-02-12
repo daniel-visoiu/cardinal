@@ -19,14 +19,14 @@
 
 ### Depends on
 
-- [psk-container](..\..\psk-container)
-- [psk-button](..\..\psk-button)
+- [psk-button](../../psk-button)
+- [psk-container](../../psk-container)
 
 ### Graph
 ```mermaid
 graph TD;
-  psk-form --> psk-container
   psk-form --> psk-button
+  psk-form --> psk-container
   psk-container --> psk-page-loader
   style psk-form fill:#f9f,stroke:#333,stroke-width:4px
 ```

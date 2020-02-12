@@ -7,22 +7,22 @@
 
 ## Properties
 
-| Property         | Attribute         | Description | Type          | Default     |
-| ---------------- | ----------------- | ----------- | ------------- | ----------- |
-| `controllerName` | `controller-name` |             | `string`      | `undefined` |
-| `htmlFilePath`   | `html-file-path`  |             | `string`      | `undefined` |
-| `parentHost`     | --                |             | `HTMLElement` | `null`      |
+| Property         | Attribute         | Description | Type       | Default     |
+| ---------------- | ----------------- | ----------- | ---------- | ----------- |
+| `controllerName` | `controller-name` |             | `string`   | `undefined` |
+| `htmlFilePath`   | `html-file-path`  |             | `string`   | `undefined` |
+| `parentCallback` | --                |             | `Function` | `undefined` |
 
 
 ## Dependencies
 
 ### Used by
 
- - [psk-form](..\form-components\psk-form)
+ - [psk-form](../form-components/psk-form)
 
 ### Depends on
 
-- [psk-page-loader](..\psk-page-loader)
+- [psk-page-loader](../psk-page-loader)
 
 ### Graph
 ```mermaid

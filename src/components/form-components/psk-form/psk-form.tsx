@@ -1,5 +1,6 @@
-import { Component, h, Prop, Element } from '@stencil/core';
+import {Component, h, Prop, Element, State} from '@stencil/core';
 import CustomTheme from '../../../decorators/CustomTheme.js';
+import ControllerFactory from "../../../services/ControllerFactory";
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty.js';
 
 @Component({
@@ -10,17 +11,28 @@ export class PskForm {
 
     @CustomTheme()
 
+    @State() ctrlIsReady = false;
+    @State() controller: any | null;
+
+
+  constructor() {
+    const controllerNameForInstance = this.controllerName ? this.controllerName : 'Controller';
+
+    ControllerFactory.getController(controllerNameForInstance).then((CTRL) => {
+      this.controller = new CTRL(this._host);
+    });
+  }
+
     render() {
         return (
-            <psk-container controllerName={this.controllerName} parentHost={this._host}>
-                <div class="container">
+
+             <div class="container">
                     <form>
                         <slot />
 
                         {this._createFormActions(this.formActions)}
                     </form>
-                </div>
-            </psk-container>
+              </div>
         );
     }
 
