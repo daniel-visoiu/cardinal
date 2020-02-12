@@ -60,10 +60,36 @@ export class PskCode {
     let decodedCode = componentCode.value;
     decodedCode = decodedCode.replace(HTML_COMMENT_TAG, "");
 
+    let codeLines = decodedCode.split("\n");
+
+    // @ts-ignore
+    let trimmedLine = codeLines[codeLines.length-1].trimLeft();
+
+    let whitespacesNr = codeLines[codeLines.length-1].length-trimmedLine.length;
+
+    let newLines = [trimmedLine];
+    if(codeLines.length-2>0){
+      for(let i = codeLines.length-2; i>=0; i--){
+        let line = codeLines[i];
+        let currentWhiteSpacesNr = whitespacesNr;
+        // @ts-ignore
+        let lineWithoutLeftWhiteSpaces = line.trimLeft();
+
+        if(line.length-lineWithoutLeftWhiteSpaces.length<whitespacesNr){
+          currentWhiteSpacesNr = line.length-lineWithoutLeftWhiteSpaces.length;
+        }
+        line  = line.substring(currentWhiteSpacesNr);
+        newLines.push(line);
+      }
+    }
+
+    let processedCode = newLines.reverse().join("\n");
+
+
     const sourceCode = (
       <pre>
         <code class={`language-${this.language}`}>
-          {decodedCode}
+          {processedCode}
         </code>
       </pre>
     );
