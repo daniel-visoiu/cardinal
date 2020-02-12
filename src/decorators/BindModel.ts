@@ -13,7 +13,7 @@ declare type BindInterface = (
 ) => void;
 
 export function BindModel(): BindInterface {
-  return function(proto: ComponentInterface): void {
+  return (proto: ComponentInterface) => {
     let { componentWillLoad, render } = proto;
 
     proto.componentWillLoad = function() {
@@ -24,7 +24,12 @@ export function BindModel(): BindInterface {
       self["changeModel"] = changeModel;
       self["__assignProperties"] = __assignProperties;
 
-      function getModel() {
+      function getModel(resolver) {
+
+        function modelReceived(err, model){
+          __getModelEventCbk.apply(self, [err, model, resolver])
+        }
+
         createCustomEvent(
           "getModelEvent",
           {
@@ -32,7 +37,7 @@ export function BindModel(): BindInterface {
             composed: true,
             cancellable: true,
             detail: {
-              callback: __getModelEventCbk.bind(self)
+              callback:modelReceived
             }
           },
           true,
@@ -40,17 +45,41 @@ export function BindModel(): BindInterface {
         );
       }
 
-      getModel();
+      if(!thisElement.isConnected){
+        return componentWillLoad && componentWillLoad.call(self)
+      }
 
-      // if (thisElement.getAttribute("get-model") === "get-model") {
-      //   getModel();
-      // } else {
-      //   document.addEventListener("modelReady", function() {
-      //     getModel();
-      //   });
-      // }
+      let attributes = thisElement.getAttributeNames();
 
-      return componentWillLoad && componentWillLoad.call(self);
+      let relateAttributes = attributes.filter(attr=>{
+        if(attr.toLowerCase() === "data-view-model"){
+          return true;
+        }
+
+        if(attr.toLowerCase().includes("view-model")){
+          return true;
+        }
+
+        if(thisElement.getAttribute(attr).toLowerCase().startsWith("@")){
+          return  true;
+        }
+
+        return false;
+      });
+
+      if(relateAttributes.length === 0){
+        return componentWillLoad && componentWillLoad.call(self)
+      }
+
+      return new Promise((resolve) => {
+
+        let resolver = ()=>{
+          resolve(componentWillLoad && componentWillLoad.call(self));
+        };
+
+        getModel(resolver);
+
+      })
     };
   };
 }

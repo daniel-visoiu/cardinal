@@ -22,7 +22,8 @@ export function __assignProperties(params: any): void {
 export function __checkViewModelAttributes(
   parentChain: string | null,
   model: any,
-  selector: string
+  selector: string,
+  callback:Function
 ): void {
   let __self = this;
   const thisElement = getElement(__self);
@@ -38,7 +39,7 @@ export function __checkViewModelAttributes(
     __self[property] = model.getChainValue(chain);
   });
 
-  return;
+  return callback();
 }
 
 /**
@@ -51,7 +52,8 @@ export function __checkViewModelAttributes(
 export function __checkViewModelValues(
   parentChain: string | null,
   model: any,
-  selector: string
+  selector: string,
+  callback:Function
 ): void {
   let __self = this;
   const thisElement = getElement(__self);
@@ -69,8 +71,7 @@ export function __checkViewModelValues(
       __self[attr.name] = model.getChainValue(chain);
     })
   });
-
-  return;
+  return callback();
 }
 
 /**
@@ -109,9 +110,9 @@ export function changeModel(leafChain: string, newValue: any): boolean {
  * @param model The proxified model
  * @returns void
  */
-export function __getModelEventCbk(err: Error, model: any): void | boolean {
+export function __getModelEventCbk(err: Error, model: any, callback:Function): void | boolean {
   if (err || !model) {
-    return;
+    return callback();
   }
 
   let __self = this;
@@ -136,12 +137,7 @@ export function __getModelEventCbk(err: Error, model: any): void | boolean {
       parentChain: parentChain
     });
 
-    /**
-     * Render must be called in order to trigger the update,
-     * because none of the assigned attributes is watched by the Stencil Listener (State)
-     */
-    __self["render"].call(__self);
-    return;
+    return callback();
   }
 
   /**
@@ -173,20 +169,14 @@ export function __getModelEventCbk(err: Error, model: any): void | boolean {
      * Check if we have attributes that start with @
      * Similar behaviour as above
      */
-    __checkViewModelValues.call(__self, parentChain, model, "@");
+    __checkViewModelValues.call(__self, parentChain, model, "@", callback);
 
     /**
      * Check if we have view-model-* attributes and assign the properties
      */
-    __checkViewModelAttributes.call(__self, parentChain, model, "view-model-");
+    __checkViewModelAttributes.call(__self, parentChain, model, "view-model-", callback);
 
-    /**
-     * Render must be called in order to trigger the update,
-     * because none of the assigned attributes is watched by the Stencil Listener (State)
-     */
-    __self["render"].call(__self);
-
-    return;
+     return callback();
   }
 
   /**
@@ -219,7 +209,7 @@ export function __getModelEventCbk(err: Error, model: any): void | boolean {
     const fullChain: string = `${parentChain}.value`;
     let parentModel: any = model.getChainValue(parentChain);
     if (!parentModel || model.getChainValue(fullChain)) {
-      return;
+      return callback();
     }
     __setModelViewProperty("value", fullChain);
   }
@@ -242,7 +232,7 @@ export function __getModelEventCbk(err: Error, model: any): void | boolean {
   if (viewModel) {
     let parentModel: any = model.getChainValue(parentChain);
     if (!parentModel) {
-      return;
+      return callback();
     }
     Object.keys(parentModel).forEach((key: string) => {
       const fullChain: string = `${parentChain}.${key}`;
@@ -250,6 +240,7 @@ export function __getModelEventCbk(err: Error, model: any): void | boolean {
     });
 
     __registerValueListener();
-    return;
+    return callback();
   }
+  return callback();
 }
