@@ -1,16 +1,39 @@
 import * as d from './declarations/declarations';
 import { getElement } from '@stencil/core';
-import { DATA_DEFINED_EVENTS, DEFINED_EVENTS, DEFINED_CONTROLLERS, DATA_DEFINED_CONTROLLERS } from '../utils/constants';
+import {
+  DATA_DEFINED_EVENTS,
+  DEFINED_EVENTS,
+  DEFINED_CONTROLLERS,
+  DATA_DEFINED_CONTROLLERS
+
+} from '../utils/constants';
 import { createCustomEvent } from '../utils/utils';
 
 export function TableOfContentEvent(opts: d.EventOptions) {
     return function (proto, propertyKey: string | symbol): void {
 
-        const { connectedCallback, render } = proto;
+        const { connectedCallback, componentWillLoad, componentDidLoad, render } = proto;
         let actionSend = 'psk-send-events';
         let typeDefined = DEFINED_EVENTS;
         let dataDefineAction = DATA_DEFINED_EVENTS;
         let definedAction = 'definedEvents';
+
+
+      proto.componentWillLoad = function() {
+        let self = this;
+        let thisElement = getElement(self);
+        if (!thisElement.hasAttribute(DATA_DEFINED_EVENTS) && !thisElement.hasAttribute(DATA_DEFINED_CONTROLLERS)) {
+          return componentWillLoad && componentWillLoad.call(self);
+        }
+      };
+
+      proto.componentDidLoad = function() {
+        let self = this;
+        let thisElement = getElement(self);
+        if (!thisElement.hasAttribute(DATA_DEFINED_EVENTS) && !thisElement.hasAttribute(DATA_DEFINED_CONTROLLERS)) {
+          return componentDidLoad && componentDidLoad.call(self);
+        }
+      };
 
         proto.connectedCallback = function () {
             let self = this;

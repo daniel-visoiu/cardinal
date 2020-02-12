@@ -5,13 +5,21 @@ import { createCustomEvent, normalizeCamelCaseToDashed } from "../utils/utils";
 
 export function TableOfContentProperty(opts: d.PropertyOptions) {
   return function(proto, propertyKey: string | symbol): void {
-    const { connectedCallback, render, componentWillLoad } = proto;
+    const { connectedCallback, render, componentWillLoad, componentDidLoad } = proto;
 
     proto.componentWillLoad = function() {
       let self = this;
       let thisElement = getElement(self);
       if (!thisElement.hasAttribute(DATA_DEFINED_PROPS)) {
         return componentWillLoad && componentWillLoad.call(self);
+      }
+    };
+
+    proto.componentDidLoad = function() {
+      let self = this;
+      let thisElement = getElement(self);
+      if (!thisElement.hasAttribute(DATA_DEFINED_PROPS)) {
+        return componentDidLoad && componentDidLoad.call(self);
       }
     };
 
