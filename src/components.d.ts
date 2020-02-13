@@ -49,6 +49,9 @@ export namespace Components {
   interface MobileProfileRenderer {
     'userInfo': any;
   }
+  interface PskAppLoader {
+    'controllerName': any;
+  }
   interface PskAppRoot {
     'controller': any;
   }
@@ -415,6 +418,12 @@ declare global {
   var HTMLMobileProfileRendererElement: {
     prototype: HTMLMobileProfileRendererElement;
     new (): HTMLMobileProfileRendererElement;
+  };
+
+  interface HTMLPskAppLoaderElement extends Components.PskAppLoader, HTMLStencilElement {}
+  var HTMLPskAppLoaderElement: {
+    prototype: HTMLPskAppLoaderElement;
+    new (): HTMLPskAppLoaderElement;
   };
 
   interface HTMLPskAppRootElement extends Components.PskAppRoot, HTMLStencilElement {}
@@ -811,6 +820,7 @@ declare global {
     'dropdown-renderer': HTMLDropdownRendererElement;
     'expandable-renderer': HTMLExpandableRendererElement;
     'mobile-profile-renderer': HTMLMobileProfileRendererElement;
+    'psk-app-loader': HTMLPskAppLoaderElement;
     'psk-app-root': HTMLPskAppRootElement;
     'psk-app-router': HTMLPskAppRouterElement;
     'psk-attachments-list': HTMLPskAttachmentsListElement;
@@ -903,6 +913,9 @@ declare namespace LocalJSX {
   }
   interface MobileProfileRenderer {
     'userInfo'?: any;
+  }
+  interface PskAppLoader {
+    'controllerName'?: any;
   }
   interface PskAppRoot {
     'controller'?: any;
@@ -1268,6 +1281,7 @@ declare namespace LocalJSX {
     'dropdown-renderer': DropdownRenderer;
     'expandable-renderer': ExpandableRenderer;
     'mobile-profile-renderer': MobileProfileRenderer;
+    'psk-app-loader': PskAppLoader;
     'psk-app-root': PskAppRoot;
     'psk-app-router': PskAppRouter;
     'psk-attachments-list': PskAttachmentsList;
@@ -1346,6 +1360,7 @@ declare module "@stencil/core" {
       'dropdown-renderer': LocalJSX.DropdownRenderer & JSXBase.HTMLAttributes<HTMLDropdownRendererElement>;
       'expandable-renderer': LocalJSX.ExpandableRenderer & JSXBase.HTMLAttributes<HTMLExpandableRendererElement>;
       'mobile-profile-renderer': LocalJSX.MobileProfileRenderer & JSXBase.HTMLAttributes<HTMLMobileProfileRendererElement>;
+      'psk-app-loader': LocalJSX.PskAppLoader & JSXBase.HTMLAttributes<HTMLPskAppLoaderElement>;
       'psk-app-root': LocalJSX.PskAppRoot & JSXBase.HTMLAttributes<HTMLPskAppRootElement>;
       'psk-app-router': LocalJSX.PskAppRouter & JSXBase.HTMLAttributes<HTMLPskAppRouterElement>;
       'psk-attachments-list': LocalJSX.PskAttachmentsList & JSXBase.HTMLAttributes<HTMLPskAttachmentsListElement>;

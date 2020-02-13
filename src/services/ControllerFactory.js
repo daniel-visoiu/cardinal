@@ -26,10 +26,15 @@ class ControllerFactory {
         resolve(this.controllers[controllerName]);
       } else {
 
-        if (!this.pendingControllerRequests[controllerName]) {
-          this.pendingControllerRequests[controllerName] = [];
-        }
-        this.pendingControllerRequests[controllerName].push({resolve, reject});
+        import(`/scripts/controllers/${controllerName}.js`)
+          .then((module) => {
+            resolve(module.default||module);
+          });
+
+        // if (!this.pendingControllerRequests[controllerName]) {
+        //   this.pendingControllerRequests[controllerName] = [];
+        // }
+        // this.pendingControllerRequests[controllerName].push({resolve, reject});
       }
     });
 
