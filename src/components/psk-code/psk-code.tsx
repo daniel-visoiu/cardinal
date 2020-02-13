@@ -1,5 +1,8 @@
 import {Component, Element, h, State, Prop} from "@stencil/core";
 import Prism from 'prismjs';
+import "prismjs/components/prism-json.js";
+import "prismjs/components/prism-bash.js";
+import "prismjs/components/prism-shell-session.js";
 import {TableOfContentProperty} from "../../decorators/TableOfContentProperty";
 import CustomTheme from "../../decorators/CustomTheme";
 
@@ -28,30 +31,31 @@ export class PskCode {
   @State() componentCode: string = "";
   @Element() host: HTMLDivElement;
 
-  private detachedInnerHTML = null;
-
-  constructor() {
-    this.detachedInnerHTML = Array.from(this.host.children)
-      .map((child: Node) => child.parentNode.removeChild(child));
-  }
 
   componentWillLoad() {
 
-    switch (this.language.toLowerCase()) {
+    switch (this.language) {
       case "javascript":
       case "css":
       case "json":
       case "shell-session":
         this.componentCode = this.host.innerText;
-        this.host.innerHTML = this.host.innerHTML.replace(this.host.innerText, '');
         break;
       default:
-        this.componentCode = this.detachedInnerHTML.map((child: Element) => child.outerHTML).join('');
+        this.componentCode = this.host.innerHTML;
+    }
+
+    let linkElement = this.host.querySelector("link");
+    if (linkElement) {
+      this.host.innerHTML = linkElement.outerHTML;
+      this.componentCode = this.componentCode.replace(linkElement.outerHTML, "");
+    } else {
+      this.host.innerHTML = "";
     }
   }
 
   componentDidLoad() {
-    Prism.highlightAllUnder(this.host);
+      Prism.highlightAllUnder(this.host);
   }
 
   render() {
@@ -59,32 +63,35 @@ export class PskCode {
     componentCode.innerHTML = this.componentCode;
     let decodedCode = componentCode.value;
     decodedCode = decodedCode.replace(HTML_COMMENT_TAG, "");
-
+    decodedCode = decodedCode.trim();
     let codeLines = decodedCode.split("\n");
 
-    // @ts-ignore
-    let trimmedLine = codeLines[codeLines.length-1].trimLeft();
-
-    let whitespacesNr = codeLines[codeLines.length-1].length-trimmedLine.length;
-
-    let newLines = [trimmedLine];
-    if(codeLines.length-2>0){
-      for(let i = codeLines.length-2; i>=0; i--){
+    let newLines = [];
+    if (codeLines.length) {
+      /*
+        removing left whitespaces and calculating left offset
+        since the trim() called before removed all left whitespaces for the first line, we use the last line
+        to calculate offset.
+      */
+      // @ts-ignore --Typescript does not recognize trimLeft!?
+      let trimmedLine = codeLines[codeLines.length - 1].trimLeft();
+      let offset = codeLines[codeLines.length - 1].length - trimmedLine.length;
+      for (let i = 0; i < codeLines.length; i++) {
         let line = codeLines[i];
-        let currentWhiteSpacesNr = whitespacesNr;
-        // @ts-ignore
-        let lineWithoutLeftWhiteSpaces = line.trimLeft();
+        let currentOffset = offset;
+        // @ts-ignore --Typescript does not recognize trimLeft!?
+        let lineOffset = line.trimLeft();
 
-        if(line.length-lineWithoutLeftWhiteSpaces.length<whitespacesNr){
-          currentWhiteSpacesNr = line.length-lineWithoutLeftWhiteSpaces.length;
+        //if code is not well-formatted we use the smallest offset.
+        if (line.length - lineOffset.length < offset) {
+          currentOffset = line.length - lineOffset.length;
         }
-        line  = line.substring(currentWhiteSpacesNr);
+        line = line.substring(currentOffset);
         newLines.push(line);
       }
     }
 
-    let processedCode = newLines.reverse().join("\n");
-
+    let processedCode = newLines.join("\n");
 
     const sourceCode = (
       <pre>
