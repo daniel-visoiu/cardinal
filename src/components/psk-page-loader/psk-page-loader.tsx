@@ -25,16 +25,13 @@ export class PskPageLoader {
 
   componentWillLoad() {
     return new Promise((resolve) => {
-      this.getPageContent(this.pageUrl, this.getPageHandler.bind(this)(()=>{
-        resolve();
-      }));
+      this.getPageContent(this.pageUrl, this.getPageHandler(resolve));
     })
   }
 
   getPageHandler(callback?: Function) {
     let self = this;
-    return (err, data) => {
-
+    return function (err, data) {
       if (err) {
         self.errorLoadingPage = true;
       } else {
@@ -48,6 +45,7 @@ export class PskPageLoader {
   }
 
   getPageContent(pageUrl, callback) {
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET', pageUrl);
 
@@ -55,10 +53,8 @@ export class PskPageLoader {
       if (xhr.status != 200) {
         callback(new Error("Some error occurred"));
       } else {
-        console.log(xhr.status);
         callback(null, xhr.responseText);
       }
-      callback();
     };
 
     xhr.onerror = () => {
@@ -69,12 +65,9 @@ export class PskPageLoader {
 
   render() {
     return (
-
       this.errorLoadingPage ?
-
         <h4>{`Page ${this.pageUrl} could not be loaded!`}</h4> :
         <div class="page_content" innerHTML={this.pageContent}/>
-
     )
   }
 }
