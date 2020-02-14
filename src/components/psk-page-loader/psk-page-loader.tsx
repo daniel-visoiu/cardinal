@@ -1,5 +1,5 @@
-import { Component, h, Prop, State, Watch } from "@stencil/core";
-import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
+import {Component, h, Prop, State, Watch} from "@stencil/core";
+import {TableOfContentProperty} from "../../decorators/TableOfContentProperty";
 
 @Component({
   tag: 'psk-page-loader',
@@ -17,27 +17,48 @@ export class PskPageLoader {
 
   @Watch('pageUrl')
   watchHandler(newValue: boolean) {
-    this.getPageContent(newValue);
+    this.getPageContent(newValue, this.getPageHandler());
   }
 
   @State() pageContent: string;
   @State() errorLoadingPage: boolean = false;
 
   componentWillLoad() {
-    this.getPageContent(this.pageUrl);
+    return new Promise((resolve) => {
+      this.getPageContent(this.pageUrl, this.getPageHandler.bind(this)(()=>{
+        resolve();
+      }));
+    })
   }
 
-  getPageContent(pageUrl) {
+  getPageHandler(callback?: Function) {
+    let self = this;
+    return (err, data) => {
+
+      if (err) {
+        self.errorLoadingPage = true;
+      } else {
+        self.errorLoadingPage = false;
+        self.pageContent = data;
+      }
+      if (typeof callback === "function") {
+        callback();
+      }
+    }
+  }
+
+  getPageContent(pageUrl, callback) {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', pageUrl);
 
     xhr.onload = () => {
       if (xhr.status != 200) {
-        this.errorLoadingPage = true;
+        callback(new Error("Some error occurred"));
       } else {
-        this.errorLoadingPage = false;
-        this.pageContent = xhr.responseText;
+        console.log(xhr.status);
+        callback(null, xhr.responseText);
       }
+      callback();
     };
 
     xhr.onerror = () => {
@@ -52,7 +73,7 @@ export class PskPageLoader {
       this.errorLoadingPage ?
 
         <h4>{`Page ${this.pageUrl} could not be loaded!`}</h4> :
-        <div class="page_content" innerHTML={this.pageContent} />
+        <div class="page_content" innerHTML={this.pageContent}/>
 
     )
   }

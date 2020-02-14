@@ -29,7 +29,9 @@ class ControllerFactory {
         import(`/scripts/controllers/${controllerName}.js`)
           .then((module) => {
             resolve(module.default||module);
-          });
+          }).catch(error=>{
+            throw error;
+        });
 
         // if (!this.pendingControllerRequests[controllerName]) {
         //   this.pendingControllerRequests[controllerName] = [];

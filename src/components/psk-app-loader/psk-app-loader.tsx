@@ -1,6 +1,8 @@
-import {Component, Prop, State, Element} from '@stencil/core';
+import {Component, Prop, State, Element, h} from '@stencil/core';
 import ControllerFactory from "../../services/ControllerFactory";
 
+/*const NO_APP_FOUND = "no-app-found";
+const LANDING_PAGE = "landing-page";*/
 @Component({
   tag: 'psk-app-loader',
   shadow: true
@@ -31,8 +33,6 @@ export class PskAppLoader {
   constructor() {
     this.htmlLoader = PskAppLoader.__createLoader();
     document.getElementsByTagName("body")[0].appendChild(this.htmlLoader);
-
-
   }
 
   componentWillLoad() {
@@ -40,8 +40,9 @@ export class PskAppLoader {
       if (this.controllerName) {
         ControllerFactory.getController(this.controllerName).then((Ctrl) => {
           this.controller = new Ctrl(this.host);
-          this.controller.checkApp((app) => {
+          this.controller.checkApp().then((app) => {
             if (app) {
+              console.log(app);
               this.appIsAvailable = true;
             }
             resolve();
@@ -60,5 +61,25 @@ export class PskAppLoader {
   }
 
   render() {
+    return (
+      <stencil-router>
+        <stencil-route-switch scrollTopOffset={0}>
+
+          {this.appIsAvailable ?
+            //routing to landing page
+            <stencil-route url="/" component="psk-page-loader" exact={true}
+                           componentProps={{pageUrl: "/pages/app.html"}}/> :
+            //routing to new-here/restore page
+            [<stencil-route url="/" component="psk-page-loader" exact={true}
+                            componentProps={{pageUrl: "/pages/wizard/new.html"}}/>,
+              <stencil-route url="/init" component="psk-page-loader" exact={true}
+                             componentProps={{pageUrl: "/pages/wizard/init.html"}}/>,
+              <stencil-route url="/restore" component="psk-page-loader" exact={true}
+                             componentProps={{pageUrl: "/pages/wizard/restore.html"}}/>]
+          }
+
+        </stencil-route-switch>
+      </stencil-router>
+    )
   }
 }

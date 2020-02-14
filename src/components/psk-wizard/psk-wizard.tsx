@@ -156,6 +156,7 @@ export class PskWizard {
                                     handleStepChange={this.handleStepChange.bind(this)} />
 
                                 <StepComponentRenderer
+                                    {...this.activeStep.stepProperties}
                                     onPropertiesChange={this.handleStepPropertiesChange.bind(this)}
                                     stepProperties={this.activeStep.stepProperties} />
 
