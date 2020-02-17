@@ -1,14 +1,17 @@
-import { Component, h, Prop, State, Event, EventEmitter } from '@stencil/core';
+import { Component, h, Prop, State, Event, EventEmitter, Element } from '@stencil/core';
 import { WizardStep } from '../../interfaces/Wizard';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
 import CustomTheme from '../../decorators/CustomTheme';
+import WizardEvent from "../../events/WizardEvent";
 
 @Component({
     tag: 'psk-wizard',
 })
 export class PskWizard {
     @CustomTheme()
+
+    @Element() host;
     @TableOfContentProperty({
         description: `This property is the string that defines the psk-stepper render`,
         isMandatory: false,
@@ -82,22 +85,27 @@ export class PskWizard {
         composed: true
     }) finishWizard: EventEmitter;
 
-    handleStepChange(indexToAdvance: number) {
-        this.changeStep.emit({
-            stepIndexToDisplay: indexToAdvance,
-            wizardSteps: this.wizardSteps,
-            activeStep: this.activeStep,
-            callback: (err, data) => {
-                if (err) {
-                    console.error(err);
-                    return;
-                }
-                this.activeStep = data.activeStep;
-                this.wizardSteps = data.wizardSteps;
-            }
-        });
-        return;
-    }
+  handleStepChange(indexToAdvance: number) {
+
+    let changeStepEvent = new WizardEvent("changeStep", {
+      stepIndexToDisplay: indexToAdvance,
+      wizardSteps: this.wizardSteps,
+      activeStep: this.activeStep,
+      callback: (err, data) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        this.activeStep = data.activeStep;
+        this.wizardSteps = data.wizardSteps;
+      }
+    }, {
+      bubbles: true,
+      composed: true,
+      cancelable: true
+    });
+    this.host.dispatchEvent(changeStepEvent);
+  }
 
     handleFinish(): void {
         this.finishWizard.emit({

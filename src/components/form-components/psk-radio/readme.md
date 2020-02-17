@@ -28,11 +28,11 @@
 
 ### Used by
 
- - [psk-radio-group](../psk-radio-group)
+ - [psk-radio-group](..\psk-radio-group)
 
 ### Depends on
 
-- [psk-label](../psk-label)
+- [psk-label](..\psk-label)
 
 ### Graph
 ```mermaid
