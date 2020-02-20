@@ -23,7 +23,7 @@ export class PskContainer {
 		defaultValue: `null`
 	})
 	@Prop() htmlFilePath?: string | null;
-	@Prop() parentCallback:Function|null;
+	@Prop() parentCallback: Function | null;
 
 	@State() controller: any | null;
 	@State() innerHtml: string | null;
@@ -36,13 +36,6 @@ export class PskContainer {
 
 	@Element() private _host: HTMLElement;
 
-	constructor() {
-		const controllerNameForInstance = this.controllerName ? this.controllerName : 'Controller';
-
-		ControllerFactory.getController(controllerNameForInstance).then((CTRL) => {
-			this.controller = new CTRL(this._host);
-		});
-	}
 
 	render() {
 		return [
@@ -53,7 +46,17 @@ export class PskContainer {
 	}
 
 	componentWillLoad() {
-			this.__getInnerController.call(this, this._host);
+
+		return new Promise((resolve, reject) => {
+			const controllerNameForInstance = this.controllerName ? this.controllerName : 'Controller';
+			ControllerFactory.getController(controllerNameForInstance).then((CTRL) => {
+				this.controller = new CTRL(this._host);
+				this.__getInnerController.call(this, this._host);
+				resolve();
+			}).catch(reject);
+
+		})
+
 	}
 
 	__getInnerController(fromElement: HTMLElement): void {

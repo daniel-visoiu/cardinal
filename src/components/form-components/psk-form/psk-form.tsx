@@ -1,4 +1,4 @@
-import {Component, h, Prop, Element, State} from '@stencil/core';
+import { Component, h, Prop, Element, State } from '@stencil/core';
 import CustomTheme from '../../../decorators/CustomTheme.js';
 import ControllerFactory from "../../../services/ControllerFactory";
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty.js';
@@ -15,24 +15,24 @@ export class PskForm {
     @State() controller: any | null;
 
 
-  constructor() {
-    const controllerNameForInstance = this.controllerName ? this.controllerName : 'Controller';
+    constructor() {
+        const controllerNameForInstance = this.controllerName ? this.controllerName : 'Controller';
 
-    ControllerFactory.getController(controllerNameForInstance).then((CTRL) => {
-      this.controller = new CTRL(this._host);
-    });
-  }
+        ControllerFactory.getController(controllerNameForInstance).then((CTRL) => {
+            this.controller = new CTRL(this._host);
+        });
+    }
 
     render() {
         return (
 
-             <div class="container">
-                    <form>
-                        <slot />
+            <div class="container">
+                <form>
+                    <slot />
 
-                        {this._createFormActions(this.formActions)}
-                    </form>
-              </div>
+                    {this._createFormActions(this.formActions)}
+                </form>
+            </div>
         );
     }
 
@@ -45,6 +45,7 @@ export class PskForm {
 
         actions = formActions.split(",").map((action: string) => {
             return <psk-button
+                button-class={action}
                 event-name={action}
                 label={action} />
         });

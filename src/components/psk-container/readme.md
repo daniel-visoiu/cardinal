@@ -18,11 +18,11 @@
 
 ### Used by
 
- - [psk-form](..\form-components\psk-form)
+ - [psk-form](../form-components/psk-form)
 
 ### Depends on
 
-- [psk-page-loader](..\psk-page-loader)
+- [psk-page-loader](../psk-page-loader)
 
 ### Graph
 ```mermaid
