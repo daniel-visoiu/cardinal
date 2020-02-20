@@ -14,13 +14,16 @@ export class PskForm {
     @State() ctrlIsReady = false;
     @State() controller: any | null;
 
-
-    constructor() {
-        const controllerNameForInstance = this.controllerName ? this.controllerName : 'Controller';
-
-        ControllerFactory.getController(controllerNameForInstance).then((CTRL) => {
+    componentWillLoad():Promise<any>{
+      if (typeof this.controllerName === "string") {
+        return new Promise((resolve, reject) => {
+          ControllerFactory.getController(this.controllerName).then((CTRL) => {
             this.controller = new CTRL(this._host);
-        });
+            resolve();
+          }).catch(reject);
+
+        })
+      }
     }
 
     render() {

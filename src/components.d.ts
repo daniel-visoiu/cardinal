@@ -94,9 +94,6 @@ export namespace Components {
     'language': string;
     'title': string;
   }
-  interface PskCondition {
-    'condition': string | null;
-  }
   interface PskContainer {
     'controllerName'?: string | null;
     'htmlFilePath'?: string | null;
@@ -477,12 +474,6 @@ declare global {
     new (): HTMLPskCodeElement;
   };
 
-  interface HTMLPskConditionElement extends Components.PskCondition, HTMLStencilElement {}
-  var HTMLPskConditionElement: {
-    prototype: HTMLPskConditionElement;
-    new (): HTMLPskConditionElement;
-  };
-
   interface HTMLPskContainerElement extends Components.PskContainer, HTMLStencilElement {}
   var HTMLPskContainerElement: {
     prototype: HTMLPskContainerElement;
@@ -838,7 +829,6 @@ declare global {
     'psk-chapter': HTMLPskChapterElement;
     'psk-checkbox': HTMLPskCheckboxElement;
     'psk-code': HTMLPskCodeElement;
-    'psk-condition': HTMLPskConditionElement;
     'psk-container': HTMLPskContainerElement;
     'psk-controller-descriptor': HTMLPskControllerDescriptorElement;
     'psk-copy-clipboard': HTMLPskCopyClipboardElement;
@@ -973,9 +963,6 @@ declare namespace LocalJSX {
   interface PskCode {
     'language'?: string;
     'title'?: string;
-  }
-  interface PskCondition {
-    'condition'?: string | null;
   }
   interface PskContainer {
     'controllerName'?: string | null;
@@ -1303,7 +1290,6 @@ declare namespace LocalJSX {
     'psk-chapter': PskChapter;
     'psk-checkbox': PskCheckbox;
     'psk-code': PskCode;
-    'psk-condition': PskCondition;
     'psk-container': PskContainer;
     'psk-controller-descriptor': PskControllerDescriptor;
     'psk-copy-clipboard': PskCopyClipboard;
@@ -1383,7 +1369,6 @@ declare module "@stencil/core" {
       'psk-chapter': LocalJSX.PskChapter & JSXBase.HTMLAttributes<HTMLPskChapterElement>;
       'psk-checkbox': LocalJSX.PskCheckbox & JSXBase.HTMLAttributes<HTMLPskCheckboxElement>;
       'psk-code': LocalJSX.PskCode & JSXBase.HTMLAttributes<HTMLPskCodeElement>;
-      'psk-condition': LocalJSX.PskCondition & JSXBase.HTMLAttributes<HTMLPskConditionElement>;
       'psk-container': LocalJSX.PskContainer & JSXBase.HTMLAttributes<HTMLPskContainerElement>;
       'psk-controller-descriptor': LocalJSX.PskControllerDescriptor & JSXBase.HTMLAttributes<HTMLPskControllerDescriptorElement>;
       'psk-copy-clipboard': LocalJSX.PskCopyClipboard & JSXBase.HTMLAttributes<HTMLPskCopyClipboardElement>;

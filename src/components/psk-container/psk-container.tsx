@@ -47,15 +47,17 @@ export class PskContainer {
 
 	componentWillLoad() {
 
-		return new Promise((resolve, reject) => {
-			const controllerNameForInstance = this.controllerName ? this.controllerName : 'Controller';
-			ControllerFactory.getController(controllerNameForInstance).then((CTRL) => {
-				this.controller = new CTRL(this._host);
-				this.__getInnerController.call(this, this._host);
-				resolve();
-			}).catch(reject);
+    this.__getInnerController.call(this, this._host);
 
-		})
+    if (typeof this.controllerName === "string") {
+      return new Promise((resolve, reject) => {
+        ControllerFactory.getController(this.controllerName).then((CTRL) => {
+          this.controller = new CTRL(this._host);
+          resolve();
+        }).catch(reject);
+
+      })
+    }
 
 	}
 
