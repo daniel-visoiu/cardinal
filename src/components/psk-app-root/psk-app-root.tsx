@@ -41,15 +41,6 @@ export class PskAppRoot {
   constructor() {
     this.htmlLoader = this.__createLoader();
     document.getElementsByTagName("body")[0].appendChild(this.htmlLoader);
-
-    if (this.controller) {
-      let controllerName = this.controller;
-      ControllerFactory.getController(controllerName).then((controller) => {
-        new controller(this.host)
-      })
-    } else {
-      console.log("No controller added to app-root");
-    }
   }
 
   @Event({
@@ -60,11 +51,23 @@ export class PskAppRoot {
 
 
   componentWillLoad() {
-    this.cfReadyEvent.emit(ControllerFactory);
+
     let innerHTML = this.host.innerHTML;
     innerHTML = innerHTML.replace(/\s/g, "");
     if (innerHTML.length) {
       this.hasSlot = true;
+    }
+
+    if (typeof this.controller=== "string") {
+      return new Promise((resolve, reject) => {
+        ControllerFactory.getController(this.controller).then((CTRL) => {
+           new CTRL(this.host);
+          resolve();
+        }).catch(reject);
+      })
+    }
+    else{
+      console.error("No controller added to app-root");
     }
   }
 
