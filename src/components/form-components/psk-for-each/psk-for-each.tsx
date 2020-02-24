@@ -138,7 +138,7 @@ export class PskForEach {
   @TableOfContentProperty({
     description: [`This property is the name of the model which will be used to generate the form. The model should be a JavaScript array.`,
       `All the information about how to write a model, hot to use the two-way binding and how to use the model with this component cand be found in the documentation found at: <psk-link page="forms/using-forms">Using forms</psk-link>`],
-    isMandatory: false,
+    isMandatory: true,
     propertyType: 'string',
     specialNote: [`If this property is not provided, nothing written inside the component's template will be displayed.`]
   })
