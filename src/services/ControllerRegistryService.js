@@ -1,4 +1,4 @@
-class ControllerFactory {
+class ControllerRegistryService {
   constructor() {
     this.controllers = {};
     this.pendingControllerRequests = {}
@@ -30,11 +30,6 @@ class ControllerFactory {
           .then((module) => {
             resolve(module.default||module);
           }).catch(reject);
-
-        // if (!this.pendingControllerRequests[controllerName]) {
-        //   this.pendingControllerRequests[controllerName] = [];
-        // }
-        // this.pendingControllerRequests[controllerName].push({resolve, reject});
       }
     });
 
@@ -44,4 +39,4 @@ class ControllerFactory {
 
 }
 
-export default new ControllerFactory();
+export default new ControllerRegistryService();

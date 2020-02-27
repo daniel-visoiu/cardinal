@@ -1,5 +1,5 @@
 import {Component, h, Prop, EventEmitter, Event, State, Element} from '@stencil/core';
-import ControllerFactory from "../../services/ControllerFactory";
+import ControllerRegistryService from "../../services/ControllerRegistryService";
 import {ExtendedHistoryType} from "../../interfaces/ExtendedHistoryType";
 import {HTMLStencilElement} from "@stencil/core/internal";
 
@@ -60,7 +60,7 @@ export class PskAppRoot {
 
     if (typeof this.controller=== "string") {
       return new Promise((resolve, reject) => {
-        ControllerFactory.getController(this.controller).then((CTRL) => {
+        ControllerRegistryService.getController(this.controller).then((CTRL) => {
            new CTRL(this.host);
           resolve();
         }).catch(reject);

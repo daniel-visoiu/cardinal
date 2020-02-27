@@ -1,5 +1,5 @@
 import {Component, Prop, State, Element, h} from '@stencil/core';
-import ControllerFactory from "../../services/ControllerFactory";
+import ControllerRegistryService from "../../services/ControllerRegistryService";
 
 /*const NO_APP_FOUND = "no-app-found";
 const LANDING_PAGE = "landing-page";*/
@@ -38,7 +38,7 @@ export class PskAppLoader {
   componentWillLoad() {
     return new Promise((resolve, reject) => {
       if (this.controllerName) {
-        ControllerFactory.getController(this.controllerName).then((Ctrl) => {
+        ControllerRegistryService.getController(this.controllerName).then((Ctrl) => {
           this.controller = new Ctrl(this.host);
           this.controller.checkApp().then((app) => {
             if (app) {

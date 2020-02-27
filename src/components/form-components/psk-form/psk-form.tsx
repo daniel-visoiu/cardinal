@@ -1,6 +1,6 @@
 import { Component, h, Prop, Element, State } from '@stencil/core';
 import CustomTheme from '../../../decorators/CustomTheme.js';
-import ControllerFactory from "../../../services/ControllerFactory";
+import ControllerRegistryService from "../../../services/ControllerRegistryService";
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty.js';
 
 @Component({
@@ -17,7 +17,7 @@ export class PskForm {
     componentWillLoad():Promise<any>{
       if (typeof this.controllerName === "string") {
         return new Promise((resolve, reject) => {
-          ControllerFactory.getController(this.controllerName).then((CTRL) => {
+          ControllerRegistryService.getController(this.controllerName).then((CTRL) => {
             this.controller = new CTRL(this._host);
             resolve();
           }).catch(reject);
