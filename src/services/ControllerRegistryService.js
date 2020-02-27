@@ -1,42 +1,38 @@
 class ControllerRegistryService {
-  constructor() {
-    this.controllers = {};
-    this.pendingControllerRequests = {}
-  }
-
-  registerController(controllerName, controller) {
-    this.controllers[controllerName] = controller;
-    this._fullFillPreviousRequests(controllerName);
-  }
-
-  _fullFillPreviousRequests(controllerName) {
-    if (this.pendingControllerRequests[controllerName]) {
-      while (this.pendingControllerRequests[controllerName].length) {
-        let request = this.pendingControllerRequests[controllerName].pop();
-        request.resolve(this.controllers[controllerName]);
-      }
+    constructor() {
+        this.controllers = {};
+        this.pendingControllerRequests = {}
     }
-  }
 
-  getController(controllerName) {
+    registerController(controllerName, controller) {
+        this.controllers[controllerName] = controller;
+        this._fullFillPreviousRequests(controllerName);
+    }
 
-    let controllerPromise = new Promise((resolve, reject) => {
+    _fullFillPreviousRequests(controllerName) {
+        if (this.pendingControllerRequests[controllerName]) {
+            while (this.pendingControllerRequests[controllerName].length) {
+                let request = this.pendingControllerRequests[controllerName].pop();
+                request.resolve(this.controllers[controllerName]);
+            }
+        }
+    }
 
-      if (this.controllers[controllerName]) {
-        resolve(this.controllers[controllerName]);
-      } else {
+    getController(controllerName) {
+        let controllerPromise = new Promise((resolve, reject) => {
 
-        import(`/scripts/controllers/${controllerName}.js`)
-          .then((module) => {
-            resolve(module.default||module);
-          }).catch(reject);
-      }
-    });
+            if (this.controllers[controllerName]) {
+                resolve(this.controllers[controllerName]);
+            } else {
+                import (`/scripts/controllers/${controllerName}.js`)
+                .then((module) => {
+                    resolve(module.default || module);
+                }).catch(reject);
+            }
+        });
 
-    return controllerPromise;
-
-  }
-
+        return controllerPromise;
+    }
 }
 
 export default new ControllerRegistryService();

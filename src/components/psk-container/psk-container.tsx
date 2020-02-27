@@ -2,7 +2,7 @@ import {Component, h, Prop, Element, State} from "@stencil/core";
 import ControllerRegistryService from "../../services/ControllerRegistryService";
 import {TableOfContentProperty} from "../../decorators/TableOfContentProperty";
 
-const BINDABLE_CONTROLLER_PATH = "base/BindableController";
+const BINDABLE_CONTROLLER_PATH = "base-controllers/BindableController";
 
 @Component({
   tag: "psk-container"
