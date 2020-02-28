@@ -16,19 +16,14 @@
 
 ## Dependencies
 
-### Used by
-
- - [psk-form](../form-components/psk-form)
-
 ### Depends on
 
-- [psk-page-loader](../psk-page-loader)
+- [psk-page-loader](..\psk-page-loader)
 
 ### Graph
 ```mermaid
 graph TD;
   psk-container --> psk-page-loader
-  psk-form --> psk-container
   style psk-container fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

@@ -11,24 +11,21 @@ export class PskForm {
 
     @CustomTheme()
 
-    @State() ctrlIsReady = false;
     @State() controller: any | null;
 
-    componentWillLoad():Promise<any>{
-      if (typeof this.controllerName === "string") {
-        return new Promise((resolve, reject) => {
-          ControllerRegistryService.getController(this.controllerName).then((CTRL) => {
-            this.controller = new CTRL(this._host);
-            resolve();
-          }).catch(reject);
-
-        })
-      }
+    componentWillLoad(): Promise<any> {
+        if (typeof this.controllerName === "string") {
+            return new Promise((resolve, reject) => {
+                ControllerRegistryService.getController(this.controllerName).then((CTRL) => {
+                    this.controller = new CTRL(this._host);
+                    resolve();
+                }).catch(reject);
+            })
+        }
     }
 
     render() {
         return (
-
             <div class="container">
                 <form>
                     <slot />
@@ -54,9 +51,9 @@ export class PskForm {
         });
 
         return (
-            <psk-container id="actions">
+            <div id="actions" class="container-fluid">
                 {actions}
-            </psk-container>
+            </div>
         );
     }
 
@@ -82,25 +79,6 @@ export class PskForm {
         specialNote: "If this attribute has no value, then the submit form action is assumed as default value."
     })
     @Prop() formActions?: string | null = 'submit';
-
-    @TableOfContentProperty({
-        description: [`	Specifies where to send the form-data when a form is submitted`,
-            `Most of the time, this is the URL to a server which is mainly responsible to handle the form-data.`],
-        isMandatory: false,
-        propertyType: 'string',
-        defaultValue: "null",
-        specialNote: "If this attribute has no value, then the current page will be handled. If a controller is given to the form, rather than FormController, then nothing will happen."
-    })
-    @Prop() action?: string | null = null;
-
-    @TableOfContentProperty({
-        description: [`This property specifies the HTTP method to use when sending form-data.`,
-            `The possible values are <strong>get</strong> and <strong>post</strong>. If no value is provided, the GET is assumed.`],
-        isMandatory: false,
-        propertyType: 'string (get / post)',
-        defaultValue: "get"
-    })
-    @Prop() method: string | null = 'get';
 
     @Element() private _host: HTMLElement;
 }

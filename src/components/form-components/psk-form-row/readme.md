@@ -5,11 +5,18 @@
 <!-- Auto Generated Below -->
 
 
+## Properties
+
+| Property | Attribute | Description | Type     | Default |
+| -------- | --------- | ----------- | -------- | ------- |
+| `layout` | `layout`  |             | `string` | `null`  |
+
+
 ## Dependencies
 
 ### Depends on
 
-- [psk-grid](../../psk-grid)
+- [psk-grid](..\..\psk-grid)
 
 ### Graph
 ```mermaid
