@@ -66,7 +66,7 @@ export class PskForm {
         defaultValue: "FormController",
         specialNote: "If the controller name is not provided, then the default FormController is assumed."
     })
-    @Prop() controllerName?: string = "FormController";
+    @Prop() controllerName: string | null;
 
     @TableOfContentProperty({
         description: [`By defining this attribute, the user is able to control the behaviour of the form, so by definition, this attribute holds the possible actions inside the form, the defined actions should be sepparated by comma(",").`,
