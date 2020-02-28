@@ -7,17 +7,17 @@
 
 ## Properties
 
-| Property         | Attribute         | Description | Type     | Default            |
-| ---------------- | ----------------- | ----------- | -------- | ------------------ |
-| `controllerName` | `controller-name` |             | `string` | `"FormController"` |
-| `formActions`    | `form-actions`    |             | `string` | `'submit'`         |
+| Property         | Attribute         | Description | Type     | Default     |
+| ---------------- | ----------------- | ----------- | -------- | ----------- |
+| `controllerName` | `controller-name` |             | `string` | `undefined` |
+| `formActions`    | `form-actions`    |             | `string` | `'submit'`  |
 
 
 ## Dependencies
 
 ### Depends on
 
-- [psk-button](..\..\psk-button)
+- [psk-button](../../psk-button)
 
 ### Graph
 ```mermaid

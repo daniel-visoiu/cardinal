@@ -23,7 +23,7 @@
 
 ### Depends on
 
-- [psk-label](..\psk-label)
+- [psk-label](../psk-label)
 
 ### Graph
 ```mermaid

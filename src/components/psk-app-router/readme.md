@@ -26,12 +26,12 @@
 
 ### Used by
 
- - [psk-default-renderer](..\renderers\app-root-renders)
+ - [psk-default-renderer](../renderers/app-root-renders)
 
 ### Depends on
 
 - stencil-route
-- [psk-ui-loader](..\psk-ui-loader)
+- [psk-ui-loader](../psk-ui-loader)
 - stencil-router
 - stencil-route-switch
 

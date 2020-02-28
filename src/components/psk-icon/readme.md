@@ -18,7 +18,7 @@
 
 ### Used by
 
- - [psk-toolbar](..\psk-toolbar)
+ - [psk-toolbar](../psk-toolbar)
 
 ### Graph
 ```mermaid

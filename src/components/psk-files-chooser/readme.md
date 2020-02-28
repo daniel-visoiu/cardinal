@@ -7,12 +7,11 @@
 
 ## Properties
 
-| Property        | Attribute | Description | Type       | Default          |
-| --------------- | --------- | ----------- | ---------- | ---------------- |
-| `accept`        | `accept`  |             | `string`   | `undefined`      |
-| `label`         | `label`   |             | `string`   | `"Select files"` |
-| `onFilesChange` | --        |             | `Function` | `undefined`      |
-| `onFilesSelect` | --        |             | `Function` | `undefined`      |
+| Property    | Attribute    | Description | Type     | Default          |
+| ----------- | ------------ | ----------- | -------- | ---------------- |
+| `accept`    | `accept`     |             | `string` | `undefined`      |
+| `eventName` | `event-name` |             | `string` | `undefined`      |
+| `label`     | `label`      |             | `string` | `"Select files"` |
 
 
 ----------------------------------------------
