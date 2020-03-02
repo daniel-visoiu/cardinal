@@ -23,14 +23,10 @@ export class PskList {
 
     render() {
         if (this.listType === LIST_TYPE_ORDERED) {
-            return <ol>
-                {this.listContent}
-            </ol>;
+            return <ol innerHTML={this.listContent} />;
         }
 
-        return <ul>
-            {this.listContent}
-        </ul>;
+        return <ul innerHTML={this.listContent} />;
     }
 
     componentWillLoad() {
@@ -38,72 +34,76 @@ export class PskList {
         if (this["getInnerContent"]) {
             htmlLinesRaw = this['getInnerContent']("innerHTML");
         }
-        const htmlLines: Array<string> = htmlLinesRaw
-            .split(/\n/g)
-            .map(el => el.trim())
-            .filter(el => el.length > 0 && el !== '<!---->');
+
+        const htmlLines: Array<string> = htmlLinesRaw.split(/\n/g).filter(el => el.trim().length > 0);
 
         if (htmlLines.length === 0) {
             return;
         }
 
-        const finalHtmlLines = [];
+        let finalHtmlLines = [];
+        let currentTag = null;
+        let currentListItem = '';
 
-        let withChild: boolean = false,
-            currentChildTagName: string = null,
-            sameChildDepthLevel: number = 0,
-            currentChildListItem: string = '';
+        // @ts-ignore --Typescript does not recognize trimLeft!?
+        const trimmedLine = htmlLines[0].trimLeft();
+        const offset = htmlLines[0].length - trimmedLine.length;
 
-        htmlLines.forEach((line: string) => {
-            let inlineTagMatch = PSK_LIST_PARSE_CONFIG.inlineTag.exec(line);
-            if (inlineTagMatch !== null) {
-                if (withChild) {
-                    currentChildListItem += line;
-                } else {
-                    finalHtmlLines.push(this._stringToHTMLElement('li', line));
-                }
-            } else {
-                let startTagMatch = PSK_LIST_PARSE_CONFIG.startTag.exec(line);
-                if (startTagMatch !== null) {
-                    withChild = true;
-                    currentChildListItem += line;
-                    if (currentChildTagName === startTagMatch[0]) {
-                        sameChildDepthLevel++;
-                    } else if (!currentChildTagName) {
-                        currentChildTagName = startTagMatch[0];
-                    }
-                } else {
-                    let endTagMatch = PSK_LIST_PARSE_CONFIG.endTag.exec(line);
-                    if (endTagMatch !== null) {
-                        currentChildListItem += line;
-                        if (currentChildTagName === endTagMatch[0].replace(/\//g, '')) {
-                            if (sameChildDepthLevel === 0) {
-                                finalHtmlLines.push(this._stringToHTMLElement('li', currentChildListItem));
-                                currentChildTagName = null;
-                                currentChildListItem = '';
-                                withChild = false;
-                            } else {
-                                sameChildDepthLevel--;
-                            }
-                        }
-                    }
-                    else {
-                        if (withChild) {
-                            currentChildListItem += line;
-                        } else {
-                            finalHtmlLines.push(this._stringToHTMLElement('li', line));
-                        }
-                    }
-                }
+        for (let index = 0; index < htmlLines.length; index++) {
+            let line = htmlLines[index];
+
+            // @ts-ignore --Typescript does not recognize trimLeft!?
+            const currentTrimmedLine = line.trimLeft();
+            const currentLineOffset = line.length - currentTrimmedLine.length;
+
+            /**
+             * If the left trim offset is not the same with the first line, 
+             * it means that this line is part of the current list item.
+             */
+            if (offset !== currentLineOffset) {
+                currentListItem += `${line}\n`;
+                continue;
             }
-        });
+            line = line.substring(offset);
+
+            if (line.split('')[0] !== '<') {
+                if (currentListItem !== '') {
+                    finalHtmlLines.push(`${currentListItem}</li>`);
+                }
+
+                currentListItem = `<li>${line}`;
+                continue;
+            } else if (currentListItem !== '') {
+                finalHtmlLines.push(`${currentListItem}</li>`);
+                currentListItem = '';
+            }
+
+            /**
+             * Check if first character is "<", which brings a component or an HTML tag.
+             * It can be the start of a tag or the end of a tag
+             */
+            const startMatch = PSK_LIST_PARSE_CONFIG.startTag.exec(line);
+            if (startMatch !== null && !currentTag) {
+                currentTag = startMatch[1];
+                currentListItem = `<li>${line}`;
+                continue;
+            }
+
+            const endMatch = PSK_LIST_PARSE_CONFIG.endTag.exec(line);
+            if (endMatch !== null && currentTag === endMatch[1]) {
+                finalHtmlLines.push(`${currentListItem}${line}</li>`);
+
+                currentTag = null;
+                currentListItem = '';
+                continue;
+            }
+        }
+
+        if (currentListItem !== '') {
+            finalHtmlLines.push(currentListItem);
+        }
 
         this.element.innerHTML = '';
-        this.listContent = [...finalHtmlLines];
-    }
-
-    _stringToHTMLElement(tag: string, html: string): HTMLElement {
-        const HTMLTag = tag;
-        return <HTMLTag innerHTML={html}></HTMLTag>;
+        this.listContent = finalHtmlLines.join('\n');
     }
 }

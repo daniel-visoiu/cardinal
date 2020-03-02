@@ -15,9 +15,8 @@ export const LIST_TYPE_ORDERED: string = "ordered";
 export const LIST_TYPE_UNORDERED: string = "unordered";
 
 export const PSK_LIST_PARSE_CONFIG = {
-  startTag: /<([a-z]+|-*)>/,
-  endTag: /<\/([a-z]+|-*)>/,
-  inlineTag: /.*<([a-z]+|-*)>.*<\/([a-z]+|-*)>.*/
+  startTag: /^<([a-z]+-?[a-z]*)+[^>]*>/,
+  endTag: /^<\/([a-z]+-?[a-z]*)+[^>]*>/
 };
 
 export const ACTIONS_ICONS = {
