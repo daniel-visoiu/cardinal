@@ -1,5 +1,4 @@
 import { Component, h, Prop, Element } from '@stencil/core';
-import { WgFile } from "../../interfaces/WgFile";
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import CustomTheme from '../../decorators/CustomTheme';
 import { BindModel } from '../../decorators/BindModel';
