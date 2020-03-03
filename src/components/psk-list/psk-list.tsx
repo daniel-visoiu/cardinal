@@ -1,4 +1,4 @@
-import { Component, h, Prop, Element, State } from "@stencil/core";
+import { Component, h, Prop, Element } from "@stencil/core";
 import { PSK_LIST_PARSE_CONFIG, LIST_TYPE_ORDERED } from "../../utils/constants";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import CustomTheme from "../../decorators/CustomTheme";
@@ -17,28 +17,19 @@ export class PskList {
         defaultValue: `unordered`
     })
     @Prop() listType: string;
-
-    @State() listContent = null;
     @Element() private element: HTMLElement;
 
     render() {
-        if (this.listType === LIST_TYPE_ORDERED) {
-            return <ol innerHTML={this.listContent} />;
-        }
-
-        return <ul innerHTML={this.listContent} />;
-    }
-
-    componentWillLoad() {
         let htmlLinesRaw = "";
-        if (this["getInnerContent"]) {
-            htmlLinesRaw = this['getInnerContent']("innerHTML");
+        if (!this["getInnerContent"]) {
+            return null;
         }
 
+        htmlLinesRaw = this['getInnerContent']("innerHTML");
         const htmlLines: Array<string> = htmlLinesRaw.split(/\n/g).filter(el => el.trim().length > 0);
 
         if (htmlLines.length === 0) {
-            return;
+            return null;
         }
 
         let finalHtmlLines = [];
@@ -104,6 +95,11 @@ export class PskList {
         }
 
         this.element.innerHTML = '';
-        this.listContent = finalHtmlLines.join('\n');
+
+        if (this.listType === LIST_TYPE_ORDERED) {
+            return <ol innerHTML={finalHtmlLines.join('\n')} />;
+        }
+
+        return <ul innerHTML={finalHtmlLines.join('\n')} />;
     }
 }

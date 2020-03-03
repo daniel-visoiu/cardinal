@@ -22,7 +22,7 @@
 
 ### Depends on
 
-- [psk-input](../psk-input)
+- [psk-input](..\psk-input)
 
 ### Graph
 ```mermaid
