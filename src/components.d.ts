@@ -48,9 +48,6 @@ export namespace Components {
   interface MobileProfileRenderer {
     'userInfo': any;
   }
-  interface PskAppLoader {
-    'controllerName': any;
-  }
   interface PskAppRoot {
     'controller': any;
   }
@@ -116,7 +113,9 @@ export namespace Components {
     'required'?: boolean;
     'value'?: string | null;
   }
-  interface PskDefaultRenderer {}
+  interface PskDefaultRenderer {
+    'handleScrollEvent': Function;
+  }
   interface PskDescription {
     'title': string;
   }
@@ -419,12 +418,6 @@ declare global {
   var HTMLMobileProfileRendererElement: {
     prototype: HTMLMobileProfileRendererElement;
     new (): HTMLMobileProfileRendererElement;
-  };
-
-  interface HTMLPskAppLoaderElement extends Components.PskAppLoader, HTMLStencilElement {}
-  var HTMLPskAppLoaderElement: {
-    prototype: HTMLPskAppLoaderElement;
-    new (): HTMLPskAppLoaderElement;
   };
 
   interface HTMLPskAppRootElement extends Components.PskAppRoot, HTMLStencilElement {}
@@ -827,7 +820,6 @@ declare global {
     'dropdown-renderer': HTMLDropdownRendererElement;
     'expandable-renderer': HTMLExpandableRendererElement;
     'mobile-profile-renderer': HTMLMobileProfileRendererElement;
-    'psk-app-loader': HTMLPskAppLoaderElement;
     'psk-app-root': HTMLPskAppRootElement;
     'psk-app-router': HTMLPskAppRouterElement;
     'psk-attachments-list': HTMLPskAttachmentsListElement;
@@ -922,9 +914,6 @@ declare namespace LocalJSX {
   interface MobileProfileRenderer extends JSXBase.HTMLAttributes<HTMLMobileProfileRendererElement> {
     'userInfo'?: any;
   }
-  interface PskAppLoader extends JSXBase.HTMLAttributes<HTMLPskAppLoaderElement> {
-    'controllerName'?: any;
-  }
   interface PskAppRoot extends JSXBase.HTMLAttributes<HTMLPskAppRootElement> {
     'controller'?: any;
     'onControllerFactoryIsReady'?: (event: CustomEvent<any>) => void;
@@ -996,7 +985,9 @@ declare namespace LocalJSX {
     'required'?: boolean;
     'value'?: string | null;
   }
-  interface PskDefaultRenderer extends JSXBase.HTMLAttributes<HTMLPskDefaultRendererElement> {}
+  interface PskDefaultRenderer extends JSXBase.HTMLAttributes<HTMLPskDefaultRendererElement> {
+    'handleScrollEvent'?: Function;
+  }
   interface PskDescription extends JSXBase.HTMLAttributes<HTMLPskDescriptionElement> {
     'title'?: string;
   }
@@ -1291,7 +1282,6 @@ declare namespace LocalJSX {
     'dropdown-renderer': DropdownRenderer;
     'expandable-renderer': ExpandableRenderer;
     'mobile-profile-renderer': MobileProfileRenderer;
-    'psk-app-loader': PskAppLoader;
     'psk-app-root': PskAppRoot;
     'psk-app-router': PskAppRouter;
     'psk-attachments-list': PskAttachmentsList;

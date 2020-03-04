@@ -5,6 +5,13 @@
 <!-- Auto Generated Below -->
 
 
+## Properties
+
+| Property            | Attribute | Description | Type       | Default     |
+| ------------------- | --------- | ----------- | ---------- | ----------- |
+| `handleScrollEvent` | --        |             | `Function` | `undefined` |
+
+
 ## Dependencies
 
 ### Depends on

@@ -17,6 +17,7 @@ export class PskToc {
     })
     @Prop() title: string;
     @State() pskPageElement: HTMLElement;
+    @State() activeChapter: string = null;
     @State() chapterList: Array<Chapter> = [];
 
     connectedCallback() {
@@ -26,7 +27,10 @@ export class PskToc {
     @Listen('psk-send-toc', { target: "document" })
     tocReceived(evt: CustomEvent) {
         if (evt.detail) {
-            this.chapterList = this._sortChapters([...evt.detail]);
+            let { chapters, active } = evt.detail;
+
+            this.chapterList = this._sortChapters(chapters);
+            this.activeChapter = active;
         }
     }
 
@@ -54,8 +58,8 @@ export class PskToc {
         const chaptersInsidePage = this.pskPageElement.querySelectorAll('psk-chapter');
         const guidOrderedList: Array<string> = [];
         chaptersInsidePage.forEach((chapter: HTMLElement) => {
-            if (!(chapter.hasAttribute('data-define-props') || chapter.hasAttribute('data-define-controller') || chapter.hasAttribute('data-define-events')) && (chapter.hasAttribute('guid')) ) {
-                    guidOrderedList.push(chapter.getAttribute('guid'));
+            if (!(chapter.hasAttribute('data-define-props') || chapter.hasAttribute('data-define-controller') || chapter.hasAttribute('data-define-events')) && (chapter.hasAttribute('guid'))) {
+                guidOrderedList.push(chapter.getAttribute('guid'));
             }
         });
 
@@ -79,12 +83,13 @@ export class PskToc {
                 : `${childrenStartingIndex}${index + 1}.`;
 
             return (
-                <li onClick={(evt: MouseEvent) => {
-                    evt.stopImmediatePropagation();
-                    evt.preventDefault();
-                    scrollToElement(chapter.title, pageElement);
-                }}>
-                    <span>{`${indexToDisplay} ${chapter.title}`}</span>
+                <li class={chapter.guid === this.activeChapter && "active"}
+                    onClick={(evt: MouseEvent) => {
+                        evt.stopImmediatePropagation();
+                        evt.preventDefault();
+                        scrollToElement(chapter.title, pageElement);
+                    }}>
+                    {`${indexToDisplay} ${chapter.title}`}
                     {
                         chapter.children.length === 0 ? null
                             : <ul>{this._renderChapters(pageElement, chapter.children, indexToDisplay)}</ul>

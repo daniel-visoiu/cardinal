@@ -3,6 +3,7 @@ import { scrollToElement, createCustomEvent } from "../../utils/utils";
 import { Component, h, Prop, Listen, State, Element } from "@stencil/core";
 import CustomTheme from "../../decorators/CustomTheme";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
+import PskScrollEvent from "../../events/ScrollEvent";
 
 @Component({
 	tag: "psk-page",
@@ -10,6 +11,8 @@ import { TableOfContentProperty } from "../../decorators/TableOfContentProperty"
 })
 export class PskPage {
 	@CustomTheme()
+
+	@State() activeChapter: string = null;
 	@State() chapters: Array<Chapter> = [];
 
 	@TableOfContentProperty({
@@ -72,21 +75,26 @@ export class PskPage {
 	}
 
 	_sendTableOfContentChapters(): void {
-
 		createCustomEvent('psk-send-toc', {
 			bubbles: true,
 			composed: true,
 			cancelable: true,
-			detail: this.chapters
+			detail: {
+				chapters: this.chapters,
+				active: this.activeChapter
+			}
 		}, true);
 	}
 
 	componentDidLoad() {
 		this.componentFullyLoaded = true;
+
+		this._checkForChapterScrolling();
 	}
 
 	render() {
-		this._checkForChapterScrolling();
+		document.addEventListener('pageScroll', this.handleScrollEvent.bind(this), true);
+
 		this._sendTableOfContentChapters();
 
 		return (
@@ -98,5 +106,58 @@ export class PskPage {
 				</div>
 			</div>
 		)
+	}
+
+	handleScrollEvent(evt: PskScrollEvent) {
+		evt.preventDefault();
+		evt.stopImmediatePropagation();
+
+		const scrollSectionElement: HTMLElement = evt.parentEventData
+			&& evt.parentEventData as HTMLElement;
+		if (!scrollSectionElement) {
+			return;
+		}
+
+		this.activeChapter = null;
+		let foundChapterId: string = null;
+		let lastChapterVerticalOffset: number = 0;
+
+		let chapterList: Array<HTMLElement> = Array.from(this.element.querySelectorAll('psk-chapter'));
+		chapterList.forEach((chapter: HTMLElement) => {
+			if (foundChapterId !== null || this.activeChapter !== null) {
+				return;
+			}
+
+			const chapterId: string = chapter.getAttribute('guid');
+			if (!chapterId) {
+				return;
+			}
+
+			const child: HTMLElement = chapter.getElementsByClassName('card psk-card')
+				&& chapter.getElementsByClassName('card psk-card')[0] as HTMLElement;
+
+			let chapterVerticalOffset: number = 0;
+			if (lastChapterVerticalOffset >= child.offsetTop) {
+				chapterVerticalOffset = lastChapterVerticalOffset + child.offsetTop;
+			} else {
+				chapterVerticalOffset = child.offsetTop;
+			}
+
+			const pageVerticalOffset: number = scrollSectionElement.scrollTop;
+
+			if (pageVerticalOffset >= lastChapterVerticalOffset
+				&& pageVerticalOffset <= chapterVerticalOffset) {
+				foundChapterId = chapterId;
+				this.activeChapter = foundChapterId;
+			}
+
+			lastChapterVerticalOffset = chapterVerticalOffset;
+		});
+
+		if (chapterList.length > 0) {
+			this.activeChapter = foundChapterId
+				? foundChapterId
+				: chapterList[0].getAttribute('guid');
+		}
 	}
 }

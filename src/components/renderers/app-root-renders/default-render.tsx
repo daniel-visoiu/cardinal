@@ -1,51 +1,54 @@
-import {Component, h, Listen, State} from "@stencil/core";
+import { Component, h, Listen, State, Prop } from "@stencil/core";
 import CustomTheme from "../../../decorators/CustomTheme";
 
 const appMaxWidth = 960;
 
 @Component({
-  tag: 'psk-default-renderer',
-  shadow: true
+	tag: 'psk-default-renderer',
+	shadow: true
 })
 
 export class AppRootDefaultRender {
-  @CustomTheme()
-  @State() mobileLayout: boolean = false;
+	@CustomTheme()
 
-  @Listen("resize", {capture: true, target: 'window'})
-  checkLayout() {
-    this.mobileLayout = document.documentElement.clientWidth < appMaxWidth;
-  }
+	@Prop() handleScrollEvent: Function;
 
-  componentWillLoad() {
-    this.checkLayout();
-  }
+	@State() mobileLayout: boolean = false;
 
-  render() {
+	@Listen("resize", { capture: true, target: 'window' })
+	checkLayout() {
+		this.mobileLayout = document.documentElement.clientWidth < appMaxWidth;
+	}
 
-    let appMenuCmpt = <app-menu item-renderer="sidebar-renderer" hamburgerMaxWidth={appMaxWidth}></app-menu>;
-    let versionCmpt = <div class="nav-footer">version 0.1</div>;
+	componentWillLoad() {
+		this.checkLayout();
+	}
 
-    let asideComponents = [];
+	render() {
 
-    if(this.mobileLayout ){
-      asideComponents = [<psk-user-profile profile-renderer="mobile-profile-renderer"></psk-user-profile>, appMenuCmpt ]
-    }
-    else{
-      asideComponents = [<psk-user-profile></psk-user-profile>, appMenuCmpt, versionCmpt]
-    }
+		let appMenuCmpt = <app-menu item-renderer="sidebar-renderer" hamburgerMaxWidth={appMaxWidth}></app-menu>;
+		let versionCmpt = <div class="nav-footer">version 0.1</div>;
 
-    return (
-      <div class={`global_container ${this.mobileLayout ? "is-mobile" : ""}`}>
-        <aside>
-          {asideComponents}
-        </aside>
+		let asideComponents = [];
 
-        <section>
-          <psk-app-router failRedirectTo="/home"></psk-app-router>
-          {this.mobileLayout === true ? versionCmpt : null}
-        </section>
-      </div>
-    );
-  }
+		if (this.mobileLayout) {
+			asideComponents = [<psk-user-profile profile-renderer="mobile-profile-renderer"></psk-user-profile>, appMenuCmpt]
+		}
+		else {
+			asideComponents = [<psk-user-profile></psk-user-profile>, appMenuCmpt, versionCmpt]
+		}
+
+		return (
+			<div class={`global_container ${this.mobileLayout ? "is-mobile" : ""}`}>
+				<aside>
+					{asideComponents}
+				</aside>
+
+				<section onScroll={this.handleScrollEvent.bind(this)}>
+					<psk-app-router failRedirectTo="/home"></psk-app-router>
+					{this.mobileLayout === true ? versionCmpt : null}
+				</section>
+			</div>
+		);
+	}
 }
