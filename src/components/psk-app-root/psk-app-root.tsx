@@ -13,7 +13,7 @@ export class PskAppRoot {
   @TableOfContentProperty({
     isMandatory: true,
     description: [`This property is a string that will permit the developer to choose his own controller.`,
-      `It is recommended that each app to extend the provided default controller and adapt it to current needs`],
+      `It is recommended that each app to extend the provided default controller and adapt it to the application needs`],
     propertyType: `string`,
     defaultValue: `null`
   })
