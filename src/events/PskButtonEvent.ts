@@ -1,4 +1,6 @@
-const EVENT_TYPE = "PskButtonClickEvent";
+import {EVENTS_TYPES} from "../utils/constants";
+
+const EVENT_TYPE = EVENTS_TYPES.PSK_BUTTON_EVT;
 
 export default class PskButtonEvent extends CustomEvent<any> {
   public data: any;

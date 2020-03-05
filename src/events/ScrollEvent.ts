@@ -1,4 +1,6 @@
-const EVENT_TYPE = "PskScrollEvent";
+import {EVENTS_TYPES} from "../utils/constants";
+
+const EVENT_TYPE = EVENTS_TYPES.PSK_SCROLL_EVT;
 
 export default class PskScrollEvent extends CustomEvent<any> {
   public parentEventData: any;
