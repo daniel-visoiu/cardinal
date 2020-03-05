@@ -24,15 +24,15 @@
 
 ### Used by
 
- - [psk-date-input](..\psk-date-input)
- - [psk-email-input](..\psk-email-input)
- - [psk-number-input](..\psk-number-input)
- - [psk-password-input](..\psk-password-input)
- - [psk-text-input](..\psk-text-input)
+ - [psk-date-input](../psk-date-input)
+ - [psk-email-input](../psk-email-input)
+ - [psk-number-input](../psk-number-input)
+ - [psk-password-input](../psk-password-input)
+ - [psk-text-input](../psk-text-input)
 
 ### Depends on
 
-- [psk-label](..\psk-label)
+- [psk-label](../psk-label)
 
 ### Graph
 ```mermaid

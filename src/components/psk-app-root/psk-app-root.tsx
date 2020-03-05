@@ -1,102 +1,96 @@
-import { Component, h, Prop, EventEmitter, Event, State, Element } from '@stencil/core';
+import {Component, h, Prop, State, Element} from '@stencil/core';
 import ControllerRegistryService from "../../services/ControllerRegistryService";
-import { ExtendedHistoryType } from "../../interfaces/ExtendedHistoryType";
-import { HTMLStencilElement } from "@stencil/core/internal";
+import {ExtendedHistoryType} from "../../interfaces/ExtendedHistoryType";
+import {HTMLStencilElement} from "@stencil/core/internal";
+import {TableOfContentProperty} from "../../decorators/TableOfContentProperty";
 import PskScrollEvent from '../../events/ScrollEvent';
 
 @Component({
-	tag: 'psk-app-root',
-	shadow: true
+  tag: 'psk-app-root',
+  shadow: true
 })
 export class PskAppRoot {
-	@Prop() controller: any;
-	@State() mobileLayout: boolean = false;
-	@State() historyType: ExtendedHistoryType;
-	@State() componentCode: string = "";
-	@Element() host: HTMLStencilElement;
-	@State() hasSlot: boolean = false;
-	@State() htmlLoader: HTMLElement;
+  @TableOfContentProperty({
+    isMandatory: true,
+    description: [`This property is a string that will permit the developer to choose his own controller.`,
+      `It is recommended that each app to extend the provided default controller and adapt it to current needs`],
+    propertyType: `string`,
+    defaultValue: `null`
+  })
+  @Prop() controller: any;
+  @State() mobileLayout: boolean = false;
+  @State() historyType: ExtendedHistoryType;
+  @State() componentCode: string = "";
+  @Element() host: HTMLStencilElement;
+  @State() hasSlot: boolean = false;
+  @State() htmlLoader:HTMLElement;
 
-	@Event({
-		eventName: 'routeChanged',
-		composed: true,
-		cancelable: true,
-		bubbles: true,
-	}) routeChangedEvent: EventEmitter;
+  __createLoader() {
 
-	__createLoader() {
+    const NR_CIRCLES = 12;
+    let circles = "";
 
-		const NR_CIRCLES = 12;
-		let circles = "";
+    for (let i = 1; i <= NR_CIRCLES; i++) {
+      circles += `<div class="sk-circle${i} sk-circle"></div>`
+    }
 
-		for (let i = 1; i <= NR_CIRCLES; i++) {
-			circles += `<div class="sk-circle${i} sk-circle"></div>`
-		}
+    let node = document.createElement("div");
+    node.className="app-loader";
+    node.innerHTML = `<div class='sk-fading-circle'>${circles}</div>`;
+    return node;
+  }
+  componentWillLoad() {
+    if(this.host.parentElement){
+      this.htmlLoader = this.__createLoader();
+      this.host.parentElement.appendChild(this.htmlLoader);
+    }
 
-		let node = document.createElement("div");
-		node.className = "app-loader";
-		node.innerHTML = `<div class='sk-fading-circle'>${circles}</div>`;
-		return node;
-	}
+    let innerHTML = this.host.innerHTML;
+    innerHTML = innerHTML.replace(/\s/g, "");
+    if (innerHTML.length) {
+      this.hasSlot = true;
+    }
 
-	constructor() {
-		this.htmlLoader = this.__createLoader();
-		document.getElementsByTagName("body")[0].appendChild(this.htmlLoader);
-	}
+    if (typeof this.controller=== "string") {
+      return new Promise((resolve, reject) => {
+        ControllerRegistryService.getController(this.controller).then((CTRL) => {
+           new CTRL(this.host);
+          resolve();
+        }).catch(reject);
+      })
+    }
+    else{
+      console.error("No controller added to app-root");
+    }
+  }
 
-	@Event({
-		eventName: "controllerFactoryIsReady",
-		composed: true,
-		cancelable: true
-	}) cfReadyEvent: EventEmitter;
+  componentDidLoad(){
+    if (this.htmlLoader && this.htmlLoader.parentNode) {
+      this.htmlLoader.parentNode.removeChild(this.htmlLoader);
+    }
+  }
 
+  render() {
+    let DefaultRendererTag = "psk-default-renderer";
+    return (
+      this.hasSlot ? <slot /> : <DefaultRendererTag handleScrollEvent={this.handleScrollEvent.bind(this)}></DefaultRendererTag>
+    );
+  }
 
-	componentWillLoad() {
+  handleScrollEvent(evt: MouseEvent) {
+    evt.preventDefault();
+    evt.stopImmediatePropagation();
 
-		let innerHTML = this.host.innerHTML;
-		innerHTML = innerHTML.replace(/\s/g, "");
-		if (innerHTML.length) {
-			this.hasSlot = true;
-		}
+    const eventOptions = {
+      bubbles: true,
+      composed: true,
+      cancelable: true
+    };
 
-		if (typeof this.controller === "string") {
-			return new Promise((resolve, reject) => {
-				ControllerRegistryService.getController(this.controller).then((CTRL) => {
-					new CTRL(this.host);
-					resolve();
-				}).catch(reject);
-			})
-		}
-		else {
-			console.error("No controller added to app-root");
-		}
-	}
-
-	componentDidLoad() {
-		document.getElementsByTagName("body")[0].removeChild(this.htmlLoader);
-	}
-
-	render() {
-		let DefaultRendererTag = "psk-default-renderer";
-		return (
-			this.hasSlot ? <slot /> : <DefaultRendererTag handleScrollEvent={this.handleScrollEvent.bind(this)}></DefaultRendererTag>
-		);
-	}
-
-	handleScrollEvent(evt: MouseEvent) {
-		evt.preventDefault();
-		evt.stopImmediatePropagation();
-
-		const eventOptions = {
-			bubbles: true,
-			composed: true,
-			cancelable: true
-		};
-
-		evt.target.dispatchEvent(new PskScrollEvent(
-			'pageScroll',
-			evt.target,
-			eventOptions
-		));
-	}
+    evt.target.dispatchEvent(new PskScrollEvent(
+      'pageScroll',
+      evt.target,
+      eventOptions
+    ));
+  }
 }
