@@ -1,3 +1,5 @@
+import PskScrollEvent from "../events/ScrollEvent";
+
 export function format(first: string, middle: string, last: string): string {
   return (
     (first || "") + (middle ? ` ${middle}` : "") + (last ? ` ${last}` : "")
@@ -140,4 +142,60 @@ export function canAttachShadow(tagName: string): boolean {
   ].find((htmlTag: string) => htmlTag === tagName);
 
   return found === tagName;
+}
+
+export function highlightCurentChapter(evt: PskScrollEvent) {
+  let self = this;
+
+  const scrollSectionElement: HTMLElement = evt.parentEventData
+    && evt.parentEventData as HTMLElement;
+  if (!scrollSectionElement) {
+    return;
+  }
+
+  self.activeChapter = null;
+  let foundChapterId: string = null;
+  let lastChapterVerticalOffset: number = 0;
+
+  let chapterList: Array<HTMLElement> = Array.from(self.element.querySelectorAll('psk-chapter'));
+  chapterList.forEach((chapter: HTMLElement) => {
+    if (foundChapterId !== null || self.activeChapter !== null) {
+      return;
+    }
+
+    const chapterId: string = chapter.getAttribute('guid');
+    if (!chapterId) {
+      return;
+    }
+
+    const child: HTMLElement = chapter.getElementsByTagName('psk-card') ?
+      chapter.getElementsByTagName('psk-card')[0] : null;
+
+    if (child === null) {
+      return;
+    }
+
+    let chapterVerticalOffset: number = 0;
+    if (lastChapterVerticalOffset >= child.offsetTop) {
+      chapterVerticalOffset = lastChapterVerticalOffset + child.offsetTop;
+    } else {
+      chapterVerticalOffset = child.offsetTop;
+    }
+
+    const pageVerticalOffset: number = scrollSectionElement.scrollTop;
+
+    if (pageVerticalOffset >= lastChapterVerticalOffset
+      && pageVerticalOffset <= chapterVerticalOffset) {
+      foundChapterId = chapterId;
+      self.activeChapter = foundChapterId;
+    }
+
+    lastChapterVerticalOffset = chapterVerticalOffset;
+  });
+
+  if (chapterList.length > 0) {
+    self.activeChapter = foundChapterId
+      ? foundChapterId
+      : chapterList[0].getAttribute('guid');
+  }
 }

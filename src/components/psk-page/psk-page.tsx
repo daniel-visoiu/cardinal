@@ -1,5 +1,5 @@
 import { Chapter } from "../../interfaces/Chapter";
-import { scrollToElement, createCustomEvent } from "../../utils/utils";
+import { scrollToElement, createCustomEvent, highlightCurentChapter } from "../../utils/utils";
 import { Component, h, Prop, Listen, State, Element } from "@stencil/core";
 import CustomTheme from "../../decorators/CustomTheme";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
@@ -28,7 +28,6 @@ export class PskPage {
 		propertyType: `string`
 	})
 	@Prop() tocTitle: string;
-
 
 	@State() componentFullyLoaded: boolean = false;
 
@@ -88,13 +87,19 @@ export class PskPage {
 
 	componentDidLoad() {
 		this.componentFullyLoaded = true;
-
+		document.addEventListener('pageScroll', this.handleScrollEvent, true);
 		this._checkForChapterScrolling();
 	}
 
-	render() {
-		document.addEventListener('pageScroll', this.handleScrollEvent.bind(this), true);
+	disconnectedCallback() {
+		document.removeEventListener('pageScroll', this.handleScrollEvent, true);
+	}
 
+	private handleScrollEvent = (evt: PskScrollEvent) => {
+		highlightCurentChapter.call(this, evt);
+	};
+
+	render() {
 		this._sendTableOfContentChapters();
 
 		return (
@@ -106,58 +111,5 @@ export class PskPage {
 				</div>
 			</div>
 		)
-	}
-
-	handleScrollEvent(evt: PskScrollEvent) {
-		evt.preventDefault();
-		evt.stopImmediatePropagation();
-
-		const scrollSectionElement: HTMLElement = evt.parentEventData
-			&& evt.parentEventData as HTMLElement;
-		if (!scrollSectionElement) {
-			return;
-		}
-
-		this.activeChapter = null;
-		let foundChapterId: string = null;
-		let lastChapterVerticalOffset: number = 0;
-
-		let chapterList: Array<HTMLElement> = Array.from(this.element.querySelectorAll('psk-chapter'));
-		chapterList.forEach((chapter: HTMLElement) => {
-			if (foundChapterId !== null || this.activeChapter !== null) {
-				return;
-			}
-
-			const chapterId: string = chapter.getAttribute('guid');
-			if (!chapterId) {
-				return;
-			}
-
-			const child: HTMLElement = chapter.getElementsByClassName('card psk-card')
-				&& chapter.getElementsByClassName('card psk-card')[0] as HTMLElement;
-
-			let chapterVerticalOffset: number = 0;
-			if (lastChapterVerticalOffset >= child.offsetTop) {
-				chapterVerticalOffset = lastChapterVerticalOffset + child.offsetTop;
-			} else {
-				chapterVerticalOffset = child.offsetTop;
-			}
-
-			const pageVerticalOffset: number = scrollSectionElement.scrollTop;
-
-			if (pageVerticalOffset >= lastChapterVerticalOffset
-				&& pageVerticalOffset <= chapterVerticalOffset) {
-				foundChapterId = chapterId;
-				this.activeChapter = foundChapterId;
-			}
-
-			lastChapterVerticalOffset = chapterVerticalOffset;
-		});
-
-		if (chapterList.length > 0) {
-			this.activeChapter = foundChapterId
-				? foundChapterId
-				: chapterList[0].getAttribute('guid');
-		}
 	}
 }
