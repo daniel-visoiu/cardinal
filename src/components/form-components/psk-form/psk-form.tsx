@@ -72,13 +72,14 @@ export class PskForm {
         description: [`By defining this attribute, the user is able to control the behaviour of the form, so by definition, this attribute holds the possible actions inside the form, the defined actions should be sepparated by comma(",").`,
             `Also, as a recommendation, the values should be provided using lowercases, and if there are more words inside an action, to be written using dash symbol(-)`,
             `Example of form actions: submit, reset-form, validate-form, cancel`,
-            `Using all these actions, the component will generate a <psk-link page="web-components/psk-button">psk-button</psk-link>.`],
+            `Using all these actions, the component will generate a <psk-link page="web-components/psk-button">psk-button</psk-link>.`,
+            `If this attribute is not defined, you can also add <psk-link page="web-components/psk-button">psk-button</psk-link> components anywhere in the form. The rule is the same, the event-name attribute assigned to the psk-button component needs to be registered in the form's controller.`],
         isMandatory: false,
         propertyType: 'string values sepparated by comma (,)',
-        defaultValue: "submit",
-        specialNote: "If this attribute has no value, then the submit form action is assumed as default value."
+        defaultValue: "null",
+        specialNote: ["If this attribute has no value, then the form will have no actions."]
     })
-    @Prop() formActions?: string | null = 'submit';
+    @Prop() formActions?: string | null = '';
 
     @Element() private _host: HTMLElement;
 }

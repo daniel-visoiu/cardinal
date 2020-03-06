@@ -35,7 +35,7 @@ export class PskList {
         let finalHtmlLines = [];
         let currentTag = null;
         let currentListItem = '';
-
+        
         // @ts-ignore --Typescript does not recognize trimLeft!?
         const trimmedLine = htmlLines[0].trimLeft();
         const offset = htmlLines[0].length - trimmedLine.length;
@@ -71,8 +71,14 @@ export class PskList {
 
             /**
              * Check if first character is "<", which brings a component or an HTML tag.
-             * It can be the start of a tag or the end of a tag
+             * It can be the start of a tag, the end of a tag, or an inline tag (e.g. <code>Text</code>)
              */
+            const inlineMatch = PSK_LIST_PARSE_CONFIG.inlineTag.exec(line);
+            if (inlineMatch !== null) {
+                finalHtmlLines.push(`<li>${line}</li>`);
+                continue;
+            }
+
             const startMatch = PSK_LIST_PARSE_CONFIG.startTag.exec(line);
             if (startMatch !== null && !currentTag) {
                 currentTag = startMatch[1];

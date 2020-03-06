@@ -23,7 +23,8 @@ export const EVENTS_TYPES = {
 
 export const PSK_LIST_PARSE_CONFIG = {
   startTag: /^<([a-z]+-?[a-z]*)+[^>]*>/,
-  endTag: /^<\/([a-z]+-?[a-z]*)+[^>]*>/
+  endTag: /^<\/([a-z]+-?[a-z]*)+[^>]*>/,
+  inlineTag: /^<([a-z]+-?[a-z]*)+[^>]*>.*<\/([a-z]+-?[a-z]*)+[^>]*>/
 };
 
 export const ACTIONS_ICONS = {
