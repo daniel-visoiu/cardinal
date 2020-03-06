@@ -1,4 +1,4 @@
-import { Component, State, Event, EventEmitter, Listen, h, Prop } from "@stencil/core";
+import { Component, State, Event, EventEmitter, Listen, h, Prop, Watch } from "@stencil/core";
 import { Message } from '../../interfaces/FeedbackMessage'
 import { StyleCustomisation } from '../../interfaces/StyleCustomisation'
 import Config from "./Config.js";
@@ -10,6 +10,8 @@ import CustomTheme from "../../decorators/CustomTheme";
     shadow: true
 })
 export class PskListFeebacks {
+    private _styleCustomisation: StyleCustomisation = {};
+
     @State() alertOpened: boolean = false;
     @State() _messagesQueue: Message[] = [];
     @State() _messagesContent: Message[] = [];
@@ -17,7 +19,7 @@ export class PskListFeebacks {
     @State() timer = 0;
     @State() opened: boolean = false;
     @State() typeOfAlert: Array<string> = [];
-   
+
     @CustomTheme()
     @TableOfContentProperty({
         description: `This property is a object based on StyleCustomisation interface `,
@@ -25,7 +27,15 @@ export class PskListFeebacks {
         propertyType: `StyleCustomisation type`,
         specialNote: `Even if you do not use all the parameters there will not be a problem with the default renderers.`,
     })
-    @Prop() styleCustomisation?: StyleCustomisation
+    @Prop() styleCustomisation?: StyleCustomisation | string = {}
+    @Watch('styleCustomisation')
+    styleCustomisationWatcher(newValue: StyleCustomisation | string) {
+        if (typeof newValue === 'string') {
+            this._styleCustomisation = JSON.parse(newValue);
+        } else {
+            this._styleCustomisation = newValue;
+        }
+    }
 
     @TableOfContentProperty({
         description: `This property is the auto closing timer in milliseconds for the alert.`,
@@ -97,6 +107,7 @@ export class PskListFeebacks {
     }
 
     componentWillLoad() {
+        this.styleCustomisationWatcher(this.styleCustomisation);
         this.openFeedbackHandler.emit((message, name, typeOfAlert) => {
             if (typeOfAlert) {
                 this.typeOfAlert.push(typeOfAlert)
@@ -170,7 +181,7 @@ export class PskListFeebacks {
                     message={message}
                     timeSinceCreation={this.timer}
                     timeMeasure={this.timeMeasure}
-                    styleCustomisation={this.styleCustomisation} />)
+                    styleCustomisation={this._styleCustomisation} />)
             }
             else {
                 _feedbackTag = this.alertRenderer ? this.alertRenderer : 'psk-ui-alert'
@@ -179,7 +190,7 @@ export class PskListFeebacks {
                         message={this._messagesContent[this._messagesContent.length - 1]}
                         typeOfAlert={this.typeOfAlert[key]}
                         timeAlive={this.timeAlive}
-                        styleCustomisation={this.styleCustomisation} />
+                        styleCustomisation={this._styleCustomisation} />
                 )
             }
         })

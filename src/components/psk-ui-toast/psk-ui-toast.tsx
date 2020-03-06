@@ -1,4 +1,4 @@
-import { Component, h, Prop, Event, EventEmitter, State } from '@stencil/core'
+import { Component, h, Prop, Event, EventEmitter, State, Watch } from '@stencil/core'
 import {StyleCustomisation} from '../../interfaces/StyleCustomisation'
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
@@ -10,6 +10,8 @@ import CustomTheme from '../../decorators/CustomTheme';
 })
 
 export class PskUiToast {
+    private _styleCustomisation: StyleCustomisation = {};
+
     @CustomTheme()
     @TableOfContentProperty({
         description: `This property is the message that will be rendered on the toast`,
@@ -38,7 +40,15 @@ export class PskUiToast {
         isMandatory: false,
         propertyType: `StyleCustomisation`,
     })
-    @Prop() styleCustomisation: StyleCustomisation
+    @Prop() styleCustomisation?: StyleCustomisation | string = {}
+    @Watch('styleCustomisation')
+    styleCustomisationWatcher(newValue: StyleCustomisation | string) {
+        if (typeof newValue === 'string') {
+            this._styleCustomisation = JSON.parse(newValue);
+        } else {
+            this._styleCustomisation = newValue;
+        }
+    }
 
     @State() toast: any = null;
 
@@ -53,11 +63,15 @@ export class PskUiToast {
         bubbles: true,
     }) closeFeedback: EventEmitter
 
+    componentWillLoad() {
+        this.styleCustomisationWatcher(this.styleCustomisation);
+    }
+
     render() {
         return (
             this.toast = (
-                <div class="toast fade out show" style={this.styleCustomisation.toast ? (this.styleCustomisation.toast.feedback ? (this.styleCustomisation.toast.feedback.style ? this.styleCustomisation.toast.feedback.style : {}) : {}) : {}}>
-                    <div class="toast-header" style={this.styleCustomisation.toast ?( this.styleCustomisation.toast.header ? (this.styleCustomisation.toast.header.style ? this.styleCustomisation.toast.header.style : {} ) : {}):{}}>
+                <div class="toast fade out show" style={this._styleCustomisation.toast ? (this._styleCustomisation.toast.feedback ? (this._styleCustomisation.toast.feedback.style ? this._styleCustomisation.toast.feedback.style : {}) : {}) : {}}>
+                    <div class="toast-header" style={this._styleCustomisation.toast ?( this._styleCustomisation.toast.header ? (this._styleCustomisation.toast.header.style ? this._styleCustomisation.toast.header.style : {} ) : {}):{}}>
                         <strong class="mr-auto">{this.message.name}</strong>
                         {(this.timeMeasure !== 'Right now') ? <small>{this.timeSinceCreation} {this.timeMeasure} </small> : <small>{this.timeMeasure} </small>}
                         <button
@@ -71,7 +85,7 @@ export class PskUiToast {
                             <span >&times;</span>
                         </button>
                     </div>
-                    <div class="toast-body" style={this.styleCustomisation.toast ?( this.styleCustomisation.toast.body ? (this.styleCustomisation.toast.body.style ? this.styleCustomisation.toast.body.style : {} ) : {}):{}}>
+                    <div class="toast-body" style={this._styleCustomisation.toast ?( this._styleCustomisation.toast.body ? (this._styleCustomisation.toast.body.style ? this._styleCustomisation.toast.body.style : {} ) : {}):{}}>
                         {this.message.content}
                     </div>
                 </div>

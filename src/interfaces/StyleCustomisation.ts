@@ -1,19 +1,19 @@
 export interface StyleCustomisation{
-    toast: {
-        header: {
-            style: { [key: string]: string; },
-            title: string
+    toast?: {
+        header?: {
+            style?: { [key: string]: string; },
+            title?: string
         },
-        body:{
-            style: { [key: string]: string; },
-            content: string
+        body?:{
+            style?: { [key: string]: string; },
+            content?: string
         },
-        feedback: {
-            style: { [key: string]: string; }
+        feedback?: {
+            style?: { [key: string]: string; }
         }
     }
-    alert:{
-        style:{ [key: string]: string; },
-        content:string
+    alert?: {
+        style? :{ [key: string]: string; },
+        content?: string
     }
 }
