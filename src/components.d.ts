@@ -198,7 +198,7 @@ export namespace Components {
   interface PskListFeedbacks {
     'alertRenderer'?: string;
     'messagesToDisplay'?: number;
-    'styleCustomisation'?: StyleCustomisation;
+    'styleCustomisation'?: StyleCustomisation | string;
     'timeAlive'?: number;
     'toastRenderer'?: string;
   }
@@ -334,7 +334,7 @@ export namespace Components {
   }
   interface PskUiAlert {
     'message': any;
-    'styleCustomisation': StyleCustomisation;
+    'styleCustomisation': StyleCustomisation | string;
     'timeAlive': any;
     'typeOfAlert': string;
   }
@@ -343,7 +343,7 @@ export namespace Components {
   }
   interface PskUiToast {
     'message': any;
-    'styleCustomisation': StyleCustomisation;
+    'styleCustomisation'?: StyleCustomisation | string;
     'timeMeasure': string;
     'timeSinceCreation': number;
   }
@@ -1071,7 +1071,7 @@ declare namespace LocalJSX {
     'alertRenderer'?: string;
     'messagesToDisplay'?: number;
     'onOpenFeedback'?: (event: CustomEvent<any>) => void;
-    'styleCustomisation'?: StyleCustomisation;
+    'styleCustomisation'?: StyleCustomisation | string;
     'timeAlive'?: number;
     'toastRenderer'?: string;
   }
@@ -1212,7 +1212,7 @@ declare namespace LocalJSX {
   interface PskUiAlert extends JSXBase.HTMLAttributes<HTMLPskUiAlertElement> {
     'message'?: any;
     'onCloseFeedback'?: (event: CustomEvent<any>) => void;
-    'styleCustomisation'?: StyleCustomisation;
+    'styleCustomisation'?: StyleCustomisation | string;
     'timeAlive'?: any;
     'typeOfAlert'?: string;
   }
@@ -1222,7 +1222,7 @@ declare namespace LocalJSX {
   interface PskUiToast extends JSXBase.HTMLAttributes<HTMLPskUiToastElement> {
     'message'?: any;
     'onCloseFeedback'?: (event: CustomEvent<any>) => void;
-    'styleCustomisation'?: StyleCustomisation;
+    'styleCustomisation'?: StyleCustomisation | string;
     'timeMeasure'?: string;
     'timeSinceCreation'?: number;
   }
