@@ -19,6 +19,7 @@ export class PskToc {
     @State() pskPageElement: HTMLElement;
     @State() activeChapter: string = null;
     @State() chapterList: Array<Chapter> = [];
+    @State() initialChapterSetupDone: boolean = false;
 
     connectedCallback() {
         this.pskPageElement = closestParentElement(getElement(this), 'psk-page');
@@ -88,6 +89,7 @@ export class PskToc {
                         evt.stopImmediatePropagation();
                         evt.preventDefault();
                         scrollToElement(chapter.title, pageElement);
+                        this.activeChapter = chapter.guid;
                     }}>
                     {`${indexToDisplay} ${chapter.title}`}
                     {
@@ -100,6 +102,11 @@ export class PskToc {
     }
 
     render() {
+        if (!this.initialChapterSetupDone && this.chapterList.length > 0) {
+            this.activeChapter = this.chapterList[0].guid;
+            this.initialChapterSetupDone = true;
+        }
+
         return (
             <div class="table-of-content">
                 <psk-card title={this.title}>

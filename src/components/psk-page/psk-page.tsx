@@ -1,9 +1,12 @@
 import { Chapter } from "../../interfaces/Chapter";
-import { scrollToElement, createCustomEvent, highlightCurentChapter } from "../../utils/utils";
 import { Component, h, Prop, Listen, State, Element } from "@stencil/core";
+
 import CustomTheme from "../../decorators/CustomTheme";
-import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import PskScrollEvent from "../../events/ScrollEvent";
+
+import { highlightChapter } from "../../utils/highlightChapter";
+import { scrollToElement, createCustomEvent } from "../../utils/utils";
+import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 
 @Component({
 	tag: "psk-page",
@@ -96,7 +99,7 @@ export class PskPage {
 	}
 
 	private handleScrollEvent = (evt: PskScrollEvent) => {
-		highlightCurentChapter.call(this, evt);
+		highlightChapter.call(this, evt);
 	};
 
 	render() {

@@ -7,12 +7,12 @@
 
 ## Properties
 
-| Property             | Attribute             | Description | Type                 | Default       |
-| -------------------- | --------------------- | ----------- | -------------------- | ------------- |
-| `message`            | `message`             |             | `any`                | `undefined`   |
-| `styleCustomisation` | --                    |             | `StyleCustomisation` | `undefined`   |
-| `timeMeasure`        | `time-measure`        |             | `string`             | `'Right now'` |
-| `timeSinceCreation`  | `time-since-creation` |             | `number`             | `undefined`   |
+| Property             | Attribute             | Description | Type                           | Default       |
+| -------------------- | --------------------- | ----------- | ------------------------------ | ------------- |
+| `message`            | `message`             |             | `any`                          | `undefined`   |
+| `styleCustomisation` | `style-customisation` |             | `StyleCustomisation \| string` | `{}`          |
+| `timeMeasure`        | `time-measure`        |             | `string`                       | `'Right now'` |
+| `timeSinceCreation`  | `time-since-creation` |             | `number`                       | `undefined`   |
 
 
 ## Events
