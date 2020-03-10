@@ -115,6 +115,7 @@ export function normalizeCamelCaseToDashed(source: string): string {
  */
 export function normalizeElementId(source:string):string{
   let normalizedId = source.replace(INVALID_ID_CHARACTERS_REGEX, "-").toLowerCase();
+  normalizedId = normalizedId.replace(/(-+){2}/gm,"-");
   normalizedId = normalizedId.replace(/(-+)$/gm,"");
   return normalizedId;
 }
