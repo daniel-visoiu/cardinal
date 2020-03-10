@@ -4,6 +4,7 @@ import { BindModel } from '../../../decorators/BindModel';
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
 import { normalizeRegexToString } from '../../../utils/utils';
 import CustomTheme from '../../../decorators/CustomTheme';
+import {INVALID_ID_CHARACTERS_REGEX} from "../../../utils/constants";
 
 @Component({
     tag: 'psk-select'
@@ -79,7 +80,7 @@ export class PskSelect {
 
             let value, label = labelValue[0].trim();
             if (labelValue.length === 1) {
-                value = normalizeRegexToString(label, /( |:|\/|\.)/g, '-', (str: string) => str.toLowerCase());
+                value = normalizeRegexToString(label, INVALID_ID_CHARACTERS_REGEX, '-', (str: string) => str.toLowerCase());
             } else {
                 value = labelValue[1].trim();
             }

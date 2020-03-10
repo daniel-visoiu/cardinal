@@ -3,6 +3,7 @@ import { Chapter } from "../../interfaces/Chapter";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import CustomTheme from "../../decorators/CustomTheme";
 import { TableOfContentEvent } from "../../decorators/TableOfContentEvent";
+import {normalizeElementId} from "../../utils/utils";
 
 @Component({
 	tag: "psk-chapter"
@@ -84,7 +85,7 @@ export class PskChapter {
 		return (
 			<psk-card
 				title={this.title}
-				id={this.title.replace(/( |:|\/|\.)/g, "-").toLowerCase()}>
+				id={normalizeElementId(this.title)}>
 				<slot />
 			</psk-card>
 		);

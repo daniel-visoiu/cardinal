@@ -1,5 +1,6 @@
 import { Component, h, Listen, State, Prop } from "@stencil/core";
 import { EventOptions } from "../../decorators/declarations/declarations";
+import {normalizeElementId} from "../../utils/utils";
 
 @Component({
     tag: "psk-event-descriptor"
@@ -32,7 +33,7 @@ export class PskEventDescriptor {
         });
 
         return (
-            <psk-chapter title={this.title} id={this.title.replace(/( |:|\/|\.)/g, "-").toLowerCase()}>
+            <psk-chapter title={this.title} id={normalizeElementId(this.title)}>
                 {componentEventsDefinitions}
             </psk-chapter>
         );

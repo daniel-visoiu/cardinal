@@ -1,6 +1,6 @@
 import { Component, h, Prop, Element, Event, EventEmitter, State } from "@stencil/core";
-import { closestParentElement, scrollToElement } from "../../utils/utils";
-import { TOOLTIP_TEXT, TOOLTIP_COPIED_TEXT } from "../../utils/constants";
+import {closestParentElement, normalizeElementId, scrollToElement} from "../../utils/utils";
+import {TOOLTIP_TEXT, TOOLTIP_COPIED_TEXT} from "../../utils/constants";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import CustomTheme from "../../decorators/CustomTheme";
 import { TableOfContentEvent } from "../../decorators/TableOfContentEvent";
@@ -94,7 +94,7 @@ export class PskCopyClipboard {
 
   render() {
 
-    const elementId = this.id.trim().replace(/( |:|\/|\.)/g, "-").toLowerCase();
+    const elementId = normalizeElementId(this.id.trim());
     if (elementId.length === 0 || !this._isCopySupported()) {
       return;
     }

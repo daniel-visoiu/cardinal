@@ -1,3 +1,5 @@
+import {INVALID_ID_CHARACTERS_REGEX} from "./constants";
+
 export function format(first: string, middle: string, last: string): string {
   return (
     (first || "") + (middle ? ` ${middle}` : "") + (last ? ` ${last}` : "")
@@ -8,7 +10,7 @@ export function scrollToElement(
   elementId: string,
   htmlView: HTMLElement
 ): void {
-  const selector = elementId.replace(/( |:|\/|\.)/g, "-").toLowerCase();
+  const selector = normalizeElementId(elementId);
   const chapterElm = htmlView.querySelector(`#${selector}`);
 
   if (!chapterElm) {
@@ -105,6 +107,16 @@ export function normalizeCamelCaseToDashed(source: string): string {
       return `-${letter.toLowerCase()}`;
     })
     .join("");
+}
+
+/**
+ * normalize a string to be compliant with a HTML id value
+ * @param source
+ */
+export function normalizeElementId(source:string):string{
+  let normalizedId = source.replace(INVALID_ID_CHARACTERS_REGEX, "-").toLowerCase();
+  normalizedId = normalizedId.replace(/(-+)$/gm,"");
+  return normalizedId;
 }
 
 /**

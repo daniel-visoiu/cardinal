@@ -20,7 +20,7 @@ export const EVENTS_TYPES = {
   PSK_WIZARD_EVT:"PSK_WIZARD_EVT",
   PSK_FILE_CHOOSER_EVT:"PSK_FILE_CHOOSER_EVT"
 };
-
+export const INVALID_ID_CHARACTERS_REGEX = /[^A-Za-z0-9 _]/g;
 export const PSK_LIST_PARSE_CONFIG = {
   startTag: /^<([a-z]+-?[a-z]*)+[^>]*>/,
   endTag: /^<\/([a-z]+-?[a-z]*)+[^>]*>/,

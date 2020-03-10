@@ -1,5 +1,6 @@
 import { Component, h, Listen, State, Prop } from "@stencil/core";
 import { PropertyOptions } from "../../decorators/declarations/declarations";
+import {normalizeElementId} from "../../utils/utils";
 
 @Component({
     tag: "psk-property-descriptor"
@@ -37,7 +38,7 @@ export class PskPropertyDescriptor {
         });
 
         return (
-            <psk-chapter title={this.title} id={this.title.replace(/( |:|\/|\.)/g, "-").toLowerCase()}>
+            <psk-chapter title={this.title} id={normalizeElementId(this.title)}>
                 {componentPropertiesDefinitions}
             </psk-chapter>
         );
