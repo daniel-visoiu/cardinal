@@ -1,4 +1,4 @@
-import { Component, h, Listen, State, Prop } from "@stencil/core";
+import { Component, h, Listen, State } from "@stencil/core";
 import CustomTheme from "../../../decorators/CustomTheme";
 
 const appMaxWidth = 960;
@@ -10,8 +10,6 @@ const appMaxWidth = 960;
 
 export class AppRootDefaultRender {
 	@CustomTheme()
-
-	@Prop() handleScrollEvent: Function;
 
 	@State() mobileLayout: boolean = false;
 
@@ -44,7 +42,7 @@ export class AppRootDefaultRender {
 					{asideComponents}
 				</aside>
 
-				<section onScroll={this.handleScrollEvent.bind(this)}>
+				<section>
 					<psk-app-router failRedirectTo="/home"></psk-app-router>
 					{this.mobileLayout === true ? versionCmpt : null}
 				</section>

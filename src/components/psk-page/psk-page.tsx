@@ -2,7 +2,6 @@ import { Chapter } from "../../interfaces/Chapter";
 import { Component, h, Prop, Listen, State, Element } from "@stencil/core";
 
 import CustomTheme from "../../decorators/CustomTheme";
-import PskScrollEvent from "../../events/ScrollEvent";
 
 import { highlightChapter } from "../../utils/highlightChapter";
 import { scrollToElement, createCustomEvent } from "../../utils/utils";
@@ -35,6 +34,20 @@ export class PskPage {
 	@State() componentFullyLoaded: boolean = false;
 
 	@Element() private element: HTMLElement;
+
+	render() {
+		this._sendTableOfContentChapters();
+
+		return (
+			<div class="main-container">
+				<nav><h3>{this.title}</h3></nav>
+				<div class="page-content container">
+					{this.componentFullyLoaded ? <slot />
+						: <psk-ui-loader shouldBeRendered={true} />}
+				</div>
+			</div>
+		)
+	}
 
 	@Listen("psk-send-chapter")
 	receiveChapters(evt: CustomEvent): void {
@@ -88,31 +101,28 @@ export class PskPage {
 		}, true);
 	}
 
+	private __isScrolling: number;
+
+	private __handleScrollEvent = (evt: MouseEvent) => {
+		let self = this;
+		evt.preventDefault();
+		evt.stopImmediatePropagation();
+
+		clearTimeout(this.__isScrolling);
+
+		this.__isScrolling = setTimeout(function () {
+			highlightChapter.call(self);
+		}, 100);
+	}
+
 	componentDidLoad() {
 		this.componentFullyLoaded = true;
-		document.addEventListener('pageScroll', this.handleScrollEvent, true);
 		this._checkForChapterScrolling();
+
+		this.element.addEventListener('scroll', this.__handleScrollEvent, true);
 	}
 
 	disconnectedCallback() {
-		document.removeEventListener('pageScroll', this.handleScrollEvent, true);
-	}
-
-	private handleScrollEvent = (evt: PskScrollEvent) => {
-		highlightChapter.call(this, evt);
-	};
-
-	render() {
-		this._sendTableOfContentChapters();
-
-		return (
-			<div>
-				<nav><h3>{this.title}</h3></nav>
-				<div class="page-content container">
-					{this.componentFullyLoaded ? <slot />
-						: <psk-ui-loader shouldBeRendered={true} />}
-				</div>
-			</div>
-		)
+		this.element.removeEventListener('scroll', this.__handleScrollEvent, true);
 	}
 }

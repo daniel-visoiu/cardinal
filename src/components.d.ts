@@ -113,9 +113,7 @@ export namespace Components {
     'required'?: boolean;
     'value'?: string | null;
   }
-  interface PskDefaultRenderer {
-    'handleScrollEvent': Function;
-  }
+  interface PskDefaultRenderer {}
   interface PskDescription {
     'title': string;
   }
@@ -983,9 +981,7 @@ declare namespace LocalJSX {
     'required'?: boolean;
     'value'?: string | null;
   }
-  interface PskDefaultRenderer extends JSXBase.HTMLAttributes<HTMLPskDefaultRendererElement> {
-    'handleScrollEvent'?: Function;
-  }
+  interface PskDefaultRenderer extends JSXBase.HTMLAttributes<HTMLPskDefaultRendererElement> {}
   interface PskDescription extends JSXBase.HTMLAttributes<HTMLPskDescriptionElement> {
     'title'?: string;
   }

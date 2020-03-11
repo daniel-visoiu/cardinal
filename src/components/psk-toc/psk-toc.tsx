@@ -102,7 +102,8 @@ export class PskToc {
     }
 
     render() {
-        if (!this.initialChapterSetupDone && this.chapterList.length > 0) {
+        if ((!this.initialChapterSetupDone || !this.activeChapter)
+            && this.chapterList.length > 0) {
             this.activeChapter = this.chapterList[0].guid;
             this.initialChapterSetupDone = true;
         }

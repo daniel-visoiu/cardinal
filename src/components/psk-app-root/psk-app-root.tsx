@@ -1,9 +1,8 @@
-import {Component, h, Prop, State, Element} from '@stencil/core';
+import { Component, h, Prop, State, Element } from '@stencil/core';
 import ControllerRegistryService from "../../services/ControllerRegistryService";
-import {ExtendedHistoryType} from "../../interfaces/ExtendedHistoryType";
-import {HTMLStencilElement} from "@stencil/core/internal";
-import {TableOfContentProperty} from "../../decorators/TableOfContentProperty";
-import PskScrollEvent from '../../events/ScrollEvent';
+import { ExtendedHistoryType } from "../../interfaces/ExtendedHistoryType";
+import { HTMLStencilElement } from "@stencil/core/internal";
+import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 
 @Component({
   tag: 'psk-app-root',
@@ -23,7 +22,7 @@ export class PskAppRoot {
   @State() componentCode: string = "";
   @Element() host: HTMLStencilElement;
   @State() hasSlot: boolean = false;
-  @State() htmlLoader:HTMLElement;
+  @State() htmlLoader: HTMLElement;
 
   __createLoader() {
 
@@ -35,12 +34,12 @@ export class PskAppRoot {
     }
 
     let node = document.createElement("div");
-    node.className="app-loader";
+    node.className = "app-loader";
     node.innerHTML = `<div class='sk-fading-circle'>${circles}</div>`;
     return node;
   }
   componentWillLoad() {
-    if(this.host.parentElement){
+    if (this.host.parentElement) {
       this.htmlLoader = this.__createLoader();
       this.host.parentElement.appendChild(this.htmlLoader);
     }
@@ -51,20 +50,20 @@ export class PskAppRoot {
       this.hasSlot = true;
     }
 
-    if (typeof this.controller=== "string") {
+    if (typeof this.controller === "string") {
       return new Promise((resolve, reject) => {
         ControllerRegistryService.getController(this.controller).then((CTRL) => {
-           new CTRL(this.host);
+          new CTRL(this.host);
           resolve();
         }).catch(reject);
       })
     }
-    else{
+    else {
       console.error("No controller added to app-root");
     }
   }
 
-  componentDidLoad(){
+  componentDidLoad() {
     if (this.htmlLoader && this.htmlLoader.parentNode) {
       this.htmlLoader.parentNode.removeChild(this.htmlLoader);
     }
@@ -73,24 +72,9 @@ export class PskAppRoot {
   render() {
     let DefaultRendererTag = "psk-default-renderer";
     return (
-      this.hasSlot ? <slot /> : <DefaultRendererTag handleScrollEvent={this.handleScrollEvent.bind(this)}></DefaultRendererTag>
+      this.hasSlot
+        ? <slot />
+        : <DefaultRendererTag />
     );
-  }
-
-  handleScrollEvent(evt: MouseEvent) {
-    evt.preventDefault();
-    evt.stopImmediatePropagation();
-
-    const eventOptions = {
-      bubbles: true,
-      composed: true,
-      cancelable: true
-    };
-
-    evt.target.dispatchEvent(new PskScrollEvent(
-      'pageScroll',
-      evt.target,
-      eventOptions
-    ));
   }
 }
