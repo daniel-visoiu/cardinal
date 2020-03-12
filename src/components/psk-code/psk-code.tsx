@@ -1,9 +1,9 @@
-import {Component, Element, h, State, Prop} from "@stencil/core";
+import { Component, Element, h, State, Prop } from "@stencil/core";
 import Prism from 'prismjs';
 import "prismjs/components/prism-json.js";
 import "prismjs/components/prism-bash.js";
 import "prismjs/components/prism-shell-session.js";
-import {TableOfContentProperty} from "../../decorators/TableOfContentProperty";
+import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import CustomTheme from "../../decorators/CustomTheme";
 
 const HTML_COMMENT_TAG = /<!---->/gm;
@@ -55,7 +55,7 @@ export class PskCode {
   }
 
   componentDidLoad() {
-      Prism.highlightAllUnder(this.host);
+    Prism.highlightAllUnder(this.host);
   }
 
   render() {
@@ -102,7 +102,7 @@ export class PskCode {
     );
 
     if (this.title.replace(/\s/g, '') === '') {
-      return <div>{sourceCode}</div>;
+      return sourceCode;
     }
 
     return <psk-chapter title={this.title}>{sourceCode}</psk-chapter>;

@@ -14,6 +14,7 @@ import { TableOfContentProperty } from "../../decorators/TableOfContentProperty"
 export class PskPage {
 	@CustomTheme()
 
+	@State() hasToc: boolean = false;
 	@State() activeChapter: string = null;
 	@State() chapters: Array<Chapter> = [];
 
@@ -36,14 +37,24 @@ export class PskPage {
 	@Element() private element: HTMLElement;
 
 	render() {
-		this._sendTableOfContentChapters();
+		this.hasToc && this._sendTableOfContentChapters();
+
+		const tableOfContentSlot = (
+			<div class="toc">
+				<slot name="toc" />
+			</div>
+		);
 
 		return (
 			<div class="main-container">
 				<nav><h3>{this.title}</h3></nav>
-				<div class="page-content container">
-					{this.componentFullyLoaded ? <slot />
-						: <psk-ui-loader shouldBeRendered={true} />}
+				<div class="page-content">
+					{(this.componentFullyLoaded && this.hasToc) && tableOfContentSlot}
+
+					<div class="container">
+						{this.componentFullyLoaded ? <slot />
+							: <psk-ui-loader shouldBeRendered={true} />}
+					</div>
 				</div>
 			</div>
 		)
@@ -113,6 +124,14 @@ export class PskPage {
 		this.__isScrolling = setTimeout(function () {
 			highlightChapter.call(self);
 		}, 100);
+	}
+
+	connectedCallback() {
+		if (this.element.querySelector('psk-toc') !== null) {
+			const toc: HTMLElement = this.element.querySelector('psk-toc');
+			toc.setAttribute('slot', 'toc');
+			this.hasToc = true;
+		}
 	}
 
 	componentDidLoad() {

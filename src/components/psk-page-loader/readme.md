@@ -16,7 +16,7 @@
 
 ### Used by
 
- - [psk-container](..\psk-container)
+ - [psk-container](../psk-container)
 
 ### Graph
 ```mermaid
