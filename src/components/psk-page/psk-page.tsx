@@ -52,7 +52,10 @@ export class PskPage {
 					{(this.componentFullyLoaded && this.hasToc) && tableOfContentSlot}
 
 					<div class="container">
-						{this.componentFullyLoaded ? <slot />
+						{this.componentFullyLoaded ?
+              <div class="container-content">
+                <slot />
+              </div>
 							: <psk-ui-loader shouldBeRendered={true} />}
 					</div>
 				</div>
