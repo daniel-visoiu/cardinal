@@ -17,7 +17,7 @@ export class PskPage {
 	@State() hasToc: boolean = false;
 	@State() activeChapter: string = null;
 	@State() chapters: Array<Chapter> = [];
-
+	@Prop() navClass : string = "";
 	@TableOfContentProperty({
 		description: `This property will be used as the title for the page.`,
 		isMandatory: false,
@@ -47,7 +47,7 @@ export class PskPage {
 
 		return (
 			<div class="main-container">
-				<nav><h3>{this.title}</h3></nav>
+				<nav class={this.navClass}><h3>{this.title}</h3></nav>
 				<div class="page-content">
 					{(this.componentFullyLoaded && this.hasToc) && tableOfContentSlot}
 

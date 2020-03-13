@@ -1,7 +1,7 @@
 import { Component, h, Prop } from '@stencil/core';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import CustomTheme from '../../decorators/CustomTheme';
-import {BindModel} from "../../decorators/BindModel";
+import { BindModel } from "../../decorators/BindModel";
 const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
 
 @Component({
@@ -11,7 +11,7 @@ const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
 
 export class PskAttachmentsList {
 	@CustomTheme()
-  @BindModel()
+	@BindModel()
 	@TableOfContentProperty({
 		description: `This parameter holds the files that can be downloaded. They can be downloaded one by one by clicking on the desired file, or all at the same time.`,
 		specialNote: `WgFile is a custom type. Inside it, the following information can be stored:
@@ -32,6 +32,8 @@ export class PskAttachmentsList {
 		defaultValue: 'null'
 	})
 	@Prop() removeFileFromList?: Function = null;
+
+	@Prop() attachmentsClass: string = "";
 
 	static bytesToSize(bytes) {
 		if (bytes == 0) return '0 Byte';
@@ -55,7 +57,7 @@ export class PskAttachmentsList {
 					fileType = "fa-file-excel-o";
 					break;
 				case "doc":
-        case "docx":
+				case "docx":
 					fileType = "fa-file-word-o";
 					break;
 				case "jpg":
@@ -65,10 +67,9 @@ export class PskAttachmentsList {
 				default:
 					fileType = "fa-file-o";
 			}
-
 			return <button type="button" class="btn btn-primary mr-2 mt-2">
 				<span class={`icon mr-1 fa ${fileType}`} />{file.name}
-				<span class="badge badge-light ml-1">{PskAttachmentsList.bytesToSize(file.size)}</span>
+				<span class={`badge badge-light ml-1 + ${this.attachmentsClass}`}>{PskAttachmentsList.bytesToSize(file.size)}</span>
 				{this.removeFileFromList !== null && <span
 					class="fa fa-remove fa-2x pull-right"
 					onClick={(evt) => {
