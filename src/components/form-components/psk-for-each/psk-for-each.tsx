@@ -1,6 +1,8 @@
-import {Component, Prop, Element, State, h} from '@stencil/core';
-import {BindModel} from '../../../decorators/BindModel';
-import {TableOfContentProperty} from '../../../decorators/TableOfContentProperty';
+import { Component, Prop, Element, State, h } from '@stencil/core';
+import { BindModel } from '../../../decorators/BindModel';
+import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
+import { DISPLAY_IF_IS, DISPLAY_IF_EXISTS } from '../../../utils/constants';
+import { __isAbleToBeDisplayed } from '../../../utils/bindModelUtils';
 
 @Component({
   tag: 'psk-for-each'
@@ -32,7 +34,7 @@ export class PskForEach {
       return node.hasAttribute("slot") && node.getAttribute("slot") === "no-data";
     }) as Element;
 
-    if(emptyNode){
+    if (emptyNode) {
       emptyNode.removeAttribute("slot");
       this.emptyNode = emptyNode.cloneNode(true) as Element;
     }
@@ -40,7 +42,7 @@ export class PskForEach {
     //empty the host
     this.__host.innerHTML = "";
     if (templateChildren) {
-      templateChildren.forEach(child=>{
+      templateChildren.forEach(child => {
         this.templateNodes.push(child.cloneNode(true));
       })
 
@@ -50,12 +52,12 @@ export class PskForEach {
   }
 
   componentDidLoad() {
-    if(this['rootModel']){
+    if (this['rootModel']) {
       this['rootModel'].onChange(this['parentChain'], () => {
         this.modelChanged = !this.modelChanged;
       });
     }
-    else{
+    else {
       //TODO: an error should be logged to console.
       //In this moment the TableOfContentsEvents decorator is not properly stopping this component
       //console.error("Model was not set or it wasn't found");
@@ -80,7 +82,7 @@ export class PskForEach {
       let pChain = this['parentChain'] ? `${this['parentChain']}.${i}.` : `${i}.`;
 
       let preparedNodes = [];
-      this.templateNodes.forEach(node=>{
+      this.templateNodes.forEach(node => {
         let clonedTemplate = node.cloneNode(true) as Element;
         let preparedNode = this.prepareItem(pChain, clonedTemplate);
         preparedNodes.push(<div innerHTML={preparedNode.outerHTML}></div>)
@@ -96,7 +98,26 @@ export class PskForEach {
     return childList;
   }
 
+  __updateDisplayConditionals(node: Element, chain: string): void {
+    const displayIfIs: string = node.getAttribute(DISPLAY_IF_IS),
+      displayIfExists: string = node.getAttribute(DISPLAY_IF_EXISTS);
+
+    if (displayIfIs) {
+      node.setAttribute(DISPLAY_IF_IS, `${chain}${displayIfIs.trim()}`);
+    }
+    if (displayIfExists) {
+      node.setAttribute(DISPLAY_IF_EXISTS, `${chain}${displayIfExists.trim()}`);
+    }
+  }
+
   __processNode(node: Element, chain: string): void {
+    this.__updateDisplayConditionals(node, chain);
+
+    if (!__isAbleToBeDisplayed(this['rootModel'], node)) {
+      node.remove();
+      return;
+    }
+
     let nodeAttributes = Array.from(node.attributes)
       .filter((attr: Attr) => attr.name.startsWith("view-model-"));
 

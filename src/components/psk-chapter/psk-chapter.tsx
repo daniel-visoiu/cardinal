@@ -3,14 +3,15 @@ import { Chapter } from "../../interfaces/Chapter";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import CustomTheme from "../../decorators/CustomTheme";
 import { TableOfContentEvent } from "../../decorators/TableOfContentEvent";
-import {normalizeElementId} from "../../utils/utils";
+import { normalizeElementId } from "../../utils/utils";
+import { BindModel } from "../../decorators/BindModel";
 
 @Component({
 	tag: "psk-chapter"
 })
 export class PskChapter {
 	@CustomTheme()
-
+	@BindModel()
 	@TableOfContentProperty({
 		description: `This property is the title, that will be used in order to create a psk-card `,
 		isMandatory: false,

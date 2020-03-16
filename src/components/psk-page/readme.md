@@ -9,6 +9,7 @@
 
 | Property   | Attribute   | Description | Type     | Default     |
 | ---------- | ----------- | ----------- | -------- | ----------- |
+| `navClass` | `nav-class` |             | `string` | `""`        |
 | `title`    | `title`     |             | `string` | `""`        |
 | `tocTitle` | `toc-title` |             | `string` | `undefined` |
 

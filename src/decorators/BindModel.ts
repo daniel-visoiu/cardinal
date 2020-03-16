@@ -4,7 +4,8 @@ import { createCustomEvent } from "../utils/utils";
 import {
   __assignProperties,
   __getModelEventCbk,
-  changeModel
+  changeModel,
+  __isAbleToBeDisplayed
 } from "../utils/bindModelUtils";
 
 declare type BindInterface = (
@@ -14,19 +15,18 @@ declare type BindInterface = (
 
 export function BindModel(): BindInterface {
   return (proto: ComponentInterface) => {
-    let { componentWillLoad, render } = proto;
+    let { componentWillLoad } = proto;
 
-    proto.componentWillLoad = function() {
+    proto.componentWillLoad = function () {
       let self = this;
       let thisElement: HTMLElement = getElement(self);
 
-      self["render"] = render;
       self["changeModel"] = changeModel;
       self["__assignProperties"] = __assignProperties;
 
       function getModel(resolver) {
 
-        function modelReceived(err, model){
+        function modelReceived(err, model) {
           __getModelEventCbk.apply(self, [err, model, resolver])
         }
 
@@ -37,7 +37,7 @@ export function BindModel(): BindInterface {
             composed: true,
             cancellable: true,
             detail: {
-              callback:modelReceived
+              callback: modelReceived
             }
           },
           true,
@@ -45,35 +45,35 @@ export function BindModel(): BindInterface {
         );
       }
 
-      if(!thisElement.isConnected){
+      if (!thisElement.isConnected) {
         return componentWillLoad && componentWillLoad.call(self)
       }
 
       let attributes = thisElement.getAttributeNames();
 
-      let relateAttributes = attributes.filter(attr=>{
-        if(attr.toLowerCase() === "data-view-model"){
+      let relateAttributes = attributes.filter(attr => {
+        if (attr.toLowerCase() === "data-view-model") {
           return true;
         }
 
-        if(attr.toLowerCase().includes("view-model")){
+        if (attr.toLowerCase().includes("view-model")) {
           return true;
         }
 
-        if(thisElement.getAttribute(attr).toLowerCase().startsWith("@")){
-          return  true;
+        if (thisElement.getAttribute(attr).toLowerCase().startsWith("@")) {
+          return true;
         }
 
         return false;
       });
 
-      if(relateAttributes.length === 0){
+      if (relateAttributes.length === 0) {
         return componentWillLoad && componentWillLoad.call(self)
       }
 
       return new Promise((resolve) => {
 
-        let resolver = ()=>{
+        let resolver = () => {
           resolve(componentWillLoad && componentWillLoad.call(self));
         };
 

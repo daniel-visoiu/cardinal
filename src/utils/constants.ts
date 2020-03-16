@@ -1,5 +1,6 @@
 export const HELP_PROPERTY: string = "with-help";
-
+export const DISPLAY_IF_IS: string = "display-if-is";
+export const DISPLAY_IF_EXISTS: string = "display-if-exists";
 export const BASE_CLASS: string = "baseClass";
 export const DEFINED_PROPERTIES: string = "definedProperties";
 export const DEFINED_EVENTS: string = "definedEvents";
@@ -15,10 +16,10 @@ export const LIST_TYPE_ORDERED: string = "ordered";
 export const LIST_TYPE_UNORDERED: string = "unordered";
 
 export const EVENTS_TYPES = {
-  PSK_BUTTON_EVT:"PSK_BUTTON_EVT",
-  PSK_SCROLL_EVT:"PSK_SCROLL_EVT",
-  PSK_WIZARD_EVT:"PSK_WIZARD_EVT",
-  PSK_FILE_CHOOSER_EVT:"PSK_FILE_CHOOSER_EVT"
+  PSK_BUTTON_EVT: "PSK_BUTTON_EVT",
+  PSK_SCROLL_EVT: "PSK_SCROLL_EVT",
+  PSK_WIZARD_EVT: "PSK_WIZARD_EVT",
+  PSK_FILE_CHOOSER_EVT: "PSK_FILE_CHOOSER_EVT"
 };
 export const INVALID_ID_CHARACTERS_REGEX = /[^A-Za-z0-9_-]/g;
 export const PSK_LIST_PARSE_CONFIG = {
