@@ -66,10 +66,15 @@ export function __checkViewModelValues(
     const property = attr.value.split(selector)[1];
     const chain = parentChain ? `${parentChain}.${property}` : property;
 
-    __self[attr.name] = model.getChainValue(chain);
-    model.onChange(chain,function(){
-      __self[attr.name] = model.getChainValue(chain);
-    })
+    if (model.hasExpression(chain)) { // Check for model expressions first
+        __self[attr.name] = model.evaluateExpression(chain);
+    } else {
+        __self[attr.name] = model.getChainValue(chain);
+        model.onChange(chain,function(){
+            __self[attr.name] = model.getChainValue(chain);
+        })
+    }
+
   });
   return callback();
 }

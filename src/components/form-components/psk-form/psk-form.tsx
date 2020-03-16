@@ -12,11 +12,23 @@ export class PskForm {
     @CustomTheme()
 
     @State() controller: any | null;
+    @State() disconnected: boolean | false;
+
+    connectedCallback() {
+        this.disconnected = false;
+    }
+    disconnectedCallback() {
+        this.disconnected = true;
+    }
 
     componentWillLoad(): Promise<any> {
         if (typeof this.controllerName === "string") {
             return new Promise((resolve, reject) => {
                 ControllerRegistryService.getController(this.controllerName).then((CTRL) => {
+                    // Prevent javascript execution if the node has been removed from DOM
+                    if (this.disconnected) {
+                        return resolve();
+                    }
                     this.controller = new CTRL(this._host);
                     resolve();
                 }).catch(reject);
