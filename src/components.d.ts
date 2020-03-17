@@ -58,6 +58,7 @@ export namespace Components {
     'routesItems'?: MenuItem[];
   }
   interface PskAttachmentsList {
+    'attachmentsClass': string;
     'files': any[];
     'removeFileFromList'?: Function;
   }
@@ -93,6 +94,7 @@ export namespace Components {
   }
   interface PskCondition {
     'condition': string | null;
+    'exists': string | null;
   }
   interface PskContainer {
     'controllerName'?: string | null;
@@ -220,6 +222,7 @@ export namespace Components {
     'value'?: string | null;
   }
   interface PskPage {
+    'navClass': string;
     'title': string;
     'tocTitle': string;
   }
@@ -924,6 +927,7 @@ declare namespace LocalJSX {
     'routesItems'?: MenuItem[];
   }
   interface PskAttachmentsList {
+    'attachmentsClass'?: string;
     'files'?: any[];
     'removeFileFromList'?: Function;
   }
@@ -960,6 +964,7 @@ declare namespace LocalJSX {
   }
   interface PskCondition {
     'condition'?: string | null;
+    'exists'?: string | null;
   }
   interface PskContainer {
     'controllerName'?: string | null;
@@ -1093,6 +1098,7 @@ declare namespace LocalJSX {
     'value'?: string | null;
   }
   interface PskPage {
+    'navClass'?: string;
     'title'?: string;
     'tocTitle'?: string;
   }

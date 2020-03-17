@@ -1,4 +1,4 @@
-import {INVALID_ID_CHARACTERS_REGEX} from "./constants";
+import { INVALID_ID_CHARACTERS_REGEX } from "./constants";
 
 export function format(first: string, middle: string, last: string): string {
   return (
@@ -97,6 +97,10 @@ export function normalizeInnerHTML(source: string = ""): string {
 }
 
 export function normalizeCamelCaseToDashed(source: string): string {
+  if (!source || typeof source !== 'string' || source.length === 0) {
+    return '';
+  }
+
   return source
     .split("")
     .map((letter: string) => {
@@ -109,14 +113,30 @@ export function normalizeCamelCaseToDashed(source: string): string {
     .join("");
 }
 
+
+export function normalizeDashedToCamelCase(source: string): string {
+  if (!source || typeof source !== 'string' || source.length === 0) {
+    return '';
+  }
+
+  return source
+    .split("-")
+    .map((word: string, index: number) => {
+      if (index === 0) {
+        return word;
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join("");
+}
 /**
  * normalize a string to be compliant with a HTML id value
  * @param source
  */
-export function normalizeElementId(source:string):string{
+export function normalizeElementId(source: string): string {
   let normalizedId = source.replace(INVALID_ID_CHARACTERS_REGEX, "-").toLowerCase();
-  normalizedId = normalizedId.replace(/(-+){2}/gm,"-");
-  normalizedId = normalizedId.replace(/(-+)$/gm,"");
+  normalizedId = normalizedId.replace(/(-+){2}/gm, "-");
+  normalizedId = normalizedId.replace(/(-+)$/gm, "");
   return normalizedId;
 }
 

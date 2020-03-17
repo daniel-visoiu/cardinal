@@ -2,6 +2,7 @@ import { Component, h, Prop, Element } from '@stencil/core';
 import CustomTheme from '../../decorators/CustomTheme';
 import PskButtonEvent from "../../events/PskButtonEvent";
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
+import { BindModel } from '../../decorators/BindModel';
 
 const ACCEPTED_DEFAULT_DISPATCHERS = [document, window];
 
@@ -10,6 +11,9 @@ const ACCEPTED_DEFAULT_DISPATCHERS = [document, window];
 	shadow: true
 })
 export class PskButton {
+
+	@BindModel()
+
 	@CustomTheme()
 
 	@Element() htmlElement: HTMLElement;

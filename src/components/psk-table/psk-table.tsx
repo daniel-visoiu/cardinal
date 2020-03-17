@@ -30,9 +30,13 @@ export class PskTable {
     @State() tableContent: Array<HTMLElement> = null;
 
     render() {
-        return <table>
-            {this.tableContent}
-        </table>;
+        return (
+            <div class="table-responsive">
+                <table class="table">
+                    {this.tableContent}
+                </table>
+            </div>
+        );
     }
 
     componentWillLoad() {

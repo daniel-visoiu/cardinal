@@ -7,10 +7,11 @@
 
 ## Properties
 
-| Property             | Attribute | Description | Type       | Default |
-| -------------------- | --------- | ----------- | ---------- | ------- |
-| `files`              | --        |             | `any[]`    | `[]`    |
-| `removeFileFromList` | --        |             | `Function` | `null`  |
+| Property             | Attribute           | Description | Type       | Default |
+| -------------------- | ------------------- | ----------- | ---------- | ------- |
+| `attachmentsClass`   | `attachments-class` |             | `string`   | `""`    |
+| `files`              | --                  |             | `any[]`    | `[]`    |
+| `removeFileFromList` | --                  |             | `Function` | `null`  |
 
 
 ----------------------------------------------

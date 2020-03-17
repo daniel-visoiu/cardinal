@@ -1,7 +1,9 @@
 * {
     outline: none !important;
 }
-
+#actions {
+    
+}
 :host {
     display: block;
     font-family: nunito;
