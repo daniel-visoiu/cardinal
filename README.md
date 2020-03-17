@@ -1,2 +1,2 @@
-# pskwebcomponents
-PrivateSky reusable web-components to be used in csbui and self sovereign applications
+# Cardinal.JS Framework
+Cardinal is a PrivateSky sub-project. Cardinal framework empowers web components capabilities to be used in Self-Sovereign Applications (SSApps).
