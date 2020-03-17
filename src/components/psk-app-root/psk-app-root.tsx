@@ -23,6 +23,7 @@ export class PskAppRoot {
   @Element() host: HTMLStencilElement;
   @State() hasSlot: boolean = false;
   @State() htmlLoader: HTMLElement;
+  @State() disconnected: boolean | false;
 
   __createLoader() {
 
@@ -38,6 +39,15 @@ export class PskAppRoot {
     node.innerHTML = `<div class='sk-fading-circle'>${circles}</div>`;
     return node;
   }
+
+  connectedCallback() {
+    this.disconnected = false;
+  }
+
+  disconnectedCallback() {
+     this.disconnected = true;
+  }
+
   componentWillLoad() {
     if (this.host.parentElement) {
       this.htmlLoader = this.__createLoader();
@@ -53,6 +63,10 @@ export class PskAppRoot {
     if (typeof this.controller === "string") {
       return new Promise((resolve, reject) => {
         ControllerRegistryService.getController(this.controller).then((CTRL) => {
+          // Prevent javascript execution if the node has been removed from DOM
+          if (this.disconnected) {
+            return resolve();
+          }
           new CTRL(this.host);
           resolve();
         }).catch(reject);

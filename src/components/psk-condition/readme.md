@@ -7,9 +7,9 @@
 
 ## Properties
 
-| Property    | Attribute   | Description | Type     | Default |
-| ----------- | ----------- | ----------- | -------- | ------- |
-| `condition` | `condition` |             | `string` | `null`  |
+| Property    | Attribute   | Description | Type  | Default |
+| ----------- | ----------- | ----------- | ----- | ------- |
+| `condition` | `condition` |             | `any` | `null`  |
 
 
 ----------------------------------------------

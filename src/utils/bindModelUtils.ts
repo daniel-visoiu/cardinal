@@ -93,12 +93,16 @@ export function __checkViewModelValues(
   attributes.forEach((attr: Attr) => {
     const property = attr.value.split(selector)[1];
     const chain = parentChain ? `${parentChain}.${property}` : property;
-
     const attributeName = normalizeDashedToCamelCase(attr.name);
-    __self[attributeName] = model.getChainValue(chain);
-    model.onChange(chain, function () {
-      __self[attributeName] = model.getChainValue(chain);
-    })
+
+    if (model.hasExpression(chain)) { // Check for model expressions first
+        __self[attributeName] = model.evaluateExpression(chain);
+    } else {
+        __self[attributeName] = model.getChainValue(chain);
+        model.onChange(chain, function () {
+            __self[attributeName] = model.getChainValue(chain);
+        })
+    }
   });
   return callback();
 }

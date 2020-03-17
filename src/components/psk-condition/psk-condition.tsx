@@ -1,21 +1,28 @@
-import { Component, Prop } from "@stencil/core";
-// import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
+import { Component, Prop, Element } from "@stencil/core";
 import { BindModel } from '../../decorators/BindModel';
 
 @Component({
     tag: "psk-condition"
 })
 export class PskCondition {
-    
+
     @BindModel()
 
-    @Prop() condition: string | null = null
+    @Prop() condition: any | null = null
 
-    render() {
-        console.log(this.condition)
-        if (this.condition) {
-            return "WORKING!"
-        } else
-            return null;
+    @Element() private _host: HTMLElement
+
+    componentWillLoad() {
+        if (this.condition instanceof Promise) {
+            return this.condition.then((result) => {
+                if (!result) {
+                    this._host.innerHTML = '';
+                }
+                return Promise.resolve();
+            })
+        }
+        if (!this.condition) {
+            this._host.innerHTML = '';
+        }
     }
-} 
+}

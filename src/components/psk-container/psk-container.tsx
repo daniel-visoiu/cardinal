@@ -30,6 +30,7 @@ export class PskContainer {
   @State() controller: any | null;
   @State() innerHtml: string | null;
   @State() controllerScript: string | null;
+  @State() disconnected: boolean | false;
 
   // Internal ussage property. In the public documentation, this property should be mentioned as a feature in case the user wants to create a component and to provide the HTML context to the container.
   // This property is provided by other components where psk-container is loaded. (e.g. psk-form)
@@ -38,6 +39,12 @@ export class PskContainer {
 
   @Element() private _host: HTMLElement;
 
+  connectedCallback() {
+    this.disconnected = false;
+  }
+  disconnectedCallback() {
+    this.disconnected = true;
+  }
 
   render() {
     return [
@@ -50,6 +57,10 @@ export class PskContainer {
   promisifyControllerLoad = (controllerName) => {
     return new Promise((resolve, reject) => {
       ControllerRegistryService.getController(controllerName).then((CTRL) => {
+        // Prevent javascript execution if the node has been removed from DOM
+        if (this.disconnected) {
+          return resolve();
+        }
         this.controller = new CTRL(this._host);
         this.__getInnerController.call(this, this._host);
         resolve();
@@ -66,11 +77,17 @@ export class PskContainer {
   }
 
   __getInnerController(fromElement: HTMLElement): void {
-    let scriptInnerHtml: HTMLElement = fromElement.querySelector("script");
+    const children:HTMLCollection = fromElement.children;
+    // Find only the first direct <script> descendant
+    for (let i = 0; i < children.length; i++) {
+        const child = children[i];
+        if (child.tagName.toLowerCase() !== 'script') {
+            continue;
+        }
 
-    if (scriptInnerHtml !== null) {
-      this.controllerScript = scriptInnerHtml.innerHTML;
-      scriptInnerHtml.innerHTML = "";
+        this.controllerScript = child.innerHTML;
+        child.innerHTML = '';
+        return;
     }
   }
 }
