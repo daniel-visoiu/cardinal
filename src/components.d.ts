@@ -93,7 +93,8 @@ export namespace Components {
     'title': string;
   }
   interface PskCondition {
-    'condition': any | null;
+    'condition': string | null;
+    'exists': string | null;
   }
   interface PskContainer {
     'controllerName'?: string | null;
@@ -962,7 +963,8 @@ declare namespace LocalJSX {
     'title'?: string;
   }
   interface PskCondition {
-    'condition'?: any | null;
+    'condition'?: string | null;
+    'exists'?: string | null;
   }
   interface PskContainer {
     'controllerName'?: string | null;

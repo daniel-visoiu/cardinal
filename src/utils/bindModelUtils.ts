@@ -1,4 +1,32 @@
 import { getElement } from "@stencil/core";
+import { normalizeDashedToCamelCase } from "./utils";
+import { DISPLAY_IF_IS, DISPLAY_IF_EXISTS } from "./constants";
+
+/**
+ * 
+ * @param {any} model
+ * @returns {boolean} 
+ */
+export function __isAbleToBeDisplayed(model: any, element: Element | HTMLElement): boolean {
+  if (element.hasAttribute(DISPLAY_IF_EXISTS)) {
+    let chain = element.getAttribute(DISPLAY_IF_EXISTS).trim();
+    return typeof model.getChainValue(chain) !== 'undefined';
+  }
+
+  if (element.hasAttribute(DISPLAY_IF_IS)) {
+    let chainValue: String[] = element.getAttribute(DISPLAY_IF_IS).split("|");
+    if (chainValue.length !== 2) {
+      return false;
+    }
+
+    let chain: string = chainValue[0].trim(),
+      value: string = chainValue[1].trim();
+
+    return value === model.getChainValue(chain);
+  }
+
+  return true;
+}
 
 /**
  * @description This function will assign to the target object the parameters found inside params
@@ -6,7 +34,7 @@ import { getElement } from "@stencil/core";
  */
 export function __assignProperties(params: any): void {
   let __self = this;
-  Object.keys(params).forEach(function(key) {
+  Object.keys(params).forEach(function (key) {
     __self[key] = params[key];
   });
 }
@@ -23,7 +51,7 @@ export function __checkViewModelAttributes(
   parentChain: string | null,
   model: any,
   selector: string,
-  callback:Function
+  callback: Function
 ): void {
   let __self = this;
   const thisElement = getElement(__self);
@@ -33,7 +61,7 @@ export function __checkViewModelAttributes(
   ).filter((attr: Attr) => attr.name.startsWith(selector));
 
   attributes.forEach((attr: Attr) => {
-    const property = attr.name.split(selector)[1];
+    const property = normalizeDashedToCamelCase(attr.name.split(selector)[1]);
     const chain = parentChain ? `${parentChain}.${attr.value}` : attr.value;
 
     __self[property] = model.getChainValue(chain);
@@ -53,7 +81,7 @@ export function __checkViewModelValues(
   parentChain: string | null,
   model: any,
   selector: string,
-  callback:Function
+  callback: Function
 ): void {
   let __self = this;
   const thisElement = getElement(__self);
@@ -66,6 +94,7 @@ export function __checkViewModelValues(
     const property = attr.value.split(selector)[1];
     const chain = parentChain ? `${parentChain}.${property}` : property;
 
+/*
     if (model.hasExpression(chain)) { // Check for model expressions first
         __self[attr.name] = model.evaluateExpression(chain);
     } else {
@@ -74,7 +103,15 @@ export function __checkViewModelValues(
             __self[attr.name] = model.getChainValue(chain);
         })
     }
+*/
 
+
+
+    const attributeName = normalizeDashedToCamelCase(attr.name);
+    __self[attributeName] = model.getChainValue(chain);
+    model.onChange(chain, function () {
+      __self[attributeName] = model.getChainValue(chain);
+    })
   });
   return callback();
 }
@@ -115,7 +152,7 @@ export function changeModel(leafChain: string, newValue: any): boolean {
  * @param model The proxified model
  * @returns void
  */
-export function __getModelEventCbk(err: Error, model: any, callback:Function): void | boolean {
+export function __getModelEventCbk(err: Error, model: any, callback: Function): void | boolean {
   if (err || !model) {
     return callback();
   }
@@ -123,6 +160,10 @@ export function __getModelEventCbk(err: Error, model: any, callback:Function): v
   let __self = this;
   let thisElement: HTMLElement = getElement(__self);
 
+  if (!__isAbleToBeDisplayed(model, thisElement)) {
+    thisElement.remove();
+    return callback();
+  }
   /**
    * If we find data-view-model property defined, then we assign the parentChain and the rootModel to the compnent
    * This means we found a psk-for-each component.
@@ -153,7 +194,7 @@ export function __getModelEventCbk(err: Error, model: any, callback:Function): v
   if (viewModel === null) {
     attrNameLabel =
       thisElement.getAttribute("name") !== null &&
-      !thisElement.getAttribute("name").startsWith("@")
+        !thisElement.getAttribute("name").startsWith("@")
         ? thisElement.getAttribute("name")
         : null;
     if (
@@ -181,7 +222,7 @@ export function __getModelEventCbk(err: Error, model: any, callback:Function): v
      */
     __checkViewModelAttributes.call(__self, parentChain, model, "view-model-", callback);
 
-     return callback();
+    return callback();
   }
 
   /**
@@ -199,7 +240,7 @@ export function __getModelEventCbk(err: Error, model: any, callback:Function): v
     /**
      * Apply onChange to the modifiable attributes (e.g. value, selected)
      */
-    model.onChange(fullChain, function(): void {
+    model.onChange(fullChain, function (): void {
       __self[propertyName] = model.getChainValue(fullChain);
     });
   }

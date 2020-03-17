@@ -5,6 +5,7 @@ import "prismjs/components/prism-bash.js";
 import "prismjs/components/prism-shell-session.js";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import CustomTheme from "../../decorators/CustomTheme";
+import { BindModel } from "../../decorators/BindModel";
 
 const HTML_COMMENT_TAG = /<!---->/gm;
 
@@ -13,6 +14,7 @@ const HTML_COMMENT_TAG = /<!---->/gm;
 })
 export class PskCode {
   @CustomTheme()
+  @BindModel()
 
   @TableOfContentProperty({
     description: `This property is the title of the psk-chapter that will be created.`,
