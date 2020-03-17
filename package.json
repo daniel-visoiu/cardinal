@@ -1,7 +1,7 @@
 {
-    "name": "pskwebcomponents",
-    "version": "0.0.1",
-    "description": "Stencil Component Starter",
+    "name": "cardinal",
+    "version": "0.1.0",
+    "description": "Cardinal is a PrivateSky sub-project. Cardinal framework empowers web components capabilities to be used in Self-Sovereign Applications (SSApps).",
     "main": "dist/index.js",
     "module": "dist/index.mjs",
     "es2015": "dist/esm/index.mjs",
@@ -9,7 +9,7 @@
     "types": "dist/types/index.d.ts",
     "collection": "dist/collection/collection-manifest.json",
     "collection:main": "dist/collection/index.js",
-    "unpkg": "dist/pskwebcomponents/pskwebcomponents.js",
+    "unpkg": "dist/cardinal/cardinal.js",
     "files": [
         "dist/",
         "loader/"
