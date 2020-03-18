@@ -15,7 +15,20 @@ declare type BindInterface = (
 
 export function BindModel(): BindInterface {
   return (proto: ComponentInterface) => {
-    let { componentWillLoad } = proto;
+    let { componentWillLoad, render } = proto;
+
+    proto.render = function () {
+      let element: HTMLElement = getElement(this);
+
+      let oldStyle: string = element.className;
+      if (element.getAttribute('data-hide') === 'hide') {
+        element.className = `${oldStyle} hidden`;
+      } else {
+        element.className = oldStyle.replace(' hidden', '');
+      }
+
+      return render && render.call(this);
+    }
 
     proto.componentWillLoad = function () {
       let self = this;
