@@ -56,7 +56,7 @@ export class PskAppRouter {
     bubbles: true,
   }) getHistoryType: EventEmitter;
 
-  @State() notFoundRoute: string = "";
+  @State() notFoundRoute: string = null;
 
   componentDidLoad() {
     this.needRoutesEvt.emit((err, data) => {
@@ -77,18 +77,21 @@ export class PskAppRouter {
   }
 
   renderItems(items) {
-    let routes = items.map((item) => {
-      if (item.name == "404") {
-        this.notFoundRoute = item.path;
-      }
+    let routes = [];
+    if (typeof items === "object") {
+      routes = items.map((item) => {
+        if (item.name == "404") {
+          this.notFoundRoute = item.path;
+        }
 
-      if (item.children) {
-        return this.renderItems(item.children)
-      } else {
-        return <stencil-route url={item.path} component={item.component}
-          componentProps={item.componentProps} />
-      }
-    });
+        if (item.children && item.children.type === "known") {
+          return this.renderItems(item.children.items)
+        } else {
+          return <stencil-route url={item.path} component={item.component}
+                                componentProps={item.componentProps}/>
+        }
+      });
+    }
     return routes;
   }
 
@@ -98,7 +101,8 @@ export class PskAppRouter {
     if (routes.length === 0) {
       return <psk-ui-loader shouldBeRendered={true} />
     }
-    if (this.notFoundRoute == "") {
+
+    if (!this.notFoundRoute) {
       this.notFoundRoute = this.routesItems[0].path;
     }
 
