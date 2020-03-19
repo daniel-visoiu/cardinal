@@ -23,11 +23,11 @@ export class ButtonGroup {
         const menuDesign = `list-group ${position}-orientation`;
 
         return (
-            <div class="button-group-wrapper" onClick={(event) => {
-                event.preventDefault();
-                this.opened = !this.opened;
-            }}>
-                <div class="trigger">
+            <div class="button-group-wrapper">
+                <div class="trigger" onClick={(event) => {
+                    event.preventDefault();
+                    this.opened = !this.opened;
+                }}>
                     {this.icon && <psk-icon icon={this.icon} color={this.iconColor} />}
                     {this.label && this.label}
                 </div>
