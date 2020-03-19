@@ -23,7 +23,7 @@ export class ButtonGroup {
         const menuDesign = `list-group ${position}-orientation`;
 
         return (
-            <div class="button-group-wrapper">
+            <div class={`button-group-wrapper ${this.classes}`}>
                 <div class="trigger" onClick={(event) => {
                     event.preventDefault();
                     this.opened = !this.opened;
@@ -86,4 +86,6 @@ export class ButtonGroup {
         defaultValue: 'left'
     })
     @Prop() menuOrientation: string = 'left';
+
+    @Prop() classes: string | null = '';
 }

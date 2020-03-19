@@ -9,6 +9,7 @@
 
 | Property          | Attribute          | Description | Type      | Default     |
 | ----------------- | ------------------ | ----------- | --------- | ----------- |
+| `classes`         | `classes`          |             | `string`  | `''`        |
 | `icon`            | `icon`             |             | `string`  | `undefined` |
 | `iconColor`       | `icon-color`       |             | `string`  | `undefined` |
 | `label`           | `label`            |             | `string`  | `undefined` |

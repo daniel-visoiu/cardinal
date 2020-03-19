@@ -79,6 +79,7 @@ export namespace Components {
     'label': string | null;
   }
   interface PskButtonGroup {
+    'classes': string | null;
     'icon': string | null;
     'iconColor': string | null;
     'label': string | null;
@@ -976,6 +977,7 @@ declare namespace LocalJSX {
     'label'?: string | null;
   }
   interface PskButtonGroup {
+    'classes'?: string | null;
     'icon'?: string | null;
     'iconColor'?: string | null;
     'label'?: string | null;
