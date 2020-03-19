@@ -97,6 +97,9 @@ export function __checkViewModelValues(
 
     if (model.hasExpression(chain)) { // Check for model expressions first
         __self[attributeName] = model.evaluateExpression(chain);
+        model.onChangeExpressionChain(chain, function () {
+            __self[attributeName] = model.evaluateExpression(chain);
+        })
     } else {
         __self[attributeName] = model.getChainValue(chain);
         model.onChange(chain, function () {
