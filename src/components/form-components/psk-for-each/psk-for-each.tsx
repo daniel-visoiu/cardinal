@@ -114,7 +114,7 @@ export class PskForEach {
     this.__updateDisplayConditionals(node, chain);
 
     if (!__isAbleToBeDisplayed(this['rootModel'], node)) {
-      node.remove();
+      node.setAttribute('data-hide', 'hide');
       return;
     }
 

@@ -51,19 +51,22 @@ export function __checkViewModelAttributes(
   parentChain: string | null,
   model: any,
   selector: string,
+  element: HTMLElement | Element,
   callback: Function
 ): void {
   let __self = this;
-  const thisElement = getElement(__self);
 
   const attributes: Array<Attr> = Array.from(
-    thisElement.attributes
+    element.attributes
   ).filter((attr: Attr) => attr.name.startsWith(selector));
 
   attributes.forEach((attr: Attr) => {
-    const property = normalizeDashedToCamelCase(attr.name.split(selector)[1]);
-    const chain = parentChain ? `${parentChain}.${attr.value}` : attr.value;
+    const attributeName: string = attr.name.split(selector)[1];
+    const property: string = normalizeDashedToCamelCase(attributeName);
+    const chain: string = parentChain ? `${parentChain}.${attr.value}` : attr.value;
+    const valueFromModel: any = model.getChainValue(chain);
 
+    element.setAttribute(attributeName, valueFromModel);
     __self[property] = model.getChainValue(chain);
   });
 
@@ -81,13 +84,13 @@ export function __checkViewModelValues(
   parentChain: string | null,
   model: any,
   selector: string,
+  element: HTMLElement | Element,
   callback: Function
 ): void {
   let __self = this;
-  const thisElement = getElement(__self);
 
   const attributes: Array<Attr> = Array.from(
-    thisElement.attributes
+    element.attributes
   ).filter((attr: Attr) => attr.value.startsWith(selector));
 
   attributes.forEach((attr: Attr) => {
@@ -101,10 +104,13 @@ export function __checkViewModelValues(
             __self[attributeName] = model.evaluateExpression(chain);
         })
     } else {
+      const valueFromModel: any = model.getChainValue(chain);
+      element.setAttribute(attr.name, valueFromModel);
+
+      __self[attributeName] = valueFromModel;
+      model.onChange(chain, function () {
         __self[attributeName] = model.getChainValue(chain);
-        model.onChange(chain, function () {
-            __self[attributeName] = model.getChainValue(chain);
-        })
+      })
     }
   });
   return callback();
@@ -155,9 +161,11 @@ export function __getModelEventCbk(err: Error, model: any, callback: Function): 
   let thisElement: HTMLElement = getElement(__self);
 
   if (!__isAbleToBeDisplayed(model, thisElement)) {
-    thisElement.remove();
+    thisElement.setAttribute('data-hide', 'hide');
     return callback();
   }
+
+  thisElement.removeAttribute('data-hide');
   /**
    * If we find data-view-model property defined, then we assign the parentChain and the rootModel to the compnent
    * This means we found a psk-for-each component.
@@ -209,12 +217,12 @@ export function __getModelEventCbk(err: Error, model: any, callback: Function): 
      * Check if we have attributes that start with @
      * Similar behaviour as above
      */
-    __checkViewModelValues.call(__self, parentChain, model, "@", callback);
+    __checkViewModelValues.call(__self, parentChain, model, "@", thisElement, callback);
 
     /**
      * Check if we have view-model-* attributes and assign the properties
      */
-    __checkViewModelAttributes.call(__self, parentChain, model, "view-model-", callback);
+    __checkViewModelAttributes.call(__self, parentChain, model, "view-model-", thisElement, callback);
 
     return callback();
   }

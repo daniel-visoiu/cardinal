@@ -2,6 +2,7 @@ import { Component, Prop, h, Element } from '@stencil/core';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import CustomTheme from '../../decorators/CustomTheme';
 import { GRID_IGNORED_COMPONENTS, GRID_BREAKPOINTS, GRID_HIDDEN_BREAKPOINTS } from '../../utils/constants';
+import { BindModel } from '../../decorators/BindModel';
 
 interface BreakPoint {
 	breakpoint: string,
@@ -12,6 +13,8 @@ interface BreakPoint {
 	tag: "psk-grid"
 })
 export class PskGrid {
+	@BindModel()
+
 	@CustomTheme()
 
 	@TableOfContentProperty({

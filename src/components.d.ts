@@ -39,6 +39,14 @@ export namespace Components {
     'somethingChanged': boolean;
     'url': any;
   }
+  interface EventExpandableRenderer {
+    'active': boolean;
+    'event': string;
+    'firstMenuChild': any;
+    'history': RouterHistory;
+    'somethingChanged': boolean;
+    'url': any;
+  }
   interface ExpandableRenderer {
     'active': boolean;
     'firstMenuChild': any;
@@ -69,6 +77,13 @@ export namespace Components {
     'eventDispatcher': string | null;
     'eventName': string | null;
     'label': string | null;
+  }
+  interface PskButtonGroup {
+    'icon': string | null;
+    'iconColor': string | null;
+    'label': string | null;
+    'menuOrientation': string;
+    'opened': boolean;
   }
   interface PskCard {
     'id': string;
@@ -409,6 +424,12 @@ declare global {
     new (): HTMLDropdownRendererElement;
   };
 
+  interface HTMLEventExpandableRendererElement extends Components.EventExpandableRenderer, HTMLStencilElement {}
+  var HTMLEventExpandableRendererElement: {
+    prototype: HTMLEventExpandableRendererElement;
+    new (): HTMLEventExpandableRendererElement;
+  };
+
   interface HTMLExpandableRendererElement extends Components.ExpandableRenderer, HTMLStencilElement {}
   var HTMLExpandableRendererElement: {
     prototype: HTMLExpandableRendererElement;
@@ -443,6 +464,12 @@ declare global {
   var HTMLPskButtonElement: {
     prototype: HTMLPskButtonElement;
     new (): HTMLPskButtonElement;
+  };
+
+  interface HTMLPskButtonGroupElement extends Components.PskButtonGroup, HTMLStencilElement {}
+  var HTMLPskButtonGroupElement: {
+    prototype: HTMLPskButtonGroupElement;
+    new (): HTMLPskButtonGroupElement;
   };
 
   interface HTMLPskCardElement extends Components.PskCard, HTMLStencilElement {}
@@ -819,12 +846,14 @@ declare global {
   interface HTMLElementTagNameMap {
     'app-menu': HTMLAppMenuElement;
     'dropdown-renderer': HTMLDropdownRendererElement;
+    'event-expandable-renderer': HTMLEventExpandableRendererElement;
     'expandable-renderer': HTMLExpandableRendererElement;
     'mobile-profile-renderer': HTMLMobileProfileRendererElement;
     'psk-app-root': HTMLPskAppRootElement;
     'psk-app-router': HTMLPskAppRouterElement;
     'psk-attachments-list': HTMLPskAttachmentsListElement;
     'psk-button': HTMLPskButtonElement;
+    'psk-button-group': HTMLPskButtonGroupElement;
     'psk-card': HTMLPskCardElement;
     'psk-chapter': HTMLPskChapterElement;
     'psk-checkbox': HTMLPskCheckboxElement;
@@ -905,6 +934,14 @@ declare namespace LocalJSX {
     'somethingChanged'?: boolean;
     'url'?: any;
   }
+  interface EventExpandableRenderer {
+    'active'?: boolean;
+    'event'?: string;
+    'firstMenuChild'?: any;
+    'history'?: RouterHistory;
+    'somethingChanged'?: boolean;
+    'url'?: any;
+  }
   interface ExpandableRenderer {
     'active'?: boolean;
     'firstMenuChild'?: any;
@@ -937,6 +974,13 @@ declare namespace LocalJSX {
     'eventDispatcher'?: string | null;
     'eventName'?: string | null;
     'label'?: string | null;
+  }
+  interface PskButtonGroup {
+    'icon'?: string | null;
+    'iconColor'?: string | null;
+    'label'?: string | null;
+    'menuOrientation'?: string;
+    'opened'?: boolean;
   }
   interface PskCard {
     'id'?: string;
@@ -1279,12 +1323,14 @@ declare namespace LocalJSX {
   interface IntrinsicElements {
     'app-menu': AppMenu;
     'dropdown-renderer': DropdownRenderer;
+    'event-expandable-renderer': EventExpandableRenderer;
     'expandable-renderer': ExpandableRenderer;
     'mobile-profile-renderer': MobileProfileRenderer;
     'psk-app-root': PskAppRoot;
     'psk-app-router': PskAppRouter;
     'psk-attachments-list': PskAttachmentsList;
     'psk-button': PskButton;
+    'psk-button-group': PskButtonGroup;
     'psk-card': PskCard;
     'psk-chapter': PskChapter;
     'psk-checkbox': PskCheckbox;
@@ -1358,12 +1404,14 @@ declare module "@stencil/core" {
     interface IntrinsicElements {
       'app-menu': LocalJSX.AppMenu & JSXBase.HTMLAttributes<HTMLAppMenuElement>;
       'dropdown-renderer': LocalJSX.DropdownRenderer & JSXBase.HTMLAttributes<HTMLDropdownRendererElement>;
+      'event-expandable-renderer': LocalJSX.EventExpandableRenderer & JSXBase.HTMLAttributes<HTMLEventExpandableRendererElement>;
       'expandable-renderer': LocalJSX.ExpandableRenderer & JSXBase.HTMLAttributes<HTMLExpandableRendererElement>;
       'mobile-profile-renderer': LocalJSX.MobileProfileRenderer & JSXBase.HTMLAttributes<HTMLMobileProfileRendererElement>;
       'psk-app-root': LocalJSX.PskAppRoot & JSXBase.HTMLAttributes<HTMLPskAppRootElement>;
       'psk-app-router': LocalJSX.PskAppRouter & JSXBase.HTMLAttributes<HTMLPskAppRouterElement>;
       'psk-attachments-list': LocalJSX.PskAttachmentsList & JSXBase.HTMLAttributes<HTMLPskAttachmentsListElement>;
       'psk-button': LocalJSX.PskButton & JSXBase.HTMLAttributes<HTMLPskButtonElement>;
+      'psk-button-group': LocalJSX.PskButtonGroup & JSXBase.HTMLAttributes<HTMLPskButtonGroupElement>;
       'psk-card': LocalJSX.PskCard & JSXBase.HTMLAttributes<HTMLPskCardElement>;
       'psk-chapter': LocalJSX.PskChapter & JSXBase.HTMLAttributes<HTMLPskChapterElement>;
       'psk-checkbox': LocalJSX.PskCheckbox & JSXBase.HTMLAttributes<HTMLPskCheckboxElement>;
