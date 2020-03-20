@@ -7,11 +7,13 @@
 
 ## Properties
 
-| Property   | Attribute   | Description | Type     | Default     |
-| ---------- | ----------- | ----------- | -------- | ----------- |
-| `navClass` | `nav-class` |             | `string` | `""`        |
-| `title`    | `title`     |             | `string` | `""`        |
-| `tocTitle` | `toc-title` |             | `string` | `undefined` |
+| Property    | Attribute    | Description | Type      | Default     |
+| ----------- | ------------ | ----------- | --------- | ----------- |
+| `hasToc`    | `has-toc`    |             | `boolean` | `false`     |
+| `pageClass` | `page-class` |             | `string`  | `""`        |
+| `subTitle`  | `sub-title`  |             | `string`  | `""`        |
+| `title`     | `title`      |             | `string`  | `""`        |
+| `tocTitle`  | `toc-title`  |             | `string`  | `undefined` |
 
 
 ## Dependencies

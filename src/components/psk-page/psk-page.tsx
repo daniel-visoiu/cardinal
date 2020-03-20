@@ -14,16 +14,22 @@ import { TableOfContentProperty } from "../../decorators/TableOfContentProperty"
 export class PskPage {
 	@CustomTheme()
 
-	@State() hasToc: boolean = false;
+	@Prop({reflect:true}) hasToc: boolean = false;
 	@State() activeChapter: string = null;
 	@State() chapters: Array<Chapter> = [];
-	@Prop() navClass : string = "";
+	@Prop() pageClass : string = "";
 	@TableOfContentProperty({
-		description: `This property will be used as the title for the page.`,
+		description: `This property is used as the page title`,
 		isMandatory: false,
 		propertyType: `string`
 	})
 	@Prop() title: string = "";
+  @TableOfContentProperty({
+    description: `This property is used as the page sub-title`,
+    isMandatory: false,
+    propertyType: `string`
+  })
+  @Prop() subTitle: string = "";
 
 	@TableOfContentProperty({
 		description: `This property is the name of the table of content.`,
@@ -46,8 +52,9 @@ export class PskPage {
 		);
 
 		return (
-			<div class="main-container">
-				<nav class={this.navClass}><h3>{this.title}</h3></nav>
+			<div class={`main-container ${this.pageClass}"`}>
+				<div class="page-title"><h1>{this.title}</h1></div>
+        {this.subTitle ? <div class="page-subtitle"><h2>{this.subTitle}</h2></div> : null}
 				<div class="page-content">
 					{(this.componentFullyLoaded && this.hasToc) && tableOfContentSlot}
 

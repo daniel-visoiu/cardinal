@@ -240,7 +240,9 @@ export namespace Components {
     'value'?: string | null;
   }
   interface PskPage {
-    'navClass': string;
+    'hasToc': boolean;
+    'pageClass': string;
+    'subTitle': string;
     'title': string;
     'tocTitle': string;
   }
@@ -1155,7 +1157,9 @@ declare namespace LocalJSX {
     'value'?: string | null;
   }
   interface PskPage {
-    'navClass'?: string;
+    'hasToc'?: boolean;
+    'pageClass'?: string;
+    'subTitle'?: string;
     'title'?: string;
     'tocTitle'?: string;
   }
