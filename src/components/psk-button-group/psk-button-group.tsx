@@ -18,10 +18,6 @@ export class ButtonGroup {
             return null;
         }
 
-        const position = this.menuOrientation !== 'left' && this.menuOrientation !== 'right'
-            ? 'left' : this.menuOrientation;
-        const menuDesign = `list-group ${position}-orientation`;
-
         return (
             <div class={`button-group-wrapper ${this.classes}`}>
                 <div class="trigger" onClick={(event) => {
@@ -31,7 +27,7 @@ export class ButtonGroup {
                     {this.icon && <psk-icon icon={this.icon} color={this.iconColor} />}
                     {this.label && this.label}
                 </div>
-                <div class={menuDesign}>
+                <div class="list-group">
                     <slot />
                 </div>
             </div>
@@ -81,11 +77,9 @@ export class ButtonGroup {
         isMandatory: false,
         propertyType: 'string',
         description: [
-            `This property is setting the orientation of the menu, left or right. This orientation helps on set the optimal position of the menu according to the position of the component in page.`
-        ],
-        defaultValue: 'left'
+            `By defining this property, you can assign more css classes according to your design needs.`,
+            `These classes will be attached to the existing class, <code>button-group-wrapper</code>. Below in the examples section, this attribute is better illustrated.`
+        ]
     })
-    @Prop() menuOrientation: string = 'left';
-
     @Prop() classes: string | null = '';
 }

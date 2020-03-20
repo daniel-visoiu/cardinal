@@ -10,6 +10,26 @@
   visibility: hidden !important;
 }
 
+.button-group-wrapper {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.trigger {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+}
+.trigger * {
+  padding-right: 0.75rem;
+}
+
+/*
+If you use the attribute "classes" on this component (e.g. <psk-button-group classes="your-class">), the selectors should be as following:
+psk-button-group .your-class { // css rules here } 
+psk-button-group[opened] .your-class { // css rules here } // used when the menu is opened 
+*/
+
 .button-group-wrapper .list-group {
   position: absolute;
   top: 100%;
@@ -25,6 +45,13 @@ psk-button-group[opened] .list-group {
   bottom: auto;
 }
 
+psk-button-group[opened] .button-group-wrapper .list-group {
+  left: 0px;
+  right: auto;
+  transform: translate3d(0px, 3rem, 0px);
+  will-change: transform;
+}
+
 .button-group-wrapper .list-group,
 .trigger {
   padding: 0.25rem 1rem 0;
@@ -36,39 +63,4 @@ psk-button-group[opened] .list-group {
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
   float: left;
-}
-
-.button-group-wrapper {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.button-group-wrapper.dots-menu .trigger {
-  background-color: transparent;
-  padding-top: 0;
-  border: none;
-}
-
-.trigger {
-  padding: 0.75rem 1rem;
-  cursor: pointer;
-}
-.trigger * {
-  padding-right: 0.75rem;
-}
-
-psk-button-group[opened] .list-group.left-orientation {
-  left: 0px;
-  right: auto;
-  transform: translate3d(0px, 3rem, 0px);
-  will-change: transform;
-}
-
-psk-button-group[opened] .list-group.right-orientation {
-  left: auto;
-  right: 0px;
-  transform: translate3d(0.5rem, 1.5rem, 0px);
-  will-change: transform;
-  min-width: 10rem;
 }
