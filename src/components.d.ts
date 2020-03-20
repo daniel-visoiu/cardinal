@@ -175,6 +175,10 @@ export namespace Components {
     'columns': number | null;
     'layout': string | null;
   }
+  interface PskHighlight {
+    'title': string;
+    'typeOfHighlight': string;
+  }
   interface PskHoc {
     'title': string;
   }
@@ -599,6 +603,12 @@ declare global {
     new (): HTMLPskGridElement;
   };
 
+  interface HTMLPskHighlightElement extends Components.PskHighlight, HTMLStencilElement {}
+  var HTMLPskHighlightElement: {
+    prototype: HTMLPskHighlightElement;
+    new (): HTMLPskHighlightElement;
+  };
+
   interface HTMLPskHocElement extends Components.PskHoc, HTMLStencilElement {}
   var HTMLPskHocElement: {
     prototype: HTMLPskHocElement;
@@ -876,6 +886,7 @@ declare global {
     'psk-form': HTMLPskFormElement;
     'psk-form-row': HTMLPskFormRowElement;
     'psk-grid': HTMLPskGridElement;
+    'psk-highlight': HTMLPskHighlightElement;
     'psk-hoc': HTMLPskHocElement;
     'psk-icon': HTMLPskIconElement;
     'psk-img': HTMLPskImgElement;
@@ -1075,6 +1086,10 @@ declare namespace LocalJSX {
   interface PskGrid {
     'columns'?: number | null;
     'layout'?: string | null;
+  }
+  interface PskHighlight {
+    'title'?: string;
+    'typeOfHighlight'?: string;
   }
   interface PskHoc {
     'title'?: string;
@@ -1354,6 +1369,7 @@ declare namespace LocalJSX {
     'psk-form': PskForm;
     'psk-form-row': PskFormRow;
     'psk-grid': PskGrid;
+    'psk-highlight': PskHighlight;
     'psk-hoc': PskHoc;
     'psk-icon': PskIcon;
     'psk-img': PskImg;
@@ -1435,6 +1451,7 @@ declare module "@stencil/core" {
       'psk-form': LocalJSX.PskForm & JSXBase.HTMLAttributes<HTMLPskFormElement>;
       'psk-form-row': LocalJSX.PskFormRow & JSXBase.HTMLAttributes<HTMLPskFormRowElement>;
       'psk-grid': LocalJSX.PskGrid & JSXBase.HTMLAttributes<HTMLPskGridElement>;
+      'psk-highlight': LocalJSX.PskHighlight & JSXBase.HTMLAttributes<HTMLPskHighlightElement>;
       'psk-hoc': LocalJSX.PskHoc & JSXBase.HTMLAttributes<HTMLPskHocElement>;
       'psk-icon': LocalJSX.PskIcon & JSXBase.HTMLAttributes<HTMLPskIconElement>;
       'psk-img': LocalJSX.PskImg & JSXBase.HTMLAttributes<HTMLPskImgElement>;
