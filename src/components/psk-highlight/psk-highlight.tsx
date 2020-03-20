@@ -27,9 +27,9 @@ export class PskDescription {
     render() {
         return (
             <div class={`psk-highlight psk-highlight-${this.typeOfHighlight}`}>
-                <div class="header">
-                    {this.title}
-                </div>
+              {this.title ? <div class="header">
+                {this.title}
+              </div> : null}
                 <div class="body">
                     <slot />
                 </div>
