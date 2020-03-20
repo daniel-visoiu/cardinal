@@ -18,7 +18,7 @@ export class PskDescription {
     @Prop() title: string = "";
 
     @TableOfContentProperty({
-        description: `This property is the type of highlight`,
+        description: `This property is the type of highlight. Possible values are: "note", "issue", "example"`,
         isMandatory: false,
         propertyType: `string`
     })
