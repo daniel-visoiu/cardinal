@@ -24,7 +24,7 @@ export class PskCode {
   @Prop() title: string = "";
 
   @TableOfContentProperty({
-    description: `This property is the language, in which the code is written(so the css can identify it).`,
+    description: `This property is setting the language of the code snippet. Supported values are: xml (default if not provided), markup, javascript, css, json, shell-session, bash.`,
     isMandatory: false,
     propertyType: `string`
   })
@@ -41,6 +41,7 @@ export class PskCode {
       case "css":
       case "json":
       case "shell-session":
+      case "bash":
         this.componentCode = this.host.innerText;
         break;
       default:
