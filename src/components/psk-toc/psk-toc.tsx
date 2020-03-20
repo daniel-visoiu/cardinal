@@ -84,14 +84,14 @@ export class PskToc {
                 : `${childrenStartingIndex}${index + 1}.`;
 
             return (
-                <li class={chapter.guid === this.activeChapter && "active"}
+                <li class={chapter.guid === this.activeChapter?"toc-item active":"toc-item"}
                     onClick={(evt: MouseEvent) => {
                         evt.stopImmediatePropagation();
                         evt.preventDefault();
                         scrollToElement(chapter.title, pageElement);
                         this.activeChapter = chapter.guid;
                     }}>
-                    {`${indexToDisplay} ${chapter.title}`}
+                    <span class="chapter-index">{indexToDisplay}</span><span class="chapter-title">{chapter.title}</span>
                     {
                         chapter.children.length === 0 ? null
                             : <ul>{this._renderChapters(pageElement, chapter.children, indexToDisplay)}</ul>
