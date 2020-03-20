@@ -21,12 +21,11 @@ export class QueryPagesRouter {
 
     let routes = {};
     let renderItems = function (pages) {
-
-      pages.forEach((item) => {
-        if (item.children) {
-          renderItems(item.children)
+      pages.forEach((page) => {
+        if (page.children && page.children.type === "known") {
+          renderItems(page.children.items)
         } else {
-          let { path, component, componentProps } = item;
+          let { path, component, componentProps } = page;
           routes[path] = ({ component, componentProps });
         }
       });
