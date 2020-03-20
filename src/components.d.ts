@@ -83,7 +83,6 @@ export namespace Components {
     'icon': string | null;
     'iconColor': string | null;
     'label': string | null;
-    'menuOrientation': string;
     'opened': boolean;
   }
   interface PskCard {
@@ -981,7 +980,6 @@ declare namespace LocalJSX {
     'icon'?: string | null;
     'iconColor'?: string | null;
     'label'?: string | null;
-    'menuOrientation'?: string;
     'opened'?: boolean;
   }
   interface PskCard {
