@@ -11,8 +11,9 @@ import DefaultApplicationController from "../../controllers/DefaultApplicationCo
 })
 export class PskAppRoot {
   @TableOfContentProperty({
-    isMandatory: true,
+    isMandatory: false,
     description: [`This property is a string that will permit the developer to choose his own controller.`,
+      `If no controller is provided, a default controller will be passed to the component`,
       `It is recommended that each app to extend the provided default controller and adapt it to the application needs`],
     propertyType: `string`,
     defaultValue: `null`

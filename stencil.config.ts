@@ -5,7 +5,10 @@ export const config: Config = {
   outputTargets: [
     {
       type: 'dist',
-      esmLoaderPath: '../loader'
+      esmLoaderPath: '../loader',
+      copy: [
+        { src: 'controllers/AppControllerUtils.js', dest:"../cardinal/utils/AppControllerUtils.js", warn:true }
+      ]
     },
     {
       type: 'docs-readme'
