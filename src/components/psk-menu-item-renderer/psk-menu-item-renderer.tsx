@@ -41,11 +41,10 @@ export class PskMenuItemRenderer {
   renderMenuItem(item) {
     let href = item.path;
     let children = [];
-    if (item.children) {
-      item.children.forEach((child) => {
+    if (item.children && item.children.type === "known") {
+      item.children.items.forEach((child) => {
         children.push(this.renderMenuItem(child));
       })
-
     }
     let ItemRenderer = this.historyType === "query" ? "query-page-link" : "stencil-route-link";
     let ItemWrapperTag = item.type === "abstract" ? "dropdown-renderer" : ItemRenderer;
