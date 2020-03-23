@@ -3,6 +3,7 @@ import ControllerRegistryService from "../../services/ControllerRegistryService"
 import { ExtendedHistoryType } from "../../interfaces/ExtendedHistoryType";
 import { HTMLStencilElement } from "@stencil/core/internal";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
+import DefaultApplicationController from "../../controllers/DefaultApplicationController.js"
 
 @Component({
   tag: 'psk-app-root',
@@ -73,7 +74,8 @@ export class PskAppRoot {
       })
     }
     else {
-      console.error("No controller added to app-root");
+      //load default controller
+      new DefaultApplicationController(this.host);
     }
   }
 

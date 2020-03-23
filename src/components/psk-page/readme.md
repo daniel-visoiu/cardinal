@@ -7,13 +7,16 @@
 
 ## Properties
 
-| Property    | Attribute    | Description | Type      | Default     |
-| ----------- | ------------ | ----------- | --------- | ----------- |
-| `hasToc`    | `has-toc`    |             | `boolean` | `false`     |
-| `pageClass` | `page-class` |             | `string`  | `""`        |
-| `subTitle`  | `sub-title`  |             | `string`  | `""`        |
-| `title`     | `title`      |             | `string`  | `""`        |
-| `tocTitle`  | `toc-title`  |             | `string`  | `undefined` |
+| Property               | Attribute                | Description | Type      | Default     |
+| ---------------------- | ------------------------ | ----------- | --------- | ----------- |
+| `badgeBackgroundColor` | `badge-background-color` |             | `string`  | `undefined` |
+| `badgeText`            | `badge-text`             |             | `string`  | `undefined` |
+| `badgeTextColor`       | `badge-text-color`       |             | `string`  | `undefined` |
+| `hasToc`               | `has-toc`                |             | `boolean` | `false`     |
+| `pageClass`            | `page-class`             |             | `string`  | `""`        |
+| `subTitle`             | `sub-title`              |             | `string`  | `""`        |
+| `title`                | `title`                  |             | `string`  | `""`        |
+| `tocTitle`             | `toc-title`              |             | `string`  | `undefined` |
 
 
 ## Dependencies

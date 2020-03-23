@@ -240,6 +240,9 @@ export namespace Components {
     'value'?: string | null;
   }
   interface PskPage {
+    'badgeBackgroundColor': string;
+    'badgeText': string;
+    'badgeTextColor': string;
     'hasToc': boolean;
     'pageClass': string;
     'subTitle': string;
@@ -1157,6 +1160,9 @@ declare namespace LocalJSX {
     'value'?: string | null;
   }
   interface PskPage {
+    'badgeBackgroundColor'?: string;
+    'badgeText'?: string;
+    'badgeTextColor'?: string;
     'hasToc'?: boolean;
     'pageClass'?: string;
     'subTitle'?: string;

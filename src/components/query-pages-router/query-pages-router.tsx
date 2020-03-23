@@ -26,7 +26,7 @@ export class QueryPagesRouter {
           renderItems(page.children.items)
         } else {
           let { path, component, componentProps } = page;
-          routes[path] = ({ component, componentProps });
+          routes[path] = { component, componentProps };
         }
       });
 
