@@ -1,6 +1,9 @@
-import { Component, h, Prop, State } from "@stencil/core";
+import { Component, h, Prop, State, Element } from "@stencil/core";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import { BindModel } from '../../decorators/BindModel';
+
+const SLOT_CONDITION_FALSE = 'condition-false';
+const SLOT_CONDITION_TRUE = 'condition-true';
 
 @Component({
     tag: "psk-condition",
@@ -16,6 +19,8 @@ export class PskCondition {
 	})
     @Prop() condition: any | null = null;
     @State() conditionResult: boolean = false;
+
+    @Element() _host: HTMLElement;
 
     componentWillLoad() {
         return this._updateConditionResult();
@@ -41,11 +46,27 @@ export class PskCondition {
     }
 
     render() {
-        if (this.conditionResult) {
-            return (
-                <slot />
-            );
+        let renderIfElseSlots = false;
+
+        let trueSlot = <slot />;
+        let falseSlot = null;
+
+        const children = this._host.children;
+        for (let i = 0; i < children.length; i++) {
+            const child = children[i];
+            const slotName = child.getAttribute('slot');
+
+            if (slotName === SLOT_CONDITION_TRUE || slotName === SLOT_CONDITION_FALSE) {
+                renderIfElseSlots = true;
+                break;
+            }
         }
-        return null;
+
+        if (renderIfElseSlots) {
+            trueSlot = <slot name={`${SLOT_CONDITION_TRUE}`} />;
+            falseSlot = <slot name={`${SLOT_CONDITION_FALSE}`} />;
+        }
+
+        return this.conditionResult ? trueSlot : falseSlot;
     }
 }

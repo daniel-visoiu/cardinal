@@ -11,14 +11,14 @@ export class PskDescription {
 
     @CustomTheme()
     @TableOfContentProperty({
-        description: `This property is the title of the new psk-card/psk-chapter that will be created.`,
+        description: `The title of the highlighted section.`,
         isMandatory: false,
         propertyType: `string`
     })
     @Prop() title: string = "";
 
     @TableOfContentProperty({
-        description: `This property is the type of highlight. Possible values are: "note", "issue", "example"`,
+        description: `This property is the type of highlight. Possible values are: "note", "issue", "example". Defaults to "note".`,
         isMandatory: false,
         propertyType: `string`
     })
