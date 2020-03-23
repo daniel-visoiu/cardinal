@@ -1,11 +1,17 @@
-import {Component, h, Prop, State, Watch} from "@stencil/core";
-import {TableOfContentProperty} from "../../decorators/TableOfContentProperty";
+import { Component, h, Prop, State, Watch } from "@stencil/core";
+import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
+import { BindModel } from "../../decorators/BindModel";
 
 @Component({
   tag: 'psk-page-loader',
   shadow: true
 })
 export class PskPageLoader {
+
+  @BindModel()
+
+  @State() pageContent: string;
+  @State() errorLoadingPage: boolean = false;
 
   @TableOfContentProperty({
     description: [`This property is the url for the page that needs to be loaded.`,
@@ -15,18 +21,15 @@ export class PskPageLoader {
   })
   @Prop() pageUrl: string;
 
+  componentWillLoad(): Promise<void> | void {
+    return new Promise((resolve) => {
+      this.getPageContent(this.pageUrl, this.getPageHandler(resolve));
+    });
+  }
+
   @Watch('pageUrl')
   watchHandler(newValue: boolean) {
     this.getPageContent(newValue, this.getPageHandler());
-  }
-
-  @State() pageContent: string;
-  @State() errorLoadingPage: boolean = false;
-
-  componentWillLoad() {
-    return new Promise((resolve) => {
-      this.getPageContent(this.pageUrl, this.getPageHandler(resolve));
-    })
   }
 
   getPageHandler(callback?: Function) {
@@ -45,7 +48,6 @@ export class PskPageLoader {
   }
 
   getPageContent(pageUrl, callback) {
-
     let xhr = new XMLHttpRequest();
     xhr.open('GET', pageUrl);
 
@@ -67,7 +69,7 @@ export class PskPageLoader {
     return (
       this.errorLoadingPage ?
         <h4>{`Page ${this.pageUrl} could not be loaded!`}</h4> :
-        <div class="page_content" innerHTML={this.pageContent}/>
+        <div class="page_content" innerHTML={this.pageContent} />
     )
   }
 }

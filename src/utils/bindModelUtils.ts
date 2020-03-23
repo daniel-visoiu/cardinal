@@ -99,10 +99,10 @@ export function __checkViewModelValues(
     const attributeName = normalizeDashedToCamelCase(attr.name);
 
     if (model.hasExpression(chain)) { // Check for model expressions first
+      __self[attributeName] = model.evaluateExpression(chain);
+      model.onChangeExpressionChain(chain, function () {
         __self[attributeName] = model.evaluateExpression(chain);
-        model.onChangeExpressionChain(chain, function () {
-            __self[attributeName] = model.evaluateExpression(chain);
-        })
+      })
     } else {
       const valueFromModel: any = model.getChainValue(chain);
       element.setAttribute(attr.name, valueFromModel);
