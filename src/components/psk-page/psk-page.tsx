@@ -38,6 +38,29 @@ export class PskPage {
 	})
 	@Prop() tocTitle: string;
 
+  @TableOfContentProperty({
+    description: `This property sets the text of the badge.`,
+    isMandatory: false,
+    propertyType: `string`
+  })
+  @Prop() badgeText: string;
+
+  @TableOfContentProperty({
+    description: `This property sets the color of the badge text.`,
+    isMandatory: false,
+    propertyType: `string`
+  })
+  @Prop() badgeTextColor: string;
+
+  @TableOfContentProperty({
+    description: `This property sets the background color of the badge.`,
+    isMandatory: false,
+    propertyType: `string`
+  })
+  @Prop() badgeBackgroundColor: string;
+
+
+
 	@State() componentFullyLoaded: boolean = false;
 
 	@Element() private element: HTMLElement;
@@ -53,6 +76,11 @@ export class PskPage {
 
 		return (
 			<div class={`main-container ${this.pageClass}"`}>
+
+        {this.badgeText?<div class="psk-badge" style={{backgroundColor:this.badgeBackgroundColor}}>
+          <div class="psk-badge-text" style={{color:this.badgeTextColor}}>{this.badgeText}</div>
+        </div>:null}
+
 				<div class="page-title"><h1>{this.title}</h1></div>
         {this.subTitle ? <div class="page-subtitle"><h2>{this.subTitle}</h2></div> : null}
 				<div class="page-content">
