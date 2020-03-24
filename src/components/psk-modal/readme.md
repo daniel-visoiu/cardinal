@@ -7,9 +7,10 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type      | Default |
-| -------- | --------- | ----------- | --------- | ------- |
-| `opened` | `opened`  |             | `boolean` | `false` |
+| Property    | Attribute    | Description | Type      | Default     |
+| ----------- | ------------ | ----------- | --------- | ----------- |
+| `eventName` | `event-name` |             | `string`  | `undefined` |
+| `opened`    | `opened`     |             | `boolean` | `false`     |
 
 
 ## Events

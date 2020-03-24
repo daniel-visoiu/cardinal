@@ -1,14 +1,62 @@
-import { Component, h, Prop, Event, EventEmitter } from '@stencil/core';
+import { Component, h, Prop, Event, EventEmitter, Element } from '@stencil/core';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
 import CustomTheme from '../../decorators/CustomTheme';
+import PskButtonEvent from '../../events/PskButtonEvent';
+import { BindModel } from '../../decorators/BindModel';
 
 @Component({
 	tag: 'psk-modal',
 	shadow: true
 })
 export class PskModal {
+	@BindModel()
+
 	@CustomTheme()
+
+	@Element() private _host: HTMLElement;
+
+	render() {
+		return (
+			<div>
+				<div id="backdrop" onClick={this._closeModalHandler} />
+				<div id="modal">
+					<div class="modal-content">
+						<div class="modal-header">
+							<slot name="title" />
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true"
+									onClick={this._closeModalHandler}>&times;</span>
+							</button>
+						</div>
+
+						<div class="modal-body">
+							<slot />
+						</div>
+					</div>
+				</div>
+			</div>
+		);
+	}
+
+	_closeModalHandler = (evt: MouseEvent) => {
+		if (this.eventName) {
+			evt.preventDefault();
+			evt.stopImmediatePropagation();
+
+			let pskButtonEvent = new PskButtonEvent(this.eventName, null, {
+				bubbles: true,
+				composed: true,
+				cancelable: true
+			});
+
+			this._host.dispatchEvent(pskButtonEvent);
+		} else {
+			this.closeModal.emit();
+		}
+
+	}
+
 	@TableOfContentProperty({
 		description: `This is the property that gives the state of the modal if it is opened or closed. The posible values are true or false.`,
 		isMandatory: false,
@@ -28,36 +76,10 @@ export class PskModal {
 		bubbles: true,
 	}) closeModal: EventEmitter;
 
-	render() {
-		return (
-			<div>
-				<div id="backdrop" onClick={() => {
-					this.closeModal.emit();
-				}} />
-				<div id="modal">
-					<div class="modal-content">
-						<div class="modal-header">
-							<slot name="title" />
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true"
-									onClick={() => {
-										this.closeModal.emit();
-									}}>&times;</span>
-							</button>
-						</div>
-
-						<div class="modal-body">
-							<slot />
-						</div>
-						<div class="modal-footer">
-							<slot name="confirm_action" />
-							<button class="btn btn-primary" onClick={() => {
-								this.closeModal.emit();
-							}}>Close</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		);
-	}
+	@TableOfContentProperty({
+		description: ['By defining this attribute, the component will be able to trigger an event. The name of the event is the value of the attribute.'],
+		isMandatory: false,
+		propertyType: 'string'
+	})
+	@Prop() eventName: string | null;
 }
