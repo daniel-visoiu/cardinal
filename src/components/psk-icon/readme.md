@@ -9,6 +9,7 @@
 
 | Property       | Attribute       | Description | Type      | Default                |
 | -------------- | --------------- | ----------- | --------- | ---------------------- |
+| `classes`      | `classes`       |             | `string`  | `undefined`            |
 | `color`        | `color`         |             | `string`  | `'rgba(0, 0, 255, 1)'` |
 | `disableColor` | `disable-color` |             | `boolean` | `false`                |
 | `icon`         | `icon`          |             | `string`  | `undefined`            |

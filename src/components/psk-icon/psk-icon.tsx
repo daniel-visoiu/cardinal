@@ -1,11 +1,10 @@
 import { Component, Prop, h } from '@stencil/core';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import CustomTheme from '../../decorators/CustomTheme';
-import {BindModel} from "../../decorators/BindModel";
+import { BindModel } from "../../decorators/BindModel";
 
 @Component({
-    tag: "psk-icon",
-    shadow: true
+    tag: "psk-icon"
 })
 export class PskIcon {
     @CustomTheme()
@@ -41,10 +40,35 @@ export class PskIcon {
     })
     @Prop() color?: string = 'rgba(0, 0, 255, 1)';
 
+    @TableOfContentProperty({
+        isMandatory: false,
+        propertyType: 'string',
+        description: [
+            `By defining this property, you can assign more css classes according to your design needs.`,
+            `These classes will be attached to the existing class, <code>icon fa</code>. In the below examples, you can also find how to use it.`
+        ],
+        specialNote: [
+            `Pay attention on how you use this attribute because if the attribute <code>color</code> is provided and in one of your CSS files you set another color, the <code>color</code> attribute has priority over CSS selectors (except the case when you use !important).`,
+            `The below examples will illustrate this behaviour.`
+        ]
+    })
+    @Prop() classes?: string | null;
+
     render() {
-        return this.icon && <span
-            style={{ color: this.color }}
-            class={`icon fa fa-${this.icon} ${this.disableColor ? 'disable-color' : ''}`}
-        />;
+        if (!this.icon) {
+            return null;
+        }
+
+        let classList = this.icon;
+
+        if (this.disableColor) {
+            classList = `${classList} disable-color`;
+        }
+
+        if (this.classes && this.classes.length) {
+            classList = `${classList} ${this.classes}`;
+        }
+
+        return <span style={{ color: this.color }} class={`icon fa fa-${classList}`} />;
     }
 }

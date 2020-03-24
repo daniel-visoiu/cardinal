@@ -182,6 +182,7 @@ export namespace Components {
     'title': string;
   }
   interface PskIcon {
+    'classes'?: string | null;
     'color'?: string;
     'disableColor'?: boolean;
     'icon': string | null;
@@ -1112,6 +1113,7 @@ declare namespace LocalJSX {
     'title'?: string;
   }
   interface PskIcon {
+    'classes'?: string | null;
     'color'?: string;
     'disableColor'?: boolean;
     'icon'?: string | null;
