@@ -326,6 +326,13 @@ export namespace Components {
     'handleStepChange': Function;
     'wizardSteps': WizardStep[];
   }
+  interface PskSwitchButton {
+    'active': string | null;
+    'eventDispatcher': string | null;
+    'inactive': string | null;
+    'title': string | null;
+    'toggleEvent': string | null;
+  }
   interface PskTable {
     'cellsWidth': string;
     'footer': boolean;
@@ -775,6 +782,12 @@ declare global {
     new (): HTMLPskStepperRendererElement;
   };
 
+  interface HTMLPskSwitchButtonElement extends Components.PskSwitchButton, HTMLStencilElement {}
+  var HTMLPskSwitchButtonElement: {
+    prototype: HTMLPskSwitchButtonElement;
+    new (): HTMLPskSwitchButtonElement;
+  };
+
   interface HTMLPskTableElement extends Components.PskTable, HTMLStencilElement {}
   var HTMLPskTableElement: {
     prototype: HTMLPskTableElement;
@@ -918,6 +931,7 @@ declare global {
     'psk-ss-app': HTMLPskSsAppElement;
     'psk-stepper': HTMLPskStepperElement;
     'psk-stepper-renderer': HTMLPskStepperRendererElement;
+    'psk-switch-button': HTMLPskSwitchButtonElement;
     'psk-table': HTMLPskTableElement;
     'psk-text-input': HTMLPskTextInputElement;
     'psk-textarea': HTMLPskTextareaElement;
@@ -1248,6 +1262,13 @@ declare namespace LocalJSX {
     'handleStepChange'?: Function;
     'wizardSteps'?: WizardStep[];
   }
+  interface PskSwitchButton {
+    'active'?: string | null;
+    'eventDispatcher'?: string | null;
+    'inactive'?: string | null;
+    'title'?: string | null;
+    'toggleEvent'?: string | null;
+  }
   interface PskTable {
     'cellsWidth'?: string;
     'footer'?: boolean;
@@ -1405,6 +1426,7 @@ declare namespace LocalJSX {
     'psk-ss-app': PskSsApp;
     'psk-stepper': PskStepper;
     'psk-stepper-renderer': PskStepperRenderer;
+    'psk-switch-button': PskSwitchButton;
     'psk-table': PskTable;
     'psk-text-input': PskTextInput;
     'psk-textarea': PskTextarea;
@@ -1487,6 +1509,7 @@ declare module "@stencil/core" {
       'psk-ss-app': LocalJSX.PskSsApp & JSXBase.HTMLAttributes<HTMLPskSsAppElement>;
       'psk-stepper': LocalJSX.PskStepper & JSXBase.HTMLAttributes<HTMLPskStepperElement>;
       'psk-stepper-renderer': LocalJSX.PskStepperRenderer & JSXBase.HTMLAttributes<HTMLPskStepperRendererElement>;
+      'psk-switch-button': LocalJSX.PskSwitchButton & JSXBase.HTMLAttributes<HTMLPskSwitchButtonElement>;
       'psk-table': LocalJSX.PskTable & JSXBase.HTMLAttributes<HTMLPskTableElement>;
       'psk-text-input': LocalJSX.PskTextInput & JSXBase.HTMLAttributes<HTMLPskTextInputElement>;
       'psk-textarea': LocalJSX.PskTextarea & JSXBase.HTMLAttributes<HTMLPskTextareaElement>;
