@@ -38,76 +38,50 @@ export class PskSwitchButton {
 
 	@Prop() title: string | null;
 
+	clickHandler(evt: MouseEvent) {
+		this.closed = !this.closed;
+		if (this.toggleEvent) {
+			evt.preventDefault();
+			evt.stopImmediatePropagation();
+
+			let pskButtonEvent = new PskButtonEvent(this.toggleEvent, {
+				"selected": this.closed ? this.inactive : this.active,
+				"active": this.active,
+				"inactive" : this.inactive
+			}, {
+				bubbles: true,
+				composed: true,
+				cancelable: true
+			});
+
+			let eventDispatcherElement = this.htmlElement;
+			if (this.eventDispatcher) {
+				if (ACCEPTED_DEFAULT_DISPATCHERS.indexOf(window[this.eventDispatcher]) !== -1) {
+					eventDispatcherElement = window[this.eventDispatcher];
+				}
+			}
+			eventDispatcherElement.dispatchEvent(pskButtonEvent);
+		}
+	}
+
 	render() {
+		let switchButton =
+			<div class="status-container" onClick={this.clickHandler.bind(this)}>
+				<h5>{this.title}</h5>
+				<psk-grid class="two-options-container"
+					columns={2}
+					layout="xs=[6,6] s=[6,6] m=[6,6] l=[6,6]">
+					<div class={`switch-item ${this.closed ? "" : "selected"}`}>
+						<p>{this.active}</p>
+					</div>
+					<div class={`switch-item ${this.closed ? "selected" : ""}`}>
+						<p>{this.inactive}</p>
+					</div>
+				</psk-grid>
+			</div>
+
 		return (
-			(this.closed == true) ?
-				<div class="status-container" onClick={(evt: MouseEvent) => {
-					this.closed = !this.closed;
-					if (this.toggleEvent) {
-						evt.preventDefault();
-						evt.stopImmediatePropagation();
-
-						let pskButtonEvent = new PskButtonEvent(this.toggleEvent, this.closed, {
-							bubbles: true,
-							composed: true,
-							cancelable: true
-						});
-
-						let eventDispatcherElement = this.htmlElement;
-						if (this.eventDispatcher) {
-							if (ACCEPTED_DEFAULT_DISPATCHERS.indexOf(window[this.eventDispatcher]) !== -1) {
-								eventDispatcherElement = window[this.eventDispatcher];
-							}
-						}
-						eventDispatcherElement.dispatchEvent(pskButtonEvent);
-					}
-				}}>
-					<h5>{this.title}</h5>
-					<psk-grid class="two-options-container"
-						columns={2}
-						layout="xs=[6,6] s=[6,6] m=[6,6] l=[6,6]">
-						<div class="right-container white-background">
-							<p>{this.active}</p>
-						</div>
-						<div class="red-background">
-							<p>{this.inactive}</p>
-						</div>
-					</psk-grid>
-				</div>
-				:
-				<div class="status-container" onClick={(evt: MouseEvent) => {
-					this.closed = !this.closed;
-					if (this.toggleEvent) {
-						evt.preventDefault();
-						evt.stopImmediatePropagation();
-
-						let pskButtonEvent = new PskButtonEvent(this.toggleEvent, this.closed, {
-							bubbles: true,
-							composed: true,
-							cancelable: true
-						});
-
-						let eventDispatcherElement = this.htmlElement;
-						if (this.eventDispatcher) {
-							if (ACCEPTED_DEFAULT_DISPATCHERS.indexOf(window[this.eventDispatcher]) !== -1) {
-								eventDispatcherElement = window[this.eventDispatcher];
-							}
-						}
-						eventDispatcherElement.dispatchEvent(pskButtonEvent);
-					}
-				}}>
-					<h5>{this.title}</h5>
-					<psk-grid class="two-options-container"
-						columns={2}
-						layout="xs=[6,6] s=[6,6] m=[6,6] l=[6,6]">
-						<div class="red-background">
-							<p>{this.active}</p>
-						</div>
-						<div class="left-container white-background">
-							<p>{this.inactive}</p>
-						</div>
-					</psk-grid>
-				</div>
+			switchButton
 		);
 	}
 
