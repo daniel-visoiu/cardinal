@@ -76,25 +76,34 @@ export class PskForEach {
     }
 
     let model = this['rootModel'].getChainValue(this['parentChain']);
-    let childList = [];
+    let childList: Element[][] = [];
 
     for (let i = 0; i < model.length; i++) {
       let pChain = this['parentChain'] ? `${this['parentChain']}.${i}.` : `${i}.`;
 
-      let preparedNodes = [];
+      let preparedNodes: Element[] = [];
       this.templateNodes.forEach(node => {
-        let clonedTemplate = node.cloneNode(true) as Element;
-        let preparedNode = this.prepareItem(pChain, clonedTemplate);
-        preparedNodes.push(<div innerHTML={preparedNode.outerHTML}></div>)
+        let clonedTemplate: Element = node.cloneNode(true) as Element;
+        let preparedNode: Element = this.prepareItem(pChain, clonedTemplate);
+
+        let NewNodeTag: string = preparedNode.tagName.toLowerCase();
+        let attributes: any = {};
+        preparedNode.getAttributeNames().forEach(attrName => {
+          attributes[attrName] = preparedNode.getAttribute(attrName);
+        });
+
+        let newElement: Element = <NewNodeTag innerHTML={preparedNode.innerHTML} {...attributes} />;
+
+        preparedNodes.push(newElement)
       });
 
       childList.push(preparedNodes);
     }
 
-    if (childList.length === 0 && this.emptyNode) {
+    if (this.emptyNode) {
       return <div innerHTML={this.emptyNode.outerHTML}></div>
-
     }
+
     return childList;
   }
 
