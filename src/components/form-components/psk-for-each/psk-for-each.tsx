@@ -100,7 +100,7 @@ export class PskForEach {
       childList.push(preparedNodes);
     }
 
-    if (this.emptyNode) {
+    if (childList.length === 0 && this.emptyNode) {
       return <div innerHTML={this.emptyNode.outerHTML}></div>
     }
 
