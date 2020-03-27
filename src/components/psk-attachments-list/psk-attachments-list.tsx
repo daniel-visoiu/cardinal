@@ -67,9 +67,9 @@ export class PskAttachmentsList {
 				default:
 					fileType = "fa-file-o";
 			}
-			return <button type="button" class="btn btn-primary mr-2 mt-2">
+			return <button type="button" class={`btn btn-primary mr-2 mt-2 ${this.attachmentsClass}`}>
 				<span class={`icon mr-1 fa ${fileType}`} />{file.name}
-				<span class={`badge badge-light ml-1 + ${this.attachmentsClass}`}>{PskAttachmentsList.bytesToSize(file.size)}</span>
+				<span class={`badge badge-light ml-1 `}>{PskAttachmentsList.bytesToSize(file.size)}</span>
 				{this.removeFileFromList !== null && <span
 					class="fa fa-remove fa-2x pull-right"
 					onClick={(evt) => {
