@@ -1,4 +1,4 @@
-import { Component, h, Prop } from '@stencil/core';
+import { Component, h, Prop, Listen, getElement } from '@stencil/core';
 
 import CustomTheme from '../../decorators/CustomTheme';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
@@ -20,10 +20,7 @@ export class ButtonGroup {
 
         return (
             <div class={`button-group-wrapper ${this.classes}`}>
-                <div class="trigger" onClick={(event) => {
-                    event.preventDefault();
-                    this.opened = !this.opened;
-                }}>
+                <div class="trigger" onClick={this._handleMouseClick}>
                     {this.icon && <psk-icon icon={this.icon} color={this.iconColor} />}
                     {this.label && this.label}
                 </div>
@@ -32,6 +29,29 @@ export class ButtonGroup {
                 </div>
             </div>
         );
+    }
+
+    _handleMouseClick = (evt: MouseEvent) => {
+        evt.preventDefault();
+        evt.stopImmediatePropagation();
+
+        let target = evt.target as HTMLElement;
+        if (getElement(this).contains(target)) {
+            this.opened = !this.opened;
+        }
+    }
+
+    @Listen('click', { capture: true, target: "window" })
+    handleClickOutside(evt: Event) {
+        let target = evt.target as HTMLElement;
+        let thisElement: HTMLElement = getElement(this);
+        let targetInPath = evt.composedPath().indexOf(thisElement) > -1;
+
+        // Turn off the menu, only if the click is coming from outside the component.
+        // If the click is coming from outside the component, let the onClick event attached to the div.trigger handle the click
+        if (!thisElement.contains(target) && !targetInPath) {
+            this.opened = false;
+        }
     }
 
     @TableOfContentProperty({
