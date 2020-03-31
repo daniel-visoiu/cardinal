@@ -65,19 +65,9 @@ export function BindModel(): BindInterface {
       let attributes = thisElement.getAttributeNames();
 
       let relateAttributes = attributes.filter(attr => {
-        if (attr.toLowerCase() === "data-view-model") {
-          return true;
-        }
-
-        if (attr.toLowerCase().includes("view-model")) {
-          return true;
-        }
-
-        if (thisElement.getAttribute(attr).toLowerCase().startsWith("@")) {
-          return true;
-        }
-
-        return false;
+        return attr.toLowerCase() === "data-view-model"
+          || attr.toLowerCase().includes("view-model")
+          || thisElement.getAttribute(attr).toLowerCase().startsWith("@");
       });
 
       if (relateAttributes.length === 0) {

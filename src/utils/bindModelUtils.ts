@@ -51,8 +51,7 @@ export function __checkViewModelAttributes(
   parentChain: string | null,
   model: any,
   selector: string,
-  element: HTMLElement | Element,
-  callback: Function
+  element: HTMLElement | Element
 ): void {
   let __self = this;
 
@@ -69,8 +68,6 @@ export function __checkViewModelAttributes(
     element.setAttribute(attributeName, valueFromModel);
     __self[property] = model.getChainValue(chain);
   });
-
-  return callback();
 }
 
 /**
@@ -84,8 +81,7 @@ export function __checkViewModelValues(
   parentChain: string | null,
   model: any,
   selector: string,
-  element: HTMLElement | Element,
-  callback: Function
+  element: HTMLElement | Element
 ): void {
   let __self = this;
 
@@ -113,7 +109,6 @@ export function __checkViewModelValues(
       })
     }
   });
-  return callback();
 }
 
 /**
