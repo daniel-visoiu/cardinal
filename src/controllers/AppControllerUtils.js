@@ -103,6 +103,8 @@ export default class AppControllerUtils{
             if (!page.componentProps) {
               page.componentProps = {};
             }
+            //page.componentProps.options = page.options;
+            Object.assign(page.componentProps,page.options);
             if (page.pageSrc) {
               if(page.pageSrc.startsWith("http")){
                 page.componentProps.pageUrl = page.pageSrc;

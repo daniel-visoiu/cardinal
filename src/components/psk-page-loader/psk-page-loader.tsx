@@ -21,6 +21,16 @@ export class PskPageLoader {
   })
   @Prop() pageUrl: string;
 
+
+  @TableOfContentProperty({
+    description: [`This property indicates if the page should use an iframe or div to render the content retrieved using pageSrc property.`,
+     `Accepted values: iframe, div`,
+     `Default value:div`],
+    isMandatory: false,
+    propertyType: 'string'
+  })
+  @Prop() type: string = "div";
+
   componentWillLoad(): Promise<void> | void {
     return new Promise((resolve) => {
       this.getPageContent(this.pageUrl, this.getPageHandler(resolve));
@@ -66,10 +76,26 @@ export class PskPageLoader {
   }
 
   render() {
+
+    let renderedComponent = null;
+    if( this.type && this.type.toLowerCase()==="iframe"){
+      renderedComponent = <iframe class="iframe_page_content"
+                                  frameborder="0" style={{
+                                  overflow: "hidden",
+                                  height: "100%",
+                                  width: "100%"
+      }}
+                                  src={`data:text/html;charset=utf-8, ${escape(this.pageContent)}`}/>;
+    }
+    else{
+      renderedComponent =<div class="page_content" innerHTML={this.pageContent}/>
+    }
+
     return (
       this.errorLoadingPage ?
         <h4>{`Page ${this.pageUrl} could not be loaded!`}</h4> :
-        <div class="page_content" innerHTML={this.pageContent} />
+        renderedComponent
+
     )
   }
 }

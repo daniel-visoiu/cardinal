@@ -10,6 +10,7 @@
 | Property  | Attribute  | Description | Type     | Default     |
 | --------- | ---------- | ----------- | -------- | ----------- |
 | `pageUrl` | `page-url` |             | `string` | `undefined` |
+| `type`    | `type`     |             | `string` | `"div"`     |
 
 
 ## Dependencies

@@ -3,6 +3,7 @@ import { MenuItem } from "../../interfaces/MenuItem";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import { TableOfContentEvent } from "../../decorators/TableOfContentEvent";
 import { ExtendedHistoryType } from "../../interfaces/ExtendedHistoryType";
+import CustomTheme from "../../decorators/CustomTheme";
 
 @Component({
   tag: "psk-app-router",
@@ -10,6 +11,7 @@ import { ExtendedHistoryType } from "../../interfaces/ExtendedHistoryType";
 })
 export class PskAppRouter {
 
+  @CustomTheme()
   @TableOfContentProperty({
     description: `This parameter holds the datasource for the creation of the application routes. If this property is not provided, the component will emit an event (needMenuItems) in order to fetch this information.`,
     specialNote: `The same configuration file is used in generating the App Menu component`,

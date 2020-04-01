@@ -253,6 +253,7 @@ export namespace Components {
   }
   interface PskPageLoader {
     'pageUrl': string;
+    'type': string;
   }
   interface PskPageNotFound {
     'basePath'?: string;
@@ -1189,6 +1190,7 @@ declare namespace LocalJSX {
   }
   interface PskPageLoader {
     'pageUrl'?: string;
+    'type'?: string;
   }
   interface PskPageNotFound {
     'basePath'?: string;
