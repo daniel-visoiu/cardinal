@@ -12,11 +12,11 @@ const SLOT_CONDITION_TRUE = 'condition-true';
 export class PskCondition {
     @BindModel()
 
-	@TableOfContentProperty({
-		description: `The property value must be the name of a model property or expression. Children are rendered only if the value of the condition is evaluated to true`,
-		isMandatory: true,
-		propertyType: `any`
-	})
+    @TableOfContentProperty({
+        description: `The property value must be the name of a model property or expression. Children are rendered only if the value of the condition is evaluated to true`,
+        isMandatory: true,
+        propertyType: `any`
+    })
     @Prop() condition: any | null = null;
     @State() conditionResult: boolean = false;
 
@@ -30,6 +30,19 @@ export class PskCondition {
         return this._updateConditionResult();
     }
 
+    _stringToBoolean(str) {
+        switch (str.toLowerCase().trim()) {
+            case "true":
+            case "1":
+                return true;
+            case "false":
+            case "0":
+            case null:
+                return false;
+            default: return Boolean(str);
+        }
+    }
+
     _updateConditionResult(): Promise<void> {
         let conditionPromise;
 
@@ -40,7 +53,11 @@ export class PskCondition {
         }
 
         return conditionPromise.then((result) => {
-            this.conditionResult = Boolean(result);
+            if(typeof result === "string"){
+                this.conditionResult = this._stringToBoolean(result);
+            } else {
+                this.conditionResult = Boolean(result);
+            }
             return Promise.resolve();
         })
     }
