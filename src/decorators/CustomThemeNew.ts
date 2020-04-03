@@ -10,43 +10,49 @@ declare type CustomThemeInterface = (
   methodName: string
 ) => void;
 
-let styleNodeElements = {};
+const regex =/@import.*?["']([^"']+)["'].*?;/g
 let dependencies = {};
-
-let regex =/@import.*?["']([^"']+)["'].*?;/g
-function checkForInnerDependencies(url, styleStr){
-
-  let baseUrl = url.substring(0,url.lastIndexOf("/")+1);
+let imports = {};
 
 
-  return new Promise((resolve, _)=>{
+function checkForInnerDependencies(referrer,styleStr){
 
+  if(!imports[referrer]){
+    imports[referrer] = new Promise((resolve, _)=>{
 
-    if(regex.exec(styleStr)){
-      styleStr.replace(regex, (match, g1) => {
-        let depUrl = baseUrl+g1;
-        //console.log("URL",depUrl);
-        if(dependencies[depUrl]){
-          resolve(styleStr.replace(match,dependencies[depUrl]));
-        }
-        else{
-          fetch(depUrl).then((raw)=>{
-            return raw.text();
-          }).then((data)=>{
-            dependencies[depUrl] = data;
-            resolve(styleStr.replace(match,dependencies[depUrl]));
+      if(regex.exec(styleStr)){
+        styleStr.replace(regex, (match, depUrl) => {
+
+          if (!dependencies[depUrl]) {
+            dependencies[depUrl] = resolveDependency(depUrl);
+          }
+
+          dependencies[depUrl].then((content)=>{
+            resolve(styleStr.replace(match, content));
           })
-        }
-      });
-    }
-    else{
-      resolve(styleStr);
-    }
+        });
+      }
 
+      else{
+        resolve(styleStr);
+      }
+    })
+  }
+
+  return imports[referrer];
+
+}
+
+
+function resolveDependency(url) {
+  return new Promise((resolve) => {
+    fetch(url).then((raw) => {
+      resolve(raw.text());
+    })
   })
 }
 
-export default function CustomThemeNewApproach(): CustomThemeInterface {
+export default function CustomThemeNew(): CustomThemeInterface {
   return (proto: ComponentInterface) => {
 
     const { componentWillLoad } = proto;
@@ -64,7 +70,7 @@ export default function CustomThemeNewApproach(): CustomThemeInterface {
       } else {
         console.error(`${htmlElementProperty} is not a property`);
       }
-    }
+    };
 
 
     proto.componentWillLoad = function () {
@@ -82,36 +88,22 @@ export default function CustomThemeNewApproach(): CustomThemeInterface {
             let themeStylePath = "/themes/" + globalConfig.theme + "/components/" + componentName + "/" + componentName + ".css";
             let parent = host.shadowRoot ? host.shadowRoot : host;
 
-            //console.log(styleNodeElements);
-            if(styleNodeElements[themeStylePath]){
+              if(!dependencies[themeStylePath]){
+                dependencies[themeStylePath]  = new Promise((resolve)=>{
+                  resolveDependency(themeStylePath).then((cssRaw)=>{
+                    resolve(cssRaw)
+                  })
+                })
+              }
 
-              let styleElement = document.createElement("style");
-              styleElement.innerText = styleNodeElements[themeStylePath];
-
-              parent.prepend(styleElement);
-              resolve(componentWillLoad && componentWillLoad.call(this))
-            }
-
-            else{
-
-
-
-              fetch(themeStylePath).then(raw=>{
-                return raw.text();
-              }).then((cssRaw)=>{
-
-
-                  checkForInnerDependencies(themeStylePath, cssRaw).then((data:string)=>{
-                    let styleElement = document.createElement("style");
-                    styleElement.innerText = data;
-                    styleNodeElements[themeStylePath] = data;
-                    parent.prepend(styleElement);
-
-                  });
+            dependencies[themeStylePath].then((cssRaw)=>{
+              checkForInnerDependencies(themeStylePath, cssRaw).then((data:string)=>{
+                let styleElement = document.createElement("style");
+                styleElement.innerHTML = data;
+                parent.prepend(styleElement);
                 resolve(componentWillLoad && componentWillLoad.call(this));
-
-              });
-            }
+              })
+            })
 
           })
         }
