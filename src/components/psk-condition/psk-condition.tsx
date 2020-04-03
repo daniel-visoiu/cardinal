@@ -30,7 +30,7 @@ export class PskCondition {
         return this._updateConditionResult();
     }
 
-    stringToBoolean(str) {
+    _stringToBoolean(str) {
         switch (str.toLowerCase().trim()) {
             case "true":
             case "1":
@@ -53,8 +53,11 @@ export class PskCondition {
         }
 
         return conditionPromise.then((result) => {
-            console.log(result, Boolean(result))
-            this.conditionResult = this.stringToBoolean(result);
+            if(typeof result === "string"){
+                this.conditionResult = this._stringToBoolean(result);
+            } else {
+                this.conditionResult = Boolean(result);
+            }
             return Promise.resolve();
         })
     }
