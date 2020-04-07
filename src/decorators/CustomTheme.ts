@@ -6,6 +6,45 @@ declare type CustomThemeInterface = (
   methodName: string
 ) => void;
 
+const regex =/@import.*?["']([^"']+)["'].*?;/g
+let dependencies = {};
+let imports = {};
+
+function checkForInnerDependencies(referrer,styleStr){
+
+  if(!imports[referrer]){
+    imports[referrer] = new Promise((resolve, _)=>{
+
+      if(regex.exec(styleStr)){
+        styleStr.replace(regex, (match, depUrl) => {
+
+          if (!dependencies[depUrl]) {
+            dependencies[depUrl] = resolveDependency(depUrl);
+          }
+
+          dependencies[depUrl].then((content)=>{
+            resolve(styleStr.replace(match, content));
+          })
+        });
+      }
+
+      else{
+        resolve(styleStr);
+      }
+    })
+  }
+
+  return imports[referrer];
+
+}
+
+function resolveDependency(url) {
+  return new Promise((resolve) => {
+    fetch(url).then((raw) => {
+      resolve(raw.text());
+    })
+  })
+}
 
 export default function CustomTheme(): CustomThemeInterface {
   return (proto: ComponentInterface) => {
@@ -15,17 +54,17 @@ export default function CustomTheme(): CustomThemeInterface {
       const host = getElement(this);
       if (host[htmlElementProperty]) {
 
-        let linkElement = host.querySelector('link')
-        if (linkElement) {
-          let content = host[htmlElementProperty].replace(linkElement.outerHTML, "");
-          host[htmlElementProperty] = linkElement.outerHTML;
+        let styleElement = host.querySelector('style');
+        if (styleElement) {
+          let content = host[htmlElementProperty].replace(styleElement.outerHTML, "");
+          host[htmlElementProperty] = styleElement.outerHTML;
           return content;
         }
         return host[htmlElementProperty];
       } else {
         console.error(`${htmlElementProperty} is not a property`);
       }
-    }
+    };
 
 
     proto.componentWillLoad = function () {
@@ -41,41 +80,25 @@ export default function CustomTheme(): CustomThemeInterface {
           return new Promise((resolve) => {
             // @ts-ignore
             let themeStylePath = "/themes/" + globalConfig.theme + "/components/" + componentName + "/" + componentName + ".css";
-            let styleElement = document.createElement("link");
-            styleElement.setAttribute("rel", "stylesheet");
-            styleElement.setAttribute("href", themeStylePath);
-
             let parent = host.shadowRoot ? host.shadowRoot : host;
-            // @ts-ignore
 
-            setTimeout(()=>{
-              parent.prepend(styleElement);
-            },0);
-
-            let styleWasLoaded = false;
-            let checkIfShouldResolve = () => {
-              if (!styleWasLoaded) {
-                styleWasLoaded = true;
-                resolve(componentWillLoad && componentWillLoad.call(this));
+              if(!dependencies[themeStylePath]){
+                dependencies[themeStylePath]  = new Promise((resolve)=>{
+                  resolveDependency(themeStylePath).then((cssRaw)=>{
+                    resolve(cssRaw)
+                  })
+                })
               }
-            };
 
-            styleElement.onload = checkIfShouldResolve;
-            styleElement.onerror = () => {
-              console.log(`File ${themeStylePath} was not found`);
-              //we let the component to render anyway
-              checkIfShouldResolve();
-            };
-
-
-
-            //don't block the UI
-            setTimeout(() => {
-              if (styleWasLoaded === false) {
-                styleWasLoaded = true;
+            dependencies[themeStylePath].then((cssRaw)=>{
+              checkForInnerDependencies(themeStylePath, cssRaw).then((data:string)=>{
+                let styleElement = document.createElement("style");
+                styleElement.innerHTML = data;
+                parent.prepend(styleElement);
                 resolve(componentWillLoad && componentWillLoad.call(this));
-              }
-            }, 100)
+              })
+            })
+
           })
         }
         else {

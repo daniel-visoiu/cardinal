@@ -5,6 +5,7 @@ import CustomTheme from '../../decorators/CustomTheme';
 
 @Component({
 	tag: 'psk-pin-popup',
+  styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.css",
 	shadow: true
 })
 export class PskPinPopup {

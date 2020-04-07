@@ -48,10 +48,10 @@ export class PskCode {
         this.componentCode = this.host.innerHTML;
     }
 
-    let linkElement = this.host.querySelector("link");
-    if (linkElement) {
-      this.host.innerHTML = linkElement.outerHTML;
-      this.componentCode = this.componentCode.replace(linkElement.outerHTML, "");
+    let styleElement = this.host.querySelector("style");
+    if (styleElement) {
+      this.host.innerHTML = styleElement.outerHTML;
+      this.componentCode = this.componentCode.replace(styleElement.outerHTML, "");
     } else {
       this.host.innerHTML = "";
     }

@@ -8,6 +8,7 @@ import PskButtonEvent from "../../events/PskButtonEvent";
 
 @Component({
 	tag: 'psk-files-chooser',
+  styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.min.css",
 	shadow: true
 })
 

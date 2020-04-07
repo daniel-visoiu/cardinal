@@ -6,6 +6,7 @@ import { TableOfContentProperty } from '../../decorators/TableOfContentProperty.
 import CustomTheme from '../../decorators/CustomTheme.js';
 @Component({
     tag: "psk-ui-alert",
+    styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.css",
     shadow: true
 })
 

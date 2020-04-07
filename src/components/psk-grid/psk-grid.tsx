@@ -10,7 +10,8 @@ interface BreakPoint {
 };
 
 @Component({
-	tag: "psk-grid"
+	tag: "psk-grid",
+  styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.css"
 })
 export class PskGrid {
 	@BindModel()

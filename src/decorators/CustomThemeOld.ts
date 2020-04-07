@@ -1,7 +1,4 @@
-/**
- * TODO check if this could be used for further development
- */
-
+/*TODO delete this. it is no longer used*/
 import { getElement } from "@stencil/core";
 import { ComponentInterface } from "@stencil/core/dist/declarations";
 
@@ -10,49 +7,8 @@ declare type CustomThemeInterface = (
   methodName: string
 ) => void;
 
-const regex =/@import.*?["']([^"']+)["'].*?;/g
-let dependencies = {};
-let imports = {};
 
-
-function checkForInnerDependencies(referrer,styleStr){
-
-  if(!imports[referrer]){
-    imports[referrer] = new Promise((resolve, _)=>{
-
-      if(regex.exec(styleStr)){
-        styleStr.replace(regex, (match, depUrl) => {
-
-          if (!dependencies[depUrl]) {
-            dependencies[depUrl] = resolveDependency(depUrl);
-          }
-
-          dependencies[depUrl].then((content)=>{
-            resolve(styleStr.replace(match, content));
-          })
-        });
-      }
-
-      else{
-        resolve(styleStr);
-      }
-    })
-  }
-
-  return imports[referrer];
-
-}
-
-
-function resolveDependency(url) {
-  return new Promise((resolve) => {
-    fetch(url).then((raw) => {
-      resolve(raw.text());
-    })
-  })
-}
-
-export default function CustomThemeNew(): CustomThemeInterface {
+export default function CustomThemeOld(): CustomThemeInterface {
   return (proto: ComponentInterface) => {
 
     const { componentWillLoad } = proto;
@@ -70,7 +26,7 @@ export default function CustomThemeNew(): CustomThemeInterface {
       } else {
         console.error(`${htmlElementProperty} is not a property`);
       }
-    };
+    }
 
 
     proto.componentWillLoad = function () {
@@ -86,25 +42,41 @@ export default function CustomThemeNew(): CustomThemeInterface {
           return new Promise((resolve) => {
             // @ts-ignore
             let themeStylePath = "/themes/" + globalConfig.theme + "/components/" + componentName + "/" + componentName + ".css";
+            let styleElement = document.createElement("link");
+            styleElement.setAttribute("rel", "stylesheet");
+            styleElement.setAttribute("href", themeStylePath);
+
             let parent = host.shadowRoot ? host.shadowRoot : host;
+            // @ts-ignore
 
-              if(!dependencies[themeStylePath]){
-                dependencies[themeStylePath]  = new Promise((resolve)=>{
-                  resolveDependency(themeStylePath).then((cssRaw)=>{
-                    resolve(cssRaw)
-                  })
-                })
-              }
+            setTimeout(()=>{
+              parent.prepend(styleElement);
+            },0);
 
-            dependencies[themeStylePath].then((cssRaw)=>{
-              checkForInnerDependencies(themeStylePath, cssRaw).then((data:string)=>{
-                let styleElement = document.createElement("style");
-                styleElement.innerHTML = data;
-                parent.prepend(styleElement);
+            let styleWasLoaded = false;
+            let checkIfShouldResolve = () => {
+              if (!styleWasLoaded) {
+                styleWasLoaded = true;
                 resolve(componentWillLoad && componentWillLoad.call(this));
-              })
-            })
+              }
+            };
 
+            styleElement.onload = checkIfShouldResolve;
+            styleElement.onerror = () => {
+              console.log(`File ${themeStylePath} was not found`);
+              //we let the component to render anyway
+              checkIfShouldResolve();
+            };
+
+
+
+            //don't block the UI
+            setTimeout(() => {
+              if (styleWasLoaded === false) {
+                styleWasLoaded = true;
+                resolve(componentWillLoad && componentWillLoad.call(this));
+              }
+            }, 100)
           })
         }
         else {

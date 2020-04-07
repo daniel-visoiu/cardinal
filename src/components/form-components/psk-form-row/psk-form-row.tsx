@@ -14,7 +14,7 @@ export class PskForm {
     render() {
         let columns = this.__host.children.length;
         Array.from(this.__host.children).forEach(function (el: Element) {
-            if (el.tagName.toLowerCase() === 'link') {
+            if (el.tagName.toLowerCase() === 'style') {
                 columns--;
             }
         });

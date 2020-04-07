@@ -4,7 +4,8 @@ import { TableOfContentProperty } from "../../decorators/TableOfContentProperty"
 import CustomTheme from "../../decorators/CustomTheme";
 
 @Component({
-    tag: "psk-list"
+    tag: "psk-list",
+    styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.min.css"
 })
 export class PskList {
     @CustomTheme()
@@ -35,7 +36,7 @@ export class PskList {
         let finalHtmlLines = [];
         let currentTag = null;
         let currentListItem = '';
-        
+
         // @ts-ignore --Typescript does not recognize trimLeft!?
         const trimmedLine = htmlLines[0].trimLeft();
         const offset = htmlLines[0].length - trimmedLine.length;
@@ -48,7 +49,7 @@ export class PskList {
             const currentLineOffset = line.length - currentTrimmedLine.length;
 
             /**
-             * If the left trim offset is not the same with the first line, 
+             * If the left trim offset is not the same with the first line,
              * it means that this line is part of the current list item.
              */
             if (offset !== currentLineOffset) {

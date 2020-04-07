@@ -6,6 +6,7 @@ import CustomTheme from '../../decorators/CustomTheme';
 
 @Component({
     tag: "psk-ui-toast",
+    styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.css",
     shadow: true
 })
 

@@ -6,7 +6,8 @@ import { BindModel } from '../../decorators/BindModel';
 
 
 @Component({
-    tag: 'psk-button-group'
+    tag: 'psk-button-group',
+    styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.css"
 })
 export class ButtonGroup {
     @BindModel()

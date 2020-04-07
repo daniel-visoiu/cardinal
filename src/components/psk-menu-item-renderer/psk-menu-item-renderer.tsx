@@ -6,6 +6,7 @@ import {ExtendedHistoryType} from "../../interfaces/ExtendedHistoryType";
 
 @Component({
   tag: 'psk-menu-item-renderer',
+  styleUrl:"../../../themes/commons/fonts/font-awesome.min.css",
   shadow: true
 })
 

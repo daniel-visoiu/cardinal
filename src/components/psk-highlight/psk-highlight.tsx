@@ -4,7 +4,8 @@ import { TableOfContentProperty } from "../../decorators/TableOfContentProperty"
 import CustomTheme from '../../decorators/CustomTheme.js';
 
 @Component({
-    tag: "psk-highlight"
+    tag: "psk-highlight",
+    styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.css"
 })
 
 export class PskDescription {

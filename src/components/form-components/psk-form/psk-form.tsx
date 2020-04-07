@@ -5,6 +5,9 @@ import { TableOfContentProperty } from '../../../decorators/TableOfContentProper
 
 @Component({
     tag: 'psk-form',
+    styleUrls: [
+      "../../../../themes/commons/fonts/font-awesome.min.css",
+      "../../../../themes/commons/bootstrap/css/bootstrap.min.css"],
     shadow: true
 })
 export class PskForm {

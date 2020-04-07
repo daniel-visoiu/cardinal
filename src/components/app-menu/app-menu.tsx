@@ -7,6 +7,7 @@ import {ExtendedHistoryType} from "../../interfaces/ExtendedHistoryType";
 
 @Component({
   tag: 'app-menu',
+  styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.css",
   shadow: true
 })
 export class AppMenu {

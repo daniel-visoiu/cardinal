@@ -4,6 +4,7 @@ import CustomTheme from '../../decorators/CustomTheme';
 
 @Component({
   tag: 'psk-user-profile-renderer',
+  styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.css",
   shadow: true
 })
 export class PskUserProfileRenderer {

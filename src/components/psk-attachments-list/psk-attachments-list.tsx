@@ -6,6 +6,9 @@ const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
 
 @Component({
 	tag: 'psk-attachments-list',
+  styleUrls:[
+    "../../../themes/commons/fonts/font-awesome.min.css",
+    "../../../themes/commons/bootstrap/css/bootstrap.min.css"],
 	shadow: true
 })
 

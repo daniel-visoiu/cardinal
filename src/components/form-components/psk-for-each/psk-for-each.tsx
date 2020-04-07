@@ -13,7 +13,7 @@ export class PskForEach {
   @Element() private __host: HTMLElement;
   @State() modelChanged: boolean = false;
 
-  private ignoredNodeNames = ["link", "slot", "#text", "#comment", "text", "comment"];
+  private ignoredNodeNames = ["link", "style", "slot", "#text", "#comment", "text", "comment"];
   private templateNodes = [];
   private emptyNode: Element;
 

@@ -5,6 +5,9 @@ import {ExtendedHistoryType} from "../../../../interfaces/ExtendedHistoryType";
 
 @Component({
   tag: 'sidebar-renderer',
+  styleUrls:[
+    "../../../../../themes/commons/bootstrap/css/bootstrap.css",
+    "../../../../../themes/commons/fonts/font-awesome.min.css"],
   shadow: true
 })
 

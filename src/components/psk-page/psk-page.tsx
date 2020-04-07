@@ -9,6 +9,7 @@ import { TableOfContentProperty } from "../../decorators/TableOfContentProperty"
 
 @Component({
 	tag: "psk-page",
+  styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.css",
 	shadow: true
 })
 export class PskPage {
