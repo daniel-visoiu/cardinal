@@ -16,6 +16,13 @@
 | `url`              | `url`               |             | `any`           | `undefined` |
 
 
+## Events
+
+| Event           | Description | Type               |
+| --------------- | ----------- | ------------------ |
+| `sectionChange` |             | `CustomEvent<any>` |
+
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

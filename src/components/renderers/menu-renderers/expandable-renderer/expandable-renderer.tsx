@@ -1,4 +1,4 @@
-import {Component, getElement, h, Listen,  Prop, State} from '@stencil/core';
+import {Component, Event, EventEmitter, h, Listen, Prop, State} from '@stencil/core';
 import {injectHistory, RouterHistory} from "@stencil/router";
 
 @Component({
@@ -15,50 +15,70 @@ export class ExpandableRenderer {
   @Prop() url;
   @State() dropDownHasChildActive = false;
   @Prop() somethingChanged = false;
-  @Prop() firstMenuChild :any;
+  @Prop() firstMenuChild: any;
   @Prop() history: RouterHistory;
 
-  @Listen("click", {capture: false, target: "window"})
-  handleClick(e: Event) {
-    const target = e.target as HTMLElement;
-    if (!getElement(this).contains(target)) {
-      this.isOpened = false;
-    }
-  }
+  @Event({
+    eventName: 'sectionChange',
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+  }) sectionChange: EventEmitter;
 
-  @Listen("routeChanged", {capture: false, target: "window"})
+  @Listen("sectionChange", {capture: false, target: "window"})
   routeChanged() {
     this.dropDownHasChildActive = window.location.href.includes(this.url);
+      if(this.dropDownHasChildActive){
+        this.isOpened = true;
+      }
   }
 
-  toggleDropdown(evt) {
+  openDropDown(evt) {
 
     let target = evt.target;
-    let isChild = false;
+    let isChild = true;
 
-    while(target.parentElement){
+    while (target.parentElement) {
       target = target.parentElement;
-      if(target.classList.contains("children")){
-        isChild = true;
-        break;
+      if(target.classList.contains("wrapper_container")){
+        if(target.querySelector(".children")!== null){
+          isChild = false;
+          break;
+        }
       }
     }
+
     if(!isChild){
-      if(!this.isOpened){
-        this.history.push(this.firstMenuChild.path);
-      }
-      evt.stopImmediatePropagation();
+    if (!this.isOpened) {
+      this.history.push(this.firstMenuChild.path);
+      this.sectionChange.emit();
     }
-    this.isOpened = !this.isOpened;
+    }
+    this.isOpened = true;
+    evt.stopImmediatePropagation();
+  }
+
+  closeSection(evt) {
+    this.isOpened = false;
+    this.dropDownHasChildActive = false;
+    evt.stopImmediatePropagation();
+  }
+
+  componentWillLoad() {
+    this.routeChanged();
   }
 
   render() {
-    this.routeChanged();
     return (
-      <div class={`dropdown ${this.dropDownHasChildActive?"active":''} ${this.isOpened ? "isOpened" : ''}`} onClick={(evt) => this.toggleDropdown(evt)}>
+      <div class={`dropdown ${this.dropDownHasChildActive ? "active" : ''} ${this.isOpened ? "isOpened" : ''}`}
+           onClick={this.openDropDown.bind(this)}>
+        {this.isOpened ?
+          <button class="close-section" onClick={this.closeSection.bind(this)}></button> : null}
+
         <slot/>
       </div>
     )
   }
 }
+
 injectHistory(ExpandableRenderer);

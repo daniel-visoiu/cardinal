@@ -979,6 +979,7 @@ declare namespace LocalJSX {
     'active'?: boolean;
     'firstMenuChild'?: any;
     'history'?: RouterHistory;
+    'onSectionChange'?: (event: CustomEvent<any>) => void;
     'somethingChanged'?: boolean;
     'url'?: any;
   }
