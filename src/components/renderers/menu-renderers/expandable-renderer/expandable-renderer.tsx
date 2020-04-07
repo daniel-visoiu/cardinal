@@ -48,14 +48,15 @@ export class ExpandableRenderer {
       }
     }
 
-    if(!isChild){
-    if (!this.isOpened) {
-      this.history.push(this.firstMenuChild.path);
-      this.sectionChange.emit();
-    }
+    if (!isChild) {
+      if (!this.isOpened) {
+        this.history.push(this.firstMenuChild.path);
+        this.sectionChange.emit();
+        //prevent propatation, otherwise, on mobile version, the menu will be closed
+        evt.stopImmediatePropagation();
+      }
     }
     this.isOpened = true;
-    evt.stopImmediatePropagation();
   }
 
   closeSection(evt) {
