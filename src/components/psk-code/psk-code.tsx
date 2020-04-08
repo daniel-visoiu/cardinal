@@ -35,19 +35,7 @@ export class PskCode {
 
 
   componentWillLoad() {
-
-    switch (this.language) {
-      case "javascript":
-      case "css":
-      case "json":
-      case "shell-session":
-      case "bash":
-        this.componentCode = this.host.innerText;
-        break;
-      default:
-        this.componentCode = this.host.innerHTML;
-    }
-
+    this.componentCode = this.host.innerHTML;
     let styleElement = this.host.querySelector("style");
     if (styleElement) {
       this.host.innerHTML = styleElement.outerHTML;
