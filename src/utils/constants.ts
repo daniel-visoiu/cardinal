@@ -20,7 +20,7 @@ export const EVENTS_TYPES = {
   PSK_SCROLL_EVT: "PSK_SCROLL_EVT",
   PSK_WIZARD_EVT: "PSK_WIZARD_EVT",
   PSK_FILE_CHOOSER_EVT: "PSK_FILE_CHOOSER_EVT",
-  PSK_SUB_MENU_EVT:"PSK_SUB_MENU_EVT"
+  PSK_SUB_MENU_EVT: "PSK_SUB_MENU_EVT"
 };
 export const INVALID_ID_CHARACTERS_REGEX = /[^A-Za-z0-9_-]/g;
 export const PSK_LIST_PARSE_CONFIG = {
@@ -50,7 +50,7 @@ export const ACTIONS_ICONS = {
   }
 };
 
-export const GRID_IGNORED_COMPONENTS = ["link", "psk-for-each"];
+export const GRID_IGNORED_COMPONENTS = ["link", "psk-for-each", "style"];
 
 export const GRID_BREAKPOINTS = ["xs", "s", "m", "l", "xl"];
 
