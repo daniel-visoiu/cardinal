@@ -4,12 +4,8 @@ import CustomTheme from '../../decorators/CustomTheme';
 import { BindModel } from '../../decorators/BindModel';
 import PskButtonEvent from "../../events/PskButtonEvent";
 
-
-
 @Component({
-	tag: 'psk-files-chooser',
-  styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.min.css",
-	shadow: true
+	tag: 'psk-files-chooser'
 })
 
 export class PskFilesChooser {
@@ -43,8 +39,6 @@ export class PskFilesChooser {
 	// })
 	// @Prop() onFilesSelect?: Function;
 	addedFile(event) {
-		console.log(this)
-
 		let filesArray = Array.from(event.target.files);
 
 		if (this.eventName) {
@@ -61,11 +55,26 @@ export class PskFilesChooser {
 	}
 
 	render() {
+		let directoryAttributes = {};
+		if (this.accept === 'directory') {
+			directoryAttributes = {
+				directory: true,
+				mozdirectory: true,
+				webkitdirectory: true
+			};
+			this.accept = null;
+		}
+
 		return [
 			<button type="button" class="btn btn-secondary p-0">
 				<label class="pt-0 mb-0 p-2">
 					{this.label}
-					<input accept={this.accept} type="file" onChange={this.addedFile.bind(this)} multiple
+					<input
+						multiple
+						{...directoryAttributes}
+						accept={this.accept}
+						type="file"
+						onChange={this.addedFile.bind(this)}
 						class="form-control-file form-control-sm" />
 				</label>
 			</button>,
