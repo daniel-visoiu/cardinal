@@ -8,7 +8,6 @@ const ACCEPTED_DEFAULT_DISPATCHERS = [document, window];
 
 @Component({
 	tag: 'psk-button',
-  styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.css",
 	shadow: true
 })
 export class PskButton {
@@ -21,31 +20,48 @@ export class PskButton {
 
 	render() {
 		return (
-			<button onClick={(evt: MouseEvent) => {
-				if (this.eventName) {
-					evt.preventDefault();
+			<button class={this.buttonClass} disabled={this.disabled}
+				onClick={(evt: MouseEvent) => {
+					this.handleClickEvent.call(this, evt, this.eventName);
+				}}
+				onDblClick={(evt: MouseEvent) => {
+					this.handleClickEvent.call(this, evt, this.doubleClickEventName);
+				}}
+				onKeyUp={(evt: KeyboardEvent) => {
 					evt.stopImmediatePropagation();
-
-					let pskButtonEvent = new PskButtonEvent(this.eventName, this.eventData, {
-						bubbles: true,
-						composed: true,
-						cancelable: true
-					});
-
-					let eventDispatcherElement = this.htmlElement;
-					if (this.eventDispatcher) {
-						if (ACCEPTED_DEFAULT_DISPATCHERS.indexOf(window[this.eventDispatcher]) !== -1) {
-							eventDispatcherElement = window[this.eventDispatcher];
-						}
+					evt.preventDefault();
+					if (evt.key === 'Enter' || evt.keyCode === 13) {
+						this.handleClickEvent.call(this, evt, this.doubleClickEventName);
 					}
-					eventDispatcherElement.dispatchEvent(pskButtonEvent);
-				}
-			}} class={this.buttonClass}
-				disabled={this.disabled}>
+				}}>
 				{this.label && this.label}
 				<slot />
 			</button>
 		);
+	}
+
+	handleClickEvent = (evt: MouseEvent | KeyboardEvent, evName: string) => {
+		evt.stopImmediatePropagation();
+		evt.preventDefault();
+
+		if (evName) {
+			evt.preventDefault();
+			evt.stopImmediatePropagation();
+
+			let pskButtonEvent = new PskButtonEvent(evName, this.eventData, {
+				bubbles: true,
+				composed: true,
+				cancelable: true
+			});
+
+			let eventDispatcherElement = this.htmlElement;
+			if (this.eventDispatcher) {
+				if (ACCEPTED_DEFAULT_DISPATCHERS.indexOf(window[this.eventDispatcher]) !== -1) {
+					eventDispatcherElement = window[this.eventDispatcher];
+				}
+			}
+			eventDispatcherElement.dispatchEvent(pskButtonEvent);
+		}
 	}
 
 	@TableOfContentProperty({
@@ -70,6 +86,13 @@ export class PskButton {
 		propertyType: 'string'
 	})
 	@Prop() eventName: string | null;
+
+	@TableOfContentProperty({
+		description: ['This attribute has almost the same definiton as the eventName attribute. The particularity of this one is that it will be triggered only on double-clicking the component.'],
+		isMandatory: false,
+		propertyType: 'string'
+	})
+	@Prop() doubleClickEventName: string | null;
 
 	@TableOfContentProperty({
 		description: ['This attribute is used to pass some information along with an event.',
