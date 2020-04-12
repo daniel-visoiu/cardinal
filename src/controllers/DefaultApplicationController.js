@@ -3,6 +3,7 @@ import AppControllerUtils from "./AppControllerUtils.js";
 
 const configUrl = "/app-config.json";
 
+
 export default class DefaultApplicationController extends ApplicationController {
 
     constructor(element) {
@@ -31,6 +32,7 @@ export default class DefaultApplicationController extends ApplicationController 
         element.addEventListener("needRoutes", this._provideConfig("routes"));
         element.addEventListener("needMenuItems", this._provideConfig("menu"));
         element.addEventListener("getUserInfo", this._provideConfig("profile"));
+        element.addEventListener("showAppModal",this._showModal());
         element.addEventListener("getHistoryType", this._provideConfig("historyType"));
         element.addEventListener("validateUrl", (e) => {
             e.stopImmediatePropagation();
@@ -98,5 +100,27 @@ export default class DefaultApplicationController extends ApplicationController 
             callback(new Error("An error occurred"));
         };
         xhr.send();
+    }
+
+    _hideModal(modal,callback){
+
+    }
+
+    _showModal(e){
+
+      let modalName = e.detail;
+      let appModals = this.configuration[modalName];
+      if (!appModals[modalName]) {
+        return console.error(`Modal with name ${modalName} does not exists. Did you forgot to add it in app-config.json?`)
+      }
+
+      let modalUrl = appModals[modalName];
+
+
+    }
+
+    _constructModalElement(modalUrl){
+      let modalComponent = document.createElement("psk-page-loader");
+      modalComponent.setAttribute("page-url",modalUrl);
     }
 }

@@ -15,6 +15,13 @@
 | `swPath`    | `sw-path`    |             | `string` | `undefined` |
 
 
+## Events
+
+| Event        | Description | Type               |
+| ------------ | ----------- | ------------------ |
+| `giveMeSeed` |             | `CustomEvent<any>` |
+
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

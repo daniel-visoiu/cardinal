@@ -1258,6 +1258,7 @@ declare namespace LocalJSX {
     'appName'?: string;
     'csbSeed'?: string;
     'iframeSrc'?: string;
+    'onGiveMeSeed'?: (event: CustomEvent<any>) => void;
     'swPath'?: string;
   }
   interface PskStepper {
