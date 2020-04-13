@@ -45,9 +45,6 @@ export class PskButton {
 		evt.preventDefault();
 
 		if (evName) {
-			evt.preventDefault();
-			evt.stopImmediatePropagation();
-
 			let pskButtonEvent = new PskButtonEvent(evName, this.eventData, {
 				bubbles: true,
 				composed: true,

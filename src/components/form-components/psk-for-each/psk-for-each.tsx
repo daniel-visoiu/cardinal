@@ -76,6 +76,10 @@ export class PskForEach {
     }
 
     let model = this['rootModel'].getChainValue(this['parentChain']);
+    if (!model) {
+      model = [];
+    }
+
     let childList: Element[][] = [];
 
     for (let i = 0; i < model.length; i++) {
