@@ -1,6 +1,7 @@
 import { Component, h, Prop, State, Watch } from "@stencil/core";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import { BindModel } from "../../decorators/BindModel";
+import CustomTheme from "../../decorators/CustomTheme";
 
 @Component({
   tag: 'psk-page-loader',
@@ -9,6 +10,7 @@ import { BindModel } from "../../decorators/BindModel";
 export class PskPageLoader {
 
   @BindModel()
+  @CustomTheme()
 
   @State() pageContent: string;
   @State() errorLoadingPage: boolean = false;
