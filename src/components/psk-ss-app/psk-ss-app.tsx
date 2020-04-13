@@ -22,9 +22,6 @@ export class PskSelfSovereignApp {
   }) giveMeSeed: EventEmitter;
 
 
-
-
-
   componentDidLoad(){
     let iframe = this.element.querySelector("iframe");
 
@@ -33,10 +30,12 @@ export class PskSelfSovereignApp {
         if(event.data.appIdentity === this.digestSeedHex){
           iframe.contentWindow.postMessage({seed:this.seed},iframe.src);
         }
+        event.stopImmediatePropagation();
       }
 
       if (event.data.status === "completed") {
         iframe.contentWindow.location.reload();
+        event.stopImmediatePropagation();
       }
 
       if (event.data.status === "error") {
