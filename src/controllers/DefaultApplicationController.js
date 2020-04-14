@@ -1,13 +1,11 @@
-import ApplicationController from "./base-controllers/ApplicationController.js";
-import AppControllerUtils from "./AppControllerUtils.js";
-
+import AppConfigurationHelper from "./AppConfigurationHelper.js";
 const configUrl = "/app-config.json";
 
 
-export default class DefaultApplicationController extends ApplicationController {
+export default class DefaultApplicationController{
 
     constructor(element) {
-        super(element);
+      this.element = element;
         this.configIsLoaded = false;
         this.pendingRequests = [];
 
@@ -18,7 +16,7 @@ export default class DefaultApplicationController extends ApplicationController 
             } else {
                 basePath = _configuration.baseUrl;
             }
-            this.configuration = AppControllerUtils._prepareConfiguration(_configuration, basePath);
+            this.configuration = AppConfigurationHelper._prepareConfiguration(_configuration, basePath);
             this.configIsLoaded = true;
             while (this.pendingRequests.length) {
                 let request = this.pendingRequests.pop();
@@ -104,7 +102,7 @@ export default class DefaultApplicationController extends ApplicationController 
     }
 
     _hideModal(e){
-      let modal = this._element.querySelector("psk-page-loader[data-type=modal]");
+      let modal = this.element.querySelector("psk-page-loader[data-type=modal]");
       if (modal) {
        modal.remove();
       }
@@ -125,11 +123,11 @@ export default class DefaultApplicationController extends ApplicationController 
 
   _constructModalElement(modalUrl) {
 
-    let modal = this._element.querySelector("psk-page-loader[data-type=modal]");
+    let modal = this.element.querySelector("psk-page-loader[data-type=modal]");
 
     if (!modal) {
       modal = document.createElement("psk-page-loader");
-      this._element.append(modal);
+      this.element.append(modal);
       modal.setAttribute("data-type", "modal");
     }
     modal.setAttribute("page-url", modalUrl);

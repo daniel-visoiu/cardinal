@@ -1,8 +1,7 @@
 import {Component, h, Prop, Element, State} from "@stencil/core";
 import ControllerRegistryService from "../../services/ControllerRegistryService";
 import {TableOfContentProperty} from "../../decorators/TableOfContentProperty";
-
-const BINDABLE_CONTROLLER_PATH = "base-controllers/BindableController";
+import DefaultContainerController from "../../controllers/base-controllers/ContainerController.js";
 
 @Component({
   tag: "psk-container"
@@ -32,7 +31,7 @@ export class PskContainer {
   @State() controllerScript: string | null;
   @State() disconnected: boolean | false;
 
-  // Internal ussage property. In the public documentation, this property should be mentioned as a feature in case the user wants to create a component and to provide the HTML context to the container.
+  // Internal usage property. In the public documentation, this property should be mentioned as a feature in case the user wants to create a component and to provide the HTML context to the container.
   // This property is provided by other components where psk-container is loaded. (e.g. psk-form)
   // If this property is filled in, the searching of a controller script will commence here.
 
@@ -49,31 +48,45 @@ export class PskContainer {
   render() {
     return [
       <slot/>,
-      this.htmlFilePath && <psk-page-loader pageUrl={this.htmlFilePath}/>,
-      (this.controller && this.controllerScript) && this.controller.executeScript(this.controller, this.controllerScript)
+      this.htmlFilePath && <psk-page-loader pageUrl={this.htmlFilePath}/>
     ];
   }
 
   promisifyControllerLoad = (controllerName) => {
     return new Promise((resolve, reject) => {
-      ControllerRegistryService.getController(controllerName).then((CTRL) => {
+      ControllerRegistryService.getController(controllerName).then((controller) => {
         // Prevent javascript execution if the node has been removed from DOM
         if (this.disconnected) {
-          return resolve();
+          return reject();
         }
-        this.controller = new CTRL(this._host);
-        this.__getInnerController.call(this, this._host);
-        resolve();
+        resolve(controller);
       }).catch(reject);
 
     })
   };
 
   componentWillLoad() {
+    let promise;
     if (typeof this.controllerName === "string" && this.controllerName.length > 0) {
-      return this.promisifyControllerLoad(this.controllerName);
+       promise = this.promisifyControllerLoad(this.controllerName);
+    }else{
+       promise = Promise.resolve(DefaultContainerController);
     }
-    return this.promisifyControllerLoad(BINDABLE_CONTROLLER_PATH);
+
+    promise.then((Controller)=>{
+      this.controller = new Controller(this._host);
+      this.__getInnerController.call(this, this._host);
+
+      if(this.controllerScript){
+        this.executeScript(this.controllerScript);
+      }
+
+    }).catch((err)=>{
+      console.log(err);
+    });
+
+    return promise;
+
   }
 
   __getInnerController(fromElement: HTMLElement): void {
@@ -90,4 +103,12 @@ export class PskContainer {
         return;
     }
   }
+
+  executeScript(script) {
+    if (typeof script === 'string' && script.trim().length > 0) {
+      new Function('controller', script)(this.controller);
+    }
+    return null;
+  }
+
 }

@@ -1,6 +1,6 @@
 const EVENT_PREFIX = "@event:";
 
-export default class AppControllerUtils{
+export default class AppConfigurationHelper{
 
 
   static _prepareRoutesTree(menuPages, historyType) {
@@ -180,7 +180,7 @@ export default class AppControllerUtils{
 
     let routes = JSON.parse(JSON.stringify(configuration.routes));
     configuration.menu = filterIndexedItems(routes);
-    configuration.pagesHierarchy = AppControllerUtils._prepareRoutesTree(configuration.routes, historyType);
+    configuration.pagesHierarchy = AppConfigurationHelper._prepareRoutesTree(configuration.routes, historyType);
     return configuration;
   }
 }

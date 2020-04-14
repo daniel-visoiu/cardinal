@@ -11,7 +11,8 @@
         type: 'dist',
         esmLoaderPath: '../loader',
         copy: [
-          { src: 'controllers/AppControllerUtils.js', dest:"../cardinal/utils/AppControllerUtils.js", warn:true }
+          { src: 'controllers/AppConfigurationHelper.js', dest:"../cardinal/controllers/AppConfigurationHelper.js", warn:true },
+          { src: 'controllers/base-controllers', dest:"../cardinal/controllers", warn:true }
         ]
       },
       {
