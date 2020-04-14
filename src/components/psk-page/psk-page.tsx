@@ -6,6 +6,7 @@ import CustomTheme from "../../decorators/CustomTheme";
 import { highlightChapter } from "../../utils/highlightChapter";
 import { scrollToElement, createCustomEvent } from "../../utils/utils";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
+import { BindModel } from "../../decorators/BindModel";
 
 @Component({
 	tag: "psk-page",
@@ -14,6 +15,8 @@ import { TableOfContentProperty } from "../../decorators/TableOfContentProperty"
 })
 export class PskPage {
 	@CustomTheme()
+
+	@BindModel()
 
 	@Prop({reflect:true}) hasToc: boolean = false;
 	@State() activeChapter: string = null;

@@ -8,6 +8,7 @@ const ACCEPTED_DEFAULT_DISPATCHERS = [document, window];
 
 @Component({
 	tag: 'psk-button',
+	styleUrl: "../../../themes/commons/bootstrap/css/bootstrap.css",
 	shadow: true
 })
 export class PskButton {

@@ -5,7 +5,8 @@ import { BindModel } from '../../decorators/BindModel';
 import PskButtonEvent from "../../events/PskButtonEvent";
 
 @Component({
-	tag: 'psk-files-chooser'
+	tag: 'psk-files-chooser',
+	styleUrl: "../../../themes/commons/bootstrap/css/bootstrap.css"
 })
 
 export class PskFilesChooser {
