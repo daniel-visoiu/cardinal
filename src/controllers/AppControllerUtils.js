@@ -44,7 +44,17 @@ export default class AppControllerUtils{
 
     let configuration = {};
     configuration.baseUrl = websiteBase;
+
     let basePagesUrl = websiteBase + rawConfig.basePagesUrl;
+
+    if (rawConfig.modals) {
+      configuration.modals = {};
+      if (Object.keys(rawConfig.modals).length) {
+        for (let key in rawConfig.modals) {
+          configuration.modals[key] = basePagesUrl + rawConfig.modals[key];
+        }
+      }
+    }
 
     if (!rawConfig.menu || !rawConfig.menu.defaultMenuConfig) {
       throw new Error("Default menu configuration is missing");
