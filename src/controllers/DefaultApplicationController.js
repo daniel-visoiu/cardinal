@@ -1,8 +1,9 @@
 import AppConfigurationHelper from "./AppConfigurationHelper.js";
+import ContainerController from "./base-controllers/ContainerController.js";
+
 const configUrl = "/app-config.json";
 
-
-export default class DefaultApplicationController{
+export default class DefaultApplicationController extends ContainerController {
 
     constructor(element) {
       this.element = element;
@@ -26,12 +27,13 @@ export default class DefaultApplicationController{
                 request.callback(null, this.configuration[request.configName]);
             }
         });
+        
+        element.addEventListener("showModal",this.showModal.bind(this));
+        element.addEventListener("hideModal",this.hideModal.bind(this));
 
         element.addEventListener("needRoutes", this._provideConfig("routes"));
         element.addEventListener("needMenuItems", this._provideConfig("menu"));
         element.addEventListener("getUserInfo", this._provideConfig("profile"));
-        element.addEventListener("showModal",this._showModal.bind(this));
-        element.addEventListener("hideModal",this._hideModal.bind(this));
         element.addEventListener("getHistoryType", this._provideConfig("historyType"));
         element.addEventListener("validateUrl", (e) => {
             e.stopImmediatePropagation();
@@ -100,37 +102,4 @@ export default class DefaultApplicationController{
         };
         xhr.send();
     }
-
-    _hideModal(e){
-      let modal = this.element.querySelector("psk-page-loader[data-type=modal]");
-      if (modal) {
-       modal.remove();
-      }
-    }
-
-  _showModal(e) {
-    let modalName = e.data;
-    if (!this.configuration.modals) {
-      throw new Error("Modals is not configured for this app");
-    }
-
-    let appModalPath = this.configuration.modals[modalName];
-    if (!appModalPath) {
-      return console.error(`Modal with name ${modalName} does not exists. Did you forgot to add it in app-config.json?`)
-    }
-    this._constructModalElement(appModalPath);
-  }
-
-  _constructModalElement(modalUrl) {
-
-    let modal = this.element.querySelector("psk-page-loader[data-type=modal]");
-
-    if (!modal) {
-      modal = document.createElement("psk-page-loader");
-      this.element.append(modal);
-      modal.setAttribute("data-type", "modal");
-    }
-    modal.setAttribute("page-url", modalUrl);
-
-  }
 }
