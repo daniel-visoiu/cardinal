@@ -26,7 +26,7 @@ export default class ContainerController {
       });
     };
 
-    this._element = element;
+    this.element = element;
     this.setModel = PskBindableModel.setModel;
 
     __initGetModelEventListener();
@@ -45,8 +45,8 @@ export default class ContainerController {
       eventName.trim().length === 0 ||
       !callback ||
       typeof callback !== "function" ||
-      !this._element ||
-      !this._element.addEventListener
+      !this.element ||
+      !this.element.addEventListener
     ) {
       throw new Error("Invalid arguments");
     }
@@ -55,7 +55,7 @@ export default class ContainerController {
       return htmlElement.addEventListener(eventName, callback, options);
     }
 
-    this._element.addEventListener(eventName, callback, options);
+    this.element.addEventListener(eventName, callback, options);
   }
 
   off(eventName, htmlElement, callback, options) {
@@ -70,8 +70,8 @@ export default class ContainerController {
       eventName.trim().length === 0 ||
       !callback ||
       typeof callback !== "function" ||
-      !this._element ||
-      !this._element.removeEventListener
+      !this.element ||
+      !this.element.removeEventListener
     ) {
       throw new Error("Invalid arguments");
     }
@@ -80,16 +80,16 @@ export default class ContainerController {
       return htmlElement.removeEventListener(eventName, callback, options);
     }
 
-    this._element.removeEventListener(eventName, callback, options);
+    this.element.removeEventListener(eventName, callback, options);
   }
 
   send(eventName, data, htmlElement) {
     if (
       !eventName ||
       eventName.trim().length === 0 ||
-      !this._element ||
-      !this._element ||
-      !this._element.dispatchEvent
+      !this.element ||
+      !this.element ||
+      !this.element.dispatchEvent
     ) {
       throw new Error("Invalid arguments");
     }
@@ -105,7 +105,7 @@ export default class ContainerController {
       return htmlElement.dispatchEvent(newEvent);
     }
 
-    this._element.dispatchEvent(newEvent);
+    this.element.dispatchEvent(newEvent);
   }
 
   hideModal() {

@@ -6,7 +6,7 @@ const configUrl = "/app-config.json";
 export default class DefaultApplicationController extends ContainerController {
 
     constructor(element) {
-      this.element = element;
+        super(element);
         this.configIsLoaded = false;
         this.pendingRequests = [];
 
