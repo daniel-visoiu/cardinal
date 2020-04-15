@@ -1,8 +1,11 @@
 import PskBindableModel from "./lib/bindableModel.js";
+import ModalController from "./ModalController.js";
 
-export default class ContainerController {
-  
+export default class ContainerController extends ModalController{
+
   constructor(element) {
+    super(element);
+
     let __initGetModelEventListener = () => {
       element.addEventListener("getModelEvent", (e) => {
         e.preventDefault();
@@ -106,37 +109,6 @@ export default class ContainerController {
     }
 
     this.element.dispatchEvent(newEvent);
-  }
-
-  hideModal() {
-    let modal = this.element.querySelector("psk-page-loader[data-type=modal]");
-    if (modal) {
-      modal.remove();
-    }
-  }
-
-  showModal(e) {
-    let modalName = e.data;
-    if (!this.configuration.modals) {
-      throw new Error("Modals is not configured for this app");
-    }
-
-    let appModalPath = this.configuration.modals[modalName];
-    if (!appModalPath) {
-      return console.error(`Modal with name ${modalName} does not exists. Did you forgot to add it in app-config.json?`)
-    }
-    this._constructModalElement(appModalPath);
-  }
-
-  _constructModalElement(modalUrl) {
-    let modal = this.element.querySelector("psk-page-loader[data-type=modal]");
-
-    if (!modal) {
-      modal = document.createElement("psk-page-loader");
-      this.element.append(modal);
-      modal.setAttribute("data-type", "modal");
-    }
-    modal.setAttribute("page-url", modalUrl);
   }
 
 }

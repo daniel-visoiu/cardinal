@@ -12,7 +12,8 @@
         esmLoaderPath: '../loader',
         copy: [
           { src: 'controllers/AppConfigurationHelper.js', dest:"../cardinal/controllers/AppConfigurationHelper.js", warn:true },
-          { src: 'controllers/base-controllers', dest:"../cardinal/controllers", warn:true }
+          { src: 'controllers/base-controllers', dest:"../cardinal/controllers/base-controllers", warn:true },
+          { src: 'events/*.js', dest:"../cardinal/events", warn:true }
         ]
       },
       {

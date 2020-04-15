@@ -1,12 +1,10 @@
 import AppConfigurationHelper from "./AppConfigurationHelper.js";
-import ContainerController from "./base-controllers/ContainerController.js";
 
 const configUrl = "/app-config.json";
 
-export default class DefaultApplicationController extends ContainerController {
+export default class DefaultApplicationController  {
 
     constructor(element) {
-        super(element);
         this.configIsLoaded = false;
         this.pendingRequests = [];
 
@@ -27,14 +25,12 @@ export default class DefaultApplicationController extends ContainerController {
                 request.callback(null, this.configuration[request.configName]);
             }
         });
-        
-        element.addEventListener("showModal",this.showModal.bind(this));
-        element.addEventListener("hideModal",this.hideModal.bind(this));
 
         element.addEventListener("needRoutes", this._provideConfig("routes"));
         element.addEventListener("needMenuItems", this._provideConfig("menu"));
         element.addEventListener("getUserInfo", this._provideConfig("profile"));
         element.addEventListener("getHistoryType", this._provideConfig("historyType"));
+        element.addEventListener("getModals", this._provideConfig("modals"));
         element.addEventListener("validateUrl", (e) => {
             e.stopImmediatePropagation();
             let { sourceUrl, callback } = e.detail;
