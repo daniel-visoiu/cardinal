@@ -66,18 +66,39 @@ export default class DefaultApplicationController  {
 
         let root = this.configuration.pagesHierarchy;
         for (let i = 0; i < paths.length; i++) {
-            if (!root[paths[i]]) {
+            let segment = paths[i];
+            
+            const segmentInsideMenu = Object.keys(root).find(function(key) {
+                return root[key].path.toLowerCase().indexOf(segment) !== -1;
+            });
+
+            let isSegmentInsideMenu = typeof root[segmentInsideMenu] !== 'undefined';
+
+            if (!root[segment] && !isSegmentInsideMenu) {
                 callback(`${sourceUrl} is not a valid path in the application!`);
                 break;
             }
 
-            const children = root[paths[i]].children;
+            let children;
+            if(isSegmentInsideMenu) {
+                children = root[segmentInsideMenu].children;
+            } else {
+                children = root[segment].children;
+            }
 
             if (typeof children === 'object' && typeof children.items === 'object' && i !== paths.length) {
                 root = children.items;
                 continue;
             }
-            callback(null, root[paths[i]].path)
+
+            let linkPath;
+            if(isSegmentInsideMenu) {
+                linkPath = root[segmentInsideMenu].path;
+            } else {
+                linkPath = root[segment].children;
+            }
+
+            callback(null, linkPath);
         }
     }
 
