@@ -95,7 +95,7 @@ export default class DefaultApplicationController  {
             if(isSegmentInsideMenu) {
                 linkPath = root[segmentInsideMenu].path;
             } else {
-                linkPath = root[segment].children;
+                linkPath = root[segment].path;
             }
 
             callback(null, linkPath);
