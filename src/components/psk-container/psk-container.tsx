@@ -56,12 +56,8 @@ export class PskContainer {
     return new Promise((resolve, reject) => {
       ControllerRegistryService.getController(controllerName).then((controller) => {
         // Prevent javascript execution if the node has been removed from DOM
-        if (this.disconnected) {
-          return reject();
-        }
         resolve(controller);
       }).catch(reject);
-
     })
   };
 
@@ -74,11 +70,13 @@ export class PskContainer {
     }
 
     promise.then((Controller)=>{
-      this.controller = new Controller(this._host);
-      this.__getInnerController.call(this, this._host);
+      if (!this.disconnected) {
+        this.controller = new Controller(this._host);
+        this.__getInnerController.call(this, this._host);
 
-      if(this.controllerScript){
-        this.executeScript(this.controllerScript);
+        if(this.controllerScript){
+          this.executeScript(this.controllerScript);
+        }
       }
 
     }).catch((err)=>{
