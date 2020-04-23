@@ -129,8 +129,18 @@ export default class ContainerController {
 
   showModal(modalName, bindContextData, returnCallback) {
 
-    this.__getModalsUrl((err, modalsUrls) => {
+    const completeCallback = (...args) => {
+      this.hideModal();
+      console.log('Hide modal is called from completecalback');
+      returnCallback(...args);
+    };
 
+    const bindModalDataHandler = function (evt) {
+      let callback = evt.data.callback;
+      callback(undefined, bindContextData, completeCallback);
+    }
+
+    this.__getModalsUrl((err, modalsUrls) => {
       if (err) {
         throw err;
       }
@@ -143,29 +153,21 @@ export default class ContainerController {
       if (!appModalPath) {
         return console.error(`Modal with name ${modalName} does not exists. Did you forgot to add it in app-config.json?`)
       }
-      this.__constructModalElement(appModalPath, bindContextData);
+      this.__constructModalElement(appModalPath);
 
-
-      let completeCallback = (...args) => {
-        this.hideModal();
-        returnCallback(...args);
-      };
-
-      this.element.addEventListener("bindModalData", (evt) => {
-        evt.stopImmediatePropagation();
-        let callback = evt.data.callback;
-        callback(undefined, bindContextData, completeCallback);
-      });
-
-      this.element.addEventListener("closeModal", this.hideModal.bind(this));
-
+      this.element.addEventListener("bindModalData", bindModalDataHandler);
+      this.element.addEventListener("closeModal", this.hideModal.bind(this, bindModalDataHandler));
     });
   }
 
-  hideModal() {
+  hideModal(eventHandlerToRemove) {
     let modal = this.element.querySelector("psk-page-loader[data-type=modal]");
     if (modal) {
       modal.remove();
+    }
+
+    if (eventHandlerToRemove) {
+      this.element.removeEventListener('bindModalData', eventHandlerToRemove);
     }
   }
 
@@ -179,6 +181,5 @@ export default class ContainerController {
     }
     modal.setAttribute("page-url", modalUrl);
   }
-
 
 }
