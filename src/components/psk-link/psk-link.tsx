@@ -14,14 +14,14 @@ export class PskLink {
   @CustomTheme()
 
   @TableOfContentProperty({
-    description: "This property gives the component the destination URL after clicking the displayed link. This property is first validated by valdateUrl event.",
+    description: "This property is helping the component to resolve the real URL of the target. This property is validated for the first time by the valdateUrl event.",
     isMandatory: true,
     propertyType: "string"
   })
   @Prop() page: string;
 
   @TableOfContentProperty({
-    description: "This property gives the component the unique keyword that will resolve a unique page.",
+    description: "This property gives the component a unique keyword which resolves a single page.",
     isMandatory: true,
     propertyType: "string"
   })
