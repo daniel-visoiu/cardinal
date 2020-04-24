@@ -15,14 +15,14 @@ export class PskLink {
 
   @TableOfContentProperty({
     description: "This property is helping the component to resolve the real URL of the target. This property is validated for the first time by the valdateUrl event.",
-    isMandatory: true,
+    isMandatory: false,
     propertyType: "string"
   })
   @Prop() page: string;
 
   @TableOfContentProperty({
     description: "This property gives the component a unique keyword which resolves a single page.",
-    isMandatory: true,
+    isMandatory: false,
     propertyType: "string"
   })
   @Prop() keyword: string;
