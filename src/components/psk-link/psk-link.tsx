@@ -34,7 +34,7 @@ export class PskLink {
     description: [
       `This event is sent to the application controller in order to check and validate the page property.`,
       `If the sequence of pages inside the page property is valid, then the event is sending back to the component the valid path to the required page.`,
-      `If not, a special behavior will be applied to the link. On mouse over, it will turn grey and will display a hint message: "Temporary unavailable".`
+      `If not, a special behavior will be applied to the link. On mouse over, it will turn grey and will display a hint message: "Page {page-name} does not exists".`
     ]
   })
   @Event({
@@ -44,6 +44,14 @@ export class PskLink {
     cancelable: true
   }) validateUrl: EventEmitter;
 
+  @TableOfContentEvent({
+    controllerInteraction: {
+      required: true
+    },
+    description: [
+      `This event is sent to the application controller in order get the dictionary that keeps the mapped keywords to their real page URLs`,
+    ]
+  })
   @Event({
     eventName: "getKeywords",
     composed: true,
