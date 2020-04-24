@@ -7,15 +7,17 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type     | Default     |
-| -------- | --------- | ----------- | -------- | ----------- |
-| `page`   | `page`    |             | `string` | `undefined` |
+| Property  | Attribute | Description | Type     | Default     |
+| --------- | --------- | ----------- | -------- | ----------- |
+| `keyword` | `keyword` |             | `string` | `undefined` |
+| `page`    | `page`    |             | `string` | `undefined` |
 
 
 ## Events
 
 | Event         | Description | Type               |
 | ------------- | ----------- | ------------------ |
+| `getKeywords` |             | `CustomEvent<any>` |
 | `validateUrl` |             | `CustomEvent<any>` |
 
 

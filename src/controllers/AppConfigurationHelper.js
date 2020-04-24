@@ -1,6 +1,6 @@
 const EVENT_PREFIX = "@event:";
 
-export default class AppConfigurationHelper{
+export default class AppConfigurationHelper {
 
 
   static _prepareRoutesTree(menuPages, historyType) {
@@ -67,7 +67,7 @@ export default class AppConfigurationHelper{
     }
 
     let filterIndexedItems = function (menuItems) {
-      for(let i = 0; i<menuItems.length; i++){
+      for (let i = 0; i < menuItems.length; i++) {
         if (menuItems[i].children && menuItems[i].children.items) {
           filterIndexedItems(menuItems[i].children.items);
         } else {
@@ -79,7 +79,7 @@ export default class AppConfigurationHelper{
       return menuItems;
     };
 
-    let fillOptionalPageProps = function(navigationPages, pathPrefix) {
+    let fillOptionalPageProps = function (navigationPages, pathPrefix) {
       navigationPages.forEach(page => {
 
         if (!page.path) {
@@ -114,12 +114,12 @@ export default class AppConfigurationHelper{
               page.componentProps = {};
             }
             //page.componentProps.options = page.options;
-            Object.assign(page.componentProps,page.options);
+            Object.assign(page.componentProps, page.options);
             if (page.pageSrc) {
-              if(page.pageSrc.startsWith("http")){
+              if (page.pageSrc.startsWith("http")) {
                 page.componentProps.pageUrl = page.pageSrc;
               }
-              else{
+              else {
                 page.componentProps.pageUrl = basePagesUrl + page.pageSrc;
               }
             } else {
@@ -138,8 +138,8 @@ export default class AppConfigurationHelper{
           page.children = {type: "known", items: JSON.parse(JSON.stringify(page.children))};
           fillOptionalPageProps(page.children.items, page.path);
         }
-        else{
-          if(typeof page.children ==="string" && page.children.indexOf(EVENT_PREFIX)==0){
+        else {
+          if (typeof page.children === "string" && page.children.indexOf(EVENT_PREFIX) == 0) {
             let eventName = page.children.substring(EVENT_PREFIX.length);
             page.children = {type: "event", event: eventName};
             page.component = "psk-ssapp-loader";
@@ -178,8 +178,29 @@ export default class AppConfigurationHelper{
       addPathPrefix(configuration.routes);
     }
 
+    let getPagesKeywords = function (routes) {
+      let keywordsDictionary = [];
+
+      function iterateThroughRoutes(routes) {
+        routes.forEach((route) => {
+            if (Object.prototype.hasOwnProperty.call(route, 'keyword')) {
+              keywordsDictionary[route['keyword']] = route.path;
+            }
+            if (typeof route.children === 'object' && Array.isArray(route.children.items)) {
+              iterateThroughRoutes(route.children.items);
+            }
+          }
+        )
+      }
+
+      iterateThroughRoutes(routes);
+
+      return keywordsDictionary;
+    };
+
     let routes = JSON.parse(JSON.stringify(configuration.routes));
     configuration.menu = filterIndexedItems(routes);
+    configuration.keywords = getPagesKeywords(routes);
     configuration.pagesHierarchy = AppConfigurationHelper._prepareRoutesTree(configuration.routes, historyType);
     return configuration;
   }

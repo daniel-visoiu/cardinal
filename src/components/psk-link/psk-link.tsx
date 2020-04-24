@@ -3,6 +3,8 @@ import { TableOfContentProperty } from "../../decorators/TableOfContentProperty"
 import { TableOfContentEvent } from "../../decorators/TableOfContentEvent";
 import CustomTheme from "../../decorators/CustomTheme";
 
+let keywordsDictionary;
+
 @Component({
   tag: "psk-link",
   shadow: true
@@ -17,6 +19,13 @@ export class PskLink {
     propertyType: "string"
   })
   @Prop() page: string;
+
+  @TableOfContentProperty({
+    description: "This property gives the component the unique keyword that will resolve a unique page.",
+    isMandatory: true,
+    propertyType: "string"
+  })
+  @Prop() keyword: string;
 
   @TableOfContentEvent({
     controllerInteraction: {
@@ -35,12 +44,42 @@ export class PskLink {
     cancelable: true
   }) validateUrl: EventEmitter;
 
+  @Event({
+    eventName: "getKeywords",
+    composed: true,
+    bubbles: true,
+    cancelable: true
+  }) getKeywords: EventEmitter;
+
   @State() error: boolean = false;
   @State() destinationUrl: string = "#";
 
-  componentDidLoad() {
-    if (!this.page) {
-      return;
+  getAssignedUrlFromKeyword(keyword, callback){
+    if (!keywordsDictionary) {
+      this.getKeywords.emit((err, data) => {
+        if (err) {
+          return callback(err);
+        }
+        keywordsDictionary = data;
+        callback(undefined, keywordsDictionary[keyword])
+      })
+    }
+    else callback(undefined, keywordsDictionary[keyword]);
+  }
+
+  componentWillLoad():Promise<any> {
+    if (this.keyword) {
+      return new Promise((resolve)=>{
+        this.getAssignedUrlFromKeyword(this.keyword,  (error, url) => {
+          if(error || !url){
+            this.error = true;
+          }
+          else{
+            this.destinationUrl = url;
+          }
+          resolve();
+        })
+      });
     }
 
     this.validateUrl.emit({
@@ -54,6 +93,7 @@ export class PskLink {
         }
       }
     });
+
   }
 
   render() {

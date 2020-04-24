@@ -211,6 +211,7 @@ export namespace Components {
     'label': string | null;
   }
   interface PskLink {
+    'keyword': string;
     'page': string;
   }
   interface PskList {
@@ -1146,6 +1147,8 @@ declare namespace LocalJSX {
     'label'?: string | null;
   }
   interface PskLink {
+    'keyword'?: string;
+    'onGetKeywords'?: (event: CustomEvent<any>) => void;
     'onValidateUrl'?: (event: CustomEvent<any>) => void;
     'page'?: string;
   }

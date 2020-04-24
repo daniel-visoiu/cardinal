@@ -31,15 +31,16 @@ export default class DefaultApplicationController  {
         element.addEventListener("getUserInfo", this._provideConfig("profile"));
         element.addEventListener("getHistoryType", this._provideConfig("historyType"));
         element.addEventListener("getModals", this._provideConfig("modals"));
+        element.addEventListener("getKeywords", this._provideConfig("keywords"));
         element.addEventListener("validateUrl", (e) => {
-            e.stopImmediatePropagation();
-            let { sourceUrl, callback } = e.detail;
-            if (callback && typeof callback === "function") {
-                this._parseSourceUrl(sourceUrl, callback);
-            } else {
-                console.error("Callback was not properly provided!");
-            }
-        });
+              e.stopImmediatePropagation();
+              let { sourceUrl, callback } = e.detail;
+              if (callback && typeof callback === "function") {
+                  this._parseSourceUrl(sourceUrl, callback);
+              } else {
+                  console.error("Callback was not properly provided!");
+              }
+          });
     }
 
     _provideConfig(configName) {
@@ -52,7 +53,7 @@ export default class DefaultApplicationController  {
                     if (!this.configuration[configName]) {
                         throw new Error(`Config ${configName} was not provided`)
                     }
-                    callback(null, this.configuration[configName]);
+                    callback(undefined, this.configuration[configName]);
                 } else {
                     this.pendingRequests.push({ configName: configName, callback: callback });
                 }
@@ -67,7 +68,7 @@ export default class DefaultApplicationController  {
         let root = this.configuration.pagesHierarchy;
         for (let i = 0; i < paths.length; i++) {
             let segment = paths[i];
-            
+
             const segmentInsideMenu = Object.keys(root).find(function(key) {
                 return root[key].path.toLowerCase().indexOf(segment) !== -1;
             });
