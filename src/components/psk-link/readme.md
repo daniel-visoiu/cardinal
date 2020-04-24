@@ -9,6 +9,7 @@
 
 | Property  | Attribute | Description | Type     | Default     |
 | --------- | --------- | ----------- | -------- | ----------- |
+| `chapter` | `chapter` |             | `string` | `undefined` |
 | `keyword` | `keyword` |             | `string` | `undefined` |
 | `page`    | `page`    |             | `string` | `undefined` |
 

@@ -99,7 +99,7 @@ export default class DefaultApplicationController  {
                 linkPath = root[segment].path;
             }
 
-            callback(null, linkPath);
+            return callback(undefined, linkPath);
         }
     }
 

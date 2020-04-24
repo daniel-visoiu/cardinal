@@ -1,6 +1,6 @@
-import { Component, h, Prop, Event, EventEmitter, State } from "@stencil/core";
-import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
-import { TableOfContentEvent } from "../../decorators/TableOfContentEvent";
+import {Component, h, Prop, Event, EventEmitter, State} from "@stencil/core";
+import {TableOfContentProperty} from "../../decorators/TableOfContentProperty";
+import {TableOfContentEvent} from "../../decorators/TableOfContentEvent";
 import CustomTheme from "../../decorators/CustomTheme";
 
 let keywordsDictionary;
@@ -26,6 +26,13 @@ export class PskLink {
     propertyType: "string"
   })
   @Prop() keyword: string;
+
+  @TableOfContentProperty({
+    description: "This property allows user to create a complex URL containing a page chapter identifier",
+    isMandatory: false,
+    propertyType: "string"
+  })
+  @Prop() chapter: string;
 
   @TableOfContentEvent({
     controllerInteraction: {
@@ -62,7 +69,7 @@ export class PskLink {
   @State() error: boolean = false;
   @State() destinationUrl: string = "#";
 
-  getAssignedUrlFromKeyword(keyword, callback){
+  getAssignedUrlFromKeyword(keyword, callback) {
     if (!keywordsDictionary) {
       this.getKeywords.emit((err, data) => {
         if (err) {
@@ -75,31 +82,24 @@ export class PskLink {
     else callback(undefined, keywordsDictionary[keyword]);
   }
 
-  componentWillLoad():Promise<any> {
+  componentWillLoad() {
+
+    let setLinkUrl = (error, url) => {
+      if (error || !url) {
+        this.error = true;
+      }
+      else {
+        this.destinationUrl = this.chapter ? url + "&chapter=" + this.chapter : url;
+      }
+    };
+
     if (this.keyword) {
-      return new Promise((resolve)=>{
-        this.getAssignedUrlFromKeyword(this.keyword,  (error, url) => {
-          if(error || !url){
-            this.error = true;
-          }
-          else{
-            this.destinationUrl = url;
-          }
-          resolve();
-        })
-      });
+      return this.getAssignedUrlFromKeyword(this.keyword, setLinkUrl)
     }
 
     this.validateUrl.emit({
       sourceUrl: this.page,
-      callback: (err, data) => {
-        if (!err) {
-          this.destinationUrl = data;
-          this.error = false;
-        } else {
-          this.error = true;
-        }
-      }
+      callback: setLinkUrl
     });
 
   }
@@ -115,14 +115,14 @@ export class PskLink {
       <div class="psk-link">
         {this.error ?
           <div><a class={`btn btn-link ${this.error ? 'invalid-url' : ''}`}
-            onClick={(evt: MouseEvent) => {
-              evt.preventDefault();
-            }}>
-            <slot />
+                  onClick={(evt: MouseEvent) => {
+                    evt.preventDefault();
+                  }}>
+            <slot/>
           </a>
             {errorContent}</div> :
           <stencil-route-link url={this.destinationUrl} anchorClass="btn btn-link">
-            <slot />
+            <slot/>
           </stencil-route-link>}
       </div>
     )
