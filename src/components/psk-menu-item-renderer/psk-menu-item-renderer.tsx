@@ -52,7 +52,7 @@ export class PskMenuItemRenderer {
     return (
       <ItemWrapperTag url={href} activeClass="active" exact={false} somethingChanged={this.value} onClick={(evt)=>this.notifyItemClicked(evt)}>
         <div class="wrapper_container">
-          <div class="item_container">
+          <div class={`item_container ${item.children?"has-children":""}`}>
             <span class={`icon fa ${item.icon}`}></span>
             <a>
               {item.children ? <span class="item_name">{item.name}<span class="fa fa-caret-down"></span></span> :

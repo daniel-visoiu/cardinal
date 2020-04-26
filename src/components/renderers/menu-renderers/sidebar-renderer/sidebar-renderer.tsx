@@ -30,7 +30,7 @@ export class SidebarRenderer {
     }
 
     let innerContent = (<div class="wrapper_container">
-      <div class="item_container">
+      <div class={`item_container ${item.children ? "has-children" : ""}`}>
         <span class={`icon fa ${item.icon}`}></span>
         {item.children ? <span class="item_name">{item.name}</span> :
           <span class="item_name">{item.name}</span>}
