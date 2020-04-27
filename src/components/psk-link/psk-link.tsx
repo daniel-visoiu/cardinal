@@ -3,7 +3,7 @@ import {TableOfContentProperty} from "../../decorators/TableOfContentProperty";
 import {TableOfContentEvent} from "../../decorators/TableOfContentEvent";
 import CustomTheme from "../../decorators/CustomTheme";
 
-let keywordsDictionary;
+let tagsDictionary;
 
 @Component({
   tag: "psk-link",
@@ -21,11 +21,11 @@ export class PskLink {
   @Prop() page: string;
 
   @TableOfContentProperty({
-    description: "This property gives the component a unique keyword which resolves a single page.",
+    description: "This property gives the component a unique tag which resolves a single page.",
     isMandatory: false,
     propertyType: "string"
   })
-  @Prop() keyword: string;
+  @Prop() tag: string;
 
   @TableOfContentProperty({
     description: "This property allows user to create a complex URL containing a page chapter identifier",
@@ -56,30 +56,30 @@ export class PskLink {
       required: true
     },
     description: [
-      `This event is sent to the application controller in order get the dictionary that keeps the mapped keywords to their real page URLs`,
+      `This event is sent to the application controller in order get the dictionary that keeps the mapped tags to their real page URLs`,
     ]
   })
   @Event({
-    eventName: "getKeywords",
+    eventName: "getTags",
     composed: true,
     bubbles: true,
     cancelable: true
-  }) getKeywords: EventEmitter;
+  }) getTags: EventEmitter;
 
   @State() error: boolean = false;
   @State() destinationUrl: string = "#";
 
-  getAssignedUrlFromKeyword(keyword, callback) {
-    if (!keywordsDictionary) {
-      this.getKeywords.emit((err, data) => {
+  getAssignedUrlFromTag(tag, callback) {
+    if (!tagsDictionary) {
+      this.getTags.emit((err, data) => {
         if (err) {
           return callback(err);
         }
-        keywordsDictionary = data;
-        callback(undefined, keywordsDictionary[keyword])
+        tagsDictionary = data;
+        callback(undefined, tagsDictionary[tag])
       })
     }
-    else callback(undefined, keywordsDictionary[keyword]);
+    else callback(undefined, tagsDictionary[tag]);
   }
 
   componentWillLoad() {
@@ -93,14 +93,16 @@ export class PskLink {
       }
     };
 
-    if (this.keyword) {
-      return this.getAssignedUrlFromKeyword(this.keyword, setLinkUrl)
+    if (this.tag) {
+      return this.getAssignedUrlFromTag(this.tag, setLinkUrl)
     }
 
-    this.validateUrl.emit({
-      sourceUrl: this.page,
-      callback: setLinkUrl
-    });
+    if(this.page){
+      this.validateUrl.emit({
+        sourceUrl: this.page,
+        callback: setLinkUrl
+      });
+    }
 
   }
 

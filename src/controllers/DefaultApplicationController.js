@@ -31,7 +31,7 @@ export default class DefaultApplicationController  {
         element.addEventListener("getUserInfo", this._provideConfig("profile"));
         element.addEventListener("getHistoryType", this._provideConfig("historyType"));
         element.addEventListener("getModals", this._provideConfig("modals"));
-        element.addEventListener("getKeywords", this._provideConfig("keywords"));
+        element.addEventListener("getTags", this._provideConfig("tags"));
         element.addEventListener("validateUrl", (e) => {
               e.stopImmediatePropagation();
               let { sourceUrl, callback } = e.detail;

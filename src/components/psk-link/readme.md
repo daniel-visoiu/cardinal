@@ -10,15 +10,15 @@
 | Property  | Attribute | Description | Type     | Default     |
 | --------- | --------- | ----------- | -------- | ----------- |
 | `chapter` | `chapter` |             | `string` | `undefined` |
-| `keyword` | `keyword` |             | `string` | `undefined` |
 | `page`    | `page`    |             | `string` | `undefined` |
+| `tag`     | `tag`     |             | `string` | `undefined` |
 
 
 ## Events
 
 | Event         | Description | Type               |
 | ------------- | ----------- | ------------------ |
-| `getKeywords` |             | `CustomEvent<any>` |
+| `getTags`     |             | `CustomEvent<any>` |
 | `validateUrl` |             | `CustomEvent<any>` |
 
 
