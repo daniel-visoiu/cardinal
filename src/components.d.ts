@@ -113,6 +113,7 @@ export namespace Components {
   }
   interface PskContainer {
     'controllerName'?: string | null;
+    'history': RouterHistory;
     'htmlFilePath'?: string | null;
     'parentCallback': Function | null;
   }
@@ -1048,6 +1049,7 @@ declare namespace LocalJSX {
   }
   interface PskContainer {
     'controllerName'?: string | null;
+    'history'?: RouterHistory;
     'htmlFilePath'?: string | null;
     'parentCallback'?: Function | null;
   }

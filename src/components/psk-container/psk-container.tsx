@@ -2,6 +2,7 @@ import {Component, h, Prop, Element, State} from "@stencil/core";
 import ControllerRegistryService from "../../services/ControllerRegistryService";
 import {TableOfContentProperty} from "../../decorators/TableOfContentProperty";
 import DefaultContainerController from "../../controllers/base-controllers/ContainerController.js";
+import {injectHistory, RouterHistory} from "@stencil/router";
 
 @Component({
   tag: "psk-container"
@@ -35,6 +36,7 @@ export class PskContainer {
   // This property is provided by other components where psk-container is loaded. (e.g. psk-form)
   // If this property is filled in, the searching of a controller script will commence here.
 
+  @Prop() history: RouterHistory;
 
   @Element() private _host: HTMLElement;
 
@@ -71,7 +73,7 @@ export class PskContainer {
 
     promise.then((Controller)=>{
       if (!this.disconnected) {
-        this.controller = new Controller(this._host);
+        this.controller = new Controller(this._host, this.history);
         this.__getInnerController.call(this, this._host);
 
         if(this.controllerScript){
@@ -110,3 +112,4 @@ export class PskContainer {
   }
 
 }
+injectHistory (PskContainer);
