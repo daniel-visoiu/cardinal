@@ -89,12 +89,12 @@ export default class AppConfigurationHelper {
           page.path = pagePath;
         }
 
-        if (pathPrefix) {
-          page.path = pathPrefix + "/" + page.path;
-        } else {
-          if (page.path.indexOf("/") !== 0) {
+        if (page.path.indexOf("/") !== 0) {
             page.path = "/" + page.path;
-          }
+        }
+
+        if (pathPrefix) {
+          page.path = pathPrefix  + page.path;
         }
 
         if (page.children) {
