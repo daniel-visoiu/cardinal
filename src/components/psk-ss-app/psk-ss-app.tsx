@@ -21,6 +21,7 @@ export class PskSelfSovereignApp {
     cancelable: true,
   }) giveMeSeed: EventEmitter;
 
+  onServiceWorkerMessageHandler: (e) => void;
 
   componentDidLoad(){
     let iframe = this.element.querySelector("iframe");
@@ -45,10 +46,39 @@ export class PskSelfSovereignApp {
 
   }
 
+  getSWOnMessageHandler() {
+      if (this.onServiceWorkerMessageHandler) {
+          return this.onServiceWorkerMessageHandler;
+      }
+
+      /**
+       * Listen for seed requests
+       */
+      this.onServiceWorkerMessageHandler = (e) => {
+          if (!e.data || e.data.query !== 'seed') {
+              return;
+          }
+
+          const swWorkerIdentity = e.data.identity;
+          if (swWorkerIdentity === this.digestSeedHex) {
+              e.source.postMessage({
+                  seed: this.seed
+              });
+          }
+      }
+      return this.onServiceWorkerMessageHandler;
+  }
+
+  connectedCallback() {
+    navigator.serviceWorker.addEventListener('message', this.getSWOnMessageHandler());
+  }
+
+  disconnectedCallback() {
+    navigator.serviceWorker.removeEventListener('message', this.getSWOnMessageHandler());
+  }
+
 
   componentWillLoad() {
-
-
     return new Promise((resolve)=>{
       this.giveMeSeed.emit({appName:this.appName, callback:(err, seed)=>{
         if(err){
@@ -56,6 +86,7 @@ export class PskSelfSovereignApp {
         }
         this.seed = seed;
         this.digestSeedHex = this.digestMessage(seed);
+
         resolve();
       }})
     });
