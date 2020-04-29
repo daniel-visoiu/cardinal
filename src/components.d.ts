@@ -168,6 +168,7 @@ export namespace Components {
   interface PskForm {
     'controllerName': string | null;
     'formActions'?: string | null;
+    'history': RouterHistory;
   }
   interface PskFormRow {
     'layout': string | null;
@@ -1106,6 +1107,7 @@ declare namespace LocalJSX {
   interface PskForm {
     'controllerName'?: string | null;
     'formActions'?: string | null;
+    'history'?: RouterHistory;
   }
   interface PskFormRow {
     'layout'?: string | null;
