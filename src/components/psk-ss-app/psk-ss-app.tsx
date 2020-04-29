@@ -25,48 +25,46 @@ export class PskSelfSovereignApp {
 
   componentDidLoad(){
     let iframe = this.element.querySelector("iframe");
+    window.document.addEventListener(this.digestSeedHex, (e) => {
+      const data = e.detail || {};
 
-    window.addEventListener("message",(event)=>{
-      if(event.data.appIdentity){
-        if(event.data.appIdentity === this.digestSeedHex){
-          iframe.contentWindow.postMessage({seed:this.seed},iframe.src);
-        }
-        event.stopImmediatePropagation();
+      if (data.query === 'seed') {
+        iframe.contentWindow.document.dispatchEvent(new CustomEvent(this.digestSeedHex, {
+          detail: {
+            seed: this.seed
+          }
+        }));
+        return;
       }
 
-      if (event.data.status === "completed") {
+      if (data.status === 'completed') {
         iframe.contentWindow.location.reload();
-        event.stopImmediatePropagation();
+        return;
       }
-
-      if (event.data.status === "error") {
-        //handle error;
-      }
-    });
-
+    }, true);
   }
 
   getSWOnMessageHandler() {
-      if (this.onServiceWorkerMessageHandler) {
-          return this.onServiceWorkerMessageHandler;
-      }
-
-      /**
-       * Listen for seed requests
-       */
-      this.onServiceWorkerMessageHandler = (e) => {
-          if (!e.data || e.data.query !== 'seed') {
-              return;
-          }
-
-          const swWorkerIdentity = e.data.identity;
-          if (swWorkerIdentity === this.digestSeedHex) {
-              e.source.postMessage({
-                  seed: this.seed
-              });
-          }
-      }
+    if (this.onServiceWorkerMessageHandler) {
       return this.onServiceWorkerMessageHandler;
+    }
+
+    /**
+     * Listen for seed requests
+     */
+    this.onServiceWorkerMessageHandler = (e) => {
+      if (!e.data || e.data.query !== 'seed') {
+        return;
+      }
+
+      const swWorkerIdentity = e.data.identity;
+      if (swWorkerIdentity === this.digestSeedHex) {
+        e.source.postMessage({
+          seed: this.seed
+        });
+      }
+    }
+    return this.onServiceWorkerMessageHandler;
   }
 
   connectedCallback() {
@@ -137,7 +135,12 @@ export class PskSelfSovereignApp {
 
 
   render() {
-    let iframeSrc = window.parent.location + "iframe/" + this.digestSeedHex;
+    let basePath = window.top.location.href;
+    if (basePath[basePath.length - 1] !== '/') {
+        basePath += '/';
+    }
+
+    const iframeSrc = basePath + "iframe/" + this.digestSeedHex;
     return (
       <iframe sandbox="allow-scripts allow-same-origin allow-forms"
         frameborder="0"
