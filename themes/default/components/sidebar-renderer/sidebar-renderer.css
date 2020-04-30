@@ -36,7 +36,7 @@ a,
  /* adding pointer */
 a.active .item_name::before{
   content: "";
-    background-image:url(../../../../assets/images/hand-point.svg);
+  background-image:url(/themes/default/images/hand-point.svg);
     background-size: 100% 100%;
     display: inline-block;
     height: 20px;
