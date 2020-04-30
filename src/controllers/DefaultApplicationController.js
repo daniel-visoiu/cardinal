@@ -1,7 +1,7 @@
 import AppConfigurationHelper from "./AppConfigurationHelper.js";
 
 const configUrl = "/app-config.json";
-
+window.globalConfig = {};
 export default class DefaultApplicationController  {
 
     constructor(element) {
@@ -16,6 +16,9 @@ export default class DefaultApplicationController  {
                 basePath = _configuration.baseUrl;
             }
             this.configuration = AppConfigurationHelper._prepareConfiguration(_configuration, basePath);
+            globalConfig.theme = _configuration.theme;
+            globalConfig.appVersion = _configuration.appVersion;
+
             this.configIsLoaded = true;
             while (this.pendingRequests.length) {
                 let request = this.pendingRequests.pop();

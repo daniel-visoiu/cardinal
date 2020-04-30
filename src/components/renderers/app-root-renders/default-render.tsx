@@ -24,8 +24,10 @@ export class AppRootDefaultRender {
 
 	render() {
 
+    // @ts-ignore
+    let appVersion = window.globalConfig.appVersion;
 		let appMenuCmpt = <app-menu item-renderer="sidebar-renderer" hamburgerMaxWidth={appMaxWidth}></app-menu>;
-		let versionCmpt = <div class="nav-footer">version 0.1</div>;
+		let versionCmpt = <div class="nav-footer">version {appVersion}</div>;
 
 		let asideComponents = [];
 
