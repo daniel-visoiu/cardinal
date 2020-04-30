@@ -1,4 +1,4 @@
-import { Component, h, Listen, State } from "@stencil/core";
+import {Component, Event, EventEmitter, h, Listen, State} from "@stencil/core";
 import CustomTheme from "../../../decorators/CustomTheme";
 
 const appMaxWidth = 960;
@@ -12,22 +12,37 @@ export class AppRootDefaultRender {
 	@CustomTheme()
 
 	@State() mobileLayout: boolean = false;
+  @State() appVersion: string;
 
 	@Listen("resize", { capture: true, target: 'window' })
 	checkLayout() {
 		this.mobileLayout = document.documentElement.clientWidth < appMaxWidth;
 	}
 
-	componentWillLoad() {
-		this.checkLayout();
+  @Event({
+    eventName: 'getAppVersion',
+    cancelable: true,
+    composed: true,
+    bubbles: true,
+  }) getAppVersion: EventEmitter;
+
+	componentWillLoad():Promise<any> {
+		return new Promise((resolve)=>{
+      this.checkLayout();
+      this.getAppVersion.emit((err, appVersion) => {
+        if (!err) {
+          this.appVersion = appVersion;
+        }
+        resolve();
+      });
+    })
+
 	}
 
 	render() {
 
-    // @ts-ignore
-    let appVersion = window.globalConfig.appVersion;
 		let appMenuCmpt = <app-menu item-renderer="sidebar-renderer" hamburgerMaxWidth={appMaxWidth}></app-menu>;
-		let versionCmpt = <div class="nav-footer">version {appVersion}</div>;
+		let versionCmpt = <div class="nav-footer">version {this.appVersion}</div>;
 
 		let asideComponents = [];
 

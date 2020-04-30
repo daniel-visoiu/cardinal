@@ -16,8 +16,8 @@ export default class DefaultApplicationController  {
                 basePath = _configuration.baseUrl;
             }
             this.configuration = AppConfigurationHelper._prepareConfiguration(_configuration, basePath);
-            globalConfig.theme = _configuration.theme;
-            globalConfig.appVersion = _configuration.appVersion;
+            this.configuration.theme = _configuration.theme;
+            this.configuration.appVersion = _configuration.appVersion;
 
             this.configIsLoaded = true;
             while (this.pendingRequests.length) {
@@ -29,6 +29,8 @@ export default class DefaultApplicationController  {
             }
         });
 
+        element.addEventListener("getThemeConfig", this._provideConfig("theme"));
+        element.addEventListener("getAppVersion", this._provideConfig("appVersion"));
         element.addEventListener("needRoutes", this._provideConfig("routes"));
         element.addEventListener("needMenuItems", this._provideConfig("menu"));
         element.addEventListener("getUserInfo", this._provideConfig("profile"));

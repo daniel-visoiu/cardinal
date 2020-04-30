@@ -1070,7 +1070,9 @@ declare namespace LocalJSX {
     'required'?: boolean;
     'value'?: string | null;
   }
-  interface PskDefaultRenderer {}
+  interface PskDefaultRenderer {
+    'onGetAppVersion'?: (event: CustomEvent<any>) => void;
+  }
   interface PskDescription {
     'title'?: string;
   }

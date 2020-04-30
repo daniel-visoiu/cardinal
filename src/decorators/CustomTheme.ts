@@ -9,6 +9,7 @@ declare type CustomThemeInterface = (
 const regex = /@import.*?["']([^"']+)["'].*?;/g
 let dependencies = {};
 let imports = {};
+let appTheme;
 
 function checkForInnerDependencies(referrer, styleStr) {
 
@@ -77,12 +78,12 @@ export default function CustomTheme(): CustomThemeInterface {
         return componentWillLoad && componentWillLoad.call(this);
       }
       else {
-        // @ts-ignore
-        if (typeof globalConfig !== "undefined" && typeof globalConfig.theme === "string") {
+
+        let injectThemeStyle = (theme) => {
           let componentName = host.tagName.toLowerCase();
           return new Promise((resolve) => {
             // @ts-ignore
-            let themeStylePath = "/themes/" + globalConfig.theme + "/components/" + componentName + "/" + componentName + ".css";
+            let themeStylePath = "/themes/" + theme + "/components/" + componentName + "/" + componentName + ".css";
             let parent = host.shadowRoot ? host.shadowRoot : host;
 
             if (!dependencies[themeStylePath]) {
@@ -106,10 +107,26 @@ export default function CustomTheme(): CustomThemeInterface {
             })
 
           })
+        };
+
+        if (!appTheme) {
+          let event = new CustomEvent("getThemeConfig", {
+            bubbles: true,
+            cancelable: true,
+            composed: true,
+            detail: (err, theme) => {
+              if (err) {
+                return console.log(err);
+              }
+              appTheme = theme;
+              return injectThemeStyle(appTheme);
+            }
+          });
+
+          host.dispatchEvent(event);
         }
-        else {
-          console.error("Theme or globalConfig is not defined!");
-        }
+        return injectThemeStyle(appTheme);
+
       }
     };
   };

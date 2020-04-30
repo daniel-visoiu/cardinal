@@ -5,6 +5,13 @@
 <!-- Auto Generated Below -->
 
 
+## Events
+
+| Event           | Description | Type               |
+| --------------- | ----------- | ------------------ |
+| `getAppVersion` |             | `CustomEvent<any>` |
+
+
 ## Dependencies
 
 ### Depends on
