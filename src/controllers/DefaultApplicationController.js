@@ -23,9 +23,9 @@ export default class DefaultApplicationController  {
             while (this.pendingRequests.length) {
                 let request = this.pendingRequests.pop();
                 if (!this.configuration[request.configName]) {
-                    throw new Error(`Config ${request.configName} was not provided`)
+                    throw new Error(`Config ${request.configName} was not provided. Did you set it in app-config.json?`)
                 }
-                request.callback(null, this.configuration[request.configName]);
+                request.callback(undefined, this.configuration[request.configName]);
             }
         });
 

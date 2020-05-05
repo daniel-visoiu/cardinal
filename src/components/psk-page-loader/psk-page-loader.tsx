@@ -67,7 +67,7 @@ export class PskPageLoader {
       if (xhr.status != 200) {
         callback(new Error("Some error occurred"));
       } else {
-        callback(null, xhr.responseText);
+        callback(undefined, xhr.responseText);
       }
     };
 
