@@ -8,8 +8,8 @@ import {Component, h, Prop, State, Event, EventEmitter, Element} from '@stencil/
 export class PskSelfSovereignApp {
 
   @Prop() iframeSrc: string;
-  @Prop() swPath: string;
   @Prop() appName: string;
+  @Prop() landingPath: string;
   @Prop() csbSeed: string;
   @State() digestSeedHex;
   @State() seed;
@@ -38,7 +38,12 @@ export class PskSelfSovereignApp {
       }
 
       if (data.status === 'completed') {
-        iframe.contentWindow.location.reload();
+        if(typeof this.landingPath !== "undefined"){
+          iframe.contentWindow.location = this.landingPath;
+        }else{
+          iframe.contentWindow.location.reload();
+        }
+
         return;
       }
     }, true);
