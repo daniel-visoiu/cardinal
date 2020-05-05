@@ -39,7 +39,7 @@ export class PskSelfSovereignApp {
 
       if (data.status === 'completed') {
         if(typeof this.landingPath !== "undefined"){
-          iframe.contentWindow.location = this.landingPath;
+          iframe.src = iframe.src + this.landingPath;
         }else{
           iframe.contentWindow.location.reload();
         }
