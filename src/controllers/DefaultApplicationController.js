@@ -46,6 +46,21 @@ export default class DefaultApplicationController  {
                   console.error("Callback was not properly provided!");
               }
           });
+
+
+        //this should be added in a SSApp lifecycle mechanism
+         element.addEventListener("getCustomLandingPage",(e)=>{
+
+           let callback = e.detail;
+           if (window.frameElement) {
+             if(window.frameElement.hasAttribute("landing-page")){
+               let landingPage = window.frameElement.getAttribute("landing-page");
+               return callback(undefined, landingPage);
+             }
+           }
+           callback();
+        });
+
     }
 
     _provideConfig(configName) {

@@ -61,7 +61,6 @@ export namespace Components {
     'controller': any;
   }
   interface PskAppRouter {
-    'failRedirectTo': string;
     'historyType': ExtendedHistoryType;
     'routesItems'?: MenuItem[];
   }
@@ -321,7 +320,7 @@ export namespace Components {
     'appName': string;
     'csbSeed': string;
     'iframeSrc': string;
-    'swPath': string;
+    'landingPath': string;
   }
   interface PskStepper {
     'activeStep': WizardStep;
@@ -995,8 +994,8 @@ declare namespace LocalJSX {
     'controller'?: any;
   }
   interface PskAppRouter {
-    'failRedirectTo'?: string;
     'historyType'?: ExtendedHistoryType;
+    'onGetCustomLandingPage'?: (event: CustomEvent<any>) => void;
     'onGetHistoryType'?: (event: CustomEvent<any>) => void;
     'onNeedRoutes'?: (event: CustomEvent<any>) => void;
     'routesItems'?: MenuItem[];
@@ -1269,8 +1268,8 @@ declare namespace LocalJSX {
     'appName'?: string;
     'csbSeed'?: string;
     'iframeSrc'?: string;
+    'landingPath'?: string;
     'onGiveMeSeed'?: (event: CustomEvent<any>) => void;
-    'swPath'?: string;
   }
   interface PskStepper {
     'activeStep'?: WizardStep;

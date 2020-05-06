@@ -129,7 +129,10 @@ export default class AppConfigurationHelper {
               if (pathPrefix) {
                 prefix = pathPrefix.replace(/^\//, '');
               }
-              page.componentProps.pageUrl = basePagesUrl + prefix + "/" + filename + ".html";
+              if (prefix.length !== 0 ) {
+                prefix =  prefix + "/";
+              }
+              page.componentProps.pageUrl = basePagesUrl + prefix +  filename + ".html";
             }
           }
         }

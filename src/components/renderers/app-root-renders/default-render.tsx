@@ -60,7 +60,7 @@ export class AppRootDefaultRender {
 				</aside>
 
 				<section>
-					<psk-app-router failRedirectTo="/home"></psk-app-router>
+					<psk-app-router></psk-app-router>
 					{this.mobileLayout === true ? versionCmpt : null}
 				</section>
 			</div>

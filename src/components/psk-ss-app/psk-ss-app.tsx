@@ -23,7 +23,7 @@ export class PskSelfSovereignApp {
 
   onServiceWorkerMessageHandler: (e) => void;
 
-  componentDidLoad(){
+  componentDidLoad() {
     let iframe = this.element.querySelector("iframe");
     window.document.addEventListener(this.digestSeedHex, (e) => {
       const data = e.detail || {};
@@ -38,13 +38,7 @@ export class PskSelfSovereignApp {
       }
 
       if (data.status === 'completed') {
-        if(typeof this.landingPath !== "undefined"){
-          iframe.src = iframe.src + this.landingPath;
-        }else{
-          iframe.contentWindow.location.reload();
-        }
-
-        return;
+        iframe.contentWindow.location.reload();
       }
     }, true);
   }
@@ -68,7 +62,7 @@ export class PskSelfSovereignApp {
           seed: this.seed
         });
       }
-    }
+    };
     return this.onServiceWorkerMessageHandler;
   }
 
@@ -82,56 +76,22 @@ export class PskSelfSovereignApp {
 
 
   componentWillLoad() {
-    return new Promise((resolve)=>{
-      this.giveMeSeed.emit({appName:this.appName, callback:(err, seed)=>{
-        if(err){
-          throw err;
-        }
-        this.seed = seed;
-        this.digestSeedHex = this.digestMessage(seed);
+    return new Promise((resolve) => {
+      this.giveMeSeed.emit({
+        appName: this.appName, callback: (err, seed) => {
+          if (err) {
+            throw err;
+          }
+          this.seed = seed;
+          this.digestSeedHex = this.digestMessage(seed);
 
-        resolve();
-      }})
+          resolve();
+        }
+      })
     });
   }
 
-  // componentDidLoad() {
-  //   //let newIframe = this.element.querySelector("iframe");
-  //
-  //   //TODO: this code should be moved to a separate controller
-  //   // @ts-ignore
-  //   // const BootLoader = require("boot-host").getBootScriptLoader();
-  //   // BootLoader.createPowerCord(this.digestSeedHex, this.csbSeed, newIframe);
-  //   // //TODO remove this test
-  //   // setTimeout(() => {
-  //   //   this.sendMessageToIframe(this.digestSeedHex, "Hi there " + this.digestSeedHex);
-  //   // }, 1000);
-  // }
-
-  sendMessageToIframe(identity, message) {
-
-    let sayEcho =  (message)=>{
-      // @ts-ignore
-      $$.interactions.startSwarmAs(identity, "echo", "say", message)
-        .onReturn(function (err, result) {
-          if (!err) {
-            console.log("Iframe received: ", result);
-            //ping-pong
-            setTimeout(()=>{
-              //sayEcho(result+"!");
-            },10000)
-          } else {
-            console.log(err);
-          }
-        });
-    };
-
-    sayEcho(message);
-
-
-    }
-
-   digestMessage(message) {
+  digestMessage(message) {
     // @ts-ignore
     const PskCrypto = require("pskcrypto");
     const hexDigest = PskCrypto.pskHash(message, "hex");
@@ -142,19 +102,20 @@ export class PskSelfSovereignApp {
   render() {
     let basePath = window.top.location.href;
     if (basePath[basePath.length - 1] !== '/') {
-        basePath += '/';
+      basePath += '/';
     }
 
     const iframeSrc = basePath + "iframe/" + this.digestSeedHex;
     return (
       <iframe sandbox="allow-scripts allow-same-origin allow-forms"
-        frameborder="0"
-        style={{
-          overflow: "hidden",
-          height: "100%",
-          width: "100%"
-        }}
-        src={iframeSrc}/>
+              landing-page={this.landingPath}
+              frameborder="0"
+              style={{
+                overflow: "hidden",
+                height: "100%",
+                width: "100%"
+              }}
+              src={iframeSrc}/>
     )
   }
 }

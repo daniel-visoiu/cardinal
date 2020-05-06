@@ -30,6 +30,7 @@ graph TD;
   psk-app-router --> psk-ui-loader
   psk-app-router --> stencil-router
   psk-app-router --> stencil-route-switch
+  psk-app-router --> stencil-router-redirect
   style psk-default-renderer fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

@@ -1,8 +1,8 @@
-import { Component, Event, EventEmitter, Prop, h, State } from "@stencil/core";
-import { MenuItem } from "../../interfaces/MenuItem";
-import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
-import { TableOfContentEvent } from "../../decorators/TableOfContentEvent";
-import { ExtendedHistoryType } from "../../interfaces/ExtendedHistoryType";
+import {Component, Event, EventEmitter, Prop, h, State} from "@stencil/core";
+import {MenuItem} from "../../interfaces/MenuItem";
+import {TableOfContentProperty} from "../../decorators/TableOfContentProperty";
+import {TableOfContentEvent} from "../../decorators/TableOfContentEvent";
+import {ExtendedHistoryType} from "../../interfaces/ExtendedHistoryType";
 import CustomTheme from "../../decorators/CustomTheme";
 
 @Component({
@@ -27,7 +27,6 @@ export class PskAppRouter {
     defaultValue: `browser`
   })
   @Prop() historyType: ExtendedHistoryType;
-  @Prop() failRedirectTo: string = "";
 
   @TableOfContentEvent({
     eventName: `needRoutes`,
@@ -58,24 +57,70 @@ export class PskAppRouter {
     bubbles: true,
   }) getHistoryType: EventEmitter;
 
+
+  @TableOfContentEvent({
+    eventName: `hasCustomLandingPage`,
+    controllerInteraction: {
+      required: true
+    },
+    description: `Check if a custom landing page is requested`
+  })
+  @Event({
+    eventName: 'getCustomLandingPage',
+    cancelable: true,
+    composed: true,
+    bubbles: true,
+  }) getCustomLandingPage: EventEmitter;
+
   @State() notFoundRoute: string = null;
 
-  componentDidLoad() {
-    this.needRoutesEvt.emit((err, data) => {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      this.routesItems = data;
+  @State() landingPage: string = "";
+
+  componentWillLoad(): Promise<any> {
+
+    let promise = Promise.resolve();
+
+    promise.then(() => {
+      return new Promise((resolve) => {
+        this.needRoutesEvt.emit((err, data) => {
+          if (err) {
+            console.log(err);
+          }
+          this.routesItems = data;
+          resolve();
+        });
+      })
     });
 
-    this.getHistoryType.emit((err, data) => {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      this.historyType = data;
-    })
+    promise.then(() => {
+      return new Promise((resolve) => {
+        this.getHistoryType.emit((err, data) => {
+          if (err) {
+            console.log(err);
+          }
+          this.historyType = data;
+          resolve();
+        });
+      })
+    });
+
+    promise.then(() => {
+      return new Promise((resolve) => {
+        this.getCustomLandingPage.emit((err, redirectPath) => {
+          if (err) {
+            console.log(err);
+          }
+          if (redirectPath) {
+            this.landingPage = redirectPath;
+          }
+          resolve();
+
+        });
+      })
+    });
+
+    return promise;
+
   }
 
   renderItems(items) {
@@ -101,7 +146,7 @@ export class PskAppRouter {
     let routes = this.renderItems(this.routesItems);
 
     if (routes.length === 0) {
-      return <psk-ui-loader shouldBeRendered={true} />
+      return <psk-ui-loader shouldBeRendered={true}/>
     }
 
     if (!this.notFoundRoute) {
@@ -114,13 +159,22 @@ export class PskAppRouter {
 
           <stencil-route-switch scrollTopOffset={0}>
             {this.historyType === "query" ?
-              <stencil-route component="query-pages-router" componentProps={{ pages: this.routesItems }} /> :
+              [<stencil-route component="query-pages-router" componentProps={{pages: this.routesItems}}/>,
+                this.landingPage ?
+                  <stencil-router-redirect url={this.landingPage}></stencil-router-redirect>
+                  : null] :
               [<stencil-route url="/" exact={true} component="psk-route-redirect"
-                              componentProps={{url:this.routesItems[0].path}}/>,
+                              componentProps={{url: this.routesItems[0].path}}/>,
                 routes,
-                <stencil-route component="psk-page-not-found"
-                  componentProps={{ urlDestination: this.notFoundRoute }} />]}
+                this.landingPage ?
+                  <stencil-router-redirect url={this.landingPage}></stencil-router-redirect>
+                  :
+                  <stencil-route component="psk-page-not-found"
+                                 componentProps={{urlDestination: this.notFoundRoute}}/>]}
           </stencil-route-switch>
+          {this.landingPage ?
+            <stencil-router-redirect url={this.landingPage}></stencil-router-redirect>
+            : null}
 
         </stencil-router>
       </div>)

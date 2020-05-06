@@ -7,19 +7,19 @@
 
 ## Properties
 
-| Property         | Attribute          | Description | Type                             | Default     |
-| ---------------- | ------------------ | ----------- | -------------------------------- | ----------- |
-| `failRedirectTo` | `fail-redirect-to` |             | `string`                         | `""`        |
-| `historyType`    | `history-type`     |             | `"browser" \| "hash" \| "query"` | `undefined` |
-| `routesItems`    | --                 |             | `MenuItem[]`                     | `[]`        |
+| Property      | Attribute      | Description | Type                             | Default     |
+| ------------- | -------------- | ----------- | -------------------------------- | ----------- |
+| `historyType` | `history-type` |             | `"browser" \| "hash" \| "query"` | `undefined` |
+| `routesItems` | --             |             | `MenuItem[]`                     | `[]`        |
 
 
 ## Events
 
-| Event            | Description | Type               |
-| ---------------- | ----------- | ------------------ |
-| `getHistoryType` |             | `CustomEvent<any>` |
-| `needRoutes`     |             | `CustomEvent<any>` |
+| Event                  | Description | Type               |
+| ---------------------- | ----------- | ------------------ |
+| `getCustomLandingPage` |             | `CustomEvent<any>` |
+| `getHistoryType`       |             | `CustomEvent<any>` |
+| `needRoutes`           |             | `CustomEvent<any>` |
 
 
 ## Dependencies
@@ -34,6 +34,7 @@
 - [psk-ui-loader](../psk-ui-loader)
 - stencil-router
 - stencil-route-switch
+- stencil-router-redirect
 
 ### Graph
 ```mermaid
@@ -42,6 +43,7 @@ graph TD;
   psk-app-router --> psk-ui-loader
   psk-app-router --> stencil-router
   psk-app-router --> stencil-route-switch
+  psk-app-router --> stencil-router-redirect
   psk-default-renderer --> psk-app-router
   style psk-app-router fill:#f9f,stroke:#333,stroke-width:4px
 ```
