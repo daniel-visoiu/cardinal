@@ -1,5 +1,5 @@
 import AppConfigurationHelper from "./AppConfigurationHelper.js";
-
+import defaultApplicationConfig from "./defaultApplicationConfig.json";
 const configUrl = "/app-config.json";
 window.globalConfig = {};
 export default class DefaultApplicationController  {
@@ -128,10 +128,18 @@ export default class DefaultApplicationController  {
         xhr.open("GET", url);
         xhr.onload = () => {
             if (xhr.status != 200) {
-                callback(new Error(xhr.status.code));
+                console.error("Configuration file app-config.json was not found!");
+                callback(null, defaultApplicationConfig);
+
             } else {
-                let configuration = JSON.parse(xhr.responseText);
-                callback(null, configuration)
+                let customConfiguration = JSON.parse(xhr.responseText);
+
+              for (let i in defaultApplicationConfig) {
+                if (!customConfiguration.hasOwnProperty(i)) {
+                  customConfiguration[i] = defaultApplicationConfig[i];
+                }
+              }
+                callback(null, customConfiguration)
             }
         };
 
