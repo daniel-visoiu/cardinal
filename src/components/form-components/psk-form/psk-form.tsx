@@ -70,9 +70,9 @@ export class PskForm {
       return null;
     }
 
-    let actions: Array<HTMLElement> = [];
+    let formActionsArray = formActions.split(",").map(action => action.trim());
 
-    actions = formActions.split(",").map((action: string) => {
+    let actions = formActionsArray.map((action: string) => {
       return <psk-button
         button-class={action}
         event-name={action}
