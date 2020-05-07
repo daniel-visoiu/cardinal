@@ -17,6 +17,20 @@ export class PskImg {
 	})
 	@Prop() src: string;
 
+  @TableOfContentProperty({
+    description: `This property is setting the width of the image. The value should be an integer specifying the units in pixels`,
+    isMandatory: false,
+    propertyType: `string`,
+  })
+  @Prop() width: string;
+
+  @TableOfContentProperty({
+    description: `This property is setting the height of the image. The value should be an integer specifying the units in pixels`,
+    isMandatory: false,
+    propertyType: `string`,
+  })
+  @Prop() height: string;
+
 	@TableOfContentProperty({
 		description: `This property is the title of the image(the alt attribute) and the description of the image.`,
 		isMandatory: false,
@@ -26,10 +40,21 @@ export class PskImg {
 	@Prop() title: string;
 
 	render() {
+    let imgTagAttributes = {
+      src: this.src,
+      alt: this.title
+    };
+    if (this.height) {
+      imgTagAttributes['height'] = this.height;
+    }
+    if (this.width) {
+      imgTagAttributes['width'] = this.width;
+    }
+
 		return (
 			<div class="image_container">
 				<div class="image_wrapper">
-					<img src={this.src} class="img-fluid" alt={this.title} />
+					<img {...imgTagAttributes}  />
 				</div>
 				{this.title ? <div class="image_description">{this.title}</div> : null}
 			</div>

@@ -190,8 +190,10 @@ export namespace Components {
     'icon': string | null;
   }
   interface PskImg {
+    'height': string;
     'src': string;
     'title': string;
+    'width': string;
   }
   interface PskInput {
     'invalidValue'?: boolean | null;
@@ -1131,8 +1133,10 @@ declare namespace LocalJSX {
     'icon'?: string | null;
   }
   interface PskImg {
+    'height'?: string;
     'src'?: string;
     'title'?: string;
+    'width'?: string;
   }
   interface PskInput {
     'invalidValue'?: boolean | null;
