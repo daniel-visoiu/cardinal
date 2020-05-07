@@ -110,23 +110,28 @@ export default function CustomTheme(): CustomThemeInterface {
         };
 
         if (!appTheme) {
-          let event = new CustomEvent("getThemeConfig", {
-            bubbles: true,
-            cancelable: true,
-            composed: true,
-            detail: (err, theme) => {
-              if (err) {
-                return console.log(err);
+          return new Promise((resolve)=>{
+            let event = new CustomEvent("getThemeConfig", {
+              bubbles: true,
+              cancelable: true,
+              composed: true,
+              detail: (err, theme) => {
+                if (err) {
+                  return console.log(err);
+                }
+                appTheme = theme;
+                injectThemeStyle(appTheme).then(()=>{
+                  resolve();
+                });
               }
-              appTheme = theme;
-              return injectThemeStyle(appTheme);
-            }
+            });
+
+            host.dispatchEvent(event);
           });
-
-          host.dispatchEvent(event);
         }
-        return injectThemeStyle(appTheme);
-
+        else{
+          return injectThemeStyle(appTheme);
+        }
       }
     };
   };
