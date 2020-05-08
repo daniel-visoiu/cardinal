@@ -1,5 +1,4 @@
-import {getElement} from "@stencil/core";
-import {ComponentInterface} from "@stencil/core/dist/declarations";
+import {getElement, ComponentInterface} from "@stencil/core";
 
 declare type CustomThemeInterface = (
   target: ComponentInterface,

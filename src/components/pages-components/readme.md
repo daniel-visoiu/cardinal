@@ -16,7 +16,7 @@
 
 ### Depends on
 
-- [psk-hoc]()
+- [psk-hoc](.)
 - [psk-chapter](../psk-chapter)
 
 ### Graph
