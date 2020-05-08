@@ -1,8 +1,8 @@
 import { Component, Prop, Element, State, h } from '@stencil/core';
-import { BindModel } from '../../../decorators/BindModel';
-import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
-import { DISPLAY_IF_IS, DISPLAY_IF_EXISTS } from '../../../utils/constants';
-import { __isAbleToBeDisplayed } from '../../../utils/bindModelUtils';
+import { BindModel } from '../../decorators/BindModel';
+import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
+import { DISPLAY_IF_IS, DISPLAY_IF_EXISTS } from '../../utils/constants';
+import { __isAbleToBeDisplayed } from '../../utils/bindModelUtils';
 
 @Component({
   tag: 'psk-for-each'
