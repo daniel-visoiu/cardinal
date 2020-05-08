@@ -19,14 +19,16 @@
         "start": "stencil build --dev --watch --serve",
         "test": "stencil test --spec --e2e",
         "test.watch": "stencil test --spec --e2e --watchAll",
-        "generate": "stencil generate"
+        "generate": "stencil generate",
+        "dev": "npm run build && node ./bin/copy.js"
     },
     "dependencies": {
         "@stencil/router": "^1.0.1",
         "prismjs": "^1.19.0"
     },
     "devDependencies": {
-        "@stencil/core": "^1.12.7"
+        "@stencil/core": "^1.12.7",
+        "octopus": "git+http://github.com/privatesky/octopus.git#1.0.3"
     },
     "license": "MIT"
 }
