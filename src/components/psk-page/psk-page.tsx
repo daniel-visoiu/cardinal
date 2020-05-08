@@ -4,7 +4,7 @@ import { Component, h, Prop, Listen, State, Element } from "@stencil/core";
 import CustomTheme from "../../decorators/CustomTheme";
 
 import { highlightChapter } from "../../utils/highlightChapter";
-import { scrollToElement, createCustomEvent } from "../../utils/utils";
+import { scrollToElement, createCustomEvent } from "../../utils/utilFunctions";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import { BindModel } from "../../decorators/BindModel";
 

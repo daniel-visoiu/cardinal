@@ -1,6 +1,6 @@
 import { Component, Prop, State, Listen, h } from "@stencil/core";
 import { EventOptions } from "../../decorators/declarations/declarations";
-import {normalizeElementId} from "../../utils/utils";
+import {normalizeElementId} from "../../utils/utilFunctions";
 
 @Component({
     tag: 'psk-controller-descriptor'

@@ -1,5 +1,5 @@
 import { getElement, ComponentInterface } from "@stencil/core";
-import { createCustomEvent } from "../utils/utils";
+import { createCustomEvent } from "../utils/utilFunctions";
 import {
   __assignProperties,
   __getModelEventCbk,

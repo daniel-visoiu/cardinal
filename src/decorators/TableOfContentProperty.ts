@@ -1,7 +1,7 @@
 import * as d from "./declarations/declarations";
 import { DEFINED_PROPERTIES, DATA_DEFINED_PROPS } from "../utils/constants";
 import { getElement } from "@stencil/core";
-import { createCustomEvent, normalizeCamelCaseToDashed } from "../utils/utils";
+import { createCustomEvent, normalizeCamelCaseToDashed } from "../utils/utilFunctions";
 
 export function TableOfContentProperty(opts: d.PropertyOptions) {
   return function(proto, propertyKey: string | symbol): void {

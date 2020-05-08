@@ -2,7 +2,7 @@ import { h, Component, Prop, State } from '@stencil/core';
 import { Option, SelectType } from '../../../interfaces/FormModel';
 import { BindModel } from '../../../decorators/BindModel';
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
-import { normalizeRegexToString } from '../../../utils/utils';
+import { normalizeRegexToString } from '../../../utils/utilFunctions';
 import CustomTheme from '../../../decorators/CustomTheme';
 import {INVALID_ID_CHARACTERS_REGEX} from "../../../utils/constants";
 

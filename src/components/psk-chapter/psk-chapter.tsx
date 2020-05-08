@@ -3,7 +3,7 @@ import { Chapter } from "../../interfaces/Chapter";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import CustomTheme from "../../decorators/CustomTheme";
 import { TableOfContentEvent } from "../../decorators/TableOfContentEvent";
-import { normalizeElementId } from "../../utils/utils";
+import { normalizeElementId } from "../../utils/utilFunctions";
 import { BindModel } from "../../decorators/BindModel";
 
 @Component({

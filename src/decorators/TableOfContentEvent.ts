@@ -7,7 +7,7 @@ import {
   DATA_DEFINED_CONTROLLERS
 
 } from '../utils/constants';
-import { createCustomEvent } from '../utils/utils';
+import { createCustomEvent } from '../utils/utilFunctions';
 
 export function TableOfContentEvent(opts: d.EventOptions) {
     return function (proto, propertyKey: string | symbol): void {

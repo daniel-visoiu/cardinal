@@ -1,6 +1,6 @@
 import { Component, h, Listen, State, Prop } from "@stencil/core";
 import { PropertyOptions } from "../../decorators/declarations/declarations";
-import {normalizeElementId} from "../../utils/utils";
+import {normalizeElementId} from "../../utils/utilFunctions";
 
 @Component({
     tag: "psk-property-descriptor"

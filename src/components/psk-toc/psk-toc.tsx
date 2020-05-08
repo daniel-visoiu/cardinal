@@ -1,5 +1,5 @@
 import { Component, h, Prop, State, getElement, Listen } from '@stencil/core';
-import { closestParentElement, scrollToElement } from '../../utils/utils';
+import { closestParentElement, scrollToElement } from '../../utils/utilFunctions';
 import { Chapter } from '../../interfaces/Chapter';
 import CustomTheme from '../../decorators/CustomTheme';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';

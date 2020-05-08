@@ -1,5 +1,5 @@
 import { ChapterDetails } from "../interfaces/ChapterDetails";
-import { closestParentTagElement } from "./utils";
+import { closestParentTagElement } from "./utilFunctions";
 
 export function highlightChapter(): void {
   let self = this;

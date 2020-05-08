@@ -146,9 +146,6 @@ export namespace Components {
     interface PskForEach {
         "dataViewModel"?: string | null;
     }
-    interface PskForEachOld {
-        "dataViewModel"?: string | null;
-    }
     interface PskForm {
         "controllerName": string | null;
         "formActions"?: string | null;
@@ -583,12 +580,6 @@ declare global {
         prototype: HTMLPskForEachElement;
         new (): HTMLPskForEachElement;
     };
-    interface HTMLPskForEachOldElement extends Components.PskForEachOld, HTMLStencilElement {
-    }
-    var HTMLPskForEachOldElement: {
-        prototype: HTMLPskForEachOldElement;
-        new (): HTMLPskForEachOldElement;
-    };
     interface HTMLPskFormElement extends Components.PskForm, HTMLStencilElement {
     }
     var HTMLPskFormElement: {
@@ -893,7 +884,6 @@ declare global {
         "psk-files-chooser": HTMLPskFilesChooserElement;
         "psk-floating-menu": HTMLPskFloatingMenuElement;
         "psk-for-each": HTMLPskForEachElement;
-        "psk-for-each-old": HTMLPskForEachOldElement;
         "psk-form": HTMLPskFormElement;
         "psk-form-row": HTMLPskFormRowElement;
         "psk-grid": HTMLPskGridElement;
@@ -1086,9 +1076,6 @@ declare namespace LocalJSX {
         "opened"?: boolean;
     }
     interface PskForEach {
-        "dataViewModel"?: string | null;
-    }
-    interface PskForEachOld {
         "dataViewModel"?: string | null;
     }
     interface PskForm {
@@ -1403,7 +1390,6 @@ declare namespace LocalJSX {
         "psk-files-chooser": PskFilesChooser;
         "psk-floating-menu": PskFloatingMenu;
         "psk-for-each": PskForEach;
-        "psk-for-each-old": PskForEachOld;
         "psk-form": PskForm;
         "psk-form-row": PskFormRow;
         "psk-grid": PskGrid;
@@ -1483,7 +1469,6 @@ declare module "@stencil/core" {
             "psk-files-chooser": LocalJSX.PskFilesChooser & JSXBase.HTMLAttributes<HTMLPskFilesChooserElement>;
             "psk-floating-menu": LocalJSX.PskFloatingMenu & JSXBase.HTMLAttributes<HTMLPskFloatingMenuElement>;
             "psk-for-each": LocalJSX.PskForEach & JSXBase.HTMLAttributes<HTMLPskForEachElement>;
-            "psk-for-each-old": LocalJSX.PskForEachOld & JSXBase.HTMLAttributes<HTMLPskForEachOldElement>;
             "psk-form": LocalJSX.PskForm & JSXBase.HTMLAttributes<HTMLPskFormElement>;
             "psk-form-row": LocalJSX.PskFormRow & JSXBase.HTMLAttributes<HTMLPskFormRowElement>;
             "psk-grid": LocalJSX.PskGrid & JSXBase.HTMLAttributes<HTMLPskGridElement>;

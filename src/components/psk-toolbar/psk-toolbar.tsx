@@ -1,7 +1,7 @@
 import { Component, Prop, h, Element } from '@stencil/core';
 import CustomTheme from '../../decorators/CustomTheme';
 import { ACTIONS_ICONS } from '../../utils/constants';
-import { createCustomEvent } from '../../utils/utils';
+import { createCustomEvent } from '../../utils/utilFunctions';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 
 @Component({

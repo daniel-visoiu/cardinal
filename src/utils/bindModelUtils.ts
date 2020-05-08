@@ -1,11 +1,11 @@
 import { getElement } from "@stencil/core";
-import { normalizeDashedToCamelCase } from "./utils";
+import { normalizeDashedToCamelCase } from "./utilFunctions";
 import { DISPLAY_IF_IS, DISPLAY_IF_EXISTS } from "./constants";
 
 /**
- * 
+ *
  * @param {any} model
- * @returns {boolean} 
+ * @returns {boolean}
  */
 export function __isAbleToBeDisplayed(model: any, element: Element | HTMLElement): boolean {
   if (element.hasAttribute(DISPLAY_IF_EXISTS)) {
