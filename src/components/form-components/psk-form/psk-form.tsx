@@ -56,11 +56,8 @@ export class PskForm {
   render() {
     return (
       <div class="container">
-        <form>
           <slot/>
-
           {this._createFormActions(this.formActions)}
-        </form>
       </div>
     );
   }
