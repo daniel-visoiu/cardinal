@@ -41,10 +41,9 @@ export class PskListFeebacks {
         description: `This property is the auto closing timer in milliseconds for the alert.`,
         isMandatory: false,
         propertyType: 'number',
-        defaultValue: 5000,
         specialNote: `This property will only be taken into consideration when used with the psk-ui-alert child component`,
     })
-    @Prop() timeAlive?: number = 5000;
+    @Prop() timeAlive?: number;
 
     @TableOfContentProperty({
         description: `This property represents the number of toasts to be renderer on the user interface.`,
@@ -87,7 +86,7 @@ export class PskListFeebacks {
         eventName: 'openFeedback',
         composed: true,
         cancelable: true,
-        bubbles: true,
+        bubbles: true
     }) openFeedbackHandler: EventEmitter
 
     @Listen('closeFeedback')
@@ -110,13 +109,19 @@ export class PskListFeebacks {
         this.styleCustomisationWatcher(this.styleCustomisation);
         this.openFeedbackHandler.emit((message, name, typeOfAlert) => {
             if (typeOfAlert) {
-                this.typeOfAlert.push(typeOfAlert)
+                if(typeOfAlert instanceof Array){
+                    typeOfAlert.forEach((alert) => {
+                        this.typeOfAlert.push(alert)
+                    })
+                } else {
+                    this.typeOfAlert.push(typeOfAlert)
+                }
             } else {
                 this.typeOfAlert.push('toast')
             }
             this.alertOpened = true;
             if (message instanceof Array) {
-                message.forEach((mes, name) => {
+                message.forEach((mes) => {
                     this.addToMessageArray.bind(this)(mes, name)
                 });
             } else {
@@ -164,6 +169,7 @@ export class PskListFeebacks {
             timer: date.getTime(),
             name: name
         }
+        console.log("mesaj:",messageToAdd)
         if (this._messagesContent.length + 1 <= this.messagesToDisplay) {
             this._messagesContent = [...this._messagesContent, messageToAdd]
         } else {
@@ -174,6 +180,7 @@ export class PskListFeebacks {
         let alertMessages = [];
         let _feedbackTag
         this._messagesContent.forEach((message, key) => {
+            console.log(this.typeOfAlert[key])
             if (this.typeOfAlert[key] === 'toast') {
                 _feedbackTag = this.toastRenderer ? this.toastRenderer : 'psk-ui-toast'
                 this.timerToShow.bind(this)(message)
@@ -195,9 +202,11 @@ export class PskListFeebacks {
             }
         })
         return (
+            this.alertOpened ?  
             <div>
                 {alertMessages ? alertMessages : null}
             </div>
+            : null
         )
 
     }

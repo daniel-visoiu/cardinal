@@ -34,7 +34,7 @@ export class AlertComponent {
         isMandatory : false,
         propertyType : 'any'
     })
-    @Prop() timeAlive: any = 3000;
+    @Prop() timeAlive: any = 900000;
 
     @TableOfContentProperty({
         description: `The style customisation for the alert so it looks according to your application`,
@@ -65,7 +65,7 @@ export class AlertComponent {
         this.isVisible = false;
         setTimeout(() => {
             this.closeFeedback.emit(this.message)
-        }, 1000);
+        }, this.timeAlive);
     }
 
     componentWillLoad() {
@@ -74,18 +74,16 @@ export class AlertComponent {
 
     render() {
         this.alert = (
-            <div class={`alert ${this.typeOfAlert} alert-dismissible fade ${this.isVisible ? 'show' : 'hide'}`}  style={this._styleCustomisation.alert ? (this._styleCustomisation.alert.style ? this._styleCustomisation.alert.style : {} ) : {}} onClick={() => {
+            <div class={`alert-feedback ${this.typeOfAlert} alert-dismissible fade ${this.isVisible ? 'show' : 'hide'}`}  style={this._styleCustomisation.alert ? (this._styleCustomisation.alert.style ? this._styleCustomisation.alert.style : {} ) : {}} onClick={() => {
                 this.closeUIFeedback()
             }}>
                 <slot />
-                <div class="toast-body">
+                <div >
                     {this.message.content}
                 </div>
             </div>
         )
-        setTimeout(() => {
-            this.closeUIFeedback()
-        }, this.timeAlive)
+        this.closeUIFeedback();
         return (
             this.alert
         )
