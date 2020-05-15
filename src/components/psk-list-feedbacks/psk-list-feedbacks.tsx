@@ -44,7 +44,7 @@ export class PskListFeebacks {
         defaultValue: 5000,
         specialNote: `This property will only be taken into consideration when used with the psk-ui-alert child component`,
     })
-    @Prop() timeAlive?: number = 5000;
+    @Prop() timeAlive?: number;
 
     @TableOfContentProperty({
         description: `This property represents the number of toasts to be renderer on the user interface.`,
@@ -87,7 +87,7 @@ export class PskListFeebacks {
         eventName: 'openFeedback',
         composed: true,
         cancelable: true,
-        bubbles: true,
+        bubbles: true
     }) openFeedbackHandler: EventEmitter
 
     @Listen('closeFeedback')
@@ -106,17 +106,23 @@ export class PskListFeebacks {
         }
     }
 
-    componentWillLoad() {
+    componentWillLoad() {        
         this.styleCustomisationWatcher(this.styleCustomisation);
         this.openFeedbackHandler.emit((message, name, typeOfAlert) => {
             if (typeOfAlert) {
-                this.typeOfAlert.push(typeOfAlert)
+                if(typeOfAlert instanceof Array){
+                    typeOfAlert.forEach((alert) => {
+                        this.typeOfAlert.push(alert)
+                    })
+                } else {
+                    this.typeOfAlert.push(typeOfAlert)
+                }
             } else {
                 this.typeOfAlert.push('toast')
             }
             this.alertOpened = true;
             if (message instanceof Array) {
-                message.forEach((mes, name) => {
+                message.forEach((mes) => {
                     this.addToMessageArray.bind(this)(mes, name)
                 });
             } else {
@@ -141,11 +147,19 @@ export class PskListFeebacks {
                     this.timeMeasure = Config.RIGHT_NOW
                     minute
                     break;
+
+                case (equation < 1):
+                    this.timer = Math.floor((time - time2) / Config.MINUTE)
+                    this.timeMeasure = "minute ago"
+                    minute
+                    break;
+
                 case (equation < 60):
                     this.timer = Math.floor((time - time2) / Config.MINUTE)
                     this.timeMeasure = Config.MINUTES
                     minute
                     break;
+
                 case (equation >= 60):
                     this.timer = Math.floor((time - time2) / Config.HOUR)
                     this.timeMeasure = Config.HOURS
