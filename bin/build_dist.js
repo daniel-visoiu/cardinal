@@ -31,8 +31,11 @@ for (let i = 0; i < destinationArray.length; i++) {
   console.log(`Copying cardinal in ${destination}`);
   cardinalCopy.actions.push({
     type: "copy",
-    "src": "./dist/cardinal/",
-    "target": destination + "/cardinal"
+    src: "./dist/cardinal/",
+    target: destination + "/cardinal",
+    options: {
+      "overwrite": true
+    }
   });
 }
 
