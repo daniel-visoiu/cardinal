@@ -1,6 +1,7 @@
 import {Component, h, Prop,} from '@stencil/core';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import CustomTheme from '../../decorators/CustomTheme';
+import {BindModel} from '../../decorators/BindModel';
 
 @Component({
   tag: 'psk-user-profile-renderer',
@@ -8,6 +9,8 @@ import CustomTheme from '../../decorators/CustomTheme';
   shadow: true
 })
 export class PskUserProfileRenderer {
+
+  @BindModel()
   @CustomTheme()
   @TableOfContentProperty({
     description: `This property is the user information that needs to be rendered for the user.`,
@@ -17,6 +20,7 @@ export class PskUserProfileRenderer {
   @Prop() userInfo:any;
 
   render() {
+    console.log("My log", this.userInfo);
     return (
       <div class="profile">
         <div class="card-body text-center">

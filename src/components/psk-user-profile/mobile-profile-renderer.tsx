@@ -1,6 +1,7 @@
 import { Component, h,  Prop, } from '@stencil/core';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import CustomTheme from "../../decorators/CustomTheme";
+import {BindModel} from '../../decorators/BindModel';
 
 @Component({
   tag: 'mobile-profile-renderer',
@@ -8,6 +9,7 @@ import CustomTheme from "../../decorators/CustomTheme";
 })
 export class MobileProfileRenderer {
 
+  @BindModel()
   @CustomTheme()
   @TableOfContentProperty({
     description: `This property is the user information that needs to be rendered for the user.`,

@@ -1,12 +1,15 @@
 import { Component, h, EventEmitter, Event, Prop, } from '@stencil/core';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
+import {BindModel} from '../../decorators/BindModel';
 
 @Component({
   tag: 'psk-user-profile',
   shadow: true
 })
 export class PskUserProfile {
+
+  @BindModel()
 
   @TableOfContentProperty({
     description: `should receive an object with the following properties if the default renderer is wanted: username, avatar, email.`,
