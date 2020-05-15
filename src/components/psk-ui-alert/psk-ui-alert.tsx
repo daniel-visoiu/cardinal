@@ -34,7 +34,7 @@ export class AlertComponent {
         isMandatory : false,
         propertyType : 'any'
     })
-    @Prop() timeAlive: any = 900000;
+    @Prop() timeAlive: any = 3000;
 
     @TableOfContentProperty({
         description: `The style customisation for the alert so it looks according to your application`,

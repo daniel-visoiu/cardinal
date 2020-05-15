@@ -106,7 +106,7 @@ export class PskListFeebacks {
         }
     }
 
-    componentWillLoad() {
+    componentWillLoad() {        
         this.styleCustomisationWatcher(this.styleCustomisation);
         this.openFeedbackHandler.emit((message, name, typeOfAlert) => {
             if (typeOfAlert) {
@@ -147,11 +147,19 @@ export class PskListFeebacks {
                     this.timeMeasure = Config.RIGHT_NOW
                     minute
                     break;
+
+                case (equation < 1):
+                    this.timer = Math.floor((time - time2) / Config.MINUTE)
+                    this.timeMeasure = "minute ago"
+                    minute
+                    break;
+
                 case (equation < 60):
                     this.timer = Math.floor((time - time2) / Config.MINUTE)
                     this.timeMeasure = Config.MINUTES
                     minute
                     break;
+
                 case (equation >= 60):
                     this.timer = Math.floor((time - time2) / Config.HOUR)
                     this.timeMeasure = Config.HOURS
@@ -201,11 +209,9 @@ export class PskListFeebacks {
             }
         })
         return (
-            this.alertOpened ?  
             <div>
                 {alertMessages ? alertMessages : null}
             </div>
-            : null
         )
 
     }
