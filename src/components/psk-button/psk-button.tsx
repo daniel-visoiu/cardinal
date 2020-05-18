@@ -21,7 +21,7 @@ export class PskButton {
 
 	render() {
 		return (
-			<button class={this.buttonClass} disabled={this.disabled}
+			<button class={this.buttonClass} disabled={this.isDisabled}
 				onClick={(evt: MouseEvent) => {
 					this.handleClickEvent.call(this, evt, this.eventName);
 				}}
@@ -35,7 +35,7 @@ export class PskButton {
 						this.handleClickEvent.call(this, evt, this.doubleClickEventName);
 					}
 				}}>
-				{this.label && this.label}
+				{this.labelValue && this.labelValue}
 				<slot />
 			</button>
 		);
@@ -68,7 +68,7 @@ export class PskButton {
 		isMandatory: false,
 		propertyType: 'string'
 	})
-	@Prop() label: string | null;
+	@Prop({attribute:"label"}) labelValue: string | null;
 
 	@TableOfContentProperty({
 		description: ['This attribute is used to provide a set of CSS classes, defined inside psk-button.css, that will be used as design for this component.'],
@@ -107,7 +107,7 @@ export class PskButton {
 		propertyType: 'boolean',
 		defaultValue: 'false'
 	})
-	@Prop() disabled: boolean = false;
+	@Prop() isDisabled: boolean = false;
 
 	@TableOfContentProperty({
 		description: ['This attribute is telling the component where to trigger the event. Accepted values: "document, "window".',

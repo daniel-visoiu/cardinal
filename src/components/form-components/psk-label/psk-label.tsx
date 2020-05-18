@@ -18,7 +18,7 @@ export class PskLabel {
         isMandatory: false,
         propertyType: 'string'
     })
-    @Prop() label: string | null = null;
+    @Prop({attribute:"label"}) labelValue: string;
 
     @TableOfContentProperty({
         description: ['Specifies which form element a label is bound to.',
@@ -33,7 +33,7 @@ export class PskLabel {
     render() {
         return (
             <label class="col-form-label" htmlFor={this.for}>
-                {this.label && this.label}
+                {this.labelValue && this.labelValue }
                 < slot />
             </label>
         );

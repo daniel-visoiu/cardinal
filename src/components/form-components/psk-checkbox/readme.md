@@ -9,14 +9,14 @@
 
 | Property         | Attribute         | Description | Type      | Default       |
 | ---------------- | ----------------- | ----------- | --------- | ------------- |
-| `checkboxLabel`  | `checkbox-label`  |             | `string`  | `null`        |
-| `checked`        | `checked`         |             | `boolean` | `false`       |
+| `checkboxLabel`  | `checkbox-label`  |             | `any`     | `undefined`   |
 | `checkedValue`   | `checked-value`   |             | `string`  | `null`        |
-| `label`          | `label`           |             | `string`  | `null`        |
+| `isChecked`      | `is-checked`      |             | `boolean` | `false`       |
+| `labelValue`     | `label-value`     |             | `string`  | `undefined`   |
 | `name`           | `name`            |             | `string`  | `null`        |
 | `required`       | `required`        |             | `boolean` | `false`       |
+| `selectedValue`  | `selected-value`  |             | `string`  | `'unchecked'` |
 | `uncheckedValue` | `unchecked-value` |             | `string`  | `null`        |
-| `value`          | `value`           |             | `string`  | `'unchecked'` |
 
 
 ## Dependencies

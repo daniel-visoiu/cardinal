@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type     | Default |
-| -------- | --------- | ----------- | -------- | ------- |
-| `for`    | `for`     |             | `string` | `null`  |
-| `label`  | `label`   |             | `string` | `null`  |
+| Property     | Attribute | Description | Type     | Default     |
+| ------------ | --------- | ----------- | -------- | ----------- |
+| `for`        | `for`     |             | `string` | `null`      |
+| `labelValue` | `label`   |             | `string` | `undefined` |
 
 
 ## Dependencies

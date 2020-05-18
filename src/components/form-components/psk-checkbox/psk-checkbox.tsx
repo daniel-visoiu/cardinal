@@ -25,20 +25,20 @@ export class PskCheckbox {
                         id={checkboxName}
                         name={checkboxName}
                         required={this.required}
-                        checked={this.checked}
+                        checked={this.isChecked}
                         onChange={this.__handleCheckbox.bind(this)}
-                        value={this.value} />
+                        value={this.selectedValue} />
                     {/* This is the label for the checkbox */}
-                    <psk-label for={checkboxName} label={this.checkboxLabel} />
+                    <psk-label for={checkboxName} labelValue={this.checkboxLabel} />
                 </div>
             </div>
         );
-        
-        return this.label
+
+        return this.labelValue
             ? (
                 <div class="form-group">
                     {/* Here, we display the label of the grouped checkbox component. Details in the documentation */}
-                    <psk-label label={this.label} />
+                    <psk-label labelValue={this.labelValue} />
                     {checkboxHtml}
                 </div>
             )
@@ -46,15 +46,15 @@ export class PskCheckbox {
     }
 
     __handleCheckbox(evt): void {
-        this.checked = evt.target.checked;
+        this.isChecked = evt.target.checked;
         if (evt.target.checked) {
-            this.value = this.checkedValue ? this.checkedValue : "checked";
+            this.selectedValue = this.checkedValue ? this.checkedValue : "checked";
         } else {
-            this.value = this.uncheckedValue ? this.uncheckedValue : "unchecked";
+            this.selectedValue = this.uncheckedValue ? this.uncheckedValue : "unchecked";
         }
 
         if (this['changeModel']) {
-            this['changeModel'].call(this, 'value', this.value);
+            this['changeModel'].call(this, 'selectedValue', this.selectedValue);
         } else {
             console.warn('[psk-input] Function named -=changeModel=- is not defined!');
         }
@@ -66,7 +66,7 @@ export class PskCheckbox {
         propertyType: 'string',
         specialNote: `If this property is not provided, the component will be displayed without any label`
     })
-    @Prop() label?: string | null = null;
+    @Prop() labelValue: string;
 
     @TableOfContentProperty({
         description: [`Specifies the name of a psk-checkbox component. It is used along with the psk-label component.`],
@@ -81,7 +81,7 @@ export class PskCheckbox {
         propertyType: 'string',
         specialNote: `If this property is not provided, the component will be displayed without any label`
     })
-    @Prop() checkboxLabel?: string | null = null;
+    @Prop() checkboxLabel;
 
     @TableOfContentProperty({
         description: [`Specifies that the psk-checkbox must be checked before submitting the form.`,
@@ -97,7 +97,7 @@ export class PskCheckbox {
         isMandatory: false,
         propertyType: 'boolean'
     })
-    @Prop() checked?: boolean = false;
+    @Prop() isChecked?: boolean = false;
 
     @TableOfContentProperty({
         description: [`Specifies the value of a psk-checkbox component.`,
@@ -105,7 +105,7 @@ export class PskCheckbox {
         isMandatory: false,
         propertyType: 'string'
     })
-    @Prop({ reflect: true, mutable: true }) value?: string = 'unchecked';
+    @Prop({ reflect: true, mutable: true }) selectedValue?: string = 'unchecked';
 
     @TableOfContentProperty({
         description: [`Specifies the value that will be assigned to the component when it is checked.`],

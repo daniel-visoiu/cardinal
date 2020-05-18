@@ -17,7 +17,7 @@ export class PskTextArea {
             : this.invalidValue ? 'is-invalid' : 'is-valid';
         return (
             <div class={`form-group`}>
-                {this.label && <psk-label for={this.name} label={this.label} />}
+                {this.label && <psk-label for={this.name} label-value={this.label} />}
 
                 <textarea
                     name={this.name}

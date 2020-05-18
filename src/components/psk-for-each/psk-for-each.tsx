@@ -1,8 +1,6 @@
 import { Component, Prop, Element, State, h } from '@stencil/core';
 import { BindModel } from '../../decorators/BindModel';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
-import { DISPLAY_IF_IS, DISPLAY_IF_EXISTS } from '../../utils/constants';
-import { __isAbleToBeDisplayed } from '../../utils/bindModelUtils';
 
 @Component({
   tag: 'psk-for-each'
@@ -80,12 +78,10 @@ export class PskForEach {
       model = [];
     }
 
-    let childList: Element[][] = [];
-
+    let childList = [];
     for (let i = 0; i < model.length; i++) {
       let pChain = this['parentChain'] ? `${this['parentChain']}.${i}.` : `${i}.`;
 
-      let preparedNodes: Element[] = [];
       this.templateNodes.forEach(node => {
         let clonedTemplate: Element = node.cloneNode(true) as Element;
         let preparedNode: Element = this.prepareItem(pChain, clonedTemplate);
@@ -97,11 +93,8 @@ export class PskForEach {
         });
 
         let newElement: Element = <NewNodeTag innerHTML={preparedNode.innerHTML} {...attributes} />;
-
-        preparedNodes.push(newElement)
+        childList.push(newElement);
       });
-
-      childList.push(preparedNodes);
     }
 
     if (childList.length === 0 && this.emptyNode) {
@@ -111,46 +104,24 @@ export class PskForEach {
     return childList;
   }
 
-  __updateDisplayConditionals(node: Element, chain: string): void {
-    const displayIfIs: string = node.getAttribute(DISPLAY_IF_IS),
-      displayIfExists: string = node.getAttribute(DISPLAY_IF_EXISTS);
-
-    if (displayIfIs) {
-      node.setAttribute(DISPLAY_IF_IS, `${chain}${displayIfIs.trim()}`);
-    }
-    if (displayIfExists) {
-      node.setAttribute(DISPLAY_IF_EXISTS, `${chain}${displayIfExists.trim()}`);
-    }
-  }
-
   __processNode(node: Element, chain: string): void {
-    this.__updateDisplayConditionals(node, chain);
-
-    if (!__isAbleToBeDisplayed(this['rootModel'], node)) {
-      node.setAttribute('data-hide', 'hide');
-      return;
-    }
 
     let nodeAttributes = Array.from(node.attributes)
       .filter((attr: Attr) => attr.name.startsWith("view-model-"));
 
     nodeAttributes.forEach((attr: Attr) => {
-      const property = attr.name.split("view-model-")[1];
       const fullChain = chain ? `${chain}${attr.value}` : attr.value;
-
-      node.setAttribute(property, this['rootModel'].getChainValue(fullChain));
+      node.setAttribute(attr.name, fullChain);
     });
 
-    nodeAttributes = Array.from(node.attributes)
+    let someAttributes = Array.from(node.attributes)
       .filter((attr: Attr) => attr.value.startsWith("@"));
 
-    nodeAttributes.forEach((attr: Attr) => {
+    someAttributes.forEach((attr: Attr) => {
       const property = attr.value.split("@")[1];
       const fullChain = chain ? `${chain}${property}` : property;
-
-      node.setAttribute(attr.name, this['rootModel'].getChainValue(fullChain));
+      node.setAttribute(attr.name, "@"+fullChain);
     });
-
     Array.from(node.children).forEach((node: Element) => {
       this.__processNode.call(this, node, chain);
     });

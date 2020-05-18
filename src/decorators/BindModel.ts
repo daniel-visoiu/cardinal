@@ -3,8 +3,7 @@ import { createCustomEvent } from "../utils/utilFunctions";
 import {
   __assignProperties,
   __getModelEventCbk,
-  changeModel,
-  __isAbleToBeDisplayed
+  changeModel
 } from "../utils/bindModelUtils";
 
 declare type BindInterface = (
@@ -14,20 +13,7 @@ declare type BindInterface = (
 
 export function BindModel(): BindInterface {
   return (proto: ComponentInterface) => {
-    let { componentWillLoad, render } = proto;
-
-    proto.render = function () {
-      let element: HTMLElement = getElement(this);
-
-      let oldStyle: string = element.className;
-      if (element.getAttribute('data-hide') === 'hide') {
-        element.className = `${oldStyle} hidden`;
-      } else {
-        element.className = oldStyle.replace(' hidden', '');
-      }
-
-      return render && render.call(this);
-    }
+    let { componentWillLoad} = proto;
 
     proto.componentWillLoad = function () {
       let self = this;

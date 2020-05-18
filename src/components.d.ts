@@ -55,12 +55,12 @@ export namespace Components {
     }
     interface PskButton {
         "buttonClass": string | null;
-        "disabled": boolean;
         "doubleClickEventName": string | null;
         "eventData": any | null;
         "eventDispatcher": string | null;
         "eventName": string | null;
-        "label": string | null;
+        "isDisabled": boolean;
+        "labelValue": string | null;
     }
     interface PskButtonGroup {
         "classes": string | null;
@@ -68,6 +68,8 @@ export namespace Components {
         "iconColor": string | null;
         "label": string | null;
         "opened": boolean;
+    }
+    interface PskButtonTest {
     }
     interface PskCard {
         "id": string;
@@ -78,14 +80,14 @@ export namespace Components {
         "title": string;
     }
     interface PskCheckbox {
-        "checkboxLabel"?: string | null;
-        "checked"?: boolean;
+        "checkboxLabel": any;
         "checkedValue"?: string | null;
-        "label"?: string | null;
+        "isChecked"?: boolean;
+        "labelValue": string;
         "name"?: string | null;
         "required"?: boolean;
+        "selectedValue"?: string;
         "uncheckedValue"?: string | null;
-        "value"?: string;
     }
     interface PskCode {
         "language": string;
@@ -193,7 +195,13 @@ export namespace Components {
     }
     interface PskLabel {
         "for": string | null;
-        "label": string | null;
+        "labelValue": string;
+    }
+    interface PskLabelTest {
+        "firstlabel": any;
+        "labelValue": any;
+        "secondLabel": any;
+        "thirdLabel": any;
     }
     interface PskLink {
         "chapter": string;
@@ -478,6 +486,12 @@ declare global {
         prototype: HTMLPskButtonGroupElement;
         new (): HTMLPskButtonGroupElement;
     };
+    interface HTMLPskButtonTestElement extends Components.PskButtonTest, HTMLStencilElement {
+    }
+    var HTMLPskButtonTestElement: {
+        prototype: HTMLPskButtonTestElement;
+        new (): HTMLPskButtonTestElement;
+    };
     interface HTMLPskCardElement extends Components.PskCard, HTMLStencilElement {
     }
     var HTMLPskCardElement: {
@@ -633,6 +647,12 @@ declare global {
     var HTMLPskLabelElement: {
         prototype: HTMLPskLabelElement;
         new (): HTMLPskLabelElement;
+    };
+    interface HTMLPskLabelTestElement extends Components.PskLabelTest, HTMLStencilElement {
+    }
+    var HTMLPskLabelTestElement: {
+        prototype: HTMLPskLabelTestElement;
+        new (): HTMLPskLabelTestElement;
     };
     interface HTMLPskLinkElement extends Components.PskLink, HTMLStencilElement {
     }
@@ -867,6 +887,7 @@ declare global {
         "psk-attachments-list": HTMLPskAttachmentsListElement;
         "psk-button": HTMLPskButtonElement;
         "psk-button-group": HTMLPskButtonGroupElement;
+        "psk-button-test": HTMLPskButtonTestElement;
         "psk-card": HTMLPskCardElement;
         "psk-chapter": HTMLPskChapterElement;
         "psk-checkbox": HTMLPskCheckboxElement;
@@ -893,6 +914,7 @@ declare global {
         "psk-img": HTMLPskImgElement;
         "psk-input": HTMLPskInputElement;
         "psk-label": HTMLPskLabelElement;
+        "psk-label-test": HTMLPskLabelTestElement;
         "psk-link": HTMLPskLinkElement;
         "psk-list": HTMLPskListElement;
         "psk-list-feedbacks": HTMLPskListFeedbacksElement;
@@ -983,12 +1005,12 @@ declare namespace LocalJSX {
     }
     interface PskButton {
         "buttonClass"?: string | null;
-        "disabled"?: boolean;
         "doubleClickEventName"?: string | null;
         "eventData"?: any | null;
         "eventDispatcher"?: string | null;
         "eventName"?: string | null;
-        "label"?: string | null;
+        "isDisabled"?: boolean;
+        "labelValue"?: string | null;
     }
     interface PskButtonGroup {
         "classes"?: string | null;
@@ -996,6 +1018,8 @@ declare namespace LocalJSX {
         "iconColor"?: string | null;
         "label"?: string | null;
         "opened"?: boolean;
+    }
+    interface PskButtonTest {
     }
     interface PskCard {
         "id"?: string;
@@ -1007,14 +1031,14 @@ declare namespace LocalJSX {
         "title"?: string;
     }
     interface PskCheckbox {
-        "checkboxLabel"?: string | null;
-        "checked"?: boolean;
+        "checkboxLabel"?: any;
         "checkedValue"?: string | null;
-        "label"?: string | null;
+        "isChecked"?: boolean;
+        "labelValue"?: string;
         "name"?: string | null;
         "required"?: boolean;
+        "selectedValue"?: string;
         "uncheckedValue"?: string | null;
-        "value"?: string;
     }
     interface PskCode {
         "language"?: string;
@@ -1125,7 +1149,13 @@ declare namespace LocalJSX {
     }
     interface PskLabel {
         "for"?: string | null;
-        "label"?: string | null;
+        "labelValue"?: string;
+    }
+    interface PskLabelTest {
+        "firstlabel"?: any;
+        "labelValue"?: any;
+        "secondLabel"?: any;
+        "thirdLabel"?: any;
     }
     interface PskLink {
         "chapter"?: string;
@@ -1373,6 +1403,7 @@ declare namespace LocalJSX {
         "psk-attachments-list": PskAttachmentsList;
         "psk-button": PskButton;
         "psk-button-group": PskButtonGroup;
+        "psk-button-test": PskButtonTest;
         "psk-card": PskCard;
         "psk-chapter": PskChapter;
         "psk-checkbox": PskCheckbox;
@@ -1399,6 +1430,7 @@ declare namespace LocalJSX {
         "psk-img": PskImg;
         "psk-input": PskInput;
         "psk-label": PskLabel;
+        "psk-label-test": PskLabelTest;
         "psk-link": PskLink;
         "psk-list": PskList;
         "psk-list-feedbacks": PskListFeedbacks;
@@ -1452,6 +1484,7 @@ declare module "@stencil/core" {
             "psk-attachments-list": LocalJSX.PskAttachmentsList & JSXBase.HTMLAttributes<HTMLPskAttachmentsListElement>;
             "psk-button": LocalJSX.PskButton & JSXBase.HTMLAttributes<HTMLPskButtonElement>;
             "psk-button-group": LocalJSX.PskButtonGroup & JSXBase.HTMLAttributes<HTMLPskButtonGroupElement>;
+            "psk-button-test": LocalJSX.PskButtonTest & JSXBase.HTMLAttributes<HTMLPskButtonTestElement>;
             "psk-card": LocalJSX.PskCard & JSXBase.HTMLAttributes<HTMLPskCardElement>;
             "psk-chapter": LocalJSX.PskChapter & JSXBase.HTMLAttributes<HTMLPskChapterElement>;
             "psk-checkbox": LocalJSX.PskCheckbox & JSXBase.HTMLAttributes<HTMLPskCheckboxElement>;
@@ -1478,6 +1511,7 @@ declare module "@stencil/core" {
             "psk-img": LocalJSX.PskImg & JSXBase.HTMLAttributes<HTMLPskImgElement>;
             "psk-input": LocalJSX.PskInput & JSXBase.HTMLAttributes<HTMLPskInputElement>;
             "psk-label": LocalJSX.PskLabel & JSXBase.HTMLAttributes<HTMLPskLabelElement>;
+            "psk-label-test": LocalJSX.PskLabelTest & JSXBase.HTMLAttributes<HTMLPskLabelTestElement>;
             "psk-link": LocalJSX.PskLink & JSXBase.HTMLAttributes<HTMLPskLinkElement>;
             "psk-list": LocalJSX.PskList & JSXBase.HTMLAttributes<HTMLPskListElement>;
             "psk-list-feedbacks": LocalJSX.PskListFeedbacks & JSXBase.HTMLAttributes<HTMLPskListFeedbacksElement>;

@@ -73,7 +73,7 @@ export class PskForm {
       return <psk-button
         button-class={action}
         event-name={action}
-        label={action}/>
+        label-value={action}/>
     });
 
     return (

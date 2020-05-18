@@ -21,7 +21,7 @@ export class PskInput {
 
 		return (
 			<div class={`form-group`}>
-				{this.label && <psk-label for={inputName} label={this.label} />}
+				{this.label && <psk-label for={inputName} label-value={this.label} />}
 
 				<input
 					type={this.type}

@@ -30,7 +30,7 @@ export class PskSelect {
 
         return (
             <div class="form-group">
-                <psk-label for={name} label={this.label} />
+                <psk-label for={name} label-value={this.label} />
 
                 <select name={name} id={name} class="form-control"
                     disabled={this.disabled} required={this.required}

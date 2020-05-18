@@ -1,32 +1,12 @@
 import { getElement } from "@stencil/core";
 import { normalizeDashedToCamelCase } from "./utilFunctions";
-import { DISPLAY_IF_IS, DISPLAY_IF_EXISTS } from "./constants";
 
 /**
  *
  * @param {any} model
  * @returns {boolean}
  */
-export function __isAbleToBeDisplayed(model: any, element: Element | HTMLElement): boolean {
-  if (element.hasAttribute(DISPLAY_IF_EXISTS)) {
-    let chain = element.getAttribute(DISPLAY_IF_EXISTS).trim();
-    return typeof model.getChainValue(chain) !== 'undefined';
-  }
 
-  if (element.hasAttribute(DISPLAY_IF_IS)) {
-    let chainValue: String[] = element.getAttribute(DISPLAY_IF_IS).split("|");
-    if (chainValue.length !== 2) {
-      return false;
-    }
-
-    let chain: string = chainValue[0].trim(),
-      value: string = chainValue[1].trim();
-
-    return value === model.getChainValue(chain);
-  }
-
-  return true;
-}
 
 /**
  * @description This function will assign to the target object the parameters found inside params
@@ -155,12 +135,7 @@ export function __getModelEventCbk(err: Error, model: any, callback: Function): 
   let __self = this;
   let thisElement: HTMLElement = getElement(__self);
 
-  if (!__isAbleToBeDisplayed(model, thisElement)) {
-    thisElement.setAttribute('data-hide', 'hide');
-    return callback();
-  }
 
-  thisElement.removeAttribute('data-hide');
   /**
    * If we find data-view-model property defined, then we assign the parentChain and the rootModel to the compnent
    * This means we found a psk-for-each component.

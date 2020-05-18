@@ -30,7 +30,15 @@ export class PskCard {
 
 	render() {
 
+	  console.log("psk-card render");
+
+	  let cardAttributes = {};
 		const elementId = this.id.trim().replace(/(\s+|:+|\/+)/g, "-").toLowerCase();
+
+		if(elementId){
+		  cardAttributes['id'] = elementId;
+    }
+
 		let cardHeader = null;
 		if (this.title) {
 			cardHeader = (
@@ -45,7 +53,7 @@ export class PskCard {
 		}
 
 		return (
-			<div class="card psk-card" id={elementId}>
+			<div class="card psk-card" {...cardAttributes}>
 				{cardHeader}
 				<div class="card-body">
 					<slot />
