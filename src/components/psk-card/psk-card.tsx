@@ -30,8 +30,6 @@ export class PskCard {
 
 	render() {
 
-	  console.log("psk-card render");
-
 	  let cardAttributes = {};
 		const elementId = this.id.trim().replace(/(\s+|:+|\/+)/g, "-").toLowerCase();
 
