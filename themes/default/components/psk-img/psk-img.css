@@ -1,3 +1,7 @@
+img {
+    max-width: 100%;
+}
+
 .image_container {
     text-align: center;
 }
@@ -8,14 +12,16 @@
     font-style: italic;
     font-size: 1rem;
 }
-.image_description::before{
-    content:"- ";
-}
-.image_description::after{
-    content:" -";
+
+.image_description::before {
+    content: "- ";
 }
 
-.image_wrapper{
+.image_description::after {
+    content: " -";
+}
+
+.image_wrapper {
     margin-bottom: 5px;
     margin-top: 5px;
 }
