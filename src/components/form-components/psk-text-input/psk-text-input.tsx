@@ -31,11 +31,9 @@ export class PskTextInput {
     __inputHandler = (event) => {
         event.stopImmediatePropagation();
         let value = event.target.value;
-        if (this['changeModel']) {
-            this['changeModel'].call(this, 'value', value);
-        } else {
-            console.warn('[psk-text-input] Function named -=changeModel=- is not defined!');
-        }
+      if (this['updateModelValue']) {
+        this['updateModelValue']('value', value);
+      }
     };
 
     @TableOfContentProperty({
@@ -52,7 +50,7 @@ export class PskTextInput {
         isMandatory: false,
         propertyType: 'string'
     })
-    @Prop() value?: string | null = null;
+    @Prop({attribute:"value"}) value;
 
     @TableOfContentProperty({
         description: [`Specifies the name of a psk-text-input component. It is used along with the psk-label component.`],

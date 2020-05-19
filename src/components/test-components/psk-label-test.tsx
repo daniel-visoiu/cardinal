@@ -1,4 +1,4 @@
-import {h, Component, Prop, getElement} from '@stencil/core';
+import {h, Component, Prop, getElement, State} from '@stencil/core';
 import {BindModel} from "../../decorators/BindModel";
 
 
@@ -24,7 +24,8 @@ export class PskLabelTest {
     @Prop({attribute:"first-label"}) firstlabel;
     @Prop({attribute:"second-label"}) secondLabel;
     @Prop({attribute:"third-label"}) thirdLabel;
-    @Prop({attribute:"label-value"}) labelValue;
+    @Prop({attribute:"cosmin-ursache"}) labelValue;
+    @State() myState = "@ceva";
 
 
 

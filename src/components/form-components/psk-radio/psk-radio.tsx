@@ -27,7 +27,7 @@ export class PskRadio {
                     readOnly={this.readOnly}
                     checked={this.checked}
                     onChange={this.__handleRadioChange.bind(this)} />
-                <psk-label for={inputName} label-value={this.label} />
+                <psk-label for={inputName} label={this.label} />
             </div>
         );
     }

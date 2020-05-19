@@ -1,6 +1,6 @@
-import { Component, h, Prop, State, Element } from "@stencil/core";
+import {Component, h, Prop, State, Element, Event, EventEmitter} from "@stencil/core";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
-import { BindModel } from '../../decorators/BindModel';
+import {normalizeModelChain} from "../../utils/utilFunctions";
 
 const SLOT_CONDITION_FALSE = 'condition-false';
 const SLOT_CONDITION_TRUE = 'condition-true';
@@ -10,7 +10,6 @@ const SLOT_CONDITION_TRUE = 'condition-true';
     shadow: true
 })
 export class PskCondition {
-    @BindModel()
 
     @TableOfContentProperty({
         description: `The property value must be the name of a model property or expression. Children are rendered only if the value of the condition is evaluated to true`,
@@ -19,11 +18,60 @@ export class PskCondition {
     })
     @Prop() condition: any | null = null;
     @State() conditionResult: boolean = false;
+    @State() modelChain;
+
+    @Event({
+      eventName: 'getModelEvent',
+      cancelable: true,
+      composed: true,
+      bubbles: true,
+    }) getModelEvent: EventEmitter;
 
     @Element() _host: HTMLElement;
 
     componentWillLoad() {
-        return this._updateConditionResult();
+
+      if(!this._host.isConnected){
+        return;
+      }
+
+      this.modelChain = this.condition;
+      this.modelChain = normalizeModelChain(this.modelChain);
+
+      let checkCondition = (model) => {
+        if (model.hasExpression(this.modelChain)) {
+          let evaluateExpression = () => {
+            this.condition = model.evaluateExpression(this.modelChain);
+          };
+          model.onChangeExpressionChain(this.modelChain, evaluateExpression);
+          evaluateExpression();
+        }
+        else{
+          let evaluateCondition = () =>{
+            this.condition = model.getChainValue(this.modelChain);
+          };
+          model.onChange(this.modelChain, evaluateCondition);
+          evaluateCondition();
+        }
+      };
+
+
+      return new Promise((resolve) => {
+        this.getModelEvent.emit({
+          callback: (err, model) => {
+            if (err) {
+              console.log(err);
+            }
+
+            checkCondition(model);
+
+            this._updateConditionResult().then(() => {
+              resolve();
+            });
+          }
+        })
+      });
+
     }
 
     componentWillUpdate() {

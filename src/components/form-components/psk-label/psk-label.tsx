@@ -9,7 +9,6 @@ import CustomTheme from '../../../decorators/CustomTheme';
 export class PskLabel {
 
     @CustomTheme()
-
     @BindModel()
 
     @TableOfContentProperty({
@@ -18,7 +17,7 @@ export class PskLabel {
         isMandatory: false,
         propertyType: 'string'
     })
-    @Prop({attribute:"label"}) labelValue: string;
+    @Prop() label: string;
 
     @TableOfContentProperty({
         description: ['Specifies which form element a label is bound to.',
@@ -33,7 +32,7 @@ export class PskLabel {
     render() {
         return (
             <label class="col-form-label" htmlFor={this.for}>
-                {this.labelValue && this.labelValue }
+                {this.label && this.label }
                 < slot />
             </label>
         );

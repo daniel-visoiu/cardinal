@@ -6,7 +6,7 @@ import { TableOfContentProperty } from '../../decorators/TableOfContentProperty'
   shadow: false
 })
 
-export class AppMenuDropdown {
+export class DropdownRenderer {
 
 
   @TableOfContentProperty({

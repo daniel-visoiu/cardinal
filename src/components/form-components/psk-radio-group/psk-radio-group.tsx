@@ -41,7 +41,7 @@ export class PskRadioGroup {
     render() {
         return (
             <div class="form-group">
-                <psk-label for={this.name} label-value={this.label} />
+                <psk-label for={this.name} label={this.label} />
 
                 <div id="psk-radio-group"
                     class={`form-group`}>

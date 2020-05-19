@@ -1,22 +1,30 @@
-import { Component, Prop, Element, State, h } from '@stencil/core';
-import { BindModel } from '../../decorators/BindModel';
-import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
+import {Component, Prop, Element, State, h, Event, EventEmitter} from '@stencil/core';
+import {TableOfContentProperty} from '../../decorators/TableOfContentProperty';
+import {normalizeModelChain} from "../../utils/utilFunctions";
 
 @Component({
   tag: 'psk-for-each'
 })
 export class PskForEach {
 
-  @BindModel()
   @Element() private __host: HTMLElement;
   @State() modelChanged: boolean = false;
+  @State() model;
+  @State() chain = "";
+
+  @Event({
+    eventName: 'getModelEvent',
+    cancelable: true,
+    composed: true,
+    bubbles: true,
+  }) getModelEvent: EventEmitter;
 
   private ignoredNodeNames = ["link", "style", "slot", "#text", "#comment", "text", "comment"];
   private templateNodes = [];
   private emptyNode: Element;
 
-  componentWillLoad() {
 
+  prepareTemplate(){
     let childNodes = Array.from(this.__host.childNodes);
 
     let children = childNodes.filter((node) => {
@@ -49,23 +57,42 @@ export class PskForEach {
     }
   }
 
+  componentWillLoad():Promise<any> {
+
+    if(!this.__host.isConnected){
+      return;
+    }
+
+    this.chain = this.dataViewModel;
+    this.chain = normalizeModelChain(this.chain);
+    this.prepareTemplate();
+
+
+    return new Promise((resolve) => {
+      this.getModelEvent.emit({
+        callback: (err, model) => {
+          if (err) {
+            console.log(err);
+          }
+          this.model = model;
+          resolve();
+        }
+      })
+    });
+  }
+
   componentDidLoad() {
-    if (this['rootModel']) {
-      this['rootModel'].onChange(this['parentChain'], () => {
+    if (this.model) {
+      this.model.onChange(this.chain, () => {
         this.modelChanged = !this.modelChanged;
       });
     }
-    else {
-      //TODO: an error should be logged to console.
-      //In this moment the TableOfContentsEvents decorator is not properly stopping this component
-      //console.error("Model was not set or it wasn't found");
-    }
-
   }
 
   render() {
-    //check if model is ready
-    if (!this['rootModel'] || !this['parentChain']) {
+
+    //check if component is no longer attached to DOM
+    if (!this.__host.isConnected) {
       return null;
     }
     //check if template is ready
@@ -73,26 +100,26 @@ export class PskForEach {
       return null;
     }
 
-    let model = this['rootModel'].getChainValue(this['parentChain']);
+    let model = this.model.getChainValue(this.chain);
     if (!model) {
       model = [];
     }
 
     let childList = [];
     for (let i = 0; i < model.length; i++) {
-      let pChain = this['parentChain'] ? `${this['parentChain']}.${i}.` : `${i}.`;
+      let pChain = this.chain ? `${this.chain}.${i}.` : `${i}.`;
 
       this.templateNodes.forEach(node => {
         let clonedTemplate: Element = node.cloneNode(true) as Element;
-        let preparedNode: Element = this.prepareItem(pChain, clonedTemplate);
+        this.__processNode(clonedTemplate, pChain);
 
-        let NewNodeTag: string = preparedNode.tagName.toLowerCase();
+        let NewNodeTag: string = clonedTemplate.tagName.toLowerCase();
         let attributes: any = {};
-        preparedNode.getAttributeNames().forEach(attrName => {
-          attributes[attrName] = preparedNode.getAttribute(attrName);
+        clonedTemplate.getAttributeNames().forEach(attrName => {
+          attributes[attrName] = clonedTemplate.getAttribute(attrName);
         });
 
-        let newElement: Element = <NewNodeTag innerHTML={preparedNode.innerHTML} {...attributes} />;
+        let newElement: Element = <NewNodeTag innerHTML={clonedTemplate.innerHTML} {...attributes} />;
         childList.push(newElement);
       });
     }
@@ -106,39 +133,30 @@ export class PskForEach {
 
   __processNode(node: Element, chain: string): void {
 
-    let nodeAttributes = Array.from(node.attributes)
-      .filter((attr: Attr) => attr.name.startsWith("view-model-"));
+    let viewModelAttrs = Array.from(node.attributes)
+      .filter((attr: Attr) => attr.name === "view-model");
 
-    nodeAttributes.forEach((attr: Attr) => {
+    viewModelAttrs.forEach((attr: Attr) => {
       const fullChain = chain ? `${chain}${attr.value}` : attr.value;
       node.setAttribute(attr.name, fullChain);
     });
 
-    let someAttributes = Array.from(node.attributes)
+    let modelAttrs = Array.from(node.attributes)
       .filter((attr: Attr) => attr.value.startsWith("@"));
 
-    someAttributes.forEach((attr: Attr) => {
+    modelAttrs.forEach((attr: Attr) => {
       const property = attr.value.split("@")[1];
       const fullChain = chain ? `${chain}${property}` : property;
-      node.setAttribute(attr.name, "@"+fullChain);
+      node.setAttribute(attr.name, "@" + fullChain);
     });
-    Array.from(node.children).forEach((node: Element) => {
-      this.__processNode.call(this, node, chain);
-    });
+
+    if(node.tagName.toLowerCase()!=="psk-for-each"){
+      Array.from(node.children).forEach((node: Element) => {
+        this.__processNode.call(this, node, chain);
+      });
+    }
   }
 
-  prepareItem(chain: string, clonedTemplate: Element) {
-    let viewModelComponents = clonedTemplate.querySelectorAll("[view-model]");
-
-    this.__processNode.call(this, clonedTemplate, chain);
-
-    viewModelComponents.forEach((component: HTMLElement) => {
-      const fullChain: string = `${chain}${component.getAttribute('view-model')}`;
-      component.setAttribute('view-model', fullChain);
-    });
-
-    return clonedTemplate;
-  }
 
   @TableOfContentProperty({
     description: [`This property is the name of the model which will be used to generate the form. The model should be a JavaScript array.`,
@@ -147,5 +165,5 @@ export class PskForEach {
     propertyType: 'string',
     specialNote: [`If this property is not provided, nothing written inside the component's template will be displayed.`]
   })
-  @Prop() dataViewModel?: string | null = null;
+  @Prop({attribute: "data-view-model"}) dataViewModel?: string | null = null;
 }

@@ -15,7 +15,7 @@
 | `eventDispatcher`      | `event-dispatcher`        |             | `string`  | `undefined`         |
 | `eventName`            | `event-name`              |             | `string`  | `undefined`         |
 | `isDisabled`           | `is-disabled`             |             | `boolean` | `false`             |
-| `labelValue`           | `label`                   |             | `string`  | `undefined`         |
+| `label`                | `label`                   |             | `string`  | `undefined`         |
 
 
 ## Dependencies

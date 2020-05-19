@@ -31,11 +31,9 @@ export class PskNumberInput {
     __inputHandler = (event) => {
         event.stopImmediatePropagation();
         let value = event.target.value;
-        if (this['changeModel']) {
-            this['changeModel'].call(this, 'value', value);
-        } else {
-            console.warn('[psk-number-input] Function named -=changeModel=- is not defined!');
-        }
+      if (this['updateModelValue']) {
+        this['updateModelValue']('value', value);
+      }
     };
 
     @TableOfContentProperty({

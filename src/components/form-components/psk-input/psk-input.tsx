@@ -8,7 +8,7 @@ import CustomTheme from '../../../decorators/CustomTheme';
 })
 export class PskInput {
 
-    @CustomTheme()
+  @CustomTheme()
 
 	@BindModel()
 
@@ -21,7 +21,7 @@ export class PskInput {
 
 		return (
 			<div class={`form-group`}>
-				{this.label && <psk-label for={inputName} label-value={this.label} />}
+				{this.label && <psk-label for={inputName} label={this.label} />}
 
 				<input
 					type={this.type}
@@ -40,11 +40,10 @@ export class PskInput {
 	__keyUpHandler = (event) => {
 		event.stopImmediatePropagation();
 		let value = event.target.value;
-		if (this['changeModel']) {
-			this['changeModel'].call(this, 'value', value);
-		} else {
-			console.warn('[psk-input] Function named -=changeModel=- is not defined!');
-		}
+
+    if (this['updateModelValue']) {
+      this['updateModelValue']('value', value);
+    }
 	};
 
 	@TableOfContentProperty({

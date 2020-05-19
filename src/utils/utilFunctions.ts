@@ -188,3 +188,10 @@ export function canAttachShadow(tagName: string): boolean {
 
   return found === tagName;
 }
+
+export function normalizeModelChain(chain){
+  if(typeof chain !== "string"){
+    throw new Error("Invalid model chain");
+  }
+  return chain.split("@").join("");
+}

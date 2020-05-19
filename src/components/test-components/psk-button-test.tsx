@@ -15,7 +15,7 @@ export class PskButton {
                       first-label="@navigationLinks.0.label"
                       second-label="@navigationLinks.1.label"
                       third-label="@navigationLinks.2.label"
-                      label-value="@navigationLinks.3.label"
+                      cosmin-ursache="@navigationLinks.3.label"
       ></psk-label-test>
 		);
 	}

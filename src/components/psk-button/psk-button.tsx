@@ -35,7 +35,7 @@ export class PskButton {
 						this.handleClickEvent.call(this, evt, this.doubleClickEventName);
 					}
 				}}>
-				{this.labelValue && this.labelValue}
+				{this.label && this.label}
 				<slot />
 			</button>
 		);
@@ -68,7 +68,7 @@ export class PskButton {
 		isMandatory: false,
 		propertyType: 'string'
 	})
-	@Prop({attribute:"label"}) labelValue: string | null;
+	@Prop() label: string | null;
 
 	@TableOfContentProperty({
 		description: ['This attribute is used to provide a set of CSS classes, defined inside psk-button.css, that will be used as design for this component.'],

@@ -20,7 +20,6 @@ export class PskUserProfileRenderer {
   @Prop() userInfo:any;
 
   render() {
-    console.log("My log", this.userInfo);
     return (
       <div class="profile">
         <div class="card-body text-center">

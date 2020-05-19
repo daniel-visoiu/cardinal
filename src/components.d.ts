@@ -60,7 +60,7 @@ export namespace Components {
         "eventDispatcher": string | null;
         "eventName": string | null;
         "isDisabled": boolean;
-        "labelValue": string | null;
+        "label": string | null;
     }
     interface PskButtonGroup {
         "classes": string | null;
@@ -81,13 +81,13 @@ export namespace Components {
     }
     interface PskCheckbox {
         "checkboxLabel": any;
+        "checked"?: boolean;
         "checkedValue"?: string | null;
-        "isChecked"?: boolean;
-        "labelValue": string;
+        "label": string;
         "name"?: string | null;
         "required"?: boolean;
-        "selectedValue"?: string;
         "uncheckedValue"?: string | null;
+        "value"?: string;
     }
     interface PskCode {
         "language": string;
@@ -195,7 +195,7 @@ export namespace Components {
     }
     interface PskLabel {
         "for": string | null;
-        "labelValue": string;
+        "label": string;
     }
     interface PskLabelTest {
         "firstlabel": any;
@@ -346,7 +346,7 @@ export namespace Components {
         "placeholder"?: string | null;
         "readOnly"?: boolean;
         "required"?: boolean;
-        "value"?: string | null;
+        "value": any;
     }
     interface PskTextarea {
         "invalidValue"?: boolean | null;
@@ -1010,7 +1010,7 @@ declare namespace LocalJSX {
         "eventDispatcher"?: string | null;
         "eventName"?: string | null;
         "isDisabled"?: boolean;
-        "labelValue"?: string | null;
+        "label"?: string | null;
     }
     interface PskButtonGroup {
         "classes"?: string | null;
@@ -1032,13 +1032,13 @@ declare namespace LocalJSX {
     }
     interface PskCheckbox {
         "checkboxLabel"?: any;
+        "checked"?: boolean;
         "checkedValue"?: string | null;
-        "isChecked"?: boolean;
-        "labelValue"?: string;
+        "label"?: string;
         "name"?: string | null;
         "required"?: boolean;
-        "selectedValue"?: string;
         "uncheckedValue"?: string | null;
+        "value"?: string;
     }
     interface PskCode {
         "language"?: string;
@@ -1046,6 +1046,7 @@ declare namespace LocalJSX {
     }
     interface PskCondition {
         "condition"?: any | null;
+        "onGetModelEvent"?: (event: CustomEvent<any>) => void;
     }
     interface PskContainer {
         "controllerName"?: string | null;
@@ -1101,6 +1102,7 @@ declare namespace LocalJSX {
     }
     interface PskForEach {
         "dataViewModel"?: string | null;
+        "onGetModelEvent"?: (event: CustomEvent<any>) => void;
     }
     interface PskForm {
         "controllerName"?: string | null;
@@ -1149,7 +1151,7 @@ declare namespace LocalJSX {
     }
     interface PskLabel {
         "for"?: string | null;
-        "labelValue"?: string;
+        "label"?: string;
     }
     interface PskLabelTest {
         "firstlabel"?: any;
@@ -1308,7 +1310,7 @@ declare namespace LocalJSX {
         "placeholder"?: string | null;
         "readOnly"?: boolean;
         "required"?: boolean;
-        "value"?: string | null;
+        "value"?: any;
     }
     interface PskTextarea {
         "invalidValue"?: boolean | null;
