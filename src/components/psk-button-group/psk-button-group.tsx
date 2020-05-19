@@ -74,7 +74,7 @@ export class ButtonGroup {
         isMandatory: true,
         propertyType: 'string'
     })
-    @Prop() label: string | null;
+    @Prop({reflect:true}) label: string | null;
 
     @TableOfContentProperty({
         isMandatory: false,

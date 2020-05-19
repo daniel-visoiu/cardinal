@@ -21,7 +21,7 @@ export class PskButton {
 
 	render() {
 		return (
-			<button class={this.buttonClass} disabled={this.isDisabled}
+			<button class={this.buttonClass} disabled={this.disabled}
 				onClick={(evt: MouseEvent) => {
 					this.handleClickEvent.call(this, evt, this.eventName);
 				}}
@@ -107,7 +107,7 @@ export class PskButton {
 		propertyType: 'boolean',
 		defaultValue: 'false'
 	})
-	@Prop() isDisabled: boolean = false;
+	@Prop() disabled: boolean = false;
 
 	@TableOfContentProperty({
 		description: ['This attribute is telling the component where to trigger the event. Accepted values: "document, "window".',

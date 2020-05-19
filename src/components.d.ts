@@ -55,11 +55,11 @@ export namespace Components {
     }
     interface PskButton {
         "buttonClass": string | null;
+        "disabled": boolean;
         "doubleClickEventName": string | null;
         "eventData": any | null;
         "eventDispatcher": string | null;
         "eventName": string | null;
-        "isDisabled": boolean;
         "label": string | null;
     }
     interface PskButtonGroup {
@@ -1005,11 +1005,11 @@ declare namespace LocalJSX {
     }
     interface PskButton {
         "buttonClass"?: string | null;
+        "disabled"?: boolean;
         "doubleClickEventName"?: string | null;
         "eventData"?: any | null;
         "eventDispatcher"?: string | null;
         "eventName"?: string | null;
-        "isDisabled"?: boolean;
         "label"?: string | null;
     }
     interface PskButtonGroup {
