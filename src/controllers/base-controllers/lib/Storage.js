@@ -1,7 +1,10 @@
 class Storage {
 
-	storeData(fileName, data, callback){
-	  let url = "/upload?path="+fileName;
+	storeData(path, data, callback){
+	  let segments = path.split("/");
+	  let fileName = segments.splice(segments.length-1, 1)[0];
+    path = segments.join("/");
+	  let url = `/upload?path=${path}&filename=${fileName}`;
 		fetch(url, {
 			method: 'POST',
 			body: data
@@ -33,7 +36,7 @@ class Storage {
 		});
 	}
 
-	detData(url, expectedResultType, callback){
+	getData(url, expectedResultType, callback){
 	  if(typeof expectedResultType === "function"){
 	    callback = expectedResultType;
 	    expectedResultType = "arrayBuffer";
@@ -42,10 +45,10 @@ class Storage {
     fetch(url)
       .then((response) => {
         if (!response.ok) {
-          return;
+          throw new Error(response.statusText);
         }
         response[expectedResultType]().then((data) => {
-          return callback(data);
+          return callback(undefined, data);
         }).catch((err)=>{
           throw err;
         });
