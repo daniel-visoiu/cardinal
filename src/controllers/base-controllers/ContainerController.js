@@ -1,4 +1,5 @@
 import PskBindableModel from "./lib/bindableModel.js";
+import RequestManager from "./lib/RequestManager.js";
 
 export default class ContainerController {
 
@@ -28,6 +29,7 @@ export default class ContainerController {
     };
 
     this.element = element;
+    this.requestManager = new RequestManager();
     this.setModel = (model) => {
       this.model = PskBindableModel.setModel(model);
       return this.model;
@@ -150,7 +152,7 @@ export default class ContainerController {
   _checkArguments(eventName, listener, options) {
     if (typeof eventName !== 'string' || eventName.trim().length === 0) {
       throw new Error(`
-      Argument eventName is not valid. It must be a non-empty string. 
+      Argument eventName is not valid. It must be a non-empty string.
       Provided value: ${eventName}
       `);
     }
