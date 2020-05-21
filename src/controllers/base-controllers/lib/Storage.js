@@ -33,7 +33,7 @@ class Storage {
 		});
 	}
 
-	detData(url, expectedResultType, callback){
+	getData(url, expectedResultType, callback){
 	  if(typeof expectedResultType === "function"){
 	    callback = expectedResultType;
 	    expectedResultType = "arrayBuffer";
@@ -42,7 +42,7 @@ class Storage {
     fetch(url)
       .then((response) => {
         if (!response.ok) {
-          return;
+          throw new Error(response.statusText);
         }
         response[expectedResultType]().then((data) => {
           return callback(data);
