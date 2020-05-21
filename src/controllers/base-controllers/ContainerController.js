@@ -1,5 +1,5 @@
 import PskBindableModel from "./lib/bindableModel.js";
-import RequestManager from "./lib/RequestManager.js";
+import Storage from "./lib/Storage.js";
 
 export default class ContainerController {
 
@@ -29,7 +29,7 @@ export default class ContainerController {
     };
 
     this.element = element;
-    this.requestManager = new RequestManager();
+    this.storage = new Storage();
     this.setModel = (model) => {
       this.model = PskBindableModel.setModel(model);
       return this.model;

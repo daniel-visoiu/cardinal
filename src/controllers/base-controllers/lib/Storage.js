@@ -1,7 +1,7 @@
-class RequestManager {
+class Storage {
 
-	upload(queryString, data, callback){
-	  let url = "/upload?"+queryString;
+	storeData(fileName, data, callback){
+	  let url = "/upload?path="+fileName;
 		fetch(url, {
 			method: 'POST',
 			body: data
@@ -33,7 +33,7 @@ class RequestManager {
 		});
 	}
 
-	download(url, expectedResultType, callback){
+	detData(url, expectedResultType, callback){
 	  if(typeof expectedResultType === "function"){
 	    callback = expectedResultType;
 	    expectedResultType = "arrayBuffer";
@@ -56,4 +56,4 @@ class RequestManager {
   }
 }
 
-export default RequestManager;
+export default Storage;
