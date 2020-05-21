@@ -1,4 +1,5 @@
 import PskBindableModel from "./lib/bindableModel.js";
+import Storage from "./lib/Storage.js";
 
 export default class ContainerController {
 
@@ -42,6 +43,7 @@ export default class ContainerController {
     };
 
     this.element = element;
+    this.storage = new Storage();
     this.setModel = (model) => {
       this.model = PskBindableModel.setModel(model);
 
@@ -171,7 +173,7 @@ export default class ContainerController {
   _checkArguments(eventName, listener, options) {
     if (typeof eventName !== 'string' || eventName.trim().length === 0) {
       throw new Error(`
-      Argument eventName is not valid. It must be a non-empty string. 
+      Argument eventName is not valid. It must be a non-empty string.
       Provided value: ${eventName}
       `);
     }
