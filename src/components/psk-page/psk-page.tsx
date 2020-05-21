@@ -16,7 +16,7 @@ import { BindModel } from "../../decorators/BindModel";
 export class PskPage {
 	@CustomTheme()
 
-	@BindModel()
+	@BindModel() modelHandler;
 
 	@Prop({reflect:true}) hasToc: boolean = false;
 	@State() activeChapter: string = null;

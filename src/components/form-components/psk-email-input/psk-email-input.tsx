@@ -10,7 +10,7 @@ export class PskEmailInput {
 
     @CustomTheme()
 
-    @BindModel()
+    @BindModel() modelHandler;
 
     render() {
         return <psk-input
@@ -31,9 +31,7 @@ export class PskEmailInput {
     __inputHandler = (event) => {
         event.stopImmediatePropagation();
         let value = event.target.value;
-      if (this['updateModelValue']) {
-        this['updateModelValue']('value', value);
-      }
+        this.modelHandler.updateModel('value', value);
     };
 
     @TableOfContentProperty({

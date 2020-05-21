@@ -14,7 +14,7 @@ const HTML_COMMENT_TAG = /<!---->/gm;
 })
 export class PskCode {
   @CustomTheme()
-  @BindModel()
+  @BindModel() modelHandler;
 
   @TableOfContentProperty({
     description: `This property is the title of the psk-chapter that will be created.`,

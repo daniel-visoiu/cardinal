@@ -9,7 +9,7 @@ import CustomTheme from "../../decorators/CustomTheme";
 })
 export class PskPageLoader {
 
-  @BindModel()
+  @BindModel() modelHandler;
   @CustomTheme()
 
   @State() pageContent: string;

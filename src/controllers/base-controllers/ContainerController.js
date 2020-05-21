@@ -28,7 +28,10 @@ export default class ContainerController {
     };
 
     this.element = element;
-    this.setModel = PskBindableModel.setModel;
+    this.setModel = (model) => {
+      this.model = PskBindableModel.setModel(model);
+      return this.model;
+    };
     this.modalsUrls = null;
 
     __initGetModelEventListener();
@@ -141,7 +144,7 @@ export default class ContainerController {
    * This function validates the arguments for on and off methods
    * @param {string} eventName - The name of the event
    * @param {Function} listener - The function that will be executed when he event is triggered
-   * @param {null | boolean | Object} options - The options for the listener. 
+   * @param {null | boolean | Object} options - The options for the listener.
    * @throws {string} - error in case any argument is invalid
    */
   _checkArguments(eventName, listener, options) {

@@ -12,7 +12,7 @@ const ACCEPTED_DEFAULT_DISPATCHERS = [document, window];
 })
 export class PskSwitchButton {
 
-	@BindModel()
+	@BindModel() modelHandler;
 
 	@CustomTheme()
 

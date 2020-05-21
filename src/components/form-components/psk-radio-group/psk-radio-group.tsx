@@ -11,7 +11,7 @@ export class PskRadioGroup {
 
     @CustomTheme()
 
-    @BindModel()
+    @BindModel() modelHandler;
 
     @State() options: Array<RadioOption> = null;
 
@@ -59,11 +59,7 @@ export class PskRadioGroup {
     }
 
     __updateModel(): void {
-        if (this['changeModel']) {
-            this['changeModel'].call(this, 'value', this.value);
-        } else {
-            console.warn('[psk-radio-group] Function named -=changeModel=- is not defined!');
-        }
+      this.modelHandler.updateModel('value', this.value);
     }
 
     @TableOfContentProperty({

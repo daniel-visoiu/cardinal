@@ -10,11 +10,11 @@
 | Property               | Attribute                 | Description | Type      | Default             |
 | ---------------------- | ------------------------- | ----------- | --------- | ------------------- |
 | `buttonClass`          | `button-class`            |             | `string`  | `"btn btn-primary"` |
+| `disabled`             | `disabled`                |             | `boolean` | `false`             |
 | `doubleClickEventName` | `double-click-event-name` |             | `string`  | `undefined`         |
 | `eventData`            | `event-data`              |             | `any`     | `undefined`         |
 | `eventDispatcher`      | `event-dispatcher`        |             | `string`  | `undefined`         |
 | `eventName`            | `event-name`              |             | `string`  | `undefined`         |
-| `isDisabled`           | `is-disabled`             |             | `boolean` | `false`             |
 | `label`                | `label`                   |             | `string`  | `undefined`         |
 
 

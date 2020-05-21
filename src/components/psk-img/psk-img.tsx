@@ -9,7 +9,7 @@ import {BindModel} from "../../decorators/BindModel";
 
 export class PskImg {
 	@CustomTheme()
-  @BindModel()
+  @BindModel() modelHandler;
 	@TableOfContentProperty({
 		description: `This property is the path to the image source (Example:"page/PrivateSky/EDFS.png").`,
 		isMandatory: true,

@@ -12,7 +12,7 @@ import PskButtonEvent from "../../events/PskButtonEvent";
 export class PskFilesChooser {
 	@CustomTheme()
 
-	@BindModel()
+	@BindModel() modelHandler;
 	@Element() htmlElement: HTMLElement;
 	@TableOfContentProperty({
 		description: `This is the lable of the button`,

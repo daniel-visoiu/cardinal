@@ -10,7 +10,7 @@ export class PskCheckbox {
 
     @CustomTheme()
 
-    @BindModel()
+    @BindModel() modelHandler;
 
     render() {
         const checkboxName = this.name ? this.name
@@ -52,10 +52,7 @@ export class PskCheckbox {
         } else {
             this.value = this.uncheckedValue ? this.uncheckedValue : "unchecked";
         }
-
-      if (this['updateModelValue']) {
-        this['updateModelValue']('value', this.value);
-      }
+        this.modelHandler.updateModel('value', this.value);
     }
 
     @TableOfContentProperty({

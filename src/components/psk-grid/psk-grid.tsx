@@ -14,7 +14,7 @@ interface BreakPoint {
   styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.css"
 })
 export class PskGrid {
-	@BindModel()
+	@BindModel() modelHandler;
 
 	@CustomTheme()
 

@@ -13,7 +13,7 @@ export class PskSelect {
 
     @CustomTheme()
 
-    @BindModel()
+    @BindModel() modelHandler;
 
     @State() options: Array<Option> = null;
 
@@ -65,11 +65,7 @@ export class PskSelect {
         evt.stopImmediatePropagation();
 
         let value = evt.target.value;
-        if (this['changeModel']) {
-            this['changeModel'].call(this, 'value', value);
-        } else {
-            console.warn('[psk-select] Function named -=changeModel=- is not defined!');
-        }
+        this.modelHandler.updateModel('value', value);
     }
 
     __createOptions(): void {

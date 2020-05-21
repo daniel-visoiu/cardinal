@@ -10,7 +10,7 @@ import {BindModel} from '../../decorators/BindModel';
 })
 export class PskUserProfileRenderer {
 
-  @BindModel()
+  @BindModel() modelHandler;
   @CustomTheme()
   @TableOfContentProperty({
     description: `This property is the user information that needs to be rendered for the user.`,

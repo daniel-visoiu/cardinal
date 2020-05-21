@@ -10,7 +10,7 @@ import { BindModel } from '../../decorators/BindModel';
     styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.css"
 })
 export class ButtonGroup {
-    @BindModel()
+    @BindModel() modelHandler;
 
     @CustomTheme()
 

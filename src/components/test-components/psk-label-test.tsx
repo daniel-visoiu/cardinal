@@ -7,7 +7,7 @@ import {BindModel} from "../../decorators/BindModel";
 })
 export class PskLabelTest {
 
-  @BindModel()
+  @BindModel() modelHandler;
 
       connectedCallback = function () {
       let thisElement = getElement(this);

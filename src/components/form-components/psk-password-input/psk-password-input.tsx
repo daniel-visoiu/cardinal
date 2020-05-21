@@ -10,7 +10,7 @@ export class PskPasswordInput {
 
     @CustomTheme()
 
-    @BindModel()
+    @BindModel() modelHandler;
 
     render() {
         return <psk-input
@@ -31,11 +31,7 @@ export class PskPasswordInput {
     __inputHandler = (event) => {
         event.stopImmediatePropagation();
         let value = event.target.value;
-        if (this['changeModel']) {
-            this['changeModel'].call(this, 'value', value);
-        } else {
-            console.warn('[psk-password-input] Function named -=changeModel=- is not defined!');
-        }
+        this.modelHandler.updateModel('value', value);
     };
 
     @TableOfContentProperty({

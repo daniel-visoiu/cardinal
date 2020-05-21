@@ -10,7 +10,7 @@ export class PskTextArea {
 
     @CustomTheme()
 
-    @BindModel()
+    @BindModel() modelHandler;
 
     render() {
         const invalidClass = this.invalidValue === null ? ''
@@ -35,11 +35,7 @@ export class PskTextArea {
     __inputHandler = (event) => {
         event.stopImmediatePropagation();
         let value = event.target.value;
-        if (this['changeModel']) {
-            this['changeModel'].call(this, 'value', value);
-        } else {
-            console.warn('[psk-textarea] Function named -=changeModel=- is not defined!');
-        }
+        this.modelHandler.updateModel('value', value);
     };
 
     @TableOfContentProperty({

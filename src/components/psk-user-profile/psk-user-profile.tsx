@@ -9,7 +9,7 @@ import {BindModel} from '../../decorators/BindModel';
 })
 export class PskUserProfile {
 
-  @BindModel()
+  @BindModel() modelHandler;
 
   @TableOfContentProperty({
     description: `should receive an object with the following properties if the default renderer is wanted: username, avatar, email.`,

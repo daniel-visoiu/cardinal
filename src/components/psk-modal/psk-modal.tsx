@@ -11,7 +11,7 @@ import { BindModel } from '../../decorators/BindModel';
 	shadow: true
 })
 export class PskModal {
-	@BindModel()
+	@BindModel() modelHandler;
 
 	@CustomTheme()
 

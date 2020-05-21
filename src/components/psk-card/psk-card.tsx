@@ -8,7 +8,7 @@ import { BindModel } from "../../decorators/BindModel";
 })
 export class PskCard {
 
-	@BindModel()
+	@BindModel() modelHandler;
 
 	@CustomTheme()
 

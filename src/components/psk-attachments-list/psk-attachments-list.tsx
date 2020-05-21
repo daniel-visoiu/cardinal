@@ -14,7 +14,7 @@ const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
 
 export class PskAttachmentsList {
 	@CustomTheme()
-	@BindModel()
+	@BindModel() modelHandler;
 	@TableOfContentProperty({
 		description: `This parameter holds the files that can be downloaded. They can be downloaded one by one by clicking on the desired file, or all at the same time.`,
 		specialNote: `WgFile is a custom type. Inside it, the following information can be stored:

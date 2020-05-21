@@ -11,7 +11,7 @@ import { BindModel } from "../../decorators/BindModel";
 })
 export class PskIcon {
     @CustomTheme()
-    @BindModel()
+    @BindModel() modelHandler;
 
     @TableOfContentProperty({
         isMandatory: true,

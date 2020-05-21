@@ -12,7 +12,7 @@ import { BindModel } from "../../decorators/BindModel";
 })
 export class PskChapter {
 	@CustomTheme()
-	@BindModel()
+	@BindModel() modelHandler;
 	@TableOfContentProperty({
 		description: `This property is the title, that will be used in order to create a psk-card `,
 		isMandatory: false,

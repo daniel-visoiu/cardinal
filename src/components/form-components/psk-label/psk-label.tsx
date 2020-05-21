@@ -9,7 +9,7 @@ import CustomTheme from '../../../decorators/CustomTheme';
 export class PskLabel {
 
     @CustomTheme()
-    @BindModel()
+    @BindModel() modelHandler;
 
     @TableOfContentProperty({
         description: ['Specifies the label to be displayed.',

@@ -10,7 +10,7 @@ export class PskInput {
 
   @CustomTheme()
 
-	@BindModel()
+	@BindModel() modelHandler;
 
 	render() {
 		const invalidClass = this.invalidValue === null ? ''
@@ -40,10 +40,7 @@ export class PskInput {
 	__keyUpHandler = (event) => {
 		event.stopImmediatePropagation();
 		let value = event.target.value;
-
-    if (this['updateModelValue']) {
-      this['updateModelValue']('value', value);
-    }
+      this.modelHandler.updateModel('value', value);
 	};
 
 	@TableOfContentProperty({
