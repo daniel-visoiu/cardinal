@@ -1,7 +1,9 @@
 import {getElement, ComponentInterface} from "@stencil/core";
 import {normalizeModelChain} from "../utils/utilFunctions";
+const ATTRIBUTE = "attr";
+const PROPERTY = "prop";
 
-function isValidProperty(property) {
+function hasChainSignature(property) {
   if (property === null || typeof property !== "string") {
     return false;
   }
@@ -11,19 +13,31 @@ function isValidProperty(property) {
   return property.length >= 2;
 }
 
+function getUpdateHandler(type, model){
 
-function BoundedModel(componentInstance, model) {
+  switch (type) {
+    case ATTRIBUTE:
+      return function (attr, boundedChain){
+        this.setAttribute(attr, model.getChainValue(boundedChain))
+      };
+    default:
+      return function (property, boundedChain){
+        this[property] = model.getChainValue(boundedChain);
+      };
+  }
+}
+
+function BoundedModel(updateHandler, model) {
 
   this.createBoundedModel = function (property, boundedChain) {
 
     boundedChain = normalizeModelChain(boundedChain);
 
-    function updateView() {
-      componentInstance[property] = model.getChainValue(boundedChain);
-    }
+    model.onChange(boundedChain, ()=>{
+      updateHandler(property, boundedChain);
+    });
 
-    model.onChange(boundedChain, updateView);
-    updateView();
+    updateHandler(property, boundedChain);
 
     return {
       updateModel: (value) => {
@@ -53,7 +67,10 @@ function bindComponentProps(element, propsData, callback) {
 
       for (let prop in propertiesData) {
         if (!properties[prop]) {
-          properties[prop] = modelChain + "." + prop;
+          properties[prop] = {
+            value:modelChain + "." + prop,
+            type:PROPERTY
+          };
         }
       }
     }
@@ -61,8 +78,10 @@ function bindComponentProps(element, propsData, callback) {
     let boundedProperties = {};
 
     for (let prop in properties) {
-      let propViewModel = new BoundedModel(this, model);
-      boundedProperties[prop] = propViewModel.createBoundedModel(prop, properties[prop]);
+      let instance = properties[prop].type === ATTRIBUTE ? element : this;
+      let handler = getUpdateHandler.call(instance, properties[prop].type, model);
+      let propViewModel = new BoundedModel(handler.bind(instance), model);
+      boundedProperties[prop] = propViewModel.createBoundedModel(prop, properties[prop].value);
     }
 
     if (typeof this[instanceName] !== "undefined") {
@@ -108,15 +127,39 @@ export function BindModel() {
 
       if (element.isConnected) {
         let componentProperties = Object.keys(componentInstance);
+        let elementAttributes = element.getAttributeNames();
         let properties = {};
 
+        /**
+         * iterate through component properties and search for model chains
+         */
         for (let i = 0; i < componentProperties.length; i++) {
           let prop = componentProperties[i];
-          if (isValidProperty(this[prop])) {
-            properties[prop] = this[prop];
+          if (hasChainSignature(this[prop])) {
+            properties[prop] = {
+              value: this[prop],
+              type: PROPERTY
+            }
           }
         }
 
+        /**
+         * iterate through component attributes and search for model chains
+         */
+        for (let i = 0; i < elementAttributes.length; i++) {
+          let attr = elementAttributes[i];
+          let attrValue = element.getAttribute(attr);
+          if (hasChainSignature(attrValue) && typeof properties[attr] === "undefined" && attr!=="view-model") {
+            properties[attr] = {
+              value: attrValue,
+              type: ATTRIBUTE
+            };
+          }
+        }
+
+        /**
+         * check for existing view-model attribute
+         */
         let hasViewModel = element.hasAttribute("view-model");
         if (Object.keys(properties).length > 0 || hasViewModel) {
           return callComponentWillLoad(new Promise((resolve) => {
