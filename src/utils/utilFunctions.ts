@@ -208,3 +208,7 @@ export function stringToBoolean(str){
     default: return Boolean(str);
   }
 }
+
+export function dashToCamelCase( str ) {
+  return str.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
+}

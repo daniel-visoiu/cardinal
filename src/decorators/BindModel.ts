@@ -1,5 +1,5 @@
 import {getElement, ComponentInterface} from "@stencil/core";
-import {normalizeModelChain} from "../utils/utilFunctions";
+import {dashToCamelCase, normalizeModelChain} from "../utils/utilFunctions";
 const ATTRIBUTE = "attr";
 const PROPERTY = "prop";
 
@@ -11,6 +11,23 @@ function hasChainSignature(property) {
     return false;
   }
   return property.length >= 2;
+}
+
+function attributeHasValidChain(attr, attrValue, properties) {
+  if (!hasChainSignature(attrValue)){
+    return false;
+  }
+
+  if(typeof properties[attr] !== "undefined"){
+    return false;
+  }
+
+  if(typeof dashToCamelCase(attrValue) !== "undefined"){
+    return false;
+  }
+
+  return attr !== "view-model";
+
 }
 
 function getUpdateHandler(type, model){
@@ -149,7 +166,7 @@ export function BindModel() {
         for (let i = 0; i < elementAttributes.length; i++) {
           let attr = elementAttributes[i];
           let attrValue = element.getAttribute(attr);
-          if (hasChainSignature(attrValue) && typeof properties[attr] === "undefined" && attr!=="view-model") {
+          if (attributeHasValidChain(attr, attrValue, properties)) {
             properties[attr] = {
               value: attrValue,
               type: ATTRIBUTE
