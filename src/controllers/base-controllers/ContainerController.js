@@ -3,6 +3,17 @@ import PskBindableModel from "./lib/bindableModel.js";
 export default class ContainerController {
 
   constructor(element) {
+    let modelRequests = [];
+
+    let dispatchModel = function (bindValue, model, callback) {
+      if (bindValue && model[bindValue]) {
+         callback(null, model[bindValue])
+      }
+
+      if (!bindValue) {
+         callback(null, model);
+      }
+    };
 
     let __initGetModelEventListener = () => {
       element.addEventListener("getModelEvent", (e) => {
@@ -15,13 +26,16 @@ export default class ContainerController {
         } = e.detail;
 
         if (typeof callback === "function") {
-          if (bindValue && this.model[bindValue]) {
-            return callback(null, this.model[bindValue])
+
+          if (!this.model) {
+            modelRequests.push(
+              {bindValue: bindValue, callback: callback}
+            );
+            return;
           }
 
-          if (!bindValue) {
-            return callback(null, this.model);
-          }
+          return dispatchModel(bindValue, this.model, callback)
+
         }
         callback(new Error("No callback provided"));
       });
@@ -30,6 +44,13 @@ export default class ContainerController {
     this.element = element;
     this.setModel = (model) => {
       this.model = PskBindableModel.setModel(model);
+
+      while (modelRequests.length > 0) {
+        let modelRequest = modelRequests.pop();
+        let {bindValue, callback} = modelRequest;
+        dispatchModel(bindValue, this.model, callback)
+      }
+
       return this.model;
     };
     this.modalsUrls = null;
