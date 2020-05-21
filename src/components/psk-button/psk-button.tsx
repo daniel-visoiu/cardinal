@@ -3,6 +3,7 @@ import CustomTheme from '../../decorators/CustomTheme';
 import PskButtonEvent from "../../events/PskButtonEvent";
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import { BindModel } from '../../decorators/BindModel';
+import {stringToBoolean} from "../../utils/utilFunctions";
 
 const ACCEPTED_DEFAULT_DISPATCHERS = [document, window];
 
@@ -20,8 +21,16 @@ export class PskButton {
 	@Element() htmlElement: HTMLElement;
 
 	render() {
+
+    let disabled;
+    if(typeof this.disabled === "string"){
+      disabled = stringToBoolean(this.disabled);
+    } else {
+      disabled = Boolean(this.disabled);
+    }
+
 		return (
-			<button class={this.buttonClass} disabled={this.disabled}
+			<button class={this.buttonClass} disabled={disabled}
 				onClick={(evt: MouseEvent) => {
 					this.handleClickEvent.call(this, evt, this.eventName);
 				}}
@@ -107,7 +116,7 @@ export class PskButton {
 		propertyType: 'boolean',
 		defaultValue: 'false'
 	})
-	@Prop() disabled: boolean = false;
+	@Prop() disabled: string | boolean = "false";
 
 	@TableOfContentProperty({
 		description: ['This attribute is telling the component where to trigger the event. Accepted values: "document, "window".',

@@ -1,6 +1,6 @@
 import {Component, h, Prop, State, Element, Event, EventEmitter} from "@stencil/core";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
-import {normalizeModelChain} from "../../utils/utilFunctions";
+import {normalizeModelChain, stringToBoolean} from "../../utils/utilFunctions";
 
 const SLOT_CONDITION_FALSE = 'condition-false';
 const SLOT_CONDITION_TRUE = 'condition-true';
@@ -78,19 +78,6 @@ export class PskCondition {
         return this._updateConditionResult();
     }
 
-    _stringToBoolean(str) {
-        switch (str.toLowerCase().trim()) {
-            case "true":
-            case "1":
-                return true;
-            case "false":
-            case "0":
-            case null:
-                return false;
-            default: return Boolean(str);
-        }
-    }
-
     _updateConditionResult(): Promise<void> {
         let conditionPromise;
 
@@ -102,7 +89,7 @@ export class PskCondition {
 
         return conditionPromise.then((result) => {
             if(typeof result === "string"){
-                this.conditionResult = this._stringToBoolean(result);
+                this.conditionResult = stringToBoolean(result);
             } else {
                 this.conditionResult = Boolean(result);
             }

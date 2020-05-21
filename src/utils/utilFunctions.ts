@@ -195,3 +195,16 @@ export function normalizeModelChain(chain){
   }
   return chain.split("@").join("");
 }
+
+export function stringToBoolean(str){
+  switch (str.toLowerCase().trim()) {
+    case "true":
+    case "1":
+      return true;
+    case "false":
+    case "0":
+    case null:
+      return false;
+    default: return Boolean(str);
+  }
+}
