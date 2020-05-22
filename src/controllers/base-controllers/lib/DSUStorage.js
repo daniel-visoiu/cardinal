@@ -1,6 +1,6 @@
-class Storage {
+class DSUStorage {
 
-	storeData(path, data, callback){
+	setItem(path, data, callback){
 	  let segments = path.split("/");
 	  let fileName = segments.splice(segments.length-1, 1)[0];
     path = segments.join("/");
@@ -36,7 +36,7 @@ class Storage {
 		});
 	}
 
-	getData(url, expectedResultType, callback){
+	getItem(url, expectedResultType, callback){
 	  if(typeof expectedResultType === "function"){
 	    callback = expectedResultType;
 	    expectedResultType = "arrayBuffer";
@@ -59,4 +59,4 @@ class Storage {
   }
 }
 
-export default Storage;
+export default DSUStorage;

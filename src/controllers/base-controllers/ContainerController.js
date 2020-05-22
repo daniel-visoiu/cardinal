@@ -1,5 +1,5 @@
 import PskBindableModel from "./lib/bindableModel.js";
-import Storage from "./lib/Storage.js";
+import DSUStorage from "./lib/DSUStorage.js";
 
 export default class ContainerController {
 
@@ -43,7 +43,7 @@ export default class ContainerController {
     };
 
     this.element = element;
-    this.storage = new Storage();
+    this.DSUStorage = new DSUStorage();
     this.setModel = (model) => {
       this.model = PskBindableModel.setModel(model);
 
