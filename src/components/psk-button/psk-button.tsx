@@ -9,8 +9,7 @@ const ACCEPTED_DEFAULT_DISPATCHERS = [document, window];
 
 @Component({
 	tag: 'psk-button',
-	styleUrl: "../../../themes/commons/bootstrap/css/bootstrap.css",
-	shadow: true
+	styleUrl: "../../../themes/commons/bootstrap/css/bootstrap.css"
 })
 export class PskButton {
 
@@ -29,8 +28,19 @@ export class PskButton {
       disabled = Boolean(this.disabled);
     }
 
+    let btnAttributes = {};
+
+    if (disabled) {
+      btnAttributes['disabled'] = disabled;
+    }
+
+    if (this.type) {
+      btnAttributes['type'] = this.type;
+      btnAttributes['value'] = this.eventName;
+    }
+
 		return (
-			<button class={this.buttonClass} disabled={disabled}
+			<button class={this.buttonClass} {...btnAttributes}
 				onClick={(evt: MouseEvent) => {
 					this.handleClickEvent.call(this, evt, this.eventName);
 				}}
@@ -51,25 +61,30 @@ export class PskButton {
 	}
 
 	handleClickEvent = (evt: MouseEvent | KeyboardEvent, evName: string) => {
-		evt.stopImmediatePropagation();
-		evt.preventDefault();
 
-		if (evName) {
-			let pskButtonEvent = new PskButtonEvent(evName, this.eventData, {
-				bubbles: true,
-				composed: true,
-				cancelable: true
-			});
+	  /*form submit event must be trusted*/
 
-			let eventDispatcherElement = this.htmlElement;
-			if (this.eventDispatcher) {
-				if (ACCEPTED_DEFAULT_DISPATCHERS.indexOf(window[this.eventDispatcher]) !== -1) {
-					eventDispatcherElement = window[this.eventDispatcher];
-				}
-			}
-			eventDispatcherElement.dispatchEvent(pskButtonEvent);
-		}
-	}
+    if (this.type !== "submit") {
+      evt.stopImmediatePropagation();
+      evt.preventDefault();
+
+      if (evName) {
+        let pskButtonEvent = new PskButtonEvent(evName, this.eventData, {
+          bubbles: true,
+          composed: true,
+          cancelable: true
+        });
+
+        let eventDispatcherElement = this.htmlElement;
+        if (this.eventDispatcher) {
+          if (ACCEPTED_DEFAULT_DISPATCHERS.indexOf(window[this.eventDispatcher]) !== -1) {
+            eventDispatcherElement = window[this.eventDispatcher];
+          }
+        }
+        eventDispatcherElement.dispatchEvent(pskButtonEvent);
+      }
+    }
+  }
 
 	@TableOfContentProperty({
 		description: ['This is the label that will be displayed for the button. If it is not set, the label will not be displayed.',
@@ -117,6 +132,8 @@ export class PskButton {
 		defaultValue: 'false'
 	})
 	@Prop() disabled: string | boolean = "false";
+
+  @Prop() type: string;
 
 	@TableOfContentProperty({
 		description: ['This attribute is telling the component where to trigger the event. Accepted values: "document, "window".',

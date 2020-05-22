@@ -61,6 +61,7 @@ export namespace Components {
         "eventDispatcher": string | null;
         "eventName": string | null;
         "label": string | null;
+        "type": string;
     }
     interface PskButtonGroup {
         "classes": string | null;
@@ -1011,6 +1012,7 @@ declare namespace LocalJSX {
         "eventDispatcher"?: string | null;
         "eventName"?: string | null;
         "label"?: string | null;
+        "type"?: string;
     }
     interface PskButtonGroup {
         "classes"?: string | null;

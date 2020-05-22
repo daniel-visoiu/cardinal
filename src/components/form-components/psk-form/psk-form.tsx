@@ -8,8 +8,7 @@ import {injectHistory, RouterHistory} from "@stencil/router";
   tag: 'psk-form',
   styleUrls: [
     "../../../../themes/commons/fonts/font-awesome.min.css",
-    "../../../../themes/commons/bootstrap/css/bootstrap.min.css"],
-  shadow: true
+    "../../../../themes/commons/bootstrap/css/bootstrap.min.css"]
 })
 export class PskForm {
 
@@ -53,32 +52,53 @@ export class PskForm {
     }
   }
 
+  submitForm(event){
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+
+    let submitter = event.submitter;
+    let eventName = submitter.getAttribute("value");
+
+    this._host.dispatchEvent( new CustomEvent(eventName,{
+      bubbles: true,
+      composed: true,
+      cancelable: true
+    }));
+  }
+
   render() {
+
     return (
       <div class="container">
+        <form onSubmit={this.submitForm.bind(this)} >
           <slot/>
-          {this._createFormActions(this.formActions)}
+          {this._createFormButtons(this.formActions)}
+        </form>
       </div>
     );
   }
 
-  _createFormActions(formActions: string): HTMLElement {
+  _createFormButtons(formActions: string): HTMLElement {
     if (formActions.trim().length === 0) {
       return null;
     }
 
     let formActionsArray = formActions.split(",").map(action => action.trim());
+    let formButtons = formActionsArray.map((action: string) => {
 
-    let actions = formActionsArray.map((action: string) => {
-      return <psk-button
-        button-class={action}
-        event-name={action}
-        label={action}/>
+    let buttonType = action === "reset" ? "reset" : "submit";
+    let className = action.toLowerCase().replace(/\s/g, "-");
+
+    return(
+      <button type={buttonType} class={`${className} btn btn-primary`} value={action}>
+        {action}
+      </button>)
     });
 
     return (
       <div id="actions" class="container-fluid">
-        {actions}
+        {formButtons}
       </div>
     );
   }
