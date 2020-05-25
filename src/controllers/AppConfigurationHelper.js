@@ -1,5 +1,5 @@
 const EVENT_PREFIX = "@event:";
-
+const PAGES_URL = "pages/";
 export default class AppConfigurationHelper {
 
 
@@ -40,13 +40,13 @@ export default class AppConfigurationHelper {
   }
 
 
-  static _prepareConfiguration(rawConfig, websiteBase) {
+  static _prepareConfiguration(rawConfig, basePath) {
 
     let configuration = {};
-    configuration.baseUrl = websiteBase;
+    configuration.baseUrl = basePath;
 
-    let basePagesUrl = websiteBase + rawConfig.basePagesUrl;
-
+    let basePagesUrl = basePath + PAGES_URL;
+    let appDir = new URL(basePath).pathname;
     if (rawConfig.modals) {
       configuration.modals = {};
       if (Object.keys(rawConfig.modals).length) {
@@ -80,8 +80,12 @@ export default class AppConfigurationHelper {
     };
 
     let fillOptionalPageProps = function (navigationPages, pathPrefix) {
+      if (pathPrefix) {
+        pathPrefix = pathPrefix.replace(/^\/|\/$/g, '');
+      }else{
+        pathPrefix = '';
+      }
       navigationPages.forEach(page => {
-
         if (!page.path) {
           let pageName = page.name.toLowerCase();
           let pagePath = pageName.toLowerCase().replace(/\s+/g, '-');
@@ -89,13 +93,16 @@ export default class AppConfigurationHelper {
           page.path = pagePath;
         }
 
-        if (page.path.indexOf("/") !== 0) {
-            page.path = "/" + page.path;
+        let sep = "/";
+        if (pathPrefix.length === 0) {
+          sep = "";
         }
-
-        if (pathPrefix) {
-          page.path = pathPrefix  + page.path;
+        if(!page.path.startsWith("/")){
+          page.path = sep + page.path;
         }
+        let relativePrefix = pathPrefix + page.path;
+        relativePrefix = relativePrefix.replace(/^\//g, '');
+        page.path = appDir + relativePrefix;
 
         if (page.children) {
           page.type = "abstract";
@@ -125,21 +132,14 @@ export default class AppConfigurationHelper {
             } else {
               let filename = page.name.replace(/[:.!?]/g, "").replace(/\s/g, '-').toLowerCase();
 
-              let prefix = "";
-              if (pathPrefix) {
-                prefix = pathPrefix.replace(/^\//, '');
-              }
-              if (prefix.length !== 0 ) {
-                prefix =  prefix + "/";
-              }
-              page.componentProps.pageUrl = basePagesUrl + prefix +  filename + ".html";
+              page.componentProps.pageUrl = basePagesUrl + pathPrefix + sep + filename + ".html";
             }
           }
         }
 
         if (typeof page.children === "object" && Array.isArray(page.children)) {
           page.children = {type: "known", items: JSON.parse(JSON.stringify(page.children))};
-          fillOptionalPageProps(page.children.items, page.path);
+          fillOptionalPageProps(page.children.items, relativePrefix);
         }
         else {
           if (typeof page.children === "string" && page.children.indexOf(EVENT_PREFIX) == 0) {

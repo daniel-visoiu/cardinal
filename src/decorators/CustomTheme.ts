@@ -72,7 +72,6 @@ export default function CustomTheme(): CustomThemeInterface {
 
     proto.componentWillLoad = function () {
       const host = getElement(this);
-
       if (!host) {
         return componentWillLoad && componentWillLoad.call(this);
       }
@@ -82,7 +81,7 @@ export default function CustomTheme(): CustomThemeInterface {
           let componentName = host.tagName.toLowerCase();
           return new Promise((resolve) => {
             // @ts-ignore
-            let themeStylePath = "/themes/" + theme + "/components/" + componentName + "/" + componentName + ".css";
+            let themeStylePath = window.basePath + "themes/" + theme + "/components/" + componentName + "/" + componentName + ".css";
             let parent = host.shadowRoot ? host.shadowRoot : host;
 
             if (!dependencies[themeStylePath]) {

@@ -1,24 +1,35 @@
 import AppConfigurationHelper from "./AppConfigurationHelper.js";
 import defaultApplicationConfig from "./defaultApplicationConfig.json";
-const configUrl = "/app-config.json";
+let configUrl = "app-config.json";
 window.globalConfig = {};
 export default class DefaultApplicationController  {
 
     constructor(element) {
         this.configIsLoaded = false;
         this.pendingRequests = [];
+        let basePath;
 
-        this._getAppConfiguration(configUrl, (err, _configuration) => {
-            let basePath;
-            if (window && window.location && window.location.origin) {
-                basePath = window.location.origin;
-            } else {
-                basePath = _configuration.baseUrl;
-            }
-            this.configuration = AppConfigurationHelper._prepareConfiguration(_configuration, basePath);
-            this.configuration.theme = _configuration.theme;
+        if (window && window.location && window.location.origin) {
+          basePath = window.location.origin;
+        }
+
+        let baseElement = document.querySelector("base");
+        if(baseElement){
+          let appDir = baseElement.getAttribute("href");
+          if (appDir) {
+            basePath += appDir;
+          }
+        }
+      if (!basePath.endsWith("/")) {
+        basePath += "/";
+      }
+      configUrl = basePath + configUrl;
+      window.basePath = basePath;
+      this._getAppConfiguration(configUrl, (err, _configuration) => {
+
+          this.configuration = AppConfigurationHelper._prepareConfiguration(_configuration, basePath);
+          this.configuration.theme = _configuration.theme;
             this.configuration.appVersion = _configuration.appVersion;
-
             this.configIsLoaded = true;
             while (this.pendingRequests.length) {
                 let request = this.pendingRequests.pop();

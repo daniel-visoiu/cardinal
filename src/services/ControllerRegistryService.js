@@ -24,7 +24,7 @@ class ControllerRegistryService {
             if (this.controllers[controllerName]) {
                 resolve(this.controllers[controllerName]);
             } else {
-                import (`/scripts/controllers/${controllerName}.js`)
+                import (`${window.basePath}scripts/controllers/${controllerName}.js`)
                 .then((module) => {
                     resolve(module.default || module);
                 }).catch(reject);
