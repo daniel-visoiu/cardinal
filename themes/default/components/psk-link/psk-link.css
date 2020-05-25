@@ -11,6 +11,10 @@
     text-decoration: none;
 }
 
+:host(.link-button) .btn-link{
+  color:#FFF;
+}
+
 .btn-link:focus,
 .btn-link:active,
 .btn-link:hover {
