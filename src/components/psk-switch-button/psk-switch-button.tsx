@@ -18,7 +18,20 @@ export class PskSwitchButton {
 
 	@Element() htmlElement: HTMLElement;
 	@State() closed: boolean = true;
+	@TableOfContentProperty({
+		description: ['This attribute is the active part of the component the one that will show the content when the switch button is on.'],
+		isMandatory: true,
+		propertyType: 'string',
+		defaultValue: null
+	})
 	@Prop() active: string | null;
+
+	@TableOfContentProperty({
+		description: 'This attribute is the inactive part of the component(this is the default value for the switch-button) the one that tells the user that the switch button is off.',
+		isMandatory: true,
+		propertyType: 'string',
+		defaultValue: null
+	})
 	@Prop() inactive: string | null;
 
 	@TableOfContentProperty({
@@ -36,6 +49,11 @@ export class PskSwitchButton {
 	})
 	@Prop() toggleEvent: string | null;
 
+	@TableOfContentProperty({
+		description: `This property is the title, that will be be shown above the switch button for better understanding. `,
+		isMandatory: false,
+		propertyType: `string`
+	})
 	@Prop() title: string | null;
 
 	clickHandler(evt: MouseEvent) {
