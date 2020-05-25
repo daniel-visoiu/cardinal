@@ -11,7 +11,31 @@
     text-decoration: none;
 }
 
+:host(.link-button){
+  width: 100%;
+}
+
+:host(.link-button) div.psk-link{
+  width: 100%;
+}
+
+:host(.link-button) stencil-route-link{
+  display: flex;
+}
+
+:host(.link-button) stencil-route-link a{
+  width: 100%;
+}
+
+:host(.link-button) stencil-route-link a:hover{
+  color: #ffffff;
+}
+
 :host(.link-button) .btn-link{
+  width: 100%;
+}
+
+:host(.link-button):hover .btn-link:hover {
   color:#FFF;
 }
 
@@ -61,9 +85,8 @@
     top: 100%;
     left: 50%;
     margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
+    border: 5px solid transparent;
+    border-top-color: #555;
 }
 
 .psk-link:hover .tooltip-error {
