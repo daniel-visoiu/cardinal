@@ -7,10 +7,8 @@ import {Component, h, Prop, State, Event, EventEmitter, Element} from '@stencil/
 
 export class PskSelfSovereignApp {
 
-  @Prop() iframeSrc: string;
   @Prop() appName: string;
   @Prop() landingPath: string;
-  @Prop() csbSeed: string;
   @State() digestSeedHex;
   @State() seed;
   @Element() element;

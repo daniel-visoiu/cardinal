@@ -139,7 +139,7 @@ export class PskButton {
       'Accepted values:<code>submit</code>,<code>reset</code>.'],
     isMandatory: false,
     propertyType: 'string',
-    specialNote: ["If you miss this attribute in your psk-form component you will still be able to catch the event in your controller but the form validation will be skipped"]
+    specialNote: ["If you miss this attribute in your psk-form component you will still be able to catch the event in your controller but the form validation will be skipped."]
   })
   @Prop() type: string;
 
