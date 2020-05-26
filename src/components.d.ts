@@ -313,8 +313,6 @@ export namespace Components {
     }
     interface PskSsApp {
         "appName": string;
-        "csbSeed": string;
-        "iframeSrc": string;
         "landingPath": string;
     }
     interface PskStepper {
@@ -1277,8 +1275,6 @@ declare namespace LocalJSX {
     }
     interface PskSsApp {
         "appName"?: string;
-        "csbSeed"?: string;
-        "iframeSrc"?: string;
         "landingPath"?: string;
         "onGiveMeSeed"?: (event: CustomEvent<any>) => void;
     }
