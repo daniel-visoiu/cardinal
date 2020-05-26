@@ -67,8 +67,8 @@ export class PskFilesChooser {
 		}
 
 		return [
-			<button type="button" class="btn btn-secondary p-0">
-				<label class="pt-0 mb-0 p-2">
+			<button type="button" class="btn btn-secondary">
+				<label>
 					{this.label}
 					<input
 						multiple
