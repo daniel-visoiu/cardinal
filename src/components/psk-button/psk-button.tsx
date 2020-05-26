@@ -133,6 +133,14 @@ export class PskButton {
 	})
 	@Prop() disabled: string | boolean = "false";
 
+  @TableOfContentProperty({
+    description: ['This attribute should be used when <code>psk-button</code> is a child in a <psk-link tag="psk-form">psk-form component</psk-link>.',
+      'When used so, the button will act as a form action button: submit or reset',
+      'Accepted values:<code>submit</code>,<code>reset</code>.'],
+    isMandatory: false,
+    propertyType: 'string',
+    specialNote: ["If you miss this attribute in your psk-form component you will still be able to catch the event in your controller but the form validation will be skipped"]
+  })
   @Prop() type: string;
 
 	@TableOfContentProperty({

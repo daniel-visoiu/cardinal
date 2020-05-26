@@ -1,7 +1,6 @@
 {
   "theme": "default",
   "appVersion": "1.0.0",
-  "basePagesUrl": "/pages/",
   "profile": {
     "username": "Cardinal App" ,
     "email": "privatesky@axiologic.net",

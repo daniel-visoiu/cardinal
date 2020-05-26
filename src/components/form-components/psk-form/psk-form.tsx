@@ -1,7 +1,7 @@
 import {Component, h, Prop, Element, State} from '@stencil/core';
-import CustomTheme from '../../../decorators/CustomTheme.js';
+import CustomTheme from '../../../decorators/CustomTheme';
 import ControllerRegistryService from "../../../services/ControllerRegistryService";
-import {TableOfContentProperty} from '../../../decorators/TableOfContentProperty.js';
+import {TableOfContentProperty} from '../../../decorators/TableOfContentProperty';
 import {injectHistory, RouterHistory} from "@stencil/router";
 
 @Component({
@@ -87,7 +87,7 @@ export class PskForm {
     let formActionsArray = formActions.split(",").map(action => action.trim());
     let formButtons = formActionsArray.map((action: string) => {
 
-    let buttonType = action === "reset" ? "reset" : "submit";
+    let buttonType = action.toLowerCase() === "reset" ? "reset" : "submit";
     let className = action.toLowerCase().replace(/\s/g, "-");
 
     return(
@@ -104,24 +104,23 @@ export class PskForm {
   }
 
   @TableOfContentProperty({
-    description: ['This attributes is setting the controller of the form. The default value for this attribute is FormController, a default controller for handling form submitions created inside Cardinal.Js.',
-      'Information about creating a controller can be found inside the documentation: <psk-link page="Cardinal/controllers">Controllers Documentation</psk-link>',
-      'All the '],
+    description: ['This attributes is setting the controller of the form.',
+      'Information about creating a controller can be found inside the documentation: <psk-link tag="mvc-controller">Controllers Documentation</psk-link>'],
     isMandatory: false,
     propertyType: 'string',
-    defaultValue: "FormController",
-    specialNote: "If the controller name is not provided, then the default FormController is assumed."
+    defaultValue: "null",
+    specialNote: "If the controller name is not provided, the events will bubble to the parent elements until them will be stopped by an existing handler."
   })
   @Prop() controllerName: string | null;
 
   @TableOfContentProperty({
-    description: [`By defining this attribute, the user is able to control the behaviour of the form, so by definition, this attribute holds the possible actions inside the form, the defined actions should be sepparated by comma(",").`,
-      `Also, as a recommendation, the values should be provided using lowercases, and if there are more words inside an action, to be written using dash symbol(-)`,
-      `Example of form actions: submit, reset-form, validate-form, cancel`,
-      `Using all these actions, the component will generate a <psk-link page="web-components/psk-button">psk-button</psk-link>.`,
-      `If this attribute is not defined, you can also add <psk-link page="web-components/psk-button">psk-button</psk-link> components anywhere in the form. The rule is the same, the event-name attribute assigned to the psk-button component needs to be registered in the form's controller.`],
+    description: [`By defining this attribute, the user is able to control the behaviour of the form, so by definition, this attribute holds the possible actions inside the form. The defined actions should be separated by comma(",").`,
+      `All actions except <code>reset</code> will perform a native form validation first. After form validation succeed, then an event with the same name as the action will be triggered.`,
+      `<i>Example of form actions: submit, reset, validate, cancel;</i>`,
+      `Please bear in mind that your controller catches the <code>reset event</code> and then the form fields will be cleared. If you want to change this behavior, don't forget to stop the propagation of the event.`,
+      `If this attribute is not defined, you can also add <psk-link tag="psk-button">psk-button</psk-link> components anywhere in the form. Because the <code>psk-button</code> is not able to generate trusted events, a <psk-link tag="psk-button" chapter="type">type="submit"</psk-link> attribute is necessary.` ],
     isMandatory: false,
-    propertyType: 'string values sepparated by comma (,)',
+    propertyType: 'string values separated by comma (,)',
     defaultValue: "null",
     specialNote: ["If this attribute has no value, then the form will have no actions."]
   })
@@ -130,4 +129,4 @@ export class PskForm {
   @Element() private _host: HTMLElement;
 }
 
-injectHistory(PskForm)
+injectHistory(PskForm);
