@@ -180,6 +180,13 @@ export namespace Components {
         "title": string;
         "width": string;
     }
+    interface PskImgInput {
+        "alt"?: string | null;
+        "eventName"?: string | null;
+        "label"?: string | null;
+        "placeholder"?: string;
+        "src"?: any | null;
+    }
     interface PskInput {
         "invalidValue"?: boolean | null;
         "label"?: string | null;
@@ -635,6 +642,12 @@ declare global {
         prototype: HTMLPskImgElement;
         new (): HTMLPskImgElement;
     };
+    interface HTMLPskImgInputElement extends Components.PskImgInput, HTMLStencilElement {
+    }
+    var HTMLPskImgInputElement: {
+        prototype: HTMLPskImgInputElement;
+        new (): HTMLPskImgInputElement;
+    };
     interface HTMLPskInputElement extends Components.PskInput, HTMLStencilElement {
     }
     var HTMLPskInputElement: {
@@ -911,6 +924,7 @@ declare global {
         "psk-hoc": HTMLPskHocElement;
         "psk-icon": HTMLPskIconElement;
         "psk-img": HTMLPskImgElement;
+        "psk-img-input": HTMLPskImgInputElement;
         "psk-input": HTMLPskInputElement;
         "psk-label": HTMLPskLabelElement;
         "psk-label-test": HTMLPskLabelTestElement;
@@ -1134,6 +1148,13 @@ declare namespace LocalJSX {
         "src"?: string;
         "title"?: string;
         "width"?: string;
+    }
+    interface PskImgInput {
+        "alt"?: string | null;
+        "eventName"?: string | null;
+        "label"?: string | null;
+        "placeholder"?: string;
+        "src"?: any | null;
     }
     interface PskInput {
         "invalidValue"?: boolean | null;
@@ -1428,6 +1449,7 @@ declare namespace LocalJSX {
         "psk-hoc": PskHoc;
         "psk-icon": PskIcon;
         "psk-img": PskImg;
+        "psk-img-input": PskImgInput;
         "psk-input": PskInput;
         "psk-label": PskLabel;
         "psk-label-test": PskLabelTest;
@@ -1509,6 +1531,7 @@ declare module "@stencil/core" {
             "psk-hoc": LocalJSX.PskHoc & JSXBase.HTMLAttributes<HTMLPskHocElement>;
             "psk-icon": LocalJSX.PskIcon & JSXBase.HTMLAttributes<HTMLPskIconElement>;
             "psk-img": LocalJSX.PskImg & JSXBase.HTMLAttributes<HTMLPskImgElement>;
+            "psk-img-input": LocalJSX.PskImgInput & JSXBase.HTMLAttributes<HTMLPskImgInputElement>;
             "psk-input": LocalJSX.PskInput & JSXBase.HTMLAttributes<HTMLPskInputElement>;
             "psk-label": LocalJSX.PskLabel & JSXBase.HTMLAttributes<HTMLPskLabelElement>;
             "psk-label-test": LocalJSX.PskLabelTest & JSXBase.HTMLAttributes<HTMLPskLabelTestElement>;
