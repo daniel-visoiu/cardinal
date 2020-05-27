@@ -17,7 +17,7 @@ export class PskCard {
 		isMandatory: false,
 		propertyType: `string`
 	})
-	@Prop() title: string = "";
+	@Prop({reflect:true}) title: string = "";
 
 	@TableOfContentProperty({
 		description: `This property is the id which will be attached to the component so finding the component in the DOM should be simplified.

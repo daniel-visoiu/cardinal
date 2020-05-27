@@ -27,7 +27,7 @@ export class PskPage {
 		isMandatory: false,
 		propertyType: `string`
 	})
-	@Prop() title: string = "";
+	@Prop({reflect:true}) title: string = "";
   @TableOfContentProperty({
     description: `This property is used as the page sub-title`,
     isMandatory: false,

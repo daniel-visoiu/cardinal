@@ -18,11 +18,7 @@ function attributeHasValidChain(attr, attrValue, properties) {
     return false;
   }
 
-  if(typeof properties[attr] !== "undefined"){
-    return false;
-  }
-
-  if(typeof dashToCamelCase(attrValue) !== "undefined"){
+  if(typeof properties[dashToCamelCase(attr)] !== "undefined"){
     return false;
   }
 
