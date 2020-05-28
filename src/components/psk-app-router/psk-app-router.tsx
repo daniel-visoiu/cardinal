@@ -152,6 +152,18 @@ export class PskAppRouter {
     if (!this.notFoundRoute) {
       this.notFoundRoute = this.routesItems[0].path;
     }
+    let basePathname = new URL(window['basePath']).pathname;
+    let landingPagePaths = [basePathname];
+    if (basePathname.length > 1 && basePathname.endsWith("/")) {
+      basePathname = basePathname.substring(0, basePathname.length - 1);
+      landingPagePaths.push(basePathname);
+    }
+
+    let landingPagesRoutes = landingPagePaths.map((path) => {
+      return <stencil-route url={path} exact={true} component="psk-route-redirect"
+                            componentProps={{url: this.routesItems[0].path}}/>
+    });
+
 
     return (
       <div class="app_container">
@@ -163,8 +175,7 @@ export class PskAppRouter {
                 this.landingPage ?
                   <stencil-router-redirect url={this.landingPage}></stencil-router-redirect>
                   : null] :
-              [<stencil-route url="/" exact={true} component="psk-route-redirect"
-                              componentProps={{url: this.routesItems[0].path}}/>,
+              [landingPagesRoutes,
                 routes,
                 this.landingPage ?
                   <stencil-router-redirect url={this.landingPage}></stencil-router-redirect>

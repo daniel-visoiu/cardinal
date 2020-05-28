@@ -34,13 +34,13 @@ export class QueryPagesRouter {
     };
 
     this.routes = renderItems(this.pages);
-
   }
 
   @Watch('location')
   locationChanged(newValue: LocationSegments) {
     this.currentRoute = newValue;
-    if (this.currentRoute.pathname === '/' && this.currentRoute.search === "") {
+    let basePathname = new URL(window['basePath']).pathname;
+    if (basePathname.includes(this.currentRoute.pathname) && this.currentRoute.search === "") {
       this.redirectTo = this.pages[0].path;
     } else {
       let notFoundRoute = this.pages.map((item, index) => item.name == "404" ? index : null).filter(item => item !== null)[0];
@@ -53,7 +53,7 @@ export class QueryPagesRouter {
   }
 
   render() {
-    let currentRouteSearchUrl = this.currentRoute.search;
+    let currentRouteSearchUrl = this.currentRoute.pathname+this.currentRoute.search;
     if (currentRouteSearchUrl.indexOf("&") !== -1) {
       currentRouteSearchUrl = currentRouteSearchUrl.substring(0, currentRouteSearchUrl.indexOf("&"))
     }

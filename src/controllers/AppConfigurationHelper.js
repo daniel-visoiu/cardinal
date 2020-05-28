@@ -102,7 +102,7 @@ export default class AppConfigurationHelper {
         }
         let relativePrefix = pathPrefix + page.path;
         relativePrefix = relativePrefix.replace(/^\//g, '');
-        page.path = appDir + relativePrefix;
+        page.path = relativePrefix;
 
         if (page.children) {
           page.type = "abstract";
@@ -161,25 +161,34 @@ export default class AppConfigurationHelper {
       configuration.historyType = historyType;
     }
 
-    if (historyType === "query") {
-      let pagePrefix = "?";
-      if (rawConfig.menu.defaultMenuConfig.pagePrefix) {
-        pagePrefix = rawConfig.menu.defaultMenuConfig.pagePrefix;
-      }
+    let completeWithPrefixes = (pathPrefix) => {
       let addPathPrefix = function (pages) {
         pages.forEach(page => {
           let pagePath = page.path;
           if (pagePath.indexOf("/") === 0) {
             pagePath = pagePath.substr(1);
           }
-          page.path = `${pagePrefix}${pagePath}`;
+          page.path = `${pathPrefix}${pagePath}`;
           if (page.children) {
             addPathPrefix(page.children.items);
           }
         });
       };
       addPathPrefix(configuration.routes);
+    };
+
+
+    let pathPrefix = appDir;
+
+    if (historyType === "query") {
+      let pagePrefix = "?";
+      if (rawConfig.menu.defaultMenuConfig.pagePrefix) {
+        pagePrefix = rawConfig.menu.defaultMenuConfig.pagePrefix;
+      }
+      pathPrefix = appDir+pagePrefix;
     }
+
+    completeWithPrefixes(pathPrefix);
 
     let getPagesTags = function (routes) {
       let tagsDictionary = [];
