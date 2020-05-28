@@ -14,15 +14,23 @@ export class PskImgInput {
 
   @Element() private element: HTMLElement;
 
+  componentWillLoad(){
+    this.srcUpdate(this.src);
+  }
+
   render() {
-    return <Host onclick={this.__clickHandler.bind(this)}  class={`form-group`}>
+    return <Host  class={`form-group`}>
       {this.label && <psk-label label={this.label} />}
 
+      <div class="outer-container" onClick={this.__clickHandler.bind(this)}>
       {typeof this.imageSource !== "undefined" && this.imageSource !== null
-        ? <img src={this.imageSource} alt={this.alt}></img>
+        ? <div class="display-img-container">
+          <img src={this.imageSource} alt={this.alt}/>
+          <psk-icon icon="pencil"></psk-icon>
+        </div>
         : <psk-label label={this.placeholder}></psk-label>
       }
-      <psk-icon icon="pencil-alt" color="rgb(208, 31, 208)"></psk-icon>
+      </div>
       <input type="file" class="form-control-file form-control-sm" style={{"display": "none"}}
              onChange={this.__fileChangeHandler.bind(this)}/>
     </Host>
@@ -30,6 +38,11 @@ export class PskImgInput {
 
   __fileChangeHandler = (event) => {
     let filesArray = Array.from(event.target.files);
+
+    if(filesArray.length === 0){
+      return;
+    }
+
     let changeEvent = new Event(this.eventName, {
       bubbles: true,
       composed: true,
