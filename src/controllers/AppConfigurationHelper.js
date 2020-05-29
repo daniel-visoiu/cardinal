@@ -169,7 +169,7 @@ export default class AppConfigurationHelper {
             pagePath = pagePath.substr(1);
           }
           page.path = `${pathPrefix}${pagePath}`;
-          if (page.children) {
+          if (page.children && page.children.items) {
             addPathPrefix(page.children.items);
           }
         });
