@@ -52,6 +52,12 @@ export class PskFilesChooser {
 			});
 			let eventDispatcherElement = this.htmlElement;
 			eventDispatcherElement.dispatchEvent(pskFileChooserEvent);
+
+			/**
+			 * SPA issue: When you try to upload the same file/folder, onChange event is not triggered.
+			 * Solution: Reset the input after the files are emitted via dispatchEvent.
+			 */
+			event.target.value = null;
 		}
 	}
 
