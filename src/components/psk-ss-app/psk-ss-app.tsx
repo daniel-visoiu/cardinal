@@ -1,4 +1,6 @@
 import {Component, h, Prop, State, Event, EventEmitter, Element} from '@stencil/core';
+import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
+import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
 
 @Component({
   tag: 'psk-ss-app',
@@ -7,12 +9,28 @@ import {Component, h, Prop, State, Event, EventEmitter, Element} from '@stencil/
 
 export class PskSelfSovereignApp {
 
+  @TableOfContentProperty({
+    isMandatory: true,
+    description: [`This property represents the name of the Self Sovereign Application that you want to run.`,
+    `Before the component is loaded it uses this property to emit the giveMeSeed event.`],
+    propertyType: 'string'
+  })
   @Prop() appName: string;
+
+  @TableOfContentProperty({
+    isMandatory: true,
+    description: `This property represents the direct path that will be passed to the Iframe as the landing-page property.`,
+    propertyType: 'string'
+  })
   @Prop() landingPath: string;
   @State() digestSeedHex;
   @State() seed;
   @Element() element;
 
+  @TableOfContentEvent({
+    description: [`This event is emitted the right before the component is loaded in order the obtain the seed.`,
+    `After this the seed is hashed using pskcrypto in order to be added in the iframe source.`]
+  })
   @Event({
     eventName: 'giveMeSeed',
     composed: true,

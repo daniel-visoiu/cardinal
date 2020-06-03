@@ -3,6 +3,7 @@ import { EventEmitter } from '@stencil/router/dist/types/stencil.core';
 import { TableOfContentEvent } from '../../../decorators/TableOfContentEvent';
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
 import CustomTheme from '../../../decorators/CustomTheme';
+import { BindModel } from '../../../decorators/BindModel';
 
 @Component({
     tag: 'psk-radio'
@@ -11,12 +12,13 @@ export class PskRadio {
 
     @CustomTheme()
 
+    @BindModel() modelHandler
+
     render() {
         const inputName = this.name ? this.name
             : (this.label && this.label.replace(/\s/g, '').toLowerCase());
 
         const inputValue = this.value ? this.value : inputName;
-
         return (
             <div class="form-check form-check-inline">
                 <input

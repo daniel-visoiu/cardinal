@@ -77,21 +77,21 @@ export class ButtonGroup {
     @Prop({reflect:true}) label: string | null;
 
     @TableOfContentProperty({
-        isMandatory: false,
+        isMandatory: true,
         propertyType: 'string',
         description: [
-            'This property gives the color of the icon.'
+            `This property is mandatory and it is the icon defined in font-awesome Cascading Style Sheet .`,
+            `We choose to use these icons because they are popular and quite expressive and very easy to use.(Example: user, eye, share, download`
         ],
         defaultValue: 'null'
     })
     @Prop() icon: string | null;
 
     @TableOfContentProperty({
-        isMandatory: true,
+        isMandatory: false,
         propertyType: 'string',
         description: [
-            `This property is mandatory and it is the icon defined in font-awesome Cascading Style Sheet .`,
-            `We choose to use these icons because they are popular and quite expressive and very easy to use.(Example: user, eye, share, download`
+            'This property gives the color of the icon.'
         ]
     })
     @Prop() iconColor: string | null;
