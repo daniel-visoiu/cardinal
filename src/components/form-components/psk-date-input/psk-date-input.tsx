@@ -2,12 +2,14 @@ import { h, Component, Prop } from '@stencil/core';
 import { BindModel } from '../../../decorators/BindModel';
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
 import CustomTheme from '../../../decorators/CustomTheme';
-
+import moment from 'moment'
 @Component({
     tag: 'psk-date-input'
 })
 export class PskDateInput {
-
+    
+    @Prop() dataDate?: any
+    
     @CustomTheme()
 
     @BindModel() modelHandler;
@@ -18,9 +20,13 @@ export class PskDateInput {
             label={this.label}
             name={this.name}
             value={this.value}
+            dataDate={this.dataDate}
             placeholder={this.placeholder}
             required={this.required}
             readOnly={this.readOnly}
+            data-date={this.value}
+            dateClass={this.dataFormat ? "formated-date" : null}
+            dataDateFormat = {this.dataFormat ? this.dataFormat : null}
             invalidValue={this.invalidValue}
             specificProps={{
                 onKeyUp: this.__inputHandler.bind(this),
@@ -31,7 +37,10 @@ export class PskDateInput {
     __inputHandler = (event) => {
         event.stopImmediatePropagation();
         let value = event.target.value;
-        this.modelHandler.updateModel('value', value);
+        if(this.dataFormat){
+            this.dataDate = moment(value, "YYYY-MM-DD").format( this.dataFormat )
+        }
+        this.modelHandler.updateModel('value', this.dataDate);
     };
 
     @TableOfContentProperty({
@@ -44,7 +53,8 @@ export class PskDateInput {
 
     @TableOfContentProperty({
         description: [`Specifies the value of an psk-date-input component.`,
-            `This value is updated also in the model using the two-way binding. Information about two-way binding using models and templates can be found at: <psk-link page="forms/using-forms">Using forms</psk-link>.`],
+            `This value is updated also in the model using the two-way binding. Information about two-way binding using models and templates can be found at: <psk-link page="forms/using-forms">Using forms</psk-link>.`,
+            `This property should respect the format give nto the data-format property.`],
         isMandatory: false,
         propertyType: 'string'
     })
@@ -88,4 +98,11 @@ export class PskDateInput {
         propertyType: 'boolean'
     })
     @Prop() invalidValue?: boolean | null = null;
+    @TableOfContentProperty({
+        isMandatory: false,
+        description: `This property is the format of the date, it can take these two values "DD MM YYYY" and"YYYY MM DD"`,
+        propertyType: 'string'
+    })
+    @Prop() dataFormat?: string | null = null
+
 }

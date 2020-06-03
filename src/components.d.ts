@@ -110,6 +110,8 @@ export namespace Components {
         "id": string;
     }
     interface PskDateInput {
+        "dataDate"?: any;
+        "dataFormat"?: string | null;
         "invalidValue"?: boolean | null;
         "label"?: string | null;
         "name"?: string | null;
@@ -188,6 +190,9 @@ export namespace Components {
         "src"?: any | null;
     }
     interface PskInput {
+        "dataDate"?: string;
+        "dataDateFormat"?: string | null;
+        "dateClass"?: string;
         "invalidValue"?: boolean | null;
         "label"?: string | null;
         "name"?: string | null;
@@ -1076,6 +1081,8 @@ declare namespace LocalJSX {
         "onGetHistoryType"?: (event: CustomEvent<any>) => void;
     }
     interface PskDateInput {
+        "dataDate"?: any;
+        "dataFormat"?: string | null;
         "invalidValue"?: boolean | null;
         "label"?: string | null;
         "name"?: string | null;
@@ -1157,6 +1164,9 @@ declare namespace LocalJSX {
         "src"?: any | null;
     }
     interface PskInput {
+        "dataDate"?: string;
+        "dataDateFormat"?: string | null;
+        "dateClass"?: string;
         "invalidValue"?: boolean | null;
         "label"?: string | null;
         "name"?: string | null;

@@ -7,15 +7,17 @@
 
 ## Properties
 
-| Property       | Attribute       | Description | Type      | Default |
-| -------------- | --------------- | ----------- | --------- | ------- |
-| `invalidValue` | `invalid-value` |             | `boolean` | `null`  |
-| `label`        | `label`         |             | `string`  | `null`  |
-| `name`         | `name`          |             | `string`  | `null`  |
-| `placeholder`  | `placeholder`   |             | `string`  | `null`  |
-| `readOnly`     | `read-only`     |             | `boolean` | `false` |
-| `required`     | `required`      |             | `boolean` | `false` |
-| `value`        | `value`         |             | `string`  | `null`  |
+| Property       | Attribute       | Description | Type      | Default     |
+| -------------- | --------------- | ----------- | --------- | ----------- |
+| `dataDate`     | `data-date`     |             | `any`     | `undefined` |
+| `dataFormat`   | `data-format`   |             | `string`  | `null`      |
+| `invalidValue` | `invalid-value` |             | `boolean` | `null`      |
+| `label`        | `label`         |             | `string`  | `null`      |
+| `name`         | `name`          |             | `string`  | `null`      |
+| `placeholder`  | `placeholder`   |             | `string`  | `null`      |
+| `readOnly`     | `read-only`     |             | `boolean` | `false`     |
+| `required`     | `required`      |             | `boolean` | `false`     |
+| `value`        | `value`         |             | `string`  | `null`      |
 
 
 ## Dependencies

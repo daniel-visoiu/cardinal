@@ -8,7 +8,9 @@ import CustomTheme from '../../../decorators/CustomTheme';
 })
 export class PskInput {
 
-  @CustomTheme()
+	@Prop() dateClass? : string
+	@Prop() dataDate? : string
+	@CustomTheme()
 
 	@BindModel() modelHandler;
 
@@ -18,7 +20,7 @@ export class PskInput {
 
 		const inputName = this.name ? this.name
 			: (this.label && this.label.replace(/( |:|\/|\.|-)/g, "").toLowerCase());
-
+			
 		return (
 			<div class={`form-group`}>
 				{this.label && <psk-label for={inputName} label={this.label} />}
@@ -26,8 +28,10 @@ export class PskInput {
 				<input
 					type={this.type}
 					value={this.value}
+					data-date= {this.dataDate}
 					name={inputName}
-					class={`form-control ${invalidClass}`}
+					data-date-format={this.dataDateFormat}
+					class={`form-control ${invalidClass} ${this.dateClass ? this.dateClass : null}`}
 					placeholder={this.placeholder}
 					required={this.required}
 					readOnly={this.readOnly}
@@ -105,6 +109,13 @@ export class PskInput {
 		propertyType: 'boolean'
 	})
 	@Prop() invalidValue?: boolean | null = null;
+
+	@TableOfContentProperty({
+		isMandatory: false,
+		description: ``,
+		propertyType: 'string'
+	})
+	@Prop() dataDateFormat? : string | null = null
 
 	/**
 	 * Property used only by other components
