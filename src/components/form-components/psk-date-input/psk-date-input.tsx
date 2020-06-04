@@ -1,14 +1,13 @@
-import { h, Component, Prop } from '@stencil/core';
+import { h, Component, Prop, State } from '@stencil/core';
 import { BindModel } from '../../../decorators/BindModel';
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
 import CustomTheme from '../../../decorators/CustomTheme';
-import moment from 'moment'
 @Component({
     tag: 'psk-date-input'
 })
 export class PskDateInput {
     
-    @Prop() dataDate?: any
+    @State() dataDate?: any
     
     @CustomTheme()
 
@@ -38,11 +37,31 @@ export class PskDateInput {
         event.stopImmediatePropagation();
         let value = event.target.value;
         if(this.dataFormat){
-            this.dataDate = moment(value, "YYYY-MM-DD").format( this.dataFormat )
+            this.dataDate=this.changeDateFormat(value,this.dataFormat)
         }
         this.modelHandler.updateModel('value', this.dataDate);
     };
 
+    changeDateFormat = (value,format) => {
+        let formatedDate : string = value;
+        let dates = value.split("-");
+        switch (format) {
+            case "DD MM YYYY" :
+                formatedDate = dates[2] + "/" + dates[1] +"/" + dates[0];
+                break;
+            case "MM DD YYYY":
+                formatedDate = dates[1] + "/" + dates[2] +"/" + dates[0];
+                break;
+            case "DD MM YY":
+                formatedDate = dates[2] + "/" + dates[1] +"/" + dates[0].slice(-2);
+                console.log(formatedDate);    
+                break;
+            case "MM DD YY":            
+                formatedDate = dates[1] + "/" + dates[2] +"/" + dates[0].slice(-2);
+                break;
+        }
+        return formatedDate
+    }
     @TableOfContentProperty({
         description: [`By filling out this property, the component will display above it, a label using <psk-link page="forms/psk-label">psk-label</psk-link> component.`],
         isMandatory: false,
@@ -100,8 +119,9 @@ export class PskDateInput {
     @Prop() invalidValue?: boolean | null = null;
     @TableOfContentProperty({
         isMandatory: false,
-        description: `This property is the format of the date, it can take these two values "DD MM YYYY" and"YYYY MM DD"`,
-        propertyType: 'string'
+        description: `This property is the format of the date.At the moment the component can format only "MM DD YYYY", "DD MM YYYY", "MM DD YY" and "DD MM YY".`,
+        propertyType: 'string',
+        defaultValue: "null"
     })
     @Prop() dataFormat?: string | null = null
 
