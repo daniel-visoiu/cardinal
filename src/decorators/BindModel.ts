@@ -10,7 +10,7 @@ function hasChainSignature(property) {
   if (!property.startsWith("@")) {
     return false;
   }
-  return property.length >= 2;
+  return property.length >= 1;
 }
 
 function attributeHasValidChain(attr, attrValue, properties) {
@@ -75,13 +75,14 @@ function bindComponentProps(element, propsData, callback) {
      */
     if (hasViewModel) {
       let modelChain = element.getAttribute("view-model");
+
       modelChain = normalizeModelChain(modelChain);
       let propertiesData = model.getChainValue(modelChain);
 
       for (let prop in propertiesData) {
         if (!properties[prop]) {
           properties[prop] = {
-            value:modelChain + "." + prop,
+            value: modelChain ? modelChain + "." + prop : prop,
             type:PROPERTY
           };
         }

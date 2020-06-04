@@ -495,6 +495,11 @@ class PskBindableModel {
                 };
 
                 getChainValue = function (chain) {
+
+                    if(!chain){
+                      return root;
+                    }
+
                     let chainSequence = chain.split(CHAIN_SEPARATOR).map(el => el.trim());
                     let reducer = (accumulator, currentValue) => {
                         if (accumulator !== null && typeof accumulator !== 'undefined') {

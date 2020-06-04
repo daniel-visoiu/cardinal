@@ -107,11 +107,11 @@ export class PskForEach {
 
     let childList = [];
     for (let i = 0; i < model.length; i++) {
-      let pChain = this.chain ? `${this.chain}.${i}.` : `${i}.`;
+      let currentChain = this.chain ? `${this.chain}.${i}.` : `${i}.`;
 
       this.templateNodes.forEach(node => {
         let clonedTemplate: Element = node.cloneNode(true) as Element;
-        this.__processNode(clonedTemplate, pChain);
+        this.__processNode(clonedTemplate, currentChain);
 
         let NewNodeTag: string = clonedTemplate.tagName.toLowerCase();
         let attributes: any = {};
@@ -133,21 +133,33 @@ export class PskForEach {
 
   __processNode(node: Element, chain: string): void {
 
-    let viewModelAttrs = Array.from(node.attributes)
-      .filter((attr: Attr) => attr.name === "view-model");
+    function processAttribute(attributeName,attributeValue) {
+      let splitChain = attributeValue.trim().split("@");
+      let property = splitChain.pop();
+      if (property === "") {
+        chain = chain.substring(0, chain.lastIndexOf("."));
+      }
+      //make sure that a chain prefix exists
+      const fullChain = chain ? `${chain}${property}` : property;
+      node.setAttribute(attributeName, "@" + fullChain);
+    }
 
-    viewModelAttrs.forEach((attr: Attr) => {
-      const fullChain = chain ? `${chain}${attr.value}` : attr.value;
-      node.setAttribute(attr.name, fullChain);
-    });
+    /*
+      process view-model attribute
+      keep in mind that this attribute accepts models that can begin or not with '@'
+     */
+    let viewModelAttribute = node.getAttribute("view-model");
 
+    if(viewModelAttribute){
+      processAttribute("view-model", viewModelAttribute);
+    }
+
+    //process component specific attributes
     let modelAttrs = Array.from(node.attributes)
-      .filter((attr: Attr) => attr.value.startsWith("@"));
+      .filter((attr: Attr) => attr.value.startsWith("@") && attr.name!=="view-model");
 
     modelAttrs.forEach((attr: Attr) => {
-      const property = attr.value.split("@")[1];
-      const fullChain = chain ? `${chain}${property}` : property;
-      node.setAttribute(attr.name, "@" + fullChain);
+      processAttribute(attr.name, attr.value);
     });
 
     if(node.tagName.toLowerCase()!=="psk-for-each"){
