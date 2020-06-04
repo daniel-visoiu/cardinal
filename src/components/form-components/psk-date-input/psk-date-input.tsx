@@ -54,7 +54,6 @@ export class PskDateInput {
                 break;
             case "DD MM YY":
                 formatedDate = dates[2] + "/" + dates[1] +"/" + dates[0].slice(-2);
-                console.log(formatedDate);    
                 break;
             case "MM DD YY":            
                 formatedDate = dates[1] + "/" + dates[2] +"/" + dates[0].slice(-2);
