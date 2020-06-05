@@ -1,6 +1,7 @@
 import {Component, h, Prop, State, Event, EventEmitter, Element} from '@stencil/core';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
+import {MatchResults, RouterHistory} from "@stencil/router";
 
 @Component({
   tag: 'psk-ss-app',
@@ -16,6 +17,10 @@ export class PskSelfSovereignApp {
     propertyType: 'string'
   })
   @Prop() appName: string;
+
+
+  @Prop() history: RouterHistory;
+  @Prop() match: MatchResults;
 
   @TableOfContentProperty({
     isMandatory: true,
@@ -38,6 +43,12 @@ export class PskSelfSovereignApp {
   }) giveMeSeed: EventEmitter;
 
   onServiceWorkerMessageHandler: (e) => void;
+
+  constructor(){
+    if(this.match.params.appName){
+      this.appName = this.match.params.appName;
+    }
+  }
 
   componentDidLoad() {
     let iframe = this.element.querySelector("iframe");

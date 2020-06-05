@@ -145,7 +145,6 @@ export default class AppConfigurationHelper {
           if (typeof page.children === "string" && page.children.indexOf(EVENT_PREFIX) == 0) {
             let eventName = page.children.substring(EVENT_PREFIX.length);
             page.children = {type: "event", event: eventName};
-            page.component = "psk-ssapp-loader";
           }
         }
       });

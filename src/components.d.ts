@@ -7,7 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { MenuItem, } from "./interfaces/MenuItem";
 import { ExtendedHistoryType, } from "./interfaces/ExtendedHistoryType";
-import { LocationSegments, RouterHistory, } from "@stencil/router";
+import { LocationSegments, MatchResults, RouterHistory, } from "@stencil/router";
 import { StyleCustomisation, } from "./interfaces/StyleCustomisation";
 import { SelectType, } from "./interfaces/FormModel";
 import { WizardStep, } from "./interfaces/Wizard";
@@ -324,7 +324,9 @@ export namespace Components {
     }
     interface PskSsApp {
         "appName": string;
+        "history": RouterHistory;
         "landingPath": string;
+        "match": MatchResults;
     }
     interface PskStepper {
         "activeStep": WizardStep;
@@ -1304,7 +1306,9 @@ declare namespace LocalJSX {
     }
     interface PskSsApp {
         "appName"?: string;
+        "history"?: RouterHistory;
         "landingPath"?: string;
+        "match"?: MatchResults;
         "onGiveMeSeed"?: (event: CustomEvent<any>) => void;
     }
     interface PskStepper {

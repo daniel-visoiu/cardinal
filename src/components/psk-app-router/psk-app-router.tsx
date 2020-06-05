@@ -131,12 +131,19 @@ export class PskAppRouter {
           this.notFoundRoute = item.path;
         }
 
-        if (item.children && item.children.type === "known") {
+        if(item.children){
+          if (item.children.type === "event") {
+            console.log(item);
+            return <stencil-route url={`${item.path}/:${item.propName}`} component={item.component}/>
+          }
+
           return this.renderItems(item.children.items)
-        } else {
+        }
+        else{
           return <stencil-route url={item.path} component={item.component}
                                 componentProps={item.componentProps}/>
         }
+
       });
     }
     return routes;
