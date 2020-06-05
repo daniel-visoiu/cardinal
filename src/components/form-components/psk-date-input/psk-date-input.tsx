@@ -43,22 +43,32 @@ export class PskDateInput {
     };
 
     changeDateFormat = (value,format) => {
-        let formatedDate : string = value;
+        let formatedDate ="";
         let dates = value.split("-");
-        switch (format) {
-            case "DD MM YYYY" :
-                formatedDate = dates[2] + "/" + dates[1] +"/" + dates[0];
-                break;
-            case "MM DD YYYY":
-                formatedDate = dates[1] + "/" + dates[2] +"/" + dates[0];
-                break;
-            case "DD MM YY":
-                formatedDate = dates[2] + "/" + dates[1] +"/" + dates[0].slice(-2);
-                break;
-            case "MM DD YY":            
-                formatedDate = dates[1] + "/" + dates[2] +"/" + dates[0].slice(-2);
-                break;
-        }
+        format = format.trim();
+        let types = format.split(" ");
+        types.forEach((type,index) => {
+
+            if(type.includes("M")){
+                formatedDate +=dates[1];
+                if(index < types.length-1){
+                    formatedDate += "/"
+                }
+
+            } else if(type.includes("D")){
+                formatedDate +=dates[2];
+                if(index < types.length-1){
+                    formatedDate += "/"
+                }
+
+            } else if (type.includes("Y")){
+                formatedDate +=dates[0];
+                if(index < types.length-1){
+                    formatedDate += "/"
+                }
+            }
+
+        });
         return formatedDate
     }
     @TableOfContentProperty({
