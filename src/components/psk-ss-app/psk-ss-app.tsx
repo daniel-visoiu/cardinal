@@ -45,7 +45,7 @@ export class PskSelfSovereignApp {
   onServiceWorkerMessageHandler: (e) => void;
 
   constructor(){
-    if(this.match.params.appName){
+    if(this.match && this.match.params && this.match.params.appName){
       this.appName = this.match.params.appName;
     }
   }
