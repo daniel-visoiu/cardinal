@@ -1,7 +1,8 @@
-import {Component, h, Prop, State, Event, EventEmitter, Element} from '@stencil/core';
+import {Component, h, Prop, State, Element} from '@stencil/core';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
-import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
 import {MatchResults, RouterHistory} from "@stencil/router";
+
+const APPS_FOLDER="/apps";
 
 @Component({
   tag: 'psk-ss-app',
@@ -12,8 +13,7 @@ export class PskSelfSovereignApp {
 
   @TableOfContentProperty({
     isMandatory: true,
-    description: [`This property represents the name of the Self Sovereign Application that you want to run.`,
-    `Before the component is loaded it uses this property to emit the giveMeSeed event.`],
+    description: [`This property represents the name of the Self Sovereign Application that you want to run.`],
     propertyType: 'string'
   })
   @Prop() appName: string;
@@ -31,16 +31,6 @@ export class PskSelfSovereignApp {
   @State() digestSeedHex;
   @State() seed;
   @Element() element;
-
-  @TableOfContentEvent({
-    description: [`This event is emitted the right before the component is loaded in order the obtain the seed.`,
-    `After this the seed is hashed using pskcrypto in order to be added in the iframe source.`]
-  })
-  @Event({
-    eventName: 'giveMeSeed',
-    composed: true,
-    cancelable: true,
-  }) giveMeSeed: EventEmitter;
 
   onServiceWorkerMessageHandler: (e) => void;
 
@@ -102,18 +92,41 @@ export class PskSelfSovereignApp {
   }
 
 
+  getManifest(callback) {
+    fetch("/download/manifest").then((response) => {
+      response.text().then(data => {
+        callback(undefined, JSON.parse(data));
+      }).catch((err) => {
+        callback(err);
+      })
+    });
+  }
+
+  getAppSeed(callback){
+    this.getManifest((err, manifest) => {
+      if (err) {
+        throw err;
+      }
+      if (manifest.mounts) {
+        for (let mount in manifest.mounts) {
+          if (mount === APPS_FOLDER+"/"+this.appName) {
+            return callback(undefined, manifest.mounts[mount]);
+          }
+        }
+      }
+      callback(new Error("No seed for app "+this.appName));
+    })
+  }
+
   componentWillLoad() {
     return new Promise((resolve) => {
-      this.giveMeSeed.emit({
-        appName: this.appName, callback: (err, seed) => {
-          if (err) {
-            throw err;
-          }
-          this.seed = seed;
-          this.digestSeedHex = this.digestMessage(seed);
-
-          resolve();
+      this.getAppSeed((err, seed) => {
+        if (err) {
+          throw err;
         }
+        this.seed = seed;
+        this.digestSeedHex = this.digestMessage(seed);
+        resolve();
       })
     });
   }
