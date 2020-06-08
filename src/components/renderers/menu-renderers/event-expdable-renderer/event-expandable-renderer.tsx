@@ -18,44 +18,52 @@ export class ExpandableRenderer {
   @Prop() somethingChanged = false;
   @Prop() firstMenuChild :any;
   @Prop() history: RouterHistory;
-  @Prop() event: string;
+  @Prop() item: any;
+
 
   @State() isClosed = true;
   @State() lazyItems = [];
+  @State() eventWasResolved = false;
   @Element() _host;
 
 
    loadSubMenuItems(){
 
-     if(this.event){
-       let event = new SubMenuItemsEvent(this.event, (err,items) =>{
 
-         if(err){
-            throw new Error(err);
-         }
+     let eventCallbackHandler = (err, items) => {
 
-         let arr = [];
-         items.forEach(item=>{
-           arr.push(
-             <stencil-route-link url={item.path} activeClass="active" exact={false}>
-               <div class="wrapper_container">
-                 <div class="item_container">
-                   <span class={`icon fa ${item.icon}`}></span>
-                   <span class="item_name">{item.name}</span>
-                 </div>
+       if (err) {
+         throw new Error(err);
+       }
+
+       let arr = [];
+       items.forEach(item => {
+         arr.push(
+           <stencil-route-link url={item.path} activeClass="active" exact={false}>
+             <div class="wrapper_container">
+               <div class="item_container">
+                 <span class={`icon fa ${item.icon}`}></span>
+                 <span class="item_name">{item.name}</span>
                </div>
-             </stencil-route-link>
-           );
-         });
-         this.lazyItems = arr;
-       },{
-         cancelable:true,
-         composed:true,
-         bubbles:true,
+             </div>
+           </stencil-route-link>
+         );
+       });
+       this.lazyItems = arr;
+       this.eventWasResolved = true
+     };
+
+     if (this.item.children.event) {
+       let event = new SubMenuItemsEvent(this.item.children.event, {
+         pathPrefix: this.item.path,
+         callback: eventCallbackHandler
+       }, {
+         cancelable: true,
+         composed: true,
+         bubbles: true,
        });
 
        this._host.dispatchEvent(event);
-
      }
   }
 
@@ -70,7 +78,8 @@ export class ExpandableRenderer {
 
   render() {
     return (
-      this.isClosed?null:this.lazyItems.length?this.lazyItems:<div class="menu-loader">Loading...</div>
+      this.isClosed?null:this.lazyItems.length?this.lazyItems:this.eventWasResolved?
+        <div class="menu-loader"><i class="small">No item found.</i></div>:<div class="menu-loader">Loading...</div>
     )
   }
 }

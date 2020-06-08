@@ -10,9 +10,9 @@
 | Property           | Attribute           | Description | Type            | Default     |
 | ------------------ | ------------------- | ----------- | --------------- | ----------- |
 | `active`           | `active`            |             | `boolean`       | `undefined` |
-| `event`            | `event`             |             | `string`        | `undefined` |
 | `firstMenuChild`   | `first-menu-child`  |             | `any`           | `undefined` |
 | `history`          | --                  |             | `RouterHistory` | `undefined` |
+| `item`             | `item`              |             | `any`           | `undefined` |
 | `somethingChanged` | `something-changed` |             | `boolean`       | `false`     |
 | `url`              | `url`               |             | `any`           | `undefined` |
 

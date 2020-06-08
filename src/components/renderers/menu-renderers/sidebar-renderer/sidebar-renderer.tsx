@@ -43,7 +43,7 @@ export class SidebarRenderer {
 
 
     if (item.children && item.children.type === "event") {
-      return <event-expandable-renderer event={item.children.event}>
+      return <event-expandable-renderer item={item}>
         {innerContent}
       </event-expandable-renderer>
     }
