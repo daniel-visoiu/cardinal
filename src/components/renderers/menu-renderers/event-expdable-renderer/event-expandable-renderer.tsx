@@ -78,8 +78,11 @@ export class ExpandableRenderer {
 
   render() {
     return (
-      this.isClosed?null:this.lazyItems.length?this.lazyItems:this.eventWasResolved?
-        <div class="menu-loader"><i class="small">No item found.</i></div>:<div class="menu-loader">Loading...</div>
+      <div class="children">
+        {this.isClosed?null:this.lazyItems.length?this.lazyItems:this.eventWasResolved?
+        <div class="menu-loader"><i class="small">No item found.</i></div>:<div class="menu-loader">Loading...</div>}
+      </div>
+
     )
   }
 }

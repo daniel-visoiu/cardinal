@@ -36,7 +36,7 @@ export class SidebarRenderer {
           <span class="item_name">{item.name}</span>}
         {item.children ? <span class="fa fa-caret-right expand-menu"></span> : null}
       </div>
-      {item.children ? <div class="children">
+      {item.children && item.children.type === "known" ? <div class="children">
         {children}
       </div> : null}
     </div>);
