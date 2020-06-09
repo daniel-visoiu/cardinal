@@ -1,10 +1,10 @@
-import {Component, h, Prop, State, Element} from '@stencil/core';
-import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
+import {Component, h, Prop, State, Element, Watch} from '@stencil/core';
+import {TableOfContentProperty} from '../../decorators/TableOfContentProperty';
 import {MatchResults, RouterHistory} from "@stencil/router";
 import {BindModel} from "../../decorators/BindModel";
 import CustomTheme from "../../decorators/CustomTheme";
 
-const APPS_FOLDER="/apps";
+const APPS_FOLDER = "/apps";
 
 @Component({
   tag: 'psk-ssapp',
@@ -35,35 +35,75 @@ export class PskSelfSovereignApp {
   })
   @Prop() landingPath: string;
   @State() digestSeedHex;
-  @State() seed;
   @Element() element;
+
+  private seed;
+  private applicationName;
+  private eventHandler;
 
   onServiceWorkerMessageHandler: (e) => void;
 
-  constructor(){
-    if(this.match && this.match.params && this.match.params.appName){
-      this.appName = this.match.params.appName;
+  hasRelevantMatchParams() {
+    return this.match && this.match.params && this.match.params.appName;
+  }
+
+  @Watch("appName")
+  @Watch("match")
+  loadApp(callback?) {
+
+    if (this.hasRelevantMatchParams()) {
+      this.applicationName = this.match.params.appName;
+    }
+    else {
+      this.applicationName = this.appName;
+    }
+
+
+    this.getAppSeed((err, seed) => {
+      if (err) {
+        throw err;
+      }
+      this.seed = seed;
+
+      this.digestSeedHex = this.digestMessage(seed);
+      if (typeof callback === "function") {
+        callback();
+      }
+    })
+  };
+
+  componentShouldUpdate(newValue, oldValue, changedState) {
+    if (newValue !== oldValue && changedState === "digestSeedHex") {
+      window.document.removeEventListener(oldValue, this.eventHandler);
+      window.document.addEventListener(newValue, this.eventHandler);
+      return true;
+    }
+    return false;
+  }
+
+
+  ssappEventHandler(e) {
+
+    const data = e.detail || {};
+   let iframe = this.element.querySelector("iframe");
+
+    if (data.query === 'seed') {
+      iframe.contentWindow.document.dispatchEvent(new CustomEvent(this.digestSeedHex, {
+        detail: {
+          seed: this.seed
+        }
+      }));
+      return;
+    }
+
+    if (data.status === 'completed') {
+      iframe.contentWindow.location.reload();
     }
   }
 
   componentDidLoad() {
-    let iframe = this.element.querySelector("iframe");
-    window.document.addEventListener(this.digestSeedHex, (e) => {
-      const data = e.detail || {};
-
-      if (data.query === 'seed') {
-        iframe.contentWindow.document.dispatchEvent(new CustomEvent(this.digestSeedHex, {
-          detail: {
-            seed: this.seed
-          }
-        }));
-        return;
-      }
-
-      if (data.status === 'completed') {
-        iframe.contentWindow.location.reload();
-      }
-    }, true);
+    this.eventHandler = this.ssappEventHandler.bind(this);
+    window.document.addEventListener(this.digestSeedHex, this.eventHandler);
   }
 
   getSWOnMessageHandler() {
@@ -108,32 +148,25 @@ export class PskSelfSovereignApp {
     });
   }
 
-  getAppSeed(callback){
+  getAppSeed(callback) {
     this.getManifest((err, manifest) => {
       if (err) {
         throw err;
       }
       if (manifest.mounts) {
         for (let mount in manifest.mounts) {
-          if (mount === APPS_FOLDER+"/"+this.appName) {
+          if (mount === APPS_FOLDER + "/" + this.applicationName) {
             return callback(undefined, manifest.mounts[mount]);
           }
         }
       }
-      callback(new Error("No seed for app "+this.appName));
+      callback(new Error("No seed for app " + this.applicationName));
     })
   }
 
-  componentWillLoad():Promise<any> {
+  componentWillLoad(): Promise<any> {
     return new Promise((resolve) => {
-      this.getAppSeed((err, seed) => {
-        if (err) {
-          throw err;
-        }
-        this.seed = seed;
-        this.digestSeedHex = this.digestMessage(seed);
-        resolve();
-      })
+      this.loadApp(resolve)
     });
   }
 
