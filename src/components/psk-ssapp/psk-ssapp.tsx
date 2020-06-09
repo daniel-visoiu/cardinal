@@ -2,6 +2,7 @@ import {Component, h, Prop, State, Element} from '@stencil/core';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import {MatchResults, RouterHistory} from "@stencil/router";
 import {BindModel} from "../../decorators/BindModel";
+import CustomTheme from "../../decorators/CustomTheme";
 
 const APPS_FOLDER="/apps";
 
@@ -13,6 +14,8 @@ const APPS_FOLDER="/apps";
 export class PskSelfSovereignApp {
 
   @BindModel() modelHandler;
+
+  @CustomTheme()
 
   @TableOfContentProperty({
     isMandatory: true,
