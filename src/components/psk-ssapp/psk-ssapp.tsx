@@ -5,7 +5,7 @@ import {MatchResults, RouterHistory} from "@stencil/router";
 const APPS_FOLDER="/apps";
 
 @Component({
-  tag: 'psk-ss-app',
+  tag: 'psk-ssapp',
   shadow: false
 })
 
