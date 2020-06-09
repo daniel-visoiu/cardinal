@@ -130,13 +130,18 @@ export function BindModel() {
       let element: HTMLElement = getElement(self);
 
       let callComponentWillLoad = (promise?) => {
-        if (!promise) {
-          promise = Promise.resolve();
+
+        if(!promise){
+          return componentWillLoad && componentWillLoad.call(self);
         }
-        promise.then(() => {
-          return componentWillLoad && componentWillLoad.call(self)
-        });
-        return promise;
+
+        else{
+          return new Promise((resolve => {
+            promise.then(() => {
+              resolve(componentWillLoad && componentWillLoad.call(self))
+            });
+          }));
+        }
       };
 
       if (element.isConnected) {
