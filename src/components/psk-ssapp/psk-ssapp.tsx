@@ -1,6 +1,7 @@
 import {Component, h, Prop, State, Element} from '@stencil/core';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import {MatchResults, RouterHistory} from "@stencil/router";
+import {BindModel} from "../../decorators/BindModel";
 
 const APPS_FOLDER="/apps";
 
@@ -10,6 +11,8 @@ const APPS_FOLDER="/apps";
 })
 
 export class PskSelfSovereignApp {
+
+  @BindModel() modelHandler;
 
   @TableOfContentProperty({
     isMandatory: true,
@@ -118,7 +121,7 @@ export class PskSelfSovereignApp {
     })
   }
 
-  componentWillLoad() {
+  componentWillLoad():Promise<any> {
     return new Promise((resolve) => {
       this.getAppSeed((err, seed) => {
         if (err) {
