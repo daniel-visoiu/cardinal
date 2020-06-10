@@ -39,7 +39,7 @@ export class PskDateInput {
         if(this.dataFormat){
             this.dataDate=this.changeDateFormat(value,this.dataFormat)
         }
-        this.modelHandler.updateModel('value', this.dataDate);
+        this.modelHandler.updateModel('value', this.dataDate ? this.dataDate : value);
     };
 
     changeDateFormat = (value,format) => {
