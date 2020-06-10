@@ -25,9 +25,9 @@ export namespace Components {
     }
     interface EventExpandableRenderer {
         "active": boolean;
-        "event": string;
         "firstMenuChild": any;
         "history": RouterHistory;
+        "item": any;
         "somethingChanged": boolean;
         "url": any;
     }
@@ -50,7 +50,7 @@ export namespace Components {
     }
     interface PskAttachmentsList {
         "attachmentsClass": string;
-        "files": any[];
+        "files": any;
         "removeFileFromList"?: Function;
     }
     interface PskButton {
@@ -322,7 +322,7 @@ export namespace Components {
         "title": string;
         "visibleSeconds": number;
     }
-    interface PskSsApp {
+    interface PskSsapp {
         "appName": string;
         "history": RouterHistory;
         "landingPath": string;
@@ -786,11 +786,11 @@ declare global {
         prototype: HTMLPskSlideshowElement;
         new (): HTMLPskSlideshowElement;
     };
-    interface HTMLPskSsAppElement extends Components.PskSsApp, HTMLStencilElement {
+    interface HTMLPskSsappElement extends Components.PskSsapp, HTMLStencilElement {
     }
-    var HTMLPskSsAppElement: {
-        prototype: HTMLPskSsAppElement;
-        new (): HTMLPskSsAppElement;
+    var HTMLPskSsappElement: {
+        prototype: HTMLPskSsappElement;
+        new (): HTMLPskSsappElement;
     };
     interface HTMLPskStepperElement extends Components.PskStepper, HTMLStencilElement {
     }
@@ -953,7 +953,7 @@ declare global {
         "psk-route-redirect": HTMLPskRouteRedirectElement;
         "psk-select": HTMLPskSelectElement;
         "psk-slideshow": HTMLPskSlideshowElement;
-        "psk-ss-app": HTMLPskSsAppElement;
+        "psk-ssapp": HTMLPskSsappElement;
         "psk-stepper": HTMLPskStepperElement;
         "psk-stepper-renderer": HTMLPskStepperRendererElement;
         "psk-switch-button": HTMLPskSwitchButtonElement;
@@ -990,9 +990,9 @@ declare namespace LocalJSX {
     }
     interface EventExpandableRenderer {
         "active"?: boolean;
-        "event"?: string;
         "firstMenuChild"?: any;
         "history"?: RouterHistory;
+        "item"?: any;
         "somethingChanged"?: boolean;
         "url"?: any;
     }
@@ -1019,7 +1019,7 @@ declare namespace LocalJSX {
     }
     interface PskAttachmentsList {
         "attachmentsClass"?: string;
-        "files"?: any[];
+        "files"?: any;
         "removeFileFromList"?: Function;
     }
     interface PskButton {
@@ -1304,12 +1304,11 @@ declare namespace LocalJSX {
         "title"?: string;
         "visibleSeconds"?: number;
     }
-    interface PskSsApp {
+    interface PskSsapp {
         "appName"?: string;
         "history"?: RouterHistory;
         "landingPath"?: string;
         "match"?: MatchResults;
-        "onGiveMeSeed"?: (event: CustomEvent<any>) => void;
     }
     interface PskStepper {
         "activeStep"?: WizardStep;
@@ -1484,7 +1483,7 @@ declare namespace LocalJSX {
         "psk-route-redirect": PskRouteRedirect;
         "psk-select": PskSelect;
         "psk-slideshow": PskSlideshow;
-        "psk-ss-app": PskSsApp;
+        "psk-ssapp": PskSsapp;
         "psk-stepper": PskStepper;
         "psk-stepper-renderer": PskStepperRenderer;
         "psk-switch-button": PskSwitchButton;
@@ -1566,7 +1565,7 @@ declare module "@stencil/core" {
             "psk-route-redirect": LocalJSX.PskRouteRedirect & JSXBase.HTMLAttributes<HTMLPskRouteRedirectElement>;
             "psk-select": LocalJSX.PskSelect & JSXBase.HTMLAttributes<HTMLPskSelectElement>;
             "psk-slideshow": LocalJSX.PskSlideshow & JSXBase.HTMLAttributes<HTMLPskSlideshowElement>;
-            "psk-ss-app": LocalJSX.PskSsApp & JSXBase.HTMLAttributes<HTMLPskSsAppElement>;
+            "psk-ssapp": LocalJSX.PskSsapp & JSXBase.HTMLAttributes<HTMLPskSsappElement>;
             "psk-stepper": LocalJSX.PskStepper & JSXBase.HTMLAttributes<HTMLPskStepperElement>;
             "psk-stepper-renderer": LocalJSX.PskStepperRenderer & JSXBase.HTMLAttributes<HTMLPskStepperRendererElement>;
             "psk-switch-button": LocalJSX.PskSwitchButton & JSXBase.HTMLAttributes<HTMLPskSwitchButtonElement>;

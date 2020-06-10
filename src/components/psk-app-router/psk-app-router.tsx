@@ -133,7 +133,7 @@ export class PskAppRouter {
 
         if(item.children){
           if (item.children.type === "event") {
-            return <stencil-route url={`${item.path}/:${item.propName}`} component={item.component}/>
+            return <stencil-route url={`${item.path}/:${item.propName}`} exact={true} component={item.component}/>
           }
 
           return this.renderItems(item.children.items)

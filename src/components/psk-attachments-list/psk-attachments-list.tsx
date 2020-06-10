@@ -25,7 +25,7 @@ export class PskAttachmentsList {
 		isMandatory: true,
 		propertyType: 'array of WgFile items (WgFile[])'
 	})
-	@Prop() files: any[] = [];
+	@Prop() files;
 
 	@TableOfContentProperty({
 		description: `If this property is given to the component, then a red X will be displayed on the right of each file card giving the possibility to remove the file (this functionality should be implemented by the programmer providing him the possibility to have custom behavior before the deletion of the file).`,
