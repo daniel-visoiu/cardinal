@@ -75,18 +75,13 @@ export class PskForEach {
             console.log(err);
           }
           this.model = model;
+          this.model.onChange(this.chain, () => {
+            this.modelChanged = !this.modelChanged;
+          });
           resolve();
         }
       })
     });
-  }
-
-  componentDidLoad() {
-    if (this.model) {
-      this.model.onChange(this.chain, () => {
-        this.modelChanged = !this.modelChanged;
-      });
-    }
   }
 
   render() {
