@@ -1,12 +1,19 @@
-function registerPowerCord(identity){
-  //powercord to communicate with the iframe
-  //$$.swarmEngine.plug(identity, pc);
+function registerPowerCord(identity, reference){
+  //power cord to communicate with the iframe in which SSApp is loaded
+  let PowerCord = require("swarm-engine").SSAppPowerCord;
+  let pc = new PowerCord(reference);
+  $$.swarmEngine.plug(identity, pc);
+}
+
+function getIdentityFromSSAppName(ssappName){
+  //todo: build a power cord identity based on ssappName
+  return ssappName;
 }
 
 class SSAppInstancesRegistry {
-  registry = [];
 
   constructor(){
+    this.registry = [];
     if(typeof $$.flows === "undefined"){
       require('callflow').initialise();
     }
@@ -15,12 +22,12 @@ class SSAppInstancesRegistry {
   }
 
   addSSAppReference(ssappName, reference) {
+    console.log("registering ssapp", ssappName, reference);
     if (typeof this.registry[ssappName] !== "undefined" && this.registry[ssappName] !== reference) {
       //todo: what should do when this happens
       console.log("Replacing a reference.");
     }else{
-      //todo: build a powercord identity based on ssappName
-      //registerPowerCord();
+      registerPowerCord(getIdentityFromSSAppName(ssappName), reference);
     }
     this.registry[ssappName] = reference;
   }
@@ -30,6 +37,7 @@ class SSAppInstancesRegistry {
       return;
     }
     delete this.registry[ssappName];
+    $$.swarmEngine.unplug(getIdentityFromSSAppName(ssappName));
   }
 
   getSSAppReference(ssappName) {

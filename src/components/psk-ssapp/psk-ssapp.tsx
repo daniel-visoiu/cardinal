@@ -3,6 +3,7 @@ import {TableOfContentProperty} from '../../decorators/TableOfContentProperty';
 import {MatchResults, RouterHistory} from "@stencil/router";
 import {BindModel} from "../../decorators/BindModel";
 import CustomTheme from "../../decorators/CustomTheme";
+import SSAppInstanceRegistry from "./SSAppInstancesRegistry.js";
 
 const APPS_FOLDER = "/apps";
 
@@ -85,7 +86,7 @@ export class PskSelfSovereignApp {
   ssappEventHandler(e) {
 
     const data = e.detail || {};
-   let iframe = this.element.querySelector("iframe");
+    let iframe = this.element.querySelector("iframe");
 
     if (data.query === 'seed') {
       iframe.contentWindow.document.dispatchEvent(new CustomEvent(this.digestSeedHex, {
@@ -102,6 +103,11 @@ export class PskSelfSovereignApp {
   }
 
   componentDidLoad() {
+
+    let iframe = this.element.querySelector("iframe");
+    console.log("#### Trying to register ssapp reference");
+    SSAppInstanceRegistry.getInstance().addSSAppReference(this.applicationName, iframe);
+
     this.eventHandler = this.ssappEventHandler.bind(this);
     window.document.addEventListener(this.digestSeedHex, this.eventHandler);
   }
