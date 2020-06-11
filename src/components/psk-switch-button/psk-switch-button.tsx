@@ -84,9 +84,9 @@ export class PskSwitchButton {
 
 	render() {
 		let switchButton =
-			<div class="status-container" onClick={this.clickHandler.bind(this)}>
+			<div class="status-container" >
 				<h5>{this.title}</h5>
-				<psk-grid class="two-options-container"
+				<psk-grid class="two-options-container" onClick={this.clickHandler.bind(this)}
 					columns={2}
 					layout="xs=[6,6] s=[6,6] m=[6,6] l=[6,6]">
 					<div class={`switch-item ${this.closed ? "" : "selected"}`}>
