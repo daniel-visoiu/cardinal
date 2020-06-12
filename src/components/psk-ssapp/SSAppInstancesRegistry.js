@@ -1,7 +1,7 @@
 function registerPowerCord(identity, reference){
   //power cord to communicate with the iframe in which SSApp is loaded
   let PowerCord = require("swarm-engine").SSAppPowerCord;
-  let pc = new PowerCord(reference);
+  let pc = new PowerCord(reference.contentWindow);
   $$.swarmEngine.plug(identity, pc);
 }
 
@@ -17,8 +17,13 @@ class SSAppInstancesRegistry {
     if(typeof $$.flows === "undefined"){
       require('callflow').initialise();
     }
-    const se = require("swarm-engine");
-    se.initialise("wallet");
+    if(typeof $$.swarms === "undefined"){
+      const se = require("swarm-engine");
+      se.initialise("wallet");
+    }else{
+      //this should force an error and help identify misuse of swarm engine
+      $$.swarmEngine.updateIdentity("wallet");
+    }
   }
 
   addSSAppReference(ssappName, reference) {

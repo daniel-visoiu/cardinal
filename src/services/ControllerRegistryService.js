@@ -24,7 +24,15 @@ class ControllerRegistryService {
             if (this.controllers[controllerName]) {
                 resolve(this.controllers[controllerName]);
             } else {
-                import (`${window.basePath}scripts/controllers/${controllerName}.js`)
+                let resourcePath = `scripts/controllers/${controllerName}.js`;
+                if(typeof window.basePath !== "undefined"){
+                    let sep = "/";
+                    if(window.basePath[window.basePath.length-1] ===sep){
+                        sep = "";
+                    }
+                    resourcePath = window.basePath+sep+resourcePath;
+                }
+                import (resourcePath)
                 .then((module) => {
                     resolve(module.default || module);
                 }).catch(reject);
