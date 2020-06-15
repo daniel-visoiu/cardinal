@@ -17,7 +17,7 @@ export class PskTextArea {
             : this.invalidValue ? 'is-invalid' : 'is-valid';
         return (
             <div class={`form-group`}>
-                {this.label && <psk-label for={this.name} label-value={this.label} />}
+                {this.label && <psk-label for={this.name} label={this.label} />}
 
                 <textarea
                     name={this.name}
@@ -39,7 +39,7 @@ export class PskTextArea {
     };
 
     @TableOfContentProperty({
-        description: [`By filling out this property, the component will display above it, a label using <psk-link page="forms/psk-label">psk-label</psk-link> component.`],
+        description: [`By filling out this property, the component will display above it, a label using <psk-link tag="psk-label">psk-label</psk-link> component.`],
         isMandatory: false,
         propertyType: 'string',
         specialNote: `If this property is not provided, the component will be displayed without any label`
@@ -48,7 +48,7 @@ export class PskTextArea {
 
     @TableOfContentProperty({
         description: [`Specifies the value of an psk-textarea component.`,
-            `This value is updated also in the model using the two-way binding. Information about two-way binding using models and templates can be found at: <psk-link page="forms/using-forms">Using forms</psk-link>.`],
+            `This value is updated also in the model using the two-way binding. Information about two-way binding using models and templates can be found at: <psk-link tag="using-forms">Using forms</psk-link>.`],
         isMandatory: false,
         propertyType: 'string'
     })
@@ -62,14 +62,14 @@ export class PskTextArea {
     @Prop() name?: string | null = null;
 
     @TableOfContentProperty({
-        description: [`Specifies a short hint that describes the expected value of an psk-textarea component`],
+        description: [`Specifies a short hint that describes the expected value of the psk-textarea component`],
         isMandatory: false,
         propertyType: 'string'
     })
     @Prop() placeholder?: string | null = null;
 
     @TableOfContentProperty({
-        description: [`Specifies that an input field must be filled out before submitting the form.`,
+        description: [`Specifies that the textarea field must be filled out before submitting the form.`,
             `Accepted values: "true" and "false"`],
         isMandatory: false,
         propertyType: 'boolean'
@@ -77,7 +77,7 @@ export class PskTextArea {
     @Prop() required?: boolean = false;
 
     @TableOfContentProperty({
-        description: [`	Specifies that an input field is read-only.`,
+        description: [`	Specifies that the textarea input field is read-only.`,
             `Accepted values: "true" and "false"`],
         isMandatory: false,
         propertyType: 'boolean'
