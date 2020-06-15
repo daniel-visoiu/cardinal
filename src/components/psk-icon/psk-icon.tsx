@@ -6,8 +6,8 @@ import { BindModel } from "../../decorators/BindModel";
 @Component({
     tag: "psk-icon",
     styleUrls: [
-      "../../../themes/commons/fonts/font-awesome.min.css",
-      "../../../themes/commons/bootstrap/css/bootstrap.min.css"],
+        "../../../themes/commons/fonts/font-awesome.min.css",
+        "../../../themes/commons/bootstrap/css/bootstrap.min.css"],
 })
 export class PskIcon {
     @CustomTheme()
@@ -35,13 +35,9 @@ export class PskIcon {
     @TableOfContentProperty({
         isMandatory: false,
         propertyType: 'string',
-        description: [
-            'This property gives the color of the icon. ',
-            'If this property is not given, blue color (rgba(0, 0, 255, 1)) is assumed'
-        ],
-        defaultValue: 'rgba(0, 0, 255, 1)'
+        description: ['This property gives the color of the icon. ']
     })
-    @Prop() color?: string = 'rgba(0, 0, 255, 1)';
+    @Prop() color?: string | null;
 
     @TableOfContentProperty({
         isMandatory: false,

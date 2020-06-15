@@ -29,6 +29,8 @@
 ```mermaid
 graph TD;
   psk-pin-popup --> psk-modal
+  psk-modal --> psk-condition
+  psk-modal --> psk-icon
   style psk-pin-popup fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

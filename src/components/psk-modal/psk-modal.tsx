@@ -18,6 +18,15 @@ export class PskModal {
 	@Element() private _host: HTMLElement;
 
 	render() {
+		const expandCollapseIcon = (this.expanded === 'true' || this.expanded === 'false') && (
+			<button class='expand' onClick={this._expandModalHandler}>
+				<psk-condition condition={this.expanded}>
+					<psk-icon slot='condition-true' class='expand-icon' icon='compress'></psk-icon>
+					<psk-icon slot='condition-false' class='expand-icon' icon='expand'></psk-icon>
+				</psk-condition>
+			</button>
+		);
+
 		return (
 			<div>
 				<div id="backdrop" onClick={this._closeModalHandler} />
@@ -25,14 +34,21 @@ export class PskModal {
 					<div class="modal-content">
 						<div class="modal-header">
 							<slot name="title" />
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true"
-									onClick={this._closeModalHandler}>&times;</span>
-							</button>
+							<div class='toolbar'>
+								{expandCollapseIcon}
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true"
+										onClick={this._closeModalHandler}>&times;</span>
+								</button>
+							</div>
 						</div>
 
 						<div class="modal-body">
 							<slot />
+						</div>
+
+						<div class="modal-footer">
+							<slot name='footer' />
 						</div>
 					</div>
 				</div>
@@ -55,7 +71,13 @@ export class PskModal {
 		} else {
 			this.closeModal.emit();
 		}
+	}
 
+	_expandModalHandler = (evt: MouseEvent) => {
+		evt.preventDefault();
+		evt.stopImmediatePropagation();
+
+		this.expanded = this.expanded === 'true' ? 'false' : 'true';
 	}
 
 	@TableOfContentProperty({
@@ -83,4 +105,14 @@ export class PskModal {
 		propertyType: 'string'
 	})
 	@Prop() eventName: string | null;
+
+	@TableOfContentProperty({
+		description: ['By defining this attribute, the component will be able to expose the functionality to expand and collapse the modal.'],
+		isMandatory: false,
+		propertyType: 'string'
+	})
+	@Prop({
+		reflect: true,
+		mutable: true
+	}) expanded: string | null;
 }

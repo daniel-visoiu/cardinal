@@ -5,12 +5,12 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { MenuItem, } from "./interfaces/MenuItem";
-import { ExtendedHistoryType, } from "./interfaces/ExtendedHistoryType";
-import { LocationSegments, MatchResults, RouterHistory, } from "@stencil/router";
-import { StyleCustomisation, } from "./interfaces/StyleCustomisation";
-import { SelectType, } from "./interfaces/FormModel";
-import { WizardStep, } from "./interfaces/Wizard";
+import { MenuItem } from "./interfaces/MenuItem";
+import { ExtendedHistoryType } from "./interfaces/ExtendedHistoryType";
+import { LocationSegments, MatchResults, RouterHistory } from "@stencil/router";
+import { StyleCustomisation } from "./interfaces/StyleCustomisation";
+import { SelectType } from "./interfaces/FormModel";
+import { WizardStep } from "./interfaces/Wizard";
 export namespace Components {
     interface AppMenu {
         "hamburgerMaxWidth"?: number;
@@ -171,7 +171,7 @@ export namespace Components {
     }
     interface PskIcon {
         "classes"?: string | null;
-        "color"?: string;
+        "color"?: string | null;
         "disableColor"?: boolean;
         "icon": string | null;
     }
@@ -230,6 +230,10 @@ export namespace Components {
         "timeAlive"?: number;
         "toastRenderer"?: string;
     }
+    interface PskLiveCode {
+        "language": string;
+        "value": string;
+    }
     interface PskLoadPlaceholder {
     }
     interface PskMenuItemRenderer {
@@ -239,6 +243,7 @@ export namespace Components {
     }
     interface PskModal {
         "eventName": string | null;
+        "expanded": string | null;
         "opened": boolean;
     }
     interface PskNumberInput {
@@ -690,6 +695,12 @@ declare global {
         prototype: HTMLPskListFeedbacksElement;
         new (): HTMLPskListFeedbacksElement;
     };
+    interface HTMLPskLiveCodeElement extends Components.PskLiveCode, HTMLStencilElement {
+    }
+    var HTMLPskLiveCodeElement: {
+        prototype: HTMLPskLiveCodeElement;
+        new (): HTMLPskLiveCodeElement;
+    };
     interface HTMLPskLoadPlaceholderElement extends Components.PskLoadPlaceholder, HTMLStencilElement {
     }
     var HTMLPskLoadPlaceholderElement: {
@@ -937,6 +948,7 @@ declare global {
         "psk-link": HTMLPskLinkElement;
         "psk-list": HTMLPskListElement;
         "psk-list-feedbacks": HTMLPskListFeedbacksElement;
+        "psk-live-code": HTMLPskLiveCodeElement;
         "psk-load-placeholder": HTMLPskLoadPlaceholderElement;
         "psk-menu-item-renderer": HTMLPskMenuItemRendererElement;
         "psk-modal": HTMLPskModalElement;
@@ -1146,7 +1158,7 @@ declare namespace LocalJSX {
     }
     interface PskIcon {
         "classes"?: string | null;
-        "color"?: string;
+        "color"?: string | null;
         "disableColor"?: boolean;
         "icon"?: string | null;
     }
@@ -1208,6 +1220,10 @@ declare namespace LocalJSX {
         "timeAlive"?: number;
         "toastRenderer"?: string;
     }
+    interface PskLiveCode {
+        "language"?: string;
+        "value"?: string;
+    }
     interface PskLoadPlaceholder {
     }
     interface PskMenuItemRenderer {
@@ -1218,6 +1234,7 @@ declare namespace LocalJSX {
     }
     interface PskModal {
         "eventName"?: string | null;
+        "expanded"?: string | null;
         "onCloseModal"?: (event: CustomEvent<any>) => void;
         "opened"?: boolean;
     }
@@ -1467,6 +1484,7 @@ declare namespace LocalJSX {
         "psk-link": PskLink;
         "psk-list": PskList;
         "psk-list-feedbacks": PskListFeedbacks;
+        "psk-live-code": PskLiveCode;
         "psk-load-placeholder": PskLoadPlaceholder;
         "psk-menu-item-renderer": PskMenuItemRenderer;
         "psk-modal": PskModal;
@@ -1549,6 +1567,7 @@ declare module "@stencil/core" {
             "psk-link": LocalJSX.PskLink & JSXBase.HTMLAttributes<HTMLPskLinkElement>;
             "psk-list": LocalJSX.PskList & JSXBase.HTMLAttributes<HTMLPskListElement>;
             "psk-list-feedbacks": LocalJSX.PskListFeedbacks & JSXBase.HTMLAttributes<HTMLPskListFeedbacksElement>;
+            "psk-live-code": LocalJSX.PskLiveCode & JSXBase.HTMLAttributes<HTMLPskLiveCodeElement>;
             "psk-load-placeholder": LocalJSX.PskLoadPlaceholder & JSXBase.HTMLAttributes<HTMLPskLoadPlaceholderElement>;
             "psk-menu-item-renderer": LocalJSX.PskMenuItemRenderer & JSXBase.HTMLAttributes<HTMLPskMenuItemRendererElement>;
             "psk-modal": LocalJSX.PskModal & JSXBase.HTMLAttributes<HTMLPskModalElement>;
