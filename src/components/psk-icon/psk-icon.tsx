@@ -35,7 +35,7 @@ export class PskIcon {
     @TableOfContentProperty({
         isMandatory: false,
         propertyType: 'string',
-        description: ['This property gives the color of the icon. ']
+        description: ['This property gives the color of the icon.']
     })
     @Prop() color?: string | null;
 

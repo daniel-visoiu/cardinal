@@ -7,3 +7,7 @@
 .icon.disable-color {
     color: #999 !important;
 }
+
+span.icon {
+    color: rgb(0, 0, 255);
+}
