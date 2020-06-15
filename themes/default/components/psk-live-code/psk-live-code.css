@@ -1,15 +1,17 @@
-@import url(/themes/dossier-explorer/components/psk-code/psk-code.css);
+@import url(/themes/default/components/psk-code/psk-code.css);
 div.prism-live {
     display: flex;
     position: relative;
     box-sizing: border-box;
     flex-flow: column;
-    width: 80vw;
-    height: 80vh;
+    height: 30vh;
 }
 
 textarea.prism-live {
     position: absolute;
+    padding-left: 30px;
+    padding-bottom: 0;
+    margin-bottom: 1em;
     top: 0;
     left: 0;
     height: 100%;
@@ -60,7 +62,7 @@ pre.prism-live {
     position: relative;
     pointer-events: none;
     overflow: hidden;
-    max-height: 100%;
+    margin: 0;
 }
 
 pre.prism-live>code:empty::before {

@@ -6,6 +6,7 @@ import Prism from 'prismjs';
 import PrismLiveEditor from '../../libs/prismLive.js';
 import { BindModel } from '../../decorators/BindModel.js';
 import CustomTheme from '../../decorators/CustomTheme.js';
+import { TableOfContentProperty } from '../../decorators/TableOfContentProperty.js';
 
 @Component({
 	tag: 'psk-live-code',
@@ -15,7 +16,19 @@ export class PskLiveCode {
 	@CustomTheme()
 	@BindModel() modelHandler;
 
-	@Prop() value: string;
+	@TableOfContentProperty({
+		description: 'This property provides the source code to be edited and can be updated to a defined model.',
+		isMandatory: false,
+		propertyType: 'string'
+	})
+	@Prop() value: string = '';
+
+	@TableOfContentProperty({
+		description: `This property is setting the language of the code snippet. Supported values are: markup (xml, html), javascript, css`,
+		isMandatory: false,
+		propertyType: `string`,
+		defaultValue: 'markup'
+	})
 	@Prop() language: string = 'markup';
 
 	@Element() private _hostElement: HTMLElement;

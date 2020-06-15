@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property   | Attribute  | Description | Type     | Default     |
-| ---------- | ---------- | ----------- | -------- | ----------- |
-| `language` | `language` |             | `string` | `'markup'`  |
-| `value`    | `value`    |             | `string` | `undefined` |
+| Property   | Attribute  | Description | Type     | Default    |
+| ---------- | ---------- | ----------- | -------- | ---------- |
+| `language` | `language` |             | `string` | `'markup'` |
+| `value`    | `value`    |             | `string` | `''`       |
 
 
 ----------------------------------------------
