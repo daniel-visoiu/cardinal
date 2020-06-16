@@ -11,7 +11,6 @@
 | ---------------- | ------------------ | ------------------------------------------------------------------------- | --------- | ----------- |
 | `dataDate`       | `data-date`        |                                                                           | `string`  | `undefined` |
 | `dataDateFormat` | `data-date-format` |                                                                           | `string`  | `null`      |
-| `dateClass`      | `date-class`       |                                                                           | `string`  | `undefined` |
 | `invalidValue`   | `invalid-value`    |                                                                           | `boolean` | `null`      |
 | `label`          | `label`            |                                                                           | `string`  | `null`      |
 | `name`           | `name`             |                                                                           | `string`  | `null`      |

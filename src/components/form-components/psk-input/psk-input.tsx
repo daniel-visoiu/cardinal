@@ -8,7 +8,6 @@ import CustomTheme from '../../../decorators/CustomTheme';
 })
 export class PskInput {
 
-	@Prop() dateClass? : string
 	@Prop() dataDate? : string
 	@CustomTheme()
 
@@ -28,10 +27,8 @@ export class PskInput {
 				<input
 					type={this.type}
 					value={this.value}
-					data-date= {this.dataDate}
 					name={inputName}
-					data-date-format={this.dataDateFormat}
-					class={`form-control ${invalidClass} ${this.dateClass ? this.dateClass : null}`}
+					class={`form-control ${invalidClass}`}
 					placeholder={this.placeholder}
 					required={this.required}
 					readOnly={this.readOnly}
