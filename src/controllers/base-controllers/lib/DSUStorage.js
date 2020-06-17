@@ -29,23 +29,50 @@ function doUpload(url, data, callback) {
         } else if (typeof data === 'object') {
           errorMessage = data.message ? data.message : JSON.stringify(data);
         }
-        throw new Error(`Upload request failed. ${errorMessage}`);
+
+        let error = new Error(errorMessage);
+        error.data = data;
+        throw error;
       }
 
       if (Array.isArray(data)) {
+        let responses = [];
         for (const item of data) {
-          if (item.error) {
-            throw new Error(`Unable to upload ${item.file.name} due to an error. Code: ${item.error.code}. Message: ${item.error.message}`);
-          }
-
           console.log(`Uploaded ${item.file.name} to ${item.result.path}`);
-          callback(undefined, item.result.path);
+          responses.push(item.result.path);
         }
+        callback(undefined, responses.length > 1 ? responses : responses[0]);
       }
     });
   }).catch((err) => {
     return callback(err);
   });
+}
+
+function doFileUpload(path, files, options, callback){
+  if(typeof options === "function"){
+    callback = options;
+    options = undefined;
+  }
+
+  const formData = new FormData();
+  let inputType = "file";
+
+  if (Array.isArray(files)) {
+    for (const attachment of files) {
+      inputType = "files[]";
+      formData.append(inputType, attachment);
+    }
+  }
+  else {
+    formData.append(inputType, files);
+  }
+
+  let url = `/upload?path=${path}&input=${inputType}`;
+  if (typeof options !== "undefined" && options.preventOverwrite) {
+    url += "&preventOverwrite=true";
+  }
+  doUpload(url, formData, callback);
 }
 
 class DSUStorage {
@@ -84,6 +111,14 @@ class DSUStorage {
 
     url = "/download" + url;
     doDownload(url, expectedResultType, callback);
+  }
+
+  uploadFile(path, file, options, callback){
+    doFileUpload(...arguments);
+  }
+
+  uploadMultipleFiles(path, files, options, callback){
+    doFileUpload(...arguments);
   }
 }
 
