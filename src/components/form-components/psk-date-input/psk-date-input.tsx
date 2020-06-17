@@ -8,7 +8,7 @@ import CustomTheme from '../../../decorators/CustomTheme';
 export class PskDateInput {
     
     @State() dataDate?: any
-    
+
     @CustomTheme()
 
     @BindModel() modelHandler;
@@ -18,59 +18,82 @@ export class PskDateInput {
             type="date"
             label={this.label}
             name={this.name}
-            value={this.value}
-            dataDate={this.dataDate}
+            value={ this.timestamp ? this.dataDate : this.value}
             placeholder={this.placeholder}
             required={this.required}
             readOnly={this.readOnly}
-            data-date={this.value}
-            dateClass={this.dataFormat ? "formated-date" : null}
-            dataDateFormat = {this.dataFormat ? this.dataFormat : null}
             invalidValue={this.invalidValue}
             specificProps={{
                 onKeyUp: this.__inputHandler.bind(this),
-                onChange: this.__inputHandler.bind(this)
+                onChange: this.__inputHandler.bind(this),
+                "data-date": this.dataDate,
+                class : this.dataFormat ? "form-control formated-date" : 'form-control',
+                "data-date-format": this.dataFormat ? this.dataFormat : null
+
             }} />
+    }
+
+    componentWillLoad(){
+        if(this.timestamp){
+            let newDate = new Date(parseInt(this.value));
+            let utcMonth = newDate.getUTCMonth();
+            let utcDay = newDate.getUTCDay();
+
+            let month = utcMonth < 9 ? `0${utcMonth}` : utcMonth;
+            let day = utcDay < 9 ? `0${utcDay}` : utcDay;
+            this.dataDate = `${newDate.getFullYear()}-${month}-${day}`;
+        } else {
+            this.dataDate = this.value;
+        }
+        if(this.dataFormat && this.dataDate !=null){
+            this.dataDate=this.changeDateFormat(this.dataDate,this.dataFormat);
+        }
     }
 
     __inputHandler = (event) => {
         event.stopImmediatePropagation();
-        let value = event.target.value;
+        let currentDate = event.target.value;
         if(this.dataFormat){
-            this.dataDate=this.changeDateFormat(value,this.dataFormat)
+            this.dataDate=this.changeDateFormat(currentDate,this.dataFormat)
         }
-        this.modelHandler.updateModel('value', this.dataDate ? this.dataDate : value);
+
+        if(this.timestamp){
+            let newDate=this.changeDateFormat(currentDate,'MM DD YYYY');
+            this.modelHandler.updateModel('value',new Date(newDate).getTime());
+        } else {
+            this.modelHandler.updateModel('value', this.dataDate ? this.dataDate : currentDate);
+        }
     };
 
-    changeDateFormat = (value,format) => {
+    changeDateFormat = (dateToBeFormated,dateFormat) => {
         let formatedDate ="";
-        let dates = value.split("-");
-        format = format.trim();
-        let types = format.split(" ");
-        types.forEach((type,index) => {
-
-            if(type.includes("M")){
-                formatedDate +=dates[1];
-                if(index < types.length-1){
-                    formatedDate += "/"
-                }
-
-            } else if(type.includes("D")){
-                formatedDate +=dates[2];
-                if(index < types.length-1){
-                    formatedDate += "/"
-                }
-
-            } else if (type.includes("Y")){
-                formatedDate +=dates[0];
-                if(index < types.length-1){
+        let splitedDate = dateToBeFormated.split("-");
+        dateFormat = dateFormat.trim();
+        let splitedFormat = dateFormat.split(" ");
+        let dateVariables = {
+            "MM" : splitedDate[1] ,
+            "DD" : splitedDate[2] ,
+            "YYYY" : splitedDate[0]
+        }
+        splitedFormat.forEach((type,index) => {
+            if(dateVariables.hasOwnProperty(type)){
+                formatedDate +=dateVariables[type];
+                if(index < splitedFormat.length-1){
                     formatedDate += "/"
                 }
             }
-
         });
         return formatedDate
     }
+
+    @TableOfContentProperty({
+        description: [`It's role is in telling the component that the value passed on to the <code>value</code> parameter is of type timestamp.`],
+        isMandatory: false,
+        propertyType: 'any',
+        defaultValue: 'null'
+    })
+    @Prop() timestamp?: string;
+
     @TableOfContentProperty({
         description: [`By filling out this property, the component will display above it, a label using <psk-link page="forms/psk-label">psk-label</psk-link> component.`],
         isMandatory: false,
