@@ -7,12 +7,13 @@
 
 ## Properties
 
-| Property      | Attribute      | Description | Type            | Default     |
-| ------------- | -------------- | ----------- | --------------- | ----------- |
-| `appName`     | `app-name`     |             | `string`        | `undefined` |
-| `history`     | --             |             | `RouterHistory` | `undefined` |
-| `landingPath` | `landing-path` |             | `string`        | `undefined` |
-| `match`       | --             |             | `MatchResults`  | `undefined` |
+| Property         | Attribute         | Description | Type            | Default     |
+| ---------------- | ----------------- | ----------- | --------------- | ----------- |
+| `appName`        | `app-name`        |             | `string`        | `undefined` |
+| `dossierContext` | `dossier-context` |             | `any`           | `null`      |
+| `history`        | --                |             | `RouterHistory` | `undefined` |
+| `landingPath`    | `landing-path`    |             | `string`        | `undefined` |
+| `match`          | --                |             | `MatchResults`  | `undefined` |
 
 
 ----------------------------------------------

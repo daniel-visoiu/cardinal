@@ -35,12 +35,21 @@ export class PskSelfSovereignApp {
     propertyType: 'string'
   })
   @Prop() landingPath: string;
+
+  @TableOfContentProperty({
+    isMandatory: false,
+    description: `This property keeps should have 2 keys: currentDossierPath and fullPath`,
+    propertyType: 'string'
+  })
+  @Prop() dossierContext: any = null;
+
   @State() digestSeedHex;
   @Element() element;
 
   private seed;
   private applicationName;
   private eventHandler;
+  private componentInitialized = false;
 
   onServiceWorkerMessageHandler: (e) => void;
 
@@ -59,18 +68,19 @@ export class PskSelfSovereignApp {
       this.applicationName = this.appName;
     }
 
+    if(this.componentInitialized){
+      this.getAppSeed((err, seed) => {
+        if (err) {
+          throw err;
+        }
+        this.seed = seed;
 
-    this.getAppSeed((err, seed) => {
-      if (err) {
-        throw err;
-      }
-      this.seed = seed;
-
-      this.digestSeedHex = this.digestMessage(seed);
-      if (typeof callback === "function") {
-        callback();
-      }
-    })
+        this.digestSeedHex = this.digestMessage(seed);
+        if (typeof callback === "function") {
+          callback();
+        }
+      })
+    }
   };
 
   componentShouldUpdate(newValue, oldValue, changedState) {
@@ -103,7 +113,6 @@ export class PskSelfSovereignApp {
   }
 
   componentDidLoad() {
-
     let iframe = this.element.querySelector("iframe");
     console.log("#### Trying to register ssapp reference");
     SSAppInstanceRegistry.getInstance().addSSAppReference(this.applicationName, iframe);
@@ -144,8 +153,8 @@ export class PskSelfSovereignApp {
   }
 
 
-  getManifest(callback) {
-    fetch("/download/manifest").then((response) => {
+  getManifest(manifestUrl, callback) {
+    fetch(manifestUrl).then((response) => {
       response.text().then(data => {
         callback(undefined, JSON.parse(data));
       }).catch((err) => {
@@ -155,13 +164,33 @@ export class PskSelfSovereignApp {
   }
 
   getAppSeed(callback) {
-    this.getManifest((err, manifest) => {
+
+    let manifestUrl = "/download";
+    let mountingPoint = APPS_FOLDER;
+    if (this.dossierContext && this.dossierContext.fullPath && this.dossierContext.currentDossierPath) {
+      manifestUrl += `${this.dossierContext.currentDossierPath}`;
+
+      if(manifestUrl.endsWith("/")){
+        manifestUrl = manifestUrl.substr(0, manifestUrl.lastIndexOf("/"));
+      }
+
+      if (this.dossierContext.currentDossierPath !== "/") {
+        mountingPoint = this.dossierContext.fullPath.replace(this.dossierContext.currentDossierPath, "");
+      } else {
+        mountingPoint = this.dossierContext.fullPath;
+      }
+
+    }
+    manifestUrl+="/manifest";
+
+
+    this.getManifest(manifestUrl, (err, manifest) => {
       if (err) {
         throw err;
       }
       if (manifest.mounts) {
         for (let mount in manifest.mounts) {
-          if (mount === APPS_FOLDER + "/" + this.applicationName) {
+          if (mount === mountingPoint + "/" + this.applicationName) {
             return callback(undefined, manifest.mounts[mount]);
           }
         }
@@ -172,6 +201,7 @@ export class PskSelfSovereignApp {
 
   componentWillLoad(): Promise<any> {
     return new Promise((resolve) => {
+      this.componentInitialized = true;
       this.loadApp(resolve)
     });
   }
