@@ -18,7 +18,7 @@ export class PskDateInput {
             type="date"
             label={this.label}
             name={this.name}
-            value={ this.timestamp ? this.dataDate : this.value}
+            value={ this.timestamp != null ? this.dataDate : this.value}
             placeholder={this.placeholder}
             required={this.required}
             readOnly={this.readOnly}
@@ -34,7 +34,7 @@ export class PskDateInput {
     }
 
     componentWillLoad(){
-        if(this.timestamp){
+        if(this.timestamp != null){
             let newDate = new Date(parseInt(this.value));
             let utcMonth = newDate.getUTCMonth();
             let utcDay = newDate.getUTCDay();
@@ -57,7 +57,7 @@ export class PskDateInput {
             this.dataDate=this.changeDateFormat(currentDate,this.dataFormat)
         }
 
-        if(this.timestamp){
+        if(this.timestamp != null){
             let newDate=this.changeDateFormat(currentDate,'MM DD YYYY');
             this.modelHandler.updateModel('value',new Date(newDate).getTime());
         } else {
@@ -92,7 +92,7 @@ export class PskDateInput {
         propertyType: 'any',
         defaultValue: 'null'
     })
-    @Prop() timestamp?: string;
+    @Prop() timestamp?: string = "";
 
     @TableOfContentProperty({
         description: [`By filling out this property, the component will display above it, a label using <psk-link page="forms/psk-label">psk-label</psk-link> component.`],
@@ -151,7 +151,7 @@ export class PskDateInput {
     @Prop() invalidValue?: boolean | null = null;
     @TableOfContentProperty({
         isMandatory: false,
-        description: `This property is the format of the date.At the moment the component can format only "MM DD YYYY", "DD MM YYYY", "MM DD YY" and "DD MM YY".`,
+        description: `This property is the format of the date.At the moment the component can format only "MM DD YYYY", "DD MM YYYY", "MM YYYY DD", "YYYY MM DD", "YYYY DD MM"   and "DD YYYY MM".`,
         propertyType: 'string',
         defaultValue: "null"
     })
