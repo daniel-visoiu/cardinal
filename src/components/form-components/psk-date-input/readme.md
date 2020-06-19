@@ -7,17 +7,17 @@
 
 ## Properties
 
-| Property       | Attribute       | Description | Type      | Default     |
-| -------------- | --------------- | ----------- | --------- | ----------- |
-| `dataFormat`   | `data-format`   |             | `string`  | `null`      |
-| `invalidValue` | `invalid-value` |             | `boolean` | `null`      |
-| `label`        | `label`         |             | `string`  | `null`      |
-| `name`         | `name`          |             | `string`  | `null`      |
-| `placeholder`  | `placeholder`   |             | `string`  | `null`      |
-| `readOnly`     | `read-only`     |             | `boolean` | `false`     |
-| `required`     | `required`      |             | `boolean` | `false`     |
-| `timestamp`    | `timestamp`     |             | `string`  | `undefined` |
-| `value`        | `value`         |             | `string`  | `null`      |
+| Property       | Attribute       | Description | Type      | Default |
+| -------------- | --------------- | ----------- | --------- | ------- |
+| `dataFormat`   | `data-format`   |             | `string`  | `null`  |
+| `invalidValue` | `invalid-value` |             | `boolean` | `null`  |
+| `label`        | `label`         |             | `string`  | `null`  |
+| `name`         | `name`          |             | `string`  | `null`  |
+| `placeholder`  | `placeholder`   |             | `string`  | `null`  |
+| `readOnly`     | `read-only`     |             | `boolean` | `false` |
+| `required`     | `required`      |             | `boolean` | `false` |
+| `timestamp`    | `timestamp`     |             | `string`  | `""`    |
+| `value`        | `value`         |             | `string`  | `null`  |
 
 
 ## Dependencies

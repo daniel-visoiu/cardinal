@@ -1,9 +1,10 @@
 import PskBindableModel from "./lib/bindableModel.js";
 import DSUStorage from "./lib/DSUStorage.js";
+import History from "./lib/History.js";
 
 export default class ContainerController {
 
-  constructor(element) {
+  constructor(element, history) {
     let modelRequests = [];
 
     let dispatchModel = function (bindValue, model, callback) {
@@ -44,6 +45,8 @@ export default class ContainerController {
 
     this.element = element;
     this.DSUStorage = new DSUStorage();
+    this.History = new History(element, history);
+
     this.setModel = (model) => {
       this.model = PskBindableModel.setModel(model);
 

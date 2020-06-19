@@ -3,8 +3,8 @@ import ContainerController from "./ContainerController.js";
 
 export default class ModalController extends ContainerController {
 
-  constructor(element) {
-    super(element);
+  constructor(element, history) {
+    super(element, history);
 
     let callback = (err, viewModel, responseCallback) => {
       this.model = this.setModel(JSON.parse(JSON.stringify(viewModel)));
