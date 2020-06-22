@@ -42,6 +42,9 @@ class History {
             if (err) {
               return callback(err);
             }
+            if(!data[tag]){
+              return callback(new Error(`No page with tag: '${tag}'`));
+            }
             callback(undefined, data[tag])
 
           }
