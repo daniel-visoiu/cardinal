@@ -215,22 +215,42 @@ export class PskSelfSovereignApp {
 
 
   render() {
-    let basePath = window.top.location.href;
-    if (basePath[basePath.length - 1] !== '/') {
-      basePath += '/';
+
+    let basePath;
+    let parentWindow = window.parent;
+    let currentWindow = window;
+
+    try{
+      while(currentWindow !== parentWindow){
+        basePath = parentWindow.location.href;
+        // @ts-ignore
+        currentWindow = parentWindow;
+        parentWindow = parentWindow.parent;
+      }
+
+    }
+    catch (e) {
+      
+    }
+    finally {
+      basePath = currentWindow.location.href;
+      if (basePath[basePath.length - 1] !== '/') {
+        basePath += '/';
+      }
+
+      const iframeSrc = basePath + "iframe/" + this.digestSeedHex;
+      return (
+        <iframe sandbox="allow-scripts allow-same-origin allow-forms"
+                landing-page={this.landingPath}
+                frameborder="0"
+                style={{
+                  overflow: "hidden",
+                  height: "100%",
+                  width: "100%"
+                }}
+                src={iframeSrc}/>
+      )
     }
 
-    const iframeSrc = basePath + "iframe/" + this.digestSeedHex;
-    return (
-      <iframe sandbox="allow-scripts allow-same-origin allow-forms"
-              landing-page={this.landingPath}
-              frameborder="0"
-              style={{
-                overflow: "hidden",
-                height: "100%",
-                width: "100%"
-              }}
-              src={iframeSrc}/>
-    )
   }
 }
