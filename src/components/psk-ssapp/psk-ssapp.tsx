@@ -230,7 +230,7 @@ export class PskSelfSovereignApp {
 
     }
     catch (e) {
-      console.log(e)
+      
     }
     finally {
       basePath = currentWindow.location.href;
