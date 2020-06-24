@@ -73,6 +73,7 @@ export default class AppConfigurationHelper {
         } else {
           if (typeof menuItems[i].indexed !== "undefined" && menuItems[i].indexed.toString() === "false") {
             menuItems.splice(i, 1);
+            i--;
           }
         }
       }
