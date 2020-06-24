@@ -95,6 +95,9 @@ class DSUStorage {
     let segments = path.split("/");
     let fileName = segments.splice(segments.length - 1, 1)[0];
     path = segments.join("/");
+    if(!path){
+      path="/";
+    }
     let url = `/upload?path=${path}&filename=${fileName}`;
     doUpload(url, data, callback);
   }
