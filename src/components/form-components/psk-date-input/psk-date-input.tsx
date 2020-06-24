@@ -6,7 +6,7 @@ import CustomTheme from '../../../decorators/CustomTheme';
     tag: 'psk-date-input'
 })
 export class PskDateInput {
-    
+
     @State() dataDate?: any
 
     @CustomTheme()
@@ -18,67 +18,71 @@ export class PskDateInput {
             type="date"
             label={this.label}
             name={this.name}
-            value={ this.timestamp != null ? this.dataDate : this.value}
+            value={this.timestamp != null ? this.dataDate : this.value}
             placeholder={this.placeholder}
-            required={this.required}
+            required={this.required != null ? true : false}
             readOnly={this.readOnly}
             invalidValue={this.invalidValue}
             specificProps={{
                 onKeyUp: this.__inputHandler.bind(this),
                 onChange: this.__inputHandler.bind(this),
-                "data-date": this.dataDate,
-                class : this.dataFormat ? "form-control formated-date" : 'form-control',
+                "data-date": this.dataDate ? this.dataDate : null,
+                class: this.dataFormat ? "form-control formated-date" : 'form-control',
                 "data-date-format": this.dataFormat ? this.dataFormat : null
 
             }} />
     }
 
-    componentWillLoad(){
-        if(this.timestamp != null){
-            let newDate = new Date(parseInt(this.value));
-            let utcMonth = newDate.getUTCMonth();
-            let utcDay = newDate.getUTCDay();
-
-            let month = utcMonth < 9 ? `0${utcMonth}` : utcMonth;
-            let day = utcDay < 9 ? `0${utcDay}` : utcDay;
-            this.dataDate = `${newDate.getFullYear()}-${month}-${day}`;
+    componentWillLoad() {
+        if (this.timestamp != null) {
+            if(this.value){
+                let newDate = new Date(parseInt(this.value));
+                const utcMonth = newDate.getUTCMonth();
+                const utcDay = newDate.getUTCDay();
+        
+                const month = utcMonth < 9 ? `0${utcMonth}` : utcMonth;
+                const day = utcDay < 9 ? `0${utcDay}` : utcDay;
+                this.dataDate = `${newDate.getFullYear()}-${month}-${day}`;
+            }
         } else {
             this.dataDate = this.value;
         }
-        if(this.dataFormat && this.dataDate !=null){
-            this.dataDate=this.changeDateFormat(this.dataDate,this.dataFormat);
+        if (this.dataFormat && this.dataDate != null) {
+            this.required = null;
+            this.dataDate = this.changeDateFormat(this.dataDate, this.dataFormat);
         }
     }
 
     __inputHandler = (event) => {
         event.stopImmediatePropagation();
         let currentDate = event.target.value;
-        if(this.dataFormat){
-            this.dataDate=this.changeDateFormat(currentDate,this.dataFormat)
+        if (this.dataFormat) {
+            this.required = null;
+            this.dataDate = this.changeDateFormat(currentDate, this.dataFormat)
         }
 
-        if(this.timestamp != null){
-            let newDate=this.changeDateFormat(currentDate,'MM DD YYYY');
-            this.modelHandler.updateModel('value',new Date(newDate).getTime());
+        if (this.timestamp != null) {
+            let newDate = this.changeDateFormat(currentDate, 'MM DD YYYY');
+            this.modelHandler.updateModel('value', new Date(newDate).getTime());
         } else {
             this.modelHandler.updateModel('value', this.dataDate ? this.dataDate : currentDate);
         }
     };
 
-    changeDateFormat = (dateToBeFormated,dateFormat) => {
-        let formatedDate ="";
+    changeDateFormat = (dateToBeFormated, dateFormat) => {
+        let formatedDate = "";
         let splitedDate = dateToBeFormated.split("-");
         dateFormat = dateFormat.trim();
         let splitedFormat = dateFormat.split(" ");
         let dateVariables = {
-            "MM" : splitedDate[1] ,
-            "DD" : splitedDate[2] ,
-            "YYYY" : splitedDate[0]
+            "MM": splitedDate[1],
+            "DD": splitedDate[2],
+            "YYYY": splitedDate[0]
         }
-        splitedFormat.forEach((type,index) => {
-            if(dateVariables.hasOwnProperty(type)){
-                formatedDate +=dateVariables[type];
-                if(index < splitedFormat.length-1){
+        splitedFormat.forEach((type, index) => {
+            if (dateVariables.hasOwnProperty(type)) {
+                formatedDate += dateVariables[type];
+                if (index < splitedFormat.length - 1) {
                     formatedDate += "/"
                 }
             }
@@ -132,7 +136,7 @@ export class PskDateInput {
         propertyType: 'boolean',
         defaultValue: "false"
     })
-    @Prop() required?: boolean = false;
+    @Prop() required?: string = "";
 
     @TableOfContentProperty({
         description: [`	Specifies that an input field is read-only.`,
