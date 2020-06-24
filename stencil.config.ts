@@ -24,5 +24,13 @@
         serviceWorker: null // disable service workers
       }
     ],
+    buildEs5: false,
+    extras: {
+      cssVarsShim: false,
+      dynamicImportShim: false,
+      safari10: false,
+      scriptDataOpts: false,
+      shadowDomShim: false
+    },
     useBootstrap:true
   };
