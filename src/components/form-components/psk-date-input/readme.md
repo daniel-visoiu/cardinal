@@ -15,7 +15,7 @@
 | `name`         | `name`          |             | `string`  | `null`  |
 | `placeholder`  | `placeholder`   |             | `string`  | `null`  |
 | `readOnly`     | `read-only`     |             | `boolean` | `false` |
-| `required`     | `required`      |             | `boolean` | `false` |
+| `required`     | `required`      |             | `string`  | `""`    |
 | `timestamp`    | `timestamp`     |             | `string`  | `""`    |
 | `value`        | `value`         |             | `string`  | `null`  |
 

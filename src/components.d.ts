@@ -116,7 +116,8 @@ export namespace Components {
         "name"?: string | null;
         "placeholder"?: string | null;
         "readOnly"?: boolean;
-        "required"?: boolean;
+        "required"?: string;
+        "timestamp"?: string;
         "value"?: string | null;
     }
     interface PskDefaultRenderer {
@@ -191,7 +192,6 @@ export namespace Components {
     interface PskInput {
         "dataDate"?: string;
         "dataDateFormat"?: string | null;
-        "dateClass"?: string;
         "invalidValue"?: boolean | null;
         "label"?: string | null;
         "name"?: string | null;
@@ -329,6 +329,7 @@ export namespace Components {
     }
     interface PskSsapp {
         "appName": string;
+        "dossierContext": any;
         "history": RouterHistory;
         "landingPath": string;
         "match": MatchResults;
@@ -1100,7 +1101,8 @@ declare namespace LocalJSX {
         "name"?: string | null;
         "placeholder"?: string | null;
         "readOnly"?: boolean;
-        "required"?: boolean;
+        "required"?: string;
+        "timestamp"?: string;
         "value"?: string | null;
     }
     interface PskDefaultRenderer {
@@ -1178,7 +1180,6 @@ declare namespace LocalJSX {
     interface PskInput {
         "dataDate"?: string;
         "dataDateFormat"?: string | null;
-        "dateClass"?: string;
         "invalidValue"?: boolean | null;
         "label"?: string | null;
         "name"?: string | null;
@@ -1323,6 +1324,7 @@ declare namespace LocalJSX {
     }
     interface PskSsapp {
         "appName"?: string;
+        "dossierContext"?: any;
         "history"?: RouterHistory;
         "landingPath"?: string;
         "match"?: MatchResults;

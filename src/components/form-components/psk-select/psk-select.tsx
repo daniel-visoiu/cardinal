@@ -4,7 +4,7 @@ import { BindModel } from '../../../decorators/BindModel';
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
 import { normalizeRegexToString } from '../../../utils/utilFunctions';
 import CustomTheme from '../../../decorators/CustomTheme';
-import {INVALID_ID_CHARACTERS_REGEX} from "../../../utils/constants";
+import { INVALID_ID_CHARACTERS_REGEX } from "../../../utils/constants";
 
 @Component({
     tag: 'psk-select'
@@ -25,8 +25,8 @@ export class PskSelect {
 
     render() {
         this.selectOptions && this.__createOptions.call(this);
-
-        const name: string = this.label && this.label.replace(/( |:|\/|\.|-)/g, "").toLowerCase();
+        const name: string = this.label && normalizeRegexToString(this.label, INVALID_ID_CHARACTERS_REGEX, '').toLowerCase();
+        const placeholderSelected: boolean = this.options.findIndex((opt: Option) => opt.value === this.value) === -1;
 
         return (
             <div class="form-group">
@@ -41,17 +41,18 @@ export class PskSelect {
                         disabled={true}
                         label={this.placeholder}
                         value={''}
-                        selected={true} />}
+                        selected={placeholderSelected} />}
 
                     {this.options && this.options.map((option: Option) => {
-                        const value = option.value ? option.value
-                            : option.label && option.label.replace(/( |:|\/|\.|-)/g, "").toLowerCase();
+                        const optValue = option.value ? option.value
+                            : option.label && normalizeRegexToString(option.label, INVALID_ID_CHARACTERS_REGEX, '');
+                        const isSelected: boolean = option.selected === true || this.value === optValue;
 
                         return (
                             <option
-                                value={value}
+                                value={optValue}
                                 label={option.label}
-                                disabled={option.disabled}
+                                selected={isSelected}
                             />
                         );
                     })}
@@ -76,7 +77,7 @@ export class PskSelect {
 
             let value, label = labelValue[0].trim();
             if (labelValue.length === 1) {
-                value = normalizeRegexToString(label, INVALID_ID_CHARACTERS_REGEX, '-', (str: string) => str.toLowerCase());
+                value = normalizeRegexToString(label, INVALID_ID_CHARACTERS_REGEX, '');
             } else {
                 value = labelValue[1].trim();
             }
@@ -93,7 +94,8 @@ export class PskSelect {
             `Each option is sepparated by the special character "|" (pipe) (e.g. option 1 | option 2 | option 3).`,
             `For each option, as a recommendation, you should add a value sepparated by comma.`,
             `Example of options with values: "Romania, ROM | Italy, ITA | Germany, DE"`,
-            `If no value is provided for an option, the component will create one. It will take the option and will normalize it to lower case and the special characters will be changed to dash ("-").`],
+            `If no value is provided for an option, the component will create one. It will take the option and will normalize it creating the value. Any character which does not comply to the rule, will be removed.`,
+            `The rule is that a label must match the folowing regular exprssion: "A-Za-z0-9_-"., which means that all the characers should be alpha-numeric and only two special characters are allowed (_ and -).`],
         isMandatory: false,
         propertyType: 'string'
     })
