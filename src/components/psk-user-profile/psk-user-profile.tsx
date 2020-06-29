@@ -4,8 +4,7 @@ import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
 import {BindModel} from '../../decorators/BindModel';
 
 @Component({
-  tag: 'psk-user-profile',
-  shadow: true
+  tag: 'psk-user-profile'
 })
 export class PskUserProfile {
 

@@ -1,9 +1,10 @@
-import { Component, h, Prop, Event, EventEmitter, Listen, State } from '@stencil/core';
+import {Component, Event, EventEmitter, h, Listen, Prop, State} from '@stencil/core';
 import CustomTheme from "../../decorators/CustomTheme";
-import { MenuItem } from "../../interfaces/MenuItem";
-import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
-import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
+import {MenuItem} from "../../interfaces/MenuItem";
+import {TableOfContentProperty} from '../../decorators/TableOfContentProperty';
+import {TableOfContentEvent} from '../../decorators/TableOfContentEvent';
 import {ExtendedHistoryType} from "../../interfaces/ExtendedHistoryType";
+import {MOBILE_MAX_WIDTH} from "../../utils/constants";
 
 @Component({
   tag: 'app-menu',
@@ -21,7 +22,7 @@ export class AppMenu {
   @Prop() itemRenderer?: string;
 
   @TableOfContentProperty({
-    description: `Menu items datasource. It should be an array if MenuItem[]. 
+    description: `Menu items datasource. It should be an array if MenuItem[].
       If it is not provided, it the component will emit an event (needMenuItems) in order to get the menu items.`,
     isMandatory: false,
     propertyType: `array of MenuItem items (MenuItem[])`,
@@ -33,9 +34,9 @@ export class AppMenu {
     description: `This property is intended to be added when you want to change the default value of 600px for switching between normal and hamburger menu.`,
     isMandatory: false,
     propertyType: `number`,
-    defaultValue: `600`
+    defaultValue: MOBILE_MAX_WIDTH
   })
-  @Prop() hamburgerMaxWidth?: number = 960;
+  @Prop() hamburgerMaxWidth?: number = MOBILE_MAX_WIDTH;
   @Prop() historyType: ExtendedHistoryType;
 
   @State() showHamburgerMenu?: boolean = false;
@@ -146,13 +147,7 @@ export class AppMenu {
       hamburger={this.showHamburgerMenu}
       value={menuItem} />
   }
-
-  render() {
-
-    if (!this.menuItems) {
-      return;
-    }
-
+  renderMenuItems() {
     let renderComponent = [];
     for (let i = 0; i < this.menuItems.length; i++) {
       let menuItem = this.menuItems[i];
@@ -169,18 +164,32 @@ export class AppMenu {
       return (<nav class="navbar navbar-dark ">
         <a class="navbar-brand" href="#"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" onClick={this.toggleNavBar.bind(this)}
-          aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class={navBarClass}>
-
+          <slot name="before"/>
           <ul class="navbar-nav mr-auto">
             {renderComponent}
           </ul>
-
+          <slot name="after"/>
         </div>
 
       </nav>)
     } else {
-      return renderComponent
+      return [
+        <slot name="before"/>,
+        <div class="menu_container">
+          {renderComponent}
+        </div>,
+        <slot name="after"/>];
     }
+  }
+
+  render() {
+
+    if (!this.menuItems) {
+      return;
+    }
+
+    return this.renderMenuItems();
   }
 }

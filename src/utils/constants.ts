@@ -1,7 +1,4 @@
-export const HELP_PROPERTY: string = "with-help";
-export const DISPLAY_IF_IS: string = "display-if-is";
-export const DISPLAY_IF_EXISTS: string = "display-if-exists";
-export const BASE_CLASS: string = "baseClass";
+export const MOBILE_MAX_WIDTH: number = 960;
 export const DEFINED_PROPERTIES: string = "definedProperties";
 export const DEFINED_EVENTS: string = "definedEvents";
 export const DEFINED_CONTROLLERS: string = "definedControllers";

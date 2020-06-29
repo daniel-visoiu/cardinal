@@ -1,9 +1,12 @@
-import { Component, h, Prop, State, Element } from '@stencil/core';
+import {Component, h, Prop, State, Element, Listen, Host} from '@stencil/core';
 import ControllerRegistryService from "../../services/ControllerRegistryService";
 import { ExtendedHistoryType } from "../../interfaces/ExtendedHistoryType";
 import { HTMLStencilElement } from "@stencil/core/internal";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import DefaultApplicationController from "../../controllers/DefaultApplicationController.js"
+import {MOBILE_MAX_WIDTH} from "../../utils/constants";
+
+const appMaxWidth = MOBILE_MAX_WIDTH;
 
 @Component({
   tag: 'psk-app-root',
@@ -42,6 +45,11 @@ export class PskAppRoot {
     return node;
   }
 
+  @Listen("resize", { capture: true, target: 'window' })
+  checkLayout() {
+    this.mobileLayout = document.documentElement.clientWidth < appMaxWidth;
+  }
+
   connectedCallback() {
     this.disconnected = false;
   }
@@ -51,6 +59,7 @@ export class PskAppRoot {
   }
 
   componentWillLoad() {
+    this.checkLayout();
     if (this.host.parentElement) {
       this.htmlLoader = this.__createLoader();
       this.host.parentElement.appendChild(this.htmlLoader);
@@ -89,9 +98,11 @@ export class PskAppRoot {
   render() {
     let DefaultRendererTag = "psk-default-renderer";
     return (
-      this.hasSlot
-        ? <slot />
-        : <DefaultRendererTag />
+      <Host class={this.mobileLayout?"is-mobile":""} >
+        {this.hasSlot
+      ? <slot />
+      : <DefaultRendererTag mobileLayout={this.mobileLayout} />}
+      </Host>
     );
   }
 }

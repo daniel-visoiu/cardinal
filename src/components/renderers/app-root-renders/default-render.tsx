@@ -1,7 +1,6 @@
-import {Component, Event, EventEmitter, h, Listen, State} from "@stencil/core";
+import {Component, Event, EventEmitter, h, Prop, State} from "@stencil/core";
 import CustomTheme from "../../../decorators/CustomTheme";
-
-const appMaxWidth = 960;
+import {MOBILE_MAX_WIDTH} from "../../../utils/constants";
 
 @Component({
 	tag: 'psk-default-renderer',
@@ -11,13 +10,8 @@ const appMaxWidth = 960;
 export class AppRootDefaultRender {
 	@CustomTheme()
 
-	@State() mobileLayout: boolean = false;
+	@Prop() mobileLayout: boolean = false;
   @State() appVersion: string;
-
-	@Listen("resize", { capture: true, target: 'window' })
-	checkLayout() {
-		this.mobileLayout = document.documentElement.clientWidth < appMaxWidth;
-	}
 
   @Event({
     eventName: 'getAppVersion',
@@ -28,7 +22,6 @@ export class AppRootDefaultRender {
 
 	componentWillLoad():Promise<any> {
 		return new Promise((resolve)=>{
-      this.checkLayout();
       this.getAppVersion.emit((err, appVersion) => {
         if (!err) {
           this.appVersion = appVersion;
@@ -41,7 +34,7 @@ export class AppRootDefaultRender {
 
 	render() {
 
-		let appMenuCmpt = <app-menu item-renderer="sidebar-renderer" hamburgerMaxWidth={appMaxWidth}></app-menu>;
+		let appMenuCmpt = <app-menu item-renderer="sidebar-renderer" hamburgerMaxWidth={MOBILE_MAX_WIDTH}></app-menu>;
 		let versionCmpt = <div class="nav-footer">version {this.appVersion}</div>;
 
 		let asideComponents = [];
