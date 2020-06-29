@@ -1,4 +1,4 @@
-import { h, Component, Prop, State } from '@stencil/core';
+import { h, Component, Prop, State, Element } from '@stencil/core';
 import { BindModel } from '../../../decorators/BindModel';
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
 import CustomTheme from '../../../decorators/CustomTheme';
@@ -8,6 +8,7 @@ import CustomTheme from '../../../decorators/CustomTheme';
 export class PskDateInput {
 
     @State() dataDate?: any
+    @Element() private _host: HTMLElement;
 
     @CustomTheme()
 
@@ -18,7 +19,7 @@ export class PskDateInput {
             type="date"
             label={this.label}
             name={this.name}
-            value={this.timestamp != null ? this.dataDate : this.value}
+            value={this._isWithTimestamp() ? this.dataDate : this.value}
             placeholder={this.placeholder}
             required={this.required != null ? true : false}
             readOnly={this.readOnly}
@@ -34,12 +35,12 @@ export class PskDateInput {
     }
 
     componentWillLoad() {
-        if (this.timestamp != null) {
-            if(this.value){
+        if (this._isWithTimestamp()) {
+            if (this.value) {
                 let newDate = new Date(parseInt(this.value));
                 const utcMonth = newDate.getUTCMonth();
                 const utcDay = newDate.getUTCDay();
-        
+
                 const month = utcMonth < 9 ? `0${utcMonth}` : utcMonth;
                 const day = utcDay < 9 ? `0${utcDay}` : utcDay;
                 this.dataDate = `${newDate.getFullYear()}-${month}-${day}`;
@@ -53,6 +54,10 @@ export class PskDateInput {
         }
     }
 
+    _isWithTimestamp = () => {
+        return this._host.hasAttribute('timestamp') || this.timestamp !== null;
+    }
+
     __inputHandler = (event) => {
         event.stopImmediatePropagation();
         let currentDate = event.target.value;
@@ -61,12 +66,15 @@ export class PskDateInput {
             this.dataDate = this.changeDateFormat(currentDate, this.dataFormat)
         }
 
-        if (this.timestamp != null) {
+        let newValue;
+        if (this._isWithTimestamp()) {
             let newDate = this.changeDateFormat(currentDate, 'MM DD YYYY');
-            this.modelHandler.updateModel('value', new Date(newDate).getTime());
+            newValue = new Date(newDate).getTime();
         } else {
-            this.modelHandler.updateModel('value', this.dataDate ? this.dataDate : currentDate);
+            newValue = this.dataDate ? this.dataDate : currentDate;
         }
+
+        this.modelHandler.updateModel('value', newValue);
     };
 
     changeDateFormat = (dateToBeFormated, dateFormat) => {
@@ -87,7 +95,7 @@ export class PskDateInput {
                 }
             }
         });
-        return formatedDate
+        return formatedDate;
     }
 
     @TableOfContentProperty({
@@ -96,7 +104,7 @@ export class PskDateInput {
         propertyType: 'any',
         defaultValue: 'null'
     })
-    @Prop() timestamp?: string = "";
+    @Prop() timestamp?: string = null;
 
     @TableOfContentProperty({
         description: [`By filling out this property, the component will display above it, a label using <psk-link page="forms/psk-label">psk-label</psk-link> component.`],
@@ -136,7 +144,7 @@ export class PskDateInput {
         propertyType: 'boolean',
         defaultValue: "false"
     })
-    @Prop() required?: string = "";
+    @Prop() required?: string = "false";
 
     @TableOfContentProperty({
         description: [`	Specifies that an input field is read-only.`,
