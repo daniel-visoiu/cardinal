@@ -1,4 +1,4 @@
-import { h, Component, Prop, State, Element } from '@stencil/core';
+import { h, Component, Prop } from '@stencil/core';
 import { BindModel } from '../../../decorators/BindModel';
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
 import CustomTheme from '../../../decorators/CustomTheme';
@@ -6,82 +6,60 @@ import CustomTheme from '../../../decorators/CustomTheme';
     tag: 'psk-date-input'
 })
 export class PskDateInput {
-
-    @State() dataDate?: any
-    @Element() private _host: HTMLElement;
-
     @CustomTheme()
-
     @BindModel() modelHandler;
 
     render() {
+        let dataDate = this.__getFormattedDate();
+
         return <psk-input
             type="date"
             label={this.label}
             name={this.name}
-            value={this._isWithTimestamp() ? this.dataDate : this.value}
+            value={dataDate}
             placeholder={this.placeholder}
-            required={this.required != null ? true : false}
+            required={this.required === 'true'}
             readOnly={this.readOnly}
             invalidValue={this.invalidValue}
             specificProps={{
                 onKeyUp: this.__inputHandler.bind(this),
                 onChange: this.__inputHandler.bind(this),
-                "data-date": this.dataDate ? this.dataDate : null,
-                class: this.dataFormat ? "form-control formated-date" : 'form-control',
-                "data-date-format": this.dataFormat ? this.dataFormat : null
-
+                "data-date": dataDate,
+                "data-date-format": this.dataFormat,
+                class: this.dataFormat ? "form-control formated-date" : 'form-control'
             }} />
-    }
-
-    componentWillLoad() {
-        if (this._isWithTimestamp()) {
-            if (this.value) {
-                let newDate = new Date(parseInt(this.value));
-                const utcMonth = newDate.getUTCMonth();
-                const utcDay = newDate.getUTCDay();
-
-                const month = utcMonth < 9 ? `0${utcMonth}` : utcMonth;
-                const day = utcDay < 9 ? `0${utcDay}` : utcDay;
-                this.dataDate = `${newDate.getFullYear()}-${month}-${day}`;
-            }
-        } else {
-            this.dataDate = this.value;
-        }
-        if (this.dataFormat && this.dataDate != null) {
-            this.required = null;
-            this.dataDate = this.changeDateFormat(this.dataDate, this.dataFormat);
-        }
-    }
-
-    _isWithTimestamp = () => {
-        return this._host.hasAttribute('timestamp') || this.timestamp !== null;
     }
 
     __inputHandler = (event) => {
         event.stopImmediatePropagation();
         let currentDate = event.target.value;
-        if (this.dataFormat) {
-            this.required = null;
-            this.dataDate = this.changeDateFormat(currentDate, this.dataFormat)
-        }
 
-        let newValue;
-        if (this._isWithTimestamp()) {
-            let newDate = this.changeDateFormat(currentDate, 'MM DD YYYY');
-            newValue = new Date(newDate).getTime();
-        } else {
-            newValue = this.dataDate ? this.dataDate : currentDate;
-        }
-
+        const newValue = new Date(currentDate).getTime();
         this.modelHandler.updateModel('value', newValue);
     };
 
-    changeDateFormat = (dateToBeFormated, dateFormat) => {
+    __getFormattedDate = () => {
+        if (this.value && this.value.trim().length) {
+            let newDate = new Date(parseInt(this.value));
+            const utcMonth = newDate.getUTCMonth() + 1;
+            const utcDayOfMonth = newDate.getUTCDate();
+
+            const month = utcMonth < 9 ? `0${utcMonth}` : utcMonth;
+            const day = utcDayOfMonth < 9 ? `0${utcDayOfMonth}` : utcDayOfMonth;
+            const dateToDisplay = `${newDate.getFullYear()}-${month}-${day}`;
+
+            if (this.dataFormat) {
+                return this.__changeDateFormat(dateToDisplay, this.dataFormat);
+            } else {
+                return dateToDisplay;
+            }
+        }
+    }
+
+    __changeDateFormat = (dateToBeFormated, dateFormat) => {
         let formatedDate = "";
         let splitedDate = dateToBeFormated.split("-");
-        dateFormat = dateFormat.trim();
-        let splitedFormat = dateFormat.split(" ");
+        let splitedFormat = dateFormat.trim().split(" ");
         let dateVariables = {
             "MM": splitedDate[1],
             "DD": splitedDate[2],
@@ -97,14 +75,6 @@ export class PskDateInput {
         });
         return formatedDate;
     }
-
-    @TableOfContentProperty({
-        description: [`It's role is in telling the component that the value passed on to the <code>value</code> parameter is of type timestamp.`],
-        isMandatory: false,
-        propertyType: 'any',
-        defaultValue: 'null'
-    })
-    @Prop() timestamp?: string = null;
 
     @TableOfContentProperty({
         description: [`By filling out this property, the component will display above it, a label using <psk-link page="forms/psk-label">psk-label</psk-link> component.`],
@@ -161,6 +131,7 @@ export class PskDateInput {
         propertyType: 'boolean'
     })
     @Prop() invalidValue?: boolean | null = null;
+
     @TableOfContentProperty({
         isMandatory: false,
         description: `This property is the format of the date.At the moment the component can format only "MM DD YYYY", "DD MM YYYY", "MM YYYY DD", "YYYY MM DD", "YYYY DD MM"   and "DD YYYY MM".`,

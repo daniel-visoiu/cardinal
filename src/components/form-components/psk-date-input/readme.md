@@ -16,7 +16,6 @@
 | `placeholder`  | `placeholder`   |             | `string`  | `null`    |
 | `readOnly`     | `read-only`     |             | `boolean` | `false`   |
 | `required`     | `required`      |             | `string`  | `"false"` |
-| `timestamp`    | `timestamp`     |             | `string`  | `null`    |
 | `value`        | `value`         |             | `string`  | `null`    |
 
 

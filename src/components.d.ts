@@ -117,7 +117,6 @@ export namespace Components {
         "placeholder"?: string | null;
         "readOnly"?: boolean;
         "required"?: string;
-        "timestamp"?: string;
         "value"?: string | null;
     }
     interface PskDefaultRenderer {
@@ -1102,7 +1101,6 @@ declare namespace LocalJSX {
         "placeholder"?: string | null;
         "readOnly"?: boolean;
         "required"?: string;
-        "timestamp"?: string;
         "value"?: string | null;
     }
     interface PskDefaultRenderer {
