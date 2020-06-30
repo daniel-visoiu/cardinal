@@ -15,18 +15,47 @@ export class PskSelect {
 
     @BindModel() modelHandler;
 
-    @State() options: Array<Option> = null;
+    @State() options: Array<Option> = [];
 
     componentWillLoad() {
         if (this.selectionType !== 'single' && this.selectionType !== 'multiple') {
             this.selectionType = 'single';
         }
+
+        if (this.selectOptions) {
+            this.__createOptions();
+        }
     }
 
     render() {
-        this.selectOptions && this.__createOptions.call(this);
         const name: string = this.label && normalizeRegexToString(this.label, INVALID_ID_CHARACTERS_REGEX, '').toLowerCase();
         const placeholderSelected: boolean = this.options.findIndex((opt: Option) => opt.value === this.value) === -1;
+
+        let placeholderElement = null;
+        if (this.placeholder) {
+            placeholderElement = <option
+                disabled={true}
+                label={this.placeholder}
+                value={''}
+                selected={placeholderSelected} />;
+        }
+
+        let selectOptionsList = [];
+        if (this.options) {
+            selectOptionsList = this.options.map((option: Option) => {
+                const optValue = option.value ? option.value
+                    : option.label && normalizeRegexToString(option.label, INVALID_ID_CHARACTERS_REGEX, '');
+                const isSelected: boolean = option.selected === true || this.value === optValue;
+
+                return (
+                    <option
+                        value={optValue}
+                        label={option.label}
+                        selected={isSelected}
+                    />
+                );
+            });
+        }
 
         return (
             <div class="form-group">
@@ -37,25 +66,8 @@ export class PskSelect {
                     multiple={this.selectionType === 'multiple'}
                     onChange={this.__onChangeHandler.bind(this)} >
 
-                    {this.placeholder && <option
-                        disabled={true}
-                        label={this.placeholder}
-                        value={''}
-                        selected={placeholderSelected} />}
-
-                    {this.options && this.options.map((option: Option) => {
-                        const optValue = option.value ? option.value
-                            : option.label && normalizeRegexToString(option.label, INVALID_ID_CHARACTERS_REGEX, '');
-                        const isSelected: boolean = option.selected === true || this.value === optValue;
-
-                        return (
-                            <option
-                                value={optValue}
-                                label={option.label}
-                                selected={isSelected}
-                            />
-                        );
-                    })}
+                    {placeholderElement}
+                    {selectOptionsList}
                 </select>
             </div>
         );
