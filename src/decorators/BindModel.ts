@@ -46,7 +46,7 @@ function BoundedModel(updateHandler, model) {
 
     boundedChain = normalizeModelChain(boundedChain);
 
-    model.onChange(boundedChain, ()=>{
+    model.onChange(boundedChain, () => {
       updateHandler(property, boundedChain);
     });
 
@@ -69,34 +69,57 @@ function bindComponentProps(element, propsData, callback) {
       console.error(err);
     }
 
+    let viewModelParentChain;
+    let boundedProperties = {};
+    
+    const bindSingleProperty = (prop) => {
+      if(!boundedProperties[prop]) {
+        let instance = properties[prop].type === ATTRIBUTE ? element : this;
+        let handler = getUpdateHandler.call(instance, properties[prop].type, model);
+        let propViewModel = new BoundedModel(handler.bind(instance), model);
+        boundedProperties[prop] = propViewModel.createBoundedModel(prop, properties[prop].value);
+      }
+    }
+
+    const bindProperties = () => {
+      for (let prop in properties) {
+        bindSingleProperty(prop);
+      }
+    }
+
     /**
      * if view-model is defined, construct the property dictionary but do not overwrite existing
      * properties
      */
     if (hasViewModel) {
-      let modelChain = element.getAttribute("view-model");
-
-      modelChain = normalizeModelChain(modelChain);
-      let propertiesData = model.getChainValue(modelChain);
-
-      for (let prop in propertiesData) {
-        if (!properties[prop]) {
-          properties[prop] = {
-            value: modelChain ? modelChain + "." + prop : prop,
-            type:PROPERTY
-          };
+      viewModelParentChain = element.getAttribute("view-model");
+      viewModelParentChain = normalizeModelChain(viewModelParentChain);
+      
+      const updateProperties = () => {
+        let propertiesData = model.getChainValue(viewModelParentChain);
+        for (let prop in propertiesData) {
+          if (!properties[prop]) {
+            properties[prop] = {
+              value: viewModelParentChain ? viewModelParentChain + "." + prop : prop,
+              type:PROPERTY
+            };
+          }
         }
       }
+
+      updateProperties();
+      
+      /**
+       * This model chain listener set on the view model parent chain is used for the those children chains (of this parent chain) which are added at the runtime, and are not bound.
+       * The below part of the code is updating and binding these new children chains to the component.
+       */
+      model.onChange(viewModelParentChain, () => {
+        updateProperties();
+        bindProperties();
+      });
     }
 
-    let boundedProperties = {};
-
-    for (let prop in properties) {
-      let instance = properties[prop].type === ATTRIBUTE ? element : this;
-      let handler = getUpdateHandler.call(instance, properties[prop].type, model);
-      let propViewModel = new BoundedModel(handler.bind(instance), model);
-      boundedProperties[prop] = propViewModel.createBoundedModel(prop, properties[prop].value);
-    }
+    bindProperties();
 
     if (typeof this[instanceName] !== "undefined") {
       throw new Error(`BindModel decorator received a wrong argument as instance name: [${instanceName}]`);
@@ -104,9 +127,15 @@ function bindComponentProps(element, propsData, callback) {
     else {
       this[instanceName] = {
         updateModel: (prop, value) => {
-          if (properties[prop]) {
-            boundedProperties[prop].updateModel(value);
+          if(!properties[prop]) {
+            properties[prop] = {
+              value: viewModelParentChain ? viewModelParentChain + "." + prop : prop,
+              type:PROPERTY
+            };
+            bindSingleProperty(prop);
           }
+
+          boundedProperties[prop].updateModel(value);
         }
       };
     }
