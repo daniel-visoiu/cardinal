@@ -4,7 +4,7 @@ import {MatchResults, RouterHistory} from "@stencil/router";
 import {BindModel} from "../../decorators/BindModel";
 import CustomTheme from "../../decorators/CustomTheme";
 import SSAppInstanceRegistry from "./SSAppInstancesRegistry.js";
-
+import NavigatinTrackerService from "./NavigationTrackerService.js";
 const APPS_FOLDER = "/apps";
 
 @Component({
@@ -76,6 +76,7 @@ export class PskSelfSovereignApp {
         this.seed = seed;
 
         this.digestSeedHex = this.digestMessage(seed);
+        NavigatinTrackerService.getInstance().setIdentity(this.digestSeedHex);
         if (typeof callback === "function") {
           callback();
         }
@@ -119,6 +120,7 @@ export class PskSelfSovereignApp {
 
     this.eventHandler = this.ssappEventHandler.bind(this);
     window.document.addEventListener(this.digestSeedHex, this.eventHandler);
+    NavigatinTrackerService.getInstance().listenForSSAppHistoryChanges();
   }
 
   getSWOnMessageHandler() {
@@ -230,7 +232,7 @@ export class PskSelfSovereignApp {
 
     }
     catch (e) {
-      
+
     }
     finally {
       basePath = currentWindow.location.href;

@@ -13,6 +13,7 @@
 | `badgeText`            | `badge-text`             |             | `string`  | `undefined` |
 | `badgeTextColor`       | `badge-text-color`       |             | `string`  | `undefined` |
 | `hasToc`               | `has-toc`                |             | `boolean` | `false`     |
+| `navigationTitle`      | `navigation-title`       |             | `string`  | `""`        |
 | `pageClass`            | `page-class`             |             | `string`  | `""`        |
 | `subTitle`             | `sub-title`              |             | `string`  | `""`        |
 | `title`                | `title`                  |             | `string`  | `""`        |

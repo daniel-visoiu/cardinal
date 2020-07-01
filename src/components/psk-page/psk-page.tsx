@@ -7,6 +7,7 @@ import { highlightChapter } from "../../utils/highlightChapter";
 import { scrollToElement, createCustomEvent } from "../../utils/utilFunctions";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import { BindModel } from "../../decorators/BindModel";
+import NavigationTrackerService from "../psk-ssapp/NavigationTrackerService.js";
 
 @Component({
 	tag: "psk-page",
@@ -30,6 +31,13 @@ export class PskPage {
 	@Prop({reflect:true}) title: string = "";
   @TableOfContentProperty({
     description: `This property is used as the page sub-title`,
+    isMandatory: false,
+    propertyType: `string`
+  })
+
+  @Prop() navigationTitle: string = "";
+  @TableOfContentProperty({
+    description: `This property is used in context of ssapps: when psk-ssapp component is loading another cardinal app that uses psk-page component and wants to notify the parent about the current page`,
     isMandatory: false,
     propertyType: `string`
   })
@@ -176,12 +184,23 @@ export class PskPage {
 		}
 	}
 
-	componentDidLoad() {
-		this.componentFullyLoaded = true;
-		this._checkForChapterScrolling();
+  componentDidLoad() {
+    this.componentFullyLoaded = true;
+    this._checkForChapterScrolling();
+    this._notifyParentAboutCurrentPage();
+    this.element.addEventListener('scroll', this.__handleScrollEvent, true);
+  }
 
-		this.element.addEventListener('scroll', this.__handleScrollEvent, true);
-	}
+  _notifyParentAboutCurrentPage() {
+    if (this.navigationTitle) {
+      let currentPageUrl = window.location.href.replace(window.location.origin,"");
+      NavigationTrackerService.notifyParentForChanges(
+        {
+          currentPageTitle: this.navigationTitle,
+          ssappPageUrl: currentPageUrl
+        });
+    }
+  }
 
 	disconnectedCallback() {
 		this.element.removeEventListener('scroll', this.__handleScrollEvent, true);
