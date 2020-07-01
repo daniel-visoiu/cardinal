@@ -5,12 +5,12 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { MenuItem, } from "./interfaces/MenuItem";
-import { ExtendedHistoryType, } from "./interfaces/ExtendedHistoryType";
-import { LocationSegments, MatchResults, RouterHistory, } from "@stencil/router";
-import { StyleCustomisation, } from "./interfaces/StyleCustomisation";
-import { SelectType, } from "./interfaces/FormModel";
-import { WizardStep, } from "./interfaces/Wizard";
+import { MenuItem } from "./interfaces/MenuItem";
+import { ExtendedHistoryType } from "./interfaces/ExtendedHistoryType";
+import { LocationSegments, MatchResults, RouterHistory } from "@stencil/router";
+import { StyleCustomisation } from "./interfaces/StyleCustomisation";
+import { SelectType } from "./interfaces/FormModel";
+import { WizardStep } from "./interfaces/Wizard";
 export namespace Components {
     interface AppMenu {
         "hamburgerMaxWidth"?: number;

@@ -2,6 +2,14 @@ import { h, Component, Prop } from '@stencil/core';
 import { BindModel } from '../../../decorators/BindModel';
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
 import CustomTheme from '../../../decorators/CustomTheme';
+
+const YEAR_LEADING_ZEROS = {
+    0: '',
+    1: '0',
+    2: '00',
+    3: '000'
+};
+
 @Component({
     tag: 'psk-date-input'
 })
@@ -10,13 +18,16 @@ export class PskDateInput {
     @BindModel() modelHandler;
 
     render() {
-        let dataDate = this.__getFormattedDate();
+        const {
+            dateToDisplay,
+            dateToAssign
+        } = this.__getFormattedDate();
 
         return <psk-input
             type="date"
             label={this.label}
             name={this.name}
-            value={dataDate}
+            value={dateToAssign}
             placeholder={this.placeholder}
             required={this.required === 'true'}
             readOnly={this.readOnly}
@@ -24,8 +35,7 @@ export class PskDateInput {
             specificProps={{
                 onKeyUp: this.__inputHandler.bind(this),
                 onChange: this.__inputHandler.bind(this),
-                "data-date": dataDate,
-                "data-date-format": this.dataFormat,
+                "data-date": dateToDisplay,
                 class: this.dataFormat ? "form-control formated-date" : 'form-control'
             }} />
     }
@@ -34,46 +44,50 @@ export class PskDateInput {
         event.stopImmediatePropagation();
         let currentDate = event.target.value;
 
-        const newValue = new Date(currentDate).getTime();
-        this.modelHandler.updateModel('value', newValue);
+        if (currentDate && currentDate.trim().length) {
+            const newValue = new Date(currentDate).getTime();
+            this.modelHandler.updateModel('value', newValue);
+        }
     };
 
     __getFormattedDate = () => {
-        if (this.value && this.value.trim().length) {
-            let newDate = new Date(parseInt(this.value));
-            const utcMonth = newDate.getUTCMonth() + 1;
-            const utcDayOfMonth = newDate.getUTCDate();
-
-            const month = utcMonth < 9 ? `0${utcMonth}` : utcMonth;
-            const day = utcDayOfMonth < 9 ? `0${utcDayOfMonth}` : utcDayOfMonth;
-            const dateToDisplay = `${newDate.getFullYear()}-${month}-${day}`;
-
-            if (this.dataFormat) {
-                return this.__changeDateFormat(dateToDisplay, this.dataFormat);
-            } else {
-                return dateToDisplay;
-            }
+        if (!this.value || !this.value.trim().length) {
+            return {};
         }
-    }
 
-    __changeDateFormat = (dateToBeFormated, dateFormat) => {
-        let formatedDate = "";
-        let splitedDate = dateToBeFormated.split("-");
-        let splitedFormat = dateFormat.trim().split(" ");
-        let dateVariables = {
-            "MM": splitedDate[1],
-            "DD": splitedDate[2],
-            "YYYY": splitedDate[0]
-        }
-        splitedFormat.forEach((type, index) => {
-            if (dateVariables.hasOwnProperty(type)) {
-                formatedDate += dateVariables[type];
-                if (index < splitedFormat.length - 1) {
-                    formatedDate += "/"
-                }
-            }
-        });
-        return formatedDate;
+        let newDate = new Date(parseInt(this.value));
+        const utcYear: number = newDate.getUTCFullYear();
+        const utcMonth: number = newDate.getUTCMonth() + 1;
+        const utcDayOfMonth: number = newDate.getUTCDate();
+
+        const day = utcDayOfMonth <= 9 ? `0${utcDayOfMonth}` : `${utcDayOfMonth}`;
+        const month = utcMonth <= 9 ? `0${utcMonth}` : `${utcMonth}`;
+
+        let year = utcYear.toString();
+        const leadingZeros = year.length < 4 ? 4 - year.length : 0;
+        year = `${YEAR_LEADING_ZEROS[leadingZeros]}${year}`;
+
+        const dateVariables = {
+            "DD": day,
+            "MM": month,
+            "YYYY": year
+        };
+
+        const dateValue = "YYYY MM DD".split(' ')
+            .map((type: string) => dateVariables[type])
+            .join("-");
+
+        const formattedDate: string = this.dataFormat
+            ? this.dataFormat.trim()
+                .split(' ')
+                .map((type: string) => dateVariables[type])
+                .join('/')
+            : dateValue;
+
+        return {
+            dateToDisplay: formattedDate,
+            dateToAssign: dateValue
+        };
     }
 
     @TableOfContentProperty({
@@ -134,10 +148,10 @@ export class PskDateInput {
 
     @TableOfContentProperty({
         isMandatory: false,
-        description: `This property is the format of the date.At the moment the component can format only "MM DD YYYY", "DD MM YYYY", "MM YYYY DD", "YYYY MM DD", "YYYY DD MM"   and "DD YYYY MM".`,
+        description: `This property is the format of the date. At the moment the component can format only "MM DD YYYY", "DD MM YYYY", "MM YYYY DD", "YYYY MM DD", "YYYY DD MM"   and "DD YYYY MM".`,
         propertyType: 'string',
         defaultValue: "null"
     })
-    @Prop() dataFormat?: string | null = null
+    @Prop() dataFormat?: string | null = null;
 
 }
