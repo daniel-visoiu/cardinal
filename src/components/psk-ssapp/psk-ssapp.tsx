@@ -242,7 +242,7 @@ export class PskSelfSovereignApp {
 
       const iframeSrc = basePath + "iframe/" + this.digestSeedHex;
       return (
-        <iframe sandbox="allow-scripts allow-same-origin allow-forms"
+        <iframe
                 landing-page={this.landingPath}
                 frameborder="0"
                 style={{
