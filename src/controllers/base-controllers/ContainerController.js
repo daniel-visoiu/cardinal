@@ -146,7 +146,7 @@ export default class ContainerController {
 
       let appModalPath = modalsUrls[modalName];
       if (!appModalPath) {
-        return console.error(`Modal with name ${modalName} does not exists. Did you forgot to add it in app-config.json?`)
+        return console.error(`Modal with name ${modalName} does not exists. Did you forgot to add it in config.json?`)
       }
       this.__constructModalElement(appModalPath);
 
