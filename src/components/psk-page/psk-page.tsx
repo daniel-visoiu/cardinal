@@ -87,7 +87,7 @@ export class PskPage {
 		);
 
 		return (
-			<div class={`main-container ${this.pageClass}"`}>
+			<div class={`main-container ${this.pageClass}`}>
 
         {this.badgeText?<div class="psk-badge" style={{backgroundColor:this.badgeBackgroundColor}}>
           <div class="psk-badge-text" style={{color:this.badgeTextColor}}>{this.badgeText}</div>
