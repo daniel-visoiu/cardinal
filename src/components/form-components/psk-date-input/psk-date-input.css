@@ -1,5 +1,6 @@
 .formated-date {
   position: relative;
+  color:transparent!important;
 }
 
 .formated-date:before {
@@ -8,6 +9,7 @@
   left: 0.7rem;
   content: attr(data-date);
   display: inline-block;
+  color:#333333;
 }
 
 .formated-date::-webkit-datetime-edit, .formated-date::-webkit-inner-spin-button, .formated-date::-webkit-clear-button {
