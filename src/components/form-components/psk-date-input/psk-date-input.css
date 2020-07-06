@@ -1,0 +1,22 @@
+.formated-date {
+  position: relative;
+}
+
+.formated-date:before {
+  position: absolute;
+  top: 0.45rem;
+  left: 0.7rem;
+  content: attr(data-date);
+  display: inline-block;
+}
+
+.formated-date::-webkit-datetime-edit, .formated-date::-webkit-inner-spin-button, .formated-date::-webkit-clear-button {
+  display: none;
+}
+
+.formated-date::-webkit-calendar-picker-indicator {
+  position: absolute;
+  top: 0.41rem;
+  right: 0.8rem;
+  opacity: 1;
+}

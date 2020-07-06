@@ -11,7 +11,8 @@ const YEAR_LEADING_ZEROS = {
 };
 
 @Component({
-    tag: 'psk-date-input'
+    tag: 'psk-date-input',
+    styleUrl:"./psk-date-input.css"
 })
 export class PskDateInput {
     @CustomTheme()
