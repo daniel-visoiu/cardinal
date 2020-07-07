@@ -48,10 +48,7 @@ export default class DefaultApplicationController  {
           this.configIsLoaded = true;
           while (this.pendingRequests.length) {
             let request = this.pendingRequests.pop();
-            if (!this.configuration[request.configName]) {
-              throw new Error(`Config ${request.configName} was not provided. Did you set it in config.json?`)
-            }
-            request.callback(undefined, this.configuration[request.configName]);
+            this.respondWithConfiguration(request.configName, request.callback)
           }
         });
       })
@@ -64,6 +61,7 @@ export default class DefaultApplicationController  {
         element.addEventListener("getHistoryType", this._provideConfig("historyType"));
         element.addEventListener("getModals", this._provideConfig("modals"));
         element.addEventListener("getTags", this._provideConfig("tags"));
+        element.addEventListener("getConfiguration", this._provideConfig());
         element.addEventListener("validateUrl", (e) => {
               e.stopImmediatePropagation();
               let { sourceUrl, callback } = e.detail;
@@ -96,19 +94,28 @@ export default class DefaultApplicationController  {
             let callback = e.detail;
 
             if (callback && typeof callback === "function") {
-                if (this.configIsLoaded) {
-                    if (!this.configuration[configName]) {
-                        throw new Error(`Config ${configName} was not provided`)
-                    }
-                    callback(undefined, this.configuration[configName]);
-                } else {
-                    this.pendingRequests.push({ configName: configName, callback: callback });
-                }
+              if (this.configIsLoaded) {
+                return this.respondWithConfiguration(configName, callback);
+              } else {
+                this.pendingRequests.push({configName: configName, callback: callback});
+              }
             }
         }
     }
 
-    _parseSourceUrl(sourceUrl, callback) {
+    respondWithConfiguration(configName, callback) {
+      if (typeof configName !== "undefined" && !this.configuration[configName]) {
+        throw new Error(`Config ${configName} does not exists`)
+      }
+
+      if (typeof configName === "undefined") {
+        return callback(undefined, this.configuration);
+      }
+
+      callback(undefined, this.configuration[configName]);
+    }
+
+  _parseSourceUrl(sourceUrl, callback) {
         sourceUrl = sourceUrl.replace(/(\s+|-)/g, '').toLowerCase();
         let paths = sourceUrl.split("/");
 
