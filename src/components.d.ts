@@ -416,7 +416,7 @@ export namespace Components {
     }
     interface QrCodeReader {
         "data": any;
-        "title": "";
+        "title": string;
     }
     interface QueryPageLink {
         "activeClass": string;
@@ -1440,7 +1440,7 @@ declare namespace LocalJSX {
     }
     interface QrCodeReader {
         "data"?: any;
-        "title"?: "";
+        "title"?: string;
     }
     interface QueryPageLink {
         "activeClass"?: string;

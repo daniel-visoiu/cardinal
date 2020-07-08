@@ -12,7 +12,7 @@ export class QrCodeReader {
 
   @Element() element;
   @Prop() data:any;
-  @Prop() title:"";
+  @Prop() title: string = "";
 
 
   componentDidLoad(){

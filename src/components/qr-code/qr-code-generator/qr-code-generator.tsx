@@ -13,7 +13,7 @@ export class QrCodeGenerator {
   @Element() element;
   @Prop() data:any;
   @State() isLoaded = false;
-  @Prop() title = "";
+  @Prop() title: string = "";
 
 
   @Watch("data")
