@@ -39,7 +39,7 @@ function updateDossier(bar, callback) {
     });
 }
 
-function build_wallet(callback) {
+function build_dossier(callback) {
     fs.readFile(DOSSIER_SEED_FILE_PATH, (err, content) => {
         if (err || content.length === 0) {
             console.log(`Creating a new Dossier...`);
@@ -71,7 +71,7 @@ function build_wallet(callback) {
     });
 }
 
-build_wallet(function (err, seed) {
+build_dossier(function (err, seed) {
     let path = require("path");
     let projectName = path.basename(path.join(__dirname, "../"));
     if (err) {
