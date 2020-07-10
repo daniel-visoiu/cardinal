@@ -23,7 +23,7 @@ aside {
     color: white;
     order: 1;
     flex: 0.5;
-    display: grid;
+    display: grid!important;
     grid-template-rows: auto 1fr 40px;
     min-width: 320px;
     overflow: auto;
