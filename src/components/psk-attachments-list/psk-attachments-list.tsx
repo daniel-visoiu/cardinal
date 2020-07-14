@@ -6,9 +6,9 @@ const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
 
 @Component({
 	tag: 'psk-attachments-list',
-  styleUrls:[
-    "../../../themes/commons/fonts/font-awesome.min.css",
-    "../../../themes/commons/bootstrap/css/bootstrap.min.css"],
+	styleUrls: [
+		"../../../themes/commons/fonts/font-awesome.min.css",
+		"../../../themes/commons/bootstrap/css/bootstrap.min.css"],
 	shadow: true
 })
 
@@ -27,15 +27,6 @@ export class PskAttachmentsList {
 	})
 	@Prop() files;
 
-	@TableOfContentProperty({
-		description: `If this property is given to the component, then a red X will be displayed on the right of each file card giving the possibility to remove the file (this functionality should be implemented by the programmer providing him the possibility to have custom behavior before the deletion of the file).`,
-		specialNote: `The function will receive one parameter, the index of the file in the WgFile array.`,
-		isMandatory: false,
-		propertyType: 'Function',
-		defaultValue: 'null'
-	})
-	@Prop() removeFileFromList?: Function = null;
-
 	@Prop() attachmentsClass: string = "";
 
 	static bytesToSize(bytes) {
@@ -49,7 +40,7 @@ export class PskAttachmentsList {
 			return <h5>No attachments available!</h5>;
 		}
 
-		let filesView = this.files.map((file, index) => {
+		let filesView = this.files.map((file) => {
 
 			let fileType = null;
 			switch (file.name.substr(file.name.lastIndexOf(".") + 1)) {
@@ -70,17 +61,12 @@ export class PskAttachmentsList {
 				default:
 					fileType = "fa-file-o";
 			}
-			return <button type="button" class={`btn btn-primary mr-2 mt-2 ${this.attachmentsClass}`}>
+			return <psk-button button-class={`btn btn-primary mr-2 mt-2 ${this.attachmentsClass}`}
+				event-data={file.name} event-name="download-file">
 				<span class={`icon mr-1 fa ${fileType}`} />{file.name}
 				<span class={`badge badge-light ml-1 `}>{PskAttachmentsList.bytesToSize(file.size)}</span>
-				{this.removeFileFromList !== null && <span
-					class="fa fa-remove fa-2x pull-right"
-					onClick={(evt) => {
-						evt.preventDefault();
-						evt.stopImmediatePropagation();
-						this.removeFileFromList(index);
-					}} />}
-			</button>
+				<psk-button event-name="remove-attachment" event-data={file.name}>&times;</psk-button>
+			</psk-button>
 		});
 
 		return (filesView)
