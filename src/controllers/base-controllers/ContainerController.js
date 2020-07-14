@@ -5,7 +5,12 @@ import History from "./lib/History.js";
 export default class ContainerController {
 
   constructor(element, history) {
-    let modelRequests = [];
+    this.element = element;
+    this.DSUStorage = new DSUStorage();
+    this.History = new History(element, history);
+    this.modalsUrls = null;
+
+    let modelReadyCallbacks = [];
 
     let dispatchModel = function (bindValue, model, callback) {
       if (bindValue && model[bindValue]) {
@@ -28,37 +33,35 @@ export default class ContainerController {
         } = e.detail;
 
         if (typeof callback === "function") {
-
-          if (!this.model) {
-            modelRequests.push(
-              {bindValue: bindValue, callback: callback}
-            );
-            return;
-          }
-
-          return dispatchModel(bindValue, this.model, callback)
-
+          return this.onModelReady(() => {
+            dispatchModel(bindValue, this.model, callback)
+          })
         }
+
         callback(new Error("No callback provided"));
       });
     };
 
-    this.element = element;
-    this.DSUStorage = new DSUStorage();
-    this.History = new History(element, history);
+    let notifyModelReady = () => {
+      modelReadyCallbacks.forEach(callback=>{
+        callback();
+      });
+    }
+
 
     this.setModel = (model) => {
       this.model = PskBindableModel.setModel(model);
-
-      while (modelRequests.length > 0) {
-        let modelRequest = modelRequests.pop();
-        let {bindValue, callback} = modelRequest;
-        dispatchModel(bindValue, this.model, callback)
-      }
-
+      notifyModelReady();
       return this.model;
     };
-    this.modalsUrls = null;
+
+    this.onModelReady = (callback) => {
+      if (typeof this.model !== 'undefined') {
+        return callback();
+      }
+      modelReadyCallbacks.push(callback);
+    }
+
 
     __initGetModelEventListener();
   }

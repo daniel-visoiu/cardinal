@@ -51,7 +51,6 @@ export namespace Components {
     interface PskAttachmentsList {
         "attachmentsClass": string;
         "files": any;
-        "removeFileFromList"?: Function;
     }
     interface PskButton {
         "buttonClass": string | null;
@@ -1056,7 +1055,6 @@ declare namespace LocalJSX {
     interface PskAttachmentsList {
         "attachmentsClass"?: string;
         "files"?: any;
-        "removeFileFromList"?: Function;
     }
     interface PskButton {
         "buttonClass"?: string | null;

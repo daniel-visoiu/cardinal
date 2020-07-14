@@ -19,6 +19,19 @@
 | `type`                 | `type`                    |             | `string`            | `undefined`         |
 
 
+## Dependencies
+
+### Used by
+
+ - [psk-attachments-list](../psk-attachments-list)
+
+### Graph
+```mermaid
+graph TD;
+  psk-attachments-list --> psk-button
+  style psk-button fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

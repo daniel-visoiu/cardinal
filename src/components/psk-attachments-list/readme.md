@@ -7,12 +7,24 @@
 
 ## Properties
 
-| Property             | Attribute           | Description | Type       | Default     |
-| -------------------- | ------------------- | ----------- | ---------- | ----------- |
-| `attachmentsClass`   | `attachments-class` |             | `string`   | `""`        |
-| `files`              | `files`             |             | `any`      | `undefined` |
-| `removeFileFromList` | --                  |             | `Function` | `null`      |
+| Property           | Attribute           | Description | Type     | Default     |
+| ------------------ | ------------------- | ----------- | -------- | ----------- |
+| `attachmentsClass` | `attachments-class` |             | `string` | `""`        |
+| `files`            | `files`             |             | `any`    | `undefined` |
 
+
+## Dependencies
+
+### Depends on
+
+- [psk-button](../psk-button)
+
+### Graph
+```mermaid
+graph TD;
+  psk-attachments-list --> psk-button
+  style psk-attachments-list fill:#f9f,stroke:#333,stroke-width:4px
+```
 
 ----------------------------------------------
 
