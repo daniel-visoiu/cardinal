@@ -102,7 +102,7 @@ export class PskForEach {
 
     let childList = [];
     for (let i = 0; i < model.length; i++) {
-      let currentChain = this.chain ? `${this.chain}.${i}` : `${i}`;
+      let currentChain = this.chain ? `${this.chain}.${i}.` : `${i}.`;
 
       this.templateNodes.forEach(node => {
         let clonedTemplate: Element = node.cloneNode(true) as Element;
@@ -131,11 +131,12 @@ export class PskForEach {
     function processAttribute(attributeName,attributeValue) {
       let splitChain = attributeValue.trim().split("@");
       let property = splitChain.pop();
-      if(chain && property.length>0){
-        chain += `.${property}`
+      if (property === "") {
+        chain = chain.substring(0, chain.lastIndexOf("."));
       }
-
-      node.setAttribute(attributeName, "@" + chain);
+      //make sure that a chain prefix exists
+      const fullChain = chain ? `${chain}${property}` : property;
+      node.setAttribute(attributeName, "@" + fullChain);
     }
 
     /*
