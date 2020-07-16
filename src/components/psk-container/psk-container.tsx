@@ -3,11 +3,13 @@ import ControllerRegistryService from "../../services/ControllerRegistryService"
 import {TableOfContentProperty} from "../../decorators/TableOfContentProperty";
 import DefaultContainerController from "../../controllers/base-controllers/ContainerController.js";
 import {injectHistory, RouterHistory} from "@stencil/router";
+import CustomTheme from "../../decorators/CustomTheme";
 
 @Component({
   tag: "psk-container"
 })
 export class PskContainer {
+  @CustomTheme()
   @TableOfContentProperty({
     isMandatory: false,
     description: [`This property is a string that will permit the developer to choose his own controller.`,
