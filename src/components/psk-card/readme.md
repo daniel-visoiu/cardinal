@@ -17,6 +17,7 @@
 
 ### Used by
 
+ - [bar-code-reader](../qr-code/bar-code-reader)
  - [psk-chapter](../psk-chapter)
  - [psk-description](../psk-description)
  - [psk-toc](../psk-toc)
@@ -31,6 +32,7 @@
 ```mermaid
 graph TD;
   psk-card --> psk-copy-clipboard
+  bar-code-reader --> psk-card
   psk-chapter --> psk-card
   psk-description --> psk-card
   psk-toc --> psk-card

@@ -18,6 +18,10 @@ export namespace Components {
         "itemRenderer"?: string;
         "menuItems"?: MenuItem[];
     }
+    interface BarCodeReader {
+        "data": any;
+        "title": string;
+    }
     interface DropdownRenderer {
         "active": boolean;
         "somethingChanged": boolean;
@@ -462,6 +466,12 @@ declare global {
     var HTMLAppMenuElement: {
         prototype: HTMLAppMenuElement;
         new (): HTMLAppMenuElement;
+    };
+    interface HTMLBarCodeReaderElement extends Components.BarCodeReader, HTMLStencilElement {
+    }
+    var HTMLBarCodeReaderElement: {
+        prototype: HTMLBarCodeReaderElement;
+        new (): HTMLBarCodeReaderElement;
     };
     interface HTMLDropdownRendererElement extends Components.DropdownRenderer, HTMLStencilElement {
     }
@@ -939,6 +949,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "app-menu": HTMLAppMenuElement;
+        "bar-code-reader": HTMLBarCodeReaderElement;
         "dropdown-renderer": HTMLDropdownRendererElement;
         "event-expandable-renderer": HTMLEventExpandableRendererElement;
         "expandable-renderer": HTMLExpandableRendererElement;
@@ -1029,6 +1040,10 @@ declare namespace LocalJSX {
         "onGetHistoryType"?: (event: CustomEvent<any>) => void;
         "onMenuEvent"?: (event: CustomEvent<any>) => void;
         "onNeedMenuItems"?: (event: CustomEvent<any>) => void;
+    }
+    interface BarCodeReader {
+        "data"?: any;
+        "title"?: string;
     }
     interface DropdownRenderer {
         "active"?: boolean;
@@ -1492,6 +1507,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "app-menu": AppMenu;
+        "bar-code-reader": BarCodeReader;
         "dropdown-renderer": DropdownRenderer;
         "event-expandable-renderer": EventExpandableRenderer;
         "expandable-renderer": ExpandableRenderer;
@@ -1578,6 +1594,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "app-menu": LocalJSX.AppMenu & JSXBase.HTMLAttributes<HTMLAppMenuElement>;
+            "bar-code-reader": LocalJSX.BarCodeReader & JSXBase.HTMLAttributes<HTMLBarCodeReaderElement>;
             "dropdown-renderer": LocalJSX.DropdownRenderer & JSXBase.HTMLAttributes<HTMLDropdownRendererElement>;
             "event-expandable-renderer": LocalJSX.EventExpandableRenderer & JSXBase.HTMLAttributes<HTMLEventExpandableRendererElement>;
             "expandable-renderer": LocalJSX.ExpandableRenderer & JSXBase.HTMLAttributes<HTMLExpandableRendererElement>;

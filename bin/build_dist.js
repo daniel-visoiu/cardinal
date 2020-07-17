@@ -21,7 +21,7 @@ let config = {
     name: "cardinal build",
     actions: [{
       type: "execute",
-      cmd: "npm run build"
+      cmd: "npm run build-prod"
     }]
   },
     cardinalCopy]
