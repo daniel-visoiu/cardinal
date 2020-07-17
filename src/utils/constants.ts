@@ -58,3 +58,10 @@ export const GRID_HIDDEN_BREAKPOINTS = {
   lg: "d-lg-none d-xl-block",
   xl: "d-xl-none"
 };
+
+export const DATE_FORMAT_MASKS = {
+  'default': 'mm dd yyyy HH:MM',
+  'shortTime': 'HH:MM ',
+  'isoTime': 'HH:MM:ss',
+  'isoDate': 'yyyy-mm-dd',
+}

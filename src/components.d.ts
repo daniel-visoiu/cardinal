@@ -108,6 +108,11 @@ export namespace Components {
     interface PskCopyClipboard {
         "id": string;
     }
+    interface PskDate {
+        "format": string | null;
+        "hoverFormat": string | null;
+        "value": string | number | null;
+    }
     interface PskDateInput {
         "dataFormat"?: string | null;
         "invalidValue"?: boolean | null;
@@ -566,6 +571,12 @@ declare global {
         prototype: HTMLPskCopyClipboardElement;
         new (): HTMLPskCopyClipboardElement;
     };
+    interface HTMLPskDateElement extends Components.PskDate, HTMLStencilElement {
+    }
+    var HTMLPskDateElement: {
+        prototype: HTMLPskDateElement;
+        new (): HTMLPskDateElement;
+    };
     interface HTMLPskDateInputElement extends Components.PskDateInput, HTMLStencilElement {
     }
     var HTMLPskDateInputElement: {
@@ -946,6 +957,7 @@ declare global {
         "psk-container": HTMLPskContainerElement;
         "psk-controller-descriptor": HTMLPskControllerDescriptorElement;
         "psk-copy-clipboard": HTMLPskCopyClipboardElement;
+        "psk-date": HTMLPskDateElement;
         "psk-date-input": HTMLPskDateInputElement;
         "psk-default-renderer": HTMLPskDefaultRendererElement;
         "psk-description": HTMLPskDescriptionElement;
@@ -1114,6 +1126,11 @@ declare namespace LocalJSX {
     interface PskCopyClipboard {
         "id"?: string;
         "onGetHistoryType"?: (event: CustomEvent<any>) => void;
+    }
+    interface PskDate {
+        "format"?: string | null;
+        "hoverFormat"?: string | null;
+        "value"?: string | number | null;
     }
     interface PskDateInput {
         "dataFormat"?: string | null;
@@ -1493,6 +1510,7 @@ declare namespace LocalJSX {
         "psk-container": PskContainer;
         "psk-controller-descriptor": PskControllerDescriptor;
         "psk-copy-clipboard": PskCopyClipboard;
+        "psk-date": PskDate;
         "psk-date-input": PskDateInput;
         "psk-default-renderer": PskDefaultRenderer;
         "psk-description": PskDescription;
@@ -1578,6 +1596,7 @@ declare module "@stencil/core" {
             "psk-container": LocalJSX.PskContainer & JSXBase.HTMLAttributes<HTMLPskContainerElement>;
             "psk-controller-descriptor": LocalJSX.PskControllerDescriptor & JSXBase.HTMLAttributes<HTMLPskControllerDescriptorElement>;
             "psk-copy-clipboard": LocalJSX.PskCopyClipboard & JSXBase.HTMLAttributes<HTMLPskCopyClipboardElement>;
+            "psk-date": LocalJSX.PskDate & JSXBase.HTMLAttributes<HTMLPskDateElement>;
             "psk-date-input": LocalJSX.PskDateInput & JSXBase.HTMLAttributes<HTMLPskDateInputElement>;
             "psk-default-renderer": LocalJSX.PskDefaultRenderer & JSXBase.HTMLAttributes<HTMLPskDefaultRendererElement>;
             "psk-description": LocalJSX.PskDescription & JSXBase.HTMLAttributes<HTMLPskDescriptionElement>;
