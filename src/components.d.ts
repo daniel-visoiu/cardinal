@@ -18,10 +18,6 @@ export namespace Components {
         "itemRenderer"?: string;
         "menuItems"?: MenuItem[];
     }
-    interface BarCodeReader {
-        "data": any;
-        "title": string;
-    }
     interface DropdownRenderer {
         "active": boolean;
         "somethingChanged": boolean;
@@ -55,6 +51,10 @@ export namespace Components {
     interface PskAttachmentsList {
         "attachmentsClass": string;
         "files": any;
+    }
+    interface PskBarcodeScanner {
+        "data": any;
+        "title": string;
     }
     interface PskButton {
         "buttonClass": string | null;
@@ -467,12 +467,6 @@ declare global {
         prototype: HTMLAppMenuElement;
         new (): HTMLAppMenuElement;
     };
-    interface HTMLBarCodeReaderElement extends Components.BarCodeReader, HTMLStencilElement {
-    }
-    var HTMLBarCodeReaderElement: {
-        prototype: HTMLBarCodeReaderElement;
-        new (): HTMLBarCodeReaderElement;
-    };
     interface HTMLDropdownRendererElement extends Components.DropdownRenderer, HTMLStencilElement {
     }
     var HTMLDropdownRendererElement: {
@@ -514,6 +508,12 @@ declare global {
     var HTMLPskAttachmentsListElement: {
         prototype: HTMLPskAttachmentsListElement;
         new (): HTMLPskAttachmentsListElement;
+    };
+    interface HTMLPskBarcodeScannerElement extends Components.PskBarcodeScanner, HTMLStencilElement {
+    }
+    var HTMLPskBarcodeScannerElement: {
+        prototype: HTMLPskBarcodeScannerElement;
+        new (): HTMLPskBarcodeScannerElement;
     };
     interface HTMLPskButtonElement extends Components.PskButton, HTMLStencilElement {
     }
@@ -949,7 +949,6 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "app-menu": HTMLAppMenuElement;
-        "bar-code-reader": HTMLBarCodeReaderElement;
         "dropdown-renderer": HTMLDropdownRendererElement;
         "event-expandable-renderer": HTMLEventExpandableRendererElement;
         "expandable-renderer": HTMLExpandableRendererElement;
@@ -957,6 +956,7 @@ declare global {
         "psk-app-root": HTMLPskAppRootElement;
         "psk-app-router": HTMLPskAppRouterElement;
         "psk-attachments-list": HTMLPskAttachmentsListElement;
+        "psk-barcode-scanner": HTMLPskBarcodeScannerElement;
         "psk-button": HTMLPskButtonElement;
         "psk-button-group": HTMLPskButtonGroupElement;
         "psk-button-test": HTMLPskButtonTestElement;
@@ -1041,10 +1041,6 @@ declare namespace LocalJSX {
         "onMenuEvent"?: (event: CustomEvent<any>) => void;
         "onNeedMenuItems"?: (event: CustomEvent<any>) => void;
     }
-    interface BarCodeReader {
-        "data"?: any;
-        "title"?: string;
-    }
     interface DropdownRenderer {
         "active"?: boolean;
         "somethingChanged"?: boolean;
@@ -1082,6 +1078,10 @@ declare namespace LocalJSX {
     interface PskAttachmentsList {
         "attachmentsClass"?: string;
         "files"?: any;
+    }
+    interface PskBarcodeScanner {
+        "data"?: any;
+        "title"?: string;
     }
     interface PskButton {
         "buttonClass"?: string | null;
@@ -1507,7 +1507,6 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "app-menu": AppMenu;
-        "bar-code-reader": BarCodeReader;
         "dropdown-renderer": DropdownRenderer;
         "event-expandable-renderer": EventExpandableRenderer;
         "expandable-renderer": ExpandableRenderer;
@@ -1515,6 +1514,7 @@ declare namespace LocalJSX {
         "psk-app-root": PskAppRoot;
         "psk-app-router": PskAppRouter;
         "psk-attachments-list": PskAttachmentsList;
+        "psk-barcode-scanner": PskBarcodeScanner;
         "psk-button": PskButton;
         "psk-button-group": PskButtonGroup;
         "psk-button-test": PskButtonTest;
@@ -1594,7 +1594,6 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "app-menu": LocalJSX.AppMenu & JSXBase.HTMLAttributes<HTMLAppMenuElement>;
-            "bar-code-reader": LocalJSX.BarCodeReader & JSXBase.HTMLAttributes<HTMLBarCodeReaderElement>;
             "dropdown-renderer": LocalJSX.DropdownRenderer & JSXBase.HTMLAttributes<HTMLDropdownRendererElement>;
             "event-expandable-renderer": LocalJSX.EventExpandableRenderer & JSXBase.HTMLAttributes<HTMLEventExpandableRendererElement>;
             "expandable-renderer": LocalJSX.ExpandableRenderer & JSXBase.HTMLAttributes<HTMLExpandableRendererElement>;
@@ -1602,6 +1601,7 @@ declare module "@stencil/core" {
             "psk-app-root": LocalJSX.PskAppRoot & JSXBase.HTMLAttributes<HTMLPskAppRootElement>;
             "psk-app-router": LocalJSX.PskAppRouter & JSXBase.HTMLAttributes<HTMLPskAppRouterElement>;
             "psk-attachments-list": LocalJSX.PskAttachmentsList & JSXBase.HTMLAttributes<HTMLPskAttachmentsListElement>;
+            "psk-barcode-scanner": LocalJSX.PskBarcodeScanner & JSXBase.HTMLAttributes<HTMLPskBarcodeScannerElement>;
             "psk-button": LocalJSX.PskButton & JSXBase.HTMLAttributes<HTMLPskButtonElement>;
             "psk-button-group": LocalJSX.PskButtonGroup & JSXBase.HTMLAttributes<HTMLPskButtonGroupElement>;
             "psk-button-test": LocalJSX.PskButtonTest & JSXBase.HTMLAttributes<HTMLPskButtonTestElement>;

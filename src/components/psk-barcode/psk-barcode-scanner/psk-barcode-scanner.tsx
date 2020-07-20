@@ -2,10 +2,11 @@ import {Component, h, Prop, Element} from '@stencil/core';
 import CustomTheme from "../../../decorators/CustomTheme";
 import {BindModel} from '../../../decorators/BindModel';
 import audioData from './audioData.js';
+const SCAN_TIMEOUT = 100;
 @Component({
-  tag: 'bar-code-reader',
+  tag: 'psk-barcode-scanner',
 })
-export class BarCodeReader {
+export class PskBarcodeScanner {
 
   @BindModel() modelHandler;
   @CustomTheme()
@@ -86,13 +87,13 @@ export class BarCodeReader {
       if (window['ZXing']) {
         this.ZXing = window['ZXing']();
         this.decodePtr = this.ZXing.Runtime.addFunction(decodeCallback);
-        setTimeout(this.scanBarcode.bind(this), 100);
+        setTimeout(this.scanBarcode.bind(this), SCAN_TIMEOUT);
       } else {
-        setTimeout(tick,100);
+        setTimeout(tick,SCAN_TIMEOUT);
       }
     };
 
-    setTimeout(tick,100);
+    setTimeout(tick,SCAN_TIMEOUT);
     let decodeCallback =  (ptr, len, resultIndex, resultCount, x1, y1, x2, y2, x3, y3, x4, y4) => {
       console.log(resultIndex, resultCount, ptr, len);
       let result = new Uint8Array(this.ZXing.HEAPU8.buffer, ptr, len);
@@ -163,7 +164,7 @@ export class BarCodeReader {
     let err = this.ZXing._decode_any(this.decodePtr);
     if (err === -2) {
       if(!this.componentIsDisconnected ){
-        setTimeout(this.scanBarcode.bind(this), 100);
+        setTimeout(this.scanBarcode.bind(this), SCAN_TIMEOUT);
       }
     }
   }

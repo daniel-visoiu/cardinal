@@ -17,12 +17,12 @@
 
 ### Used by
 
- - [bar-code-reader](../qr-code/bar-code-reader)
+ - [psk-barcode-scanner](../psk-barcode/psk-barcode-scanner)
  - [psk-chapter](../psk-chapter)
  - [psk-description](../psk-description)
  - [psk-toc](../psk-toc)
- - [qr-code-generator](../qr-code/qr-code-generator)
- - [qr-code-reader](../qr-code/qr-code-reader)
+ - [qr-code-generator](../psk-barcode/qr-code-generator)
+ - [qr-code-reader](../psk-barcode/qr-code-reader)
 
 ### Depends on
 
@@ -32,7 +32,7 @@
 ```mermaid
 graph TD;
   psk-card --> psk-copy-clipboard
-  bar-code-reader --> psk-card
+  psk-barcode-scanner --> psk-card
   psk-chapter --> psk-card
   psk-description --> psk-card
   psk-toc --> psk-card
