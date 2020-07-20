@@ -1,8 +1,8 @@
-import { Component, Prop, h, Element } from '@stencil/core';
-import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
+import {Component, Element, h, Prop} from '@stencil/core';
+import {TableOfContentProperty} from '../../decorators/TableOfContentProperty';
 import CustomTheme from '../../decorators/CustomTheme';
-import { GRID_IGNORED_COMPONENTS, GRID_BREAKPOINTS, GRID_HIDDEN_BREAKPOINTS } from '../../utils/constants';
-import { BindModel } from '../../decorators/BindModel';
+import {GRID_BREAKPOINTS, GRID_HIDDEN_BREAKPOINTS, GRID_IGNORED_COMPONENTS} from '../../utils/constants';
+import {BindModel} from '../../decorators/BindModel';
 
 interface BreakPoint {
 	breakpoint: string,
@@ -60,13 +60,17 @@ export class PskGrid {
 		let htmlChildren: Array<Element> = [];
 
 		if (!this.columns || !this.layout) {
-			return <slot />;
+      return this.htmlSlotChildren.map((htmlSlotElement)=>{
+        return this.getJSXFromElement(htmlSlotElement);
+      });
 		}
 
 		let mappedBoostrapRules: Array<BreakPoint> = this._createLayoutRules.call(this);
 
 		if (mappedBoostrapRules.length === 0) {
-			return <slot />;
+			return this.htmlSlotChildren.map((htmlSlotElement)=>{
+			  return this.getJSXFromElement(htmlSlotElement);
+      });
 		}
 
 		let index = 0;
@@ -108,12 +112,11 @@ export class PskGrid {
 			htmlChildren.push(child);
 		});
 
-    let children = this.addRows(htmlChildren);
-    return children;
+    return this.addRows(htmlChildren);
 	}
 
   private addRows(htmlChildren: Array<Element>) {
-    let children = [];
+    let jsxChildren = [];
     let finishedAddingRows: boolean = false;
     while (!finishedAddingRows) {
       let rowElements: Array<Element> = htmlChildren.splice(0, Math.min(this.columns, htmlChildren.length));
@@ -123,20 +126,23 @@ export class PskGrid {
       rowElements.forEach(function (child: Element) {
         row.appendChild(child);
       });
-
-
-      let NewNodeTag: string = row.tagName.toLowerCase();
-      let attributes: any = {};
-      row.getAttributeNames().forEach(attrName => {
-        attributes[attrName] = row.getAttribute(attrName);
-      });
-
-      let newElement: Element = <NewNodeTag innerHTML={row.innerHTML} {...attributes} />;
-      children.push(newElement);
+      let newJSXElement = this.getJSXFromElement(row);
+      jsxChildren.push(newJSXElement);
 
       finishedAddingRows = htmlChildren.length === 0;
     }
-    return children;
+    return jsxChildren;
+  }
+
+  private getJSXFromElement(element: Element) {
+    let NewNodeTag: string = element.tagName.toLowerCase();
+    let attributes: any = {};
+    element.getAttributeNames().forEach(attrName => {
+      attributes[attrName] = element.getAttribute(attrName);
+    });
+
+    let newJSXElement: Element = <NewNodeTag innerHTML={element.innerHTML} {...attributes} />;
+    return newJSXElement;
   }
 
   _getClass(bkpt: string, value: string) {
