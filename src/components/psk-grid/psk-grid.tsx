@@ -42,8 +42,21 @@ export class PskGrid {
 
 	@Element() _host: HTMLElement;
 
+	private htmlSlotChildren:Array<Element> = [];
+
+	componentWillLoad(){
+    this.htmlSlotChildren = Array.from(this._host.children);
+    this._host.innerHTML = "";
+  }
+
 	render() {
-		let htmlSlotChildren: Array<Element> = Array.from(this._host.children);
+
+    //check if component is no longer attached to DOM
+    if (!this._host.isConnected) {
+      return null;
+    }
+
+		// let htmlSlotChildren: Array<Element> = Array.from(this._host.children);
 		let htmlChildren: Array<Element> = [];
 
 		if (!this.columns || !this.layout) {
@@ -57,7 +70,7 @@ export class PskGrid {
 		}
 
 		let index = 0;
-		htmlSlotChildren.forEach((child: Element) => {
+		this.htmlSlotChildren.forEach((child: Element) => {
 			if (GRID_IGNORED_COMPONENTS.indexOf(child.tagName.toLowerCase()) >= 0) {
 				return;
 			}
@@ -92,28 +105,41 @@ export class PskGrid {
 			child.className = `${child.className.trim()} ${classList.trim()}`.trim();
 			index = (index + 1) % this.columns;
 
-			htmlChildren.push(child.parentNode.removeChild(child));
+			htmlChildren.push(child);
 		});
 
-		let done: boolean = false;
-		while (!done) {
-			let rowElements: Array<Element> = htmlChildren.splice(0, Math.min(this.columns, htmlChildren.length));
-
-			let row: HTMLDivElement = document.createElement('div');
-			row.className = "row";
-			rowElements.forEach(function (child: Element) {
-				row.appendChild(child);
-			});
-
-			this._host.appendChild(row);
-
-			done = htmlChildren.length === 0;
-		}
-
-		return <slot />;
+    let children = this.addRows(htmlChildren);
+    return children;
 	}
 
-	_getClass(bkpt: string, value: string) {
+  private addRows(htmlChildren: Array<Element>) {
+    let children = [];
+    let finishedAddingRows: boolean = false;
+    while (!finishedAddingRows) {
+      let rowElements: Array<Element> = htmlChildren.splice(0, Math.min(this.columns, htmlChildren.length));
+
+      let row: HTMLDivElement = document.createElement('div');
+      row.className = "row";
+      rowElements.forEach(function (child: Element) {
+        row.appendChild(child);
+      });
+
+
+      let NewNodeTag: string = row.tagName.toLowerCase();
+      let attributes: any = {};
+      row.getAttributeNames().forEach(attrName => {
+        attributes[attrName] = row.getAttribute(attrName);
+      });
+
+      let newElement: Element = <NewNodeTag innerHTML={row.innerHTML} {...attributes} />;
+      children.push(newElement);
+
+      finishedAddingRows = htmlChildren.length === 0;
+    }
+    return children;
+  }
+
+  _getClass(bkpt: string, value: string) {
 		let classes: string = '';
 
 		switch (value) {
