@@ -42,11 +42,15 @@ export class PskGrid {
 
 	@Element() _host: HTMLElement;
 
-	private htmlSlotChildren:Array<Element> = [];
+	private htmlSlotChildren = [];
 
 	componentWillLoad(){
     this.htmlSlotChildren = Array.from(this._host.children);
     this._host.innerHTML = "";
+
+    this.htmlSlotChildren =  this.htmlSlotChildren.filter((node) => {
+      return (GRID_IGNORED_COMPONENTS.indexOf(node.nodeName.toLowerCase()) === -1)
+    });
   }
 
 	render() {

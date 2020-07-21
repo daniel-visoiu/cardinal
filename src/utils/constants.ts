@@ -47,7 +47,7 @@ export const ACTIONS_ICONS = {
   }
 };
 
-export const GRID_IGNORED_COMPONENTS = ["link", "psk-for-each", "style"];
+export const GRID_IGNORED_COMPONENTS = ["link", "style", "slot", "#text", "#comment", "text", "comment"];
 
 export const GRID_BREAKPOINTS = ["xs", "s", "m", "l", "xl"];
 

@@ -11,18 +11,32 @@ export class PskForm {
 
     @Element() private __host: HTMLElement;
 
-    render() {
-        let columns = this.__host.children.length;
-        Array.from(this.__host.children).forEach(function (el: Element) {
-            if (el.tagName.toLowerCase() === 'style') {
-                columns--;
-            }
-        });
+    private componentSlot = ""
+    private columns = 1;
 
-        return <psk-grid
-            columns={columns}
+    componentWillLoad(){
+
+      this.columns = this.__host.children.length;
+      Array.from(this.__host.children).forEach( (el: Element) =>{
+        if (el.tagName.toLowerCase() === 'style') {
+          this.columns--;
+        }
+      });
+
+      this.componentSlot = this.__host.innerHTML;
+      let styleElement = this.__host.querySelector("style");
+      if (styleElement) {
+        this.__host.innerHTML = styleElement.outerHTML;
+        this.componentSlot = this.componentSlot.replace(styleElement.outerHTML, "");
+      } else {
+        this.__host.innerHTML = "";
+      }
+    }
+
+    render() {
+        return <psk-grid innerHTML={this.componentSlot}
+            columns={this.columns}
             layout={this.layout}>
-            <slot />
         </psk-grid>;
     }
 
