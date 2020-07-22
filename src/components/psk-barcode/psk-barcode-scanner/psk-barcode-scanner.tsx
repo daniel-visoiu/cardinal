@@ -3,6 +3,7 @@ import CustomTheme from "../../../decorators/CustomTheme";
 import {BindModel} from '../../../decorators/BindModel';
 import audioData from './audioData.js';
 const SCAN_TIMEOUT = 100;
+const ANGLE_WIDTH=50;
 const MOBILE_DIMENSIONS = {
   WIDTH:240,
   HEIGHT:320,
@@ -89,8 +90,8 @@ export class PskBarcodeScanner {
     //for mobile devices we double the proportions because we don't want to touch the image quality by performing any image resizing
     this.cropOptions = this.isMobileDevice?[xPadding*2,yPadding*2,deviceDimmensions.FRAME_WIDTH*2,deviceDimmensions.FRAME_WIDTH*2]:[xPadding,yPadding,deviceDimmensions.FRAME_WIDTH,deviceDimmensions.FRAME_WIDTH];
 
-    this.addCanvasToView("overlayCanvas");
     this.addCanvasToView("lensCanvas");
+    this.addCanvasToView("overlayCanvas");
 
     this.videoElement = this.element.querySelector('video');
 
@@ -182,12 +183,13 @@ export class PskBarcodeScanner {
     ctx.lineTo(holePoints[0][0],holePoints[0][1]);
     ctx.closePath();
 
-//  add as many holes as you want
-    ctx.fillStyle = "#77777777";
-    ctx.strokeStyle = "rgba(0.5,0.5,0.5,0.5)";
-    ctx.lineWidth = 1;
+    ctx.fillStyle = "#77777799";
+    ctx.strokeStyle = "#FFFFFFFF"
+    ctx.lineWidth = 2;
     ctx.fill();
-    ctx.stroke();
+
+    let angleWidth = this.isMobileDevice?ANGLE_WIDTH/2:ANGLE_WIDTH;
+    this.addLensCorners(ctx,xPadding, yPadding, frameWidth, angleWidth);
   }
 
   gotStream(stream) {
@@ -260,7 +262,7 @@ export class PskBarcodeScanner {
     canvas.height = this.videoElement['videoHeight'];
     if (canvas.getContext) {
       let ctx = canvas.getContext('2d');
-      ctx.lineWidth = 7;
+      ctx.lineWidth = 5;
       ctx.strokeStyle = "#48d96099"
       ctx.fillStyle = "#48d96099";
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -283,12 +285,39 @@ export class PskBarcodeScanner {
       ctx.closePath();
       ctx.fill();
       ctx.stroke();
-
+      ctx.strokeStyle = "#48d960FF"
+      let xPadding = this.cropOptions[0];
+      let yPadding = this.cropOptions[1];
+      let frameWidth = this.cropOptions[2];
+      this.addLensCorners(ctx,xPadding, yPadding, frameWidth, ANGLE_WIDTH);
       setTimeout(()=>{
         ctx.clearRect(0, 0, canvas.width, canvas.height);
       },500);
 
     }
+  }
+
+  private addLensCorners(ctx,xPadding,yPadding, frameWidth, angleWidth) {
+    ctx.beginPath();
+    //top-left corner
+    ctx.moveTo(xPadding, yPadding + angleWidth);
+    ctx.lineTo(xPadding, yPadding);
+    ctx.lineTo(xPadding + angleWidth, yPadding);
+
+    //top-right corner
+    ctx.moveTo(xPadding + frameWidth - angleWidth, yPadding);
+    ctx.lineTo(xPadding + frameWidth, yPadding);
+    ctx.lineTo(xPadding + frameWidth, yPadding + angleWidth);
+    //bottom-right corner
+    ctx.moveTo(xPadding + frameWidth - angleWidth, yPadding + frameWidth);
+    ctx.lineTo(xPadding + frameWidth, yPadding + frameWidth);
+    ctx.lineTo(xPadding + frameWidth, yPadding + frameWidth - angleWidth);
+    //bottom-left corner
+    ctx.moveTo(xPadding, yPadding + frameWidth - angleWidth);
+    ctx.lineTo(xPadding, yPadding + frameWidth);
+    ctx.lineTo(xPadding + angleWidth, yPadding + frameWidth);
+
+    ctx.stroke();
   }
 
   scanBarcode() {
