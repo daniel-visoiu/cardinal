@@ -47,10 +47,6 @@ export class PskGrid {
 	componentWillLoad(){
     this.htmlSlotChildren = Array.from(this._host.children);
     this._host.innerHTML = "";
-
-    this.htmlSlotChildren =  this.htmlSlotChildren.filter((node) => {
-      return (GRID_IGNORED_COMPONENTS.indexOf(node.nodeName.toLowerCase()) === -1)
-    });
   }
 
 	render() {
@@ -60,7 +56,6 @@ export class PskGrid {
       return null;
     }
 
-		// let htmlSlotChildren: Array<Element> = Array.from(this._host.children);
 		let htmlChildren: Array<Element> = [];
 
 		if (!this.columns || !this.layout) {
