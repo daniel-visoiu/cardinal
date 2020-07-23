@@ -52,6 +52,12 @@ export namespace Components {
         "attachmentsClass": string;
         "files": any;
     }
+    interface PskBarcodeGenerator {
+        "data": any;
+        "size"?: any;
+        "title": string;
+        "type": string;
+    }
     interface PskBarcodeScanner {
         "data": any;
         "title": string;
@@ -509,6 +515,12 @@ declare global {
         prototype: HTMLPskAttachmentsListElement;
         new (): HTMLPskAttachmentsListElement;
     };
+    interface HTMLPskBarcodeGeneratorElement extends Components.PskBarcodeGenerator, HTMLStencilElement {
+    }
+    var HTMLPskBarcodeGeneratorElement: {
+        prototype: HTMLPskBarcodeGeneratorElement;
+        new (): HTMLPskBarcodeGeneratorElement;
+    };
     interface HTMLPskBarcodeScannerElement extends Components.PskBarcodeScanner, HTMLStencilElement {
     }
     var HTMLPskBarcodeScannerElement: {
@@ -956,6 +968,7 @@ declare global {
         "psk-app-root": HTMLPskAppRootElement;
         "psk-app-router": HTMLPskAppRouterElement;
         "psk-attachments-list": HTMLPskAttachmentsListElement;
+        "psk-barcode-generator": HTMLPskBarcodeGeneratorElement;
         "psk-barcode-scanner": HTMLPskBarcodeScannerElement;
         "psk-button": HTMLPskButtonElement;
         "psk-button-group": HTMLPskButtonGroupElement;
@@ -1078,6 +1091,12 @@ declare namespace LocalJSX {
     interface PskAttachmentsList {
         "attachmentsClass"?: string;
         "files"?: any;
+    }
+    interface PskBarcodeGenerator {
+        "data"?: any;
+        "size"?: any;
+        "title"?: string;
+        "type"?: string;
     }
     interface PskBarcodeScanner {
         "data"?: any;
@@ -1514,6 +1533,7 @@ declare namespace LocalJSX {
         "psk-app-root": PskAppRoot;
         "psk-app-router": PskAppRouter;
         "psk-attachments-list": PskAttachmentsList;
+        "psk-barcode-generator": PskBarcodeGenerator;
         "psk-barcode-scanner": PskBarcodeScanner;
         "psk-button": PskButton;
         "psk-button-group": PskButtonGroup;
@@ -1601,6 +1621,7 @@ declare module "@stencil/core" {
             "psk-app-root": LocalJSX.PskAppRoot & JSXBase.HTMLAttributes<HTMLPskAppRootElement>;
             "psk-app-router": LocalJSX.PskAppRouter & JSXBase.HTMLAttributes<HTMLPskAppRouterElement>;
             "psk-attachments-list": LocalJSX.PskAttachmentsList & JSXBase.HTMLAttributes<HTMLPskAttachmentsListElement>;
+            "psk-barcode-generator": LocalJSX.PskBarcodeGenerator & JSXBase.HTMLAttributes<HTMLPskBarcodeGeneratorElement>;
             "psk-barcode-scanner": LocalJSX.PskBarcodeScanner & JSXBase.HTMLAttributes<HTMLPskBarcodeScannerElement>;
             "psk-button": LocalJSX.PskButton & JSXBase.HTMLAttributes<HTMLPskButtonElement>;
             "psk-button-group": LocalJSX.PskButtonGroup & JSXBase.HTMLAttributes<HTMLPskButtonGroupElement>;
