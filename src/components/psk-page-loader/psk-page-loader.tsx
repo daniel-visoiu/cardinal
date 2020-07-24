@@ -1,4 +1,4 @@
-import { Component, h, Prop, State, Watch } from "@stencil/core";
+import { Component, h, Prop, State, Watch,Element } from "@stencil/core";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import { BindModel } from "../../decorators/BindModel";
 import CustomTheme from "../../decorators/CustomTheme";
@@ -14,6 +14,7 @@ export class PskPageLoader {
 
   @State() pageContent: string;
   @State() errorLoadingPage: boolean = false;
+  @Element() element;
 
   @TableOfContentProperty({
     description: [`This property is the url for the page that needs to be loaded.`,
@@ -34,9 +35,11 @@ export class PskPageLoader {
   @Prop() type: string = "div";
 
   componentWillLoad(): Promise<void> | void {
-    return new Promise((resolve) => {
-      this.getPageContent(this.pageUrl, this.getPageHandler(resolve));
-    });
+    if(this.element.isConnected){
+      return new Promise((resolve) => {
+        this.getPageContent(this.pageUrl, this.getPageHandler(resolve));
+      });
+    }
   }
 
   @Watch('pageUrl')
