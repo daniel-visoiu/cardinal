@@ -50,9 +50,38 @@ function resolveDependency(url) {
 }
 
 export default function CustomTheme(): CustomThemeInterface {
+
+
+  let handleStyleExistenceCheck=(element)=>{
+    let childComponents = {};
+    element.addEventListener("styleExists",(event:CustomEvent)=>{
+      event.stopImmediatePropagation();
+      event.preventDefault();
+
+      let eventCallback = event.detail.callback;
+      let componentName = event.detail.componentTag;
+
+      eventCallback(undefined, childComponents.hasOwnProperty(componentName));
+      if (!childComponents[componentName]) {
+        childComponents[componentName] = true;
+      }
+    })
+
+
+    element.addEventListener("componentWasRemoved",(event:CustomEvent)=>{
+      let componentName = event.detail.componentTag;
+      if (childComponents[componentName]) {
+        delete childComponents[componentName];
+      }
+    })
+  }
+
+  handleStyleExistenceCheck(document.querySelector("body"));
+
+
   return (proto: ComponentInterface) => {
 
-    const {componentWillLoad} = proto;
+    const {componentWillLoad, disconnectedCallback} = proto;
     proto.getInnerContent = function (htmlElementProperty) {
       const host = getElement(this);
       if (host[htmlElementProperty]) {
@@ -79,32 +108,78 @@ export default function CustomTheme(): CustomThemeInterface {
 
         let injectThemeStyle = (theme) => {
           let componentName = host.tagName.toLowerCase();
-          return new Promise((resolve) => {
-            // @ts-ignore
-            let themeStylePath = window.basePath + "themes/" + theme + "/components/" + componentName + "/" + componentName + ".css";
-            let parent = host.shadowRoot ? host.shadowRoot : host;
 
-            if (!dependencies[themeStylePath]) {
-              dependencies[themeStylePath] = new Promise((resolve, reject) => {
-                resolveDependency(themeStylePath).then((cssRaw) => {
-                  resolve(cssRaw)
-                }).catch(reject);
-              })
-            }
+          let addStyleElement = ()=>{
+            return new Promise((resolve) => {
+              // @ts-ignore
+              let themeStylePath = window.basePath + "themes/" + theme + "/components/" + componentName + "/" + componentName + ".css";
+              let parent = host.shadowRoot ? host.shadowRoot : host;
 
-            dependencies[themeStylePath].then((cssRaw) => {
-              checkForInnerDependencies(themeStylePath, cssRaw).then((data: string) => {
-                let styleElement = document.createElement("style");
-                styleElement.innerHTML = data;
-                parent.prepend(styleElement);
+              if (!dependencies[themeStylePath]) {
+                dependencies[themeStylePath] = new Promise((resolve, reject) => {
+                  resolveDependency(themeStylePath).then((cssRaw) => {
+                    resolve(cssRaw)
+                  }).catch(reject);
+                })
+              }
+
+              dependencies[themeStylePath].then((cssRaw) => {
+                checkForInnerDependencies(themeStylePath, cssRaw).then((data: string) => {
+                  let styleElement = document.createElement("style");
+                  styleElement.innerHTML = data;
+                  parent.append(styleElement);
+                })
+              }).catch((errorStatus) => {
+                console.log(`Request on resource ${errorStatus.url} ended with status: ${errorStatus.status} (${errorStatus.statusText})`);
+              }).finally(() => {
+                resolve(componentWillLoad && componentWillLoad.call(this));
               })
-            }).catch((errorStatus) => {
-              console.log(`Request on resource ${errorStatus.url} ended with status: ${errorStatus.status} (${errorStatus.statusText})`);
-            }).finally(() => {
+
+            })
+          }
+
+          if(host.shadowRoot){
+            handleStyleExistenceCheck(host);
+            return addStyleElement();
+          }
+
+
+          if(!host.isConnected){
+            return new Promise(resolve=>{
               resolve(componentWillLoad && componentWillLoad.call(this));
             })
+          }
 
-          })
+          return new Promise((resolve => {
+            let styleExistsEvent = new CustomEvent("styleExists",
+              {
+                bubbles: true,
+                cancelable: true,
+                composed: true,
+                detail: {
+                  callback: (err, styleExists) => {
+
+                    if (err) {
+                      console.log(err);
+                      return;
+                    }
+                    if (!styleExists) {
+                      addStyleElement().then(()=>{
+                        resolve();
+                      });
+                    }else{
+                      resolve(componentWillLoad && componentWillLoad.call(this));
+                    }
+                  },
+                  componentTag:componentName
+                }
+              })
+
+            host.dispatchEvent(styleExistsEvent);
+          }))
+
+
+
         };
 
         if (!appTheme) {
@@ -132,5 +207,20 @@ export default function CustomTheme(): CustomThemeInterface {
         }
       }
     };
+    proto.disconnectedCallback = function () {
+      const host = getElement(this);
+      let componentName = host.tagName.toLowerCase();
+      let componentWasRemovedEvent = new CustomEvent("componentWasRemoved",
+        {
+          bubbles: true,
+          cancelable: true,
+          composed: true,
+          detail: {
+            componentTag: componentName
+          }
+        });
+      host.dispatchEvent(componentWasRemovedEvent);
+      disconnectedCallback && disconnectedCallback.call(this);
+    }
   };
 }
