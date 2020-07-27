@@ -3,6 +3,7 @@ import { Component, h, Prop, Listen, getElement } from '@stencil/core';
 import CustomTheme from '../../decorators/CustomTheme';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import { BindModel } from '../../decorators/BindModel';
+import {stringToBoolean} from "../../utils/utilFunctions";
 
 
 @Component({
@@ -15,6 +16,10 @@ export class ButtonGroup {
     @CustomTheme()
 
     render() {
+        if (typeof this.opened === "string") {
+          this.opened = stringToBoolean(this.opened);
+        }
+
         if (!this.label && !this.icon) {
             return null;
         }
