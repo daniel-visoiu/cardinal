@@ -3,6 +3,7 @@ import {TableOfContentProperty} from '../../decorators/TableOfContentProperty';
 import CustomTheme from '../../decorators/CustomTheme';
 import {GRID_BREAKPOINTS, GRID_HIDDEN_BREAKPOINTS, GRID_IGNORED_COMPONENTS} from '../../utils/constants';
 import {BindModel} from '../../decorators/BindModel';
+import {normalizeDashedToCamelCase} from "../../utils/utilFunctions";
 
 interface BreakPoint {
 	breakpoint: string,
@@ -136,8 +137,26 @@ export class PskGrid {
   private getJSXFromElement(element: Element) {
     let NewNodeTag: string = element.tagName.toLowerCase();
     let attributes: any = {};
+
+    let extractStyleDeclarations = () => {
+      //@ts-ignore
+      let customizationStyle = element.style;
+      let index = 0;
+      let styles = {};
+      while (customizationStyle[index]) {
+        let stylePropertyName = normalizeDashedToCamelCase(customizationStyle[index]);
+        styles[stylePropertyName] = customizationStyle[stylePropertyName];
+        index++;
+      }
+      return styles;
+    }
+
     element.getAttributeNames().forEach(attrName => {
-      attributes[attrName] = element.getAttribute(attrName);
+      if (attrName === "style") {
+        attributes[attrName] = extractStyleDeclarations();
+      } else {
+        attributes[attrName] = element.getAttribute(attrName);
+      }
     });
 
     let newJSXElement: Element = <NewNodeTag innerHTML={element.innerHTML} {...attributes} />;
