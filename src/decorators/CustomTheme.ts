@@ -82,23 +82,6 @@ export default function CustomTheme(): CustomThemeInterface {
   return (proto: ComponentInterface) => {
 
     const {componentWillLoad, disconnectedCallback} = proto;
-    proto.getInnerContent = function (htmlElementProperty) {
-      const host = getElement(this);
-      if (host[htmlElementProperty]) {
-
-        let styleElement = host.querySelector('style');
-        if (styleElement) {
-          let content = host[htmlElementProperty].replace(styleElement.outerHTML, "");
-          host[htmlElementProperty] = styleElement.outerHTML;
-          return content;
-        }
-        return host[htmlElementProperty];
-      } else {
-        console.error(`${htmlElementProperty} is not a property`);
-      }
-    };
-
-
     proto.componentWillLoad = function () {
       const host = getElement(this);
       if (!host) {

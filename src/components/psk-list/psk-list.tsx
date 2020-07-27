@@ -2,6 +2,7 @@ import { Component, h, Prop, Element } from "@stencil/core";
 import { PSK_LIST_PARSE_CONFIG, LIST_TYPE_ORDERED } from "../../utils/constants";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import CustomTheme from "../../decorators/CustomTheme";
+import {getInnerHTML} from "../../utils/utilFunctions";
 
 @Component({
     tag: "psk-list",
@@ -22,11 +23,10 @@ export class PskList {
 
     render() {
         let htmlLinesRaw = "";
-        if (!this["getInnerContent"]) {
-            return null;
+        htmlLinesRaw = getInnerHTML(this);
+        if(!htmlLinesRaw){
+          return null;
         }
-
-        htmlLinesRaw = this['getInnerContent']("innerHTML");
         const htmlLines: Array<string> = htmlLinesRaw.split(/\n/g).filter(el => el.trim().length > 0);
 
         if (htmlLines.length === 0) {

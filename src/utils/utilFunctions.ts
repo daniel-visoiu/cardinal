@@ -1,4 +1,5 @@
 import { INVALID_ID_CHARACTERS_REGEX } from "./constants";
+import {getElement} from "@stencil/core";
 
 export function format(first: string, middle: string, last: string): string {
   return (
@@ -212,3 +213,19 @@ export function stringToBoolean(str){
 export function dashToCamelCase( str ) {
   return str.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
 }
+
+export function getInnerHTML(component) {
+  const host = getElement(component);
+  if (!host.innerHTML) {
+    return null;
+  }
+
+  let styleElement = host.querySelector('style');
+  if (styleElement) {
+    let content = host.innerHTML.replace(styleElement.outerHTML, "");
+    host.innerHTML = styleElement.outerHTML;
+    return content;
+  }
+  return host.innerHTML;
+
+};
