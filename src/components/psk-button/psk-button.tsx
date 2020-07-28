@@ -22,13 +22,15 @@ export class PskButton {
 	render() {
 
     let disabled;
+    let touched = false;
+    let btnAttributes = {};
+    let eventsListeners = {};
+
     if(typeof this.disabled === "string"){
       disabled = stringToBoolean(this.disabled);
     } else {
       disabled = Boolean(this.disabled);
     }
-
-    let btnAttributes = {};
 
     if (disabled) {
       btnAttributes['disabled'] = disabled;
@@ -39,21 +41,44 @@ export class PskButton {
       btnAttributes['value'] = this.eventName;
     }
 
+    if(this.eventName){
+      eventsListeners['onClick'] = (evt: MouseEvent) => {
+        this.handleClickEvent.call(this, evt, this.eventName);
+      };
+    }
+
+    if(this.doubleClickEventName){
+      eventsListeners['onDblClick'] = (evt: MouseEvent) => {
+        this.handleClickEvent.call(this, evt, this.doubleClickEventName);
+      };
+
+      eventsListeners['onKeyUp'] = (evt: KeyboardEvent) => {
+        evt.stopImmediatePropagation();
+        evt.preventDefault();
+        if (evt.key === 'Enter' || evt.code === "Enter") {
+          this.handleClickEvent.call(this, evt, this.doubleClickEventName);
+        }
+      }
+    }
+
+    if(this.touchEventName){
+      eventsListeners['onTouchStart'] = () => {
+        touched = true;
+        setTimeout(()=>{
+          touched=false;
+        },250)
+      };
+
+      eventsListeners['onTouchEnd'] = (evt) => {
+        if(touched){
+          this.handleClickEvent.call(this, evt, this.touchEventName);
+          touched = false;
+        }
+      }
+    }
+
 		return (
-			<button class={this.buttonClass} {...btnAttributes}
-				onClick={(evt: MouseEvent) => {
-					this.handleClickEvent.call(this, evt, this.eventName);
-				}}
-				onDblClick={(evt: MouseEvent) => {
-					this.handleClickEvent.call(this, evt, this.doubleClickEventName);
-				}}
-				onKeyUp={(evt: KeyboardEvent) => {
-					evt.stopImmediatePropagation();
-					evt.preventDefault();
-					if (evt.key === 'Enter' || evt.keyCode === 13) {
-						this.handleClickEvent.call(this, evt, this.doubleClickEventName);
-					}
-				}}>
+			<button class={this.buttonClass} {...btnAttributes} {...eventsListeners}>
 				{this.label && this.label}
 				<slot />
 			</button>
@@ -110,11 +135,18 @@ export class PskButton {
 	@Prop() eventName: string | null;
 
 	@TableOfContentProperty({
-		description: ['This attribute has almost the same definiton as the eventName attribute. The particularity of this one is that it will be triggered only on double-clicking the component.'],
+		description: ['This attribute has almost the same definition as the eventName attribute. The particularity of this one is that it will be triggered only on double-clicking the component.'],
 		isMandatory: false,
 		propertyType: 'string'
 	})
 	@Prop() doubleClickEventName: string | null;
+
+  @TableOfContentProperty({
+    description: ['This attribute has almost the same definition as the eventName attribute. The particularity of this one is that it will be triggered only on touch the component.'],
+    isMandatory: false,
+    propertyType: 'string'
+  })
+  @Prop() touchEventName: string | null;
 
 	@TableOfContentProperty({
 		description: ['This attribute is used to pass some information along with an event.',
