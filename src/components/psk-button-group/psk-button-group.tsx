@@ -50,10 +50,16 @@ export class ButtonGroup {
     @Listen('click', { capture: true, target: "window" })
     handleClickOutside(evt: Event) {
         let thisElement: HTMLElement = getElement(this);
-        let listGroup = thisElement.querySelector(".list-group");
-        let trigger = thisElement.querySelector(".trigger");
-        let listGroupInPath = evt.composedPath().indexOf(listGroup) > -1;
-        let triggerInPath = evt.composedPath().indexOf(trigger) > -1;
+        let listGroup = thisElement.querySelector("div.list-group");
+        let trigger = thisElement.querySelector("div.trigger");
+        let composedPath = evt.composedPath();
+        //do not turn off menu on a misleading click/touch.
+        if(composedPath[0] === listGroup){
+          return;
+        }
+
+        let listGroupInPath = composedPath.indexOf(listGroup) > 1;
+        let triggerInPath = composedPath.indexOf(trigger) > -1;
 
         // Turn off the menu, only if the click is coming from outside the component.
         // If the click is coming from outside the component, let the onClick event attached to the div.trigger handle the click
