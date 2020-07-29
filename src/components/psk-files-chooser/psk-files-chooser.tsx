@@ -31,14 +31,12 @@ export class PskFilesChooser {
 	@Prop() accept?: string;
 	@Prop() eventName?: string;
 
-	// @TableOfContentProperty({
-	// 	description: `This property tells the component what to do with the selected uploaded files.
-	// 		If this property is missing, then nothing will happen with the selected uploaded files.`,
-	// 	isMandatory: false,
-	// 	propertyType: `Function`,
-	// 	specialNote: `A hint message will be displayed for the user, to know that a controller for the component is not set.`
-	// })
-	// @Prop() onFilesSelect?: Function;
+  triggerBrowseFile(event){
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    this.htmlElement.querySelector("input").click();
+  }
+
 	addedFile(event) {
 		let filesArray = Array.from(event.target.files);
 
@@ -73,7 +71,8 @@ export class PskFilesChooser {
 		}
 
 		return [
-			<button type="button" class="btn btn-secondary">
+			<button type="button" class="btn btn-secondary" onClick={this.triggerBrowseFile.bind(this)}>
+        <slot/>
 				<label>
 					{this.label}
 					<input
@@ -81,6 +80,7 @@ export class PskFilesChooser {
 						{...directoryAttributes}
 						accept={this.accept}
 						type="file"
+            onClick={(event)=>{event.stopImmediatePropagation()}}
 						onChange={this.addedFile.bind(this)}
 						class="form-control-file form-control-sm" />
 				</label>
