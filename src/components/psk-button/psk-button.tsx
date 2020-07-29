@@ -1,4 +1,4 @@
-import { Component, h, Prop, Element } from '@stencil/core';
+import { Component, h, Prop, Element, Host } from '@stencil/core';
 import CustomTheme from '../../decorators/CustomTheme';
 import PskButtonEvent from "../../events/PskButtonEvent";
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
@@ -40,6 +40,9 @@ export class PskButton {
       btnAttributes['type'] = this.type;
       btnAttributes['value'] = this.eventName;
     }
+    if(this.buttonClass.trim()){
+      btnAttributes['class'] = this.buttonClass
+    }
 
     if(this.eventName){
       eventsListeners['onClick'] = (evt: MouseEvent) => {
@@ -66,7 +69,7 @@ export class PskButton {
         touched = true;
         setTimeout(()=>{
           touched=false;
-        },250)
+        },75)
       };
 
       eventsListeners['onTouchEnd'] = (evt) => {
@@ -78,10 +81,12 @@ export class PskButton {
     }
 
 		return (
-			<button class={this.buttonClass} {...btnAttributes} {...eventsListeners}>
+		  <Host {...eventsListeners}>
+			<button {...btnAttributes}>
 				{this.label && this.label}
 				<slot />
 			</button>
+      </Host>
 		);
 	}
 
