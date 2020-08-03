@@ -16,6 +16,7 @@
 | `eventDispatcher`      | `event-dispatcher`        |             | `string`            | `undefined`         |
 | `eventName`            | `event-name`              |             | `string`            | `undefined`         |
 | `label`                | `label`                   |             | `string`            | `undefined`         |
+| `touchEventName`       | `touch-event-name`        |             | `string`            | `undefined`         |
 | `type`                 | `type`                    |             | `string`            | `undefined`         |
 
 
