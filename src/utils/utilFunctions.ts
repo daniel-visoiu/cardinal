@@ -198,6 +198,9 @@ export function normalizeModelChain(chain){
 }
 
 export function stringToBoolean(str){
+  if(typeof str === "boolean"){
+    return str;
+  }
   switch (str.toLowerCase().trim()) {
     case "true":
     case "1":

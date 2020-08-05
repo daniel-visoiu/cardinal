@@ -59,6 +59,7 @@ export namespace Components {
         "type": string;
     }
     interface PskBarcodeScanner {
+        "allowFileBrowsing": boolean;
         "data": any;
         "title": string;
     }
@@ -1100,6 +1101,7 @@ declare namespace LocalJSX {
         "type"?: string;
     }
     interface PskBarcodeScanner {
+        "allowFileBrowsing"?: boolean;
         "data"?: any;
         "title"?: string;
     }

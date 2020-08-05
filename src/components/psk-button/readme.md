@@ -25,11 +25,13 @@
 ### Used by
 
  - [psk-attachments-list](../psk-attachments-list)
+ - [psk-barcode-scanner](../psk-barcode/psk-barcode-scanner)
 
 ### Graph
 ```mermaid
 graph TD;
   psk-attachments-list --> psk-button
+  psk-barcode-scanner --> psk-button
   style psk-button fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
