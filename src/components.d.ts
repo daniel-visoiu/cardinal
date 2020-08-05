@@ -54,6 +54,7 @@ export namespace Components {
     }
     interface PskBarcodeGenerator {
         "data": any;
+        "includeText": boolean;
         "size"?: any;
         "title": string;
         "type": string;
@@ -1096,6 +1097,7 @@ declare namespace LocalJSX {
     }
     interface PskBarcodeGenerator {
         "data"?: any;
+        "includeText"?: boolean;
         "size"?: any;
         "title"?: string;
         "type"?: string;

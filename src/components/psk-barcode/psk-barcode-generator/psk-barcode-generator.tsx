@@ -1,6 +1,7 @@
 import {Component, h, Prop, Element, State, Watch} from '@stencil/core';
 import CustomTheme from "../../../decorators/CustomTheme";
 import {BindModel} from '../../../decorators/BindModel';
+import {stringToBoolean} from "../../../utils/utilFunctions";
 
 @Component({
   tag: 'psk-barcode-generator',
@@ -15,8 +16,7 @@ export class PskBarcodeGenerator {
   @Prop() title: string = "";
   @Prop() type:string="";
   @Prop() size?:any = 32;
-
-
+  @Prop() includeText:boolean = false;
 
 
   @Watch("data")
@@ -29,17 +29,20 @@ export class PskBarcodeGenerator {
         //@ts-ignore
         if (window.bwipjs) {
           try{
-            //@ts-ignore
-            window.bwipjs.toCanvas(canvas, {
+            let options =  {
               bcid: this.type,       // Barcode type
               text: this.data,    // Text to encode
-              alttext:this.data,
               scale: 3,               // 3x scaling factor
               width: this.size,
               height: this.size,              // Bar height, in millimeters
-              includetext: true,            // Show human-readable text
               textxalign: 'center',        // Always good to set this
-            }, function (err) {
+            }
+            if(stringToBoolean(this.includeText)){
+              options['alttext'] = this.data;
+            }
+
+            //@ts-ignore
+            window.bwipjs.toCanvas(canvas,options, function (err) {
               if (err) {
                 console.log(err);
               }
