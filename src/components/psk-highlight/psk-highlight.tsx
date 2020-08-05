@@ -5,7 +5,7 @@ import CustomTheme from '../../decorators/CustomTheme.js';
 
 @Component({
     tag: "psk-highlight",
-    styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.css"
+    styleUrls:["./psk-highlight.css","../../../themes/commons/bootstrap/css/bootstrap.css"]
 })
 
 export class PskDescription {
@@ -19,7 +19,7 @@ export class PskDescription {
     @Prop() title: string = "";
 
     @TableOfContentProperty({
-        description: `This property is the type of highlight. Possible values are: "note", "issue", "example". Defaults to "note".`,
+        description: `This property is the type of highlight. Possible values are: "note", "issue", "example", "warning". Defaults to "note".`,
         isMandatory: false,
         propertyType: `string`
     })
