@@ -24,11 +24,11 @@ export class PskEventDescriptor {
         let componentEventsDefinitions = this.decoratorEvents.map((event: EventOptions) => {
             const cardSubtitle = `${event.eventName}: CustomEvent`;
             return (
-                <psk-hoc title={event.eventName}>
+                <psk-chapter-wrapper title={event.eventName}>
                     <p class="subtitle"><i>{cardSubtitle}</i></p>
                     <p>{event.description}</p>
                     {event.specialNote ? (<p><b>Note: {event.specialNote}</b></p>) : null}
-                </psk-hoc>
+                </psk-chapter-wrapper>
             );
         });
 

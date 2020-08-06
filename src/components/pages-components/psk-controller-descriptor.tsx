@@ -26,12 +26,12 @@ export class PskControllerDescriptor {
             const cardSubtitle = `${controller.eventName}: CustomEvent`;
             const required = `Required : ${controller.controllerInteraction.required}`
             return (
-                <psk-hoc title={controller.eventName}>
+                <psk-chapter-wrapper title={controller.eventName}>
                     <p class="subtitle"><i>{cardSubtitle}</i></p>
                     <p class="subtitle"><b>{required}</b></p>
                     <p>{controller.description}</p>
                     {controller.specialNote ? (<p><b>Note: {controller.specialNote}</b></p>) : null}
-                </psk-hoc>
+                </psk-chapter-wrapper>
             );
         });
         return (

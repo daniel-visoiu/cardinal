@@ -1,10 +1,10 @@
 import { Component, h, Prop } from "@stencil/core";
 
 @Component({
-    tag: "psk-hoc"
+    tag: "psk-chapter-wrapper"
 })
 
-export class PskHOC {
+export class PskChapterWrapper {
 
     @Prop() title: string;
 

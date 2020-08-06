@@ -24,7 +24,7 @@ export class PskPropertyDescriptor {
         let componentPropertiesDefinitions = this.decoratorProperties.map((prop: PropertyOptions) => {
             const cardSubtitle = `${prop.propertyName}${prop.isMandatory ? "" : "?"}: ${prop.propertyType} ${prop.isMandatory ? "(mandatory)" : "(optional)"}`;
             return (
-                <psk-hoc title={prop.propertyName}>
+                <psk-chapter-wrapper title={prop.propertyName}>
                     <p class="subtitle"><i>{cardSubtitle}</i></p>
                     {
                         Array.isArray(prop.description)
@@ -33,7 +33,7 @@ export class PskPropertyDescriptor {
                     }
                     {prop.specialNote ? (<p><b>Note: {prop.specialNote}</b></p>) : null}
                     {prop.defaultValue ? (<p><i>Default value: {prop.defaultValue}</i></p>) : null}
-                </psk-hoc>
+                </psk-chapter-wrapper>
             );
         });
 
