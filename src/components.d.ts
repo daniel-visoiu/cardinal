@@ -92,6 +92,9 @@ export namespace Components {
         "guid": string;
         "title": string;
     }
+    interface PskChapterWrapper {
+        "title": string;
+    }
     interface PskCheckbox {
         "checkboxLabel": any;
         "checked"?: boolean;
@@ -185,7 +188,6 @@ export namespace Components {
         "typeOfHighlight": string;
     }
     interface PskHoc {
-        "title": string;
     }
     interface PskIcon {
         "classes"?: string | null;
@@ -559,6 +561,12 @@ declare global {
     var HTMLPskChapterElement: {
         prototype: HTMLPskChapterElement;
         new (): HTMLPskChapterElement;
+    };
+    interface HTMLPskChapterWrapperElement extends Components.PskChapterWrapper, HTMLStencilElement {
+    }
+    var HTMLPskChapterWrapperElement: {
+        prototype: HTMLPskChapterWrapperElement;
+        new (): HTMLPskChapterWrapperElement;
     };
     interface HTMLPskCheckboxElement extends Components.PskCheckbox, HTMLStencilElement {
     }
@@ -978,6 +986,7 @@ declare global {
         "psk-button-test": HTMLPskButtonTestElement;
         "psk-card": HTMLPskCardElement;
         "psk-chapter": HTMLPskChapterElement;
+        "psk-chapter-wrapper": HTMLPskChapterWrapperElement;
         "psk-checkbox": HTMLPskCheckboxElement;
         "psk-code": HTMLPskCodeElement;
         "psk-condition": HTMLPskConditionElement;
@@ -1136,6 +1145,9 @@ declare namespace LocalJSX {
         "onPsk-send-chapter"?: (event: CustomEvent<any>) => void;
         "title"?: string;
     }
+    interface PskChapterWrapper {
+        "title"?: string;
+    }
     interface PskCheckbox {
         "checkboxLabel"?: any;
         "checked"?: boolean;
@@ -1234,7 +1246,6 @@ declare namespace LocalJSX {
         "typeOfHighlight"?: string;
     }
     interface PskHoc {
-        "title"?: string;
     }
     interface PskIcon {
         "classes"?: string | null;
@@ -1546,6 +1557,7 @@ declare namespace LocalJSX {
         "psk-button-test": PskButtonTest;
         "psk-card": PskCard;
         "psk-chapter": PskChapter;
+        "psk-chapter-wrapper": PskChapterWrapper;
         "psk-checkbox": PskCheckbox;
         "psk-code": PskCode;
         "psk-condition": PskCondition;
@@ -1634,6 +1646,7 @@ declare module "@stencil/core" {
             "psk-button-test": LocalJSX.PskButtonTest & JSXBase.HTMLAttributes<HTMLPskButtonTestElement>;
             "psk-card": LocalJSX.PskCard & JSXBase.HTMLAttributes<HTMLPskCardElement>;
             "psk-chapter": LocalJSX.PskChapter & JSXBase.HTMLAttributes<HTMLPskChapterElement>;
+            "psk-chapter-wrapper": LocalJSX.PskChapterWrapper & JSXBase.HTMLAttributes<HTMLPskChapterWrapperElement>;
             "psk-checkbox": LocalJSX.PskCheckbox & JSXBase.HTMLAttributes<HTMLPskCheckboxElement>;
             "psk-code": LocalJSX.PskCode & JSXBase.HTMLAttributes<HTMLPskCodeElement>;
             "psk-condition": LocalJSX.PskCondition & JSXBase.HTMLAttributes<HTMLPskConditionElement>;

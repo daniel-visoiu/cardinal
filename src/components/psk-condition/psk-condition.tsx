@@ -6,8 +6,7 @@ const SLOT_CONDITION_FALSE = 'condition-false';
 const SLOT_CONDITION_TRUE = 'condition-true';
 
 @Component({
-    tag: "psk-condition",
-    shadow: true
+  tag: "psk-condition"
 })
 export class PskCondition {
 
@@ -19,6 +18,9 @@ export class PskCondition {
     @Prop() condition: any | null = null;
     @State() conditionResult: boolean = false;
     @State() modelChain;
+
+    private falseSlot = null;
+    private trueSlot = null;
 
     @Event({
       eventName: 'getModelEvent',
@@ -53,8 +55,33 @@ export class PskCondition {
           model.onChange(this.modelChain, evaluateCondition);
           evaluateCondition();
         }
-      };
 
+        this.falseSlot = null;
+        const children = Array.from(this._host.children);
+
+        let trueSlotsElements = children.filter((child)=>{
+          const slotName = child.getAttribute('slot');
+          return  slotName === SLOT_CONDITION_TRUE;
+        });
+
+        this.trueSlot = trueSlotsElements.map((slotElement)=>{return slotElement.outerHTML}).join("")
+
+        let falseSlotsElements = children.filter((child)=>{
+          const slotName = child.getAttribute('slot');
+          return  slotName === SLOT_CONDITION_FALSE;
+        });
+
+        this.falseSlot = falseSlotsElements.map((slotElement)=>{return slotElement.outerHTML}).join("")
+
+        if (this.trueSlot.length === 0 && this.falseSlot.length === 0) {
+          this.trueSlot = children.map(child => {
+            return child.outerHTML;
+          }).join("");
+        }
+
+        this._host.innerHTML = "";
+
+      };
 
       return new Promise((resolve) => {
         this.getModelEvent.emit({
@@ -88,37 +115,12 @@ export class PskCondition {
         }
 
         return conditionPromise.then((result) => {
-            if(typeof result === "string"){
-                this.conditionResult = stringToBoolean(result);
-            } else {
-                this.conditionResult = Boolean(result);
-            }
+            this.conditionResult = stringToBoolean(result);
             return Promise.resolve();
         })
     }
 
     render() {
-        let renderIfElseSlots = false;
-
-        let trueSlot = <slot />;
-        let falseSlot = null;
-
-        const children = this._host.children;
-        for (let i = 0; i < children.length; i++) {
-            const child = children[i];
-            const slotName = child.getAttribute('slot');
-
-            if (slotName === SLOT_CONDITION_TRUE || slotName === SLOT_CONDITION_FALSE) {
-                renderIfElseSlots = true;
-                break;
-            }
-        }
-
-        if (renderIfElseSlots) {
-            trueSlot = <slot name={`${SLOT_CONDITION_TRUE}`} />;
-            falseSlot = <slot name={`${SLOT_CONDITION_FALSE}`} />;
-        }
-
-        return this.conditionResult ? trueSlot : falseSlot;
+      return <psk-hoc innerHTML={this.conditionResult ? this.trueSlot : this.falseSlot}/>;
     }
 }

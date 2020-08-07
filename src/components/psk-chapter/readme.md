@@ -9,46 +9,31 @@
 
 | Property | Attribute | Description | Type     | Default     |
 | -------- | --------- | ----------- | -------- | ----------- |
-| `guid`   | `guid`    |             | `string` | `undefined` |
-| `title`  | `title`   |             | `string` | `""`        |
-
-
-## Events
-
-| Event              | Description | Type               |
-| ------------------ | ----------- | ------------------ |
-| `psk-send-chapter` |             | `CustomEvent<any>` |
+| `title`  | `title`   |             | `string` | `undefined` |
 
 
 ## Dependencies
 
 ### Used by
 
- - [psk-code](../psk-code)
  - [psk-controller-descriptor](../pages-components)
- - [psk-description](../psk-description)
  - [psk-event-descriptor](../pages-components)
- - [psk-example](../psk-example)
- - [psk-hoc](../pages-components)
  - [psk-property-descriptor](../pages-components)
 
 ### Depends on
 
-- [psk-card](../psk-card)
+- [psk-chapter](.)
 
 ### Graph
 ```mermaid
 graph TD;
+  psk-chapter-wrapper --> psk-chapter
   psk-chapter --> psk-card
   psk-card --> psk-copy-clipboard
-  psk-code --> psk-chapter
-  psk-controller-descriptor --> psk-chapter
-  psk-description --> psk-chapter
-  psk-event-descriptor --> psk-chapter
-  psk-example --> psk-chapter
-  psk-hoc --> psk-chapter
-  psk-property-descriptor --> psk-chapter
-  style psk-chapter fill:#f9f,stroke:#333,stroke-width:4px
+  psk-controller-descriptor --> psk-chapter-wrapper
+  psk-event-descriptor --> psk-chapter-wrapper
+  psk-property-descriptor --> psk-chapter-wrapper
+  style psk-chapter-wrapper fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

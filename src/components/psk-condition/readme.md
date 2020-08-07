@@ -25,9 +25,14 @@
 
  - [psk-modal](../psk-modal)
 
+### Depends on
+
+- [psk-hoc](../psk-hoc)
+
 ### Graph
 ```mermaid
 graph TD;
+  psk-condition --> psk-hoc
   psk-modal --> psk-condition
   style psk-condition fill:#f9f,stroke:#333,stroke-width:4px
 ```

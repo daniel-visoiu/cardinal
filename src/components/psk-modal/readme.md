@@ -37,6 +37,7 @@
 graph TD;
   psk-modal --> psk-condition
   psk-modal --> psk-icon
+  psk-condition --> psk-hoc
   psk-pin-popup --> psk-modal
   style psk-modal fill:#f9f,stroke:#333,stroke-width:4px
 ```

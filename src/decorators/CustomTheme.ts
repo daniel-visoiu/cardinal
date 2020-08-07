@@ -1,5 +1,5 @@
 import {getElement, ComponentInterface} from "@stencil/core";
-
+const SLOTTED = "SLOTTED:";
 declare type CustomThemeInterface = (
   target: ComponentInterface,
   methodName: string
@@ -49,6 +49,19 @@ function resolveDependency(url) {
   })
 }
 
+function isFromSlot (child, element) {
+
+  if(!element){
+    return false;
+  }
+
+  if(element.shadowRoot){
+    return child.parentNode === element.shadowRoot.host;
+
+  }
+  return isFromSlot(element, element.parentElement);
+}
+
 export default function CustomTheme(): CustomThemeInterface {
 
 
@@ -61,7 +74,7 @@ export default function CustomTheme(): CustomThemeInterface {
       let eventCallback = event.detail.callback;
       let componentName = event.detail.componentTag;
 
-      eventCallback(undefined, childComponents.hasOwnProperty(componentName));
+      eventCallback(undefined, childComponents.hasOwnProperty(componentName), element);
       if (!childComponents[componentName]) {
         childComponents[componentName] = true;
       }
@@ -92,11 +105,10 @@ export default function CustomTheme(): CustomThemeInterface {
         let injectThemeStyle = (theme) => {
           let componentName = host.tagName.toLowerCase();
 
-          let addStyleElement = ()=>{
+          let addStyleElement = (parent)=>{
             return new Promise((resolve) => {
               // @ts-ignore
               let themeStylePath = window.basePath + "themes/" + theme + "/components/" + componentName + "/" + componentName + ".css";
-              let parent = host.shadowRoot ? host.shadowRoot : host;
 
               if (!dependencies[themeStylePath]) {
                 dependencies[themeStylePath] = new Promise((resolve, reject) => {
@@ -123,7 +135,7 @@ export default function CustomTheme(): CustomThemeInterface {
 
           if(host.shadowRoot){
             handleStyleExistenceCheck(host);
-            return addStyleElement();
+            return addStyleElement(host.shadowRoot);
           }
 
 
@@ -134,35 +146,40 @@ export default function CustomTheme(): CustomThemeInterface {
           }
 
           return new Promise((resolve => {
+
+            let isSlotted = isFromSlot(host, host.parentElement);
+            host['isSlotted'] = isSlotted;
+
             let styleExistsEvent = new CustomEvent("styleExists",
               {
                 bubbles: true,
                 cancelable: true,
                 composed: true,
                 detail: {
-                  callback: (err, styleExists) => {
-
+                  callback: (err, styleExists, shadowRootHostComponent) => {
                     if (err) {
                       console.log(err);
                       return;
                     }
+
                     if (!styleExists) {
-                      addStyleElement().then(()=>{
+                      if (!isSlotted) {
+                        shadowRootHostComponent = shadowRootHostComponent.shadowRoot;
+                      }
+
+                      addStyleElement(shadowRootHostComponent).then(() => {
                         resolve();
                       });
                     }else{
                       resolve(componentWillLoad && componentWillLoad.call(this));
                     }
                   },
-                  componentTag:componentName
+                  componentTag: isSlotted ? SLOTTED + componentName : componentName
                 }
               })
 
             host.dispatchEvent(styleExistsEvent);
           }))
-
-
-
         };
 
         if (!appTheme) {
@@ -190,9 +207,15 @@ export default function CustomTheme(): CustomThemeInterface {
         }
       }
     };
+
     proto.disconnectedCallback = function () {
       const host = getElement(this);
       let componentName = host.tagName.toLowerCase();
+
+      if(host['isSlotted']){
+        componentName = SLOTTED + componentName;
+      }
+
       let componentWasRemovedEvent = new CustomEvent("componentWasRemoved",
         {
           bubbles: true,
