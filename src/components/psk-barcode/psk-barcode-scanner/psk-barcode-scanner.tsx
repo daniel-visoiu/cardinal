@@ -1,4 +1,4 @@
-import {Component, h, Prop, Element, State} from '@stencil/core';
+import {Component, h, Prop, Element} from '@stencil/core';
 import CustomTheme from "../../../decorators/CustomTheme";
 import {BindModel} from '../../../decorators/BindModel';
 import audioData from './audioData.js';
@@ -6,25 +6,41 @@ import {stringToBoolean} from "../../../utils/utilFunctions";
 import BarcodeUtilFunctions from "./barcode-util-functions.js";
 import VideoOverlay  from "./VideoOverlay.js";
 import ImageOverlay  from "./ImageOverlay.js";
+import {TableOfContentProperty} from "../../../decorators/TableOfContentProperty";
 const SCAN_TIMEOUT = 100;
 
 @Component({
-  tag: 'psk-barcode-scanner',
+  tag: 'psk-barcode-scanner'
 })
 export class PskBarcodeScanner {
 
   @BindModel() modelHandler;
   @CustomTheme()
   @Element() element;
+  @TableOfContentProperty({
+    description: `The data-model that will be updated with the retrieved data from the scanner.`,
+    isMandatory: true,
+    propertyType: `string`
+  })
   @Prop() data:any;
+  @TableOfContentProperty({
+    description: `A title that will be used for the current component instance.`,
+    isMandatory: false,
+    propertyType: `string`
+  })
   @Prop() title: string = "";
+  @TableOfContentProperty({
+    description: `A boolean value indicating that the current component instance is accepting files from the device. Please note that if no camera is detected, this feature will be automatically enabled.`,
+    isMandatory: false,
+    propertyType: `string`
+  })
   @Prop() allowFileBrowsing:boolean = false;
 
   private componentIsDisconnected = false;
   private ZXing = null;
   private decodePtr = null;
   private videoElement = null;
-  @State() cameraIsAvailable = false;
+  private cameraIsAvailable = false;
   private cameraIsOn = false;
   private overlay = null;
 

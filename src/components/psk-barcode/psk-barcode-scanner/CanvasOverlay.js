@@ -20,7 +20,7 @@ export default class CanvasOverlay{
     this.isMobileDevice = BarcodeUtilFunctions.isMobile();
   }
 
-  addCanvasToView(canvasId){
+  addCanvasToView(canvasId, customStyle){
     let canvasElement = document.createElement("canvas");
     canvasElement.id=canvasId;
     canvasElement.width=this.isMobileDevice?MOBILE_DIMENSIONS.WIDTH:PC_DIMENSIONS.WIDTH;
@@ -29,6 +29,14 @@ export default class CanvasOverlay{
     canvasElement.style.width = "100%";
     canvasElement.style.top = "0";
     canvasElement.style.left = "0";
+
+    if (typeof customStyle === "object") {
+      Object.keys(customStyle).forEach(key => {
+        if (canvasElement.style[key])
+          canvasElement.style[key] = customStyle[key];
+      })
+    }
+
     this.scannerContainer.appendChild(canvasElement);
     return canvasElement;
   }

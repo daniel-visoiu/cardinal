@@ -9,7 +9,11 @@ export default class ImageOverlay extends CanvasOverlay{
   }
 
   createOverlaysCanvases(imageCanvas){
-    this.imageCanvas = this.addCanvasToView(imageCanvas);
+    let style = {
+      position:"relative",
+      display:"block"
+    }
+    this.imageCanvas = this.addCanvasToView(imageCanvas,style);
   }
 
   removeOverlays(){
