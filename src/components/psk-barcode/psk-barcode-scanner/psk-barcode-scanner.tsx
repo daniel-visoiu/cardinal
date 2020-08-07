@@ -32,7 +32,7 @@ export class PskBarcodeScanner {
   @TableOfContentProperty({
     description: `A boolean value indicating that the current component instance is accepting files from the device. Please note that if no camera is detected, this feature will be automatically enabled.`,
     isMandatory: false,
-    propertyType: `string`
+    propertyType: `boolean`
   })
   @Prop() allowFileBrowsing:boolean = false;
 

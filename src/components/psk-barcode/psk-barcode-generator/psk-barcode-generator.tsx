@@ -2,7 +2,9 @@ import {Component, h, Prop, Element, State, Watch} from '@stencil/core';
 import CustomTheme from "../../../decorators/CustomTheme";
 import {BindModel} from '../../../decorators/BindModel';
 import {stringToBoolean} from "../../../utils/utilFunctions";
+import {TableOfContentProperty} from "../../../decorators/TableOfContentProperty";
 
+const TWO_D_BARCODES = ["datamatrix","gs1datamatrix","qrcode"];
 @Component({
   tag: 'psk-barcode-generator',
 })
@@ -11,13 +13,40 @@ export class PskBarcodeGenerator {
   @BindModel() modelHandler;
   @CustomTheme()
   @Element() element;
+  @TableOfContentProperty({
+    description: `The data-model that will be used for generating the desired barcode.`,
+    isMandatory: true,
+    propertyType: `string`
+  })
   @Prop() data:any;
-  @State() isLoaded = false;
-  @Prop() title: string = "";
-  @Prop() type:string="";
-  @Prop() size?:any = 32;
-  @Prop() includeText:boolean = false;
 
+  @TableOfContentProperty({
+    description: `The barcode type. Accepted values are 'gs1datamatrix','datamatrix','qrcode', 'code128','code11','isbn'.`,
+    isMandatory: true,
+    propertyType: `string`
+  })
+  @Prop() type:string="qrcode";
+
+  @TableOfContentProperty({
+    description: `A title that will be used for the current component instance.`,
+    isMandatory: false,
+    propertyType: `string`
+  })
+  @Prop() title: string = "";
+
+  @TableOfContentProperty({
+    description: `The size of the barcode in mm. Default is set to 32 mm.`,
+    isMandatory: false,
+    propertyType: `integer`
+  })
+  @Prop() size?:any = 32;
+  @TableOfContentProperty({
+    description: `This option allows to print the input data below the generated barcode.`,
+    isMandatory: false,
+    propertyType: `boolean`
+  })
+  @Prop() includeText:boolean = false;
+  @State() isLoaded = false;
 
   @Watch("data")
   drawQRCodeCanvas(){
@@ -33,12 +62,16 @@ export class PskBarcodeGenerator {
               bcid: this.type,       // Barcode type
               text: this.data,    // Text to encode
               scale: 3,               // 3x scaling factor
-              width: this.size,
               height: this.size,              // Bar height, in millimeters
               textxalign: 'center',        // Always good to set this
             }
+
             if(stringToBoolean(this.includeText)){
               options['alttext'] = this.data;
+            }
+
+            if(TWO_D_BARCODES.indexOf(this.type)!==-1){
+              options['width'] = this.size;
             }
 
             //@ts-ignore
