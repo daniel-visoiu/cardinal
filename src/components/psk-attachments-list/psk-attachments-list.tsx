@@ -36,7 +36,11 @@ export class PskAttachmentsList {
 	}
 
 	render() {
-		if (!this.files || this.files.length === 0) {
+	  if(!Array.isArray(this.files)){
+	    return null;
+    }
+
+		if (this.files.length === 0) {
 			return <h5>No attachments available!</h5>;
 		}
 
