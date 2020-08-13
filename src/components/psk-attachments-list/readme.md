@@ -7,10 +7,11 @@
 
 ## Properties
 
-| Property           | Attribute           | Description | Type     | Default     |
-| ------------------ | ------------------- | ----------- | -------- | ----------- |
-| `attachmentsClass` | `attachments-class` |             | `string` | `""`        |
-| `files`            | `files`             |             | `any`    | `undefined` |
+| Property           | Attribute           | Description | Type      | Default     |
+| ------------------ | ------------------- | ----------- | --------- | ----------- |
+| `attachmentsClass` | `attachments-class` |             | `string`  | `""`        |
+| `files`            | `files`             |             | `any`     | `undefined` |
+| `readOnly`         | `read-only`         |             | `boolean` | `false`     |
 
 
 ## Dependencies

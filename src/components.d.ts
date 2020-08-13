@@ -51,6 +51,7 @@ export namespace Components {
     interface PskAttachmentsList {
         "attachmentsClass": string;
         "files": any;
+        "readOnly": boolean;
     }
     interface PskBarcodeGenerator {
         "data": any;
@@ -1103,6 +1104,7 @@ declare namespace LocalJSX {
     interface PskAttachmentsList {
         "attachmentsClass"?: string;
         "files"?: any;
+        "readOnly"?: boolean;
     }
     interface PskBarcodeGenerator {
         "data"?: any;

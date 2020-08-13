@@ -23,9 +23,15 @@ export class PskAttachmentsList {
 			type of the file (by extension),
 			? content of the file`,
 		isMandatory: true,
-		propertyType: 'array of WgFile items (WgFile[])'
+		propertyType: 'Array containing objects with following properties {name:string, size:number(nr_of_bytes)}'
 	})
 	@Prop() files;
+  @TableOfContentProperty({
+    description: `This parameter indicates if the files list could be altered by removing files from the list `,
+    isMandatory: false,
+    propertyType: 'boolean'
+  })
+  @Prop() readOnly: boolean = false;
 
 	@Prop() attachmentsClass: string = "";
 
@@ -66,10 +72,10 @@ export class PskAttachmentsList {
 					fileType = "fa-file-o";
 			}
 			return <psk-button button-class={`btn btn-primary mr-2 mt-2 ${this.attachmentsClass}`}
-				event-data={file.name} event-name="download-file">
+				event-data={file.name} event-name="download-attachment">
 				<span class={`icon mr-1 fa ${fileType}`} />{file.name}
 				<span class={`badge badge-light ml-1 `}>{PskAttachmentsList.bytesToSize(file.size)}</span>
-				<psk-button event-name="remove-attachment" event-data={file.name}>&times;</psk-button>
+        {!this.readOnly?<psk-button event-name="remove-attachment" eventData={file}>&times;</psk-button>:null}
 			</psk-button>
 		});
 
