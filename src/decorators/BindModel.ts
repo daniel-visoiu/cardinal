@@ -35,7 +35,13 @@ function getUpdateHandler(type, model){
       };
     default:
       return function (property, boundedChain){
-        this[property] = model.getChainValue(boundedChain);
+        let newValue = model.getChainValue(boundedChain);
+        if(Array.isArray(this[property])){
+          this[property] = [...newValue];
+        }
+        else{
+          this[property] = newValue;
+        }
       };
   }
 }
@@ -71,7 +77,7 @@ function bindComponentProps(element, propsData, callback) {
 
     let viewModelParentChain;
     let boundedProperties = {};
-    
+
     const bindSingleProperty = (prop) => {
       if(!boundedProperties[prop]) {
         let instance = properties[prop].type === ATTRIBUTE ? element : this;
@@ -94,7 +100,7 @@ function bindComponentProps(element, propsData, callback) {
     if (hasViewModel) {
       viewModelParentChain = element.getAttribute("view-model");
       viewModelParentChain = normalizeModelChain(viewModelParentChain);
-      
+
       const updateProperties = () => {
         let propertiesData = model.getChainValue(viewModelParentChain);
         for (let prop in propertiesData) {
@@ -108,7 +114,7 @@ function bindComponentProps(element, propsData, callback) {
       }
 
       updateProperties();
-      
+
       /**
        * This model chain listener set on the view model parent chain is used for the those children chains (of this parent chain) which are added at the runtime, and are not bound.
        * The below part of the code is updating and binding these new children chains to the component.
