@@ -49,8 +49,8 @@ function doUpload(url, data, callback) {
   });
 }
 
-function doFileUpload(path, files, options, callback){
-  if(typeof options === "function"){
+function doFileUpload(path, files, options, callback) {
+  if (typeof options === "function") {
     callback = options;
     options = undefined;
   }
@@ -63,8 +63,7 @@ function doFileUpload(path, files, options, callback){
       inputType = "files[]";
       formData.append(inputType, attachment);
     }
-  }
-  else {
+  } else {
     formData.append(inputType, files);
   }
 
@@ -75,14 +74,60 @@ function doFileUpload(path, files, options, callback){
   doUpload(url, formData, callback);
 }
 
+function doRemoveFile(url, callback) {
+  fetch(url, {method: "DELETE"})
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      callback();
+    })
+    .catch((err) => {
+      return callback(err);
+    });
+}
+
+
+function performFilesRemoval(filePathList, callback) {
+
+  let errors = [];
+  let deletedFiles = []
+
+  let deleteFile = (path) => {
+    let filename = path;
+    if (path[0] !== "/") {
+      path = "/" + path;
+    }
+    let url = "/delete" + path;
+    doRemoveFile(url, (err) => {
+
+      if (err) {
+        console.log(err);
+        errors.push({
+          filename: filename,
+          message: err.message
+        });
+      } else {
+        deletedFiles.push(filename);
+      }
+
+      if (filePathList.length > 0) {
+        return deleteFile(filePathList.shift())
+      }
+      callback(errors.length ? errors : undefined, deletedFiles);
+    });
+  }
+
+  deleteFile(filePathList.shift())
+}
+
 class DSUStorage {
 
   setObject(path, data, callback) {
     try {
       let dataSerialized = JSON.stringify(data);
       this.setItem(path, dataSerialized, callback);
-    }
-    catch (e) {
+    } catch (e) {
       callback(e);
     }
   }
@@ -95,8 +140,8 @@ class DSUStorage {
     let segments = path.split("/");
     let fileName = segments.splice(segments.length - 1, 1)[0];
     path = segments.join("/");
-    if(!path){
-      path="/";
+    if (!path) {
+      path = "/";
     }
     let url = `/upload?path=${path}&filename=${fileName}`;
     doUpload(url, data, callback);
@@ -109,19 +154,27 @@ class DSUStorage {
     }
 
     if (url[0] !== "/") {
-        url = "/" + url;
+      url = "/" + url;
     }
 
     url = "/download" + url;
     doDownload(url, expectedResultType, callback);
   }
 
-  uploadFile(path, file, options, callback){
+  uploadFile(path, file, options, callback) {
     doFileUpload(...arguments);
   }
 
-  uploadMultipleFiles(path, files, options, callback){
+  uploadMultipleFiles(path, files, options, callback) {
     doFileUpload(...arguments);
+  }
+
+  removeFile(filePath, callback) {
+    performFilesRemoval([filePath], callback);
+  }
+
+  removeFiles(filePathList, callback) {
+    performFilesRemoval(...arguments);
   }
 }
 
