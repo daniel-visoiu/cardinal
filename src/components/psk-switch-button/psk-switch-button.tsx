@@ -7,13 +7,11 @@ import { BindModel } from '../../decorators/BindModel';
 const ACCEPTED_DEFAULT_DISPATCHERS = [document, window];
 
 @Component({
-	tag: 'psk-switch-button',
-	shadow: true
+	tag: 'psk-switch-button'
 })
 export class PskSwitchButton {
 
 	@BindModel() modelHandler;
-
 	@CustomTheme()
 
 	@Element() htmlElement: HTMLElement;
@@ -86,21 +84,19 @@ export class PskSwitchButton {
 		let switchButton =
 			<div class="status-container" >
 				<h5>{this.title}</h5>
-				<psk-grid class="two-options-container" onClick={this.clickHandler.bind(this)}
-					columns={2}
-					layout="xs=[6,6] s=[6,6] m=[6,6] l=[6,6]">
-					<div class={`switch-item ${this.closed ? "" : "selected"}`}>
+				<psk-hoc class="two-options-container" onClick={this.clickHandler.bind(this)}>
+          <div class="row">
+					<div class={`switch-item col-xs-6 col-sm-6 col-md-6 col-lg-6 ${this.closed ? "" : "selected"}`}>
 						<p>{this.active}</p>
 					</div>
-					<div class={`switch-item ${this.closed ? "selected" : ""}`}>
+					<div class={`switch-item col-xs-6 col-sm-6 col-md-6 col-lg-6 ${this.closed ? "selected" : ""}`}>
 						<p>{this.inactive}</p>
 					</div>
-				</psk-grid>
+          </div>
+				</psk-hoc>
 			</div>
 
-		return (
-			switchButton
-		);
+		return switchButton;
 	}
 
 
