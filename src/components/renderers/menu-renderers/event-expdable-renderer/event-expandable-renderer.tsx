@@ -10,7 +10,7 @@ import SubMenuItemsEvent from "../../../../events/SubMenuItemsEvent";
 export class ExpandableRenderer {
 
   @Prop({
-    reflectToAttr: true,
+    reflect: true,
   }) active: boolean;
   @State() isOpened = false;
   @Prop() url;

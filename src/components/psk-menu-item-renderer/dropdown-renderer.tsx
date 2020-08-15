@@ -15,7 +15,7 @@ export class DropdownRenderer {
     propertyType: `boolean`
   })
   @Prop({
-    reflectToAttr: true,
+    reflect: true,
   }) active: boolean;
 
   @State() isOpened = false;

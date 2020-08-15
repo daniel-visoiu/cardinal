@@ -16,7 +16,7 @@ export class PskPinPopup {
 		propertyType: 'boolean',
 		defaultValue: 'false'
 	})
-	@Prop({ reflectToAttr: true, mutable: true }) opened: boolean = false;
+	@Prop({ reflect: true, mutable: true }) opened: boolean = false;
 
 	@State() pin: string = '';
 	@State() errorMessage: string = null;

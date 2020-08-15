@@ -76,7 +76,7 @@ export class ButtonGroup {
         propertyType: `boolean`,
         defaultValue: `false`
     })
-    @Prop({ reflectToAttr: true, mutable: true }) opened: boolean = false;
+    @Prop({ reflect: true, mutable: true }) opened: boolean = false;
 
     @TableOfContentProperty({
         description: [

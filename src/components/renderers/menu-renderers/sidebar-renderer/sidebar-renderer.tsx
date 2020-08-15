@@ -16,7 +16,7 @@ export class SidebarRenderer {
   @Prop() value: MenuItem;
   @Prop() historyType: ExtendedHistoryType;
   @Prop({
-    reflectToAttr:true,
+    reflect:true,
   }) active: boolean;
 
 

@@ -25,7 +25,7 @@ export class PskMenuItemRenderer {
     propertyType: `boolean`
   })
   @Prop({
-    reflectToAttr: true,
+    reflect: true,
   }) active: boolean;
   @Prop() historyType: ExtendedHistoryType;
 

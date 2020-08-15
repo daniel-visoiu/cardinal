@@ -9,7 +9,7 @@ import {injectHistory, RouterHistory} from "@stencil/router";
 export class ExpandableRenderer {
 
   @Prop({
-    reflectToAttr: true,
+    reflect: true,
   }) active: boolean;
   @State() isOpened = false;
   @Prop() url;

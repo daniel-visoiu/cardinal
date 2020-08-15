@@ -21,7 +21,7 @@ export class FloatingMenu {
         defaultValue: `false`
     })
 
-    @Prop({ reflectToAttr: true, mutable: true }) opened: boolean = false;
+    @Prop({ reflect: true, mutable: true }) opened: boolean = false;
 
     @Event({
         eventName: "needFloatingMenu",

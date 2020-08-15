@@ -86,7 +86,7 @@ export class PskModal {
 		propertyType: `boolean`,
 		defaultValue: 'false',
 	})
-	@Prop({ reflectToAttr: true, mutable: true }) opened: boolean = false;
+	@Prop({ reflect: true, mutable: true }) opened: boolean = false;
 
 	@TableOfContentEvent({
 		eventName: `closeModal`,
