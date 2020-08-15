@@ -16,7 +16,7 @@ export class PskAttachmentsList {
 	@CustomTheme()
 	@BindModel() modelHandler;
 	@TableOfContentProperty({
-		description: `This parameter holds the files that can be downloaded. They can be downloaded one by one by clicking on the desired file, or all at the same time.`,
+		description: `This property holds the files that can be downloaded. They can be downloaded one by one by clicking on the desired file, or all at the same time.`,
 		specialNote: `WgFile is a custom type. Inside it, the following information can be stored:
 			name of the file,
 			size of the file,
@@ -27,11 +27,20 @@ export class PskAttachmentsList {
 	})
 	@Prop() files;
   @TableOfContentProperty({
-    description: `This parameter indicates if the files list could be altered by removing files from the list `,
+    description: `This property indicates if the files list could be altered by removing files from the list `,
     isMandatory: false,
     propertyType: 'boolean'
   })
   @Prop() readOnly: boolean = false;
+
+
+  @TableOfContentProperty({
+    description: `This property indicates if the component should render a "No attachments available" text if no files are present.`,
+    isMandatory: false,
+    propertyType: 'boolean'
+  })
+  @Prop() noAttachmentsText:string;
+
 
 	@Prop() attachmentsClass: string = "";
 
@@ -46,9 +55,9 @@ export class PskAttachmentsList {
 	    return null;
     }
 
-		if (this.files.length === 0) {
-			return <h5>No attachments available!</h5>;
-		}
+    if (this.files.length === 0) {
+      return this.noAttachmentsText ? <h5>{this.noAttachmentsText}</h5> : null;
+    }
 
 		let filesView = this.files.map((file) => {
 
@@ -73,7 +82,7 @@ export class PskAttachmentsList {
 			}
 			return <psk-button button-class={`btn btn-primary mr-2 mt-2 ${this.attachmentsClass}`}
 				event-data={file.name} event-name="download-attachment">
-				<span class={`icon mr-1 fa ${fileType}`} />{file.name}
+        <span class={`icon mr-1 fa ${fileType}`} /><span class="filename">{file.name}</span>
 				<span class={`badge badge-light ml-1 `}>{PskAttachmentsList.bytesToSize(file.size)}</span>
         {!this.readOnly?<psk-button event-name="remove-attachment" eventData={file}>&times;</psk-button>:null}
 			</psk-button>
