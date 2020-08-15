@@ -20,12 +20,12 @@
 
 ### Depends on
 
-- [psk-grid](../psk-grid)
+- [psk-hoc](../psk-hoc)
 
 ### Graph
 ```mermaid
 graph TD;
-  psk-switch-button --> psk-grid
+  psk-switch-button --> psk-hoc
   style psk-switch-button fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
