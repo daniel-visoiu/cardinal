@@ -99,7 +99,7 @@ export namespace Components {
     }
     interface PskCheckbox {
         "checkboxLabel": any;
-        "checked"?: boolean;
+        "checked"?: string;
         "checkedValue"?: string | null;
         "label": string;
         "name"?: string | null;
@@ -1154,7 +1154,7 @@ declare namespace LocalJSX {
     }
     interface PskCheckbox {
         "checkboxLabel"?: any;
-        "checked"?: boolean;
+        "checked"?: string;
         "checkedValue"?: string | null;
         "label"?: string;
         "name"?: string | null;

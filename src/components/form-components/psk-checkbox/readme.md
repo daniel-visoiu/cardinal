@@ -10,7 +10,7 @@
 | Property         | Attribute         | Description | Type      | Default       |
 | ---------------- | ----------------- | ----------- | --------- | ------------- |
 | `checkboxLabel`  | `checkbox-label`  |             | `any`     | `undefined`   |
-| `checked`        | `checked`         |             | `boolean` | `false`       |
+| `checked`        | `checked`         |             | `string`  | `null`        |
 | `checkedValue`   | `checked-value`   |             | `string`  | `null`        |
 | `label`          | `label`           |             | `string`  | `undefined`   |
 | `name`           | `name`            |             | `string`  | `null`        |
