@@ -197,6 +197,11 @@ export namespace Components {
         "disableColor"?: boolean;
         "icon": string | null;
     }
+    interface PskIconChooser {
+        "iconsColor"?: string | null;
+        "iconsSize"?: string | null;
+        "value": string | null;
+    }
     interface PskImg {
         "height": string;
         "src": string;
@@ -702,6 +707,12 @@ declare global {
         prototype: HTMLPskIconElement;
         new (): HTMLPskIconElement;
     };
+    interface HTMLPskIconChooserElement extends Components.PskIconChooser, HTMLStencilElement {
+    }
+    var HTMLPskIconChooserElement: {
+        prototype: HTMLPskIconChooserElement;
+        new (): HTMLPskIconChooserElement;
+    };
     interface HTMLPskImgElement extends Components.PskImg, HTMLStencilElement {
     }
     var HTMLPskImgElement: {
@@ -1011,6 +1022,7 @@ declare global {
         "psk-highlight": HTMLPskHighlightElement;
         "psk-hoc": HTMLPskHocElement;
         "psk-icon": HTMLPskIconElement;
+        "psk-icon-chooser": HTMLPskIconChooserElement;
         "psk-img": HTMLPskImgElement;
         "psk-img-input": HTMLPskImgInputElement;
         "psk-input": HTMLPskInputElement;
@@ -1256,6 +1268,11 @@ declare namespace LocalJSX {
         "color"?: string | null;
         "disableColor"?: boolean;
         "icon"?: string | null;
+    }
+    interface PskIconChooser {
+        "iconsColor"?: string | null;
+        "iconsSize"?: string | null;
+        "value"?: string | null;
     }
     interface PskImg {
         "height"?: string;
@@ -1584,6 +1601,7 @@ declare namespace LocalJSX {
         "psk-highlight": PskHighlight;
         "psk-hoc": PskHoc;
         "psk-icon": PskIcon;
+        "psk-icon-chooser": PskIconChooser;
         "psk-img": PskImg;
         "psk-img-input": PskImgInput;
         "psk-input": PskInput;
@@ -1673,6 +1691,7 @@ declare module "@stencil/core" {
             "psk-highlight": LocalJSX.PskHighlight & JSXBase.HTMLAttributes<HTMLPskHighlightElement>;
             "psk-hoc": LocalJSX.PskHoc & JSXBase.HTMLAttributes<HTMLPskHocElement>;
             "psk-icon": LocalJSX.PskIcon & JSXBase.HTMLAttributes<HTMLPskIconElement>;
+            "psk-icon-chooser": LocalJSX.PskIconChooser & JSXBase.HTMLAttributes<HTMLPskIconChooserElement>;
             "psk-img": LocalJSX.PskImg & JSXBase.HTMLAttributes<HTMLPskImgElement>;
             "psk-img-input": LocalJSX.PskImgInput & JSXBase.HTMLAttributes<HTMLPskImgInputElement>;
             "psk-input": LocalJSX.PskInput & JSXBase.HTMLAttributes<HTMLPskInputElement>;

@@ -4,11 +4,13 @@ import { TableOfContentProperty } from '../../decorators/TableOfContentProperty'
 import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
 import CustomTheme from '../../decorators/CustomTheme';
 import WizardEvent from "../../events/WizardEvent";
+import {BindModel} from "../../decorators/BindModel";
 
 @Component({
     tag: 'psk-wizard',
 })
 export class PskWizard {
+    @BindModel() modelHandler;
     @CustomTheme()
 
     @Element() host;
