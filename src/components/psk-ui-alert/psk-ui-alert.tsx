@@ -2,8 +2,8 @@ import { Component, h, Prop, Event, EventEmitter, State, Watch } from '@stencil/
 import Config from "../psk-list-feedbacks/Config.js";
 
 import {StyleCustomisation} from '../../interfaces/StyleCustomisation';
-import { TableOfContentProperty } from '../../decorators/TableOfContentProperty.js';
-import CustomTheme from '../../decorators/CustomTheme.js';
+import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
+import CustomTheme from '../../decorators/CustomTheme';
 @Component({
     tag: "psk-ui-alert",
     styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.css",
