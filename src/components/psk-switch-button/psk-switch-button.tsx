@@ -15,7 +15,7 @@ export class PskSwitchButton {
 	@CustomTheme()
 
 	@Element() htmlElement: HTMLElement;
-	@State() closed: boolean = true;
+	@State() closed: boolean = false;
 	@TableOfContentProperty({
 		description: ['This attribute is the active part of the component the one that will show the content when the switch button is on.'],
 		isMandatory: true,

@@ -4,9 +4,9 @@ import { Component, h, Prop, Element } from '@stencil/core';
 // TODO: Check the posibility to integrate PrismJs internaly
 import Prism from 'prismjs';
 import PrismLiveEditor from '../../libs/prismLive.js';
-import { BindModel } from '../../decorators/BindModel.js';
-import CustomTheme from '../../decorators/CustomTheme.js';
-import { TableOfContentProperty } from '../../decorators/TableOfContentProperty.js';
+import { BindModel } from '../../decorators/BindModel';
+import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
+import CustomTheme from "../../decorators/CustomTheme";
 
 @Component({
 	tag: 'psk-live-code',

@@ -2,6 +2,7 @@ import { h, Component, Prop } from '@stencil/core';
 import { BindModel } from '../../../decorators/BindModel';
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
 import CustomTheme from '../../../decorators/CustomTheme';
+import {stringToBoolean} from "../../../utils/utilFunctions";
 
 @Component({
     tag: 'psk-checkbox'
@@ -16,6 +17,7 @@ export class PskCheckbox {
         const checkboxName = this.name ? this.name
             : this.checkboxLabel ? this.checkboxLabel.replace(/\s/g, '').toLowerCase() : '';
 
+        let isChecked = stringToBoolean(this.checked);
         const checkboxHtml = (
             <div class="form-group">
                 <div class="form-check form-check-inline">
@@ -25,9 +27,10 @@ export class PskCheckbox {
                         id={checkboxName}
                         name={checkboxName}
                         required={this.required}
-                        checked={this.checked}
+                        defaultChecked={isChecked}
                         onChange={this.__handleCheckbox.bind(this)}
-                        value={this.value} />
+                        value={this.value}
+                        />
                     {/* This is the label for the checkbox */}
                     <psk-label for={checkboxName} label={this.checkboxLabel} />
                 </div>
@@ -92,11 +95,11 @@ export class PskCheckbox {
         isMandatory: false,
         propertyType: 'boolean'
     })
-    @Prop() checked?: boolean = false;
+    @Prop() checked?: string = null;
 
     @TableOfContentProperty({
         description: [`Specifies the value of a psk-checkbox component.`,
-            `This value is updated also in the model using the two-way binding. Information about two-way binding using models and templates can be found at: <psk-link page="forms/using-forms">Using forms</psk-link>.`],
+            `This value is updated also in the model using the two-way binding. Information about two-way binding using models and templates can be found at: <psk-link tag="using-forms">Using forms</psk-link>.`],
         isMandatory: false,
         propertyType: 'string'
     })

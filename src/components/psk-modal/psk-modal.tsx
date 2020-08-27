@@ -20,10 +20,7 @@ export class PskModal {
 	render() {
 		const expandCollapseIcon = (this.expanded === 'true' || this.expanded === 'false') && (
 			<button class='expand' onClick={this._expandModalHandler}>
-				<psk-condition condition={this.expanded}>
-					<psk-icon slot='condition-true' class='expand-icon' icon='compress'></psk-icon>
-					<psk-icon slot='condition-false' class='expand-icon' icon='expand'></psk-icon>
-				</psk-condition>
+          <psk-icon class='expand-icon' icon={this.expanded?"compress":"expand"}></psk-icon>
 			</button>
 		);
 

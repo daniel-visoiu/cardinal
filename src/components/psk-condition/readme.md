@@ -21,10 +21,6 @@
 
 ## Dependencies
 
-### Used by
-
- - [psk-modal](../psk-modal)
-
 ### Depends on
 
 - [psk-hoc](../psk-hoc)
@@ -33,7 +29,6 @@
 ```mermaid
 graph TD;
   psk-condition --> psk-hoc
-  psk-modal --> psk-condition
   style psk-condition fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
