@@ -33,9 +33,16 @@ export class PskLiveCode {
 
 	@Element() private _hostElement: HTMLElement;
 
-	componentDidLoad() {
-		new PrismLiveEditor(this._hostElement.shadowRoot.querySelector('.live-editor-container'));
-	}
+  componentDidLoad() {
+    if (this.value && this._hostElement.isConnected) {
+      //this timeout is needed because the PrismLiveEditor is reading elements style.
+      // if it is too early called the elements may not have the style element attached to it.
+      //TODO find another method to detect that all styles are attached to elements
+      setTimeout(()=>{
+        new PrismLiveEditor(this._hostElement.shadowRoot.querySelector('.live-editor-container'));
+      },100);
+    }
+  }
 
 	_updateViewModel = (evt) => {
 		let value = evt.target.value;
