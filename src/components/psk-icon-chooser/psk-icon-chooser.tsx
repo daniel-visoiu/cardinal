@@ -94,7 +94,8 @@ export class PskIconChooser {
 
   __iconClickListener = (event) => {
     event.stopImmediatePropagation();
-    this.modelHandler.updateModel('value', event.data);
+    let fullIconName = event.data;
+    this.modelHandler.updateModel('value', fullIconName.replace('fa-', ''));
   }
 
   __categoryChangeListener = (event) => {
