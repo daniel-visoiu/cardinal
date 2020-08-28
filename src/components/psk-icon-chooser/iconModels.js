@@ -1,3292 +1,3292 @@
 export const iconModels = [
   {
     "group": "a11y",
-    "id": "fa-american-sign-language-interpreting",
+    "id": "american-sign-language-interpreting",
     "name": "American Sign Language"
   },
   {
     "group": "a11y",
-    "id": "fa-audio-description",
+    "id": "audio-description",
     "name": "Audio Description"
   },
   {
     "group": "a11y",
-    "id": "fa-assistive-listening-systems",
+    "id": "assistive-listening-systems",
     "name": "Assistive Listening Systems"
   },
   {
     "group": "a11y",
-    "id": "fa-blind",
+    "id": "blind",
     "name": "Blind"
   },
   {
     "group": "a11y",
-    "id": "fa-braille",
+    "id": "braille",
     "name": "Braille"
   },
   {
     "group": "a11y",
-    "id": "fa-deaf",
+    "id": "deaf",
     "name": "Deaf"
   },
   {
     "group": "a11y",
-    "id": "fa-low-vision",
+    "id": "low-vision",
     "name": "Low Vision"
   },
   {
     "group": "a11y",
-    "id": "fa-volume-control-phone",
+    "id": "volume-control-phone",
     "name": "Phone Volume Control"
   },
   {
     "group": "a11y",
-    "id": "fa-sign-language",
+    "id": "sign-language",
     "name": "Sign Language"
   },
   {
     "group": "a11y",
-    "id": "fa-universal-access",
+    "id": "universal-access",
     "name": "Universal Access"
   },
   {
     "group": "brand",
-    "id": "fa-500px",
+    "id": "500px",
     "name": "500px"
   },
   {
     "group": "brand",
-    "id": "fa-adn",
+    "id": "adn",
     "name": "ADN"
   },
   {
     "group": "brand",
-    "id": "fa-amazon",
+    "id": "amazon",
     "name": "Amazon"
   },
   {
     "group": "brand",
-    "id": "fa-android",
+    "id": "android",
     "name": "Android"
   },
   {
     "group": "brand",
-    "id": "fa-angellist",
+    "id": "angellist",
     "name": "AngelList"
   },
   {
     "group": "brand",
-    "id": "fa-apple",
+    "id": "apple",
     "name": "Apple"
   },
   {
     "group": "brand",
-    "id": "fa-black-tie",
+    "id": "black-tie",
     "name": "BlackTie"
   },
   {
     "group": "brand",
-    "id": "fa-behance",
+    "id": "behance",
     "name": "Behance"
   },
   {
     "group": "brand",
-    "id": "fa-behance-square",
+    "id": "behance-square",
     "name": "Behance"
   },
   {
     "group": "brand",
-    "id": "fa-bitbucket",
+    "id": "bitbucket",
     "name": "Bitbucket"
   },
   {
     "group": "brand",
-    "id": "fa-bluetooth",
+    "id": "bluetooth",
     "name": "Bluetooth"
   },
   {
     "group": "brand",
-    "id": "fa-bluetooth-b",
+    "id": "bluetooth-b",
     "name": "Bluetooth"
   },
   {
     "group": "brand",
-    "id": "fa-bitbucket-square",
+    "id": "bitbucket-square",
     "name": "Bitbucket"
   },
   {
     "group": "brand",
-    "id": "fa-buysellads",
+    "id": "buysellads",
     "name": "BuySellAds"
   },
   {
     "group": "brand",
-    "id": "fa-chrome",
+    "id": "chrome",
     "name": "Chrome"
   },
   {
     "group": "brand",
-    "id": "fa-codepen",
+    "id": "codepen",
     "name": "CodePen"
   },
   {
     "group": "brand",
-    "id": "fa-codiepie",
+    "id": "codiepie",
     "name": "Codie Pie"
   },
   {
     "group": "brand",
-    "id": "fa-connectdevelop",
+    "id": "connectdevelop",
     "name": "Connect + Develop"
   },
   {
     "group": "brand",
-    "id": "fa-contao",
+    "id": "contao",
     "name": "Contao"
   },
   {
     "group": "brand",
-    "id": "fa-creative-commons",
+    "id": "creative-commons",
     "name": "Creative Commons"
   },
   {
     "group": "brand",
-    "id": "fa-css3",
+    "id": "css3",
     "name": "CSS3"
   },
   {
     "group": "brand",
-    "id": "fa-dashcube",
+    "id": "dashcube",
     "name": "Dashcube"
   },
   {
     "group": "brand",
-    "id": "fa-delicious",
+    "id": "delicious",
     "name": "Delicious"
   },
   {
     "group": "brand",
-    "id": "fa-deviantart",
+    "id": "deviantart",
     "name": "deviantART"
   },
   {
     "group": "brand",
-    "id": "fa-digg",
+    "id": "digg",
     "name": "Digg"
   },
   {
     "group": "brand",
-    "id": "fa-dribbble",
+    "id": "dribbble",
     "name": "Dribbble"
   },
   {
     "group": "brand",
-    "id": "fa-dropbox",
+    "id": "dropbox",
     "name": "DropBox"
   },
   {
     "group": "brand",
-    "id": "fa-drupal",
+    "id": "drupal",
     "name": "Drupal"
   },
   {
     "group": "brand",
-    "id": "fa-empire",
+    "id": "empire",
     "name": "Empire"
   },
   {
     "group": "brand",
-    "id": "fa-edge",
+    "id": "edge",
     "name": "Edge"
   },
   {
     "group": "brand",
-    "id": "fa-envira",
+    "id": "envira",
     "name": "Envira"
   },
   {
     "group": "brand",
-    "id": "fa-expeditedssl",
+    "id": "expeditedssl",
     "name": "ExpeditedSSL"
   },
   {
     "group": "brand",
-    "id": "fa-facebook-official",
+    "id": "facebook-official",
     "name": "Facebook"
   },
   {
     "group": "brand",
-    "id": "fa-facebook-square",
+    "id": "facebook-square",
     "name": "Facebook"
   },
   {
     "group": "brand",
-    "id": "fa-facebook",
+    "id": "facebook",
     "name": "Facebook"
   },
   {
     "group": "brand",
-    "id": "fa-firefox",
+    "id": "firefox",
     "name": "Firefox"
   },
   {
     "group": "brand",
-    "id": "fa-flickr",
+    "id": "flickr",
     "name": "Flickr"
   },
   {
     "group": "brand",
-    "id": "fa-fonticons",
+    "id": "fonticons",
     "name": "FontIcons"
   },
   {
     "group": "brand",
-    "id": "fa-fort-awesome",
+    "id": "fort-awesome",
     "name": "Fort Awesome"
   },
   {
     "group": "brand",
-    "id": "fa-forumbee",
+    "id": "forumbee",
     "name": "Forumbee"
   },
   {
     "group": "brand",
-    "id": "fa-foursquare",
+    "id": "foursquare",
     "name": "Foursquare"
   },
   {
     "group": "brand",
-    "id": "fa-get-pocket",
+    "id": "get-pocket",
     "name": "Pocket"
   },
   {
     "group": "brand",
-    "id": "fa-git",
+    "id": "git",
     "name": "Git"
   },
   {
     "group": "brand",
-    "id": "fa-git-square",
+    "id": "git-square",
     "name": "Git"
   },
   {
     "group": "brand",
-    "id": "fa-github",
+    "id": "github",
     "name": "GitHub"
   },
   {
     "group": "brand",
-    "id": "fa-gitlab",
+    "id": "gitlab",
     "name": "Gitlab"
   },
   {
     "group": "brand",
-    "id": "fa-github-alt",
+    "id": "github-alt",
     "name": "GitHub"
   },
   {
     "group": "brand",
-    "id": "fa-github-square",
+    "id": "github-square",
     "name": "GitHub"
   },
   {
     "group": "brand",
-    "id": "fa-gittip",
+    "id": "gittip",
     "name": "GitTip"
   },
   {
     "group": "brand",
-    "id": "fa-glide",
+    "id": "glide",
     "name": "Glide"
   },
   {
     "group": "brand",
-    "id": "fa-glide-g",
+    "id": "glide-g",
     "name": "Glide"
   },
   {
     "group": "brand",
-    "id": "fa-google",
+    "id": "google",
     "name": "Google"
   },
   {
     "group": "brand",
-    "id": "fa-google-plus",
+    "id": "google-plus",
     "name": "Google+"
   },
   {
     "group": "brand",
-    "id": "fa-google-plus-square",
+    "id": "google-plus-square",
     "name": "Google+"
   },
   {
     "group": "brand",
-    "id": "fa-hacker-news",
+    "id": "hacker-news",
     "name": "Hacker News"
   },
   {
     "group": "brand",
-    "id": "fa-houzz",
+    "id": "houzz",
     "name": "Houzz"
   },
   {
     "group": "brand",
-    "id": "fa-html5",
+    "id": "html5",
     "name": "HTML5"
   },
   {
     "group": "brand",
-    "id": "fa-instagram",
+    "id": "instagram",
     "name": "Instagram"
   },
   {
     "group": "brand",
-    "id": "fa-internet-explorer",
+    "id": "internet-explorer",
     "name": "Internet Explorer"
   },
   {
     "group": "brand",
-    "id": "fa-ioxhost",
+    "id": "ioxhost",
     "name": "IoxHost"
   },
   {
     "group": "brand",
-    "id": "fa-joomla",
+    "id": "joomla",
     "name": "Joomla"
   },
   {
     "group": "brand",
-    "id": "fa-jsfiddle",
+    "id": "jsfiddle",
     "name": "JSFiddle"
   },
   {
     "group": "brand",
-    "id": "fa-lastfm",
+    "id": "lastfm",
     "name": "Last.fm"
   },
   {
     "group": "brand",
-    "id": "fa-lastfm-square",
+    "id": "lastfm-square",
     "name": "Last.fm"
   },
   {
     "group": "brand",
-    "id": "fa-leanpub",
+    "id": "leanpub",
     "name": "Leanpub"
   },
   {
     "group": "brand",
-    "id": "fa-linkedin",
+    "id": "linkedin",
     "name": "LinkedIn"
   },
   {
     "group": "brand",
-    "id": "fa-linkedin-square",
+    "id": "linkedin-square",
     "name": "LinkedIn"
   },
   {
     "group": "brand",
-    "id": "fa-linux",
+    "id": "linux",
     "name": "Linux"
   },
   {
     "group": "brand",
-    "id": "fa-maxcdn",
+    "id": "maxcdn",
     "name": "MaxCDN"
   },
   {
     "group": "brand",
-    "id": "fa-meanpath",
+    "id": "meanpath",
     "name": "meanpath"
   },
   {
     "group": "brand",
-    "id": "fa-medium",
+    "id": "medium",
     "name": "Medium"
   },
   {
     "group": "brand",
-    "id": "fa-mixcloud",
+    "id": "mixcloud",
     "name": "Mixcloud"
   },
   {
     "group": "brand",
-    "id": "fa-modx",
+    "id": "modx",
     "name": "MODX"
   },
   {
     "group": "brand",
-    "id": "fa-odnoklassniki",
+    "id": "odnoklassniki",
     "name": "Odnoklassniki"
   },
   {
     "group": "brand",
-    "id": "fa-odnoklassniki-square",
+    "id": "odnoklassniki-square",
     "name": "Odnoklassniki"
   },
   {
     "group": "brand",
-    "id": "fa-opencart",
+    "id": "opencart",
     "name": "OpenCart"
   },
   {
     "group": "brand",
-    "id": "fa-openid",
+    "id": "openid",
     "name": "OpenID"
   },
   {
     "group": "brand",
-    "id": "fa-opera",
+    "id": "opera",
     "name": "Opera"
   },
   {
     "group": "brand",
-    "id": "fa-optin-monster",
+    "id": "optin-monster",
     "name": "OptinMonster"
   },
   {
     "group": "brand",
-    "id": "fa-pagelines",
+    "id": "pagelines",
     "name": "Pagelines"
   },
   {
     "group": "brand",
-    "id": "fa-pied-piper",
+    "id": "pied-piper",
     "name": "Pied Piper"
   },
   {
     "group": "brand",
-    "id": "fa-pied-piper-alt",
+    "id": "pied-piper-alt",
     "name": "Pied Piper"
   },
   {
     "group": "brand",
-    "id": "fa-pinterest",
+    "id": "pinterest",
     "name": "Pinterest"
   },
   {
     "group": "brand",
-    "id": "fa-pinterest-p",
+    "id": "pinterest-p",
     "name": "Pinterest"
   },
   {
     "group": "brand",
-    "id": "fa-pinterest-square",
+    "id": "pinterest-square",
     "name": "Pinterest"
   },
   {
     "group": "brand",
-    "id": "fa-product-hunt",
+    "id": "product-hunt",
     "name": "Product Hunt"
   },
   {
     "group": "brand",
-    "id": "fa-qq",
+    "id": "qq",
     "name": "QQ"
   },
   {
     "group": "brand",
-    "id": "fa-reddit",
+    "id": "reddit",
     "name": "reddit"
   },
   {
     "group": "brand",
-    "id": "fa-reddit-alien",
+    "id": "reddit-alien",
     "name": "reddit"
   },
   {
     "group": "brand",
-    "id": "fa-reddit-square",
+    "id": "reddit-square",
     "name": "reddit"
   },
   {
     "group": "brand",
-    "id": "fa-renren",
+    "id": "renren",
     "name": "Renren"
   },
   {
     "group": "brand",
-    "id": "fa-safari",
+    "id": "safari",
     "name": "Safari"
   },
   {
     "group": "brand",
-    "id": "fa-scribd",
+    "id": "scribd",
     "name": "Scribd"
   },
   {
     "group": "brand",
-    "id": "fa-sellsy",
+    "id": "sellsy",
     "name": "SELLSY"
   },
   {
     "group": "brand",
-    "id": "fa-shirtsinbulk",
+    "id": "shirtsinbulk",
     "name": "Shirts In Bulk"
   },
   {
     "group": "brand",
-    "id": "fa-simplybuilt",
+    "id": "simplybuilt",
     "name": "SimplyBuilt"
   },
   {
     "group": "brand",
-    "id": "fa-skyatlas",
+    "id": "skyatlas",
     "name": "Skyatlas"
   },
   {
     "group": "brand",
-    "id": "fa-skype",
+    "id": "skype",
     "name": "Skype"
   },
   {
     "group": "brand",
-    "id": "fa-slack",
+    "id": "slack",
     "name": "Slack"
   },
   {
     "group": "brand",
-    "id": "fa-slideshare",
+    "id": "slideshare",
     "name": "SlideShare"
   },
   {
     "group": "brand",
-    "id": "fa-soundcloud",
+    "id": "soundcloud",
     "name": "SoundCloud"
   },
   {
     "group": "brand",
-    "id": "fa-snapchat",
+    "id": "snapchat",
     "name": "Snapchat"
   },
   {
     "group": "brand",
-    "id": "fa-snapchat-ghost",
+    "id": "snapchat-ghost",
     "name": "Snapchat"
   },
   {
     "group": "brand",
-    "id": "fa-snapchat-square",
+    "id": "snapchat-square",
     "name": "Snapchat"
   },
   {
     "group": "brand",
-    "id": "fa-spotify",
+    "id": "spotify",
     "name": "Spotify"
   },
   {
     "group": "brand",
-    "id": "fa-stack-exchange",
+    "id": "stack-exchange",
     "name": "Stack Exchange"
   },
   {
     "group": "brand",
-    "id": "fa-stack-overflow",
+    "id": "stack-overflow",
     "name": "Stack Overflow"
   },
   {
     "group": "brand",
-    "id": "fa-steam",
+    "id": "steam",
     "name": "Steam"
   },
   {
     "group": "brand",
-    "id": "fa-steam-square",
+    "id": "steam-square",
     "name": "Steam"
   },
   {
     "group": "brand",
-    "id": "fa-stumbleupon",
+    "id": "stumbleupon",
     "name": "StumbleUpon"
   },
   {
     "group": "brand",
-    "id": "fa-stumbleupon-circle",
+    "id": "stumbleupon-circle",
     "name": "StumbleUpon"
   },
   {
     "group": "brand",
-    "id": "fa-tencent-weibo",
+    "id": "tencent-weibo",
     "name": "Tencent Weibo"
   },
   {
     "group": "brand",
-    "id": "fa-trello",
+    "id": "trello",
     "name": "Trello"
   },
   {
     "group": "brand",
-    "id": "fa-tripadvisor",
+    "id": "tripadvisor",
     "name": "TripAdvisor"
   },
   {
     "group": "brand",
-    "id": "fa-tumblr",
+    "id": "tumblr",
     "name": "Tumblr"
   },
   {
     "group": "brand",
-    "id": "fa-tumblr-square",
+    "id": "tumblr-square",
     "name": "Tumblr"
   },
   {
     "group": "brand",
-    "id": "fa-twitch",
+    "id": "twitch",
     "name": "Twitch"
   },
   {
     "group": "brand",
-    "id": "fa-twitter",
+    "id": "twitter",
     "name": "Twitter"
   },
   {
     "group": "brand",
-    "id": "fa-twitter-square",
+    "id": "twitter-square",
     "name": "Twitter"
   },
   {
     "group": "brand",
-    "id": "fa-usb",
+    "id": "usb",
     "name": "USB"
   },
   {
     "group": "brand",
-    "id": "fa-vimeo",
+    "id": "vimeo",
     "name": "Vimeo"
   },
   {
     "group": "brand",
-    "id": "fa-viadeo",
+    "id": "viadeo",
     "name": "Viadeo"
   },
   {
     "group": "brand",
-    "id": "fa-viadeo-square",
+    "id": "viadeo-square",
     "name": "Viadeo"
   },
   {
     "group": "brand",
-    "id": "fa-vimeo-square",
+    "id": "vimeo-square",
     "name": "Vimeo"
   },
   {
     "group": "brand",
-    "id": "fa-viacoin",
+    "id": "viacoin",
     "name": "Viacoin"
   },
   {
     "group": "brand",
-    "id": "fa-vine",
+    "id": "vine",
     "name": "Vine"
   },
   {
     "group": "brand",
-    "id": "fa-vk",
+    "id": "vk",
     "name": "VK"
   },
   {
     "group": "brand",
-    "id": "fa-weixin",
+    "id": "weixin",
     "name": "Weixin"
   },
   {
     "group": "brand",
-    "id": "fa-weibo",
+    "id": "weibo",
     "name": "Wibo"
   },
   {
     "group": "brand",
-    "id": "fa-whatsapp",
+    "id": "whatsapp",
     "name": "WhatsApp"
   },
   {
     "group": "brand",
-    "id": "fa-wikipedia-w",
+    "id": "wikipedia-w",
     "name": "Wikipedia"
   },
   {
     "group": "brand",
-    "id": "fa-windows",
+    "id": "windows",
     "name": "Windows"
   },
   {
     "group": "brand",
-    "id": "fa-wordpress",
+    "id": "wordpress",
     "name": "WordPress"
   },
   {
     "group": "brand",
-    "id": "fa-wpbeginner",
+    "id": "wpbeginner",
     "name": "WP Beginner"
   },
   {
     "group": "brand",
-    "id": "fa-wpforms",
+    "id": "wpforms",
     "name": "WP Forms"
   },
   {
     "group": "brand",
-    "id": "fa-xing",
+    "id": "xing",
     "name": "Xing"
   },
   {
     "group": "brand",
-    "id": "fa-xing-square",
+    "id": "xing-square",
     "name": "Xing"
   },
   {
     "group": "brand",
-    "id": "fa-y-combinator",
+    "id": "y-combinator",
     "name": "Y Combinator"
   },
   {
     "group": "brand",
-    "id": "fa-yahoo",
+    "id": "yahoo",
     "name": "Yahoo!"
   },
   {
     "group": "brand",
-    "id": "fa-yelp",
+    "id": "yelp",
     "name": "Yelp"
   },
   {
     "group": "brand",
-    "id": "fa-youtube",
+    "id": "youtube",
     "name": "YouTube"
   },
   {
     "group": "brand",
-    "id": "fa-youtube-square",
+    "id": "youtube-square",
     "name": "YouTube"
   },
   {
     "group": "chart",
-    "id": "fa-area-chart",
+    "id": "area-chart",
     "name": "Area Chart"
   },
   {
     "group": "chart",
-    "id": "fa-bar-chart-o",
+    "id": "bar-chart-o",
     "name": "Bar Chart"
   },
   {
     "group": "chart",
-    "id": "fa-line-chart",
+    "id": "line-chart",
     "name": "Line Chart"
   },
   {
     "group": "chart",
-    "id": "fa-pie-chart",
+    "id": "pie-chart",
     "name": "Pie Chart"
   },
   {
     "group": "currency",
-    "id": "fa-bitcoin",
+    "id": "bitcoin",
     "name": "Bitcoin"
   },
   {
     "group": "currency",
-    "id": "fa-dollar",
+    "id": "dollar",
     "name": "Dollar"
   },
   {
     "group": "currency",
-    "id": "fa-euro",
+    "id": "euro",
     "name": "Euro"
   },
   {
     "group": "currency",
-    "id": "fa-gbp",
+    "id": "gbp",
     "name": "GBP"
   },
   {
     "group": "currency",
-    "id": "fa-gg",
+    "id": "gg",
     "name": "GBP"
   },
   {
     "group": "currency",
-    "id": "fa-gg-circle",
+    "id": "gg-circle",
     "name": "GG"
   },
   {
     "group": "currency",
-    "id": "fa-ils",
+    "id": "ils",
     "name": "Israeli Sheqel"
   },
   {
     "group": "currency",
-    "id": "fa-money",
+    "id": "money",
     "name": "Money"
   },
   {
     "group": "currency",
-    "id": "fa-rouble",
+    "id": "rouble",
     "name": "Rouble"
   },
   {
     "group": "currency",
-    "id": "fa-inr",
+    "id": "inr",
     "name": "Rupee"
   },
   {
     "group": "currency",
-    "id": "fa-try",
+    "id": "try",
     "name": "Turkish Lira"
   },
   {
     "group": "currency",
-    "id": "fa-krw",
+    "id": "krw",
     "name": "Won"
   },
   {
     "group": "currency",
-    "id": "fa-jpy",
+    "id": "jpy",
     "name": "Yen"
   },
   {
     "group": "directional",
-    "id": "fa-angle-down",
+    "id": "angle-down",
     "name": "Angle Down"
   },
   {
     "group": "directional",
-    "id": "fa-angle-left",
+    "id": "angle-left",
     "name": "Angle Left"
   },
   {
     "group": "directional",
-    "id": "fa-angle-right",
+    "id": "angle-right",
     "name": "Angle Right"
   },
   {
     "group": "directional",
-    "id": "fa-angle-up",
+    "id": "angle-up",
     "name": "Angle Up"
   },
   {
     "group": "directional",
-    "id": "fa-angle-double-down",
+    "id": "angle-double-down",
     "name": "Angle Double Down"
   },
   {
     "group": "directional",
-    "id": "fa-angle-double-left",
+    "id": "angle-double-left",
     "name": "Angle Double Left"
   },
   {
     "group": "directional",
-    "id": "fa-angle-double-right",
+    "id": "angle-double-right",
     "name": "Angle Double Right"
   },
   {
     "group": "directional",
-    "id": "fa-angle-double-up",
+    "id": "angle-double-up",
     "name": "Angle Double Up"
   },
   {
     "group": "directional",
-    "id": "fa-arrow-circle-o-down",
+    "id": "arrow-circle-o-down",
     "name": "Arrow Circle Down"
   },
   {
     "group": "directional",
-    "id": "fa-arrow-circle-o-left",
+    "id": "arrow-circle-o-left",
     "name": "Arrow Circle Left"
   },
   {
     "group": "directional",
-    "id": "fa-arrow-circle-o-right",
+    "id": "arrow-circle-o-right",
     "name": "Arrow Circle Right"
   },
   {
     "group": "directional",
-    "id": "fa-arrow-circle-o-up",
+    "id": "arrow-circle-o-up",
     "name": "Arrow Circle Up"
   },
   {
     "group": "directional",
-    "id": "fa-arrow-circle-down",
+    "id": "arrow-circle-down",
     "name": "Arrow Circle Down"
   },
   {
     "group": "directional",
-    "id": "fa-arrow-circle-left",
+    "id": "arrow-circle-left",
     "name": "Arrow Circle Left"
   },
   {
     "group": "directional",
-    "id": "fa-arrow-circle-right",
+    "id": "arrow-circle-right",
     "name": "Arrow Circle Right"
   },
   {
     "group": "directional",
-    "id": "fa-arrow-circle-up",
+    "id": "arrow-circle-up",
     "name": "Arrow Circle Up"
   },
   {
     "group": "directional",
-    "id": "fa-arrow-down",
+    "id": "arrow-down",
     "name": "Arrow Down"
   },
   {
     "group": "directional",
-    "id": "fa-arrow-left",
+    "id": "arrow-left",
     "name": "Arrow Left"
   },
   {
     "group": "directional",
-    "id": "fa-arrow-right",
+    "id": "arrow-right",
     "name": "Arrow Right"
   },
   {
     "group": "directional",
-    "id": "fa-arrow-up",
+    "id": "arrow-up",
     "name": "Arrow Up"
   },
   {
     "group": "directional",
-    "id": "fa-arrows",
+    "id": "arrows",
     "name": "Arrows"
   },
   {
     "group": "directional",
-    "id": "fa-arrows-alt",
+    "id": "arrows-alt",
     "name": "Arrows"
   },
   {
     "group": "directional",
-    "id": "fa-arrows-h",
+    "id": "arrows-h",
     "name": "Arrows"
   },
   {
     "group": "directional",
-    "id": "fa-arrows-v",
+    "id": "arrows-v",
     "name": "Arrows"
   },
   {
     "group": "directional",
-    "id": "fa-caret-down",
+    "id": "caret-down",
     "name": "Caret Down"
   },
   {
     "group": "directional",
-    "id": "fa-caret-left",
+    "id": "caret-left",
     "name": "Caret Left"
   },
   {
     "group": "directional",
-    "id": "fa-caret-right",
+    "id": "caret-right",
     "name": "Caret Right"
   },
   {
     "group": "directional",
-    "id": "fa-caret-up",
+    "id": "caret-up",
     "name": "Caret Up"
   },
   {
     "group": "directional",
-    "id": "fa-caret-square-o-down",
+    "id": "caret-square-o-down",
     "name": "Caret Down"
   },
   {
     "group": "directional",
-    "id": "fa-caret-square-o-left",
+    "id": "caret-square-o-left",
     "name": "Caret Left"
   },
   {
     "group": "directional",
-    "id": "fa-caret-square-o-right",
+    "id": "caret-square-o-right",
     "name": "Caret Right"
   },
   {
     "group": "directional",
-    "id": "fa-caret-square-o-up",
+    "id": "caret-square-o-up",
     "name": "Caret Up"
   },
   {
     "group": "directional",
-    "id": "fa-chevron-circle-down",
+    "id": "chevron-circle-down",
     "name": "Chevron Circle Down"
   },
   {
     "group": "directional",
-    "id": "fa-chevron-circle-left",
+    "id": "chevron-circle-left",
     "name": "Chevron Circle Left"
   },
   {
     "group": "directional",
-    "id": "fa-chevron-circle-right",
+    "id": "chevron-circle-right",
     "name": "Chevron Circle Right"
   },
   {
     "group": "directional",
-    "id": "fa-chevron-circle-up",
+    "id": "chevron-circle-up",
     "name": "Chevron Circle Up"
   },
   {
     "group": "directional",
-    "id": "fa-chevron-down",
+    "id": "chevron-down",
     "name": "Chevron Down"
   },
   {
     "group": "directional",
-    "id": "fa-chevron-left",
+    "id": "chevron-left",
     "name": "Chevron Left"
   },
   {
     "group": "directional",
-    "id": "fa-chevron-right",
+    "id": "chevron-right",
     "name": "Chevron Right"
   },
   {
     "group": "directional",
-    "id": "fa-chevron-up",
+    "id": "chevron-up",
     "name": "Chevron Up"
   },
   {
     "group": "directional",
-    "id": "fa-hand-o-down",
+    "id": "hand-o-down",
     "name": "Hand Down"
   },
   {
     "group": "directional",
-    "id": "fa-hand-o-left",
+    "id": "hand-o-left",
     "name": "Hand Left"
   },
   {
     "group": "directional",
-    "id": "fa-hand-o-right",
+    "id": "hand-o-right",
     "name": "Hand Right"
   },
   {
     "group": "directional",
-    "id": "fa-hand-o-up",
+    "id": "hand-o-up",
     "name": "Hand Up"
   },
   {
     "group": "directional",
-    "id": "fa-long-arrow-down",
+    "id": "long-arrow-down",
     "name": "Long Arrow Down"
   },
   {
     "group": "directional",
-    "id": "fa-long-arrow-left",
+    "id": "long-arrow-left",
     "name": "Long Arrow Left"
   },
   {
     "group": "directional",
-    "id": "fa-long-arrow-right",
+    "id": "long-arrow-right",
     "name": "Long Arrow Right"
   },
   {
     "group": "directional",
-    "id": "fa-long-arrow-up",
+    "id": "long-arrow-up",
     "name": "Long Arrow Up"
   },
   {
     "group": "file-types",
-    "id": "fa-file",
+    "id": "file",
     "name": "File"
   },
   {
     "group": "file-types",
-    "id": "fa-file-o",
+    "id": "file-o",
     "name": "File"
   },
   {
     "group": "file-types",
-    "id": "fa-file-text",
+    "id": "file-text",
     "name": "File: Text"
   },
   {
     "group": "file-types",
-    "id": "fa-file-text-o",
+    "id": "file-text-o",
     "name": "File: Text"
   },
   {
     "group": "file-types",
-    "id": "fa-file-archive-o",
+    "id": "file-archive-o",
     "name": "File: Archive"
   },
   {
     "group": "file-types",
-    "id": "fa-file-audio-o",
+    "id": "file-audio-o",
     "name": "File: Audio"
   },
   {
     "group": "file-types",
-    "id": "fa-file-code-o",
+    "id": "file-code-o",
     "name": "File: Code"
   },
   {
     "group": "file-types",
-    "id": "fa-file-excel-o",
+    "id": "file-excel-o",
     "name": "File: Excel"
   },
   {
     "group": "file-types",
-    "id": "fa-file-image-o",
+    "id": "file-image-o",
     "name": "File: Image"
   },
   {
     "group": "file-types",
-    "id": "fa-file-pdf-o",
+    "id": "file-pdf-o",
     "name": "File: PDF"
   },
   {
     "group": "file-types",
-    "id": "fa-file-powerpoint-o",
+    "id": "file-powerpoint-o",
     "name": "File: Powerpoint"
   },
   {
     "group": "file-types",
-    "id": "fa-file-video-o",
+    "id": "file-video-o",
     "name": "File: Video"
   },
   {
     "group": "file-types",
-    "id": "fa-file-word-o",
+    "id": "file-word-o",
     "name": "File: Word"
   },
   {
     "group": "form-control",
-    "id": "fa-check-square",
+    "id": "check-square",
     "name": "Check"
   },
   {
     "group": "form-control",
-    "id": "fa-check-square-o",
+    "id": "check-square-o",
     "name": "Check"
   },
   {
     "group": "form-control",
-    "id": "fa-circle",
+    "id": "circle",
     "name": "Circle"
   },
   {
     "group": "form-control",
-    "id": "fa-circle-o",
+    "id": "circle-o",
     "name": "Circle"
   },
   {
     "group": "form-control",
-    "id": "fa-dot-circle-o",
+    "id": "dot-circle-o",
     "name": "Dot"
   },
   {
     "group": "form-control",
-    "id": "fa-minus-square",
+    "id": "minus-square",
     "name": "Minus"
   },
   {
     "group": "form-control",
-    "id": "fa-minus-square-o",
+    "id": "minus-square-o",
     "name": "Minus"
   },
   {
     "group": "form-control",
-    "id": "fa-plus-square",
+    "id": "plus-square",
     "name": "Plus"
   },
   {
     "group": "form-control",
-    "id": "fa-plus-square-o",
+    "id": "plus-square-o",
     "name": "Plus"
   },
   {
     "group": "form-control",
-    "id": "fa-square",
+    "id": "square",
     "name": "Square"
   },
   {
     "group": "form-control",
-    "id": "fa-square-o",
+    "id": "square-o",
     "name": "Square"
   },
   {
     "group": "gender",
-    "id": "fa-genderless",
+    "id": "genderless",
     "name": "Genderless"
   },
   {
     "group": "gender",
-    "id": "fa-mars",
+    "id": "mars",
     "name": "Mars"
   },
   {
     "group": "gender",
-    "id": "fa-mars-double",
+    "id": "mars-double",
     "name": "Mars"
   },
   {
     "group": "gender",
-    "id": "fa-mars-stroke",
+    "id": "mars-stroke",
     "name": "Mars"
   },
   {
     "group": "gender",
-    "id": "fa-mars-stroke-h",
+    "id": "mars-stroke-h",
     "name": "Mars"
   },
   {
     "group": "gender",
-    "id": "fa-mars-stroke-v",
+    "id": "mars-stroke-v",
     "name": "Mars"
   },
   {
     "group": "gender",
-    "id": "fa-mercury",
+    "id": "mercury",
     "name": "Mercury"
   },
   {
     "group": "gender",
-    "id": "fa-neuter",
+    "id": "neuter",
     "name": "Neuter"
   },
   {
     "group": "gender",
-    "id": "fa-transgender",
+    "id": "transgender",
     "name": "Transgender"
   },
   {
     "group": "gender",
-    "id": "fa-transgender-alt",
+    "id": "transgender-alt",
     "name": "Transgender"
   },
   {
     "group": "gender",
-    "id": "fa-venus",
+    "id": "venus",
     "name": "Venus"
   },
   {
     "group": "gender",
-    "id": "fa-venus-double",
+    "id": "venus-double",
     "name": "Venus"
   },
   {
     "group": "gender",
-    "id": "fa-venus-mars",
+    "id": "venus-mars",
     "name": "Venus + Mars"
   },
   {
     "group": "medical",
-    "id": "fa-heart",
+    "id": "heart",
     "name": "Heart"
   },
   {
     "group": "medical",
-    "id": "fa-heart-o",
+    "id": "heart-o",
     "name": "Heart"
   },
   {
     "group": "medical",
-    "id": "fa-heartbeat",
+    "id": "heartbeat",
     "name": "Heartbeat"
   },
   {
     "group": "medical",
-    "id": "fa-h-square",
+    "id": "h-square",
     "name": "Hospital"
   },
   {
     "group": "medical",
-    "id": "fa-hospital-o",
+    "id": "hospital-o",
     "name": "Hospital"
   },
   {
     "group": "medical",
-    "id": "fa-medkit",
+    "id": "medkit",
     "name": "Medkit"
   },
   {
     "group": "medical",
-    "id": "fa-stethoscope",
+    "id": "stethoscope",
     "name": "Stethoscope"
   },
   {
     "group": "medical",
-    "id": "fa-user-md",
+    "id": "user-md",
     "name": "User MD"
   },
   {
     "group": "payment",
-    "id": "fa-cc-amex",
+    "id": "cc-amex",
     "name": "American Express"
   },
   {
     "group": "payment",
-    "id": "fa-credit-card",
+    "id": "credit-card",
     "name": "Credit Card"
   },
   {
     "group": "payment",
-    "id": "fa-credit-card-alt",
+    "id": "credit-card-alt",
     "name": "Credit Card"
   },
   {
     "group": "payment",
-    "id": "fa-cc-diners-club",
+    "id": "cc-diners-club",
     "name": "Diners Club"
   },
   {
     "group": "payment",
-    "id": "fa-cc-discover",
+    "id": "cc-discover",
     "name": "Discover"
   },
   {
     "group": "payment",
-    "id": "fa-google-wallet",
+    "id": "google-wallet",
     "name": "Google Wallet"
   },
   {
     "group": "payment",
-    "id": "fa-cc-jcb",
+    "id": "cc-jcb",
     "name": "JCB"
   },
   {
     "group": "payment",
-    "id": "fa-cc-mastercard",
+    "id": "cc-mastercard",
     "name": "MasterCard"
   },
   {
     "group": "payment",
-    "id": "fa-cc-paypal",
+    "id": "cc-paypal",
     "name": "PayPal"
   },
   {
     "group": "payment",
-    "id": "fa-paypal",
+    "id": "paypal",
     "name": "PayPal"
   },
   {
     "group": "payment",
-    "id": "fa-cc-stripe",
+    "id": "cc-stripe",
     "name": "Stripe"
   },
   {
     "group": "payment",
-    "id": "fa-cc-visa",
+    "id": "cc-visa",
     "name": "Visa"
   },
   {
     "group": "spinner",
-    "id": "fa-circle-o-notch",
+    "id": "circle-o-notch",
     "name": "Circle"
   },
   {
     "group": "spinner",
-    "id": "fa-cog",
+    "id": "cog",
     "name": "Cog"
   },
   {
     "group": "spinner",
-    "id": "fa-refresh",
+    "id": "refresh",
     "name": "Refresh"
   },
   {
     "group": "spinner",
-    "id": "fa-spinner",
+    "id": "spinner",
     "name": "Spinner"
   },
   {
     "group": "transportation",
-    "id": "fa-ambulance",
+    "id": "ambulance",
     "name": "Ambulance"
   },
   {
     "group": "transportation",
-    "id": "fa-bicycle",
+    "id": "bicycle",
     "name": "Bicycle"
   },
   {
     "group": "transportation",
-    "id": "fa-bus",
+    "id": "bus",
     "name": "Bus"
   },
   {
     "group": "transportation",
-    "id": "fa-car",
+    "id": "car",
     "name": "Car"
   },
   {
     "group": "transportation",
-    "id": "fa-fighter-jet",
+    "id": "fighter-jet",
     "name": "Fighter Jet"
   },
   {
     "group": "transportation",
-    "id": "fa-motorcycle",
+    "id": "motorcycle",
     "name": "Motorcycle"
   },
   {
     "group": "transportation",
-    "id": "fa-plane",
+    "id": "plane",
     "name": "Plane"
   },
   {
     "group": "transportation",
-    "id": "fa-rocket",
+    "id": "rocket",
     "name": "Rocket"
   },
   {
     "group": "transportation",
-    "id": "fa-ship",
+    "id": "ship",
     "name": "Ship"
   },
   {
     "group": "transportation",
-    "id": "fa-space-shuttle",
+    "id": "space-shuttle",
     "name": "Space Shuttle"
   },
   {
     "group": "transportation",
-    "id": "fa-subway",
+    "id": "subway",
     "name": "Subway"
   },
   {
     "group": "transportation",
-    "id": "fa-taxi",
+    "id": "taxi",
     "name": "Taxi"
   },
   {
     "group": "transportation",
-    "id": "fa-train",
+    "id": "train",
     "name": "Train"
   },
   {
     "group": "transportation",
-    "id": "fa-truck",
+    "id": "truck",
     "name": "Truck"
   },
   {
     "group": "transportation",
-    "id": "fa-wheelchair",
+    "id": "wheelchair",
     "name": "Wheelchair"
   },
   {
     "group": "transportation",
-    "id": "fa-wheelchair-alt",
+    "id": "wheelchair-alt",
     "name": "Wheelchair"
   },
   {
     "group": "text-editor",
-    "id": "fa-align-left",
+    "id": "align-left",
     "name": "Align Left"
   },
   {
     "group": "text-editor",
-    "id": "fa-align-center",
+    "id": "align-center",
     "name": "Align Center"
   },
   {
     "group": "text-editor",
-    "id": "fa-align-justify",
+    "id": "align-justify",
     "name": "Justify"
   },
   {
     "group": "text-editor",
-    "id": "fa-align-right",
+    "id": "align-right",
     "name": "Align Right"
   },
   {
     "group": "text-editor",
-    "id": "fa-bold",
+    "id": "bold",
     "name": "Bold"
   },
   {
     "group": "text-editor",
-    "id": "fa-clipboard",
+    "id": "clipboard",
     "name": "Clipboard"
   },
   {
     "group": "text-editor",
-    "id": "fa-columns",
+    "id": "columns",
     "name": "Columns"
   },
   {
     "group": "text-editor",
-    "id": "fa-copy",
+    "id": "copy",
     "name": "Copy"
   },
   {
     "group": "text-editor",
-    "id": "fa-cut",
+    "id": "cut",
     "name": "Cut"
   },
   {
     "group": "text-editor",
-    "id": "fa-paste",
+    "id": "paste",
     "name": "Paste"
   },
   {
     "group": "text-editor",
-    "id": "fa-eraser",
+    "id": "eraser",
     "name": "Eraser"
   },
   {
     "group": "text-editor",
-    "id": "fa-files-o",
+    "id": "files-o",
     "name": "Files"
   },
   {
     "group": "text-editor",
-    "id": "fa-font",
+    "id": "font",
     "name": "Font"
   },
   {
     "group": "text-editor",
-    "id": "fa-header",
+    "id": "header",
     "name": "Header"
   },
   {
     "group": "text-editor",
-    "id": "fa-indent",
+    "id": "indent",
     "name": "Indent"
   },
   {
     "group": "text-editor",
-    "id": "fa-outdent",
+    "id": "outdent",
     "name": "Outdent"
   },
   {
     "group": "text-editor",
-    "id": "fa-italic",
+    "id": "italic",
     "name": "Italic"
   },
   {
     "group": "text-editor",
-    "id": "fa-link",
+    "id": "link",
     "name": "Link"
   },
   {
     "group": "text-editor",
-    "id": "fa-unlink",
+    "id": "unlink",
     "name": "Unlink"
   },
   {
     "group": "text-editor",
-    "id": "fa-list",
+    "id": "list",
     "name": "List"
   },
   {
     "group": "text-editor",
-    "id": "fa-list-alt",
+    "id": "list-alt",
     "name": "List"
   },
   {
     "group": "text-editor",
-    "id": "fa-list-ol",
+    "id": "list-ol",
     "name": "Ordered List"
   },
   {
     "group": "text-editor",
-    "id": "fa-list-ul",
+    "id": "list-ul",
     "name": "Unordered List"
   },
   {
     "group": "text-editor",
-    "id": "fa-paperclip",
+    "id": "paperclip",
     "name": "Paperclip"
   },
   {
     "group": "text-editor",
-    "id": "fa-paragraph",
+    "id": "paragraph",
     "name": "Paragraph"
   },
   {
     "group": "text-editor",
-    "id": "fa-repeat",
+    "id": "repeat",
     "name": "Repeat"
   },
   {
     "group": "text-editor",
-    "id": "fa-undo",
+    "id": "undo",
     "name": "Undo"
   },
   {
     "group": "text-editor",
-    "id": "fa-save",
+    "id": "save",
     "name": "Save"
   },
   {
     "group": "text-editor",
-    "id": "fa-strikethrough",
+    "id": "strikethrough",
     "name": "Strikethrough"
   },
   {
     "group": "text-editor",
-    "id": "fa-subscript",
+    "id": "subscript",
     "name": "Subscript"
   },
   {
     "group": "text-editor",
-    "id": "fa-superscript",
+    "id": "superscript",
     "name": "Superscript"
   },
   {
     "group": "text-editor",
-    "id": "fa-table",
+    "id": "table",
     "name": "Table"
   },
   {
     "group": "text-editor",
-    "id": "fa-text-height",
+    "id": "text-height",
     "name": "Text Height"
   },
   {
     "group": "text-editor",
-    "id": "fa-text-width",
+    "id": "text-width",
     "name": "Text Width"
   },
   {
     "group": "text-editor",
-    "id": "fa-th",
+    "id": "th",
     "name": "Table Header"
   },
   {
     "group": "text-editor",
-    "id": "fa-th-large",
+    "id": "th-large",
     "name": "TH Large"
   },
   {
     "group": "text-editor",
-    "id": "fa-th-list",
+    "id": "th-list",
     "name": "TH List"
   },
   {
     "group": "text-editor",
-    "id": "fa-underline",
+    "id": "underline",
     "name": "Underline"
   },
   {
     "group": "video-player",
-    "id": "fa-arrows-alt",
+    "id": "arrows-alt",
     "name": "Arrows"
   },
   {
     "group": "video-player",
-    "id": "fa-backward",
+    "id": "backward",
     "name": "Backward"
   },
   {
     "group": "video-player",
-    "id": "fa-compress",
+    "id": "compress",
     "name": "Compress"
   },
   {
     "group": "video-player",
-    "id": "fa-eject",
+    "id": "eject",
     "name": "Eject"
   },
   {
     "group": "video-player",
-    "id": "fa-expand",
+    "id": "expand",
     "name": "Expand"
   },
   {
     "group": "video-player",
-    "id": "fa-fast-backward",
+    "id": "fast-backward",
     "name": "Fast Backward"
   },
   {
     "group": "video-player",
-    "id": "fa-fast-forward",
+    "id": "fast-forward",
     "name": "Fast Forward"
   },
   {
     "group": "video-player",
-    "id": "fa-forward",
+    "id": "forward",
     "name": "Forward"
   },
   {
     "group": "video-player",
-    "id": "fa-pause",
+    "id": "pause",
     "name": "Pause"
   },
   {
     "group": "video-player",
-    "id": "fa-pause-circle",
+    "id": "pause-circle",
     "name": "Pause"
   },
   {
     "group": "video-player",
-    "id": "fa-pause-circle-o",
+    "id": "pause-circle-o",
     "name": "Pause"
   },
   {
     "group": "video-player",
-    "id": "fa-play",
+    "id": "play",
     "name": "Play"
   },
   {
     "group": "video-player",
-    "id": "fa-play-circle",
+    "id": "play-circle",
     "name": "Play"
   },
   {
     "group": "video-player",
-    "id": "fa-play-circle-o",
+    "id": "play-circle-o",
     "name": "Play"
   },
   {
     "group": "video-player",
-    "id": "fa-step-backward",
+    "id": "step-backward",
     "name": "Step Backward"
   },
   {
     "group": "video-player",
-    "id": "fa-step-forward",
+    "id": "step-forward",
     "name": "Step Forward"
   },
   {
     "group": "video-player",
-    "id": "fa-stop",
+    "id": "stop",
     "name": "Stop"
   },
   {
     "group": "video-player",
-    "id": "fa-stop-circle",
+    "id": "stop-circle",
     "name": "Stop"
   },
   {
     "group": "video-player",
-    "id": "fa-stop-circle-o",
+    "id": "stop-circle-o",
     "name": "Stop"
   },
   {
     "group": "video-player",
-    "id": "fa-youtube-play",
+    "id": "youtube-play",
     "name": "YouTube Play"
   },
   {
     "group": "web-application",
-    "id": "fa-adjust",
+    "id": "adjust",
     "name": "Adjust"
   },
   {
     "group": "web-application",
-    "id": "fa-anchor",
+    "id": "anchor",
     "name": "Anchor"
   },
   {
     "group": "web-application",
-    "id": "fa-archive",
+    "id": "archive",
     "name": "Archive"
   },
   {
     "group": "web-application",
-    "id": "fa-arrows",
+    "id": "arrows",
     "name": "Arrows"
   },
   {
     "group": "web-application",
-    "id": "fa-arrows-h",
+    "id": "arrows-h",
     "name": "Arrows"
   },
   {
     "group": "web-application",
-    "id": "fa-arrows-v",
+    "id": "arrows-v",
     "name": "Arrows"
   },
   {
     "group": "web-application",
-    "id": "fa-asterisk",
+    "id": "asterisk",
     "name": "Asterisk"
   },
   {
     "group": "web-application",
-    "id": "fa-at",
+    "id": "at",
     "name": "At"
   },
   {
     "group": "web-application",
-    "id": "fa-balance-scale",
+    "id": "balance-scale",
     "name": "Balance"
   },
   {
     "group": "web-application",
-    "id": "fa-ban",
+    "id": "ban",
     "name": "Ban"
   },
   {
     "group": "web-application",
-    "id": "fa-barcode",
+    "id": "barcode",
     "name": "Barcode"
   },
   {
     "group": "web-application",
-    "id": "fa-bars",
+    "id": "bars",
     "name": "Bars"
   },
   {
     "group": "web-application",
-    "id": "fa-battery-empty",
+    "id": "battery-empty",
     "name": "Battery"
   },
   {
     "group": "web-application",
-    "id": "fa-battery-quarter",
+    "id": "battery-quarter",
     "name": "Battery"
   },
   {
     "group": "web-application",
-    "id": "fa-battery-half",
+    "id": "battery-half",
     "name": "Battery"
   },
   {
     "group": "web-application",
-    "id": "fa-battery-full",
+    "id": "battery-full",
     "name": "Battery"
   },
   {
     "group": "web-application",
-    "id": "fa-bed",
+    "id": "bed",
     "name": "Bed"
   },
   {
     "group": "web-application",
-    "id": "fa-beer",
+    "id": "beer",
     "name": "Beer"
   },
   {
     "group": "web-application",
-    "id": "fa-bell",
+    "id": "bell",
     "name": "Bell"
   },
   {
     "group": "web-application",
-    "id": "fa-bell-o",
+    "id": "bell-o",
     "name": "Bell"
   },
   {
     "group": "web-application",
-    "id": "fa-bell-slash",
+    "id": "bell-slash",
     "name": "Bell"
   },
   {
     "group": "web-application",
-    "id": "fa-bell-slash-o",
+    "id": "bell-slash-o",
     "name": "Bell"
   },
   {
     "group": "web-application",
-    "id": "fa-binoculars",
+    "id": "binoculars",
     "name": "Binoculars"
   },
   {
     "group": "web-application",
-    "id": "fa-birthday-cake",
+    "id": "birthday-cake",
     "name": "Birthday Cake"
   },
   {
     "group": "web-application",
-    "id": "fa-bolt",
+    "id": "bolt",
     "name": "Bolt"
   },
   {
     "group": "web-application",
-    "id": "fa-book",
+    "id": "book",
     "name": "Book"
   },
   {
     "group": "web-application",
-    "id": "fa-bookmark",
+    "id": "bookmark",
     "name": "Bookmark"
   },
   {
     "group": "web-application",
-    "id": "fa-bookmark-o",
+    "id": "bookmark-o",
     "name": "Bookmark"
   },
   {
     "group": "web-application",
-    "id": "fa-bomb",
+    "id": "bomb",
     "name": "Bomb"
   },
   {
     "group": "web-application",
-    "id": "fa-briefcase",
+    "id": "briefcase",
     "name": "Briefcase"
   },
   {
     "group": "web-application",
-    "id": "fa-bug",
+    "id": "bug",
     "name": "Bug"
   },
   {
     "group": "web-application",
-    "id": "fa-building",
+    "id": "building",
     "name": "Building"
   },
   {
     "group": "web-application",
-    "id": "fa-building-o",
+    "id": "building-o",
     "name": "Building"
   },
   {
     "group": "web-application",
-    "id": "fa-bullhorn",
+    "id": "bullhorn",
     "name": "Bullhorn"
   },
   {
     "group": "web-application",
-    "id": "fa-bullseye",
+    "id": "bullseye",
     "name": "Bullseye"
   },
   {
     "group": "web-application",
-    "id": "fa-calculator",
+    "id": "calculator",
     "name": "Calculator"
   },
   {
     "group": "web-application",
-    "id": "fa-calendar",
+    "id": "calendar",
     "name": "Calendar"
   },
   {
     "group": "web-application",
-    "id": "fa-calendar-o",
+    "id": "calendar-o",
     "name": "Calendar"
   },
   {
     "group": "web-application",
-    "id": "fa-calendar-check-o",
+    "id": "calendar-check-o",
     "name": "Calendar"
   },
   {
     "group": "web-application",
-    "id": "fa-calendar-minus-o",
+    "id": "calendar-minus-o",
     "name": "Calendar"
   },
   {
     "group": "web-application",
-    "id": "fa-calendar-times-o",
+    "id": "calendar-times-o",
     "name": "Calendar"
   },
   {
     "group": "web-application",
-    "id": "fa-camera",
+    "id": "camera",
     "name": "Camera"
   },
   {
     "group": "web-application",
-    "id": "fa-camera-retro",
+    "id": "camera-retro",
     "name": "Camera Retro"
   },
   {
     "group": "web-application",
-    "id": "fa-caret-square-o-down",
+    "id": "caret-square-o-down",
     "name": "Caret Down"
   },
   {
     "group": "web-application",
-    "id": "fa-caret-square-o-left",
+    "id": "caret-square-o-left",
     "name": "Caret Left"
   },
   {
     "group": "web-application",
-    "id": "fa-caret-square-o-right",
+    "id": "caret-square-o-right",
     "name": "Caret Right"
   },
   {
     "group": "web-application",
-    "id": "fa-caret-square-o-up",
+    "id": "caret-square-o-up",
     "name": "Caret Up"
   },
   {
     "group": "web-application",
-    "id": "fa-cart-arrow-down",
+    "id": "cart-arrow-down",
     "name": "Cart Arrow Down"
   },
   {
     "group": "web-application",
-    "id": "fa-cart-plus",
+    "id": "cart-plus",
     "name": "Cart Plus"
   },
   {
     "group": "web-application",
-    "id": "fa-certificate",
+    "id": "certificate",
     "name": "Certificate"
   },
   {
     "group": "web-application",
-    "id": "fa-check",
+    "id": "check",
     "name": "Check"
   },
   {
     "group": "web-application",
-    "id": "fa-check-circle",
+    "id": "check-circle",
     "name": "Check"
   },
   {
     "group": "web-application",
-    "id": "fa-check-circle-o",
+    "id": "check-circle-o",
     "name": "Check"
   },
   {
     "group": "web-application",
-    "id": "fa-child",
+    "id": "child",
     "name": "Child"
   },
   {
     "group": "web-application",
-    "id": "fa-circle-thin",
+    "id": "circle-thin",
     "name": "Circle"
   },
   {
     "group": "web-application",
-    "id": "fa-clock-o",
+    "id": "clock-o",
     "name": "Clock"
   },
   {
     "group": "web-application",
-    "id": "fa-clone",
+    "id": "clone",
     "name": "Clone"
   },
   {
     "group": "web-application",
-    "id": "fa-cloud",
+    "id": "cloud",
     "name": "Cloud"
   },
   {
     "group": "web-application",
-    "id": "fa-cloud-download",
+    "id": "cloud-download",
     "name": "Cloud Download"
   },
   {
     "group": "web-application",
-    "id": "fa-cloud-upload",
+    "id": "cloud-upload",
     "name": "Cloud Upload"
   },
   {
     "group": "web-application",
-    "id": "fa-code",
+    "id": "code",
     "name": "Code"
   },
   {
     "group": "web-application",
-    "id": "fa-code-fork",
+    "id": "code-fork",
     "name": "Code Fork"
   },
   {
     "group": "web-application",
-    "id": "fa-coffee",
+    "id": "coffee",
     "name": "Coffee"
   },
   {
     "group": "web-application",
-    "id": "fa-cogs",
+    "id": "cogs",
     "name": "Cogs"
   },
   {
     "group": "web-application",
-    "id": "fa-comment",
+    "id": "comment",
     "name": "Comment"
   },
   {
     "group": "web-application",
-    "id": "fa-comment-o",
+    "id": "comment-o",
     "name": "Comment"
   },
   {
     "group": "web-application",
-    "id": "fa-comments",
+    "id": "comments",
     "name": "Comments"
   },
   {
     "group": "web-application",
-    "id": "fa-comments-o",
+    "id": "comments-o",
     "name": "Comments"
   },
   {
     "group": "web-application",
-    "id": "fa-commenting",
+    "id": "commenting",
     "name": "Commenting"
   },
   {
     "group": "web-application",
-    "id": "fa-commenting-o",
+    "id": "commenting-o",
     "name": "Commenting"
   },
   {
     "group": "web-application",
-    "id": "fa-compass",
+    "id": "compass",
     "name": "Compass"
   },
   {
     "group": "web-application",
-    "id": "fa-copyright",
+    "id": "copyright",
     "name": "Copyright"
   },
   {
     "group": "web-application",
-    "id": "fa-credit-card",
+    "id": "credit-card",
     "name": "Credit Card"
   },
   {
     "group": "web-application",
-    "id": "fa-crop",
+    "id": "crop",
     "name": "Crop"
   },
   {
     "group": "web-application",
-    "id": "fa-crosshairs",
+    "id": "crosshairs",
     "name": "Crosshairs"
   },
   {
     "group": "web-application",
-    "id": "fa-cube",
+    "id": "cube",
     "name": "Cube"
   },
   {
     "group": "web-application",
-    "id": "fa-cubes",
+    "id": "cubes",
     "name": "Cubes"
   },
   {
     "group": "web-application",
-    "id": "fa-i-cursor",
+    "id": "i-cursor",
     "name": "Cursor"
   },
   {
     "group": "web-application",
-    "id": "fa-cutlery",
+    "id": "cutlery",
     "name": "Cutlery"
   },
   {
     "group": "web-application",
-    "id": "fa-dashboard",
+    "id": "dashboard",
     "name": "Dashboard"
   },
   {
     "group": "web-application",
-    "id": "fa-database",
+    "id": "database",
     "name": "Database"
   },
   {
     "group": "web-application",
-    "id": "fa-desktop",
+    "id": "desktop",
     "name": "Desktop"
   },
   {
     "group": "web-application",
-    "id": "fa-diamond",
+    "id": "diamond",
     "name": "Diamond"
   },
   {
     "group": "web-application",
-    "id": "fa-download",
+    "id": "download",
     "name": "Download"
   },
   {
     "group": "web-application",
-    "id": "fa-edit",
+    "id": "edit",
     "name": "Edit"
   },
   {
     "group": "web-application",
-    "id": "fa-ellipsis-h",
+    "id": "ellipsis-h",
     "name": "Ellipsis"
   },
   {
     "group": "web-application",
-    "id": "fa-ellipsis-v",
+    "id": "ellipsis-v",
     "name": "Ellipsis"
   },
   {
     "group": "web-application",
-    "id": "fa-envelope",
+    "id": "envelope",
     "name": "Envelope"
   },
   {
     "group": "web-application",
-    "id": "fa-envelope-o",
+    "id": "envelope-o",
     "name": "Envelope"
   },
   {
     "group": "web-application",
-    "id": "fa-envelope-square",
+    "id": "envelope-square",
     "name": "Envelope"
   },
   {
     "group": "web-application",
-    "id": "fa-eraser",
+    "id": "eraser",
     "name": "Eraser"
   },
   {
     "group": "web-application",
-    "id": "fa-exchange",
+    "id": "exchange",
     "name": "Exchange"
   },
   {
     "group": "web-application",
-    "id": "fa-exclamation",
+    "id": "exclamation",
     "name": "Exclamation"
   },
   {
     "group": "web-application",
-    "id": "fa-exclamation-circle",
+    "id": "exclamation-circle",
     "name": "Exclamation"
   },
   {
     "group": "web-application",
-    "id": "fa-exclamation-triangle",
+    "id": "exclamation-triangle",
     "name": "Exclamation"
   },
   {
     "group": "web-application",
-    "id": "fa-external-link",
+    "id": "external-link",
     "name": "External Link"
   },
   {
     "group": "web-application",
-    "id": "fa-external-link-square",
+    "id": "external-link-square",
     "name": "External Link"
   },
   {
     "group": "web-application",
-    "id": "fa-eye",
+    "id": "eye",
     "name": "Eye"
   },
   {
     "group": "web-application",
-    "id": "fa-eye-slash",
+    "id": "eye-slash",
     "name": "Eye"
   },
   {
     "group": "web-application",
-    "id": "fa-eyedropper",
+    "id": "eyedropper",
     "name": "Eye Dropper"
   },
   {
     "group": "web-application",
-    "id": "fa-fax",
+    "id": "fax",
     "name": "Fax"
   },
   {
     "group": "web-application",
-    "id": "fa-female",
+    "id": "female",
     "name": "Female"
   },
   {
     "group": "web-application",
-    "id": "fa-film",
+    "id": "film",
     "name": "Film"
   },
   {
     "group": "web-application",
-    "id": "fa-filter",
+    "id": "filter",
     "name": "Filter"
   },
   {
     "group": "web-application",
-    "id": "fa-fire",
+    "id": "fire",
     "name": "Fire"
   },
   {
     "group": "web-application",
-    "id": "fa-fire-extinguisher",
+    "id": "fire-extinguisher",
     "name": "Fire Extinguisher"
   },
   {
     "group": "web-application",
-    "id": "fa-flag",
+    "id": "flag",
     "name": "Flag"
   },
   {
     "group": "web-application",
-    "id": "fa-flag-checkered",
+    "id": "flag-checkered",
     "name": "Flag"
   },
   {
     "group": "web-application",
-    "id": "fa-flag-o",
+    "id": "flag-o",
     "name": "Flag"
   },
   {
     "group": "web-application",
-    "id": "fa-flash",
+    "id": "flash",
     "name": "Flash"
   },
   {
     "group": "web-application",
-    "id": "fa-flask",
+    "id": "flask",
     "name": "Flask"
   },
   {
     "group": "web-application",
-    "id": "fa-folder",
+    "id": "folder",
     "name": "Folder"
   },
   {
     "group": "web-application",
-    "id": "fa-folder-open",
+    "id": "folder-open",
     "name": "Folder Open"
   },
   {
     "group": "web-application",
-    "id": "fa-folder-o",
+    "id": "folder-o",
     "name": "Folder"
   },
   {
     "group": "web-application",
-    "id": "fa-folder-open-o",
+    "id": "folder-open-o",
     "name": "Folder Open"
   },
   {
     "group": "web-application",
-    "id": "fa-futbol-o",
+    "id": "futbol-o",
     "name": "Foot Ball"
   },
   {
     "group": "web-application",
-    "id": "fa-frown-o",
+    "id": "frown-o",
     "name": "Frown"
   },
   {
     "group": "web-application",
-    "id": "fa-gamepad",
+    "id": "gamepad",
     "name": "Gamepad"
   },
   {
     "group": "web-application",
-    "id": "fa-gavel",
+    "id": "gavel",
     "name": "Gavel"
   },
   {
     "group": "web-application",
-    "id": "fa-gear",
+    "id": "gear",
     "name": "Gear"
   },
   {
     "group": "web-application",
-    "id": "fa-gears",
+    "id": "gears",
     "name": "Gears"
   },
   {
     "group": "web-application",
-    "id": "fa-gift",
+    "id": "gift",
     "name": "Gift"
   },
   {
     "group": "web-application",
-    "id": "fa-glass",
+    "id": "glass",
     "name": "Glass"
   },
   {
     "group": "web-application",
-    "id": "fa-globe",
+    "id": "globe",
     "name": "Globe"
   },
   {
     "group": "web-application",
-    "id": "fa-graduation-cap",
+    "id": "graduation-cap",
     "name": "Graduation Cap"
   },
   {
     "group": "web-application",
-    "id": "fa-group",
+    "id": "group",
     "name": "Group"
   },
   {
     "group": "web-application",
-    "id": "fa-hand-lizard-o",
+    "id": "hand-lizard-o",
     "name": "Hand"
   },
   {
     "group": "web-application",
-    "id": "fa-hand-paper-o",
+    "id": "hand-paper-o",
     "name": "Hand"
   },
   {
     "group": "web-application",
-    "id": "fa-hand-peace-o",
+    "id": "hand-peace-o",
     "name": "Hand"
   },
   {
     "group": "web-application",
-    "id": "fa-hand-pointer-o",
+    "id": "hand-pointer-o",
     "name": "Hand"
   },
   {
     "group": "web-application",
-    "id": "fa-hand-rock-o",
+    "id": "hand-rock-o",
     "name": "Hand"
   },
   {
     "group": "web-application",
-    "id": "fa-hand-scissors-o",
+    "id": "hand-scissors-o",
     "name": "Hand"
   },
   {
     "group": "web-application",
-    "id": "fa-hand-spock-o",
+    "id": "hand-spock-o",
     "name": "Hand"
   },
   {
     "group": "web-application",
-    "id": "fa-hdd-o",
+    "id": "hdd-o",
     "name": "HDD"
   },
   {
     "group": "web-application",
-    "id": "fa-hashtag",
+    "id": "hashtag",
     "name": "Hash Tag"
   },
   {
     "group": "web-application",
-    "id": "fa-headphones",
+    "id": "headphones",
     "name": "Headphones"
   },
   {
     "group": "web-application",
-    "id": "fa-home",
+    "id": "home",
     "name": "Home"
   },
   {
     "group": "web-application",
-    "id": "fa-hourglass-o",
+    "id": "hourglass-o",
     "name": "Hourglass"
   },
   {
     "group": "web-application",
-    "id": "fa-hourglass-start",
+    "id": "hourglass-start",
     "name": "Hourglass"
   },
   {
     "group": "web-application",
-    "id": "fa-hourglass-half",
+    "id": "hourglass-half",
     "name": "Hourglass"
   },
   {
     "group": "web-application",
-    "id": "fa-hourglass-end",
+    "id": "hourglass-end",
     "name": "Hourglass"
   },
   {
     "group": "web-application",
-    "id": "fa-hourglass",
+    "id": "hourglass",
     "name": "Hourglass"
   },
   {
     "group": "web-application",
-    "id": "fa-history",
+    "id": "history",
     "name": "History"
   },
   {
     "group": "web-application",
-    "id": "fa-inbox",
+    "id": "inbox",
     "name": "Inbox"
   },
   {
     "group": "web-application",
-    "id": "fa-industry",
+    "id": "industry",
     "name": "Industry"
   },
   {
     "group": "web-application",
-    "id": "fa-info",
+    "id": "info",
     "name": "Info"
   },
   {
     "group": "web-application",
-    "id": "fa-info-circle",
+    "id": "info-circle",
     "name": "Info"
   },
   {
     "group": "web-application",
-    "id": "fa-key",
+    "id": "key",
     "name": "Key"
   },
   {
     "group": "web-application",
-    "id": "fa-keyboard-o",
+    "id": "keyboard-o",
     "name": "Keyboard"
   },
   {
     "group": "web-application",
-    "id": "fa-language",
+    "id": "language",
     "name": "Language"
   },
   {
     "group": "web-application",
-    "id": "fa-laptop",
+    "id": "laptop",
     "name": "Laptop"
   },
   {
     "group": "web-application",
-    "id": "fa-leaf",
+    "id": "leaf",
     "name": "Leaf"
   },
   {
     "group": "web-application",
-    "id": "fa-legal",
+    "id": "legal",
     "name": "Legal"
   },
   {
     "group": "web-application",
-    "id": "fa-lemon-o",
+    "id": "lemon-o",
     "name": "Lemon"
   },
   {
     "group": "web-application",
-    "id": "fa-level-down",
+    "id": "level-down",
     "name": "Level Down"
   },
   {
     "group": "web-application",
-    "id": "fa-level-up",
+    "id": "level-up",
     "name": "Level Up"
   },
   {
     "group": "web-application",
-    "id": "fa-life-ring",
+    "id": "life-ring",
     "name": "Life Buoy"
   },
   {
     "group": "web-application",
-    "id": "fa-lightbulb-o",
+    "id": "lightbulb-o",
     "name": "Lightbulb"
   },
   {
     "group": "web-application",
-    "id": "fa-location-arrow",
+    "id": "location-arrow",
     "name": "Location Arrow"
   },
   {
     "group": "web-application",
-    "id": "fa-lock",
+    "id": "lock",
     "name": "Lock"
   },
   {
     "group": "web-application",
-    "id": "fa-magic",
+    "id": "magic",
     "name": "Magic"
   },
   {
     "group": "web-application",
-    "id": "fa-magnet",
+    "id": "magnet",
     "name": "Magnet"
   },
   {
     "group": "web-application",
-    "id": "fa-mail-forward",
+    "id": "mail-forward",
     "name": "Mail Forward"
   },
   {
     "group": "web-application",
-    "id": "fa-mail-reply",
+    "id": "mail-reply",
     "name": "Mail Reply"
   },
   {
     "group": "web-application",
-    "id": "fa-mail-reply-all",
+    "id": "mail-reply-all",
     "name": "Mail Reply All"
   },
   {
     "group": "web-application",
-    "id": "fa-male",
+    "id": "male",
     "name": "Male"
   },
   {
     "group": "web-application",
-    "id": "fa-map",
+    "id": "map",
     "name": "Map"
   },
   {
     "group": "web-application",
-    "id": "fa-map-o",
+    "id": "map-o",
     "name": "Map"
   },
   {
     "group": "web-application",
-    "id": "fa-map-marker",
+    "id": "map-marker",
     "name": "Map Marker"
   },
   {
     "group": "web-application",
-    "id": "fa-map-pin",
+    "id": "map-pin",
     "name": "Map Pin"
   },
   {
     "group": "web-application",
-    "id": "fa-map-signs",
+    "id": "map-signs",
     "name": "Map Signs"
   },
   {
     "group": "web-application",
-    "id": "fa-meh-o",
+    "id": "meh-o",
     "name": "Meh"
   },
   {
     "group": "web-application",
-    "id": "fa-microphone",
+    "id": "microphone",
     "name": "Microphone"
   },
   {
     "group": "web-application",
-    "id": "fa-microphone-slash",
+    "id": "microphone-slash",
     "name": "Microphone"
   },
   {
     "group": "web-application",
-    "id": "fa-minus",
+    "id": "minus",
     "name": "Minus"
   },
   {
     "group": "web-application",
-    "id": "fa-minus-circle",
+    "id": "minus-circle",
     "name": "Minus"
   },
   {
     "group": "web-application",
-    "id": "fa-mobile",
+    "id": "mobile",
     "name": "Mobile"
   },
   {
     "group": "web-application",
-    "id": "fa-mobile-phone",
+    "id": "mobile-phone",
     "name": "Mobile Phone"
   },
   {
     "group": "web-application",
-    "id": "fa-moon-o",
+    "id": "moon-o",
     "name": "Moon"
   },
   {
     "group": "web-application",
-    "id": "fa-mouse-pointer",
+    "id": "mouse-pointer",
     "name": "Mouse Pointer"
   },
   {
     "group": "web-application",
-    "id": "fa-music",
+    "id": "music",
     "name": "Music"
   },
   {
     "group": "web-application",
-    "id": "fa-newspaper-o",
+    "id": "newspaper-o",
     "name": "Newspaper"
   },
   {
     "group": "web-application",
-    "id": "fa-object-group",
+    "id": "object-group",
     "name": "Object Group"
   },
   {
     "group": "web-application",
-    "id": "fa-object-ungroup",
+    "id": "object-ungroup",
     "name": "Object Ungroup"
   },
   {
     "group": "web-application",
-    "id": "fa-paint-brush",
+    "id": "paint-brush",
     "name": "Paint Brush"
   },
   {
     "group": "web-application",
-    "id": "fa-paper-plane",
+    "id": "paper-plane",
     "name": "Paper Plane"
   },
   {
     "group": "web-application",
-    "id": "fa-paper-plane-o",
+    "id": "paper-plane-o",
     "name": "Paper Plane"
   },
   {
     "group": "web-application",
-    "id": "fa-paw",
+    "id": "paw",
     "name": "Paw"
   },
   {
     "group": "web-application",
-    "id": "fa-pencil",
+    "id": "pencil",
     "name": "Pencil"
   },
   {
     "group": "web-application",
-    "id": "fa-pencil-square",
+    "id": "pencil-square",
     "name": "Pencil"
   },
   {
     "group": "web-application",
-    "id": "fa-pencil-square-o",
+    "id": "pencil-square-o",
     "name": "Pencil"
   },
   {
     "group": "web-application",
-    "id": "fa-phone",
+    "id": "phone",
     "name": "Phone"
   },
   {
     "group": "web-application",
-    "id": "fa-percent",
+    "id": "percent",
     "name": "Percent"
   },
   {
     "group": "web-application",
-    "id": "fa-phone-square",
+    "id": "phone-square",
     "name": "Phone"
   },
   {
     "group": "web-application",
-    "id": "fa-picture-o",
+    "id": "picture-o",
     "name": "Picture"
   },
   {
     "group": "web-application",
-    "id": "fa-plug",
+    "id": "plug",
     "name": "Plug"
   },
   {
     "group": "web-application",
-    "id": "fa-plus",
+    "id": "plus",
     "name": "Plus"
   },
   {
     "group": "web-application",
-    "id": "fa-plus-circle",
+    "id": "plus-circle",
     "name": "Plus"
   },
   {
     "group": "web-application",
-    "id": "fa-power-off",
+    "id": "power-off",
     "name": "Power Off"
   },
   {
     "group": "web-application",
-    "id": "fa-print",
+    "id": "print",
     "name": "Print"
   },
   {
     "group": "web-application",
-    "id": "fa-puzzle-piece",
+    "id": "puzzle-piece",
     "name": "Puzzle Piece"
   },
   {
     "group": "web-application",
-    "id": "fa-qrcode",
+    "id": "qrcode",
     "name": "QR Code"
   },
   {
     "group": "web-application",
-    "id": "fa-question",
+    "id": "question",
     "name": "Question"
   },
   {
     "group": "web-application",
-    "id": "fa-question-circle",
+    "id": "question-circle",
     "name": "Question"
   },
   {
     "group": "web-application",
-    "id": "fa-question-circle-o",
+    "id": "question-circle-o",
     "name": "Question"
   },
   {
     "group": "web-application",
-    "id": "fa-quote-left",
+    "id": "quote-left",
     "name": "Quote Left"
   },
   {
     "group": "web-application",
-    "id": "fa-quote-right",
+    "id": "quote-right",
     "name": "Quote Right"
   },
   {
     "group": "web-application",
-    "id": "fa-random",
+    "id": "random",
     "name": "Random"
   },
   {
     "group": "web-application",
-    "id": "fa-rebel",
+    "id": "rebel",
     "name": "Rebel"
   },
   {
     "group": "web-application",
-    "id": "fa-recycle",
+    "id": "recycle",
     "name": "Recycle"
   },
   {
     "group": "web-application",
-    "id": "fa-registered",
+    "id": "registered",
     "name": "Registered"
   },
   {
     "group": "web-application",
-    "id": "fa-reply",
+    "id": "reply",
     "name": "Reply"
   },
   {
     "group": "web-application",
-    "id": "fa-reply-all",
+    "id": "reply-all",
     "name": "Reply All"
   },
   {
     "group": "web-application",
-    "id": "fa-retweet",
+    "id": "retweet",
     "name": "Retweet"
   },
   {
     "group": "web-application",
-    "id": "fa-road",
+    "id": "road",
     "name": "Road"
   },
   {
     "group": "web-application",
-    "id": "fa-rss",
+    "id": "rss",
     "name": "RSS"
   },
   {
     "group": "web-application",
-    "id": "fa-rss-square",
+    "id": "rss-square",
     "name": "RSS Square"
   },
   {
     "group": "web-application",
-    "id": "fa-search",
+    "id": "search",
     "name": "Search"
   },
   {
     "group": "web-application",
-    "id": "fa-search-minus",
+    "id": "search-minus",
     "name": "Search Minus"
   },
   {
     "group": "web-application",
-    "id": "fa-search-plus",
+    "id": "search-plus",
     "name": "Search Plus"
   },
   {
     "group": "web-application",
-    "id": "fa-server",
+    "id": "server",
     "name": "Server"
   },
   {
     "group": "web-application",
-    "id": "fa-share",
+    "id": "share",
     "name": "Share"
   },
   {
     "group": "web-application",
-    "id": "fa-share-alt",
+    "id": "share-alt",
     "name": "Share"
   },
   {
     "group": "web-application",
-    "id": "fa-share-alt-square",
+    "id": "share-alt-square",
     "name": "Share"
   },
   {
     "group": "web-application",
-    "id": "fa-share-square",
+    "id": "share-square",
     "name": "Share"
   },
   {
     "group": "web-application",
-    "id": "fa-share-square-o",
+    "id": "share-square-o",
     "name": "Share"
   },
   {
     "group": "web-application",
-    "id": "fa-shield",
+    "id": "shield",
     "name": "Shield"
   },
   {
     "group": "web-application",
-    "id": "fa-shopping-cart",
+    "id": "shopping-cart",
     "name": "Shopping Cart"
   },
   {
     "group": "web-application",
-    "id": "fa-shopping-bag",
+    "id": "shopping-bag",
     "name": "Shopping Bag"
   },
   {
     "group": "web-application",
-    "id": "fa-shopping-basket",
+    "id": "shopping-basket",
     "name": "Shopping Basket"
   },
   {
     "group": "web-application",
-    "id": "fa-sign-in",
+    "id": "sign-in",
     "name": "Sign In"
   },
   {
     "group": "web-application",
-    "id": "fa-sign-out",
+    "id": "sign-out",
     "name": "Sign Out"
   },
   {
     "group": "web-application",
-    "id": "fa-signal",
+    "id": "signal",
     "name": "Signal"
   },
   {
     "group": "web-application",
-    "id": "fa-sitemap",
+    "id": "sitemap",
     "name": "Sitemap"
   },
   {
     "group": "web-application",
-    "id": "fa-sliders",
+    "id": "sliders",
     "name": "Sliders"
   },
   {
     "group": "web-application",
-    "id": "fa-smile-o",
+    "id": "smile-o",
     "name": "Smile"
   },
   {
     "group": "web-application",
-    "id": "fa-sort",
+    "id": "sort",
     "name": "Sort"
   },
   {
     "group": "web-application",
-    "id": "fa-sort-asc",
+    "id": "sort-asc",
     "name": "Sort ASC"
   },
   {
     "group": "web-application",
-    "id": "fa-sort-desc",
+    "id": "sort-desc",
     "name": "Sort DESC"
   },
   {
     "group": "web-application",
-    "id": "fa-sort-down",
+    "id": "sort-down",
     "name": "Sort Down"
   },
   {
     "group": "web-application",
-    "id": "fa-sort-up",
+    "id": "sort-up",
     "name": "Sort Up"
   },
   {
     "group": "web-application",
-    "id": "fa-sort-alpha-asc",
+    "id": "sort-alpha-asc",
     "name": "Sort Alpha ASC"
   },
   {
     "group": "web-application",
-    "id": "fa-sort-alpha-desc",
+    "id": "sort-alpha-desc",
     "name": "Sort Alpha DESC"
   },
   {
     "group": "web-application",
-    "id": "fa-sort-amount-asc",
+    "id": "sort-amount-asc",
     "name": "Sort Amount ASC"
   },
   {
     "group": "web-application",
-    "id": "fa-sort-amount-desc",
+    "id": "sort-amount-desc",
     "name": "Sort Amount DESC"
   },
   {
     "group": "web-application",
-    "id": "fa-sort-numeric-asc",
+    "id": "sort-numeric-asc",
     "name": "Sort Numeric ASC"
   },
   {
     "group": "web-application",
-    "id": "fa-sort-numeric-desc",
+    "id": "sort-numeric-desc",
     "name": "Sort Numeric DESC"
   },
   {
     "group": "web-application",
-    "id": "fa-spoon",
+    "id": "spoon",
     "name": "Spoon"
   },
   {
     "group": "web-application",
-    "id": "fa-star",
+    "id": "star",
     "name": "Star"
   },
   {
     "group": "web-application",
-    "id": "fa-star-half",
+    "id": "star-half",
     "name": "Star Half"
   },
   {
     "group": "web-application",
-    "id": "fa-star-half-o",
+    "id": "star-half-o",
     "name": "Star Half"
   },
   {
     "group": "web-application",
-    "id": "fa-star-half-empty",
+    "id": "star-half-empty",
     "name": "Star Half Empty"
   },
   {
     "group": "web-application",
-    "id": "fa-star-half-full",
+    "id": "star-half-full",
     "name": "Star Half Full"
   },
   {
     "group": "web-application",
-    "id": "fa-star-o",
+    "id": "star-o",
     "name": "Star"
   },
   {
     "group": "web-application",
-    "id": "fa-sticky-note",
+    "id": "sticky-note",
     "name": "Sticky Note"
   },
   {
     "group": "web-application",
-    "id": "fa-sticky-note-o",
+    "id": "sticky-note-o",
     "name": "Sticky Note"
   },
   {
     "group": "web-application",
-    "id": "fa-street-view",
+    "id": "street-view",
     "name": "Street View"
   },
   {
     "group": "web-application",
-    "id": "fa-suitcase",
+    "id": "suitcase",
     "name": "Suitcase"
   },
   {
     "group": "web-application",
-    "id": "fa-sun-o",
+    "id": "sun-o",
     "name": "Sun"
   },
   {
     "group": "web-application",
-    "id": "fa-tablet",
+    "id": "tablet",
     "name": "Tablet"
   },
   {
     "group": "web-application",
-    "id": "fa-tachometer",
+    "id": "tachometer",
     "name": "Tachometer"
   },
   {
     "group": "web-application",
-    "id": "fa-tag",
+    "id": "tag",
     "name": "Tag"
   },
   {
     "group": "web-application",
-    "id": "fa-tags",
+    "id": "tags",
     "name": "Tags"
   },
   {
     "group": "web-application",
-    "id": "fa-tasks",
+    "id": "tasks",
     "name": "Tasks"
   },
   {
     "group": "web-application",
-    "id": "fa-television",
+    "id": "television",
     "name": "Television"
   },
   {
     "group": "web-application",
-    "id": "fa-terminal",
+    "id": "terminal",
     "name": "Terminal"
   },
   {
     "group": "web-application",
-    "id": "fa-thumb-tack",
+    "id": "thumb-tack",
     "name": "Thumb Tack"
   },
   {
     "group": "web-application",
-    "id": "fa-thumbs-down",
+    "id": "thumbs-down",
     "name": "Thumbs Down"
   },
   {
     "group": "web-application",
-    "id": "fa-thumbs-up",
+    "id": "thumbs-up",
     "name": "Thumbs Up"
   },
   {
     "group": "web-application",
-    "id": "fa-thumbs-o-down",
+    "id": "thumbs-o-down",
     "name": "Thumbs Down"
   },
   {
     "group": "web-application",
-    "id": "fa-thumbs-o-up",
+    "id": "thumbs-o-up",
     "name": "Thumbs Up"
   },
   {
     "group": "web-application",
-    "id": "fa-ticket",
+    "id": "ticket",
     "name": "Ticket"
   },
   {
     "group": "web-application",
-    "id": "fa-times",
+    "id": "times",
     "name": "Times"
   },
   {
     "group": "web-application",
-    "id": "fa-times-circle",
+    "id": "times-circle",
     "name": "Times"
   },
   {
     "group": "web-application",
-    "id": "fa-times-circle-o",
+    "id": "times-circle-o",
     "name": "Times"
   },
   {
     "group": "web-application",
-    "id": "fa-tint",
+    "id": "tint",
     "name": "Tint"
   },
   {
     "group": "web-application",
-    "id": "fa-toggle-down",
+    "id": "toggle-down",
     "name": "Toggle Down"
   },
   {
     "group": "web-application",
-    "id": "fa-toggle-left",
+    "id": "toggle-left",
     "name": "Toggle Left"
   },
   {
     "group": "web-application",
-    "id": "fa-toggle-right",
+    "id": "toggle-right",
     "name": "Toggle Right"
   },
   {
     "group": "web-application",
-    "id": "fa-toggle-up",
+    "id": "toggle-up",
     "name": "Toggle Up"
   },
   {
     "group": "web-application",
-    "id": "fa-toggle-off",
+    "id": "toggle-off",
     "name": "Toggle Off"
   },
   {
     "group": "web-application",
-    "id": "fa-toggle-on",
+    "id": "toggle-on",
     "name": "Toggle On"
   },
   {
     "group": "web-application",
-    "id": "fa-trademark",
+    "id": "trademark",
     "name": "Trademark"
   },
   {
     "group": "web-application",
-    "id": "fa-trash",
+    "id": "trash",
     "name": "Trash"
   },
   {
     "group": "web-application",
-    "id": "fa-trash-o",
+    "id": "trash-o",
     "name": "Trash"
   },
   {
     "group": "web-application",
-    "id": "fa-tree",
+    "id": "tree",
     "name": "Tree"
   },
   {
     "group": "web-application",
-    "id": "fa-trophy",
+    "id": "trophy",
     "name": "Trophy"
   },
   {
     "group": "web-application",
-    "id": "fa-tty",
+    "id": "tty",
     "name": "TTY"
   },
   {
     "group": "web-application",
-    "id": "fa-umbrella",
+    "id": "umbrella",
     "name": "Umbrella"
   },
   {
     "group": "web-application",
-    "id": "fa-university",
+    "id": "university",
     "name": "University"
   },
   {
     "group": "web-application",
-    "id": "fa-unlock",
+    "id": "unlock",
     "name": "Unlock"
   },
   {
     "group": "web-application",
-    "id": "fa-unlock-alt",
+    "id": "unlock-alt",
     "name": "Unlock"
   },
   {
     "group": "web-application",
-    "id": "fa-unsorted",
+    "id": "unsorted",
     "name": "Unsorted"
   },
   {
     "group": "web-application",
-    "id": "fa-upload",
+    "id": "upload",
     "name": "Upload"
   },
   {
     "group": "web-application",
-    "id": "fa-user",
+    "id": "user",
     "name": "User"
   },
   {
     "group": "web-application",
-    "id": "fa-users",
+    "id": "users",
     "name": "Users"
   },
   {
     "group": "web-application",
-    "id": "fa-user-plus",
+    "id": "user-plus",
     "name": "User: Add"
   },
   {
     "group": "web-application",
-    "id": "fa-user-times",
+    "id": "user-times",
     "name": "User: Remove"
   },
   {
     "group": "web-application",
-    "id": "fa-user-secret",
+    "id": "user-secret",
     "name": "User: Password"
   },
   {
     "group": "web-application",
-    "id": "fa-video-camera",
+    "id": "video-camera",
     "name": "Video Camera"
   },
   {
     "group": "web-application",
-    "id": "fa-volume-down",
+    "id": "volume-down",
     "name": "Volume Down"
   },
   {
     "group": "web-application",
-    "id": "fa-volume-off",
+    "id": "volume-off",
     "name": "Volume Of"
   },
   {
     "group": "web-application",
-    "id": "fa-volume-up",
+    "id": "volume-up",
     "name": "Volume Up"
   },
   {
     "group": "web-application",
-    "id": "fa-warning",
+    "id": "warning",
     "name": "Warning"
   },
   {
     "group": "web-application",
-    "id": "fa-wifi",
+    "id": "wifi",
     "name": "WiFi"
   },
   {
     "group": "web-application",
-    "id": "fa-wrench",
+    "id": "wrench",
     "name": "Wrench"
   }
 ]

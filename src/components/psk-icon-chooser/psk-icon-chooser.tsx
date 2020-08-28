@@ -13,6 +13,8 @@ export class PskIconChooser {
   @CustomTheme()
   @Element() element;
 
+  @State() iconsModelListToShow = null;
+
   @TableOfContentProperty({
     isMandatory: false,
     propertyType: 'string',
@@ -33,14 +35,6 @@ export class PskIconChooser {
     propertyType: 'string'
   })
   @Prop() value: string | null = null;
-
-  componentDidLoad() {
-    this.element.addEventListener("icon-click", this.__iconClickListener.bind(this));
-  }
-
-  componentWillLoad() {
-    this.iconsModelListToShow = this.__getIconDivArrayList();
-  }
 
   private groupSelection = {
     options: Array.from(new Set(iconModels.map(iconModel => iconModel.group))),
@@ -81,7 +75,7 @@ export class PskIconChooser {
       <psk-button
         eventName={'icon-click'}
         eventData={iconModel.id}>
-        <span style={{color: this.iconsColor, fontSize: this.iconsSize}} class={`icon fa ${iconModel.id}`}/>
+        <span style={{color: this.iconsColor, fontSize: this.iconsSize}} class={`icon fa fa-${iconModel.id}`}/>
       </psk-button>
     </div>
   }
@@ -94,8 +88,7 @@ export class PskIconChooser {
 
   __iconClickListener = (event) => {
     event.stopImmediatePropagation();
-    let fullIconName = event.data;
-    this.modelHandler.updateModel('value', fullIconName.replace('fa-', ''));
+    this.modelHandler.updateModel('value', event.data);
   }
 
   __categoryChangeListener = (event) => {
@@ -105,7 +98,13 @@ export class PskIconChooser {
     this.iconsModelListToShow = this.__getIconDivArrayList();
   }
 
-  @State() iconsModelListToShow = null;
+  componentDidLoad() {
+    this.element.addEventListener("icon-click", this.__iconClickListener.bind(this));
+  }
+
+  componentWillLoad() {
+    this.iconsModelListToShow = this.__getIconDivArrayList();
+  }
 
   render() {
     return <div>
