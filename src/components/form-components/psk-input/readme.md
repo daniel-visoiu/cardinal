@@ -28,6 +28,7 @@
 
  - [psk-date-input](../psk-date-input)
  - [psk-email-input](../psk-email-input)
+ - [psk-icon-chooser](../../psk-icon-chooser)
  - [psk-number-input](../psk-number-input)
  - [psk-password-input](../psk-password-input)
  - [psk-text-input](../psk-text-input)
@@ -42,6 +43,7 @@ graph TD;
   psk-input --> psk-label
   psk-date-input --> psk-input
   psk-email-input --> psk-input
+  psk-icon-chooser --> psk-input
   psk-number-input --> psk-input
   psk-password-input --> psk-input
   psk-text-input --> psk-input
