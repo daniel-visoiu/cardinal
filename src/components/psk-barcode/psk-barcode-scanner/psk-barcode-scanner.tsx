@@ -117,30 +117,68 @@ export class PskBarcodeScanner {
     this.overlay.drawLensCanvas();
   }
 
+  removeDeviceIdFromList(deviceId) {
+    let camerasSelectList = this.element.querySelector('select#videoSource');
+    for (let i = 0; i < camerasSelectList.length; i++) {
+      if (camerasSelectList.options[i].value === deviceId) {
+        camerasSelectList.remove(i);
+        //select nextElement if available
+        if(camerasSelectList.length){
+          camerasSelectList.selectedIndex = i;
+        }
+        else{
+          camerasSelectList.selectedIndex = -1;
+        }
+        break;
+      }
+    }
+  }
+
   /**
    * select the stream and get barcode from the stream
    */
   getStream = () => {
-    let videoSelect = this.element.querySelector('select#videoSource');
+    let camerasSelectList = this.element.querySelector('select#videoSource');
+    let alternativeCameras = Array.from(camerasSelectList.querySelectorAll("option")).map((option: any) => {
+      return option.value;
+    }).filter((cameraId) => {
+      return cameraId !== camerasSelectList.value
+    });
+
     let constraints = {
       audio: false
     };
 
-    if (videoSelect.value) {
+    if (camerasSelectList.value) {
       constraints['video'] = {
-        deviceId: {exact: videoSelect.value}
+        deviceId: {exact: camerasSelectList.value}
       }
     } else {
       constraints['video'] = true
     }
 
-    let gotStream =(stream) =>{
+    let gotStream = (stream) => {
       window['stream'] = stream; // make stream available to console
       this.cameraIsOn = true;
       this.videoElement.srcObject = stream;
       this.scanBarcodeFromCamera();
     }
-    navigator.mediaDevices.getUserMedia(constraints).then(gotStream.bind(this)).catch(this.handleCameraError);
+
+    let startVideo = (constraints) => {
+      navigator.mediaDevices.getUserMedia(constraints).then(gotStream.bind(this)).catch((err) => {
+        if (err.message === "Could not start video source") {
+          if (alternativeCameras.length) {
+            this.removeDeviceIdFromList(constraints['video'].deviceId.exact);
+            constraints.video.deviceId = {exact: alternativeCameras.shift()};
+            startVideo(constraints);
+          }
+        } else {
+          this.handleCameraError(err)
+        }
+      });
+    }
+    
+    startVideo(constraints);
   }
 
 
