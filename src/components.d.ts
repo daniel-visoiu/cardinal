@@ -356,10 +356,10 @@ export namespace Components {
     }
     interface PskSsapp {
         "appName": string;
-        "dossierContext": any;
         "history": RouterHistory;
         "landingPath": string;
         "match": MatchResults;
+        "seed": string;
     }
     interface PskStepper {
         "activeStep": WizardStep;
@@ -1435,10 +1435,10 @@ declare namespace LocalJSX {
     }
     interface PskSsapp {
         "appName"?: string;
-        "dossierContext"?: any;
         "history"?: RouterHistory;
         "landingPath"?: string;
         "match"?: MatchResults;
+        "seed"?: string;
     }
     interface PskStepper {
         "activeStep"?: WizardStep;
