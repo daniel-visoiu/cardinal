@@ -11,6 +11,7 @@ export class AppRootDefaultRender {
 	@CustomTheme()
 
 	@Prop() mobileLayout: boolean = false;
+	@Prop() disableSidebar: boolean = false;
   @State() appVersion: string;
 
   @Event({
@@ -46,11 +47,12 @@ export class AppRootDefaultRender {
 			asideComponents = [<psk-user-profile></psk-user-profile>, appMenuCmpt, versionCmpt]
 		}
 
+    console.log(asideComponents);
+		console.log(this.disableSidebar);
+
 		return (
 			<div class={`global_container ${this.mobileLayout ? "is-mobile" : ""}`}>
-				<aside>
-					{asideComponents}
-				</aside>
+        { this.disableSidebar === false ? <aside>{asideComponents}</aside> : null }
 
 				<section>
 					<psk-app-router></psk-app-router>

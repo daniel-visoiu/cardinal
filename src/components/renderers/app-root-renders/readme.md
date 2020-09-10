@@ -7,9 +7,10 @@
 
 ## Properties
 
-| Property       | Attribute       | Description | Type      | Default |
-| -------------- | --------------- | ----------- | --------- | ------- |
-| `mobileLayout` | `mobile-layout` |             | `boolean` | `false` |
+| Property         | Attribute         | Description | Type      | Default |
+| ---------------- | ----------------- | ----------- | --------- | ------- |
+| `disableSidebar` | `disable-sidebar` |             | `boolean` | `false` |
+| `mobileLayout`   | `mobile-layout`   |             | `boolean` | `false` |
 
 
 ## Events

@@ -20,7 +20,9 @@
 ### Used by
 
  - [psk-button-group](../psk-button-group)
+ - [psk-details](../psk-details)
  - [psk-img-input](../form-components/psk-img-input)
+ - [psk-mobile](../psk-mobile)
  - [psk-modal](../psk-modal)
  - [psk-toolbar](../psk-toolbar)
 
@@ -28,7 +30,9 @@
 ```mermaid
 graph TD;
   psk-button-group --> psk-icon
+  psk-details --> psk-icon
   psk-img-input --> psk-icon
+  psk-mobile --> psk-icon
   psk-modal --> psk-icon
   psk-toolbar --> psk-icon
   style psk-icon fill:#f9f,stroke:#333,stroke-width:4px

@@ -22,6 +22,7 @@ export class PskAppRoot {
     defaultValue: `null`
   })
   @Prop() controller: any;
+  @Prop() disableSidebar: boolean = false;
   @State() mobileLayout: boolean = false;
   @State() historyType: ExtendedHistoryType;
   @State() componentCode: string = "";
@@ -101,7 +102,7 @@ export class PskAppRoot {
       <Host class={this.mobileLayout?"is-mobile":""} >
         {this.hasSlot
       ? <slot />
-      : <DefaultRendererTag mobileLayout={this.mobileLayout} />}
+      : <DefaultRendererTag mobileLayout={this.mobileLayout} disableSidebar={this.disableSidebar} />}
       </Host>
     );
   }

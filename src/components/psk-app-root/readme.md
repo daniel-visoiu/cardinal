@@ -7,9 +7,10 @@
 
 ## Properties
 
-| Property     | Attribute    | Description | Type  | Default     |
-| ------------ | ------------ | ----------- | ----- | ----------- |
-| `controller` | `controller` |             | `any` | `undefined` |
+| Property         | Attribute         | Description | Type      | Default     |
+| ---------------- | ----------------- | ----------- | --------- | ----------- |
+| `controller`     | `controller`      |             | `any`     | `undefined` |
+| `disableSidebar` | `disable-sidebar` |             | `boolean` | `false`     |
 
 
 ----------------------------------------------
