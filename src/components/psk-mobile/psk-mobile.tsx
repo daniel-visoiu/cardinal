@@ -90,7 +90,7 @@ export class PskMobile {
           this.controller = new Controller(this._host, this.history);
         }
       }).catch((err) => {
-        console.log(err);
+        console.error(err);
       });
       return promise;
     }
