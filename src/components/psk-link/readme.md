@@ -24,6 +24,10 @@
 
 ## Dependencies
 
+### Used by
+
+ - [psk-button-link](../psk-button-link)
+
 ### Depends on
 
 - stencil-route-link
@@ -32,6 +36,7 @@
 ```mermaid
 graph TD;
   psk-link --> stencil-route-link
+  psk-button-link --> psk-link
   style psk-link fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

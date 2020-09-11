@@ -85,6 +85,11 @@ export namespace Components {
         "label": string | null;
         "opened": boolean;
     }
+    interface PskButtonLink {
+        "icon"?: string;
+        "name"?: string;
+        "page": string;
+    }
     interface PskButtonTest {
     }
     interface PskCard {
@@ -275,6 +280,8 @@ export namespace Components {
     }
     interface PskMobile {
         "controllerName"?: string | null;
+        "disableBack": boolean;
+        "disableSidebar": boolean;
         "history": RouterHistory;
         "title": string;
     }
@@ -567,6 +574,12 @@ declare global {
     var HTMLPskButtonGroupElement: {
         prototype: HTMLPskButtonGroupElement;
         new (): HTMLPskButtonGroupElement;
+    };
+    interface HTMLPskButtonLinkElement extends Components.PskButtonLink, HTMLStencilElement {
+    }
+    var HTMLPskButtonLinkElement: {
+        prototype: HTMLPskButtonLinkElement;
+        new (): HTMLPskButtonLinkElement;
     };
     interface HTMLPskButtonTestElement extends Components.PskButtonTest, HTMLStencilElement {
     }
@@ -1037,6 +1050,7 @@ declare global {
         "psk-barcode-scanner": HTMLPskBarcodeScannerElement;
         "psk-button": HTMLPskButtonElement;
         "psk-button-group": HTMLPskButtonGroupElement;
+        "psk-button-link": HTMLPskButtonLinkElement;
         "psk-button-test": HTMLPskButtonTestElement;
         "psk-card": HTMLPskCardElement;
         "psk-chapter": HTMLPskChapterElement;
@@ -1195,6 +1209,11 @@ declare namespace LocalJSX {
         "iconColor"?: string | null;
         "label"?: string | null;
         "opened"?: boolean;
+    }
+    interface PskButtonLink {
+        "icon"?: string;
+        "name"?: string;
+        "page"?: string;
     }
     interface PskButtonTest {
     }
@@ -1396,6 +1415,8 @@ declare namespace LocalJSX {
     }
     interface PskMobile {
         "controllerName"?: string | null;
+        "disableBack"?: boolean;
+        "disableSidebar"?: boolean;
         "history"?: RouterHistory;
         "onNeedMenuItems"?: (event: CustomEvent<any>) => void;
         "title"?: string;
@@ -1638,6 +1659,7 @@ declare namespace LocalJSX {
         "psk-barcode-scanner": PskBarcodeScanner;
         "psk-button": PskButton;
         "psk-button-group": PskButtonGroup;
+        "psk-button-link": PskButtonLink;
         "psk-button-test": PskButtonTest;
         "psk-card": PskCard;
         "psk-chapter": PskChapter;
@@ -1732,6 +1754,7 @@ declare module "@stencil/core" {
             "psk-barcode-scanner": LocalJSX.PskBarcodeScanner & JSXBase.HTMLAttributes<HTMLPskBarcodeScannerElement>;
             "psk-button": LocalJSX.PskButton & JSXBase.HTMLAttributes<HTMLPskButtonElement>;
             "psk-button-group": LocalJSX.PskButtonGroup & JSXBase.HTMLAttributes<HTMLPskButtonGroupElement>;
+            "psk-button-link": LocalJSX.PskButtonLink & JSXBase.HTMLAttributes<HTMLPskButtonLinkElement>;
             "psk-button-test": LocalJSX.PskButtonTest & JSXBase.HTMLAttributes<HTMLPskButtonTestElement>;
             "psk-card": LocalJSX.PskCard & JSXBase.HTMLAttributes<HTMLPskCardElement>;
             "psk-chapter": LocalJSX.PskChapter & JSXBase.HTMLAttributes<HTMLPskChapterElement>;

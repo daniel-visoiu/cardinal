@@ -1,8 +1,9 @@
-import { Component, Prop, State, Element, Event, EventEmitter, h } from '@stencil/core';
-import CustomTheme from "../../decorators/CustomTheme";
-import ControllerRegistryService from "../../services/ControllerRegistryService";
-import DefaultContainerController from "../../controllers/base-controllers/ContainerController";
+import { Component, Prop, State, Event, Element, EventEmitter, h } from '@stencil/core';
 import { RouterHistory } from "@stencil/router";
+
+import CustomTheme from "../../decorators/CustomTheme";
+import { BindModel } from "../../decorators/BindModel";
+import ControllerRegistryService from "../../services/ControllerRegistryService";
 
 @Component({
   tag: 'psk-mobile',
@@ -10,32 +11,34 @@ import { RouterHistory } from "@stencil/router";
 })
 
 export class PskMobile {
-  // TODO : Deny : wid : removed useless Promisify
-  // promisifyControllerLoad(controllerName)
-
-  // TODO : Deny : remark : controller stuff
-  // controller-name="MobileController"
-  // __getInnerController, executeScript
-
-  // TODO: Deny : wsbd : nicer why of managing hamburger
-  // { status: 'closed', 'transition-in', 'opened', 'transition-out' }
-  // asideToggled
-
   @CustomTheme()
+
+  @BindModel() modelHandler;
+
+  @Element() private _host: HTMLElement;
 
   @Prop() title: string;
 
-  @Prop() controllerName?: string | null;
+  @Prop() disableSidebar: boolean = false;
+
+  @Prop() disableBack: boolean = true;
 
   @Prop() history: RouterHistory;
+
+  @Prop() controllerName?: string | null;
 
   @State() controller: any | null;
 
   @State() disconnected: boolean | false;
 
-  @State() controllerScript: string | null;
-
-  @Element() private _host: HTMLElement;
+  @State() aside = {
+    disabled: this.disableSidebar,
+    hidden: true
+  }
+  @State() options = {
+    disabled: true,
+    hidden: true
+  }
 
   @Event({
     eventName: 'needMenuItems',
@@ -44,60 +47,53 @@ export class PskMobile {
     bubbles: true,
   }) needMenuItemsEvt: EventEmitter;
 
-  @State() aside = {
-    value: false
-  }
-
-  componentWillLoad() {
-    let promise;
-    if (typeof this.controllerName === "string" && this.controllerName.length > 0) {
-      promise = ControllerRegistryService.getController(this.controllerName);
-    } else {
-      promise = Promise.resolve(DefaultContainerController);
-    }
-
-    promise
-      .then(Controller => {
-        if (!this.disconnected) {
-          this.controller = new Controller(this._host, this.history);
-          this.__getInnerController.call(this, this._host);
-          if (this.controllerScript) {
-            this.executeScript(this.controllerScript);
-          }
-      }})
-      .catch(err => console.log(err));
-
-    return promise;
-  }
-
-  __getInnerController(fromElement: HTMLElement): void {
-    const children:HTMLCollection = fromElement.children;
-    // Find only the first direct <script> descendant
-    for (let i = 0; i < children.length; i++) {
-      const child = children[i];
-      if (child.tagName.toLowerCase() !== 'script') {
-        continue;
-      }
-
-      this.controllerScript = child.innerHTML;
-      child.innerHTML = '';
-      return;
-    }
-  }
-
-  executeScript(script) {
-    if (typeof script === 'string' && script.trim().length > 0) {
-      new Function('controller', script)(this.controller);
-    }
-    return null;
-  }
-
-  asideToggled(e) {
+  toggleAside(e) {
     e.preventDefault();
     this.aside = {
       ...this.aside,
-      value: !this.aside.value
+      hidden: !this.aside.hidden
     };
+  }
+
+  toggleBack(e) {
+    e.preventDefault();
+    window.history.back();
+  }
+
+  toggleOptions(e) {
+    e.preventDefault();
+    this.options = {
+      ...this.options,
+      hidden: !this.options.hidden
+    }
+  }
+
+  componentWillLoad() {
+    if (this._host.querySelector('[slot="options"]')) {
+      this.options.disabled = false;
+    }
+
+    const promisifyControllerLoad = (controllerName) => {
+      return new Promise((resolve, reject) => {
+        ControllerRegistryService.getController(controllerName).then((controller) => {
+          // Prevent javascript execution if the node has been removed from DOM
+          resolve(controller);
+        }).catch(reject);
+      })
+    };
+
+    if (typeof this.controllerName === "string") {
+      let promise;
+      promise = promisifyControllerLoad(this.controllerName);
+      promise.then((Controller) => {
+        if (!this.disconnected) {
+          this.controller = new Controller(this._host, this.history);
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
+      return promise;
+    }
   }
 
   render() {
@@ -105,30 +101,39 @@ export class PskMobile {
       <div class='mobile'>
         <header>
           <div class='back-toggler'>
-            <psk-button>
-              <psk-icon icon='chevron-left'/>
-            </psk-button>
+          {
+            !this.disableBack ? (
+              <psk-button onClick={e => this.toggleBack(e)}>
+                <psk-icon icon='chevron-left'/>
+              </psk-button>
+            ) : null
+          }
           </div>
           <div class='aside-toggler'>
-            <psk-button onClick={(e) => this.asideToggled(e)}>
-              <psk-icon icon='bars'/>
-            </psk-button>
+            {
+              !this.aside.disabled ? (
+                <psk-button onClick={e => this.toggleAside(e)}>
+                  <psk-icon icon='bars'/>
+                </psk-button>
+              ) : null
+            }
           </div>
           <h1 class='title'>{this.title}</h1>
           <div class='options-toggler'>
-            <psk-button>
-              <psk-icon icon='ellipsis-v'/>
-            </psk-button>
-          </div>
           {
-            this.aside.value ? (
-              <div class='aside-menu'>
-                <psk-user-profile/>
-                <app-menu hamburger-max-width={0} item-renderer='sidebar-renderer'/>
-              </div>
+            !this.options.disabled ? (
+              <psk-button onClick={e => this.toggleOptions(e)}>
+                <psk-icon icon='ellipsis-v'/>
+              </psk-button>
             ) : null
           }
-          <div class='options-menu'>
+          </div>
+          <div class='aside-menu' hidden={this.aside.hidden}>
+            <psk-user-profile/>
+            <app-menu hamburger-max-width={0} item-renderer='sidebar-renderer'/>
+          </div>
+          <div class='options-menu' hidden={this.options.hidden}>
+            <slot name='options'/>
           </div>
         </header>
         <main>

@@ -10,6 +10,8 @@
 | Property         | Attribute         | Description | Type            | Default     |
 | ---------------- | ----------------- | ----------- | --------------- | ----------- |
 | `controllerName` | `controller-name` |             | `string`        | `undefined` |
+| `disableBack`    | `disable-back`    |             | `boolean`       | `true`      |
+| `disableSidebar` | `disable-sidebar` |             | `boolean`       | `false`     |
 | `history`        | --                |             | `RouterHistory` | `undefined` |
 | `title`          | `title`           |             | `string`        | `undefined` |
 
