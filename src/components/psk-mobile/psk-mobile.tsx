@@ -3,7 +3,6 @@ import CustomTheme from "../../decorators/CustomTheme";
 import ControllerRegistryService from "../../services/ControllerRegistryService";
 import DefaultContainerController from "../../controllers/base-controllers/ContainerController";
 import { RouterHistory } from "@stencil/router";
-import { MenuItem } from "../../interfaces/MenuItem";
 
 @Component({
   tag: 'psk-mobile',
