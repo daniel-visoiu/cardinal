@@ -32,7 +32,7 @@ export class PskLink {
     isMandatory: false,
     propertyType: "string"
   })
-  @Prop() chapter: string;    /*font-size: 20px;*/
+  @Prop() chapter: string;
 
   @TableOfContentEvent({
     controllerInteraction: {
