@@ -78,7 +78,7 @@ export class PskImgInput {
 
   @TableOfContentProperty({
     description: [`Represent the src of the image that need to be displayed`],
-    isMandatory: true,
+    isMandatory: false,
     propertyType: 'string'
   })
   @Prop() src?: any | null = null;
@@ -93,7 +93,8 @@ export class PskImgInput {
   @TableOfContentProperty({
     description: [`Represent the text that will be displayed as placeholder when src attribute is not set`],
     isMandatory: false,
-    propertyType: 'string'
+    propertyType: 'string',
+    defaultValue: "click here to select source"
   })
   @Prop() placeholder?: string = 'click here to select source';
 
@@ -107,7 +108,8 @@ export class PskImgInput {
   @TableOfContentProperty({
     description: [`Represent the event type that will be thrown when user changes the image src`],
     isMandatory: false,
-    propertyType: 'string'
+    propertyType: 'string',
+    defaultValue: "change"
   })
   @Prop() eventName?: string | null = 'change';
 }

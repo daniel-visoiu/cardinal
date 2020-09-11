@@ -56,7 +56,6 @@ export class PskTabNavigator {
     return (
       <div class={'tab-navigator'}>
       { this.tabsData.map(tab => {
-          // console.log(`${tab.id}`, selected);
           return (
             <psk-button
               class={`${tab.id}` === selected ? 'active' : ''}
