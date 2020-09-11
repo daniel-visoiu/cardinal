@@ -11,7 +11,6 @@
 | ---------------- | ----------------- | ----------- | --------------- | ----------- |
 | `controllerName` | `controller-name` |             | `string`        | `undefined` |
 | `history`        | --                |             | `RouterHistory` | `undefined` |
-| `menuItems`      | --                |             | `MenuItem[]`    | `[]`        |
 | `title`          | `title`           |             | `string`        | `undefined` |
 
 
@@ -29,6 +28,7 @@
 - [psk-button](../psk-button)
 - [psk-icon](../psk-icon)
 - [psk-user-profile](../psk-user-profile)
+- [app-menu](../app-menu)
 
 ### Graph
 ```mermaid
@@ -36,6 +36,7 @@ graph TD;
   psk-mobile --> psk-button
   psk-mobile --> psk-icon
   psk-mobile --> psk-user-profile
+  psk-mobile --> app-menu
   style psk-mobile fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

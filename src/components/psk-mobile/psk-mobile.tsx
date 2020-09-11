@@ -14,10 +14,6 @@ export class PskMobile {
   // TODO : Deny : wid : removed useless Promisify
   // promisifyControllerLoad(controllerName)
 
-  // TODO : Deny : remark : menu items
-  // needMenuItemsEvt
-  // renderItem, renderMenuItems
-
   // TODO : Deny : remark : controller stuff
   // controller-name="MobileController"
   // __getInnerController, executeScript
@@ -29,8 +25,6 @@ export class PskMobile {
   @CustomTheme()
 
   @Prop() title: string;
-
-  @Prop() menuItems?: MenuItem[] = [];
 
   @Prop() controllerName?: string | null;
 
@@ -56,11 +50,6 @@ export class PskMobile {
   }
 
   componentWillLoad() {
-    this.needMenuItemsEvt.emit((err, data) => {
-      if (err) { console.log(err); return; }
-      this.menuItems = data;
-    });
-
     let promise;
     if (typeof this.controllerName === "string" && this.controllerName.length > 0) {
       promise = ControllerRegistryService.getController(this.controllerName);
@@ -104,40 +93,6 @@ export class PskMobile {
     return null;
   }
 
-  renderItem(menuItem) {
-    let ItemRendererTag = 'sidebar-renderer';
-    let children = [];
-
-    if (menuItem.children) {
-      for (let i = 0; i < menuItem.children.length; i++) {
-        children.push(this.renderItem(menuItem.children[i]))
-      }
-    }
-
-    return (
-      <ItemRendererTag
-        active={menuItem.active ? menuItem.active : false}
-        children={children}
-        value={menuItem}
-      />
-    )
-  }
-
-  renderMenuItems() {
-    let renderComponent = [];
-
-    for (let i = 0; i < this.menuItems.length; i++) {
-      let menuItem = this.menuItems[i];
-      renderComponent.push(this.renderItem(menuItem));
-    }
-
-    return [
-      <slot name='before'/>,
-      <div class='menu_container'>{renderComponent}</div>,
-      <slot name='after'/>
-    ];
-  }
-
   asideToggled(e) {
     e.preventDefault();
     this.aside = {
@@ -150,6 +105,11 @@ export class PskMobile {
     return (
       <div class='mobile'>
         <header>
+          <div class='back-toggler'>
+            <psk-button>
+              <psk-icon icon='chevron-left'/>
+            </psk-button>
+          </div>
           <div class='aside-toggler'>
             <psk-button onClick={(e) => this.asideToggled(e)}>
               <psk-icon icon='bars'/>
@@ -165,7 +125,7 @@ export class PskMobile {
             this.aside.value ? (
               <div class='aside-menu'>
                 <psk-user-profile/>
-                {this.renderMenuItems()}
+                <app-menu hamburger-max-width={0} item-renderer='sidebar-renderer'/>
               </div>
             ) : null
           }

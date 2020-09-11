@@ -276,7 +276,6 @@ export namespace Components {
     interface PskMobile {
         "controllerName"?: string | null;
         "history": RouterHistory;
-        "menuItems"?: MenuItem[];
         "title": string;
     }
     interface PskModal {
@@ -1398,7 +1397,6 @@ declare namespace LocalJSX {
     interface PskMobile {
         "controllerName"?: string | null;
         "history"?: RouterHistory;
-        "menuItems"?: MenuItem[];
         "onNeedMenuItems"?: (event: CustomEvent<any>) => void;
         "title"?: string;
     }

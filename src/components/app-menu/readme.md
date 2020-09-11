@@ -29,11 +29,13 @@
 ### Used by
 
  - [psk-default-renderer](../renderers/app-root-renders)
+ - [psk-mobile](../psk-mobile)
 
 ### Graph
 ```mermaid
 graph TD;
   psk-default-renderer --> app-menu
+  psk-mobile --> app-menu
   style app-menu fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
