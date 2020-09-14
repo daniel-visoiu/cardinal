@@ -9,7 +9,7 @@
 
 | Property  | Attribute | Description | Type     | Default |
 | --------- | --------- | ----------- | -------- | ------- |
-| `default` | `default` |             | `number` | `null`  |
+| `default` | `default` |             | `number` | `0`     |
 
 
 ## Dependencies

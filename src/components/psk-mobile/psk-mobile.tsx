@@ -1,8 +1,9 @@
-import { Component, Prop, State, Event, Element, EventEmitter, h } from '@stencil/core';
+import { Component, Prop, State, Element, Event, EventEmitter, h } from "@stencil/core";
 import { RouterHistory } from "@stencil/router";
 
 import CustomTheme from "../../decorators/CustomTheme";
 import { BindModel } from "../../decorators/BindModel";
+import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import ControllerRegistryService from "../../services/ControllerRegistryService";
 
 @Component({
@@ -15,17 +16,50 @@ export class PskMobile {
 
   @BindModel() modelHandler;
 
-  @Element() private _host: HTMLElement;
+  @TableOfContentProperty({
+    description: `This property is used as title for the page.`,
+    isMandatory: false,
+    propertyType: `string`
+  })
+  @Prop() title: string = '';
 
-  @Prop() title: string;
-
+  @TableOfContentProperty({
+    description: `This property decides if the hamburger button and the sidebar attached with it should be rendered.`,
+    isMandatory: false,
+    propertyType: `boolean`,
+    defaultValue: `false`
+  })
   @Prop() disableSidebar: boolean = false;
 
+  @TableOfContentProperty({
+    description: `This property decides if the return / go back button should be displayed.`,
+    isMandatory: false,
+    propertyType: `boolean`,
+    defaultValue: `true`
+  })
   @Prop() disableBack: boolean = true;
+
+  @TableOfContentProperty({
+    description: [
+      `This property is a string that will permit the developer to choose his own controller.`,
+      `If no value is sent then the null default value will be taken and the component will use the basic Controller.`
+    ],
+    propertyType: `string`,
+    isMandatory: false,
+    defaultValue: `null`
+  })
+  @Prop() controllerName?: string | null;
 
   @Prop() history: RouterHistory;
 
-  @Prop() controllerName?: string | null;
+  @Element() private _host: HTMLElement;
+
+  @Event({
+    eventName: 'needMenuItems',
+    cancelable: true,
+    composed: true,
+    bubbles: true,
+  }) needMenuItemsEvt: EventEmitter;
 
   @State() controller: any | null;
 
@@ -35,17 +69,11 @@ export class PskMobile {
     disabled: this.disableSidebar,
     hidden: true
   }
+
   @State() options = {
     disabled: true,
     hidden: true
   }
-
-  @Event({
-    eventName: 'needMenuItems',
-    cancelable: true,
-    composed: true,
-    bubbles: true,
-  }) needMenuItemsEvt: EventEmitter;
 
   toggleAside(e) {
     e.preventDefault();
@@ -110,13 +138,13 @@ export class PskMobile {
           }
           </div>
           <div class='aside-toggler'>
-            {
-              !this.aside.disabled ? (
-                <psk-button onClick={e => this.toggleAside(e)}>
-                  <psk-icon icon='bars'/>
-                </psk-button>
-              ) : null
-            }
+          {
+            !this.aside.disabled ? (
+              <psk-button onClick={e => this.toggleAside(e)}>
+                <psk-icon icon='bars'/>
+              </psk-button>
+            ) : null
+          }
           </div>
           <h1 class='title'>{this.title}</h1>
           <div class='options-toggler'>

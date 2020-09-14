@@ -401,7 +401,7 @@ export namespace Components {
         "title": string;
     }
     interface PskTabNavigator {
-        "default": number | null;
+        "default": number;
     }
     interface PskTable {
         "cellsWidth": string;
@@ -1540,7 +1540,7 @@ declare namespace LocalJSX {
         "title"?: string;
     }
     interface PskTabNavigator {
-        "default"?: number | null;
+        "default"?: number;
     }
     interface PskTable {
         "cellsWidth"?: string;

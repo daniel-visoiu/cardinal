@@ -1,5 +1,7 @@
-import { Component, Element, State, Prop, Host, h } from '@stencil/core';
-import CustomTheme from '../../../decorators/CustomTheme';
+import { Component, Element, State, Prop, h } from "@stencil/core";
+
+import CustomTheme from "../../../decorators/CustomTheme";
+import { TableOfContentProperty } from "../../../decorators/TableOfContentProperty";
 
 @Component({
   tag: 'psk-tab-navigator',
@@ -7,19 +9,40 @@ import CustomTheme from '../../../decorators/CustomTheme';
 })
 
 export class PskTabNavigator {
-
   @CustomTheme()
 
-  @Element() host: HTMLElement;
+  @TableOfContentProperty({
+    description: [
+      `This property actives the tab with specified index.`,
+      `The first tab is indexed with 0. If an invalid index is set, there will be no active tab.`,
+      `By default there first tab is selected.`
+    ],
+    isMandatory: false,
+    propertyType: `number`,
+    defaultValue: `0`
+  })
+  @Prop({ reflect: true }) default: number = 0;
 
   @State() tabNavigator;
 
-  @Prop() default: number | null = null;
+  @Element() private _host: HTMLElement;
 
   tabsData = [];
 
+  selectTab(e) {
+    const button = e.currentTarget;
+    const tabs = this._host.children;
+    const selected = parseInt(button.getAttribute('data-index'));
+
+    for (let i = 0; i < tabs.length; i++) {
+      tabs[i].setAttribute('hidden', '');
+    }
+    tabs[selected].removeAttribute('hidden');
+    this.tabNavigator = this.getNavigator(selected);
+  }
+
   componentWillLoad() {
-    const tabs = this.host.children;
+    const tabs = this._host.children;
 
     for (let i = 0; i < tabs.length; i++) {
       this.tabsData = [
@@ -32,51 +55,37 @@ export class PskTabNavigator {
     }
   }
 
-  selectTab(e) {
-    const button = e.currentTarget;
-    const tabs = this.host.children;
-    const selected = button.getAttribute('data-index');
-
-    for (let i = 0; i < tabs.length; i++) {
-      tabs[i].setAttribute('hidden', '');
-    }
-    tabs[selected].removeAttribute('hidden');
-    this.tabNavigator = this.getNavigator(selected);
-  }
-
   componentDidLoad() {
-    if (this.default) {
-      const tabs = this.host.children;
-      this.tabNavigator = this.getNavigator(`${this.default}`);
-      tabs[this.default].removeAttribute('hidden');
-    }
+    if (typeof this.default !== 'number') return;
+    if (this.default < 0 || this.default > this._host.children.length) return;
+
+    const tabs = this._host.children;
+    this.tabNavigator = this.getNavigator(this.default);
+    tabs[this.default].removeAttribute('hidden');
   }
 
   getNavigator(selected) {
     return (
-      <div class={'tab-navigator'}>
-      { this.tabsData.map(tab => {
-          return (
-            <psk-button
-              class={`${tab.id}` === selected ? 'active' : ''}
-              data-index={tab.id}
-              onClick={(e) => this.selectTab(e)}>{tab.title}
-            </psk-button>
-          )
-        })
+      <div class='tab-navigator'>
+      {
+        this.tabsData.map(tab =>
+          <psk-button
+            class={tab.id === selected ? 'active' : ''}
+            data-index={tab.id}
+            onClick={e => this.selectTab(e)}>{tab.title}
+          </psk-button>
+        )
       }
       </div>
     )
   }
 
   render() {
-    return (
-      <Host>
-        {this.tabNavigator}
-        <div class={'tab-container'}>
-          <slot />
-        </div>
-      </Host>
-    )
+    return [
+      this.tabNavigator,
+      <div class='tab-container'>
+        <slot />
+      </div>
+    ]
   }
 }
