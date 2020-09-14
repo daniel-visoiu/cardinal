@@ -1,5 +1,7 @@
-import { Component, Prop, Host, h } from '@stencil/core';
-import CustomTheme from '../../../decorators/CustomTheme';
+import { Component, Prop, Host, h } from "@stencil/core";
+
+import CustomTheme from "../../../decorators/CustomTheme";
+import { TableOfContentProperty } from "../../../decorators/TableOfContentProperty";
 
 @Component({
   tag: 'psk-tab',
@@ -7,9 +9,13 @@ import CustomTheme from '../../../decorators/CustomTheme';
 })
 
 export class PskTab {
-
   @CustomTheme()
 
+  @TableOfContentProperty({
+    description: `This property is used as the tab title`,
+    isMandatory: false,
+    propertyType: `string`
+  })
   @Prop() title: string;
 
   render() {

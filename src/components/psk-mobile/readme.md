@@ -13,7 +13,7 @@
 | `disableBack`    | `disable-back`    |             | `boolean`       | `true`      |
 | `disableSidebar` | `disable-sidebar` |             | `boolean`       | `false`     |
 | `history`        | --                |             | `RouterHistory` | `undefined` |
-| `title`          | `title`           |             | `string`        | `undefined` |
+| `title`          | `title`           |             | `string`        | `''`        |
 
 
 ## Events

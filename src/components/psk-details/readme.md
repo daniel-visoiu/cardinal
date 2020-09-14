@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property  | Attribute | Description | Type      | Default     |
-| --------- | --------- | ----------- | --------- | ----------- |
-| `opened`  | `opened`  |             | `boolean` | `undefined` |
-| `summary` | `summary` |             | `string`  | `undefined` |
+| Property  | Attribute | Description | Type      | Default |
+| --------- | --------- | ----------- | --------- | ------- |
+| `opened`  | `opened`  |             | `boolean` | `false` |
+| `summary` | `summary` |             | `string`  | `''`    |
 
 
 ## Dependencies
