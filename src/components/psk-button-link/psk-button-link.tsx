@@ -5,7 +5,8 @@ import { BindModel } from "../../decorators/BindModel";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 
 @Component({
-  tag: "psk-button-link"
+  tag: "psk-button-link",
+  styleUrl: './psk-button-link.css',
 })
 
 export class PskButtonLink {

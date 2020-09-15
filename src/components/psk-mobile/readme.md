@@ -10,17 +10,10 @@
 | Property         | Attribute         | Description | Type            | Default     |
 | ---------------- | ----------------- | ----------- | --------------- | ----------- |
 | `controllerName` | `controller-name` |             | `string`        | `undefined` |
-| `disableBack`    | `disable-back`    |             | `boolean`       | `true`      |
 | `disableSidebar` | `disable-sidebar` |             | `boolean`       | `false`     |
+| `enableBack`     | `enable-back`     |             | `boolean`       | `false`     |
 | `history`        | --                |             | `RouterHistory` | `undefined` |
 | `title`          | `title`           |             | `string`        | `''`        |
-
-
-## Events
-
-| Event           | Description | Type               |
-| --------------- | ----------- | ------------------ |
-| `needMenuItems` |             | `CustomEvent<any>` |
 
 
 ## Dependencies

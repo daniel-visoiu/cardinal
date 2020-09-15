@@ -1,20 +1,18 @@
-import { Component, Prop, State, Element, Event, EventEmitter, h } from "@stencil/core";
+import { Component, Prop, State, Element, Listen, h } from "@stencil/core";
 import { RouterHistory } from "@stencil/router";
 
 import CustomTheme from "../../decorators/CustomTheme";
-import { BindModel } from "../../decorators/BindModel";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
 import ControllerRegistryService from "../../services/ControllerRegistryService";
 
 @Component({
   tag: 'psk-mobile',
+  styleUrl: './psk-mobile.css',
   shadow: true
 })
 
 export class PskMobile {
   @CustomTheme()
-
-  @BindModel() modelHandler;
 
   @TableOfContentProperty({
     description: `This property is used as title for the page.`,
@@ -35,9 +33,9 @@ export class PskMobile {
     description: `This property decides if the return / go back button should be displayed.`,
     isMandatory: false,
     propertyType: `boolean`,
-    defaultValue: `true`
+    defaultValue: `false`
   })
-  @Prop() disableBack: boolean = true;
+  @Prop() enableBack: boolean = false;
 
   @TableOfContentProperty({
     description: [
@@ -54,16 +52,7 @@ export class PskMobile {
 
   @Element() private _host: HTMLElement;
 
-  @Event({
-    eventName: 'needMenuItems',
-    cancelable: true,
-    composed: true,
-    bubbles: true,
-  }) needMenuItemsEvt: EventEmitter;
-
   @State() controller: any | null;
-
-  @State() disconnected: boolean | false;
 
   @State() aside = {
     disabled: this.disableSidebar,
@@ -77,50 +66,69 @@ export class PskMobile {
 
   toggleAside(e) {
     e.preventDefault();
+    e.stopImmediatePropagation();
     this.aside = {
       ...this.aside,
       hidden: !this.aside.hidden
     };
+    this.options = {
+      ...this.options,
+      hidden: true
+    }
   }
 
   toggleBack(e) {
     e.preventDefault();
+    e.stopImmediatePropagation();
     window.history.back();
   }
 
   toggleOptions(e) {
     e.preventDefault();
+    e.stopImmediatePropagation();
     this.options = {
       ...this.options,
       hidden: !this.options.hidden
     }
+    this.aside = {
+      ...this.aside, hidden: true
+    };
   }
 
-  componentWillLoad() {
+  @Listen('click')
+  onHandleClickEvent(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    const tree: Array<EventTarget> = e.composedPath();
+    const main = this._host.shadowRoot.querySelector('main');
+
+    for (const elem of tree) {
+      if (elem === main) {
+        this.aside = {
+          ...this.aside,
+          hidden: true
+        };
+        this.options = {
+          ...this.options,
+          hidden: true
+        }
+      }
+    }
+  }
+
+  async componentWillLoad() {
     if (this._host.querySelector('[slot="options"]')) {
       this.options.disabled = false;
     }
 
-    const promisifyControllerLoad = (controllerName) => {
-      return new Promise((resolve, reject) => {
-        ControllerRegistryService.getController(controllerName).then((controller) => {
-          // Prevent javascript execution if the node has been removed from DOM
-          resolve(controller);
-        }).catch(reject);
-      })
-    };
-
     if (typeof this.controllerName === "string") {
-      let promise;
-      promise = promisifyControllerLoad(this.controllerName);
-      promise.then((Controller) => {
-        if (!this.disconnected) {
-          this.controller = new Controller(this._host, this.history);
-        }
-      }).catch((err) => {
+      try {
+        const Controller = await ControllerRegistryService.getController(this.controllerName);
+        this.controller = new Controller(this._host, this.history);
+      } catch (err) {
         console.error(err);
-      });
-      return promise;
+      }
     }
   }
 
@@ -130,7 +138,7 @@ export class PskMobile {
         <header>
           <div class='back-toggler'>
           {
-            !this.disableBack ? (
+            this.enableBack ? (
               <psk-button onClick={e => this.toggleBack(e)}>
                 <psk-icon icon='chevron-left'/>
               </psk-button>
@@ -165,6 +173,7 @@ export class PskMobile {
           </div>
         </header>
         <main>
+          <div class='main-cover' hidden={this.aside.hidden} />
           <slot name='content'/>
         </main>
         <footer>

@@ -1,0 +1,133 @@
+.mobile {
+  position: relative;
+  min-height: 100vh;
+  overflow-y: auto;
+  background-color: #EEEEEE;
+}
+
+.mobile > header {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto auto 1fr 50px;
+  height: 4rem;
+  place-items: center;
+  padding: 0 0.5rem;
+  background-color: #354F9B;
+  z-index: 1;
+}
+
+.mobile > header > .title {
+  margin: 0;
+  font-size: 1.6rem;
+  color: #FFFFFF;
+}
+
+.mobile > header .btn {
+  padding: 0; margin: 0;
+  min-width: 50px;
+  min-height: 50px;
+  border-radius: 5px;
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.mobile > header .btn:hover {
+  border-style: solid;
+  border-color: #5E7FE1;
+}
+
+.mobile > header .btn:hover,
+.mobile > header .btn:focus,
+.mobile > header .btn:active {
+  background-color: transparent !important;
+}
+
+.mobile > header .btn .icon,
+.mobile > footer .btn .icon {
+  padding: 0; margin: 0;
+  color: #FFFFFF;
+}
+
+.mobile > main {
+  padding: 1rem 1rem 5.5rem 1rem;
+}
+
+.mobile > main > * {
+  color: #000000;
+}
+
+::slotted([slot='footer']) {
+  display: flex;
+  height: 4.5rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mobile > footer {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  background-color: #5E7FE1;
+}
+
+.mobile > footer > a .icon {
+  padding: 0; margin: 0;
+}
+
+.mobile > footer > a .icon,
+.mobile > footer > a span {
+  color: #FFFFFF;
+}
+
+.options-menu, .aside-menu {
+  position: absolute;
+  top: 100%;
+}
+
+.aside-menu {
+  height: auto; min-height: calc(100vh - 4rem);
+  width: 100%; max-width: 300px;
+  left: 0;
+  display: grid;
+  align-content: flex-start;
+  z-index: 9;
+}
+
+.aside-menu::after {
+  position: absolute;
+  content: '';
+  left: 0; right: 0;
+  top: 0; bottom: 0;
+  background-color: #4461B5;
+  z-index: -1;
+}
+
+.aside-menu::before {
+  position: absolute;
+  content: '';
+  left: 0; width: 100vw;
+  top: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: -1;
+}
+
+.aside-menu .profile {
+  z-index: 1;
+  color: #FFFFFF;
+}
+
+.aside-menu .wrapper_container {
+  width: 100%;
+}
+
+::slotted([slot='options']) {
+  display: grid;
+}
+
+.options-menu {
+  display: grid;
+  right: 0;
+  min-width: 200px;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
+  z-index: 8;
+}

@@ -280,8 +280,8 @@ export namespace Components {
     }
     interface PskMobile {
         "controllerName"?: string | null;
-        "disableBack": boolean;
         "disableSidebar": boolean;
+        "enableBack": boolean;
         "history": RouterHistory;
         "title": string;
     }
@@ -1415,10 +1415,9 @@ declare namespace LocalJSX {
     }
     interface PskMobile {
         "controllerName"?: string | null;
-        "disableBack"?: boolean;
         "disableSidebar"?: boolean;
+        "enableBack"?: boolean;
         "history"?: RouterHistory;
-        "onNeedMenuItems"?: (event: CustomEvent<any>) => void;
         "title"?: string;
     }
     interface PskModal {
