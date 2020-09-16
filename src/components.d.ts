@@ -460,14 +460,6 @@ export namespace Components {
         "componentRender": string;
         "wizardSteps"?: WizardStep[];
     }
-    interface QrCodeGenerator {
-        "data": any;
-        "title": string;
-    }
-    interface QrCodeReader {
-        "data": any;
-        "title": string;
-    }
     interface QueryPageLink {
         "activeClass": string;
         "anchorClass"?: string;
@@ -1007,18 +999,6 @@ declare global {
         prototype: HTMLPskWizardElement;
         new (): HTMLPskWizardElement;
     };
-    interface HTMLQrCodeGeneratorElement extends Components.QrCodeGenerator, HTMLStencilElement {
-    }
-    var HTMLQrCodeGeneratorElement: {
-        prototype: HTMLQrCodeGeneratorElement;
-        new (): HTMLQrCodeGeneratorElement;
-    };
-    interface HTMLQrCodeReaderElement extends Components.QrCodeReader, HTMLStencilElement {
-    }
-    var HTMLQrCodeReaderElement: {
-        prototype: HTMLQrCodeReaderElement;
-        new (): HTMLQrCodeReaderElement;
-    };
     interface HTMLQueryPageLinkElement extends Components.QueryPageLink, HTMLStencilElement {
     }
     var HTMLQueryPageLinkElement: {
@@ -1122,8 +1102,6 @@ declare global {
         "psk-user-profile": HTMLPskUserProfileElement;
         "psk-user-profile-renderer": HTMLPskUserProfileRendererElement;
         "psk-wizard": HTMLPskWizardElement;
-        "qr-code-generator": HTMLQrCodeGeneratorElement;
-        "qr-code-reader": HTMLQrCodeReaderElement;
         "query-page-link": HTMLQueryPageLinkElement;
         "query-pages-router": HTMLQueryPagesRouterElement;
         "sidebar-renderer": HTMLSidebarRendererElement;
@@ -1604,14 +1582,6 @@ declare namespace LocalJSX {
         "onNeedWizardConfiguration"?: (event: CustomEvent<any>) => void;
         "wizardSteps"?: WizardStep[];
     }
-    interface QrCodeGenerator {
-        "data"?: any;
-        "title"?: string;
-    }
-    interface QrCodeReader {
-        "data"?: any;
-        "title"?: string;
-    }
     interface QueryPageLink {
         "activeClass"?: string;
         "anchorClass"?: string;
@@ -1730,8 +1700,6 @@ declare namespace LocalJSX {
         "psk-user-profile": PskUserProfile;
         "psk-user-profile-renderer": PskUserProfileRenderer;
         "psk-wizard": PskWizard;
-        "qr-code-generator": QrCodeGenerator;
-        "qr-code-reader": QrCodeReader;
         "query-page-link": QueryPageLink;
         "query-pages-router": QueryPagesRouter;
         "sidebar-renderer": SidebarRenderer;
@@ -1825,8 +1793,6 @@ declare module "@stencil/core" {
             "psk-user-profile": LocalJSX.PskUserProfile & JSXBase.HTMLAttributes<HTMLPskUserProfileElement>;
             "psk-user-profile-renderer": LocalJSX.PskUserProfileRenderer & JSXBase.HTMLAttributes<HTMLPskUserProfileRendererElement>;
             "psk-wizard": LocalJSX.PskWizard & JSXBase.HTMLAttributes<HTMLPskWizardElement>;
-            "qr-code-generator": LocalJSX.QrCodeGenerator & JSXBase.HTMLAttributes<HTMLQrCodeGeneratorElement>;
-            "qr-code-reader": LocalJSX.QrCodeReader & JSXBase.HTMLAttributes<HTMLQrCodeReaderElement>;
             "query-page-link": LocalJSX.QueryPageLink & JSXBase.HTMLAttributes<HTMLQueryPageLinkElement>;
             "query-pages-router": LocalJSX.QueryPagesRouter & JSXBase.HTMLAttributes<HTMLQueryPagesRouterElement>;
             "sidebar-renderer": LocalJSX.SidebarRenderer & JSXBase.HTMLAttributes<HTMLSidebarRendererElement>;
