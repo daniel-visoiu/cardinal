@@ -5,6 +5,7 @@ import { TableOfContentProperty } from "../../decorators/TableOfContentProperty"
 
 @Component({
   tag: 'psk-details',
+  styleUrl: './psk-details.css',
   shadow: true
 })
 
