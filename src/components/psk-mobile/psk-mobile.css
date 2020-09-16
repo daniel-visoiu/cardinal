@@ -56,7 +56,7 @@
   display: grid;
   align-content: flex-start;
   z-index: 9;
-  overflow-y: scroll;
+  overflow-y: auto;
   background-color: #4461B5;
 }
 
@@ -81,7 +81,7 @@
 .mobile > main {
   display: block;
   padding: 1rem;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .mobile > main .main-cover {
