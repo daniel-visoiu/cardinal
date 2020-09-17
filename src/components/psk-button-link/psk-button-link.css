@@ -1,4 +1,4 @@
-psk-link {
+:host > psk-link {
   padding: 0.75rem 1rem;
   margin: 0;
   border: none;
@@ -6,19 +6,20 @@ psk-link {
   background-color: transparent;
 }
 
-psk-link .icon {
+:host > psk-link .icon {
   padding: 0; margin: 0;
 }
 
-psk-link div {
-  width: 100%;
-}
-
-psk-link .icon,
-psk-link div {
+:host > psk-link .icon,
+:host > psk-link div {
   color: #000000;
 }
 
 [slot='footer'] psk-link {
   text-align: center;
+}
+
+[slot='options'] psk-link {
+  padding: 0.25rem 1rem;
+  width: 100%;
 }

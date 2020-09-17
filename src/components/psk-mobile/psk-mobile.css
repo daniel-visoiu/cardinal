@@ -99,6 +99,7 @@
 ::slotted([slot='footer']) {
   display: flex;
   height: 4.5rem;
+  padding: 0 1rem;
   justify-content: space-between;
   align-items: center;
 }
@@ -139,4 +140,11 @@
   .mobile > header .aside-menu {
     max-width: 100%;
   }
+}
+
+:host([disable-sidebar]) .mobile > header {
+  padding-left: 50px;
+}
+:host([disable-sidebar][enable-back]) .mobile > header {
+  padding-left: 0;
 }
