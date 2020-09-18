@@ -111,7 +111,7 @@ export namespace Components {
         "name"?: string | null;
         "required"?: boolean;
         "uncheckedValue"?: string | null;
-        "value"?: string;
+        "value"?: any;
     }
     interface PskCode {
         "language": string;
@@ -1215,7 +1215,7 @@ declare namespace LocalJSX {
         "name"?: string | null;
         "required"?: boolean;
         "uncheckedValue"?: string | null;
-        "value"?: string;
+        "value"?: any;
     }
     interface PskCode {
         "language"?: string;

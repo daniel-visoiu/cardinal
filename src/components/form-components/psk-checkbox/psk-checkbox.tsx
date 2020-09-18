@@ -51,9 +51,9 @@ export class PskCheckbox {
     __handleCheckbox(evt): void {
         this.checked = evt.target.checked;
         if (evt.target.checked) {
-            this.value = this.checkedValue ? this.checkedValue : "checked";
+            this.value = this.checkedValue ? this.checkedValue : true;
         } else {
-            this.value = this.uncheckedValue ? this.uncheckedValue : "unchecked";
+            this.value = this.uncheckedValue ? this.uncheckedValue : false;
         }
         this.modelHandler.updateModel('value', this.value);
     }
@@ -103,7 +103,7 @@ export class PskCheckbox {
         isMandatory: false,
         propertyType: 'string'
     })
-    @Prop({ reflect: true, mutable: true }) value?: string = 'unchecked';
+    @Prop({ reflect: true, mutable: true }) value?: any = false;
 
     @TableOfContentProperty({
         description: [`Specifies the value that will be assigned to the component when it is checked.`],
