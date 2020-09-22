@@ -6,7 +6,7 @@ import {getInnerHTML} from "../../utils/utilFunctions";
 
 @Component({
     tag: "psk-list",
-    styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.min.css"
+    styleUrl:"../../assets/css/bootstrap/bootstrap.min.css"
 })
 export class PskList {
     @CustomTheme()

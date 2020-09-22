@@ -12,7 +12,7 @@ interface BreakPoint {
 
 @Component({
 	tag: "psk-grid",
-  styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.css"
+  styleUrl:"../../assets/css/bootstrap/bootstrap.css"
 })
 export class PskGrid {
 	@BindModel() modelHandler;

@@ -3,7 +3,7 @@ import CustomTheme from '../../decorators/CustomTheme';
 
 @Component({
     tag: 'psk-page-not-found-renderer',
-    styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.css",
+    styleUrl:"../../assets/css/bootstrap/bootstrap.css",
     shadow: true
 })
 export class PskPageNotFoundRenderer {

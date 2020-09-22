@@ -11,7 +11,7 @@ import NavigationTrackerService from "../psk-ssapp/NavigationTrackerService.js";
 
 @Component({
 	tag: "psk-page",
-  styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.css",
+  styleUrl:"../../assets/css/bootstrap/bootstrap.css",
 	shadow: true
 })
 export class PskPage {

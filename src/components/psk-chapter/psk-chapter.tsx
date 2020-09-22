@@ -8,7 +8,7 @@ import { BindModel } from "../../decorators/BindModel";
 
 @Component({
 	tag: "psk-chapter",
-  styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.css"
+  styleUrl:"../../assets/css/bootstrap/bootstrap.css"
 })
 export class PskChapter {
 	@CustomTheme()

@@ -5,7 +5,7 @@ import {BindModel} from '../../decorators/BindModel';
 
 @Component({
   tag: 'psk-user-profile-renderer',
-  styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.css"
+  styleUrl:"../../assets/css/bootstrap/bootstrap.css"
 })
 export class PskUserProfileRenderer {
 

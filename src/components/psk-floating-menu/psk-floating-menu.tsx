@@ -6,7 +6,7 @@ import { TableOfContentProperty } from '../../decorators/TableOfContentProperty'
 
 @Component({
     tag: 'psk-floating-menu',
-    styleUrl:"../../../themes/commons/fonts/font-awesome.min.css",
+    styleUrl:"../../assets/fonts/font-awesome/font-awesome.min.css",
     shadow: true
 })
 export class FloatingMenu {

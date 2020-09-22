@@ -2,7 +2,7 @@ import { Component, h } from '@stencil/core';
 
 @Component({
 	tag: 'psk-button-test',
-	styleUrl: "../../../themes/commons/bootstrap/css/bootstrap.css",
+	styleUrl: "../../assets/css/bootstrap/bootstrap.css",
 	shadow: true
 })
 

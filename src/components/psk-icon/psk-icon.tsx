@@ -6,8 +6,8 @@ import { BindModel } from "../../decorators/BindModel";
 @Component({
     tag: "psk-icon",
     styleUrls: [
-        "../../../themes/commons/fonts/font-awesome.min.css",
-        "../../../themes/commons/bootstrap/css/bootstrap.min.css"],
+        "../../assets/fonts/font-awesome/font-awesome.min.css",
+        "../../assets/css/bootstrap/bootstrap.min.css"],
 })
 export class PskIcon {
     @CustomTheme()

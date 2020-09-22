@@ -8,7 +8,7 @@ import {MOBILE_MAX_WIDTH} from "../../utils/constants";
 
 @Component({
   tag: 'app-menu',
-  styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.css",
+  styleUrl:"../../assets/css/bootstrap/bootstrap.css",
   shadow: true
 })
 export class AppMenu {

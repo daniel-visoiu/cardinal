@@ -8,7 +8,7 @@ import {stringToBoolean} from "../../utils/utilFunctions";
 
 @Component({
     tag: 'psk-button-group',
-    styleUrl:"../../../themes/commons/bootstrap/css/bootstrap.css"
+    styleUrl:"../../assets/css/bootstrap/bootstrap.css"
 })
 export class ButtonGroup {
     @BindModel() modelHandler;

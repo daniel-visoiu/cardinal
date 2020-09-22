@@ -5,7 +5,7 @@ import CustomTheme from '../../decorators/CustomTheme';
 
 @Component({
     tag: "psk-highlight",
-    styleUrls:["./psk-highlight.css","../../../themes/commons/bootstrap/css/bootstrap.css"]
+    styleUrls:["./psk-highlight.css","../../assets/css/bootstrap/bootstrap.css"]
 })
 
 export class PskDescription {
