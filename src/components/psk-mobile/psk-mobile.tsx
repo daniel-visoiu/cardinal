@@ -22,6 +22,14 @@ export class PskMobile {
   @Prop() title: string = '';
 
   @TableOfContentProperty({
+    description: `This property decides if header is rendered (header includes sidebar, options and title).`,
+    isMandatory: false,
+    propertyType: `boolean`,
+    defaultValue: `false`
+  })
+  @Prop() disableHeader: boolean = false;
+
+  @TableOfContentProperty({
     description: `This property decides if the hamburger button and the sidebar attached with it should be rendered.`,
     isMandatory: false,
     propertyType: `boolean`,
@@ -62,6 +70,14 @@ export class PskMobile {
   @State() options = {
     disabled: true,
     hidden: true
+  }
+
+  @State() header: {
+    disabled: boolean,
+    title: string | Element
+  } = {
+    disabled: this.disableHeader,
+    title: this.title
   }
 
   toggleAside(e) {
@@ -117,9 +133,36 @@ export class PskMobile {
     }
   }
 
+  @Listen('hide-mobile-options', { target: 'document' })
+  onHandleHideMobileOptionsEvent(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    this.options = {
+      ...this.options,
+      hidden: true
+    }
+  }
+
+  @Listen('show-mobile-options', { target: 'document' })
+  onHandleShowMobileOptionsEvent(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    this.options = {
+      ...this.options,
+      hidden: false
+    }
+  }
+
   async componentWillLoad() {
     if (this._host.querySelector('[slot="options"]')) {
       this.options.disabled = false;
+    }
+
+    if (this._host.querySelector('[slot="title"]')) {
+      this.header = {
+        ...this.header,
+        title: <slot name='title'/>
+      };
     }
 
     if (typeof this.controllerName === "string") {
@@ -134,44 +177,48 @@ export class PskMobile {
 
   render() {
     return (
-      <div class='mobile'>
-        <header>
-          <div class='back-toggler'>
-          {
-            this.enableBack ? (
-              <psk-button onClick={e => this.toggleBack(e)}>
-                <psk-icon icon='chevron-left'/>
-              </psk-button>
-            ) : null
-          }
-          </div>
-          <div class='aside-toggler'>
-          {
-            !this.aside.disabled ? (
-              <psk-button onClick={e => this.toggleAside(e)}>
-                <psk-icon icon='bars'/>
-              </psk-button>
-            ) : null
-          }
-          </div>
-          <h1 class='title'>{this.title}</h1>
-          <div class='options-toggler'>
-          {
-            !this.options.disabled ? (
-              <psk-button onClick={e => this.toggleOptions(e)}>
-                <psk-icon icon='ellipsis-v'/>
-              </psk-button>
-            ) : null
-          }
-          </div>
-          <div class='aside-menu' hidden={this.aside.hidden}>
-            <psk-user-profile/>
-            <app-menu hamburger-max-width={0} item-renderer='sidebar-renderer'/>
-          </div>
-          <div class='options-menu' hidden={this.options.hidden}>
-            <slot name='options'/>
-          </div>
-        </header>
+      <div class={{'mobile': true, 'no-header': this.header.disabled}}>
+        {
+          !this.header.disabled ? (
+            <header>
+              <div class='back-toggler'>
+                {
+                  this.enableBack ? (
+                    <psk-button onClick={e => this.toggleBack(e)}>
+                      <psk-icon icon='chevron-left'/>
+                    </psk-button>
+                  ) : null
+                }
+              </div>
+              <div class='aside-toggler'>
+                {
+                  !this.aside.disabled ? (
+                    <psk-button onClick={e => this.toggleAside(e)}>
+                      <psk-icon icon='bars'/>
+                    </psk-button>
+                  ) : null
+                }
+              </div>
+              <h1 class='title'>{this.header.title}</h1>
+              <div class='options-toggler'>
+                {
+                  !this.options.disabled ? (
+                    <psk-button onClick={e => this.toggleOptions(e)}>
+                      <psk-icon icon='ellipsis-v'/>
+                    </psk-button>
+                  ) : null
+                }
+              </div>
+              <div class='aside-menu' hidden={this.aside.hidden}>
+                <psk-user-profile/>
+                <app-menu hamburger-max-width={0} item-renderer='sidebar-renderer'/>
+              </div>
+              <div class='options-menu' hidden={this.options.hidden}>
+                <slot name='options'/>
+              </div>
+            </header>
+          ) : null
+        }
         <main>
           <div class='main-cover' hidden={this.aside.hidden} />
           <slot name='content'/>
