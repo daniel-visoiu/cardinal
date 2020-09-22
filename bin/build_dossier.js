@@ -5,7 +5,6 @@ const DEFAULT_DOMAIN = "default";
 require("./../../privatesky/psknode/bundles/csbBoot.js");
 require("./../../privatesky/psknode/bundles/openDSU.js");
 const fs = require("fs");
-const EDFS = require("edfs");
 const openDSU = require("opendsu");
 const bdns = openDSU.loadApi("bdns");
 const keyssi = openDSU.loadApi("keyssi");
