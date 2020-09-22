@@ -10,8 +10,8 @@ export class PskPageLoader {
   @CustomTheme()
 
   @TableOfContentProperty({
-    description: [`This property is the images sources separed by ','.`,
-      `Using this property a new array will be created by spliting this string by ','.`],
+    description: [`This property is the images sources separated by ','.`,
+      `Using this property a new array will be created by splitting this string by ','.`],
     isMandatory: true,
     propertyType: `string`
   })
@@ -35,11 +35,25 @@ export class PskPageLoader {
   })
   @Prop() caption: string;
 
+  @TableOfContentProperty({
+    description: 'This property represents the number of seconds an image is visible.',
+    isMandatory: false,
+    propertyType: `number`,
+    defaultValue: `10`
+  })
+  @Prop() visibleSeconds: number = 10;
+
+  @TableOfContentProperty({
+    description: 'This property adjusts the transition between images such that its duration is equal to the specified number of seconds.',
+    isMandatory: false,
+    propertyType: `number`,
+    defaultValue: `1`
+  })
+  @Prop() fadeSeconds: number = 1;
+
   @State() imagesSrcs: Array<string>;
   @State() slideshowHeight;
   @State() marginTop;
-  @Prop() fadeSeconds: number = 1;
-  @Prop() visibleSeconds: number = 10;
 
   @Element() element;
 
