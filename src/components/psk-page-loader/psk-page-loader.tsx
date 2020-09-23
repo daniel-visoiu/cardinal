@@ -93,7 +93,9 @@ export class PskPageLoader {
                                   src={`data:text/html;charset=utf-8, ${escape(this.pageContent)}`}/>;
     }
     else{
-      renderedComponent =<div class="page_content" innerHTML={this.pageContent}/>
+      renderedComponent = <div
+        class="page_content" style={{height: "100%", width: "100%"}}
+        innerHTML={this.pageContent}/>
     }
 
     return (
