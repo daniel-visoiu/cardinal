@@ -7,6 +7,7 @@ export interface CardinalConfig extends Config {
 
 export const config: CardinalConfig = {
   namespace: 'cardinal',
+  globalScript: './src/globals/index.ts',
   plugins: [
     global.removeWarnings()
   ],
