@@ -1,28 +1,23 @@
 .mobile {
   position: relative;
-  height: 100%; width: 100vw;
+  height: 100%; width: 100%;
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
 
-.mobile.no-header {
-  grid-template-rows: 1fr auto;
-}
-
 .mobile > header {
-  position: relative;
+  position: static;
   height: 4rem;
   padding: 0 0.5rem;
   display: grid;
   grid-template-columns: auto auto 1fr 50px;
   place-items: center;
-  background-color: #5E7FE1;
   z-index: 8;
 }
 
 .mobile > header > .title {
-  margin: 0;
-  color: #FFFFFF;
+  margin: 0; padding: 0;
+  font-size: 1.6rem;
 }
 
 .mobile > header .btn {
@@ -30,16 +25,6 @@
   min-width: 50px;
   min-height: 50px;
   border-radius: 5px;
-  border-color: transparent;
-  background-color: transparent;
-}
-
-.mobile > header .btn:hover,
-.mobile > header .btn:focus,
-.mobile > header .btn:active {
-  border-style: solid;
-  border-color: #5E7FE1;
-  background-color: transparent !important;
 }
 
 .mobile > header .btn .icon,
@@ -50,18 +35,17 @@
 .mobile > header .aside-menu,
 .mobile > header .options-menu {
   position: absolute;
-  top: 100%;
+  top: 4rem;
 }
 
 .mobile > header .aside-menu {
-  height: calc(100vh - 4rem);
+  left: 0; bottom: 0;
   width: 100%; max-width: 300px;
-  left: 0;
   display: grid;
   align-content: flex-start;
-  z-index: 9;
   overflow-y: auto;
-  background-color: #4461B5;
+  overflow-x: hidden;
+  z-index: 9;
 }
 
 .mobile > header .aside-menu .wrapper_container {
@@ -77,8 +61,6 @@
   display: grid;
   right: 0;
   min-width: 200px;
-  background-color: #FFFFFF;
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
   z-index: 8;
 }
 
@@ -96,6 +78,12 @@
   z-index: 7;
 }
 
+@media screen and (max-width: 340px) {
+  .mobile > header .aside-menu {
+    max-width: 100%;
+  }
+}
+
 ::slotted([slot='options']) {
   display: grid;
 }
@@ -108,47 +96,14 @@
   align-items: center;
 }
 
-::-webkit-scrollbar {
-  height: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #CCCCCC;
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: #F1F1F1;
-}
-
-.mobile > header .aside-menu::-webkit-scrollbar {
-  background-color: #FFFFFF;
-  width: 7px;
-}
-
-.mobile > header .aside-menu::-webkit-scrollbar-track {
-  background-color: #354F9B;
-}
-
-.mobile > header .aside-menu::-webkit-scrollbar-thumb {
-  background-color: #FFFFFF;
-  border-radius: 10px;
-  border: 1px solid #354f9b;
-}
-
-.mobile > header .aside-menu::-webkit-scrollbar-button {
-  display: none;
-}
-
-@media screen and (max-width: 340px) {
-  .mobile > header .aside-menu {
-    max-width: 100%;
-  }
+:host([disable-header]) .mobile {
+  grid-template-rows: 1fr auto;
 }
 
 :host([disable-sidebar]) .mobile > header {
   padding-left: 50px;
 }
+
 :host([disable-sidebar][enable-back]) .mobile > header {
   padding-left: 0;
 }

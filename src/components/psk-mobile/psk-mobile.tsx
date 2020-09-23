@@ -7,7 +7,11 @@ import ControllerRegistryService from "../../services/ControllerRegistryService"
 
 @Component({
   tag: 'psk-mobile',
-  styleUrl: './psk-mobile.css',
+  styleUrls: {
+    default: './styles/psk-mobile.default.css',
+    layout: './styles/psk-mobile.layout.css',
+    demo: './styles/psk-mobile.demo.css'
+  },
   shadow: true
 })
 
@@ -177,7 +181,7 @@ export class PskMobile {
 
   render() {
     return (
-      <div class={{'mobile': true, 'no-header': this.header.disabled}}>
+      <div class='mobile'>
         {
           !this.header.disabled ? (
             <header>

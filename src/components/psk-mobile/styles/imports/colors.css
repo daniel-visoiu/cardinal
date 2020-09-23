@@ -1,0 +1,73 @@
+.mobile > header {
+  background-color: #5E7FE1;
+}
+
+.mobile > header > .title {
+  color: #FFFFFF;
+}
+
+.mobile > header .btn {
+  border-color: transparent;
+  background-color: transparent !important;
+}
+
+.mobile > header .btn:hover,
+.mobile > header .btn:focus,
+.mobile > header .btn:active {
+  border-style: solid;
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.mobile > header .aside-menu {
+  background-color: #4461B5;
+}
+
+.mobile > header .options-menu {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
+}
+
+.mobile > main {
+  background-color: #FAFAFA;
+}
+
+.mobile > main > * {
+  color: #000000;
+}
+
+.mobile > main .main-cover {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+::-webkit-scrollbar {
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #CCCCCC;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #F1F1F1;
+}
+
+.mobile > header .aside-menu::-webkit-scrollbar {
+  background-color: #FFFFFF;
+  width: 7px;
+}
+
+.mobile > header .aside-menu::-webkit-scrollbar-track {
+  background-color: #4461B5;
+}
+
+.mobile > header .aside-menu::-webkit-scrollbar-thumb {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  border: 1px solid #4461B5;
+}
+
+.mobile > header .aside-menu::-webkit-scrollbar-button {
+  display: none;
+}
