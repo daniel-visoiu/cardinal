@@ -2,50 +2,24 @@
   position: absolute;
 }
 
-/*@media (max-width: 1366px) {*/
-/*  .mobile {*/
-/*    height: calc(100vh - 275px) !important;*/
-/*  }*/
-/*  .mobile > header .aside-menu {*/
-/*    height: calc(100vh - 275px - 4rem) !important;*/
-/*  }*/
-/*}*/
-
-/*@media (max-width: 640px) {*/
-/*  .mobile {*/
-/*    height: calc(100vh - 325px) !important;*/
-/*  }*/
-/*  .mobile > header .aside-menu {*/
-/*    height: calc(100vh - 325px - 4rem) !important;*/
-/*  }*/
-/*}*/
-
-/*@media (max-width: 450px) {*/
-/*  .mobile {*/
-/*    height: calc(100vh - 230px) !important;*/
-/*  }*/
-/*  .mobile > header .aside-menu {*/
-/*    height: calc(100vh - 230px - 4rem) !important;*/
-/*  }*/
-/*}*/
-
 :host([id="demo-title"]) .mobile {
-  height: auto !important;
+  height: auto;
 }
 :host([id="demo-title"]) .mobile > main {
   display: none;
 }
 
 :host([id="demo-footer"]) .mobile {
-  height: auto !important;
+  height: auto;
   padding-bottom: 5px;
 }
 :host([id="demo-footer"]) .mobile > header,
 :host([id="demo-footer"]) .mobile > main {
   display: none;
 }
+
 :host([id="demo-options"]) .mobile {
-  height: 200px !important;
+  height: 200px;
 }
 :host([id="demo-options"]) .mobile > header .options-menu {
   visibility: hidden;
@@ -55,11 +29,12 @@
   visibility: visible !important;
   display: block !important;
 }
+
 :host([id="demo-content"]) .mobile {
-  height: 350px !important;
+  height: 350px;
 }
 :host([id="demo-content"]) .mobile > header .aside-menu {
-  height: calc(350px - 4rem) !important;
+  height: calc(350px - 4rem);
 }
 
 @media (max-width: 550px) {
