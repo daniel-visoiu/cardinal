@@ -137,8 +137,8 @@ export class PskMobile {
     }
   }
 
-  @Listen('hide-mobile-options', { target: 'document' })
-  onHandleHideMobileOptionsEvent(e) {
+  @Listen('psk-mobile:hide-options', { target: 'document' })
+  onHandleHideOptionsEvent(e) {
     e.preventDefault();
     e.stopImmediatePropagation();
     this.options = {
@@ -147,14 +147,24 @@ export class PskMobile {
     }
   }
 
-  @Listen('show-mobile-options', { target: 'document' })
-  onHandleShowMobileOptionsEvent(e) {
+  @Listen('psk-mobile:show-options', { target: 'document' })
+  onHandleShowOptionsEvent(e) {
     e.preventDefault();
     e.stopImmediatePropagation();
     this.options = {
       ...this.options,
       hidden: false
     }
+  }
+
+  @Listen('psk-mobile:toggle-sidebar', { target: 'document' })
+  onHandleToggleSidebarEvent(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    this.aside = {
+      ...this.aside,
+      hidden: !this.aside.hidden
+    };
   }
 
   async componentWillLoad() {
