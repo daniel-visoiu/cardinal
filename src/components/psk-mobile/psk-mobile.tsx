@@ -68,14 +68,12 @@ export class PskMobile {
 
   @State() aside = {
     disabled: this.disableSidebar,
-    hidden: true,
-    actions: 0
+    hidden: true
   }
 
   @State() options = {
     disabled: true,
-    hidden: true,
-    actions: 0
+    hidden: true
   }
 
   @State() header: {
