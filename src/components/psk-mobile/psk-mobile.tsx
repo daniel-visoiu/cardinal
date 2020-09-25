@@ -68,12 +68,14 @@ export class PskMobile {
 
   @State() aside = {
     disabled: this.disableSidebar,
-    hidden: true
+    hidden: true,
+    actions: 0
   }
 
   @State() options = {
     disabled: true,
-    hidden: true
+    hidden: true,
+    actions: 0
   }
 
   @State() header: {
@@ -82,37 +84,6 @@ export class PskMobile {
   } = {
     disabled: this.disableHeader,
     title: this.title
-  }
-
-  toggleAside(e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    this.aside = {
-      ...this.aside,
-      hidden: !this.aside.hidden
-    };
-    this.options = {
-      ...this.options,
-      hidden: true
-    }
-  }
-
-  toggleBack(e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    window.history.back();
-  }
-
-  toggleOptions(e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    this.options = {
-      ...this.options,
-      hidden: !this.options.hidden
-    }
-    this.aside = {
-      ...this.aside, hidden: true
-    };
   }
 
   @Listen('click')
@@ -125,46 +96,20 @@ export class PskMobile {
 
     for (const elem of tree) {
       if (elem === main) {
-        this.aside = {
-          ...this.aside,
-          hidden: true
-        };
-        this.options = {
-          ...this.options,
-          hidden: true
-        }
+        this.aside = { ...this.aside, hidden: true };
+        this.options = { ...this.options, hidden: true };
       }
     }
   }
 
-  @Listen('psk-mobile:hide-options', { target: 'document' })
-  onHandleHideOptionsEvent(e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    this.options = {
-      ...this.options,
-      hidden: true
-    }
-  }
-
-  @Listen('psk-mobile:show-options', { target: 'document' })
-  onHandleShowOptionsEvent(e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    this.options = {
-      ...this.options,
-      hidden: false
-    }
+  @Listen('psk-mobile:toggle-options', { target: 'document' })
+  onHandleToggleOptionsEvent(e) {
+    this._toggleOptions((typeof e.detail === 'boolean' ? !e.detail : !this.options.hidden));
   }
 
   @Listen('psk-mobile:toggle-sidebar', { target: 'document' })
   onHandleToggleSidebarEvent(e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    this.aside = {
-      ...this.aside,
-      hidden: !this.aside.hidden
-    };
+    this._toggleAside((typeof e.detail === 'boolean' ? !e.detail : !this.aside.hidden));
   }
 
   async componentWillLoad() {
@@ -187,6 +132,34 @@ export class PskMobile {
         console.error(err);
       }
     }
+  }
+
+  toggleAside(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    this._toggleAside();
+  }
+
+  toggleBack(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    window.history.back();
+  }
+
+  toggleOptions(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    this._toggleOptions();
+  }
+
+  private _toggleAside(hidden = !this.aside.hidden) {
+    this.aside = { ...this.aside, hidden };
+    this.options = { ...this.options, hidden: true };
+  }
+
+  private _toggleOptions(hidden = !this.options.hidden) {
+    this.options = { ...this.options, hidden };
+    this.aside = { ...this.aside, hidden: true };
   }
 
   render() {
