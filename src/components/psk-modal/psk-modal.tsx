@@ -30,7 +30,7 @@ export class PskModal {
   @TableOfContentProperty({
     description: `By defining this attribute, the component will be able to expose the functionality to expand and collapse the modal.`,
     isMandatory: false,
-    propertyType: `string`,
+    propertyType: `boolean`,
     defaultValue: `false`
   })
   @Prop({ reflect: true, mutable: true }) expanded: boolean = false;
