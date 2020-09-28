@@ -290,7 +290,7 @@ export namespace Components {
     }
     interface PskModal {
         "eventName": string | null;
-        "expanded": string | null;
+        "expanded": boolean;
         "opened": boolean;
     }
     interface PskNumberInput {
@@ -1404,7 +1404,7 @@ declare namespace LocalJSX {
     }
     interface PskModal {
         "eventName"?: string | null;
-        "expanded"?: string | null;
+        "expanded"?: boolean;
         "onCloseModal"?: (event: CustomEvent<any>) => void;
         "opened"?: boolean;
     }

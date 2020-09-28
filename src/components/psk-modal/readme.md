@@ -10,7 +10,7 @@
 | Property    | Attribute    | Description | Type      | Default     |
 | ----------- | ------------ | ----------- | --------- | ----------- |
 | `eventName` | `event-name` |             | `string`  | `undefined` |
-| `expanded`  | `expanded`   |             | `string`  | `undefined` |
+| `expanded`  | `expanded`   |             | `boolean` | `false`     |
 | `opened`    | `opened`     |             | `boolean` | `false`     |
 
 
