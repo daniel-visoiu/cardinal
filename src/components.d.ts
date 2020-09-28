@@ -285,6 +285,8 @@ export namespace Components {
         "enableBack": boolean;
         "history": RouterHistory;
         "title": string;
+        "toggleOptions": (visible: any) => Promise<void>;
+        "toggleSidebar": (visible: any) => Promise<void>;
     }
     interface PskModal {
         "eventName": string | null;

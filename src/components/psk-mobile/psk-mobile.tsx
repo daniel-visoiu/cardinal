@@ -1,4 +1,4 @@
-import { Component, Prop, State, Element, Listen, h } from "@stencil/core";
+import { Component, Prop, State, Element, Listen, Method, h } from "@stencil/core";
 import { RouterHistory } from "@stencil/router";
 
 import CustomTheme from "../../decorators/CustomTheme";
@@ -17,6 +17,8 @@ import ControllerRegistryService from "../../services/ControllerRegistryService"
 
 export class PskMobile {
   @CustomTheme()
+
+  @Element() private _host: HTMLElement;
 
   @TableOfContentProperty({
     description: `This property is used as title for the page.`,
@@ -62,8 +64,6 @@ export class PskMobile {
 
   @Prop() history: RouterHistory;
 
-  @Element() private _host: HTMLElement;
-
   @State() controller: any | null;
 
   @State() aside = {
@@ -85,7 +85,7 @@ export class PskMobile {
   }
 
   @Listen('click')
-  onHandleClickEvent(e) {
+  onClickEvent(e) {
     e.preventDefault();
     e.stopImmediatePropagation();
 
@@ -100,14 +100,24 @@ export class PskMobile {
     }
   }
 
-  @Listen('psk-mobile:toggle-options', { target: 'document' })
-  onHandleToggleOptionsEvent(e) {
-    this._toggleOptions((typeof e.detail === 'boolean' ? !e.detail : !this.options.hidden));
+  // @Listen('psk-mobile:toggle-options', { target: 'document' })
+  // onHandleToggleOptionsEvent(e) {
+  //   this._toggleOptions((typeof e.detail === 'boolean' ? !e.detail : !this.options.hidden));
+  // }
+  //
+  // @Listen('psk-mobile:toggle-sidebar', { target: 'document' })
+  // onHandleToggleSidebarEvent(e) {
+  //   this._toggleAside((typeof e.detail === 'boolean' ? !e.detail : !this.aside.hidden));
+  // }
+
+  @Method()
+  async toggleSidebar(visible) {
+    this._toggleAside((typeof visible === 'boolean' ? !visible : !this.aside.hidden));
   }
 
-  @Listen('psk-mobile:toggle-sidebar', { target: 'document' })
-  onHandleToggleSidebarEvent(e) {
-    this._toggleAside((typeof e.detail === 'boolean' ? !e.detail : !this.aside.hidden));
+  @Method()
+  async toggleOptions(visible) {
+    this._toggleOptions((typeof visible === 'boolean' ? !visible : !this.options.hidden));
   }
 
   async componentWillLoad() {
@@ -132,19 +142,19 @@ export class PskMobile {
     }
   }
 
-  toggleAside(e) {
+  handleAsideClick(e) {
     e.preventDefault();
     e.stopImmediatePropagation();
     this._toggleAside();
   }
 
-  toggleBack(e) {
+  handleBackClick(e) {
     e.preventDefault();
     e.stopImmediatePropagation();
     window.history.back();
   }
 
-  toggleOptions(e) {
+  handleOptionsClick(e) {
     e.preventDefault();
     e.stopImmediatePropagation();
     this._toggleOptions();
@@ -169,7 +179,7 @@ export class PskMobile {
               <div class='back-toggler'>
                 {
                   this.enableBack ? (
-                    <psk-button onClick={e => this.toggleBack(e)}>
+                    <psk-button onClick={e => this.handleBackClick(e)}>
                       <psk-icon icon='chevron-left'/>
                     </psk-button>
                   ) : null
@@ -178,7 +188,7 @@ export class PskMobile {
               <div class='aside-toggler'>
                 {
                   !this.aside.disabled ? (
-                    <psk-button onClick={e => this.toggleAside(e)}>
+                    <psk-button onClick={e => this.handleAsideClick(e)}>
                       <psk-icon icon='bars'/>
                     </psk-button>
                   ) : null
@@ -188,7 +198,7 @@ export class PskMobile {
               <div class='options-toggler'>
                 {
                   !this.options.disabled ? (
-                    <psk-button onClick={e => this.toggleOptions(e)}>
+                    <psk-button onClick={e => this.handleOptionsClick(e)}>
                       <psk-icon icon='ellipsis-v'/>
                     </psk-button>
                   ) : null
@@ -206,7 +216,7 @@ export class PskMobile {
         }
         <main>
           <div class='main-cover' hidden={this.aside.hidden} />
-          <slot name='content'/>
+          <slot />
         </main>
         <footer>
           <slot name='footer'/>

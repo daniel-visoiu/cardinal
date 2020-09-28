@@ -17,6 +17,29 @@
 | `title`          | `title`           |             | `string`        | `''`        |
 
 
+## Methods
+
+### `toggleOptions(visible: any) => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `toggleSidebar(visible: any) => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+
 ## Dependencies
 
 ### Depends on
