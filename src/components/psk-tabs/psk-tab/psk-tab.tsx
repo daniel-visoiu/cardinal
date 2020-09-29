@@ -12,8 +12,11 @@ export class PskTab {
   @CustomTheme()
 
   @TableOfContentProperty({
-    description: `This property is used as the tab title`,
-    isMandatory: false,
+    description: [
+      `This property is used as the tab title.`,
+      `psk-tab-navigator will use this title in order to generate the control area.`
+    ],
+    isMandatory: true,
     propertyType: `string`
   })
   @Prop() title: string;

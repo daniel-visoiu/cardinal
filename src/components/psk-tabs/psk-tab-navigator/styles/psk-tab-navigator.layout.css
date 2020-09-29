@@ -1,0 +1,47 @@
+:host .tabs {
+  display: grid;
+}
+
+:host .tabs .tab-navigator {
+  overflow-x: auto;
+}
+
+:host .tabs .tab-container {
+  position: relative;
+}
+
+:host .tabs .tab-navigator .btn {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+}
+
+:host([layout='horizontal']) .tabs .tab-navigator {
+  display: grid;
+  grid-auto-flow: column;
+}
+
+:host([layout='horizontal']) .tabs .tab-navigator .btn {
+  width: 100%;
+}
+
+:host([layout='vertical']) .tabs {
+  grid-template-columns: auto 1fr;
+  align-items: start;
+}
+
+:host([layout='vertical']) .tabs .tab-navigator {
+  display: grid;
+}
+
+:host([layout='vertical']) .tabs .tab-navigator button.btn {
+  width: 100%;
+}
+
+:host([layout='mobile']) .tabs .tab-navigator psk-select psk-label {
+  display: none;
+}
+
+:host([layout='mobile']) .tabs .tab-navigator psk-select .form-group {
+  margin: 0;
+}

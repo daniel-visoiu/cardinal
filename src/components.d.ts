@@ -361,6 +361,7 @@ export namespace Components {
     }
     interface PskSelect {
         "disabled"?: boolean;
+        "eventName": string | null;
         "invalidValue"?: boolean | null;
         "label"?: string | null;
         "placeholder"?: string | null;
@@ -406,6 +407,7 @@ export namespace Components {
     }
     interface PskTabNavigator {
         "default": number;
+        "layout": string;
     }
     interface PskTable {
         "cellsWidth": string;
@@ -1479,6 +1481,7 @@ declare namespace LocalJSX {
     }
     interface PskSelect {
         "disabled"?: boolean;
+        "eventName"?: string | null;
         "invalidValue"?: boolean | null;
         "label"?: string | null;
         "placeholder"?: string | null;
@@ -1524,6 +1527,7 @@ declare namespace LocalJSX {
     }
     interface PskTabNavigator {
         "default"?: number;
+        "layout"?: string;
     }
     interface PskTable {
         "cellsWidth"?: string;

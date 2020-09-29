@@ -1,0 +1,32 @@
+:host .tabs {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+:host .tabs .tab-navigator,
+:host .tabs .tab-navigator .btn {
+  background-color: #4C71DD;
+}
+
+:host .tabs .tab-navigator psk-button.active button.btn {
+  background-color: #354F9B;
+  border-style: none;
+}
+
+:host .tabs .tab-container {
+  padding: 1rem;
+}
+
+:host([layout='horizontal']) .tabs .tab-container {
+  border-top: 3px solid #354F9B;
+}
+
+:host([layout='vertical']) .tabs .tab-navigator {
+  min-width: 150px;
+}
+
+:host([layout='mobile']) .tabs .tab-navigator {
+  padding: 1rem;
+  background-color: #4C71DD70;
+  border-bottom: 1px solid #354F9B;
+}
