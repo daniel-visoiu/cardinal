@@ -1,19 +1,23 @@
-import { h, Component, Prop, State } from '@stencil/core';
+import { Component, Prop, State, Element, h } from '@stencil/core';
 import { Option, SelectType } from '../../../interfaces/FormModel';
 import { BindModel } from '../../../decorators/BindModel';
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
 import { normalizeRegexToString } from '../../../utils/utilFunctions';
 import CustomTheme from '../../../decorators/CustomTheme';
 import { INVALID_ID_CHARACTERS_REGEX } from "../../../utils/constants";
+import PskButtonEvent from "../../../events/PskButtonEvent";
 
 @Component({
     tag: 'psk-select'
 })
+
 export class PskSelect {
 
     @CustomTheme()
 
     @BindModel() modelHandler;
+
+    @Element() private _host: HTMLElement;
 
     @State() options: Array<Option> = [];
 
@@ -28,6 +32,8 @@ export class PskSelect {
     }
 
     render() {
+        console.log('psk-select')
+
         const name: string = this.label && normalizeRegexToString(this.label, INVALID_ID_CHARACTERS_REGEX, '').toLowerCase();
         const placeholderSelected: boolean = this.options.findIndex((opt: Option) => opt.value === this.value) === -1;
 
@@ -46,7 +52,6 @@ export class PskSelect {
                 const optValue = option.value ? option.value
                     : option.label && normalizeRegexToString(option.label, INVALID_ID_CHARACTERS_REGEX, '');
                 const isSelected: boolean = option.selected === true || this.value === optValue;
-
                 return (
                     <option
                         value={optValue}
@@ -77,8 +82,19 @@ export class PskSelect {
         evt.preventDefault();
         evt.stopImmediatePropagation();
 
-        let value = evt.target.value;
-        this.modelHandler.updateModel('value', value);
+        const value = evt.target.value;
+        if (this.modelHandler) this.modelHandler.updateModel('value', value);
+
+        if (this.eventName) {
+          evt.preventDefault();
+          evt.stopImmediatePropagation();
+
+          this._host.dispatchEvent(new PskButtonEvent(this.eventName, value, {
+            bubbles: true,
+            composed: true,
+            cancelable: true
+          }));
+        }
     }
 
     __createOptions(): void {
@@ -169,4 +185,11 @@ export class PskSelect {
         propertyType: 'boolean'
     })
     @Prop() invalidValue?: boolean | null = null;
+
+    @TableOfContentProperty({
+      description: `By defining this attribute, the component will be able to trigger an event.`,
+      isMandatory: false,
+      propertyType: 'string'
+    })
+    @Prop() eventName: string | null;
 }
