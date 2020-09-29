@@ -3,7 +3,7 @@ import CustomTheme from "../../../decorators/CustomTheme";
 import {BindModel} from '../../../decorators/BindModel';
 import {stringToBoolean} from "../../../utils/utilFunctions";
 import {TableOfContentProperty} from "../../../decorators/TableOfContentProperty";
-
+import bwipjs from "../../../libs/bwip.js";
 const TWO_D_BARCODES = ["datamatrix","gs1datamatrix","qrcode"];
 @Component({
   tag: 'psk-barcode-generator',
@@ -56,7 +56,7 @@ export class PskBarcodeGenerator {
 
       let tryToGenerateBarcode = () => {
         //@ts-ignore
-        if (window.bwipjs) {
+        if (bwipjs) {
           try{
             let options =  {
               bcid: this.type,       // Barcode type
@@ -75,7 +75,7 @@ export class PskBarcodeGenerator {
             }
 
             //@ts-ignore
-            window.bwipjs.toCanvas(canvas,options, function (err) {
+            bwipjs.toCanvas(canvas,options, function (err) {
               if (err) {
                 console.log(err);
               }
@@ -100,7 +100,6 @@ export class PskBarcodeGenerator {
   render() {
     return (
       <psk-card title={this.title}>
-        <script src="/cardinal/libs/bwip.js"></script>
         <div class="code_container">
           <div class="card-body text-center">
             <canvas class="code_canvas"/>
