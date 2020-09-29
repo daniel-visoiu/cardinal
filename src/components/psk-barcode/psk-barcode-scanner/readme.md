@@ -11,6 +11,7 @@
 | ------------------- | --------------------- | ----------- | --------- | ----------- |
 | `allowFileBrowsing` | `allow-file-browsing` |             | `boolean` | `false`     |
 | `data`              | `data`                |             | `any`     | `undefined` |
+| `normalSize`        | `normal-size`         |             | `boolean` | `false`     |
 | `title`             | `title`               |             | `string`  | `""`        |
 
 

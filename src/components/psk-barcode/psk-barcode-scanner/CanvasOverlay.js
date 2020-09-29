@@ -13,11 +13,11 @@ const PC_DIMENSIONS = {
 
 export default class CanvasOverlay{
 
-  constructor(scannerContainer) {
+  constructor(scannerContainer, restrictResponsiveness) {
     this.PC_DIMENSIONS = PC_DIMENSIONS;
     this.MOBILE_DIMENSIONS = MOBILE_DIMENSIONS;
     this.scannerContainer = scannerContainer;
-    this.isMobileDevice = BarcodeUtilFunctions.isMobile();
+    this.isMobileDevice = BarcodeUtilFunctions.isMobile(restrictResponsiveness);
   }
 
   addCanvasToView(canvasId, customStyle){

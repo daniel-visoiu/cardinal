@@ -65,6 +65,7 @@ export namespace Components {
     interface PskBarcodeScanner {
         "allowFileBrowsing": boolean;
         "data": any;
+        "normalSize": boolean;
         "title": string;
     }
     interface PskButton {
@@ -1171,6 +1172,7 @@ declare namespace LocalJSX {
     interface PskBarcodeScanner {
         "allowFileBrowsing"?: boolean;
         "data"?: any;
+        "normalSize"?: boolean;
         "title"?: string;
     }
     interface PskButton {

@@ -1,4 +1,5 @@
-function isMobile() {
+function isMobile(restrict) {
+  if (restrict) return false;
   let userAgentKey ='userAgent';
   let sUserAgent = navigator[userAgentKey].toLowerCase();
   let bIsIpad = sUserAgent.match(/ipad/i) == "ipad";

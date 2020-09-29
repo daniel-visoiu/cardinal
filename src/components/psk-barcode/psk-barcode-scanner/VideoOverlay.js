@@ -4,8 +4,8 @@ const ANGLE_WIDTH=50;
 
 export default class VideoOverlay extends CanvasOverlay{
 
-  constructor(scannerContainer, videoSource) {
-    super(scannerContainer);
+  constructor(scannerContainer, videoSource, restrictResponsiveness) {
+    super(scannerContainer, restrictResponsiveness);
     this.videoSource = videoSource;
     let deviceDimensions = this.isMobileDevice?this.MOBILE_DIMENSIONS:this.PC_DIMENSIONS;
 
@@ -14,6 +14,7 @@ export default class VideoOverlay extends CanvasOverlay{
 
     //this.cropOptions = [80,160,320,320];
     //for mobile devices we double the proportions because we don't want to touch the image quality by performing any image resizing
+
     this.cropOptions = this.isMobileDevice?[xPadding*2,yPadding*2,deviceDimensions.FRAME_WIDTH*2,deviceDimensions.FRAME_WIDTH*2]:[xPadding,yPadding,deviceDimensions.FRAME_WIDTH,deviceDimensions.FRAME_WIDTH];
   }
 

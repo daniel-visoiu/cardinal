@@ -36,6 +36,9 @@ export class PskBarcodeScanner {
   })
   @Prop() allowFileBrowsing:boolean = false;
 
+  // force camera to not be stretched (PC DIMENSIONS)
+  @Prop() normalSize: boolean = false;
+
   private componentIsDisconnected = false;
   private ZXing = null;
   private decodePtr = null;
@@ -112,7 +115,7 @@ export class PskBarcodeScanner {
     let scannerContainer = this.element.querySelector("#scanner_container");
     this.cleanupOverlays();
     this.startCameraScan();
-    this.overlay = new VideoOverlay(scannerContainer, this.videoElement);
+    this.overlay = new VideoOverlay(scannerContainer, this.videoElement, this.normalSize);
     this.overlay.createOverlaysCanvases("lensCanvas", "overlayCanvas");
     this.overlay.drawLensCanvas();
   }
@@ -177,7 +180,7 @@ export class PskBarcodeScanner {
         }
       });
     }
-    
+
     startVideo(constraints);
   }
 
