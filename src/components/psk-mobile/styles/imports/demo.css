@@ -37,6 +37,10 @@
   height: calc(350px - 4rem);
 }
 
+:host([id="demo-overall"]) .mobile {
+  height: calc(100vh - 15rem);
+}
+
 @media (max-width: 550px) {
   :host([id="demo-title"]) .mobile > header .title {
     font-size: 3vw;
