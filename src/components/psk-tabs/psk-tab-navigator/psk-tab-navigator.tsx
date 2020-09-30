@@ -63,7 +63,8 @@ export class PskTabNavigator {
   @Listen('psk-tab-navigator:psk-select:change')
   onTabSelected(e) {
     e.stopImmediatePropagation();
-    const selected = parseInt(e.data);
+    const { value } = e.data;
+    const selected = parseInt(value);
     this.__selectTab(selected);
   }
 
@@ -110,7 +111,8 @@ export class PskTabNavigator {
           <psk-select
             value={selected}
             select-options={options}
-            event-name='psk-tab-navigator:psk-select:change'/>
+            event-name='psk-tab-navigator:psk-select:change'
+          />
         </psk-form-row>
       )
     }

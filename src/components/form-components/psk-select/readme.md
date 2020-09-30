@@ -10,6 +10,7 @@
 | Property        | Attribute        | Description | Type                     | Default     |
 | --------------- | ---------------- | ----------- | ------------------------ | ----------- |
 | `disabled`      | `disabled`       |             | `boolean`                | `false`     |
+| `eventData`     | `event-data`     |             | `any`                    | `undefined` |
 | `eventName`     | `event-name`     |             | `string`                 | `undefined` |
 | `invalidValue`  | `invalid-value`  |             | `boolean`                | `null`      |
 | `label`         | `label`          |             | `string`                 | `null`      |
