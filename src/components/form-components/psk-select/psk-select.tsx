@@ -1,11 +1,12 @@
 import { Component, Prop, State, Element, h } from '@stencil/core';
+
 import { Option, SelectType } from '../../../interfaces/FormModel';
+import CustomTheme from '../../../decorators/CustomTheme';
 import { BindModel } from '../../../decorators/BindModel';
 import { TableOfContentProperty } from '../../../decorators/TableOfContentProperty';
-import { normalizeRegexToString } from '../../../utils/utilFunctions';
-import CustomTheme from '../../../decorators/CustomTheme';
-import { INVALID_ID_CHARACTERS_REGEX } from "../../../utils/constants";
 import PskButtonEvent from "../../../events/PskButtonEvent";
+import { normalizeRegexToString } from '../../../utils/utilFunctions';
+import { INVALID_ID_CHARACTERS_REGEX } from "../../../utils/constants";
 
 @Component({
   tag: 'psk-select'
@@ -20,105 +21,6 @@ export class PskSelect {
   @Element() private _host: HTMLElement;
 
   @State() options: Array<Option> = [];
-
-  componentWillLoad() {
-    if (this.selectionType !== 'single' && this.selectionType !== 'multiple') {
-      this.selectionType = 'single';
-    }
-
-    if (this.selectOptions) {
-      this.__createOptions();
-    }
-  }
-
-  render() {
-    console.log('psk-select')
-
-    const name: string = this.label && normalizeRegexToString(this.label, INVALID_ID_CHARACTERS_REGEX, '').toLowerCase();
-    const placeholderSelected: boolean = this.options.findIndex((opt: Option) => opt.value === this.value) === -1;
-
-    let placeholderElement = null;
-    if (this.placeholder) {
-      placeholderElement = <option
-        disabled={true}
-        label={this.placeholder}
-        value={''}
-        selected={placeholderSelected} />;
-    }
-
-    let selectOptionsList = [];
-    if (this.options) {
-      selectOptionsList = this.options.map((option: Option) => {
-        const optValue = option.value ? option.value
-          : option.label && normalizeRegexToString(option.label, INVALID_ID_CHARACTERS_REGEX, '');
-        const isSelected: boolean = option.selected === true || this.value === optValue;
-        return (
-          <option
-            value={optValue}
-            label={option.label}
-            selected={isSelected}
-          />
-        );
-      });
-    }
-
-    return (
-      <div class="form-group">
-        <psk-label for={name} label={this.label} />
-
-        <select name={name} id={name} class="form-control"
-                disabled={this.disabled} required={this.required}
-                multiple={this.selectionType === 'multiple'}
-                onChange={this.__onChangeHandler.bind(this)} >
-
-          {placeholderElement}
-          {selectOptionsList}
-        </select>
-      </div>
-    );
-  }
-
-  __onChangeHandler(evt): void {
-    evt.preventDefault();
-    evt.stopImmediatePropagation();
-
-    const value = evt.target.value;
-    if (this.modelHandler) this.modelHandler.updateModel('value', value);
-
-    if (this.eventName) {
-      evt.preventDefault();
-      evt.stopImmediatePropagation();
-
-      this._host.dispatchEvent(new PskButtonEvent(this.eventName, {
-        value,
-        payload: this.eventData
-      }, {
-        bubbles: true,
-        composed: true,
-        cancelable: true
-      }));
-    }
-  }
-
-  __createOptions(): void {
-    let optionsArray: Array<string> = this.selectOptions.split('|');
-
-    this.options = optionsArray.map((option: string) => {
-      let labelValue = option.trim().split(',');
-
-      let value, label = labelValue[0].trim();
-      if (labelValue.length === 1) {
-        value = normalizeRegexToString(label, INVALID_ID_CHARACTERS_REGEX, '');
-      } else {
-        value = labelValue[1].trim();
-      }
-
-      return {
-        label: label,
-        value: value
-      }
-    });
-  }
 
   @TableOfContentProperty({
     description: [`This property is providing the list of the options available for selection.`,
@@ -203,4 +105,101 @@ export class PskSelect {
     propertyType: 'any'
   })
   @Prop() eventData: any | null;
+
+  componentWillLoad() {
+    if (this.selectionType !== 'single' && this.selectionType !== 'multiple') {
+      this.selectionType = 'single';
+    }
+
+    if (this.selectOptions) {
+      this.__createOptions();
+    }
+  }
+
+  __onChangeHandler(evt): void {
+    evt.preventDefault();
+    evt.stopImmediatePropagation();
+
+    const value = evt.target.value;
+    if (this.modelHandler) this.modelHandler.updateModel('value', value);
+
+    if (this.eventName) {
+      evt.preventDefault();
+      evt.stopImmediatePropagation();
+
+      this._host.dispatchEvent(new PskButtonEvent(this.eventName, {
+        value,
+        payload: this.eventData
+      }, {
+        bubbles: true,
+        composed: true,
+        cancelable: true
+      }));
+    }
+  }
+
+  __createOptions(): void {
+    let optionsArray: Array<string> = this.selectOptions.split('|');
+
+    this.options = optionsArray.map((option: string) => {
+      let labelValue = option.trim().split(',');
+
+      let value, label = labelValue[0].trim();
+      if (labelValue.length === 1) {
+        value = normalizeRegexToString(label, INVALID_ID_CHARACTERS_REGEX, '');
+      } else {
+        value = labelValue[1].trim();
+      }
+
+      return {
+        label: label,
+        value: value
+      }
+    });
+  }
+
+  render() {
+    const name: string = this.label && normalizeRegexToString(this.label, INVALID_ID_CHARACTERS_REGEX, '').toLowerCase();
+    const placeholderSelected: boolean = this.options.findIndex((opt: Option) => opt.value === this.value) === -1;
+
+    let placeholderElement = null;
+    if (this.placeholder) {
+      placeholderElement = <option
+        disabled={true}
+        label={this.placeholder}
+        value={''}
+        selected={placeholderSelected} />;
+    }
+
+    let selectOptionsList = [];
+    if (this.options) {
+      selectOptionsList = this.options.map((option: Option) => {
+        const optValue = option.value ? option.value
+          : option.label && normalizeRegexToString(option.label, INVALID_ID_CHARACTERS_REGEX, '');
+        const isSelected: boolean = option.selected === true || this.value === optValue;
+        return (
+          <option
+            value={optValue}
+            label={option.label}
+            selected={isSelected}
+          />
+        );
+      });
+    }
+
+    return (
+      <div class="form-group">
+        <psk-label for={name} label={this.label} />
+
+        <select name={name} id={name} class="form-control"
+                disabled={this.disabled} required={this.required}
+                multiple={this.selectionType === 'multiple'}
+                onChange={this.__onChangeHandler.bind(this)} >
+
+          {placeholderElement}
+          {selectOptionsList}
+        </select>
+      </div>
+    );
+  }
 }
