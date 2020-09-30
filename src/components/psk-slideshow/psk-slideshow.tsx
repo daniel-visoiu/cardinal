@@ -6,7 +6,7 @@ import { TableOfContentProperty } from "../../decorators/TableOfContentProperty"
   tag: 'psk-slideshow',
   shadow: true
 })
-export class PskPageLoader {
+export class PskSlideshow {
   @CustomTheme()
 
   @TableOfContentProperty({

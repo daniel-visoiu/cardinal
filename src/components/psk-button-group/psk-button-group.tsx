@@ -10,7 +10,7 @@ import {stringToBoolean} from "../../utils/utilFunctions";
     tag: 'psk-button-group',
     styleUrl:"../../assets/css/bootstrap/bootstrap.css"
 })
-export class ButtonGroup {
+export class PskButtonGroup {
     @BindModel() modelHandler;
 
     @CustomTheme()

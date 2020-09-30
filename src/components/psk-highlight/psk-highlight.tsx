@@ -8,7 +8,7 @@ import CustomTheme from '../../decorators/CustomTheme';
     styleUrls:["./psk-highlight.css","../../assets/css/bootstrap/bootstrap.css"]
 })
 
-export class PskDescription {
+export class PskHighlight {
 
     @CustomTheme()
     @TableOfContentProperty({

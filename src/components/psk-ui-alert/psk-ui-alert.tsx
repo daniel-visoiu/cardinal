@@ -10,7 +10,7 @@ import CustomTheme from '../../decorators/CustomTheme';
     shadow: true
 })
 
-export class AlertComponent {
+export class PskUiAlert {
     private _styleCustomisation: StyleCustomisation = {};
 
     @CustomTheme()

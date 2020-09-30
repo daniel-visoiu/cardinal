@@ -5,7 +5,7 @@ import { TableOfContentProperty } from '../../../decorators/TableOfContentProper
 @Component({
     tag: 'psk-form-row'
 })
-export class PskForm {
+export class PskFormRow {
 
     @CustomTheme()
 

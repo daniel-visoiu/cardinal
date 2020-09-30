@@ -9,7 +9,7 @@ import CustomTheme from "../../decorators/CustomTheme";
     tag: 'psk-list-feedbacks',
     shadow: true
 })
-export class PskListFeebacks {
+export class PskListFeedbacks {
     private _styleCustomisation: StyleCustomisation = {};
 
     @State() alertOpened: boolean = false;
@@ -106,7 +106,7 @@ export class PskListFeebacks {
         }
     }
 
-    componentWillLoad() {        
+    componentWillLoad() {
         this.styleCustomisationWatcher(this.styleCustomisation);
         this.openFeedbackHandler.emit((message, name, typeOfAlert) => {
             if (typeOfAlert) {

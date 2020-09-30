@@ -361,6 +361,7 @@ export namespace Components {
     }
     interface PskSelect {
         "disabled"?: boolean;
+        "eventData": any | null;
         "eventName": string | null;
         "invalidValue"?: boolean | null;
         "label"?: string | null;
@@ -1481,6 +1482,7 @@ declare namespace LocalJSX {
     }
     interface PskSelect {
         "disabled"?: boolean;
+        "eventData"?: any | null;
         "eventName"?: string | null;
         "invalidValue"?: boolean | null;
         "label"?: string | null;

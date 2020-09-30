@@ -9,7 +9,7 @@ import { TableOfContentProperty } from '../../decorators/TableOfContentProperty'
     styleUrl:"../../assets/fonts/font-awesome/font-awesome.min.css",
     shadow: true
 })
-export class FloatingMenu {
+export class PskFloatingMenu {
     @CustomTheme()
 
     @State() menuItems: MenuItem[] = [];
