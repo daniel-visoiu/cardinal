@@ -1,49 +1,63 @@
-const args = process.argv;
-const octopus = require("octopus");
-//const FSExtension = require("../node_modules/octopus/lib/utils/FSExtension").fsExt;
+const path = require('path');
+const octopus = require('octopus');
 
-if (args.length < 3) {
-  console.log("Usage: npm run dist path_Where_to_copy_cardinal_dist[,another_path] \n\n");
-  process.exit(1);
-}
-let destination = args[2];
-
-let destinationArray = destination.split(",").map(destination => destination.trim());
-
-let cardinalCopy = {
-  name: "copy cardinal",
-  actions: []
-}
-
-let config = {
-  workDir: ".",
-  dependencies: [{
-    name: "cardinal build",
+function buildCardinal(production = true) {
+  return {
+    name: 'build cardinal',
     actions: [{
-      type: "execute",
-      cmd: "npm run build-prod"
+      type: 'execute',
+      cmd: `npm run build-${production ? 'prod' : 'dev'}`
     }]
-  },
-    cardinalCopy]
-};
-for (let i = 0; i < destinationArray.length; i++) {
-  destination = destinationArray[i];
-  console.log(`Copying cardinal in ${destination}`);
-  cardinalCopy.actions.push({
-    type: "copy",
-    src: "./dist/cardinal/",
-    target: destination + "/cardinal",
-    options: {
-      "overwrite": true
-    }
-  });
+  }
 }
 
-octopus.run(config, function (err, result) {
+function copyCardinal(destinations = []) {
+  const config = {
+    name: 'copy cardinal',
+    actions: []
+  }
+  for (const destination of destinations) {
+    console.log('Copying cardinal in', destination);
+
+    config.actions.push({
+      type: 'copy',
+      src: './dist/cardinal',
+      target: path.join(destination, 'cardinal'),
+      options: { 'overwrite': true }
+    })
+  }
+  return config;
+}
+
+function generateConfig() {
+  const args = process.argv;
+
+  if (args.length < 3) {
+    console.error('Usage: npm run dist path_where_to_copy_cardinal_dist[,another_path]\n\n');
+    process.exit(1);
+  }
+
+  let production = true;
+  const destination = args[2];
+  const destinations = destination.split(',').map(destination => destination.trim());
+
+  if (args[args.length - 1] === 'dev') {
+    production = false;
+  }
+
+  return {
+    workDir: '.',
+    dependencies: [
+      buildCardinal(production),
+      copyCardinal(destinations)
+    ]
+  };
+}
+
+octopus.run(generateConfig(), (err, result) => {
   if (err) {
     throw err;
   }
-  console.log("Job done!");
+  console.log('\nOctopus result:', result);
+  console.log('Job done!');
 })
-
-
