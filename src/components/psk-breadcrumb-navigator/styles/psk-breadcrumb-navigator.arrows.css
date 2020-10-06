@@ -1,0 +1,64 @@
+:host {
+    padding: 0.75rem 1.25rem;
+    margin: 0 0 2rem 0;
+    font-size: 1.1rem;
+    line-height: 2.8rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+:host::-webkit-scrollbar {
+    display: none;
+}
+
+:host psk-button::after {
+    padding: 8px;
+    content: "/\00a0";
+}
+
+:host psk-button:last-of-type::after {
+    content: none;
+}
+
+:host button,
+:host button:focus,
+:host button:active,
+:host button:active:focus,
+:host button:hover {
+    background: unset;
+    border: unset;
+    box-shadow: unset;
+    outline: none !important;
+}
+
+#next {
+    right: 0;
+}
+
+#prev {
+    left: 0;
+}
+
+#next,
+#prev {
+    position: absolute;
+    padding: 0.75rem;
+    background: #fff;
+    border-radius: 6px;
+    opacity: 0.75;
+    box-shadow: 0px 0px 4px #ccc;
+}
+
+#next:hover,
+#prev:hover {
+    opacity: 1;
+    pointer-events: all;
+    cursor: pointer;
+    box-shadow: 0px 0px 4px #999;
+}

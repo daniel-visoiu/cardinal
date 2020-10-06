@@ -1,0 +1,19 @@
+:host {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    margin: 0 0 2rem 0;
+    font-size: 1.1rem;
+    line-height: 2.8rem;
+}
+
+:host psk-button::after {
+    padding: 8px;
+    content: "/\00a0";
+}
+
+:host psk-button:last-of-type::after {
+    content: none;
+}

@@ -65,3 +65,12 @@ export const DATE_FORMAT_MASKS = {
   'isoTime': 'HH:MM:ss',
   'isoDate': 'yyyy-mm-dd',
 }
+
+export const BREADCRUMB_CONSTANTS = {
+  ARROWS: "arrows",
+  DEFAULT: "default",
+  SCROLL: "scroll",
+  PREVIOUS_ID: "prev",
+  NEXT_ID: "next",
+  BREADCRUMB_CLICK: "breadcrumb-click"
+};

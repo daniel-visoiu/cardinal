@@ -8,6 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { MenuItem } from "./interfaces/MenuItem";
 import { ExtendedHistoryType } from "./interfaces/ExtendedHistoryType";
 import { LocationSegments, MatchResults, RouterHistory } from "@stencil/router";
+import { BreadcrumbSegment } from "./interfaces/BreadcrumbSegment";
 import { StyleCustomisation } from "./interfaces/StyleCustomisation";
 import { SelectType } from "./interfaces/FormModel";
 import { WizardStep } from "./interfaces/Wizard";
@@ -67,6 +68,10 @@ export namespace Components {
         "data": any;
         "normalSize": boolean;
         "title": string;
+    }
+    interface PskBreadcrumbNavigator {
+        "eventName": string | null;
+        "segments": BreadcrumbSegment[];
     }
     interface PskButton {
         "buttonClass": string | null;
@@ -562,6 +567,12 @@ declare global {
         prototype: HTMLPskBarcodeScannerElement;
         new (): HTMLPskBarcodeScannerElement;
     };
+    interface HTMLPskBreadcrumbNavigatorElement extends Components.PskBreadcrumbNavigator, HTMLStencilElement {
+    }
+    var HTMLPskBreadcrumbNavigatorElement: {
+        prototype: HTMLPskBreadcrumbNavigatorElement;
+        new (): HTMLPskBreadcrumbNavigatorElement;
+    };
     interface HTMLPskButtonElement extends Components.PskButton, HTMLStencilElement {
     }
     var HTMLPskButtonElement: {
@@ -1035,6 +1046,7 @@ declare global {
         "psk-attachments-list": HTMLPskAttachmentsListElement;
         "psk-barcode-generator": HTMLPskBarcodeGeneratorElement;
         "psk-barcode-scanner": HTMLPskBarcodeScannerElement;
+        "psk-breadcrumb-navigator": HTMLPskBreadcrumbNavigatorElement;
         "psk-button": HTMLPskButtonElement;
         "psk-button-group": HTMLPskButtonGroupElement;
         "psk-button-link": HTMLPskButtonLinkElement;
@@ -1177,6 +1189,10 @@ declare namespace LocalJSX {
         "data"?: any;
         "normalSize"?: boolean;
         "title"?: string;
+    }
+    interface PskBreadcrumbNavigator {
+        "eventName"?: string | null;
+        "segments"?: BreadcrumbSegment[];
     }
     interface PskButton {
         "buttonClass"?: string | null;
@@ -1638,6 +1654,7 @@ declare namespace LocalJSX {
         "psk-attachments-list": PskAttachmentsList;
         "psk-barcode-generator": PskBarcodeGenerator;
         "psk-barcode-scanner": PskBarcodeScanner;
+        "psk-breadcrumb-navigator": PskBreadcrumbNavigator;
         "psk-button": PskButton;
         "psk-button-group": PskButtonGroup;
         "psk-button-link": PskButtonLink;
@@ -1731,6 +1748,7 @@ declare module "@stencil/core" {
             "psk-attachments-list": LocalJSX.PskAttachmentsList & JSXBase.HTMLAttributes<HTMLPskAttachmentsListElement>;
             "psk-barcode-generator": LocalJSX.PskBarcodeGenerator & JSXBase.HTMLAttributes<HTMLPskBarcodeGeneratorElement>;
             "psk-barcode-scanner": LocalJSX.PskBarcodeScanner & JSXBase.HTMLAttributes<HTMLPskBarcodeScannerElement>;
+            "psk-breadcrumb-navigator": LocalJSX.PskBreadcrumbNavigator & JSXBase.HTMLAttributes<HTMLPskBreadcrumbNavigatorElement>;
             "psk-button": LocalJSX.PskButton & JSXBase.HTMLAttributes<HTMLPskButtonElement>;
             "psk-button-group": LocalJSX.PskButtonGroup & JSXBase.HTMLAttributes<HTMLPskButtonGroupElement>;
             "psk-button-link": LocalJSX.PskButtonLink & JSXBase.HTMLAttributes<HTMLPskButtonLinkElement>;

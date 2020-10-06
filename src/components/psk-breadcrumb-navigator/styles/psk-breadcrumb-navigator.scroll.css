@@ -1,0 +1,32 @@
+:host {
+    padding: 0.75rem 1.25rem;
+    margin: 0 0 2rem 0;
+    font-size: 1.1rem;
+    line-height: 2.8rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+:host psk-button::after {
+    padding: 8px;
+    content: "/\00a0";
+}
+
+:host psk-button:last-of-type::after {
+    content: none;
+}
+
+:host button,
+:host button:focus,
+:host button:active,
+:host button:active:focus,
+:host button:hover {
+    background: unset;
+    border: unset;
+    box-shadow: unset;
+    outline: none !important;
+}
