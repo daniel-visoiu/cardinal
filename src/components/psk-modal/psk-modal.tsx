@@ -8,7 +8,10 @@ import PskButtonEvent from "../../events/PskButtonEvent";
 
 @Component({
   tag: 'psk-modal',
-  styleUrl: "../../assets/css/bootstrap/bootstrap.css",
+  styleUrls: {
+    default: './styles/psk-modal.default.css',
+    layout: './styles/psk-modal.layout.css'
+  },
   shadow: true
 })
 
@@ -53,7 +56,7 @@ export class PskModal {
     bubbles: true,
   }) closeModal: EventEmitter;
 
-  _closeModalHandler = (evt: MouseEvent) => {
+  __closeModalHandler = (evt: MouseEvent) => {
     if (this.eventName) {
       evt.preventDefault();
       evt.stopImmediatePropagation();
@@ -70,7 +73,7 @@ export class PskModal {
     }
   }
 
-  _expandModalHandler = (evt: MouseEvent) => {
+  __expandModalHandler = (evt: MouseEvent) => {
     evt.preventDefault();
     evt.stopImmediatePropagation();
 
@@ -79,37 +82,33 @@ export class PskModal {
 
   render() {
     const expandCollapseIcon = (
-      <button class='expand' onClick={this._expandModalHandler}>
+      <button class='expand' onClick={this.__expandModalHandler}>
         <psk-icon class='expand-icon' icon={this.expanded ? 'compress' : 'expand'}/>
       </button>
-    );
+    )
 
-    return (
-      <div>
-        <div id="backdrop" onClick={this._closeModalHandler} />
-        <div id="modal">
-          <div class="modal-content">
-            <div class="modal-header">
-              <slot name="title" />
-              <div class='toolbar'>
-                {expandCollapseIcon}
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                        onClick={this._closeModalHandler}>
-									<span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+    return [
+      <div class="psk-modal-backdrop" onClick={this.__closeModalHandler} />,
+      <div class="psk-modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <slot name="title" />
+            <div class='toolbar'>
+              {expandCollapseIcon}
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                      onClick={this.__closeModalHandler}>
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-
-            <div class="modal-body">
-              <slot />
-            </div>
-
-            <div class="modal-footer">
-              <slot name='footer' />
-            </div>
+          </div>
+          <div class="modal-body">
+            <slot />
+          </div>
+          <div class="modal-footer">
+            <slot name='footer' />
           </div>
         </div>
       </div>
-    );
+    ]
   }
 }
