@@ -102,22 +102,22 @@ export class PskMobile {
 
   // @Listen('psk-mobile:toggle-options', { target: 'document' })
   // onHandleToggleOptionsEvent(e) {
-  //   this._toggleOptions((typeof e.detail === 'boolean' ? !e.detail : !this.options.hidden));
+  //   this.__toggleOptions((typeof e.detail === 'boolean' ? !e.detail : !this.options.hidden));
   // }
   //
   // @Listen('psk-mobile:toggle-sidebar', { target: 'document' })
   // onHandleToggleSidebarEvent(e) {
-  //   this._toggleAside((typeof e.detail === 'boolean' ? !e.detail : !this.aside.hidden));
+  //   this.__toggleAside((typeof e.detail === 'boolean' ? !e.detail : !this.aside.hidden));
   // }
 
   @Method()
   async toggleSidebar(visible) {
-    this._toggleAside((typeof visible === 'boolean' ? !visible : !this.aside.hidden));
+    this.__toggleAside((typeof visible === 'boolean' ? !visible : !this.aside.hidden));
   }
 
   @Method()
   async toggleOptions(visible) {
-    this._toggleOptions((typeof visible === 'boolean' ? !visible : !this.options.hidden));
+    this.__toggleOptions((typeof visible === 'boolean' ? !visible : !this.options.hidden));
   }
 
   async componentWillLoad() {
@@ -145,7 +145,7 @@ export class PskMobile {
   handleAsideClick(e) {
     e.preventDefault();
     e.stopImmediatePropagation();
-    this._toggleAside();
+    this.__toggleAside();
   }
 
   handleBackClick(e) {
@@ -157,15 +157,15 @@ export class PskMobile {
   handleOptionsClick(e) {
     e.preventDefault();
     e.stopImmediatePropagation();
-    this._toggleOptions();
+    this.__toggleOptions();
   }
 
-  private _toggleAside(hidden = !this.aside.hidden) {
+  private __toggleAside(hidden = !this.aside.hidden) {
     this.aside = { ...this.aside, hidden };
     this.options = { ...this.options, hidden: true };
   }
 
-  private _toggleOptions(hidden = !this.options.hidden) {
+  private __toggleOptions(hidden = !this.options.hidden) {
     this.options = { ...this.options, hidden };
     this.aside = { ...this.aside, hidden: true };
   }
@@ -180,7 +180,7 @@ export class PskMobile {
                 {
                   this.enableBack ? (
                     <psk-button onClick={e => this.handleBackClick(e)}>
-                      <psk-icon icon='chevron-left'/>
+                      <psk-icon icon='chevron-left' />
                     </psk-button>
                   ) : null
                 }
@@ -189,7 +189,7 @@ export class PskMobile {
                 {
                   !this.aside.disabled ? (
                     <psk-button onClick={e => this.handleAsideClick(e)}>
-                      <psk-icon icon='bars'/>
+                      <psk-icon icon='bars' />
                     </psk-button>
                   ) : null
                 }
@@ -199,17 +199,17 @@ export class PskMobile {
                 {
                   !this.options.disabled ? (
                     <psk-button onClick={e => this.handleOptionsClick(e)}>
-                      <psk-icon icon='ellipsis-v'/>
+                      <psk-icon icon='ellipsis-v' />
                     </psk-button>
                   ) : null
                 }
               </div>
               <div class='aside-menu' hidden={this.aside.hidden}>
-                <psk-user-profile/>
-                <app-menu hamburger-max-width={0} item-renderer='sidebar-renderer'/>
+                <psk-user-profile />
+                <psk-app-menu hamburger-max-width={0} item-renderer='sidebar-renderer' />
               </div>
               <div class='options-menu' hidden={this.options.hidden}>
-                <slot name='options'/>
+                <slot name='options' />
               </div>
             </header>
           ) : null
@@ -219,7 +219,7 @@ export class PskMobile {
           <slot />
         </main>
         <footer>
-          <slot name='footer'/>
+          <slot name='footer' />
         </footer>
       </div>
     )

@@ -24,14 +24,14 @@
 
 ### Depends on
 
-- [app-menu](../../app-menu)
+- [psk-app-menu](../../psk-app-menu)
 - [psk-user-profile](../../psk-user-profile)
 - [psk-app-router](../../psk-app-router)
 
 ### Graph
 ```mermaid
 graph TD;
-  psk-default-renderer --> app-menu
+  psk-default-renderer --> psk-app-menu
   psk-default-renderer --> psk-user-profile
   psk-default-renderer --> psk-app-router
   psk-app-router --> stencil-route

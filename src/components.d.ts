@@ -5,20 +5,14 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { LocationSegments, MatchResults, RouterHistory } from "@stencil/router";
 import { MenuItem } from "./interfaces/MenuItem";
 import { ExtendedHistoryType } from "./interfaces/ExtendedHistoryType";
-import { LocationSegments, MatchResults, RouterHistory } from "@stencil/router";
 import { BreadcrumbSegment } from "./interfaces/BreadcrumbSegment";
 import { StyleCustomisation } from "./interfaces/StyleCustomisation";
 import { SelectType } from "./interfaces/FormModel";
 import { WizardStep } from "./interfaces/Wizard";
 export namespace Components {
-    interface AppMenu {
-        "hamburgerMaxWidth"?: number;
-        "historyType": ExtendedHistoryType;
-        "itemRenderer"?: string;
-        "menuItems"?: MenuItem[];
-    }
     interface DropdownRenderer {
         "active": boolean;
         "somethingChanged": boolean;
@@ -41,6 +35,12 @@ export namespace Components {
     }
     interface MobileProfileRenderer {
         "userInfo": any;
+    }
+    interface PskAppMenu {
+        "hamburgerMaxWidth"?: number;
+        "historyType": ExtendedHistoryType;
+        "itemRenderer"?: string;
+        "menuItems"?: MenuItem[];
     }
     interface PskAppRoot {
         "controller": any;
@@ -507,12 +507,6 @@ export namespace Components {
     }
 }
 declare global {
-    interface HTMLAppMenuElement extends Components.AppMenu, HTMLStencilElement {
-    }
-    var HTMLAppMenuElement: {
-        prototype: HTMLAppMenuElement;
-        new (): HTMLAppMenuElement;
-    };
     interface HTMLDropdownRendererElement extends Components.DropdownRenderer, HTMLStencilElement {
     }
     var HTMLDropdownRendererElement: {
@@ -536,6 +530,12 @@ declare global {
     var HTMLMobileProfileRendererElement: {
         prototype: HTMLMobileProfileRendererElement;
         new (): HTMLMobileProfileRendererElement;
+    };
+    interface HTMLPskAppMenuElement extends Components.PskAppMenu, HTMLStencilElement {
+    }
+    var HTMLPskAppMenuElement: {
+        prototype: HTMLPskAppMenuElement;
+        new (): HTMLPskAppMenuElement;
     };
     interface HTMLPskAppRootElement extends Components.PskAppRoot, HTMLStencilElement {
     }
@@ -1036,11 +1036,11 @@ declare global {
         new (): HTMLSidebarRendererElement;
     };
     interface HTMLElementTagNameMap {
-        "app-menu": HTMLAppMenuElement;
         "dropdown-renderer": HTMLDropdownRendererElement;
         "event-expandable-renderer": HTMLEventExpandableRendererElement;
         "expandable-renderer": HTMLExpandableRendererElement;
         "mobile-profile-renderer": HTMLMobileProfileRendererElement;
+        "psk-app-menu": HTMLPskAppMenuElement;
         "psk-app-root": HTMLPskAppRootElement;
         "psk-app-router": HTMLPskAppRouterElement;
         "psk-attachments-list": HTMLPskAttachmentsListElement;
@@ -1127,15 +1127,6 @@ declare global {
     }
 }
 declare namespace LocalJSX {
-    interface AppMenu {
-        "hamburgerMaxWidth"?: number;
-        "historyType"?: ExtendedHistoryType;
-        "itemRenderer"?: string;
-        "menuItems"?: MenuItem[];
-        "onGetHistoryType"?: (event: CustomEvent<any>) => void;
-        "onMenuEvent"?: (event: CustomEvent<any>) => void;
-        "onNeedMenuItems"?: (event: CustomEvent<any>) => void;
-    }
     interface DropdownRenderer {
         "active"?: boolean;
         "somethingChanged"?: boolean;
@@ -1159,6 +1150,15 @@ declare namespace LocalJSX {
     }
     interface MobileProfileRenderer {
         "userInfo"?: any;
+    }
+    interface PskAppMenu {
+        "hamburgerMaxWidth"?: number;
+        "historyType"?: ExtendedHistoryType;
+        "itemRenderer"?: string;
+        "menuItems"?: MenuItem[];
+        "onGetHistoryType"?: (event: CustomEvent<any>) => void;
+        "onMenuEvent"?: (event: CustomEvent<any>) => void;
+        "onNeedMenuItems"?: (event: CustomEvent<any>) => void;
     }
     interface PskAppRoot {
         "controller"?: any;
@@ -1644,11 +1644,11 @@ declare namespace LocalJSX {
         "value"?: MenuItem;
     }
     interface IntrinsicElements {
-        "app-menu": AppMenu;
         "dropdown-renderer": DropdownRenderer;
         "event-expandable-renderer": EventExpandableRenderer;
         "expandable-renderer": ExpandableRenderer;
         "mobile-profile-renderer": MobileProfileRenderer;
+        "psk-app-menu": PskAppMenu;
         "psk-app-root": PskAppRoot;
         "psk-app-router": PskAppRouter;
         "psk-attachments-list": PskAttachmentsList;
@@ -1738,11 +1738,11 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "app-menu": LocalJSX.AppMenu & JSXBase.HTMLAttributes<HTMLAppMenuElement>;
             "dropdown-renderer": LocalJSX.DropdownRenderer & JSXBase.HTMLAttributes<HTMLDropdownRendererElement>;
             "event-expandable-renderer": LocalJSX.EventExpandableRenderer & JSXBase.HTMLAttributes<HTMLEventExpandableRendererElement>;
             "expandable-renderer": LocalJSX.ExpandableRenderer & JSXBase.HTMLAttributes<HTMLExpandableRendererElement>;
             "mobile-profile-renderer": LocalJSX.MobileProfileRenderer & JSXBase.HTMLAttributes<HTMLMobileProfileRendererElement>;
+            "psk-app-menu": LocalJSX.PskAppMenu & JSXBase.HTMLAttributes<HTMLPskAppMenuElement>;
             "psk-app-root": LocalJSX.PskAppRoot & JSXBase.HTMLAttributes<HTMLPskAppRootElement>;
             "psk-app-router": LocalJSX.PskAppRouter & JSXBase.HTMLAttributes<HTMLPskAppRouterElement>;
             "psk-attachments-list": LocalJSX.PskAttachmentsList & JSXBase.HTMLAttributes<HTMLPskAttachmentsListElement>;

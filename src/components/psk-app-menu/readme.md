@@ -34,9 +34,9 @@
 ### Graph
 ```mermaid
 graph TD;
-  psk-default-renderer --> app-menu
-  psk-mobile --> app-menu
-  style app-menu fill:#f9f,stroke:#333,stroke-width:4px
+  psk-default-renderer --> psk-app-menu
+  psk-mobile --> psk-app-menu
+  style psk-app-menu fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

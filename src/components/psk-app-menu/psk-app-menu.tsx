@@ -7,11 +7,11 @@ import {ExtendedHistoryType} from "../../interfaces/ExtendedHistoryType";
 import {MOBILE_MAX_WIDTH} from "../../utils/constants";
 
 @Component({
-  tag: 'app-menu',
+  tag: 'psk-app-menu',
   styleUrl:"../../assets/css/bootstrap/bootstrap.css",
   shadow: true
 })
-export class AppMenu {
+export class PskAppMenu {
   @CustomTheme()
   @TableOfContentProperty({
     description: `Another web component that can render each menu item.

@@ -35,16 +35,16 @@ export class AppRootDefaultRender {
 
 	render() {
 
-		let appMenuCmpt = <app-menu item-renderer="sidebar-renderer" hamburgerMaxWidth={MOBILE_MAX_WIDTH}></app-menu>;
+		let appMenuCmpt = <psk-app-menu item-renderer="sidebar-renderer" hamburgerMaxWidth={MOBILE_MAX_WIDTH} />;
 		let versionCmpt = <div class="nav-footer">version {this.appVersion}</div>;
 
 		let asideComponents = [];
 
 		if (this.mobileLayout) {
-			asideComponents = [<psk-user-profile profile-renderer="mobile-profile-renderer"></psk-user-profile>, appMenuCmpt]
+			asideComponents = [<psk-user-profile profile-renderer="mobile-profile-renderer" />, appMenuCmpt]
 		}
 		else {
-			asideComponents = [<psk-user-profile></psk-user-profile>, appMenuCmpt, versionCmpt]
+			asideComponents = [<psk-user-profile />, appMenuCmpt, versionCmpt]
 		}
 
 		return (
@@ -52,7 +52,7 @@ export class AppRootDefaultRender {
         { this.disableSidebar === false ? <aside>{asideComponents}</aside> : null }
 
 				<section>
-					<psk-app-router></psk-app-router>
+					<psk-app-router />
 					{this.mobileLayout === true ? versionCmpt : null}
 				</section>
 			</div>
