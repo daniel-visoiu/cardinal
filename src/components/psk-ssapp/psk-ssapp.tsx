@@ -87,6 +87,7 @@ export class PskSelfSovereignApp {
 
 	@Watch("seed")
 	@Watch("match")
+  @Watch("landingPath")
 	loadApp(callback?) {
 		if (this.__hasRelevantMatchParams()) {
 			this.seed = atob(this.match.params.keySSI);
@@ -109,7 +110,7 @@ export class PskSelfSovereignApp {
 
 		try {
 			while (currentWindow !== parentWindow) {
-				basePath = parentWindow.location.href;
+				basePath = parentWindow.location.origin+parentWindow.location.pathname;
 				// @ts-ignore
 				currentWindow = parentWindow;
 				parentWindow = parentWindow.parent;
@@ -118,7 +119,7 @@ export class PskSelfSovereignApp {
 		}
 		catch (e) { }
 		finally {
-			basePath = currentWindow.location.href;
+			basePath = currentWindow.location.origin+currentWindow.location.pathname;
 			if (basePath[basePath.length - 1] !== '/') {
 				basePath += '/';
 			}
