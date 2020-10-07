@@ -1,0 +1,83 @@
+:host {
+  display: block;
+}
+
+:host .title {
+  display: flex;
+  align-items: center;
+  outline: none;
+  cursor: pointer;
+  border: 2px solid transparent;
+  background-color: transparent;
+}
+
+:host .content {
+  transform-origin: top;
+  transition-duration: 0.3s;
+  transition-property: transform, padding, height, opacity;
+  transition-timing-function: ease-in;
+}
+
+:host .content,
+:host([opened='false']) .content {
+  overflow: hidden;
+  height: 0;
+  opacity: 0;
+  padding-top: 0; padding-bottom: 0;
+  transform: translateY(-0.15em);
+}
+
+:host([opened]) .content,
+:host([opened='true']) .content {
+  height: 100%;
+  opacity: 1;
+  padding-top: 0.75em; padding-bottom: 0.5em;
+  transform: translateY(0);
+
+}
+
+/* default layout */
+
+:host([layout='default']) .title {
+  border-radius: 5px;
+}
+
+:host([layout='default']) .title .icon {
+  padding: 0.45em 0.25em;
+  transition: transform 0.2s ease-in-out;
+}
+
+:host([layout='default']) .title .rotated .icon {
+  transform: rotate(90deg);
+}
+
+/* collapsable layout */
+
+:host([layout='collapsable']) {
+  overflow: hidden;
+  border-radius: 4px;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+:host([layout='collapsable']) .title {
+  padding: 0.65em;
+}
+
+:host([layout='collapsable']) .content {
+  padding-left: 1em; padding-right: 1em;
+}
+
+:host([layout='collapsable']) .footer {
+  text-align: center;
+  cursor: pointer;
+}
+
+:host([layout='collapsable']) .footer .icon {
+  padding: 0;
+  font-size: 75%;
+  transition: transform 0.2s ease-in-out;
+}
+
+:host([layout='collapsable']) .footer .rotated .icon {
+  transform: rotate(180deg);
+}

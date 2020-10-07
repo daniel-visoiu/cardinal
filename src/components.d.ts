@@ -161,8 +161,9 @@ export namespace Components {
         "title": string;
     }
     interface PskDetails {
+        "layout": string;
         "opened": boolean;
-        "summary": string;
+        "title": string;
     }
     interface PskEcho {
         "value": string | null;
@@ -1296,8 +1297,9 @@ declare namespace LocalJSX {
         "title"?: string;
     }
     interface PskDetails {
+        "layout"?: string;
         "opened"?: boolean;
-        "summary"?: string;
+        "title"?: string;
     }
     interface PskEcho {
         "value"?: string | null;

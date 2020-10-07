@@ -1,0 +1,43 @@
+:host .title .icon,
+:host .title span {
+  color: #5E7FE2;
+}
+
+:host .title:hover {
+  background-color: #5E7FE225;
+}
+
+/* default layout */
+
+:host([layout='default']) .title:focus,
+:host([layout='default'][opened]) .title,
+:host([layout='default'][opened='true']) .title {
+  border-color: #5E7FE2;
+}
+
+/* collapsable layout */
+
+:host([layout='collapsable'][opened]),
+:host([layout='collapsable'][opened='true']) {
+  box-shadow: 0 0 5px rgba(0, 0, 0, .25);
+}
+
+:host([layout='collapsable']) .title {
+  background-color: #5E7FE225;
+}
+
+:host([layout='collapsable']) .title:focus {
+  border-color: #5E7FE2;
+}
+
+:host([layout='collapsable']) .content {
+  background-color: #FFFFFF;
+}
+
+:host([layout='collapsable']) .footer {
+  background-color: #5E7FE2;
+}
+
+:host([layout='collapsable']) .footer .icon {
+  color: #FFFFFF;
+}
