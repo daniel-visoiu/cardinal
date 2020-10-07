@@ -164,6 +164,9 @@ export namespace Components {
         "opened": boolean;
         "summary": string;
     }
+    interface PskEcho {
+        "value": string | null;
+    }
     interface PskEmailInput {
         "invalidValue"?: boolean | null;
         "label"?: string | null;
@@ -681,6 +684,12 @@ declare global {
         prototype: HTMLPskDetailsElement;
         new (): HTMLPskDetailsElement;
     };
+    interface HTMLPskEchoElement extends Components.PskEcho, HTMLStencilElement {
+    }
+    var HTMLPskEchoElement: {
+        prototype: HTMLPskEchoElement;
+        new (): HTMLPskEchoElement;
+    };
     interface HTMLPskEmailInputElement extends Components.PskEmailInput, HTMLStencilElement {
     }
     var HTMLPskEmailInputElement: {
@@ -1065,6 +1074,7 @@ declare global {
         "psk-default-renderer": HTMLPskDefaultRendererElement;
         "psk-description": HTMLPskDescriptionElement;
         "psk-details": HTMLPskDetailsElement;
+        "psk-echo": HTMLPskEchoElement;
         "psk-email-input": HTMLPskEmailInputElement;
         "psk-event-descriptor": HTMLPskEventDescriptorElement;
         "psk-example": HTMLPskExampleElement;
@@ -1288,6 +1298,9 @@ declare namespace LocalJSX {
     interface PskDetails {
         "opened"?: boolean;
         "summary"?: string;
+    }
+    interface PskEcho {
+        "value"?: string | null;
     }
     interface PskEmailInput {
         "invalidValue"?: boolean | null;
@@ -1673,6 +1686,7 @@ declare namespace LocalJSX {
         "psk-default-renderer": PskDefaultRenderer;
         "psk-description": PskDescription;
         "psk-details": PskDetails;
+        "psk-echo": PskEcho;
         "psk-email-input": PskEmailInput;
         "psk-event-descriptor": PskEventDescriptor;
         "psk-example": PskExample;
@@ -1767,6 +1781,7 @@ declare module "@stencil/core" {
             "psk-default-renderer": LocalJSX.PskDefaultRenderer & JSXBase.HTMLAttributes<HTMLPskDefaultRendererElement>;
             "psk-description": LocalJSX.PskDescription & JSXBase.HTMLAttributes<HTMLPskDescriptionElement>;
             "psk-details": LocalJSX.PskDetails & JSXBase.HTMLAttributes<HTMLPskDetailsElement>;
+            "psk-echo": LocalJSX.PskEcho & JSXBase.HTMLAttributes<HTMLPskEchoElement>;
             "psk-email-input": LocalJSX.PskEmailInput & JSXBase.HTMLAttributes<HTMLPskEmailInputElement>;
             "psk-event-descriptor": LocalJSX.PskEventDescriptor & JSXBase.HTMLAttributes<HTMLPskEventDescriptorElement>;
             "psk-example": LocalJSX.PskExample & JSXBase.HTMLAttributes<HTMLPskExampleElement>;
