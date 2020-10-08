@@ -17,7 +17,7 @@ export class PskDetails {
 
   @TableOfContentProperty({
     description: `This property is used as title or summary for collapsable section.`,
-    isMandatory: true,
+    isMandatory: false,
     propertyType: `string`
   })
   @Prop() title: string = '';
@@ -32,7 +32,7 @@ export class PskDetails {
 
   @TableOfContentProperty({
     description: [
-      `There are two alternatives for this attribute: "collapsable" and "default". If other value is passed, fallback plan is also the default value.`,
+      `There are three alternatives for this attribute: "collapsable", "plus" and "default". If other value is passed, fallback plan is also the default value.`,
       `According to this property, the appearance of the component is changing.`
     ],
     isMandatory: false,
@@ -50,17 +50,33 @@ export class PskDetails {
   __renderDetails() {
     switch (this.layout) {
       case 'collapsable':
-        return [
+      {
+        let result = [];
+        if (this.title) result.push(
           <div class='title' tabindex={0} onClick={e => this.toggleDetails(e)}>
             <span>{this.title}</span>
+          </div>
+        )
+        result.push(
+          <div class='content'>
+            <slot/>
           </div>,
+          <div class='footer' tabindex={0} onClick={e => this.toggleDetails(e)}>
+            <psk-icon icon='chevron-down' class={{'rotated': this.opened}}/>
+          </div>
+        )
+        return result;
+      }
+      case 'plus':
+        return [
           <div class='content'>
             <slot />
           </div>,
-          <div class='footer' onClick={e => this.toggleDetails(e)}>
-            <psk-icon icon='chevron-down' class={{'rotated': this.opened}} />
+          <div class='footer' tabindex={0} onClick={e => this.toggleDetails(e)}>
+            <psk-icon icon={this.opened ? 'minus' : 'plus'} />
+            <span>{this.title}</span>
           </div>
-        ];
+        ]
       default:
         this.layout = 'default';
         return [

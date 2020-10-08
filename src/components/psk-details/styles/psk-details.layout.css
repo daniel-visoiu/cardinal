@@ -72,6 +72,10 @@
   cursor: pointer;
 }
 
+:host([layout='collapsable']) .footer:focus {
+  outline: none;
+}
+
 :host([layout='collapsable']) .footer .icon {
   padding: 0;
   font-size: 75%;
@@ -79,5 +83,37 @@
 }
 
 :host([layout='collapsable']) .footer .rotated .icon {
+  transform: rotate(180deg);
+}
+
+/* plus layout */
+
+:host([layout='plus']) {
+  overflow: hidden;
+  border-radius: 4px;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+:host([layout='plus']) .content {
+  padding-left: 1em; padding-right: 1em;
+}
+
+:host([layout='plus']) .footer {
+  text-align: center;
+  cursor: pointer;
+}
+
+:host([layout='plus']) .footer:focus {
+  outline: none;
+  border: 2px solid transparent;
+}
+
+:host([layout='plus']) .footer .icon {
+  padding: 0;
+  font-size: 75%;
+  transition: transform 0.2s ease-in-out;
+}
+
+:host([layout='plus']) .footer .rotated .icon {
   transform: rotate(180deg);
 }

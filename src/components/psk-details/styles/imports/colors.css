@@ -41,3 +41,26 @@
 :host([layout='collapsable']) .footer .icon {
   color: #FFFFFF;
 }
+
+/* plus layout */
+
+:host([layout='plus'][opened]),
+:host([layout='plus'][opened='true']) {
+  box-shadow: 0 0 5px rgba(0, 0, 0, .25);
+}
+
+:host([layout='plus']) .content {
+  background-color: #FFFFFF;
+}
+
+:host([layout='plus']) .footer {
+  background-color: #5E7FE225;
+}
+
+:host([layout='plus']) .footer:focus {
+  border-color: #5E7FE2;
+}
+
+:host([layout='plus']) .footer .icon {
+  color: #333333;
+}
