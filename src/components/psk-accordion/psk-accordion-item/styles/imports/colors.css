@@ -1,0 +1,23 @@
+:host .title .icon,
+:host .title span {
+  color: #5E7FE2;
+}
+
+:host .title:hover {
+  background-color: #5E7FE225;
+}
+
+/* default layout */
+
+:host([layout='default']) .title:focus {
+  border-color: #5E7FE2;
+}
+
+:host([layout='default'][opened]) .title,
+:host([layout='default'][opened='true']) .title {
+  background-color: #5E7FE225;
+}
+
+:host([layout='default']) .content {
+  border-color: #5E7FE225;
+}

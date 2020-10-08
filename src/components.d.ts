@@ -36,6 +36,15 @@ export namespace Components {
     interface MobileProfileRenderer {
         "userInfo": any;
     }
+    interface PskAccordion {
+        "layout": string;
+        "multiple": boolean;
+    }
+    interface PskAccordionItem {
+        "layout": string;
+        "opened": boolean;
+        "title": string;
+    }
     interface PskAppMenu {
         "hamburgerMaxWidth"?: number;
         "historyType": ExtendedHistoryType;
@@ -534,6 +543,18 @@ declare global {
     var HTMLMobileProfileRendererElement: {
         prototype: HTMLMobileProfileRendererElement;
         new (): HTMLMobileProfileRendererElement;
+    };
+    interface HTMLPskAccordionElement extends Components.PskAccordion, HTMLStencilElement {
+    }
+    var HTMLPskAccordionElement: {
+        prototype: HTMLPskAccordionElement;
+        new (): HTMLPskAccordionElement;
+    };
+    interface HTMLPskAccordionItemElement extends Components.PskAccordionItem, HTMLStencilElement {
+    }
+    var HTMLPskAccordionItemElement: {
+        prototype: HTMLPskAccordionItemElement;
+        new (): HTMLPskAccordionItemElement;
     };
     interface HTMLPskAppMenuElement extends Components.PskAppMenu, HTMLStencilElement {
     }
@@ -1050,6 +1071,8 @@ declare global {
         "event-expandable-renderer": HTMLEventExpandableRendererElement;
         "expandable-renderer": HTMLExpandableRendererElement;
         "mobile-profile-renderer": HTMLMobileProfileRendererElement;
+        "psk-accordion": HTMLPskAccordionElement;
+        "psk-accordion-item": HTMLPskAccordionItemElement;
         "psk-app-menu": HTMLPskAppMenuElement;
         "psk-app-root": HTMLPskAppRootElement;
         "psk-app-router": HTMLPskAppRouterElement;
@@ -1161,6 +1184,15 @@ declare namespace LocalJSX {
     }
     interface MobileProfileRenderer {
         "userInfo"?: any;
+    }
+    interface PskAccordion {
+        "layout"?: string;
+        "multiple"?: boolean;
+    }
+    interface PskAccordionItem {
+        "layout"?: string;
+        "opened"?: boolean;
+        "title"?: string;
     }
     interface PskAppMenu {
         "hamburgerMaxWidth"?: number;
@@ -1663,6 +1695,8 @@ declare namespace LocalJSX {
         "event-expandable-renderer": EventExpandableRenderer;
         "expandable-renderer": ExpandableRenderer;
         "mobile-profile-renderer": MobileProfileRenderer;
+        "psk-accordion": PskAccordion;
+        "psk-accordion-item": PskAccordionItem;
         "psk-app-menu": PskAppMenu;
         "psk-app-root": PskAppRoot;
         "psk-app-router": PskAppRouter;
@@ -1758,6 +1792,8 @@ declare module "@stencil/core" {
             "event-expandable-renderer": LocalJSX.EventExpandableRenderer & JSXBase.HTMLAttributes<HTMLEventExpandableRendererElement>;
             "expandable-renderer": LocalJSX.ExpandableRenderer & JSXBase.HTMLAttributes<HTMLExpandableRendererElement>;
             "mobile-profile-renderer": LocalJSX.MobileProfileRenderer & JSXBase.HTMLAttributes<HTMLMobileProfileRendererElement>;
+            "psk-accordion": LocalJSX.PskAccordion & JSXBase.HTMLAttributes<HTMLPskAccordionElement>;
+            "psk-accordion-item": LocalJSX.PskAccordionItem & JSXBase.HTMLAttributes<HTMLPskAccordionItemElement>;
             "psk-app-menu": LocalJSX.PskAppMenu & JSXBase.HTMLAttributes<HTMLPskAppMenuElement>;
             "psk-app-root": LocalJSX.PskAppRoot & JSXBase.HTMLAttributes<HTMLPskAppRootElement>;
             "psk-app-router": LocalJSX.PskAppRouter & JSXBase.HTMLAttributes<HTMLPskAppRouterElement>;

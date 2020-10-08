@@ -19,6 +19,7 @@
 
 ### Used by
 
+ - [psk-accordion-item](../psk-accordion/psk-accordion-item)
  - [psk-breadcrumb-navigator](../psk-breadcrumb-navigator)
  - [psk-button-group](../psk-button-group)
  - [psk-button-link](../psk-button-link)
@@ -31,6 +32,7 @@
 ### Graph
 ```mermaid
 graph TD;
+  psk-accordion-item --> psk-icon
   psk-breadcrumb-navigator --> psk-icon
   psk-button-group --> psk-icon
   psk-button-link --> psk-icon
