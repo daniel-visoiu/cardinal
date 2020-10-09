@@ -62,7 +62,10 @@ export class PskDetails {
             <slot/>
           </div>,
           <div class='footer' tabindex={0} onClick={e => this.toggleDetails(e)}>
-            <psk-icon icon='chevron-down' class={{'rotated': this.opened}}/>
+            <slot name='footer'/>
+            <div>
+              <psk-icon icon='chevron-down' class={{'rotated': this.opened}}/>
+            </div>
           </div>
         )
         return result;
@@ -70,7 +73,7 @@ export class PskDetails {
       case 'plus':
         return [
           <div class='content'>
-            <slot />
+            <slot/>
           </div>,
           <div class='footer' tabindex={0} onClick={e => this.toggleDetails(e)}>
             <psk-icon icon={this.opened ? 'minus' : 'plus'} />
@@ -81,11 +84,11 @@ export class PskDetails {
         this.layout = 'default';
         return [
           <div class='title' tabindex={0} onClick={e => this.toggleDetails(e)}>
-            <psk-icon icon='chevron-right' class={{'rotated': this.opened}} />
+            <psk-icon icon='chevron-right' class={{'rotated': this.opened}}/>
             <span>{this.title}</span>
           </div>,
           <div class='content'>
-            <slot />
+            <slot/>
           </div>
         ];
     }
