@@ -147,6 +147,8 @@ export namespace Components {
     interface PskCopyClipboard {
         "id": string;
     }
+    interface PskCustom {
+    }
     interface PskDate {
         "format": string | null;
         "hoverFormat": string | null;
@@ -676,6 +678,12 @@ declare global {
         prototype: HTMLPskCopyClipboardElement;
         new (): HTMLPskCopyClipboardElement;
     };
+    interface HTMLPskCustomElement extends Components.PskCustom, HTMLStencilElement {
+    }
+    var HTMLPskCustomElement: {
+        prototype: HTMLPskCustomElement;
+        new (): HTMLPskCustomElement;
+    };
     interface HTMLPskDateElement extends Components.PskDate, HTMLStencilElement {
     }
     var HTMLPskDateElement: {
@@ -1093,6 +1101,7 @@ declare global {
         "psk-container": HTMLPskContainerElement;
         "psk-controller-descriptor": HTMLPskControllerDescriptorElement;
         "psk-copy-clipboard": HTMLPskCopyClipboardElement;
+        "psk-custom": HTMLPskCustomElement;
         "psk-date": HTMLPskDateElement;
         "psk-date-input": HTMLPskDateInputElement;
         "psk-default-renderer": HTMLPskDefaultRendererElement;
@@ -1304,6 +1313,8 @@ declare namespace LocalJSX {
     interface PskCopyClipboard {
         "id"?: string;
         "onGetHistoryType"?: (event: CustomEvent<any>) => void;
+    }
+    interface PskCustom {
     }
     interface PskDate {
         "format"?: string | null;
@@ -1717,6 +1728,7 @@ declare namespace LocalJSX {
         "psk-container": PskContainer;
         "psk-controller-descriptor": PskControllerDescriptor;
         "psk-copy-clipboard": PskCopyClipboard;
+        "psk-custom": PskCustom;
         "psk-date": PskDate;
         "psk-date-input": PskDateInput;
         "psk-default-renderer": PskDefaultRenderer;
@@ -1814,6 +1826,7 @@ declare module "@stencil/core" {
             "psk-container": LocalJSX.PskContainer & JSXBase.HTMLAttributes<HTMLPskContainerElement>;
             "psk-controller-descriptor": LocalJSX.PskControllerDescriptor & JSXBase.HTMLAttributes<HTMLPskControllerDescriptorElement>;
             "psk-copy-clipboard": LocalJSX.PskCopyClipboard & JSXBase.HTMLAttributes<HTMLPskCopyClipboardElement>;
+            "psk-custom": LocalJSX.PskCustom & JSXBase.HTMLAttributes<HTMLPskCustomElement>;
             "psk-date": LocalJSX.PskDate & JSXBase.HTMLAttributes<HTMLPskDateElement>;
             "psk-date-input": LocalJSX.PskDateInput & JSXBase.HTMLAttributes<HTMLPskDateInputElement>;
             "psk-default-renderer": LocalJSX.PskDefaultRenderer & JSXBase.HTMLAttributes<HTMLPskDefaultRendererElement>;
