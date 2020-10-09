@@ -1,28 +1,35 @@
-import {Component, Event, EventEmitter, h, Listen, Prop, State} from '@stencil/core';
+import { Component, Listen, Prop, State, Event, EventEmitter, h } from '@stencil/core';
+
+import { MenuItem } from "../../interfaces/MenuItem";
+import { ExtendedHistoryType } from "../../interfaces/ExtendedHistoryType";
+
 import CustomTheme from "../../decorators/CustomTheme";
-import {MenuItem} from "../../interfaces/MenuItem";
-import {TableOfContentProperty} from '../../decorators/TableOfContentProperty';
-import {TableOfContentEvent} from '../../decorators/TableOfContentEvent';
-import {ExtendedHistoryType} from "../../interfaces/ExtendedHistoryType";
-import {MOBILE_MAX_WIDTH} from "../../utils/constants";
+import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
+import { TableOfContentEvent } from '../../decorators/TableOfContentEvent';
+
+import { MOBILE_MAX_WIDTH } from "../../utils/constants";
 
 @Component({
   tag: 'psk-app-menu',
   styleUrl:"../../assets/css/bootstrap/bootstrap.css",
   shadow: true
 })
+
 export class PskAppMenu {
   @CustomTheme()
+
   @TableOfContentProperty({
-    description: `Another web component that can render each menu item.
-     This component is responsible for rendering children (nested menu items).`,
+    description:
+      `Another web component that can render each menu item.
+      This component is responsible for rendering children (nested menu items).`,
     isMandatory: false,
     propertyType: `string`
   })
   @Prop() itemRenderer?: string;
 
   @TableOfContentProperty({
-    description: `Menu items datasource. It should be an array if MenuItem[].
+    description:
+      `Menu items datasource. It should be an array of MenuItem[].
       If it is not provided, it the component will emit an event (needMenuItems) in order to get the menu items.`,
     isMandatory: false,
     propertyType: `array of MenuItem items (MenuItem[])`,
@@ -31,12 +38,13 @@ export class PskAppMenu {
   @Prop() menuItems?: MenuItem[] = null;
 
   @TableOfContentProperty({
-    description: `This property is intended to be added when you want to change the default value of 600px for switching between normal and hamburger menu.`,
+    description: `This property is intended to be added when you want to change the default value of ${MOBILE_MAX_WIDTH}px for switching between normal and hamburger menu.`,
     isMandatory: false,
     propertyType: `number`,
     defaultValue: MOBILE_MAX_WIDTH
   })
   @Prop() hamburgerMaxWidth?: number = MOBILE_MAX_WIDTH;
+
   @Prop() historyType: ExtendedHistoryType;
 
   @State() showHamburgerMenu?: boolean = false;
@@ -47,7 +55,7 @@ export class PskAppMenu {
     controllerInteraction: {
       required: true
     },
-    description: `This event will be emited when you click on a menu item and it will create another CustomEvent that will change your route to the page you want to access.`
+    description: `This event will be emitted when you click on a menu item and it will create another CustomEvent that will change your route to the page you want to access.`
   })
   @Event({
     eventName: 'menuEvent',
@@ -61,7 +69,7 @@ export class PskAppMenu {
     controllerInteraction: {
       required: true
     },
-    description: `If no data is provided for the menuItems property this event will be emited that will render a default menuItem created by us.`
+    description: `If no data is provided for the menuItems property this event will be emitted and a default menu will be rendered.`
   })
   @Event({
     eventName: 'needMenuItems',
@@ -75,7 +83,7 @@ export class PskAppMenu {
     controllerInteraction: {
       required: true
     },
-    description: `This event gets the history type `
+    description: `This event gets the history type.`
   })
   @Event({
     eventName: 'getHistoryType',
@@ -109,7 +117,7 @@ export class PskAppMenu {
     }
 
     this.menuItemClicked.emit(ev.target.value);
-    //forcing a rerendering
+    //forcing a re-rendering
     this.menuItems = [...this.menuItems];
   }
 
@@ -129,7 +137,6 @@ export class PskAppMenu {
     }
   }
 
-
   renderItem(menuItem) {
     let ItemRendererTag = this.itemRenderer ? this.itemRenderer : "psk-menu-item-renderer";
 
@@ -147,6 +154,7 @@ export class PskAppMenu {
       hamburger={this.showHamburgerMenu}
       value={menuItem} />
   }
+
   renderMenuItems() {
     let renderComponent = [];
     for (let i = 0; i < this.menuItems.length; i++) {
@@ -155,41 +163,40 @@ export class PskAppMenu {
     }
 
     if (this.showHamburgerMenu) {
-
       renderComponent = renderComponent.map((item) => {
         return <li onClick={this.toggleNavBar.bind(this)} class="nav-item">{item}</li>
       });
 
       let navBarClass = "collapse navbar-collapse " + `${this.showNavBar == true ? 'show' : ''}`;
-      return (<nav class="navbar navbar-dark ">
-        <a class="navbar-brand" href="#"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" onClick={this.toggleNavBar.bind(this)}
-                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div class={navBarClass}>
-          <slot name="before"/>
-          <ul class="navbar-nav mr-auto">
-            {renderComponent}
-          </ul>
-          <slot name="after"/>
-        </div>
-
-      </nav>)
+      return (
+        <nav class="navbar navbar-dark ">
+          <a class="navbar-brand" href="#"/>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" onClick={this.toggleNavBar.bind(this)}
+                  aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"/>
+          </button>
+          <div class={navBarClass}>
+            <slot name="before"/>
+            <ul class="navbar-nav mr-auto">
+              {renderComponent}
+            </ul>
+            <slot name="after"/>
+          </div>
+        </nav>
+      )
     } else {
       return [
         <slot name="before"/>,
         <div class="menu_container">
           {renderComponent}
         </div>,
-        <slot name="after"/>];
+        <slot name="after"/>
+      ];
     }
   }
 
   render() {
-
-    if (!this.menuItems) {
-      return;
-    }
-
+    if (!this.menuItems) return null;
     return this.renderMenuItems();
   }
 }
