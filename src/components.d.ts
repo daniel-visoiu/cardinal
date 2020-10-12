@@ -273,6 +273,27 @@ export namespace Components {
         "secondLabel": any;
         "thirdLabel": any;
     }
+    interface PskLayout {
+        "alignContent": string | null;
+        "alignContentX": string | null;
+        "alignContentY": string | null;
+        "alignItems": string | null;
+        "alignItemsX": string | null;
+        "alignItemsY": string | null;
+        "columnGap": string | null;
+        "gap": string | null;
+        "rowGap": string | null;
+        "templateColumns": string | null;
+        "templateRows": string | null;
+    }
+    interface PskLayoutItem {
+        "column": string | null;
+        "columnEnd": string | null;
+        "columnStart": string | null;
+        "row": string | null;
+        "rowEnd": string | null;
+        "rowStart": string | null;
+    }
     interface PskLink {
         "chapter": string;
         "page": string;
@@ -828,6 +849,18 @@ declare global {
         prototype: HTMLPskLabelTestElement;
         new (): HTMLPskLabelTestElement;
     };
+    interface HTMLPskLayoutElement extends Components.PskLayout, HTMLStencilElement {
+    }
+    var HTMLPskLayoutElement: {
+        prototype: HTMLPskLayoutElement;
+        new (): HTMLPskLayoutElement;
+    };
+    interface HTMLPskLayoutItemElement extends Components.PskLayoutItem, HTMLStencilElement {
+    }
+    var HTMLPskLayoutItemElement: {
+        prototype: HTMLPskLayoutItemElement;
+        new (): HTMLPskLayoutItemElement;
+    };
     interface HTMLPskLinkElement extends Components.PskLink, HTMLStencilElement {
     }
     var HTMLPskLinkElement: {
@@ -1126,6 +1159,8 @@ declare global {
         "psk-input": HTMLPskInputElement;
         "psk-label": HTMLPskLabelElement;
         "psk-label-test": HTMLPskLabelTestElement;
+        "psk-layout": HTMLPskLayoutElement;
+        "psk-layout-item": HTMLPskLayoutItemElement;
         "psk-link": HTMLPskLinkElement;
         "psk-list": HTMLPskListElement;
         "psk-list-feedbacks": HTMLPskListFeedbacksElement;
@@ -1443,6 +1478,27 @@ declare namespace LocalJSX {
         "secondLabel"?: any;
         "thirdLabel"?: any;
     }
+    interface PskLayout {
+        "alignContent"?: string | null;
+        "alignContentX"?: string | null;
+        "alignContentY"?: string | null;
+        "alignItems"?: string | null;
+        "alignItemsX"?: string | null;
+        "alignItemsY"?: string | null;
+        "columnGap"?: string | null;
+        "gap"?: string | null;
+        "rowGap"?: string | null;
+        "templateColumns"?: string | null;
+        "templateRows"?: string | null;
+    }
+    interface PskLayoutItem {
+        "column"?: string | null;
+        "columnEnd"?: string | null;
+        "columnStart"?: string | null;
+        "row"?: string | null;
+        "rowEnd"?: string | null;
+        "rowStart"?: string | null;
+    }
     interface PskLink {
         "chapter"?: string;
         "onGetTags"?: (event: CustomEvent<any>) => void;
@@ -1753,6 +1809,8 @@ declare namespace LocalJSX {
         "psk-input": PskInput;
         "psk-label": PskLabel;
         "psk-label-test": PskLabelTest;
+        "psk-layout": PskLayout;
+        "psk-layout-item": PskLayoutItem;
         "psk-link": PskLink;
         "psk-list": PskList;
         "psk-list-feedbacks": PskListFeedbacks;
@@ -1851,6 +1909,8 @@ declare module "@stencil/core" {
             "psk-input": LocalJSX.PskInput & JSXBase.HTMLAttributes<HTMLPskInputElement>;
             "psk-label": LocalJSX.PskLabel & JSXBase.HTMLAttributes<HTMLPskLabelElement>;
             "psk-label-test": LocalJSX.PskLabelTest & JSXBase.HTMLAttributes<HTMLPskLabelTestElement>;
+            "psk-layout": LocalJSX.PskLayout & JSXBase.HTMLAttributes<HTMLPskLayoutElement>;
+            "psk-layout-item": LocalJSX.PskLayoutItem & JSXBase.HTMLAttributes<HTMLPskLayoutItemElement>;
             "psk-link": LocalJSX.PskLink & JSXBase.HTMLAttributes<HTMLPskLinkElement>;
             "psk-list": LocalJSX.PskList & JSXBase.HTMLAttributes<HTMLPskListElement>;
             "psk-list-feedbacks": LocalJSX.PskListFeedbacks & JSXBase.HTMLAttributes<HTMLPskListFeedbacksElement>;
