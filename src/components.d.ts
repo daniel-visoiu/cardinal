@@ -445,6 +445,9 @@ export namespace Components {
         "handleStepChange": Function;
         "wizardSteps": WizardStep[];
     }
+    interface PskStyle {
+        "src": string | null;
+    }
     interface PskSwitchButton {
         "active": string | null;
         "eventDispatcher": string | null;
@@ -1013,6 +1016,12 @@ declare global {
         prototype: HTMLPskStepperRendererElement;
         new (): HTMLPskStepperRendererElement;
     };
+    interface HTMLPskStyleElement extends Components.PskStyle, HTMLStencilElement {
+    }
+    var HTMLPskStyleElement: {
+        prototype: HTMLPskStyleElement;
+        new (): HTMLPskStyleElement;
+    };
     interface HTMLPskSwitchButtonElement extends Components.PskSwitchButton, HTMLStencilElement {
     }
     var HTMLPskSwitchButtonElement: {
@@ -1193,6 +1202,7 @@ declare global {
         "psk-ssapp": HTMLPskSsappElement;
         "psk-stepper": HTMLPskStepperElement;
         "psk-stepper-renderer": HTMLPskStepperRendererElement;
+        "psk-style": HTMLPskStyleElement;
         "psk-switch-button": HTMLPskSwitchButtonElement;
         "psk-tab": HTMLPskTabElement;
         "psk-tab-navigator": HTMLPskTabNavigatorElement;
@@ -1663,6 +1673,9 @@ declare namespace LocalJSX {
         "handleStepChange"?: Function;
         "wizardSteps"?: WizardStep[];
     }
+    interface PskStyle {
+        "src"?: string | null;
+    }
     interface PskSwitchButton {
         "active"?: string | null;
         "eventDispatcher"?: string | null;
@@ -1851,6 +1864,7 @@ declare namespace LocalJSX {
         "psk-ssapp": PskSsapp;
         "psk-stepper": PskStepper;
         "psk-stepper-renderer": PskStepperRenderer;
+        "psk-style": PskStyle;
         "psk-switch-button": PskSwitchButton;
         "psk-tab": PskTab;
         "psk-tab-navigator": PskTabNavigator;
@@ -1951,6 +1965,7 @@ declare module "@stencil/core" {
             "psk-ssapp": LocalJSX.PskSsapp & JSXBase.HTMLAttributes<HTMLPskSsappElement>;
             "psk-stepper": LocalJSX.PskStepper & JSXBase.HTMLAttributes<HTMLPskStepperElement>;
             "psk-stepper-renderer": LocalJSX.PskStepperRenderer & JSXBase.HTMLAttributes<HTMLPskStepperRendererElement>;
+            "psk-style": LocalJSX.PskStyle & JSXBase.HTMLAttributes<HTMLPskStyleElement>;
             "psk-switch-button": LocalJSX.PskSwitchButton & JSXBase.HTMLAttributes<HTMLPskSwitchButtonElement>;
             "psk-tab": LocalJSX.PskTab & JSXBase.HTMLAttributes<HTMLPskTabElement>;
             "psk-tab-navigator": LocalJSX.PskTabNavigator & JSXBase.HTMLAttributes<HTMLPskTabNavigatorElement>;
