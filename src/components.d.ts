@@ -280,13 +280,21 @@ export namespace Components {
         "alignItems": string | null;
         "alignItemsX": string | null;
         "alignItemsY": string | null;
+        "autoColumns": string | null;
+        "autoFlow": string | null;
+        "autoRows": string | null;
         "columnGap": string | null;
+        "columns": number | null;
         "gap": string | null;
         "rowGap": string | null;
+        "rows": number | null;
         "templateColumns": string | null;
         "templateRows": string | null;
     }
     interface PskLayoutItem {
+        "align": string | null;
+        "alignX": string | null;
+        "alignY": string | null;
         "column": string | null;
         "columnEnd": string | null;
         "columnStart": string | null;
@@ -1485,13 +1493,21 @@ declare namespace LocalJSX {
         "alignItems"?: string | null;
         "alignItemsX"?: string | null;
         "alignItemsY"?: string | null;
+        "autoColumns"?: string | null;
+        "autoFlow"?: string | null;
+        "autoRows"?: string | null;
         "columnGap"?: string | null;
+        "columns"?: number | null;
         "gap"?: string | null;
         "rowGap"?: string | null;
+        "rows"?: number | null;
         "templateColumns"?: string | null;
         "templateRows"?: string | null;
     }
     interface PskLayoutItem {
+        "align"?: string | null;
+        "alignX"?: string | null;
+        "alignY"?: string | null;
         "column"?: string | null;
         "columnEnd"?: string | null;
         "columnStart"?: string | null;
