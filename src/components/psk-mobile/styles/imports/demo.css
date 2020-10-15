@@ -11,7 +11,6 @@
 
 :host([id="demo-footer"]) .mobile {
   height: auto;
-  padding-bottom: 5px;
 }
 :host([id="demo-footer"]) .mobile > header,
 :host([id="demo-footer"]) .mobile > main {
@@ -19,7 +18,7 @@
 }
 
 :host([id="demo-options"]) .mobile {
-  height: 200px;
+  height: 250px;
 }
 :host([id="demo-options"]) .mobile > header .options-menu {
   visibility: hidden;

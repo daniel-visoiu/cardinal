@@ -1,4 +1,4 @@
-import { Component, Prop, h } from "@stencil/core";
+import { Component, Prop, Element, h } from "@stencil/core";
 
 import CustomTheme from "../../decorators/CustomTheme";
 import { BindModel } from "../../decorators/BindModel";
@@ -7,12 +7,15 @@ import { TableOfContentProperty } from "../../decorators/TableOfContentProperty"
 @Component({
   tag: "psk-button-link",
   styleUrl: './psk-button-link.css',
+  shadow: true
 })
 
 export class PskButtonLink {
   @CustomTheme()
 
   @BindModel() modelHandler;
+
+  @Element() private __host;
 
   @TableOfContentProperty({
     description: `This property is passed to psk-link.`,
@@ -39,8 +42,9 @@ export class PskButtonLink {
   @Prop() icon?: string;
 
   render() {
+    const slottedClass = this.__host.className;
     return (
-      <psk-link page={this.page} class='button-link'>
+      <psk-link page={this.page} class={(slottedClass ? `${slottedClass} ` : '') + 'button-link'}>
         {this.icon ? <psk-icon icon={this.icon}/> : null}
         {this.name ? <div>{this.name}</div> : <slot/>}
       </psk-link>

@@ -86,6 +86,7 @@
 
 ::slotted([slot='options']) {
   display: grid;
+  padding: 0 !important;
 }
 
 ::slotted([slot='footer']) {
