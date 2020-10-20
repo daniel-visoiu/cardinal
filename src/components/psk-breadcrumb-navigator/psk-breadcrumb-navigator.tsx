@@ -17,7 +17,7 @@ import { TableOfContentProperty } from '../../decorators/TableOfContentProperty'
 })
 export class PskBreadcrumbNavigator {
 
-	private __activeSegment: HTMLElement;
+	private _activeSegment: HTMLElement;
 
 	@BindModel() modelHandler;
 
@@ -48,7 +48,7 @@ export class PskBreadcrumbNavigator {
 		event.preventDefault();
 		event.stopImmediatePropagation();
 
-		this.__activeSegment = this.__getFirstSegment();
+		this._activeSegment = this.__getFirstSegment();
 		this.__scrollToActiveSegment();
 	}
 
@@ -56,16 +56,16 @@ export class PskBreadcrumbNavigator {
 		event.preventDefault();
 		event.stopImmediatePropagation();
 
-		this.__activeSegment = this.__getLastSegment();
+		this._activeSegment = this.__getLastSegment();
 		this.__scrollToActiveSegment();
 	}
 
 	__scrollToActiveSegment = (): void => {
 		if (this.__isScrollDisplayed()) {
-			this.__activeSegment.scrollIntoView({
+			this._activeSegment.scrollIntoView({
 				behavior: "smooth",
-				block: "start",
-				inline: "start"
+				block: "nearest",
+				inline: "nearest"
 			});
 		}
 	}
@@ -89,10 +89,6 @@ export class PskBreadcrumbNavigator {
 	}
 
 	render() {
-		if (this.segments.length) {
-			return null;
-		}
-
 		let previousSegmentArrow: HTMLElement = null,
 			nextSegmentArrow: HTMLElement = null;
 
@@ -110,7 +106,7 @@ export class PskBreadcrumbNavigator {
 					onClick={this.__lastSegmentClickHandler} />
 			);
 
-			this.__activeSegment = this.__getFirstSegment();
+			this._activeSegment = this.__getFirstSegment();
 		}
 
 		let segmentList: HTMLElement[] = this.segments.map((segment: BreadcrumbSegment, index: number) => {
