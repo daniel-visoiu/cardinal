@@ -17,3 +17,14 @@
 :host psk-button:last-of-type::after {
     content: none;
 }
+
+:host button,
+:host button:focus,
+:host button:active,
+:host button:active:focus,
+:host button:hover {
+    background: unset;
+    border: unset;
+    box-shadow: unset;
+    outline: none !important;
+}

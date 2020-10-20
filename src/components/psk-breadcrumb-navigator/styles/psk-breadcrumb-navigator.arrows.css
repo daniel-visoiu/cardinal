@@ -48,7 +48,6 @@
 #next,
 #prev {
     position: absolute;
-    padding: 0.75rem;
     background: #fff;
     border-radius: 6px;
     opacity: 0.75;
@@ -61,4 +60,9 @@
     pointer-events: all;
     cursor: pointer;
     box-shadow: 0px 0px 4px #999;
+}
+
+#next .icon,
+#prev .icon {
+    padding: 0.25rem;
 }
