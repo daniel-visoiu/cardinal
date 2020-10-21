@@ -26,9 +26,7 @@ export function TableOfContentProperty(opts: d.PropertyOptions) {
     proto.connectedCallback = function() {
       let self = this;
       let thisElement = getElement(self);
-      let propertyName: string = normalizeCamelCaseToDashed(
-        String(propertyKey)
-      );
+      let propertyName: string = normalizeCamelCaseToDashed(String(propertyKey));
 
       if (thisElement.hasAttribute(DATA_DEFINED_PROPS)) {
         if (!self.componentDefinitions) {
@@ -61,13 +59,18 @@ export function TableOfContentProperty(opts: d.PropertyOptions) {
         } else {
           componentDefinitions[DEFINED_PROPERTIES] = [newProperty];
         }
+
         self.componentDefinitions = { ...componentDefinitions };
       }
+
       return connectedCallback && connectedCallback.call(self);
     };
 
     proto.render = function() {
       let self = this;
+      let thisElement = getElement(self);
+      const tag = thisElement.tagName.toLowerCase();
+
       if (
         !self.componentDefinitions ||
         !(
@@ -89,7 +92,9 @@ export function TableOfContentProperty(opts: d.PropertyOptions) {
           composed: true,
           bubbles: true,
           cancelable: true,
-          detail: definedProps
+          detail: {
+            tag,
+            props: definedProps }
         },
         true
       );

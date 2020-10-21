@@ -9,7 +9,7 @@
 
 | Property | Attribute | Description | Type     | Default |
 | -------- | --------- | ----------- | -------- | ------- |
-| `title`  | `title`   |             | `string` | `""`    |
+| `title`  | `title`   |             | `string` | `''`    |
 
 
 ## Dependencies
