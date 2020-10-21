@@ -40,7 +40,6 @@ export class PskStyle {
     }
 
     if (valid) {
-      console.log(this.__styles);
       applyStyles(this.__styledElement, this.__styles);
     }
   }

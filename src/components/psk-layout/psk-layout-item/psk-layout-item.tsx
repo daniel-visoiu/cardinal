@@ -2,6 +2,7 @@ import { Component, Element, Prop, Host, h } from '@stencil/core';
 
 import CustomTheme from '../../../decorators/CustomTheme';
 import { applyStyles, generateRule } from '../psk-layout.utils';
+import { TableOfContentProperty } from "../../../decorators/TableOfContentProperty";
 
 @Component({
   tag: 'psk-layout-item',
@@ -13,16 +14,73 @@ export class PskLayoutItem {
 
   @Element() private __host: HTMLElement;
 
+  @TableOfContentProperty({
+    description: '',
+    isMandatory: false,
+    propertyType: `string`
+  })
   @Prop() column: string | null = null;
+
+  @TableOfContentProperty({
+    description: '',
+    isMandatory: false,
+    propertyType: `string`
+  })
   @Prop() columnStart: string | null = null;
+
+  @TableOfContentProperty({
+    description: '',
+    isMandatory: false,
+    propertyType: `string`
+  })
   @Prop() columnEnd: string | null = null;
 
+  @TableOfContentProperty({
+    description: '',
+    isMandatory: false,
+    propertyType: `string`
+  })
   @Prop() row: string | null = null;
+
+  @TableOfContentProperty({
+    description: '',
+    isMandatory: false,
+    propertyType: `string`
+  })
   @Prop() rowStart: string | null = null;
+
+  @TableOfContentProperty({
+    description: '',
+    isMandatory: false,
+    propertyType: `string`
+  })
   @Prop() rowEnd: string | null = null;
 
+  @TableOfContentProperty({
+    description: [
+      `Equivalent to <em>place-self</em>.`
+    ],
+    isMandatory: false,
+    propertyType: `string`
+  })
   @Prop() align: string | null = null;
+
+  @TableOfContentProperty({
+    description: [
+      `Equivalent to <em>justify-self</em>.`
+    ],
+    isMandatory: false,
+    propertyType: `string`
+  })
   @Prop() alignX: string | null = null;
+
+  @TableOfContentProperty({
+    description: [
+      `Equivalent to <em>align-self</em>.`
+    ],
+    isMandatory: false,
+    propertyType: `string`
+  })
   @Prop() alignY: string | null = null;
 
   async componentWillLoad() {
