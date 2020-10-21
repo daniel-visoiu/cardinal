@@ -197,7 +197,10 @@ export namespace Components {
     interface PskFilesChooser {
         "accept"?: string;
         "eventName"?: string;
+        "files": any[];
+        "filesAppend"?: boolean;
         "label": string;
+        "listFiles"?: boolean;
     }
     interface PskFloatingMenu {
         "opened": boolean;
@@ -1418,7 +1421,10 @@ declare namespace LocalJSX {
     interface PskFilesChooser {
         "accept"?: string;
         "eventName"?: string;
+        "files"?: any[];
+        "filesAppend"?: boolean;
         "label"?: string;
+        "listFiles"?: boolean;
     }
     interface PskFloatingMenu {
         "onNeedFloatingMenu"?: (event: CustomEvent<any>) => void;

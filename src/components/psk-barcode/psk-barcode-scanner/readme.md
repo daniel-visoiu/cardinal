@@ -32,6 +32,7 @@ graph TD;
   psk-barcode-scanner --> psk-files-chooser
   psk-barcode-scanner --> psk-button
   psk-card --> psk-copy-clipboard
+  psk-files-chooser --> psk-icon
   style psk-barcode-scanner fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
