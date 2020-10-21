@@ -1,4 +1,4 @@
-import { Component, h, Prop, Element } from '@stencil/core';
+import {Component, h, Prop, Element, State} from '@stencil/core';
 import { TableOfContentProperty } from '../../decorators/TableOfContentProperty';
 import CustomTheme from '../../decorators/CustomTheme';
 import { BindModel } from '../../decorators/BindModel';
@@ -53,9 +53,18 @@ export class PskFilesChooser {
     isMandatory: false,
     propertyType: `File[]`
   })
-  @Prop() files: File[] = [];
+  @Prop() files: any[] = null;
 
   @Prop() eventName?: string;
+
+  @State() filesWereProvided: boolean = false;
+
+  componentDidLoad(){
+    this.filesWereProvided = this.files != null;
+    if (!this.filesWereProvided) {
+      this.files = [];
+    }
+  }
 
   triggerBrowseFile(event) {
     event.preventDefault();
@@ -63,13 +72,18 @@ export class PskFilesChooser {
     this.htmlElement.querySelector("input").click();
   }
 
+  updateFilesModel(files) {
+    if (this.filesWereProvided && this.modelHandler) {
+      this.modelHandler.updateModel('files', files);
+    }
+  }
+
   addedFile(event) {
     let filesArray = Array.from(event.target.files);
 
-    if (this.modelHandler) {
-      let newFiles = this.filesAppend ? [...this.files, ...filesArray] : filesArray;
-      this.modelHandler.updateModel('files', newFiles);
-    }
+    this.files = this.filesAppend ? [...this.files, ...filesArray] : filesArray;
+
+    this.updateFilesModel(this.files);
 
     if (this.eventName) {
       event.preventDefault();
@@ -81,25 +95,20 @@ export class PskFilesChooser {
         cancelable: true
       });
       let eventDispatcherElement = this.htmlElement;
-      eventDispatcherElement.dispatchEvent(pskFileChooserEvent);
+        eventDispatcherElement.dispatchEvent(pskFileChooserEvent);
 
       /**
        * SPA issue: When you try to upload the same file/folder, onChange event is not triggered.
        * Solution: Reset the input after the files are emitted via dispatchEvent.
        */
-      this.files = filesArray as File[];
       event.target.value = null;
     }
   }
 
   deleteFileFromList(data: File) {
-    let files = this.files;
-    if (files && this.modelHandler) {
-      let currentFileIndex = files.indexOf(data);
-      if (currentFileIndex > -1) {
-        files.splice(currentFileIndex, 1);
-        this.modelHandler.updateModel('files', files);
-      }
+    if (this.files) {
+      this.files = this.files.filter(file => file != data);
+      this.updateFilesModel(this.files);
     }
   }
 
@@ -126,7 +135,7 @@ export class PskFilesChooser {
       this.accept = null;
     }
 
-    if (this.listFiles) {
+    if (this.filesWereProvided || (this.listFiles && this.files)) {
       selectedFiles = <div>
         {this.files.map((file) => this.mapFileToDiv(file))}
       </div>
