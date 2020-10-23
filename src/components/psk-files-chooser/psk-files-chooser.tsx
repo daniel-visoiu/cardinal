@@ -48,23 +48,9 @@ export class PskFilesChooser {
   })
   @Prop() filesAppend?: boolean = false;
 
-  @TableOfContentProperty({
-    description: `This property represents the list of uploaded files.`,
-    isMandatory: false,
-    propertyType: `File[]`
-  })
-  @Prop() files: any[] = null;
-
   @Prop() eventName?: string;
 
-  @State() filesWereProvided: boolean = false;
-
-  componentDidLoad(){
-    this.filesWereProvided = this.files != null;
-    if (!this.filesWereProvided) {
-      this.files = [];
-    }
-  }
+  @State() files: any[] = [];
 
   triggerBrowseFile(event) {
     event.preventDefault();
@@ -72,10 +58,14 @@ export class PskFilesChooser {
     this.htmlElement.querySelector("input").click();
   }
 
-  updateFilesModel(files) {
-    if (this.filesWereProvided && this.modelHandler) {
-      this.modelHandler.updateModel('files', files);
-    }
+  dispatchEvent() {
+    let pskFileChooserEvent = new PskButtonEvent(this.eventName, this.files, {
+      bubbles: true,
+      composed: true,
+      cancelable: true
+    });
+    let eventDispatcherElement = this.htmlElement;
+    eventDispatcherElement.dispatchEvent(pskFileChooserEvent);
   }
 
   addedFile(event) {
@@ -83,20 +73,10 @@ export class PskFilesChooser {
 
     this.files = this.filesAppend ? [...this.files, ...filesArray] : filesArray;
 
-    this.updateFilesModel(this.files);
-
     if (this.eventName) {
       event.preventDefault();
       event.stopImmediatePropagation();
-
-      let pskFileChooserEvent = new PskButtonEvent(this.eventName, filesArray, {
-        bubbles: true,
-        composed: true,
-        cancelable: true
-      });
-      let eventDispatcherElement = this.htmlElement;
-        eventDispatcherElement.dispatchEvent(pskFileChooserEvent);
-
+      this.dispatchEvent();
       /**
        * SPA issue: When you try to upload the same file/folder, onChange event is not triggered.
        * Solution: Reset the input after the files are emitted via dispatchEvent.
@@ -108,7 +88,7 @@ export class PskFilesChooser {
   deleteFileFromList(data: File) {
     if (this.files) {
       this.files = this.files.filter(file => file != data);
-      this.updateFilesModel(this.files);
+      this.dispatchEvent();
     }
   }
 
@@ -135,7 +115,7 @@ export class PskFilesChooser {
       this.accept = null;
     }
 
-    if (this.filesWereProvided || (this.listFiles && this.files)) {
+    if (this.listFiles && this.files) {
       selectedFiles = <div>
         {this.files.map((file) => this.mapFileToDiv(file))}
       </div>
@@ -159,7 +139,7 @@ export class PskFilesChooser {
         </label>
       </button>,
       selectedFiles,
-      (!this.eventName && !this.modelHandler) ? <h5 class="mt-4">No controller set for this component!</h5> : null
+      (!this.eventName) ? <h5 class="mt-4">No controller set for this component!</h5> : null
     ]
   }
 }
