@@ -1,7 +1,9 @@
-import { Component, Prop, Host, h } from "@stencil/core";
+import { Component, Prop, Element, Host, h } from "@stencil/core";
 
 import CustomTheme from "../../decorators/CustomTheme";
 import { TableOfContentProperty } from "../../decorators/TableOfContentProperty";
+
+import { dispatchEvent } from "../../events/helpers";
 
 @Component({
   tag: 'psk-details',
@@ -14,6 +16,8 @@ import { TableOfContentProperty } from "../../decorators/TableOfContentProperty"
 
 export class PskDetails {
   @CustomTheme()
+
+  @Element() private __host: HTMLElement;
 
   @TableOfContentProperty({
     description: `This property is used as title or summary for collapsable section.`,
@@ -41,10 +45,45 @@ export class PskDetails {
   })
   @Prop({ reflect: true, mutable: true }) layout: string = 'default';
 
+  @TableOfContentProperty({
+    description: [
+      `By defining this attribute, the component will be able to trigger an event.`
+    ],
+    isMandatory: false,
+    propertyType: 'string'
+  })
+  @Prop() eventName: string | null;
+
+  @TableOfContentProperty({
+    description: [
+      `This attribute is used to pass some information along with an event.`,
+      `This attribute is taken into consideration only if the event-name has a value. If not, it is ignored.`
+    ],
+    isMandatory: false,
+    propertyType: 'any'
+  })
+  @Prop() eventData: any | null;
+
+  @TableOfContentProperty({
+    description: [
+      `This attribute is telling the component where to trigger the event. Accepted values: "document, "window".`,
+      `If the value is not set or it is not one of the accepted values, the event-dispatcher will be the component itself.`
+    ],
+    isMandatory: false,
+    propertyType: 'string'
+  })
+  @Prop() eventDispatcher: string | null;
+
   toggleDetails(e) {
     e.preventDefault();
     e.stopImmediatePropagation();
     this.opened = !this.opened;
+
+    dispatchEvent(this.__host, {
+      eventName: this.eventName,
+      eventData: this.eventData,
+      eventDispatcher: this.eventDispatcher
+    });
   }
 
   __renderDetails() {

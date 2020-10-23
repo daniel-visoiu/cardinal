@@ -101,6 +101,9 @@ export namespace Components {
         "opened": boolean;
     }
     interface PskButtonLink {
+        "eventData": any | null;
+        "eventDispatcher": string | null;
+        "eventName": string | null;
         "icon"?: string;
         "name"?: string;
         "page": string;
@@ -172,6 +175,9 @@ export namespace Components {
         "title": string;
     }
     interface PskDetails {
+        "eventData": any | null;
+        "eventDispatcher": string | null;
+        "eventName": string | null;
         "layout": string;
         "opened": boolean;
         "title": string;
@@ -198,8 +204,8 @@ export namespace Components {
         "accept"?: string;
         "eventName"?: string;
         "filesAppend"?: boolean;
-        "listFiles"?: boolean;
         "label": string;
+        "listFiles"?: boolean;
     }
     interface PskFloatingMenu {
         "opened": boolean;
@@ -1320,6 +1326,9 @@ declare namespace LocalJSX {
         "opened"?: boolean;
     }
     interface PskButtonLink {
+        "eventData"?: any | null;
+        "eventDispatcher"?: string | null;
+        "eventName"?: string | null;
         "icon"?: string;
         "name"?: string;
         "page"?: string;
@@ -1395,6 +1404,9 @@ declare namespace LocalJSX {
         "title"?: string;
     }
     interface PskDetails {
+        "eventData"?: any | null;
+        "eventDispatcher"?: string | null;
+        "eventName"?: string | null;
         "layout"?: string;
         "opened"?: boolean;
         "title"?: string;

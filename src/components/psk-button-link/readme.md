@@ -7,11 +7,14 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type     | Default     |
-| -------- | --------- | ----------- | -------- | ----------- |
-| `icon`   | `icon`    |             | `string` | `undefined` |
-| `name`   | `name`    |             | `string` | `undefined` |
-| `page`   | `page`    |             | `string` | `undefined` |
+| Property          | Attribute          | Description | Type     | Default     |
+| ----------------- | ------------------ | ----------- | -------- | ----------- |
+| `eventData`       | `event-data`       |             | `any`    | `undefined` |
+| `eventDispatcher` | `event-dispatcher` |             | `string` | `undefined` |
+| `eventName`       | `event-name`       |             | `string` | `undefined` |
+| `icon`            | `icon`             |             | `string` | `undefined` |
+| `name`            | `name`             |             | `string` | `undefined` |
+| `page`            | `page`             |             | `string` | `undefined` |
 
 
 ## Dependencies
