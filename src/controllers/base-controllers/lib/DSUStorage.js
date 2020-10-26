@@ -16,7 +16,6 @@ function doDownload(url, expectedResultType, callback) {
 }
 
 function doUpload(url, data, callback) {
-
   fetch(url, {
     method: 'POST',
     body: data
@@ -88,10 +87,13 @@ function doRemoveFile(url, callback) {
 }
 
 
-function performFilesRemoval(filePathList, callback) {
+function performRemoval(filePathList, callback) {
+  if(!Array.isArray(filePathList)){
+    filePathList = [filePathList];
+  }
 
   let errors = [];
-  let deletedFiles = []
+  let deletedFiles = [];
 
   let deleteFile = (path) => {
     let filename = path;
@@ -102,7 +104,7 @@ function performFilesRemoval(filePathList, callback) {
     doRemoveFile(url, (err) => {
 
       if (err) {
-        console.log(err);
+        //console.log(err);
         errors.push({
           filename: filename,
           message: err.message
@@ -118,10 +120,32 @@ function performFilesRemoval(filePathList, callback) {
     });
   }
 
-  deleteFile(filePathList.shift())
+  deleteFile(filePathList.shift());
 }
 
 class DSUStorage {
+
+  call(name, ...args) {
+    if(args.length === 0){
+      throw Error('Missing arguments. Usage: call(functionName, arg1, arg2 ... callback)');
+    }
+
+    const callback = args.pop();
+    const url = "/api?" + new URLSearchParams({name: name, arguments: args});
+    fetch(url, {method: "GET"})
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((result)=>{
+        callback(...result);
+      })
+      .catch((err) => {
+        return callback(err);
+      });
+  }
 
   setObject(path, data, callback) {
     try {
@@ -169,12 +193,18 @@ class DSUStorage {
     doFileUpload(...arguments);
   }
 
+  deleteObjects(objects, callback) {
+    performRemoval(objects, callback);
+  }
+
   removeFile(filePath, callback) {
-    performFilesRemoval([filePath], callback);
+    console.log("[Warning] - obsolete. Use DSU.deleteObjects");
+    performRemoval([filePath], callback);
   }
 
   removeFiles(filePathList, callback) {
-    performFilesRemoval(...arguments);
+    console.log("[Warning] - obsolete. Use DSU.deleteObjects");
+    performRemoval(filePathList, callback);
   }
 }
 
