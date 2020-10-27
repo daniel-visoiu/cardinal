@@ -236,4 +236,10 @@ export function getInnerHTML(component) {
   }
   return host.innerHTML;
 
-};
+}
+
+export function applyStyles(host: HTMLElement | ShadowRoot, styles: string) {
+  const style = document.createElement('style');
+  style.innerHTML = styles;
+  host.appendChild(style);
+}
