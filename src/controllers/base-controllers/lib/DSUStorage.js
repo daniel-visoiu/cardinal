@@ -131,7 +131,7 @@ class DSUStorage {
     }
 
     const callback = args.pop();
-    const url = "/api?" + new URLSearchParams({name: name, arguments: args});
+    const url = "/api?" + new URLSearchParams({name: name, arguments: JSON.stringify(args)});
     fetch(url, {method: "GET"})
       .then((response) => {
         if (!response.ok) {
